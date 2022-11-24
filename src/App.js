@@ -10,6 +10,18 @@ function App() {
           title = {"slayer"}
           pronouns = {"she/her"}
           email = {"kaeleytran@gmail.com"}
+          phone = {"714-420-6969"}
+          city = {"Orange County"}
+          state = {"California"}
+          ethnicity = {"vietnamese"}
+          age = {"69"}
+          genderIdentity = {"baddie"}
+          sexuality = {"your mom"}
+          veteran = {"duh"}
+          disability = {"many"}
+          housingSituation = {"stable"}
+          employmentStatus= {"space place"}
+          priorConvictions = {"hundreds"}
           >
           </ProfileOutline> 
         </div>
