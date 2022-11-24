@@ -1,5 +1,6 @@
 // code here! 
 // beep boop beep boop
+import PropTypes from 'prop-types';
 
 import { useEffect } from "react";
 
@@ -26,19 +27,21 @@ const styles = {
     },
 };
 
-const name = 'kaylee'; 
-const title = 'administrator'; 
-const pronouns = 'she/her'; 
-const email = 'kaeleytran@gmail.com'; 
 
-export default function ProfileOutline(){
+export default function ProfileOutline({
+    name, 
+    title,
+    pronouns,
+    email,
+}
+){
 // some code here 
-const user = {
-    name: 'kaylee',
-    title: 'administrator',
-    pronouns: 'she/her',
-    email: 'kaeleytran@gmail.com', 
-};
+// const user = {
+//     name: 'kaylee',
+//     title: 'administrator',
+//     pronouns: 'she/her',
+//     email: 'kaeleytran@gmail.com', 
+// };
 
 useEffect(()=> {
 // do something 
@@ -51,15 +54,15 @@ return (
         Name:
     </div>
     <div style={styles.name}>
-        {user.name}
-    </div>
+        {name}
+    </div> 
         <br>
         </br>
     <div style={styles.boldedText}>
         Title:
     </div>
     <div style={styles.title}>
-        {user.title} 
+        {title} 
     </div>
         <br>
         </br>
@@ -67,7 +70,7 @@ return (
         Pronouns:
     </div>
     <div style={styles.pronouns}>
-        {user.pronouns} 
+        {pronouns} 
     </div>
         <br>
         </br>
@@ -75,7 +78,7 @@ return (
         Email:
     </div>
     <div style={styles.email}>
-        {user.email} 
+        {email} 
     </div>
         <br>
         </br>
@@ -87,3 +90,10 @@ return (
 
 // end of function bracket 
 }
+
+ProfileOutline.propTypes = {
+    name: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    pronouns: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+  }
