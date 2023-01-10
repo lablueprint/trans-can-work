@@ -1,5 +1,3 @@
-// code here! 
-// beep boop beep boop
 import PropTypes from 'prop-types';
 
 import { useEffect } from "react";
@@ -16,38 +14,15 @@ const styles = {
     },
 };
 
+const demographic_info {
+    employmentStatus
+}
 
 export default function ProfileOutline({
-    name, 
-    title,
-    pronouns,
-    email,
-    phone,
-    city,
-    state,
-    ethnicity,
-    age,
-    genderIdentity,
-    sexuality,
-    veteran,
-    disability,
-    housingSituation,
-    employmentStatus,
-    priorConvictions,
+    demographic_info
 }
 ){
-// some code here 
-// const user = {
-//     name: 'kaylee',
-//     title: 'administrator',
-//     pronouns: 'she/her',
-//     email: 'kaeleytran@gmail.com', 
-// };
 
-useEffect(()=> {
-// do something 
-},//set something 
-);
 
 return (
 <div>
@@ -55,7 +30,7 @@ return (
         Name:
     </div>
     <div style={styles.text}>
-        {name}
+        {demographic_info[0].name}
     </div> 
         <br>
         </br>
@@ -63,7 +38,7 @@ return (
         Title:
     </div>
     <div style={styles.text}>
-        {title} 
+        {demographic_info[0].title} 
     </div>
         <br>
         </br>
@@ -71,7 +46,7 @@ return (
         Pronouns:
     </div>
     <div style={styles.text}>
-        {pronouns} 
+        {demographic_info[0].pronouns} 
     </div>
         <br>
         </br>
@@ -79,7 +54,7 @@ return (
         Email:
     </div>
     <div style={styles.text}>
-        {email} 
+        {demographic_info[0].email} 
     </div>
         <br>
         </br>
@@ -87,7 +62,7 @@ return (
         Phone:
     </div>
     <div style={styles.text}>
-        {phone}
+        {demographic_info[0].phone}
     </div> 
         <br>
         </br>
@@ -95,7 +70,7 @@ return (
         City:
     </div>
     <div style={styles.text}>
-        {city} 
+        {demographic_info[0].city} 
     </div>
         <br>
         </br>
@@ -103,7 +78,7 @@ return (
         State:
     </div>
     <div style={styles.text}>
-        {state} 
+        {demographic_info[0].state} 
     </div>
         <br>
         </br>
@@ -111,7 +86,7 @@ return (
         Ethnicity:
     </div>
     <div style={styles.text}>
-        {ethnicity} 
+        {demographic_info[0].ethnicity} 
     </div>
         <br>
         </br>
@@ -119,7 +94,7 @@ return (
         Age:
     </div>
     <div style={styles.text}>
-        {age}
+        {demographic_info[0].age}
     </div> 
         <br>
         </br>
@@ -127,7 +102,7 @@ return (
         Gender Identity:
     </div>
     <div style={styles.text}>
-        {genderIdentity} 
+        {demographic_info[0].genderIdentity} 
     </div>
         <br>
         </br>
@@ -135,7 +110,7 @@ return (
         Sexuality:
     </div>
     <div style={styles.text}>
-        {sexuality} 
+        {demographic_info[0].sexuality} 
     </div>
         <br>
         </br>
@@ -143,7 +118,7 @@ return (
         Veteran:
     </div>
     <div style={styles.text}>
-        {veteran} 
+        {demographic_info[0].veteran} 
     </div>
         <br>
         </br>
@@ -151,7 +126,7 @@ return (
         Disability:
     </div>
     <div style={styles.text}>
-        {disability}
+        {demographic_info[0].disability}
     </div> 
         <br>
         </br>
@@ -159,7 +134,7 @@ return (
         Housing Situation:
     </div>
     <div style={styles.text}>
-        {housingSituation} 
+        {demographic_info[0].housingSituation} 
     </div>
         <br>
         </br>
@@ -167,7 +142,7 @@ return (
         Employment Status:
     </div>
     <div style={styles.text}>
-        {employmentStatus} 
+        {demographic_info[0].employmentStatus} 
     </div>
         <br>
         </br>
@@ -175,7 +150,7 @@ return (
         Prior Convictions:
     </div>
     <div style={styles.text}>
-        {priorConvictions} 
+        {demographic_info[0].priorConvictions} 
     </div>
         <br>
         </br>
@@ -184,8 +159,6 @@ return (
 )
 
 
-
-// end of function bracket 
 }
 
 ProfileOutline.propTypes = {
