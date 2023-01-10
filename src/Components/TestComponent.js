@@ -1,7 +1,8 @@
 import "../App.css";
 import React, { useState, useEffect } from 'react';
-import {db} from '../firebase';
-import { collection, addDoc, getDocs } from "firebase/firestore"; 
+import firebase from '../firebase';
+import { collection, addDoc, getDocs } from "firebase/firestore";
+const db = firebase; 
  
 const TestComponent = () => {
     const [todo, setTodo] = useState("");

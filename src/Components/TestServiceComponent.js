@@ -1,84 +1,84 @@
-import "../App.css";
 import React, { useState, useEffect } from 'react';
-import {db} from '../firebase';
-import { collection, addDoc, getDocs } from "firebase/firestore"; 
 import NavigatorService from '../Services/NavigatorService';
 
-const TestComponent = () => {
-    const [todo, setTodo] = useState("");
-    const [todos, setTodos] = useState([]);
- 
-    const addTodo = async (e) => {
-        e.preventDefault();  
-       
-        try {
-            const docRef = await addDoc(collection(db, "todos"), {
-              todo: todo,    
-            });
-            console.log("Document written with ID: ", docRef.id);
-          } catch (e) {
-            console.error("Error adding document: ", e);
-          }
+const TestServiceComponent = () => {
+    const initialTutorialState = {
+        title: "",
+        description: "",
+        published: false
     }
+    const [tutorial, setTutorial] = useState(initialTutorialState);
+    const [submitted, setSubmitted] = useState(false);
  
-    const fetchPost = async () => {
-       
-        await getDocs(collection(db, "todos"))
-            .then((querySnapshot)=>{              
-                const newData = querySnapshot.docs
-                    .map((doc) => ({...doc.data(), id:doc.id }));
-                setTodos(newData);                
-                console.log(todos, newData);
+    const handleInputChange = event => {
+        const { name, value } = event.target;
+        setTutorial({ ...tutorial, [name]: value });
+    };
+
+    const saveTutorial = () => {
+        var data = {
+            title: tutorial.title,
+            description: tutorial.description,
+            published: false
+        };
+
+        NavigatorService.create(data)
+            .then(() => {
+                setSubmitted(true);
             })
-       
+            .catch(e => {
+                console.error("Error adding document: ", e);
+            });
     }
-   
-    useEffect(()=>{
-        fetchPost();
-    }, [])
- 
+    const newTutorial = () => {
+    setTutorial(initialTutorialState);
+    setSubmitted(false);
+  };
  
     return (
-        <section className="todo-container">
-            <div className="todo">
-                <h1 className="header">
-                    Todo-App
-                </h1>
-   
-                <div>
-   
-                    <div>
-                        <input
-                            type="text"
-                            placeholder="What do you have to do today?"
-                            onChange={(e)=>setTodo(e.target.value)}
-                        />
-                    </div>
-   
-                    <div className="btn-container">
-                        <button
-                            type="submit"
-                            className="btn"
-                            onClick={addTodo}
-                        >
-                            Submit
-                        </button>
-                    </div>
-   
-                </div>
-   
-                <div className="todo-content">
-                    {
-                        todos?.map((todo,i)=>(
-                            <p key={i}>
-                                {todo.todo}
-                            </p>
-                        ))
-                    }
-                </div>
-            </div>
-        </section>
+        <div className="submit-form">
+      {submitted ? (
+        <div>
+          <h4>You submitted successfully!</h4>
+          <button className="btn btn-success" onClick={newTutorial}>
+            Add
+          </button>
+        </div>
+      ) : (
+        <div>
+          <div className="form-group">
+            <label htmlFor="title">Title</label>
+            <input
+              type="text"
+              className="form-control"
+              id="title"
+              required
+              value={tutorial.title}
+              onChange={handleInputChange}
+              name="title"
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="description">Description</label>
+            <input
+              type="text"
+              className="form-control"
+              id="description"
+              required
+              value={tutorial.description}
+              onChange={handleInputChange}
+              name="description"
+            />
+          </div>
+
+          <button onClick={saveTutorial} className="btn btn-success">
+            Submit
+          </button>
+        </div>
+      )}
+    </div>
     )
 }
  
-export default TestComponent;
+export default TestServiceComponent;

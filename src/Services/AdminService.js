@@ -3,6 +3,7 @@ import firebase from "../firebase";
 const db = firebase.collection("/admin");
 
 const getAll = () => {
+  // change filter method if possible
   return db;
 };
 
