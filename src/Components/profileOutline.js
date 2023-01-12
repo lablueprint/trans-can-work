@@ -14,9 +14,7 @@ const styles = {
     },
 };
 
-const demographic_info {
-    employmentStatus
-}
+
 
 export default function ProfileOutline({
     demographic_info
@@ -25,7 +23,42 @@ export default function ProfileOutline({
 
 
 return (
+    
 <div>
+    Name: {demographic_info[0].name}
+    <br></br>
+    Title: {demographic_info[0].title}
+    <br></br>
+    Pronouns: {demographic_info[0].pronouns}
+    <br></br>
+    Email: {demographic_info[0].email}
+    <br></br>
+    Phone Number: {demographic_info[0].phone}
+    <br></br>
+    City: {demographic_info[0].city}
+    <br></br>
+    State: {demographic_info[0].state}
+    <br></br>
+    Ethnicity: {demographic_info[0].ethnicity}
+    <br></br>
+    Age: {demographic_info[0].age}
+    <br></br>
+    Gender Identity: {demographic_info[0].genderIdentity}
+    <br></br>
+    Sexuality: {demographic_info[0].sexuality}
+    <br></br>
+    Veteran Status: {demographic_info[0].veteran}
+    <br></br>
+    Disability: {demographic_info[0].disability}
+    <br></br>
+    Housing Situation: {demographic_info[0].housingSituation}
+    <br></br>
+    Employment Status: {demographic_info[0].employmentStatus}
+    <br></br>
+    Prior Convictions: {demographic_info[0].priorConvictions}
+    <br></br>
+</div>
+    /* <div>
     <div style={styles.header}>
         Name:
     </div>
@@ -154,7 +187,7 @@ return (
     </div>
         <br>
         </br>
-</div>
+</div> */
 
 )
 
