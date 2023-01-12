@@ -25,170 +25,23 @@ export default function ProfileOutline({
 return (
     
 <div>
-    Name: {demographic_info[0].name}
-    <br></br>
-    Title: {demographic_info[0].title}
-    <br></br>
-    Pronouns: {demographic_info[0].pronouns}
-    <br></br>
-    Email: {demographic_info[0].email}
-    <br></br>
-    Phone Number: {demographic_info[0].phone}
-    <br></br>
-    City: {demographic_info[0].city}
-    <br></br>
-    State: {demographic_info[0].state}
-    <br></br>
-    Ethnicity: {demographic_info[0].ethnicity}
-    <br></br>
-    Age: {demographic_info[0].age}
-    <br></br>
-    Gender Identity: {demographic_info[0].genderIdentity}
-    <br></br>
-    Sexuality: {demographic_info[0].sexuality}
-    <br></br>
-    Veteran Status: {demographic_info[0].veteran}
-    <br></br>
-    Disability: {demographic_info[0].disability}
-    <br></br>
-    Housing Situation: {demographic_info[0].housingSituation}
-    <br></br>
-    Employment Status: {demographic_info[0].employmentStatus}
-    <br></br>
-    Prior Convictions: {demographic_info[0].priorConvictions}
-    <br></br>
+    <p>Name: {demographic_info[0].name}</p>
+    <p>Title: {demographic_info[0].title}</p>
+    <p>Pronouns: {demographic_info[0].pronouns}</p>
+    <p>Email: {demographic_info[0].email}</p>
+    <p>Phone Number: {demographic_info[0].phone}</p>
+    <p>City: {demographic_info[0].city}</p>
+    <p>State: {demographic_info[0].state}</p>
+    <p>Ethnicity: {demographic_info[0].ethnicity}</p>
+    <p>Age: {demographic_info[0].age}</p>
+    <p>Gender Identity: {demographic_info[0].genderIdentity}</p>
+    <p>Sexuality: {demographic_info[0].sexuality}</p>
+    <p>Veteran Status: {demographic_info[0].veteran}</p>
+    <p>Disability: {demographic_info[0].disability}</p>
+    <p>Housing Situation: {demographic_info[0].housingSituation}</p>
+    <p>Employment Status: {demographic_info[0].employmentStatus}</p>
+    <p>Prior Convictions: {demographic_info[0].priorConvictions}</p>
 </div>
-    /* <div>
-    <div style={styles.header}>
-        Name:
-    </div>
-    <div style={styles.text}>
-        {demographic_info[0].name}
-    </div> 
-        <br>
-        </br>
-    <div style={styles.header}>
-        Title:
-    </div>
-    <div style={styles.text}>
-        {demographic_info[0].title} 
-    </div>
-        <br>
-        </br>
-    <div style={styles.header}>
-        Pronouns:
-    </div>
-    <div style={styles.text}>
-        {demographic_info[0].pronouns} 
-    </div>
-        <br>
-        </br>
-        <div style={styles.header}>
-        Email:
-    </div>
-    <div style={styles.text}>
-        {demographic_info[0].email} 
-    </div>
-        <br>
-        </br>
-        <div style={styles.header}>
-        Phone:
-    </div>
-    <div style={styles.text}>
-        {demographic_info[0].phone}
-    </div> 
-        <br>
-        </br>
-    <div style={styles.header}>
-        City:
-    </div>
-    <div style={styles.text}>
-        {demographic_info[0].city} 
-    </div>
-        <br>
-        </br>
-    <div style={styles.header}>
-        State:
-    </div>
-    <div style={styles.text}>
-        {demographic_info[0].state} 
-    </div>
-        <br>
-        </br>
-        <div style={styles.header}>
-        Ethnicity:
-    </div>
-    <div style={styles.text}>
-        {demographic_info[0].ethnicity} 
-    </div>
-        <br>
-        </br>
-    <div style={styles.header}>
-        Age:
-    </div>
-    <div style={styles.text}>
-        {demographic_info[0].age}
-    </div> 
-        <br>
-        </br>
-    <div style={styles.header}>
-        Gender Identity:
-    </div>
-    <div style={styles.text}>
-        {demographic_info[0].genderIdentity} 
-    </div>
-        <br>
-        </br>
-    <div style={styles.header}>
-        Sexuality:
-    </div>
-    <div style={styles.text}>
-        {demographic_info[0].sexuality} 
-    </div>
-        <br>
-        </br>
-        <div style={styles.header}>
-        Veteran:
-    </div>
-    <div style={styles.text}>
-        {demographic_info[0].veteran} 
-    </div>
-        <br>
-        </br>
-        <div style={styles.header}>
-        Disability:
-    </div>
-    <div style={styles.text}>
-        {demographic_info[0].disability}
-    </div> 
-        <br>
-        </br>
-    <div style={styles.header}>
-        Housing Situation:
-    </div>
-    <div style={styles.text}>
-        {demographic_info[0].housingSituation} 
-    </div>
-        <br>
-        </br>
-    <div style={styles.header}>
-        Employment Status:
-    </div>
-    <div style={styles.text}>
-        {demographic_info[0].employmentStatus} 
-    </div>
-        <br>
-        </br>
-        <div style={styles.header}>
-        Prior Convictions:
-    </div>
-    <div style={styles.text}>
-        {demographic_info[0].priorConvictions} 
-    </div>
-        <br>
-        </br>
-</div> */
-
 )
 
 
