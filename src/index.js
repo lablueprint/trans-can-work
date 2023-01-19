@@ -3,19 +3,19 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 
 // import TestServiceComponent from './Components/TestServiceComponent'
-import TestComponent from './Components/TestComponent'
+import AddUser from './Components/AddUser'
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>    
+  <div>
     {/* <Router>
       <App /> */}
-      <TestComponent />
+    <AddUser />
     {/* </Router> */}
-  </React.StrictMode>
+  </div>
 );
 
 // If you want to start measuring performance in your app, pass a function
