@@ -1,11 +1,26 @@
 import PropTypes from 'prop-types';
 
-import { useEffect } from "react";
 
-
+const demographic_info = [{
+    name: 'kaylee',
+    title: 'slayer',
+    pronouns: 'she/her',
+    email: 'kaeleytran@gmail.com',
+    phone: '714-420-6969',
+    city: 'Orange County',
+    state: 'California',
+    ethnicity: 'vietnamese',
+    age: 69,
+    genderIdentity: 'baddie',
+    sexuality: 'your mom',
+    veteran: 'duh',
+    disability: 'many',
+    housingSituation: 'a shit show',
+    employmentStatus: 'space place',
+    priorConvictions: 'hundreds'
+  }]
 
 export default function ProfileOutline({
-    demographic_info
 }
 ){
 
