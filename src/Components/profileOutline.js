@@ -2,18 +2,6 @@ import PropTypes from 'prop-types';
 
 import { useEffect } from "react";
 
-const styles = {
-    header: {
-        fontSize: 69,
-        color: "maroon",
-        fontWeight: 900,
-    }, 
-    text: {
-        fontSize: 69,
-        color: "brown",
-    },
-};
-
 
 
 export default function ProfileOutline({
