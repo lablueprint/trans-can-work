@@ -43,7 +43,7 @@ const AddUser = () => {
 
     const addSeeker = async (event) => {
         event.preventDefault();
-        await setDoc(doc(db, "job seekers", seekEmail), {
+        await setDoc(doc(db, "jobseekers", seekEmail), {
             name: seekName,
         }).then(function () {
             console.log(`saved job seeker`);
@@ -54,7 +54,7 @@ const AddUser = () => {
 
     const addAdmin = async (event) => {
         event.preventDefault();
-        await setDoc(doc(db, "admin", adminEmail), {
+        await setDoc(doc(db, "admins", adminEmail), {
             name: adminName,
         }).then(function () {
             console.log(`saved navigator`);
