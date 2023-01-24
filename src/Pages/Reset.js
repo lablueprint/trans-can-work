@@ -7,11 +7,7 @@ import "./Reset.css"
 function Reset() {
   const [email, setEmail] = useState("");
   const [user, loading, error] = useAuthState(auth);
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (loading) return;
-    if (user) navigate("/dashboard");
-  }, [user, loading]);
+  
   return (
     <div>
       <div className="reset">

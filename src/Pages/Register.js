@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 import { Link } from 'react-router-dom';
-import { registerWithEmailAndPassword, logout } from "../Components/firebase";
+import { registerWithEmailAndPassword, logout, addToAdminPool } from "../Components/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import "./Register.css";
 
 const auth = getAuth();
@@ -16,12 +16,22 @@ function Register() {
     const [accountType, setAccountType] = useState("");
     const [user, loading, error] = useAuthState(auth);
     const [displayName, setDisplayName] = useState("");
+    const [registeredAsAdmin, setRegisteredAsAdmin] = useState(false);
     useEffect(()=>{
       if (user)
         setDisplayName(user.displayName)
     },[user])
     
-    
+    const register = ((firstName, lastName, accountType, email, password) =>
+    {
+      if (accountType === "administrator")
+      {
+        console.log(firstName)
+        addToAdminPool(firstName, lastName, email, password)
+      }
+      else
+        registerWithEmailAndPassword(firstName, lastName, accountType, email, password)
+    })
     
     return (
       <div> 
@@ -78,7 +88,7 @@ function Register() {
           <input
             className="registerFormItem"
             type="submit"
-            onClick={() => registerWithEmailAndPassword(firstName, lastName, accountType, email, password)}
+            onClick={() => register(firstName, lastName, accountType, email, password)}
           />
           {/* <button
             onClick={() => registerWithEmailAndPassword(firstName, lastName, accountType, email, password)}
