@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
 import firebase from '../firebase';
 var db = firebase
 
@@ -8,8 +8,8 @@ const AddUser = () => {
     const [navName, setNavName] = useState('');
     const [seekEmail, setSeekEmail] = useState('');
     const [seekName, setSeekName] = useState('');
-    const [adminEmail, setAdminEmail] = useState('');
-    const [adminName, setAdminName] = useState('');
+    const [updateEmail, setUpdateEmail] = useState('');
+    const [updateName, setUpdateName] = useState('');
 
     const handleChangeNavEmail = (event) => {
         setNavEmail(event.target.value);
@@ -23,12 +23,14 @@ const AddUser = () => {
     const handleChangeSeekName = (event) => {
         setSeekName(event.target.value);
     }
-    const handleChangeAdminEmail = (event) => {
-        setAdminEmail(event.target.value);
+
+    const handleUpdateEmail = (event) => {
+        setUpdateEmail(event.target.value)
     }
-    const handleChangeAdminName = (event) => {
-        setAdminName(event.target.value);
+    const handleUpdateName = (event) => {
+        setUpdateName(event.target.value)
     }
+
 
     const addNavigator = async (event) => {
         event.preventDefault();
@@ -52,16 +54,17 @@ const AddUser = () => {
         });
     }
 
-    const addAdmin = async (event) => {
+    const update = async (event) => {
         event.preventDefault();
-        await setDoc(doc(db, "admins", adminEmail), {
-            name: adminName,
+        await updateDoc(doc(db, "navigators", updateEmail), {
+            name: updateName,
         }).then(function () {
-            console.log(`saved navigator`);
+            console.log(`updated navigator`);
         }).catch(function (err) {
             alert(err.stack);
         });
     }
+
 
     return (
         <section>
@@ -101,22 +104,23 @@ const AddUser = () => {
                     <button type="submit">Add</button>
                 </form>
             </div>
+
             <div>
-                <h1>Add Admin</h1>
-                <form onSubmit={addAdmin}>
+                <h1>Update Navigator</h1>
+                <form onSubmit={update}>
                     <input
                         type="text"
                         placeholder="email"
-                        value={adminEmail}
-                        onChange={handleChangeAdminEmail}
+                        value={updateEmail}
+                        onChange={handleUpdateEmail}
                     />
                     <input
                         type="text"
                         placeholder="name"
-                        value={adminName}
-                        onChange={handleChangeAdminName}
+                        value={updateName}
+                        onChange={handleUpdateName}
                     />
-                    <button type="submit">Add</button>
+                    <button type="submit">Update</button>
                 </form>
             </div>
         </section>
