@@ -67,6 +67,9 @@ const styles = {
     alignItems: 'right',
     padding: '0 2%',
     zIndex: (theme) => theme.zIndex.drawer + 1,
+    width: '30vw',  
+    height: '100vh', 
+    left: '0',
   },
   drawerContainer: {
     width: { xs: '100vw', sm: 300 },
@@ -83,6 +86,7 @@ const HeaderTabs = styled(Tabs)({
   '& .MuiTabs-indicator': {
     backgroundColor: '#393EBA',
     height: '4px',
+
   },
 });
 
@@ -102,7 +106,7 @@ const HeaderTab = styled((props) => <Tab disableRipple {...props} />)(
   },
 );
 
-function Header() {
+function Header() { 
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
@@ -153,10 +157,10 @@ function Header() {
           to="/"
           className={({ isActive }) => (isActive ? 'nav-link-active logo-img-container' : 'nav-link logo-img-container')}
         >
-          <img src={Logo} className="logo" alt="The Conscious Kid logo" />
+          <img src={Logo} className="logo" alt="Trans Can Work logo" />
         </NavLink>
         { size.width > 900 ? (
-          <HeaderTabs value={currentRoot}>
+          <HeaderTabs value={currentRoot} orientation="vertical">
             {options.map((option) => (
               <HeaderTab
                 key={uuidv4()}
