@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { doc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import firebase from '../firebase';
 var db = firebase
 
@@ -8,8 +8,6 @@ const AddUser = () => {
     const [navName, setNavName] = useState('');
     const [seekEmail, setSeekEmail] = useState('');
     const [seekName, setSeekName] = useState('');
-    const [updateEmail, setUpdateEmail] = useState('');
-    const [updateName, setUpdateName] = useState('');
 
     const handleChangeNavEmail = (event) => {
         setNavEmail(event.target.value);
@@ -24,12 +22,7 @@ const AddUser = () => {
         setSeekName(event.target.value);
     }
 
-    const handleUpdateEmail = (event) => {
-        setUpdateEmail(event.target.value)
-    }
-    const handleUpdateName = (event) => {
-        setUpdateName(event.target.value)
-    }
+
 
 
     const addNavigator = async (event) => {
@@ -49,17 +42,6 @@ const AddUser = () => {
             name: seekName,
         }).then(function () {
             console.log(`saved job seeker`);
-        }).catch(function (err) {
-            alert(err.stack);
-        });
-    }
-
-    const update = async (event) => {
-        event.preventDefault();
-        await updateDoc(doc(db, "navigators", updateEmail), {
-            name: updateName,
-        }).then(function () {
-            console.log(`updated navigator`);
         }).catch(function (err) {
             alert(err.stack);
         });
@@ -102,25 +84,6 @@ const AddUser = () => {
                         onChange={handleChangeSeekName}
                     />
                     <button type="submit">Add</button>
-                </form>
-            </div>
-
-            <div>
-                <h1>Update Navigator</h1>
-                <form onSubmit={update}>
-                    <input
-                        type="text"
-                        placeholder="email"
-                        value={updateEmail}
-                        onChange={handleUpdateEmail}
-                    />
-                    <input
-                        type="text"
-                        placeholder="name"
-                        value={updateName}
-                        onChange={handleUpdateName}
-                    />
-                    <button type="submit">Update</button>
                 </form>
             </div>
         </section>

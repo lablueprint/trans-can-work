@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 
 // import TestServiceComponent from './Components/TestServiceComponent'
-import AddUser from './Components/AddUser'
+import JobseekerService from './Services/JobseekerService';
+import NavigatorService from './Services/NavigatorService';
+import AdminService from './Services/AdminService';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -13,7 +15,9 @@ root.render(
   <div>
     {/* <Router>
       <App /> */}
-    <AddUser />
+    <JobseekerService />
+    <NavigatorService />
+    <AdminService />
     {/* </Router> */}
   </div>
 );
