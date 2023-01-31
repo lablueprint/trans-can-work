@@ -5,6 +5,7 @@ import {
 import {
   Home,
   Login,
+  NavigatorDashboard,
   Register,
   Reset,
 } from './Pages';
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />
         <Route path="/reset" element={<Reset />} />
       </Routes>
       <Footer />
