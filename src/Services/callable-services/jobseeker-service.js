@@ -42,22 +42,7 @@ export const fetchJobseeker = async (email) => {
     } catch (error) {
         console.log(error);
     }
-
   }
-
-//  export const displayRTJobseekers = async (event) => {
-//     const dbRef = collection(db, "jobseekers");
-//     try {
-//         onSnapshot(dbRef, docsSnap => {
-//             docsSnap.forEach(doc => {
-//                 console.log(doc.data());
-//             })
-//         });
-//       } catch (error) {
-//           console.log(error);
-//       }
-  
-//   }
 
   export const updateJobseeker = async (email, data) => {
     await updateDoc(doc(db, "jobseekers", email), data)

@@ -15,6 +15,7 @@ const JobseekerTester = () => {
      const data2 = {"name": "Solia", "paper":"ayub",
      "fun fact": "doubtful of HK", "helen keller": "maybe can exist"}
 
+     const data3 = {"name" : "Nasser the Great"}
      return (
         <section>
           <div className="Jobseeker">
@@ -34,8 +35,8 @@ const JobseekerTester = () => {
             
             
             }}>GetAllJS</button>
-            <button type="button" onClick={e => {e.preventDefault(); updateJobseeker(email, data2)}}>UpdateJS</button>
-            <button type="button" onClick={e => {e.preventDefault(); fetchJobseeker(email)}}>DelJS</button>
+            <button type="button" onClick={e => {e.preventDefault(); updateJobseeker(email, data3)}}>UpdateJS</button>
+            <button type="button" onClick={e => {e.preventDefault(); deleteJobseeker(email)}}>DelJS</button>
           </div>
         </section>
       );
