@@ -1,4 +1,4 @@
-import { doc, setDoc, getDoc, getDocs, updateDoc, deleteDoc, collection, onSnapshot } from "firebase/firestore";
+import { doc, setDoc, getDoc, getDocs, updateDoc, deleteDoc, collection } from "firebase/firestore";
 import firebase from '../../firebase'; //idk if i need these two lines yet
 var db = firebase
 
@@ -44,6 +44,7 @@ export const fetchJobseeker = async (email) => {
     }
   }
 
+  
   export const updateJobseeker = async (email, data) => {
     await updateDoc(doc(db, "jobseekers", email), data)
     .then(function () {
@@ -64,3 +65,39 @@ export const deleteJobseeker = async (email) => {
         console.log(error);
     });
 }
+
+//MILESTONE ROUTES:
+  //depends on how userData is implemented. may not need to pass in JSemail; so waiting to implement.
+  // initial thought: would pull user data before calling this function; pass in email, milestoneIndex, and navigator email. 
+  // reason not inside is bc we want to reuse this route in case a navigator or admin wants to call it.
+  // milestoneArray format: [”completed”, “completed”, “awaiting approval,” “completed, “incomplete”, “incomplete”]
+  export const pingNavigator = async (JSemail, milestoneIndex, NavEmail, milestoneArray) => {
+    milestoneArray[milestoneIndex] = "awaiting approval";
+    await updateDoc(doc(db, "jobseekers", JSemail), {"milestoneArray": milestoneArray})
+    .then(function () {
+      //email NavEmail here; may potentially have multiple navigators maybe?
+      console.log(`pinged navigator for milestone approval `, JSemail);
+    }).catch(function (err) {
+      alert(err.stack);
+    });
+  }
+
+  export const markComplete = async (JSemail, milestoneIndex, NavEmail, milestoneArray) => {
+    milestoneArray[milestoneIndex] = "completed";
+    await updateDoc(doc(db, "jobseekers", JSemail), {"milestoneArray": milestoneArray})
+    .then(function () {
+      console.log(`marked milestone complete!`, JSemail);
+    }).catch(function (err) {
+      alert(err.stack);
+    });
+  }
+
+  export const markIncomplete = async (JSemail, milestoneIndex, NavEmail, milestoneArray) => {
+    await updateDoc(doc(db, "jobseekers", JSemail), {"milestoneArray": milestoneArray})
+    .then(function () {
+      console.log(`reset milestone to incomplete `, JSemail);
+    }).catch(function (err) {
+      alert(err.stack);
+    });
+  }
+  //reasoning for 3 separate routes: 1) pingNav has unique permissioning; 2) simpler than combining
