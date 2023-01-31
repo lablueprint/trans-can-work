@@ -50,3 +50,8 @@ MilestoneButton.propTypes = {
 }
 
 export default MilestoneButton  
+
+/*
+Finished creating the popup
+Later: include button/external links to the popup 
+*/ 
