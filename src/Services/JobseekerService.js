@@ -28,7 +28,7 @@
 // export default JobseekerService;
 
 import { useState } from 'react';
-import { doc, setDoc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, getDocs, updateDoc, deleteDoc, collection, onSnapshot } from "firebase/firestore";
 import firebase from '../firebase';
 var db = firebase
 
@@ -91,6 +91,24 @@ const JobseekerService = () => {
     }
   }
 
+  const fetchAllJobseekers = async (event) => {
+    event.preventDefault();
+    const colRef = collection(db, "jobseekers");
+    try {
+      const docsSnap = await getDocs(colRef);
+      if(docsSnap.docs.length > 0) {
+         docsSnap.forEach(doc => {
+            console.log(doc.data());
+            console.log(doc.id);
+         })
+      }
+    } catch (error) {
+        console.log(error);
+    }
+
+  }
+
+
   const updateJobseeker = async (event) => {
     event.preventDefault();
     await updateDoc(doc(db, "jobseekers", updateEmail), {
@@ -109,6 +127,7 @@ const JobseekerService = () => {
     // this function alone won't be able to confirm if account has been deleted or doesnt exist
     await deleteDoc(doc(db, "jobseekers", deleteEmail));
   }
+
 
   return (
     <section>
@@ -140,6 +159,12 @@ const JobseekerService = () => {
             onChange={handleReadEmail}
           />
           <button type="submit">Get</button>
+        </form>
+      </div>
+      <div className="readAll">
+        <h1>Get All Jobseekers</h1>
+        <form onSubmit={fetchAllJobseekers}>
+          <button type="submit">GetAll</button>
         </form>
       </div>
       <div className="update">
