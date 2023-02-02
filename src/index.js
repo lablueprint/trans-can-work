@@ -2,11 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
-// import TestServiceComponent from './Components/TestServiceComponent'
-import JobseekerService from './Services/JobseekerService';
-import NavigatorService from './Services/NavigatorService';
 import JobseekerTester from './Components/JobseekerTester';
-import AdminService from './Services/AdminService';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';

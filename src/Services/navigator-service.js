@@ -1,5 +1,5 @@
-import { doc, setDoc, getDoc, updateDoc, deleteDoc} from "firebase/firestore";
-import firebase from '../../firebase'; 
+import { doc, setDoc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
+import firebase from '../firebase';
 var db = firebase
 
 // CRUD functions
@@ -18,30 +18,30 @@ export const fetchNavigator = async (email) => {
     try {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-        console.log("Navigator: ", docSnap.data());
+            console.log("Navigator: ", docSnap.data());
         } else {
-        console.log("Navigator ", email, " does not exist");
+            console.log("Navigator ", email, " does not exist");
         }
     }
     catch (error) {
         console.log(error);
     }
 }
-  
+
 export const updateNavigator = async (email, data) => {
     await updateDoc(doc(db, "navigators", email), data)
-    .then(function () {
-        console.log(`updated navigator `, email);
-    }).catch(function (err) {
-        alert(err.stack);
-    });
+        .then(function () {
+            console.log(`updated navigator `, email);
+        }).catch(function (err) {
+            alert(err.stack);
+        });
 }
 
 export const deleteNavigator = async (email) => {
     await deleteDoc(doc(db, "navigators", email)).then(() => {
         console.log("Navigator account ", email, " has been deleted successfully.")
     })
-    .catch(error => {
-        console.log(error);
-    });
+        .catch(error => {
+            console.log(error);
+        });
 }
