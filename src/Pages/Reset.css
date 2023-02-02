@@ -1,0 +1,9 @@
+.reset {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .resetInput{
+    border: 1px solid #ccc; 
+    margin-bottom: 5px
+  }
