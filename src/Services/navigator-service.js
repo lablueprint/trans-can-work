@@ -1,5 +1,5 @@
-import { doc, setDoc, getDoc, getDocs, updateDoc, deleteDoc, collection, onSnapshot } from "firebase/firestore";
-import firebase from '../../firebase'; //idk if i need these two lines yet
+import { doc, setDoc, getDoc, updateDoc, deleteDoc} from "firebase/firestore";
+import firebase from '../../firebase'; 
 var db = firebase
 
 // CRUD functions
@@ -27,32 +27,17 @@ export const fetchNavigator = async (email) => {
         console.log(error);
     }
 }
-
-// would be debug uses only:
-//  export const fetchAllNavigators = async () => {
-//     const colRef = collection(db, "navigators");
-//     try {
-//       const docsSnap = await getDocs(colRef);
-//       return docsSnap;
-//     } catch (error) {
-//         console.log(error);
-//     }
-//   }
-
   
-  export const updateNavigator = async (email, data) => {
+export const updateNavigator = async (email, data) => {
     await updateDoc(doc(db, "navigators", email), data)
     .then(function () {
-      console.log(`updated navigator `, email);
+        console.log(`updated navigator `, email);
     }).catch(function (err) {
-      alert(err.stack);
+        alert(err.stack);
     });
-  }
+}
 
 export const deleteNavigator = async (email) => {
-    // make sure to use "read" to be sure the user exists in the database before calling delete
-    // this function alone won't be able to confirm if account has been deleted or doesnt exist
-    //i think its fine bc of try + catch.
     await deleteDoc(doc(db, "navigators", email)).then(() => {
         console.log("Navigator account ", email, " has been deleted successfully.")
     })
