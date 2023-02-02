@@ -3,7 +3,10 @@ import {
   Route, Routes,
 } from 'react-router-dom';
 import {
-  Home
+  Home,
+  Login,
+  Register,
+  Reset,
 } from './Pages';
 import './App.css';
 import Footer from './Components/Footer/Footer';
@@ -12,10 +15,12 @@ import Header from './Components/Navigation/Header';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-      </header>
+
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/reset" element={<Reset />} />
       </Routes>
       <Header /> 
       <Footer />
@@ -24,3 +29,4 @@ function App() {
 }
 
 export default App;
+
