@@ -1,25 +1,16 @@
-import React from 'react';
-import {
-  Route, Routes,
-} from 'react-router-dom';
-import {
-  Home
-} from './Pages';
+// import logo from './logo.svg';
 import './App.css';
-import Footer from './Components/Footer/Footer';
+import ProfileOutline from './Components/profileOutline'
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-      </header>
-      <Routes>
-        <Route path="/" element={<Home />} />
-      </Routes>
-      <Footer />
-    </div>
+        <div>
+        <ProfileOutline>
+          demographic_info.
+        </ProfileOutline>
+        </div>
   );
 }
 
 export default App;
-
