@@ -7,6 +7,7 @@ import {
   Login,
   Register,
   Reset,
+  Profile,
 } from './Pages';
 import './App.css';
 import Footer from './Components/Footer/Footer';
@@ -21,6 +22,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/reset" element={<Reset />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
       <Header /> 
       <Footer />
@@ -29,4 +31,3 @@ function App() {
 }
 
 export default App;
-
