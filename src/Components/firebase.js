@@ -35,6 +35,7 @@ const logInWithEmailAndPassword = async (email, password) => {
       console.error(err);
       alert(err.message);
     }
+    return true
   };
 
   //const getSnapshot = async
@@ -55,10 +56,11 @@ const logInWithEmailAndPassword = async (email, password) => {
     alert("Applied to be an Admin");
   };
 
-  const registerWithEmailAndPassword = async (firstName, lastName, accountType, email, password) => {
+  const registerWithEmailAndPassword = async (firstName, lastName, accountType, email, password, setDisplayName) => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       const user = res.user;
+      setDisplayName(firstName)
       await addDoc(collection(db, "allUsers"), {
         uid: user.uid,
         firstName, 
@@ -71,10 +73,12 @@ const logInWithEmailAndPassword = async (email, password) => {
           displayName: firstName,
         })
       });
+      
     } catch (err) {
       console.error(err);
       alert(err.message);
     }
+    return true;
   };
 
   const sendPasswordReset = async (email) => {

@@ -9,7 +9,11 @@ function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [user, loading, error] = useAuthState(auth);
-    console.log(user)
+    const login = async () => {
+      const loggedIn = await logInWithEmailAndPassword(email.toLowerCase(), password)
+      if (loggedIn)
+      window.location.reload(true)
+    }
     return (
       <div >
         {user !== null &&
@@ -43,7 +47,7 @@ function Login() {
           />
           <button
             className="loginInput"
-            onClick={() => logInWithEmailAndPassword(email.toLowerCase(), password)}
+            onClick={() => login()}
           >
             Login
           </button>

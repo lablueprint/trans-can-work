@@ -3,6 +3,8 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../Components/firebase";
 import "./NavigatorDashboard.css"
 
+// later we can make each tab a different component, the individual tabs take a jobseeker as a prob
+
 
 const getSeeker = async (setJobseeker) => {
     const Ref = collection(db, "jobseekers");
@@ -120,6 +122,10 @@ function NavigatorDashboard() {
                     {/* Submit button and on Click we update info */}
                 </form>
                 <button onClick={updateJobseeker}>Save Changes</button>
+            </div>
+            <div>
+                <h1>Skills Checklist</h1>
+
             </div>
         </div>
     </div>

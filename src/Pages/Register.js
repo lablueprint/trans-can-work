@@ -18,11 +18,20 @@ function Register() {
     const [displayName, setDisplayName] = useState("");
     const [registeredAsAdmin, setRegisteredAsAdmin] = useState(false);
     useEffect(()=>{
-      if (user)
-        setDisplayName(user.displayName)
-    },[user])
+      // if (!loading && user)
+      //   {
+      //     setDisplayName(user.displayName)
+      //     console.log(user.displayName)
+      //   }
+
+    },[user, loading])
     
-    const register = ((firstName, lastName, accountType, email, password) =>
+
+    const logoutUser = () => {
+      logout()
+      setDisplayName("")
+    }
+    const register = async (firstName, lastName, accountType, email, password) =>
     {
       if (accountType === "administrator")
       {
@@ -30,17 +39,21 @@ function Register() {
         addToAdminPool(firstName, lastName, email, password)
       }
       else
-        registerWithEmailAndPassword(firstName, lastName, accountType, email, password)
-    })
+      {
+        const registered = await registerWithEmailAndPassword(firstName, lastName, accountType, email, password, setDisplayName) 
+        if (registered === true)
+          window.location.reload(true);
+      }
+    };
     
     return (
       <div> 
         
-        {user !== null &&
+        {user !== null && 
           <div>
             <div>
               Hello {user.displayName}
-              <button onClick={() => logout()}>Sign Out</button>
+              <button onClick={() => logoutUser()}>Sign Out</button>
             </div>
           </div>
           
@@ -85,11 +98,11 @@ function Register() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
-          <input
+          <button
             className="registerFormItem"
             type="submit"
-            onClick={() => register(firstName, lastName, accountType, email, password)}
-          />
+            onClick={() => {register(firstName, lastName, accountType, email, password); }}
+          >Submit </button>
           {/* <button
             onClick={() => registerWithEmailAndPassword(firstName, lastName, accountType, email, password)}
             >Register</button> */}
