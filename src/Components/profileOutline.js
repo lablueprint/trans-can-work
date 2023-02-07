@@ -6,7 +6,6 @@ import Box from '@mui/material/Box';
 import useState from "react";
 import { PropTypes } from 'prop-types';
 import Avatar from 'react-avatar';
-import beyonce from '.././Assets/beyonce.png'
 
 
 const demographic_info = [{
@@ -89,7 +88,7 @@ export default function ProfileOutline() {
           </Tabs>
         </Box>
         <TabPanel value={value} index={0} >
-          <Avatar sx={{ width: 200, height: 200 }} alt="Remy Sharp" src={beyonce} />
+        <Avatar facebookId="100008343750912" size="150" />
           <header>
             MY PROFILE
           </header>
@@ -145,7 +144,7 @@ export default function ProfileOutline() {
           </Tabs>
         </Box>
         <TabPanel value={value} index={0} >
-          <Avatar sx={{ width: 200, height: 200 }} alt="Remy Sharp" src={beyonce} />
+        <Avatar facebookId="100008343750912" size="150" />
           <br></br>
           <label>
             Name:
