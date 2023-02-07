@@ -7,10 +7,10 @@ import {
   Login,
   Register,
   Reset,
+  Profile,
 } from './Pages';
 import './App.css';
-import ProfileOutline from './Components/profileOutline'
-
+import Footer from './Components/Footer/Footer';
 
 function App() {
   return (
@@ -21,6 +21,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/reset" element={<Reset />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
       <Footer />
     </div>
