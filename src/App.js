@@ -11,6 +11,7 @@ import {
 } from './Pages';
 import './App.css';
 import Footer from './Components/Footer/Footer';
+import Header from './Components/Navigation/Header'; 
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/reset" element={<Reset />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
+      <Header /> 
       <Footer />
     </div>
   );
