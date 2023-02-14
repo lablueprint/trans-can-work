@@ -1,4 +1,4 @@
-import { doc, setDoc, getDoc, getDocs, updateDoc, deleteDoc, collection } from "firebase/firestore";
+import { doc, setDoc, query, where, getDoc, getDocs, updateDoc, deleteDoc, collection } from "firebase/firestore";
 import firebase from '../firebase';
 var db = firebase
 
@@ -18,6 +18,7 @@ export const fetchJobseeker = async (email) => {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       console.log("jobseeker: ", docSnap.data());
+      return docSnap.data();
     } else {
       console.log("jobseeker ", email, " does not exist");
     }
@@ -31,7 +32,18 @@ export const fetchAllJobseekers = async () => {
   const colRef = collection(db, "jobseekers");
   try {
     const docsSnap = await getDocs(colRef);
-    return docsSnap;
+    return docsSnap.docs.map(doc => doc.data());
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const fetchByNavigator = async (email) => {
+  const colRef = collection(db, "jobseekers");
+  const navRef = doc(db, "navigator", email)
+  try {
+    const docsSnap = await getDocs(query(colRef, where("navigator", "==", navRef)));
+    return docsSnap.docs.map(doc => doc.data());
   } catch (error) {
     console.log(error);
   }
