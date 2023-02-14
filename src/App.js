@@ -11,7 +11,8 @@ import {
 } from './Pages';
 import './App.css';
 import Footer from './Components/Footer/Footer';
-import Header from './Components/Navigation/Header'; 
+import Header from './Components/Navigation/Header';
+import MilestoneMap from './Components/Milestones/MilestoneMap'; 
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
         <Route path="/reset" element={<Reset />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
-      <Header /> 
+      {/*<Header /> */}
       <Footer />
     </div>
   );
