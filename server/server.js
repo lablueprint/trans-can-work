@@ -1,41 +1,24 @@
 const express = require('express');
 const app = express();
-const nodemailer = require('nodemailer');
+const cors = require('cors');
 const port = 3001;
+const SendEmail = require('./email.js');
 
-const senderEmail = '';
-const senderPassword = '';
-const receiverEmail = '';
-
-const SendEmail = () => {
-    return new Promise((resolve, reject) => {
-        let transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: senderEmail,
-                pass: senderPassword
-            }
-        });
-
-        const mailConfigs = {
-            from: senderEmail,
-            to: receiverEmail,
-            subject: 'Testing Single Email',
-            text: 'Body text of the email.'
-        }
-
-        transporter.sendMail(mailConfigs, (error, info) => {
-            if (error) {
-                console.log(error);
-                return reject({ message: 'transporter sendMail error' });
-            }
-            return resolve({ message: 'email sent successfully' });
-        });
-    });
-}
+// cors
+app.use(cors());
+app.use(express.json({ limit: '25mb' }));
+app.use(express.urlencoded({ limit: '25mb', extended: true }));
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    next();
+});
 
 app.get('/', (req, res) => {
-    SendEmail()
+    res.send('server running')
+});
+
+app.post('/send-email', (req, res) => {
+    SendEmail(req.body)
         .then(response => res.send(response.message))
         .catch(error => res.status(500).send(error.message));
 });
