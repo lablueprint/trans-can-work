@@ -1,16 +1,45 @@
 const express = require('express');
-
-const PORT = process.env.PORT || 3001;
-
 const app = express();
+const nodemailer = require('nodemailer');
+const port = 3001;
 
+const senderEmail = '';
+const senderPassword = '';
+const receiverEmail = '';
 
-app.get('/api', (req, res) => {
-    // res.json({ message: "Hello from server!" });
-    res.send('hello world from express');
+const SendEmail = () => {
+    return new Promise((resolve, reject) => {
+        let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: senderEmail,
+                pass: senderPassword
+            }
+        });
+
+        const mailConfigs = {
+            from: senderEmail,
+            to: receiverEmail,
+            subject: 'Testing Single Email',
+            text: 'Body text of the email.'
+        }
+
+        transporter.sendMail(mailConfigs, (error, info) => {
+            if (error) {
+                console.log(error);
+                return reject({ message: 'transporter sendMail error' });
+            }
+            return resolve({ message: 'email sent successfully' });
+        });
+    });
+}
+
+app.get('/', (req, res) => {
+    SendEmail()
+        .then(response => res.send(response.message))
+        .catch(error => res.status(500).send(error.message));
 });
 
-app.listen(1234);
-// app.listen(PORT, () => {
-//     console.log(`Server listening on ${PORT}`);
-// });
+app.listen(port, () => {
+    console.log(`Listening at http://localhost:${port}`);
+});

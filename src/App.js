@@ -11,21 +11,22 @@ import {
 } from './Pages';
 import './App.css';
 import Footer from './Components/Footer/Footer';
-import Header from './Components/Navigation/Header'; 
+import Header from './Components/Navigation/Header';
+import Users from './Services/express-test';
 
 function App() {
   return (
     <div className="App">
-
-      <Routes>
+      <Users />
+      {/* <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
-      <Header /> 
-      <Footer />
+      <Header />
+      <Footer /> */}
     </div>
   );
 }
