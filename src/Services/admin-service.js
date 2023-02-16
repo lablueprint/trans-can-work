@@ -21,6 +21,7 @@ export const fetchAdmin = async (email) => {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       console.log("Admin: ", docSnap.data());
+      return docSnap.data();
     } else {
       console.log("Admin ", email, " does not exist");
     }
