@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../Components/firebase";
 import "./NavigatorDashboard.css"
+import Checkboxes from "./Checkboxes";
 
 // later we can make each tab a different component, the individual tabs take a jobseeker as a prob
 
@@ -9,7 +10,7 @@ import "./NavigatorDashboard.css"
 const getSeeker = async (setJobseeker) => {
     const Ref = collection(db, "jobseekers");
 
-const q = query(Ref, where("name", "==", "Joe Bruin"));
+const q = query(Ref, where("name", "==", "Ryan"));
 const querySnapshot = await getDocs(q);
 querySnapshot.forEach((doc) => {
     const data = doc.data();
@@ -47,10 +48,14 @@ function NavigatorDashboard() {
         certificateType: "None",
     })
     const {name, pronouns, phone, email, ethnicity, degree, degreeType, certificate, certificateType} = jobseeker
+
     useEffect(() => {
         getSeeker(setJobseeker)
     }, [setJobseeker])
+    const skills = ['Accounting Software', 'Administrative', 'Adobe Software Suite']
     
+    const [checkedArr, setCheckedArr] = useState(new Array(skills.length).fill(false))
+    let props = {skills, checkedArr, setCheckedArr}
   return (
     <div>
         <div>
@@ -125,10 +130,10 @@ function NavigatorDashboard() {
             </div>
             <div>
                 <h1>Skills Checklist</h1>
-
+                <Checkboxes props={props}></Checkboxes>
             </div>
         </div>
     </div>
   );
 }
-export default NavigatorDashboard;
+export default NavigatorDashboard
