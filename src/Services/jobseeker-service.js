@@ -17,8 +17,8 @@ export const fetchJobseeker = async (email) => {
   try {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      console.log("jobseeker: ", docSnap.data());
-      return docSnap.data();
+      console.log("jobseeker: ", docSnap);
+      return docSnap;
     } else {
       console.log("jobseeker ", email, " does not exist");
     }
@@ -32,7 +32,8 @@ export const fetchAllJobseekers = async () => {
   const colRef = collection(db, "jobseekers");
   try {
     const docsSnap = await getDocs(colRef);
-    return docsSnap.docs.map(doc => doc.data());
+    // use docsSnap.docs.map(doc => doc.data());
+    return docsSnap;
   } catch (error) {
     console.log(error);
   }
@@ -43,7 +44,7 @@ export const fetchByNavigator = async (email) => {
   const navRef = doc(db, "navigator", email)
   try {
     const docsSnap = await getDocs(query(colRef, where("navigator", "==", navRef)));
-    return docsSnap.docs.map(doc => doc.data());
+    return docsSnap;
   } catch (error) {
     console.log(error);
   }
