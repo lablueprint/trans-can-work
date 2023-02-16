@@ -17,7 +17,8 @@ export const fetchJobseeker = async (email) => {
   try {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      console.log("jobseeker: ", docSnap.data());
+      console.log("jobseeker: ", docSnap);
+      return docSnap; //use .data() and .id
     } else {
       console.log("jobseeker ", email, " does not exist");
     }
@@ -31,7 +32,7 @@ export const fetchAllJobseekers = async () => {
   const colRef = collection(db, "jobseekers");
   try {
     const docsSnap = await getDocs(colRef);
-    return docsSnap;
+    return docsSnap; //use .docs and then .data() and .id; use map
   } catch (error) {
     console.log(error);
   }
