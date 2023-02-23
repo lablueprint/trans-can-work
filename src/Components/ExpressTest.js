@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { fetchAllJobseekers } from '../Services/jobseeker-service';
 
 const Form = () => {
     const [email, setEmail] = useState('');
     const [subject, setSubject] = useState('');
     const [message, setMessage] = useState('');
+    const [emailList, setEmailList] = useState([]);
 
     const sendMail = () => {
         if (email && subject && message) {
@@ -19,9 +21,18 @@ const Form = () => {
         return alert('Fill the required fields.');
     }
 
+    const getAllEmails = async () => {
+        fetchAllJobseekers().then(docs => {
+            docs.forEach(doc => {
+                setEmailList([...emailList, doc.id])
+            })
+        });
+        console.log(emailList)
+    }
+
     return (
         <div>
-            <section>
+            <section className='send-single-email'>
                 <div>
                     <h2>Email credentials</h2>
 
@@ -42,7 +53,10 @@ const Form = () => {
                     </form>
                 </div>
             </section>
-        </div>
+            <section className='get-all-emails'>
+                <button type='button' onClick={() => getAllEmails()}>Load all emails</button>
+            </section>
+        </div >
     )
 }
 

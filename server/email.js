@@ -1,8 +1,9 @@
 const nodemailer = require('nodemailer');
+const dotenv = require('dotenv').config();
 
 // email credentials
-const senderEmail = '';
-const senderPassword = '';
+const senderEmail = process.env.SENDER_EMAIL;
+const senderPassword = process.env.SENDER_PASS;
 
 const SendEmail = ({ email, subject, message }) => {
     return new Promise((resolve, reject) => {
