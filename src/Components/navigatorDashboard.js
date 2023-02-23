@@ -4,7 +4,10 @@ import { fetchJobseeker } from '../Services/jobseeker-service';
 import Modal from '@material-ui/core/Modal';
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import firebase from '../firebase';
-
+import localStorage from 'redux-persist/es/storage';
+import navDashJobseeker from '../store/jobseeker/navDashRedux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getJobseeker } from '../store/jobseeker/navDashRedux';
 
 
 function NavigatorDashboard() {
@@ -15,11 +18,15 @@ function NavigatorDashboard() {
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [address, setAddress] = useState('');
-  const [ethinicity, setEthnicity] = useState('');
-  const [mode, toggleMode] = useState(true);
+  const [ethnicity, setEthnicity] = useState('');
   const [notes, setNotes] = useState('');
   const [open,setOpen] = useState (false);
   const [existingNotes, setExistingNotes] = useState('');
+  const [show, setShow] = useState('');
+
+  const jobseeker = useSelector(state => state.jobseeker);
+  const dispatch = useDispatch();
+
 
   var db = firebase;
   const docRef = doc(db, "jobseekers", testemail);
@@ -27,34 +34,68 @@ function NavigatorDashboard() {
   useEffect(() => {
     const logquery = async () => {
       const query = await fetchJobseeker(testemail); 
-      setJobSeeker({
-        name: query.data()["name"], 
-        pronouns: query.data()["pronouns"],
-        phone:query.data()["phone"], 
-        email: query.id, 
-        address:query.data()["address"], 
-        ethnicity:query.data()["ethnicity"],
-      })
+      // setJobSeeker({
+      //   name: query.data()["name"], 
+      //   pronouns: query.data()["pronouns"],
+      //   phone:query.data()["phone"], 
+      //   email: query.id, 
+      //   address:query.data()["address"], 
+      //   ethnicity:query.data()["ethnicity"],
+      // })
       if (query.data()["notes"] != null){
         setExistingNotes(query.data()["notes"])
       }
+      setName(query.data()["name"]);
+      setPronouns(query.data()["pronouns"]);
+      setPhone(query.data()["phone"]);
+      setEmail(query.id);
+      setAddress(query.data()["address"]);
+      setEthnicity(query.data()["ethnicity"]);
+
     }
-  
+ 
     logquery()
   }, []);
 
+
   function onJobseekerClick(){
-    console.log("reached");
+    // setClickedJobSeeker({
+    //   name: name, 
+    //   pronouns: pronouns,
+    //   phone:phone, 
+    //   email: email, 
+    //   address: address, 
+    //   ethnicity: ethnicity,
+    // })
     setName(jobSeeker.name);
+    console.log(name);
     setPronouns(jobSeeker.pronouns);
     setPhone(jobSeeker.phone);
     setEmail(jobSeeker.email);
     setAddress(jobSeeker.address);
     setEthnicity(jobSeeker.ethnicity);
-    toggleMode(!mode);
+
+
+    setShow("false");
+    // dispatch(getJobseeker(clickedJobSeeker));
+  } 
+
+  function onJobseekerClose(){
+    setShow("true");
   }
 
-  function handleOpen(){
+  useEffect(()=>{
+    localStorage.setItem('name', JSON.stringify((name)));
+    localStorage.setItem('pronouns', JSON.stringify((pronouns)));
+    localStorage.setItem('phone', JSON.stringify((phone)));
+    localStorage.setItem('email', JSON.stringify((email)));
+    localStorage.setItem('address', JSON.stringify((address)));
+    localStorage.setItem('ethnicity',JSON.stringify((ethnicity)));
+    localStorage.setItem('showBanner', JSON.stringify(show));
+  },[name,pronouns,phone,email,address,ethnicity,show])
+
+
+function handleOpen(){
     setOpen(true);
 };
 
@@ -63,7 +104,7 @@ let data = {
 };
 
 function handleClose(){
-  setDoc(docRef, data)
+  setDoc(docRef, data, { merge:true })
   .then(docRef => {
 })
 .catch(error => {
@@ -79,10 +120,10 @@ const handleInputChange = (e) => {
 
 
 
-if (mode){
+if (show =="true"){
   return (
     <div>
-      <Button onClick={onJobseekerClick} style={{ width: "100px", height:"50px",borderColor: 'grey', text:"client af" }} >click af</Button>
+      <Button onClick={onJobseekerClick} style={{ width: "100px", height:"50px",borderColor: 'grey' }} >jobseeker af</Button>
       <Button onClick={handleOpen}>{existingNotes}</Button>
       <div>
       <Modal
@@ -100,13 +141,28 @@ if (mode){
 else{
   return (
     <div>
-      <Button onClick={onJobseekerClick} style={{ width: "100px", height:"50px",borderColor: 'grey', text:"client af" }} >click af</Button>
+    {/* <Button onClick={onJobseekerClick} style={{ width: "100px", height:"50px",borderColor: 'grey', text:"client af" }} >jobseeker af</Button> */}
+    {/* {jobseeker.map(seeker => (
+            <h3>{seeker.name}</h3>
+        ))}
+        console.log(jobseeker); */}
       <div>Name: {name}</div>
       <div>Pronouns: {pronouns}</div>
       <div>Phone: {phone}</div>
       <div>Email: {email}</div>
       <div>Address: {address}</div>
-      <div>Ethinicity: {ethinicity}</div>
+      <div>Ethinicity: {ethnicity}</div>
+      
+      <Button onClick={handleOpen}>{existingNotes}</Button>
+      <Modal
+        open = {open}
+        onClose = {handleClose}
+        >
+        <input 
+        onChange={handleInputChange}>
+        </input>
+      </Modal>
+      <Button onClick={onJobseekerClose}>close</Button>
     </div>
   );
 }
