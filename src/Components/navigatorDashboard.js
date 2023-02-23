@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getJobseeker } from '../store/jobseeker/navDashRedux';
 
 
-function NavigatorDashboard() {
+function NavigatorDash() {
     let testemail = "bboy@tt.com";
   const [jobSeeker, setJobSeeker] = useState({name: '', pronouns: '', phone: '', email: '', address:'', ethnicity:''});
   const [name, setName] = useState('');
@@ -169,4 +169,4 @@ else{
   
 }
 
-export default NavigatorDashboard;
+export default NavigatorDash;
