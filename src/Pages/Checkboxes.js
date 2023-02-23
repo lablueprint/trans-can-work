@@ -13,9 +13,10 @@ function Checkboxes(props) {
       )
       setCheckedArr(updatedCheckedState)
     };
+    console.log(checkedArr)
     return (
     <div>
-        {skills.map(({ name}, index) => {
+        {skills.map((name, index) => {
           return (
               <div className="row">
                 <div>
@@ -30,7 +31,6 @@ function Checkboxes(props) {
                   />
                   <label for={`custom-checkbox-${index}`}>{name}</label>
                 </div>
-                <div className="right-section">{skills[index]}</div>
               </div>
           );
         })}

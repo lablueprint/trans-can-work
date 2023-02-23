@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, doc, update } from "firebase/firestore";
 import { db } from "../Components/firebase";
 import "./NavigatorDashboard.css"
 import Checkboxes from "./Checkboxes";
@@ -7,35 +7,16 @@ import Checkboxes from "./Checkboxes";
 // later we can make each tab a different component, the individual tabs take a jobseeker as a prob
 
 
-const getSeeker = async (setJobseeker) => {
-    const Ref = collection(db, "jobseekers");
 
-const q = query(Ref, where("name", "==", "Ryan"));
-const querySnapshot = await getDocs(q);
-querySnapshot.forEach((doc) => {
-    const data = doc.data();
-    console.log(data)
-    setJobseeker({
-        name: data.name,
-        pronouns: data.pronouns,
-        phone: data.phone,
-        email: data.email,
-        ethnicity: data.ethnicity,
-        degree: data.degree,
-        degreeType: data.degreeType,
-        certificate: data.certificate,
-        certificateType: data.certificateType,
-    })
-});
-}
 
 function NavigatorDashboard() {
 
-
-    const updateJobseeker = () => {
-        console.log(1)
+    const updateJobseeker = async () => {
+        const ref = doc(db, 'jobseekers', {seekerID})
+        //await update need to update db first
     };
-    
+
+    const [seekerID, setSeekerID] = useState('');
     const [jobseeker, setJobseeker] = useState({
         name: "Name",
         pronouns: "Pronouns",
@@ -52,10 +33,34 @@ function NavigatorDashboard() {
     useEffect(() => {
         getSeeker(setJobseeker)
     }, [setJobseeker])
-    const skills = ['Accounting Software', 'Administrative', 'Adobe Software Suite']
+    const skills = ['Accounting Software', 'Administrative', 'Adobe Software Suite', 'Bilingual', 'Brand Management', 'Cold Calling'] //can expand to all skills on spreadsheet
     
     const [checkedArr, setCheckedArr] = useState(new Array(skills.length).fill(false))
     let props = {skills, checkedArr, setCheckedArr}
+
+
+    const getSeeker = async (setJobseeker) => {
+        const Ref = collection(db, "jobseekers");
+    
+    const q = query(Ref, where("name", "==", "Sol I Adams"));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        setSeekerID(doc.id)
+        setJobseeker({
+            name: data.name,
+            pronouns: data.pronouns,
+            phone: data.phone,
+            email: data.email,
+            ethnicity: data.ethnicity,
+            degree: data.degree,
+            degreeType: data.degreeType,
+            certificate: data.certificate,
+            certificateType: data.certificateType,
+        })
+    });
+    }
+
   return (
     <div>
         <div>
@@ -126,12 +131,13 @@ function NavigatorDashboard() {
                     </div> */}
                     {/* Submit button and on Click we update info */}
                 </form>
-                <button onClick={updateJobseeker}>Save Changes</button>
+                
             </div>
             <div>
                 <h1>Skills Checklist</h1>
                 <Checkboxes props={props}></Checkboxes>
             </div>
+            <button onClick={updateJobseeker}>Save Changes</button>
         </div>
     </div>
   );
