@@ -3,16 +3,13 @@ import { Button } from 'react-bootstrap';
 import { fetchJobseeker } from '../Services/jobseeker-service';
 import Modal from '@material-ui/core/Modal';
 import { getFirestore, doc, setDoc } from "firebase/firestore";
-import firebase from '../firebase';
 import localStorage from 'redux-persist/es/storage';
-import navDashJobseeker from '../store/jobseeker/navDashRedux';
+import firebase from '../firebase';
 import { useDispatch, useSelector } from 'react-redux';
-import { getJobseeker } from '../store/jobseeker/navDashRedux';
 
 
 function NavigatorDash() {
     let testemail = "bboy@tt.com";
-  const [jobSeeker, setJobSeeker] = useState({name: '', pronouns: '', phone: '', email: '', address:'', ethnicity:''});
   const [name, setName] = useState('');
   const [pronouns, setPronouns] = useState('');
   const [phone, setPhone] = useState('');
@@ -20,12 +17,11 @@ function NavigatorDash() {
   const [address, setAddress] = useState('');
   const [ethnicity, setEthnicity] = useState('');
   const [notes, setNotes] = useState('');
-  const [open,setOpen] = useState (false);
+  const [open,setOpen] = useState(false);
   const [existingNotes, setExistingNotes] = useState('');
-  const [show, setShow] = useState('');
-
-  const jobseeker = useSelector(state => state.jobseeker);
+  const show = useSelector(state => state.show);
   const dispatch = useDispatch();
+
 
 
   var db = firebase;
@@ -34,18 +30,11 @@ function NavigatorDash() {
   useEffect(() => {
     const logquery = async () => {
       const query = await fetchJobseeker(testemail); 
-      // setJobSeeker({
-      //   name: query.data()["name"], 
-      //   pronouns: query.data()["pronouns"],
-      //   phone:query.data()["phone"], 
-      //   email: query.id, 
-      //   address:query.data()["address"], 
-      //   ethnicity:query.data()["ethnicity"],
-      // })
       if (query.data()["notes"] != null){
         setExistingNotes(query.data()["notes"])
       }
       setName(query.data()["name"]);
+      dispatch({ type: 'SET_NAME', payload: query.data()["name"] });
       setPronouns(query.data()["pronouns"]);
       setPhone(query.data()["phone"]);
       setEmail(query.id);
@@ -59,29 +48,14 @@ function NavigatorDash() {
 
 
   function onJobseekerClick(){
-    // setClickedJobSeeker({
-    //   name: name, 
-    //   pronouns: pronouns,
-    //   phone:phone, 
-    //   email: email, 
-    //   address: address, 
-    //   ethnicity: ethnicity,
-    // })
-    setName(jobSeeker.name);
-    console.log(name);
-    setPronouns(jobSeeker.pronouns);
-    setPhone(jobSeeker.phone);
-    setEmail(jobSeeker.email);
-    setAddress(jobSeeker.address);
-    setEthnicity(jobSeeker.ethnicity);
-
-
-    setShow("false");
-    // dispatch(getJobseeker(clickedJobSeeker));
+    dispatch({ type: 'SET_SHOW', payload: false });
+    console.log('onClick', show);
   } 
 
   function onJobseekerClose(){
-    setShow("true");
+    dispatch({ type: 'SET_SHOW', payload: true });
+    console.log('onClose', show);
+
   }
 
   useEffect(()=>{
@@ -97,6 +71,7 @@ function NavigatorDash() {
 
 function handleOpen(){
     setOpen(true);
+
 };
 
 let data = {
@@ -111,6 +86,7 @@ function handleClose(){
     console.log(error);
 })
   setOpen(false);
+  
   setExistingNotes(notes);
 };
 
@@ -120,7 +96,7 @@ const handleInputChange = (e) => {
 
 
 
-if (show =="true"){
+if (show){
   return (
     <div>
       <Button onClick={onJobseekerClick} style={{ width: "100px", height:"50px",borderColor: 'grey' }} >jobseeker af</Button>
@@ -141,11 +117,6 @@ if (show =="true"){
 else{
   return (
     <div>
-    {/* <Button onClick={onJobseekerClick} style={{ width: "100px", height:"50px",borderColor: 'grey', text:"client af" }} >jobseeker af</Button> */}
-    {/* {jobseeker.map(seeker => (
-            <h3>{seeker.name}</h3>
-        ))}
-        console.log(jobseeker); */}
       <div>Name: {name}</div>
       <div>Pronouns: {pronouns}</div>
       <div>Phone: {phone}</div>

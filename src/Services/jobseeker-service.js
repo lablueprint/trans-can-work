@@ -12,12 +12,28 @@ export const createJobseeker = async (email, data) => {
   });
 }
 
+// export const fetchJobseeker = async (email) => {
+//   const docRef = doc(db, "jobseekers", email);
+//   try {
+//     const docSnap = await getDoc(docRef);
+//     if (docSnap.exists()) {
+//       console.log("jobseeker: ", docSnap.data());
+//     } else {
+//       console.log("jobseeker ", email, " does not exist");
+//     }
+//   }
+//   catch (error) {
+//     console.log(error);
+//   }
+// }
 export const fetchJobseeker = async (email) => {
   const docRef = doc(db, "jobseekers", email);
   try {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       console.log("jobseeker: ", docSnap.data());
+      console.log("jobseeker: ", docSnap.id);
+      return docSnap //delete this before pushing kaylee please.
     } else {
       console.log("jobseeker ", email, " does not exist");
     }
@@ -26,6 +42,8 @@ export const fetchJobseeker = async (email) => {
     console.log(error);
   }
 }
+
+
 
 export const fetchAllJobseekers = async () => {
   const colRef = collection(db, "jobseekers");

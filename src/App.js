@@ -13,11 +13,12 @@ import './App.css';
 import Footer from './Components/Footer/Footer';
 import Header from './Components/Navigation/Header'; 
 import NavigatorDashboard from './Pages/NavigatorDashboard';
+// import { Provider } from 'react-redux';
+// import store from './store';
 
 function App() {
   return (
     <div className="App">
-
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
