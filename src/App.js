@@ -5,6 +5,7 @@ import {
 import {
   Home,
   Login,
+  NavigatorDashboard,
   Register,
   Reset,
   Profile,
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
