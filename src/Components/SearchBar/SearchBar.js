@@ -18,7 +18,7 @@ function SearchBar(props)
                   if (value.length > 0) {
                     setResult([]);
                     let searchQuery = value.toLowerCase();
-                    for(let step = 1; step < names.length; step++) {
+                    for(let step = 0; step < names.length; step++) {
                       let nam = names[step].toLowerCase();
                       if(nam.slice(0, searchQuery.length).indexOf(searchQuery) !== -1) {
                         setResult(prevResult => {
