@@ -29,13 +29,14 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 const logInWithEmailAndPassword = async (email, password) => {
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-  } catch (err) {
-    console.error(err);
-    alert(err.message);
-  }
-};
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+    return true
+  };
 
 //const getSnapshot = async
 const addToAdminPool = async (firstName, lastName, email, password) => {
@@ -55,27 +56,31 @@ const addToAdminPool = async (firstName, lastName, email, password) => {
   alert("Applied to be an Admin");
 };
 
-const registerWithEmailAndPassword = async (firstName, lastName, accountType, email, password) => {
-  try {
-    const res = await createUserWithEmailAndPassword(auth, email, password);
-    const user = res.user;
-    await addDoc(collection(db, "allUsers"), {
-      uid: user.uid,
-      firstName,
-      lastName,
-      accountType,
-      authProvider: "local",
-      email,
-    }).then(() => {
-      updateProfile(auth.currentUser, {
-        displayName: firstName,
-      })
-    });
-  } catch (err) {
-    console.error(err);
-    alert(err.message);
-  }
-};
+
+  const registerWithEmailAndPassword = async (firstName, lastName, accountType, email, password, setDisplayName) => {
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+      const user = res.user;
+      setDisplayName(firstName)
+      await addDoc(collection(db, "allUsers"), {
+        uid: user.uid,
+        firstName, 
+        lastName,
+        accountType,
+        authProvider: "local",
+        email,
+      }).then(() => {
+        updateProfile(auth.currentUser, {
+          displayName: firstName,
+        })
+      });
+      
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+    return true;
+  };
 
 const sendPasswordReset = async (email) => {
   try {

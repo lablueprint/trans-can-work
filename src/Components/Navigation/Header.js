@@ -86,7 +86,6 @@ const HeaderTabs = styled(Tabs)({
   '& .MuiTabs-indicator': {
     backgroundColor: '#393EBA',
     height: '4px',
-
   },
 });
 
