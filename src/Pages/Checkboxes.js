@@ -9,7 +9,6 @@ function Checkboxes({ skills, checkedArr, setCheckedArr }) {
       ? !item : item));
     setCheckedArr(updatedCheckedState);
   };
-  console.log(checkedArr);
   return (
     <div>
       {skills.map((name, index) => (
