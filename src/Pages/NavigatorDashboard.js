@@ -3,6 +3,10 @@ import { collection, query, where, getDocs, doc, update } from "firebase/firesto
 import { db } from "../Components/firebase";
 import "./NavigatorDashboard.css"
 import Checkboxes from "./Checkboxes";
+import Modal from '@material-ui/core/Modal';
+import { Button } from "@material-ui/core";
+import Notepad from "../Components/Notepad";
+
 
 // later we can make each tab a different component, the individual tabs take a jobseeker as a prob
 
@@ -10,7 +14,6 @@ import Checkboxes from "./Checkboxes";
 
 
 function NavigatorDashboard() {
-
     const updateJobseeker = async () => {
         const ref = doc(db, 'jobseekers', {seekerID})
         //await update need to update db first
@@ -66,12 +69,14 @@ function NavigatorDashboard() {
         <div>
             [Image goes here]
         </div>
+        <Notepad></Notepad>
         <div className="content">
+             <div>
+                <h1>Client Info</h1>
+
             <div>
                 <h1>Employment Roadmap</h1>
             </div>
-            <div>
-                <h1>Client Info</h1>
                 <form>
                     <div className="inputWrapper">
                         <label for="authName">Authentic Name</label>
