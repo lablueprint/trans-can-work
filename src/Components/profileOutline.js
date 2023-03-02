@@ -58,11 +58,6 @@ function a11yProps(index) {
   };
 }
 
-// const initialValues = {
-//   name: demographicInfo[0].name,
-//   pronouns: demographicInfo[0].pronouns,
-// };
-
 export default function ProfileOutline() {
   const [value, setValue] = React.useState(0);
   const [disableButton, setDisableButton] = React.useState(true);
