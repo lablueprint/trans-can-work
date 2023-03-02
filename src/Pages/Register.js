@@ -31,17 +31,17 @@ function Register() {
     logout();
     setDisplayName('');
   };
-  const register = async (firstNameReg, lastNameReg, accountTypeReg, emailReg, passwordReg) => {
+  const register = async () => {
     if (accountType === 'administrator') {
-      console.log(firstNameReg);
-      addToAdminPool(firstNameReg, lastNameReg, emailReg, passwordReg);
+      console.log(firstName);
+      addToAdminPool(firstName, lastName, email, password);
     } else {
       const registered = await registerWithEmailAndPassword(
-        firstNameReg,
-        lastNameReg,
-        accountTypeReg,
-        emailReg,
-        passwordReg,
+        firstName,
+        lastName,
+        accountType,
+        email,
+        password,
         setDisplayName,
       );
       if (registered === true) window.location.reload(true);
