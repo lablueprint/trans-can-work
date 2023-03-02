@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp } from 'firebase/app';
 import {
   getAuth,
   updateProfile,
@@ -6,22 +6,22 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
-} from "firebase/auth";
+} from 'firebase/auth';
 import {
   getFirestore,
   collection,
   addDoc,
-} from "firebase/firestore";
+} from 'firebase/firestore';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyC84QEm_BT77ocIwq1FrmeOOkX1yuikJaU",
-  authDomain: "trans-can-work.firebaseapp.com",
-  projectId: "trans-can-work",
-  storageBucket: "trans-can-work.appspot.com",
-  messagingSenderId: "454640569499",
-  appId: "1:454640569499:web:58a2ba7beb0e8f412f4a3e",
-  measurementId: "G-K3V885RFK0"
+  apiKey: 'AIzaSyC84QEm_BT77ocIwq1FrmeOOkX1yuikJaU',
+  authDomain: 'trans-can-work.firebaseapp.com',
+  projectId: 'trans-can-work',
+  storageBucket: 'trans-can-work.appspot.com',
+  messagingSenderId: '454640569499',
+  appId: '1:454640569499:web:58a2ba7beb0e8f412f4a3e',
+  measurementId: 'G-K3V885RFK0',
 };
 
 const app = initializeApp(firebaseConfig);
@@ -29,63 +29,68 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 const logInWithEmailAndPassword = async (email, password) => {
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-    } catch (err) {
-      console.error(err);
-      alert(err.message);
-    }
-    return true
-  };
-
-//const getSnapshot = async
-const addToAdminPool = async (firstName, lastName, email, password) => {
-  console.log(firstName)
   try {
-    await addDoc(collection(db, "potentialAdmins"), {
+    await signInWithEmailAndPassword(auth, email, password);
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+  return true;
+};
+
+// const getSnapshot = async
+const addToAdminPool = async (firstName, lastName, email) => {
+  console.log(firstName);
+  try {
+    await addDoc(collection(db, 'potentialAdmins'), {
       firstName,
       lastName,
-      authProvider: "local",
+      authProvider: 'local',
       email,
     });
   } catch (err) {
     console.error(err);
     alert(err.message);
-    return
+    return;
   }
-  alert("Applied to be an Admin");
+  alert('Applied to be an Admin');
 };
 
-
-  const registerWithEmailAndPassword = async (firstName, lastName, accountType, email, password, setDisplayName) => {
-    try {
-      const res = await createUserWithEmailAndPassword(auth, email, password);
-      const user = res.user;
-      setDisplayName(firstName)
-      await addDoc(collection(db, "allUsers"), {
-        uid: user.uid,
-        firstName, 
-        lastName,
-        accountType,
-        authProvider: "local",
-        email,
-      }).then(() => {
-        updateProfile(auth.currentUser, {
-          displayName: firstName,
-        })
+const registerWithEmailAndPassword = async (
+  firstName,
+  lastName,
+  accountType,
+  email,
+  password,
+  setDisplayName,
+) => {
+  try {
+    const res = await createUserWithEmailAndPassword(auth, email, password);
+    const { user } = res;
+    setDisplayName(firstName);
+    await addDoc(collection(db, 'allUsers'), {
+      uid: user.uid,
+      firstName,
+      lastName,
+      accountType,
+      authProvider: 'local',
+      email,
+    }).then(() => {
+      updateProfile(auth.currentUser, {
+        displayName: firstName,
       });
-      
-    } catch (err) {
-      console.error(err);
-      alert(err.message);
-    }
-    return true;
-  };
+    });
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+  return true;
+};
 
 const sendPasswordReset = async (email) => {
   try {
     await sendPasswordResetEmail(auth, email);
-    alert("Password reset link sent!");
+    alert('Password reset link sent!');
   } catch (err) {
     console.error(err);
     alert(err.message);
@@ -93,7 +98,7 @@ const sendPasswordReset = async (email) => {
 };
 
 const logout = () => {
-  signOut(auth)
+  signOut(auth);
 };
 
 export {
