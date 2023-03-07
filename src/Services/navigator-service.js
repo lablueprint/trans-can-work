@@ -20,8 +20,8 @@ export const fetchNavigator = async (email) => {
   try {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      console.log('Navigator: ', docSnap.data());
-      return docSnap.data();
+      console.log('Navigator: ', docSnap);
+      return docSnap;
     }
     console.log('Navigator ', email, ' does not exist');
     return null;
