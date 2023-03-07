@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-
 import { Link } from 'react-router-dom';
+import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { getAuth } from 'firebase/auth';
 import { registerWithEmailAndPassword, logout, addToAdminPool } from '../Components/firebase';
 import './Register.css';
 
@@ -15,16 +14,17 @@ function Register() {
   const [lastName, setLastName] = useState('');
   const [accountType, setAccountType] = useState('');
   const [user, loading] = useAuthState(auth);
+  const [googleLoggedIn, setGoogleLoggedIn] = useState(false);
+
   // eslint-disable-next-line no-unused-vars
   const [displayName, setDisplayName] = useState('');
   // const [registeredAsAdmin, setRegisteredAsAdmin] = useState(false);
+  // If we want to see if user is logged in
   useEffect(() => {
-    // if (!loading && user)
-    //   {
-    //     setDisplayName(user.displayName)
-    //     console.log(user.displayName)
-    //   }
-
+    if (!loading && user) {
+      setDisplayName(user.displayName);
+      console.log(user.displayName);
+    }
   }, [user, loading]);
 
   const logoutUser = () => {
@@ -47,6 +47,40 @@ function Register() {
       if (registered === true) window.location.reload(true);
     }
   };
+  const provider = new GoogleAuthProvider();
+
+  function signUpWithGoogle() {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        console.log('SC');
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        console.log('credential: ', credential);
+        const token = credential.accessToken;
+        console.log(token);
+        // The signed-in user info.
+        const { user: googleUser } = result;
+        console.log(googleUser);
+        setGoogleLoggedIn(true);
+        console.log(googleLoggedIn);
+        setEmail(googleUser.email);
+        // setUsername(googleUser.displayName);
+      // ...
+      }).catch((error) => {
+      // Handle Errors here.
+        const errorCode = error.code;
+        console.log(errorCode);
+
+        const googleErrorMessage = error.message;
+        console.log(googleErrorMessage);
+
+        // The email of the user's account used.
+        // const { email } = error.customData;
+        // The AuthCredential type that was used.
+        // const credential = GoogleAuthProvider.credentialFromError(error);
+      // ...
+      });
+  }
 
   return (
     <div>
@@ -119,10 +153,13 @@ function Register() {
           Submit
           {' '}
         </button>
-        {/* <button
-            onClick={() => registerWithEmailAndPassword(
-              firstName, lastName, accountType, email, password)}
-            >Register</button> */}
+        <button
+          type="button"
+          className="loginInput"
+          onClick={() => signUpWithGoogle()}
+        >
+          Sign in with Google
+        </button>
       </div>
       <div>
         Have an account? Sign in here!
