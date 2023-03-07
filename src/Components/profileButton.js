@@ -19,6 +19,7 @@ function ProfileButton() {
           const query = await fetchJobseeker(testemail);
           setName(query.data()["name"]);
           setField (query.data()["field of work"]);
+          console.log(field);
         }
      
         logquery()
@@ -28,7 +29,8 @@ console.log(name);
       <div>
         <Avatar facebookId="100008343750912" size="150" />
         {name} <br/>
-        {field}
+        <text>name</text>
+        <text>field</text>
       </div>
     );
   }
