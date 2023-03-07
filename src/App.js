@@ -5,13 +5,14 @@ import {
 import {
   Home,
   Login,
+  NavigatorDashboard,
   Register,
   Reset,
   Profile,
 } from './Pages';
 import './App.css';
 import Footer from './Components/Footer/Footer';
-import Header from './Components/Navigation/Header'; 
+import Header from './Components/Navigation/Header';
 
 function App() {
   return (
@@ -21,10 +22,11 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
-      <Header /> 
+      <Header />
       <Footer />
     </div>
   );
