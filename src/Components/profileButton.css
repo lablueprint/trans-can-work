@@ -1,0 +1,27 @@
+.container { 
+    width: 80px; 
+    height: 80px;
+    vertical-align: middle;
+ }
+.outer-container{
+    display: flex;  
+    flex-direction: row;
+    height: 80px;
+}
+.container2 {
+    width: 200px; 
+    height: 80px;
+    display:flex ;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
+    line-height: 22px;
+}
+.image {
+    height: 80px;
+    width: 80px;
+}
+.button {
+    color: black;
+    border-width: 3px;
+}
