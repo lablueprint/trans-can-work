@@ -8,6 +8,7 @@ import {
   Register,
   Reset,
   Profile,
+  Onboard
 } from './Pages';
 import './App.css';
 import Footer from './Components/Footer/Footer';
@@ -23,6 +24,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/onboard" element={<Onboard />} />
       </Routes>
       <Header /> 
       <Footer />
