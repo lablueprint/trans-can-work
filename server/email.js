@@ -1,5 +1,7 @@
 const nodemailer = require("nodemailer");
 const dotenv = require("dotenv").config();
+const hbs = require("nodemailer-express-handlebars");
+const path = require("path");
 
 // email credentials
 const senderEmail = process.env.SENDER_EMAIL;
@@ -15,13 +17,28 @@ const SendEmail = ({ emailList, subject, message }) => {
       },
     });
 
-    for (let i = 0; i < emailList.length; i++) {
+    const handlebarOptions = {
+      viewEngine: {
+        partialsDir: path.resolve("./templates/"),
+        defaultLayout: false,
+      },
+      viewPath: path.resolve("./templates/"),
+    };
+
+    transporter.use("compile", hbs(handlebarOptions));
+
+    const testerEmail = ["arwaidev@gmail.com"];
+
+    for (let i = 0; i < testerEmail.length; i++) {
       setTimeout(() => {
         const mailConfigs = {
           from: senderEmail,
-          to: emailList[i],
+          to: testerEmail[i],
           subject: subject,
-          text: message,
+          template: "email",
+          context: {
+            username: emailList[i],
+          },
         };
 
         transporter.sendMail(mailConfigs, (error, info) => {
