@@ -2,10 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { registerWithEmailAndPassword, logout, addToAdminPool } from '../Components/firebase';
+import { registerWithEmailAndPassword, logout } from '../Components/firebase';
+import { createNavigator } from '../Services/navigator-service';
+import { createJobseeker } from '../Services/jobseeker-service';
+import { createAdmin } from '../Services/admin-service';
+
 import './Register.css';
 
 const auth = getAuth();
+const data = {
+  name: 'Solia',
+  paper: 'ayub',
+  'fun fact': 'ableist',
+  'helen keller': 'does not exist',
+};
 
 function Register() {
   const [email, setEmail] = useState('');
@@ -14,7 +24,7 @@ function Register() {
   const [lastName, setLastName] = useState('');
   const [accountType, setAccountType] = useState('');
   const [user, loading] = useAuthState(auth);
-  const [googleLoggedIn, setGoogleLoggedIn] = useState(false);
+  // const [googleLoggedIn, setGoogleLoggedIn] = useState(false);
 
   // eslint-disable-next-line no-unused-vars
   const [displayName, setDisplayName] = useState('');
@@ -32,26 +42,37 @@ function Register() {
     setDisplayName('');
   };
   const register = async () => {
-    if (accountType === 'administrator') {
-      console.log(firstName);
-      addToAdminPool(firstName, lastName, email, password);
-    } else {
-      const registered = await registerWithEmailAndPassword(
-        firstName,
-        lastName,
-        accountType,
-        email,
-        password,
-        setDisplayName,
-      );
-      if (registered === true) window.location.reload(true);
+    if (accountType !== 'navigator' && accountType !== 'jobseeker' && accountType !== 'admin') {
+      alert('Please select a role');
+      return;
     }
+    const registered = await registerWithEmailAndPassword(
+      firstName,
+      lastName,
+      accountType,
+      email,
+      password,
+      setDisplayName,
+    );
+    if (accountType === 'navigator') {
+      createNavigator(email, data);
+    } else if (accountType === 'jobseeker') {
+      createJobseeker(email, data);
+    } else {
+      createAdmin(email, data);
+    }
+    if (registered === true) window.location.reload(true);
   };
   const provider = new GoogleAuthProvider();
 
-  function signUpWithGoogle() {
+  const handleGoogleSignUp = async () => {
+    if (accountType !== 'navigator' && accountType !== 'jobseeker' && accountType !== 'admin') {
+      alert('Please select a role');
+      return;
+    }
     signInWithPopup(auth, provider)
-      .then((result) => {
+      .then(async (result) => {
+        // Signed in successfully with Google
         console.log('SC');
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -61,27 +82,20 @@ function Register() {
         // The signed-in user info.
         const { user: googleUser } = result;
         console.log(googleUser);
-        setGoogleLoggedIn(true);
-        console.log(googleLoggedIn);
-        setEmail(googleUser.email);
-        // setUsername(googleUser.displayName);
-      // ...
-      }).catch((error) => {
-      // Handle Errors here.
-        const errorCode = error.code;
-        console.log(errorCode);
-
-        const googleErrorMessage = error.message;
-        console.log(googleErrorMessage);
-
-        // The email of the user's account used.
-        // const { email } = error.customData;
-        // The AuthCredential type that was used.
-        // const credential = GoogleAuthProvider.credentialFromError(error);
-      // ...
+        console.log('email', googleUser.email);
+        if (accountType === 'navigator') {
+          createNavigator(googleUser.email, data);
+        } else if (accountType === 'jobseeker') {
+          createJobseeker(googleUser.email, data);
+        } else {
+          createAdmin(googleUser.email, data);
+        }
+      })
+      .catch((error) => {
+        alert(error);
+        // Sign-in with Google failed
       });
-  }
-
+  };
   return (
     <div>
 
@@ -156,7 +170,7 @@ function Register() {
         <button
           type="button"
           className="loginInput"
-          onClick={() => signUpWithGoogle()}
+          onClick={() => handleGoogleSignUp()}
         >
           Sign in with Google
         </button>
