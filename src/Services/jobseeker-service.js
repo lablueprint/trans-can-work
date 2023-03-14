@@ -20,12 +20,16 @@ export const fetchJobseeker = async (email) => {
   try {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      console.log('jobseeker: ', docSnap.data());
-      return docSnap.data();
+      console.log('jobseeker: ', docSnap);
+      return docSnap;
     }
     console.log('jobseeker ', email, ' does not exist');
+
+    console.log('jobseeker ', email, ' does not exist');
+    return null;
   } catch (error) {
     console.log(error);
+    return undefined;
   }
 };
 
@@ -33,9 +37,11 @@ export const fetchAllJobseekers = async () => {
   const colRef = collection(db, 'jobseekers');
   try {
     const docsSnap = await getDocs(colRef);
-    return docsSnap.docs.map((doc) => doc.data());
+    // use docsSnap.docs.map(doc => doc.data());
+    return docsSnap;
   } catch (error) {
     console.log(error);
+    return undefined;
   }
 };
 
@@ -44,9 +50,10 @@ export const fetchByNavigator = async (email) => {
   const navRef = doc(db, 'navigator', email);
   try {
     const docsSnap = await getDocs(query(colRef, where('navigator', '==', navRef)));
-    return docsSnap.docs.map((doc) => doc.data());
+    return docsSnap;
   } catch (error) {
     console.log(error);
+    return undefined;
   }
 };
 
@@ -70,12 +77,16 @@ export const deleteJobseeker = async (email) => {
 
 // MILESTONE ROUTES:
 // depends on how userData is implemented. may not need to pass in JSemail; so waiting to implement.
-// initial thought: would pull user data before calling this function; pass in email, milestoneIndex, and navigator email.
-// reason not inside is bc we want to reuse this route in case a navigator or admin wants to call it.
-// milestoneArray format: [”completed”, “completed”, “awaiting approval,” “completed, “incomplete”, “incomplete”]
+// initial thought: would pull user data before calling this function;
+// pass in email, milestoneIndex, and navigator email.
+// reason not inside is bc we want to reuse this route
+// in case a navigator or admin wants to call it.
+// milestoneArray format:
+// [”completed”, “completed”, “awaiting approval,” “completed, “incomplete”, “incomplete”]
 export const pingNavigator = async (JSemail, milestoneIndex, NavEmail, milestoneArray) => {
-  milestoneArray[milestoneIndex] = 'awaiting approval';
-  await updateDoc(doc(db, 'jobseekers', JSemail), { milestoneArray })
+  const updatedMilestoneArray = [...milestoneArray];
+  updatedMilestoneArray[milestoneIndex] = 'awaiting approval';
+  await updateDoc(doc(db, 'jobseekers', JSemail), { milestoneArray: updatedMilestoneArray })
     .then(() => {
       // email NavEmail here; may potentially have multiple navigators(?)
       console.log('pinged navigator for milestone approval ', JSemail);
@@ -85,8 +96,9 @@ export const pingNavigator = async (JSemail, milestoneIndex, NavEmail, milestone
 };
 
 export const markComplete = async (JSemail, milestoneIndex, NavEmail, milestoneArray) => {
-  milestoneArray[milestoneIndex] = 'completed';
-  await updateDoc(doc(db, 'jobseekers', JSemail), { milestoneArray })
+  const updatedMilestoneArray = [...milestoneArray];
+  updatedMilestoneArray[milestoneIndex] = 'completed';
+  await updateDoc(doc(db, 'jobseekers', JSemail), { milestoneArray: updatedMilestoneArray })
     .then(() => {
       console.log('marked milestone complete!', JSemail);
     }).catch((err) => {
