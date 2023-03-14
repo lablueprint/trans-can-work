@@ -7,7 +7,7 @@ const path = require("path");
 const senderEmail = process.env.SENDER_EMAIL;
 const senderPassword = process.env.SENDER_PASS;
 
-const SendEmail = ({ emailList, subject, message }) => {
+const MilestoneEmail = ({ emailList, subject, message }) => {
   return new Promise((resolve, reject) => {
     let transporter = nodemailer.createTransport({
       service: "gmail",
@@ -29,29 +29,25 @@ const SendEmail = ({ emailList, subject, message }) => {
 
     const testerEmail = ["arwaidev@gmail.com"];
 
-    for (let i = 0; i < testerEmail.length; i++) {
-      setTimeout(() => {
-        const mailConfigs = {
-          from: senderEmail,
-          to: testerEmail[i],
-          subject: subject,
-          template: "email",
-          context: {
-            username: emailList[i],
-            message: message,
-          },
-        };
+    const mailConfigs = {
+      from: senderEmail,
+      to: testerEmail,
+      subject: subject,
+      template: "milestone",
+      context: {
+        username: emailList,
+        message: message,
+      },
+    };
 
-        transporter.sendMail(mailConfigs, (error, info) => {
-          if (error) {
-            console.log(error);
-            return reject({ message: "transporter sendMail error" });
-          }
-          return resolve({ message: "email sent successfully" });
-        });
-      }, i * 1000); // 1 email per second
-    }
+    transporter.sendMail(mailConfigs, (error, info) => {
+      if (error) {
+        console.log(error);
+        return reject({ message: "transporter sendMail error" });
+      }
+      return resolve({ message: "email sent successfully" });
+    });
   });
 };
 
-module.exports = SendEmail;
+module.exports = MilestoneEmail;
