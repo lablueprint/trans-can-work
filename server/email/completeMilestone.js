@@ -33,7 +33,7 @@ const MilestoneEmail = ({ emailList, subject, message }) => {
       from: senderEmail,
       to: testerEmail,
       subject: subject,
-      template: "milestone",
+      template: "completeMilestone",
       context: {
         username: emailList,
         message: message,

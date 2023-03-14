@@ -2,8 +2,8 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const port = 3001;
-const NoProgressEmail = require("./noProgressEmail.js");
-const MilestoneEmail = require("./milestoneEmail.js");
+const NoProgress = require("./email/noProgress.js");
+const CompleteMilestone = require("./email/completeMilestone.js");
 
 // cors
 app.use(cors());
@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
 
 app.post("/no-progress-email", (req, res) => {
   console.log(req.body);
-  NoProgressEmail(req.body)
+  NoProgress(req.body)
     .then((response) => res.send(response.message))
     .catch((error) => {
       res.status(500).send(error.message);
@@ -29,7 +29,7 @@ app.post("/no-progress-email", (req, res) => {
 
 app.post("/milestone-email", (req, res) => {
   console.log(req.body);
-  MilestoneEmail(req.body)
+  CompleteMilestone(req.body)
     .then((response) => res.send(response.message))
     .catch((error) => {
       res.status(500).send(error.message);
