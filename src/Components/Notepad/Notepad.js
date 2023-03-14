@@ -25,24 +25,24 @@ function Notepad() {
     logquery();
   }, []);
 
-  function handleOpen() {
+  const handleOpen = () => {
     setOpen(true);
-  }
+  };
 
   const data = {
     notes,
   };
 
-  function handleClose() {
+  const handleClose = () => {
     setDoc(docRef, data, { merge: true })
-      .then((docRef) => {
+      .then(() => {
       })
       .catch((error) => {
         console.log(error);
       });
     setOpen(false);
     setNotes(notes);
-  }
+  };
 
   const handleInputChange = (e) => {
     setNotes(e.target.value);
