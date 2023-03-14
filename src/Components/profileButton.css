@@ -7,6 +7,15 @@
     display: flex;  
     flex-direction: row;
     height: 80px;
+    width: 250px; 
+    background-color: #FFFBFE;
+}
+.outer-container-archive{
+    display: flex;  
+    flex-direction: row;
+    height: 80px;
+    width: 250px; 
+    background-color: #CAC4D0; 
 }
 .container2 {
     width: 200px; 
