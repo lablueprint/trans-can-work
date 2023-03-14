@@ -82,7 +82,6 @@ function ProfileButton(props) {
     updateJobseeker(jobseekerEmail, { archive: false });
   };
 
-
   const deleteSeeker = () => {
     deleteJobseeker(jobseekerEmail);
   };
@@ -106,7 +105,7 @@ function ProfileButton(props) {
         <div className="container2">
           <text>{name}</text>
           <text>{field}</text>
-          <Link to="/profile">Register</Link>
+          <Link to="/profile">View Profile</Link>
           {/* MODAL STUFF FOR LATER FUNCTIONALITY
           <Button onClick={handleOpen}>View Profile</Button>
           <Modal
@@ -160,7 +159,7 @@ function ProfileButton(props) {
       <div className="container2">
         <text>{name}</text>
         <text>{field}</text>
-        <Link to="/profile">Register</Link>
+        <Link to="/profile">View Profile</Link>
         {/* MODAL STUFF SAVE FOR LATER
         <Button onClick={handleOpen}>View Profile</Button>
         <Modal
