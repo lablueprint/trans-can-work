@@ -38,6 +38,7 @@ const SendEmail = ({ emailList, subject, message }) => {
           template: "email",
           context: {
             username: emailList[i],
+            message: message,
           },
         };
 
