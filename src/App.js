@@ -13,7 +13,6 @@ import {
 import './App.css';
 import Footer from './Components/Footer/Footer';
 import Header from './Components/Navigation/Header'; 
-import NavigatorDashboard from './Pages/NavigatorDashboard';
 
 function App() {
   return (
@@ -26,7 +25,6 @@ function App() {
         <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/navigatordashboard" element={<NavigatorDashboard />} />
       </Routes>
       <Header /> 
       <Footer />
