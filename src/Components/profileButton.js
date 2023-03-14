@@ -82,9 +82,6 @@ function ProfileButton(props) {
     updateJobseeker(jobseekerEmail, { archive: false });
   };
 
-  const unbookmarkJobseeker = () => {
-    updateJobseeker(jobseekerEmail, { boookmark: false });
-  };
 
   const deleteSeeker = () => {
     deleteJobseeker(jobseekerEmail);
@@ -139,7 +136,7 @@ function ProfileButton(props) {
             }}
           >
             <MenuItem onClick={unarchiveJobseeker}>Unarchive</MenuItem>
-            <MenuItem onClick={unbookmarkJobseeker}>Unbookmark</MenuItem>
+            <MenuItem onClick={deleteSeeker}>Delete</MenuItem>
           </Menu>
         </div>
       </div>
