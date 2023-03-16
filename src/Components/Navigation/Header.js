@@ -67,8 +67,8 @@ const styles = {
     alignItems: 'right',
     padding: '0 2%',
     zIndex: (theme) => theme.zIndex.drawer + 1,
-    width: '30vw',  
-    height: '100vh', 
+    width: '30vw',
+    height: '100vh',
     left: '0',
   },
   drawerContainer: {
@@ -86,7 +86,6 @@ const HeaderTabs = styled(Tabs)({
   '& .MuiTabs-indicator': {
     backgroundColor: '#393EBA',
     height: '4px',
-
   },
 });
 
@@ -106,7 +105,7 @@ const HeaderTab = styled((props) => <Tab disableRipple {...props} />)(
   },
 );
 
-function Header() { 
+function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
