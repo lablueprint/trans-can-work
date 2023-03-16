@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; //  new stuff
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -17,13 +17,20 @@ const style = {
     p: 4,
   };
 
-function MilestoneButton({title, onClick}) {
+// somewhere inside this function, pass a img tag with the images (parent is map, child is milestone button)
+// function MilestoneButton(props)
+//
+//... <Button>{props.title}</Button>
+//
+function MilestoneButton({title, image, onClick}) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     return (
         <div>
-            <Button onClick={handleOpen}>{title}</Button>
+            <Button onClick={handleOpen}>{title} 
+                <img id="img" src={image} alt="island pic"/>
+            </Button>
             <Modal
             open={open}
             onClose={handleClose}
@@ -37,6 +44,13 @@ function MilestoneButton({title, onClick}) {
                 <Typography id="modal-modal-description" sx={{ mt: 60 }}>
                 Here is a milestone description!
                 </Typography>
+                <Button variant="contained"
+                    onClick={() => {
+                        "Completed"; 
+                    }}
+                >
+                    Mark as Complete
+                </Button> 
             </Box>
             </Modal>
         </div>
@@ -47,11 +61,11 @@ function MilestoneButton({title, onClick}) {
 
 MilestoneButton.propTypes = {
     title: PropTypes.string,
+    image: PropTypes.string 
 }
 
 export default MilestoneButton  
-
 /*
-Finished creating the popup
+Finished creating the popup 
 Later: include button/external links to the popup 
-*/ 
+*/

@@ -1,7 +1,7 @@
 @media (min-width: 300px){
     .footer-wrapper{
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(4, 1fr));
         height: 100%;
         background: #FCFCFC;
         box-shadow: 0 -7px 10px rgba(0, 0, 0, 0.15);

@@ -8,14 +8,20 @@ import {
 import './App.css';
 import Footer from './Components/Footer/Footer';
 import MilestoneButton from './Components/Milestones/MilestoneButton';
-
+import MilestoneMap from './Components/Milestones/MilestoneMap';
 
 function App() {
+  // new stuff
+  // const [image, setImage] = useState(""); 
+  // const addImageHandler = (image) => {
+  //   setImage((prevImage)=> {
+  //     return image; 
+  //   })
+  // }
+  // new stuff
+
   return (
     <div className="App">
-      <header className="App-header">
-      </header>
-      <MilestoneButton title="Click Me!"></MilestoneButton>
       <Routes>
         <Route path="/" element={<Home />} />
       </Routes> 
