@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { registerWithEmailAndPassword, logout } from '../Components/firebase';
 import { createNavigator } from '../Services/navigator-service';
-import { createJobseeker } from '../Services/jobseeker-service';
+import { createJobseeker, fetchJobseeker } from '../Services/jobseeker-service';
 import { createAdmin } from '../Services/admin-service';
 
 import './Register.css';
@@ -15,6 +15,18 @@ const data = {
   paper: 'ayub',
   'fun fact': 'ableist',
   'helen keller': 'does not exist',
+  approval: false,
+};
+
+const getApprovalStatus = async (email) => {
+  const docSnap = await fetchJobseeker(email);
+  if (docSnap) {
+    const approveData = docSnap.data();
+    const approvalStatus = approveData.approval;
+    return approvalStatus;
+  }
+  console.log(`Jobseeker ${email} not found`);
+  return null;
 };
 
 function Register() {
@@ -25,6 +37,7 @@ function Register() {
   const [accountType, setAccountType] = useState('');
   const [user, loading] = useAuthState(auth);
   // const [googleLoggedIn, setGoogleLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   // eslint-disable-next-line no-unused-vars
   const [displayName, setDisplayName] = useState('');
@@ -55,13 +68,19 @@ function Register() {
       setDisplayName,
     );
     if (accountType === 'navigator') {
-      createNavigator(email, data);
+      await createNavigator(email, data);
     } else if (accountType === 'jobseeker') {
-      createJobseeker(email, data);
+      await createJobseeker(email, data);
     } else {
-      createAdmin(email, data);
+      await createAdmin(email, data);
     }
-    if (registered === true) window.location.reload(true);
+    if (registered === true) {
+      const approves = await getApprovalStatus(email);
+      console.log('approval status', approves);
+      navigate(approves ? '/' : '/home');
+
+      // window.location.reload(true);
+    }
   };
   const provider = new GoogleAuthProvider();
 
