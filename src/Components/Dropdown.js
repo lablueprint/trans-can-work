@@ -19,8 +19,6 @@ function Dropdown() {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = (event) => {
-    console.log(event.target.innerText)
-    //if (event.target.innerText)
     setAnchorEl(null);
   };
 

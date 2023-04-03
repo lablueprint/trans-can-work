@@ -28,7 +28,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/adminview" element={<AdminView />} />
       </Routes>
-      {/* <Header />  */}
+      <Header /> 
       <Footer />
     </div>
   );

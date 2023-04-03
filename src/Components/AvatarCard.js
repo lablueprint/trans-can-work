@@ -25,7 +25,6 @@ function AvatarCard({user, archivedUsers, setArchivedUsers}) {
   const updateArchived = async (id) => {
     const Ref = doc(db, 'jobseekers', id);
     setDoc(Ref, { archived: false }, { merge: true });
-    console.log(Ref)
   }
 
   const deleteDocument = async (id) => {
@@ -33,7 +32,6 @@ function AvatarCard({user, archivedUsers, setArchivedUsers}) {
   }
 
   const handleClose = async (index) => {
-    console.log(index)
     if (index == 0)
     {
       await updateArchived(user.id)

@@ -13,7 +13,6 @@ function Checkboxes(props) {
       )
       setCheckedArr(updatedCheckedState)
     };
-    console.log(checkedArr)
     return (
     <div>
         {skills.map((name, index) => {
