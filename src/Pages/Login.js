@@ -1,28 +1,31 @@
 import React, { useState } from 'react';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   useAuthState,
 } from 'react-firebase-hooks/auth';
 import { auth, logInWithEmailAndPassword, logout } from '../Components/firebase';
+import { getApprovalStatus } from './Register';
 import './Login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [user] = useAuthState(auth);
+  const navigate = useNavigate();
   const login = async () => {
     const loggedIn = await logInWithEmailAndPassword(email.toLowerCase(), password);
-    if (loggedIn) window.location.reload(true);
+    if (loggedIn) {
+      const approves = await getApprovalStatus(email);
+      navigate(approves ? '/' : '/splash');
+    }
   };
   const provider = new GoogleAuthProvider();
   function signInWithGoogle() {
     signInWithPopup(auth, provider)
       .then(async (result) => {
-        console.log('SC');
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
-        console.log('credential: ', credential);
         const token = credential.accessToken;
         console.log(token);
         // The signed-in user info.

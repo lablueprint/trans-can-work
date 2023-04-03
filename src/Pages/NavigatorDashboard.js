@@ -15,7 +15,6 @@ function NavigatorDashboard() {
   // const ref = doc(db, 'jobseekers', { seekerID });
   // await update need to update db first
   };
-
   const [jobseeker, setJobseeker] = useState({
     name: 'Name',
     pronouns: 'Pronouns',

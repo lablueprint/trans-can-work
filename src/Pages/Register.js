@@ -10,6 +10,7 @@ import { createAdmin } from '../Services/admin-service';
 import './Register.css';
 
 const auth = getAuth();
+// Sample data
 const data = {
   name: 'Solia',
   paper: 'ayub',
@@ -18,7 +19,7 @@ const data = {
   approval: false,
 };
 
-const getApprovalStatus = async (email) => {
+export const getApprovalStatus = async (email) => {
   const docSnap = await fetchJobseeker(email);
   if (docSnap) {
     const approveData = docSnap.data();
@@ -36,12 +37,10 @@ function Register() {
   const [lastName, setLastName] = useState('');
   const [accountType, setAccountType] = useState('');
   const [user, loading] = useAuthState(auth);
-  // const [googleLoggedIn, setGoogleLoggedIn] = useState(false);
   const navigate = useNavigate();
-
+  // We will use display name later, on the landing page
   // eslint-disable-next-line no-unused-vars
   const [displayName, setDisplayName] = useState('');
-  // const [registeredAsAdmin, setRegisteredAsAdmin] = useState(false);
   // If we want to see if user is logged in
   useEffect(() => {
     if (!loading && user) {
@@ -76,10 +75,7 @@ function Register() {
     }
     if (registered === true) {
       const approves = await getApprovalStatus(email);
-      console.log('approval status', approves);
-      navigate(approves ? '/' : '/home');
-
-      // window.location.reload(true);
+      navigate(approves ? '/' : '/splash');
     }
   };
   const provider = new GoogleAuthProvider();
@@ -92,16 +88,12 @@ function Register() {
     signInWithPopup(auth, provider)
       .then(async (result) => {
         // Signed in successfully with Google
-        console.log('SC');
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
-        console.log('credential: ', credential);
         const token = credential.accessToken;
         console.log(token);
         // The signed-in user info.
         const { user: googleUser } = result;
-        console.log(googleUser);
-        console.log('email', googleUser.email);
         if (accountType === 'navigator') {
           createNavigator(googleUser.email, data);
         } else if (accountType === 'jobseeker') {

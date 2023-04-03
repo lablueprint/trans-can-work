@@ -9,6 +9,7 @@ import {
   Register,
   Reset,
   Profile,
+  Landing,
 } from './Pages';
 import './App.css';
 import Footer from './Components/Footer/Footer';
@@ -26,6 +27,7 @@ function App() {
         <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/landing" element={<Landing />} />
         <Route
           path="/splash"
           element={(
