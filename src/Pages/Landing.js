@@ -1,25 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import {
+  collection, query, where, getDocs,
+} from 'firebase/firestore';
+import AvatarCard from '../Components/AvatarCard';
+import { db } from '../Components/firebase';
+// import './AdminView.css';
 
-export default function Landing() {
+function Landing() {
+  // query all seekers
+  const [unapprovedUsers, setunapprovedUsers] = useState([]);
+
+  const getUnapprovedUsers = async () => {
+    const unapproved = [];
+    try {
+      const Ref = collection(db, 'jobseekers');
+      const q = query(Ref, where('approval', '==', false));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const { id } = doc;
+        const js = {
+          data,
+          id,
+        };
+        unapproved.push(js);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    setunapprovedUsers(unapproved);
+  };
+  useEffect(() => {
+    getUnapprovedUsers(setunapprovedUsers);
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit
-          {' '}
-          <code>src/App.js</code>
-          {' '}
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="Cards">
+      {unapprovedUsers.map((user) => (
+        <div className="Card">
+          <AvatarCard
+            user={user}
+            unapprovedUsers={unapprovedUsers}
+            setunapprovedUsers={setunapprovedUsers}
+          />
+
+        </div>
+      ))}
     </div>
+
   );
 }
+export default Landing;
