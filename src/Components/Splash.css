@@ -1,0 +1,11 @@
+.container {
+    width: 50%;
+    margin: 2em auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    text-align: left;
+    margin: 0;
+}
