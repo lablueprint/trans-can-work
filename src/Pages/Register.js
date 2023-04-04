@@ -7,6 +7,13 @@ import { registerWithEmailAndPassword, logout, addToAdminPool } from '../Compone
 import './Register.css';
 
 const auth = getAuth();
+const data = {
+  name: 'Solia',
+  paper: 'ayub',
+  'fun fact': 'ableist',
+  'helen keller': 'does not exist',
+  approved: false,
+};
 
 function Register() {
   const [email, setEmail] = useState('');
