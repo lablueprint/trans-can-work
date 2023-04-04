@@ -7,11 +7,13 @@ import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <div>
+  // <div>
+  <React.StrictMode>
     <Router>
       <App />
     </Router>
-  </div>,
+  </React.StrictMode>,
+  // </div>,
 );
 
 // If you want to start measuring performance in your app, pass a function

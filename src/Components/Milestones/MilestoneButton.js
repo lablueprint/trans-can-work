@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
@@ -16,14 +17,16 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
-function MilestoneButton({ title }) {
+function MilestoneButton({ title, image, onClick }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
     <div>
-      <Button onClick={handleOpen}>{title}</Button>
+      <Button onClick={handleOpen}>
+        {title}
+        <img id="img" src={image} alt="island pic" />
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -37,6 +40,14 @@ function MilestoneButton({ title }) {
           <Typography id="modal-modal-description" sx={{ mt: 60 }}>
             Here is a milestone description!
           </Typography>
+          <Button
+            variant="contained"
+            onClick={() => {
+              'Completed';
+            }}
+          >
+            Mark as Complete
+          </Button>
         </Box>
       </Modal>
     </div>
@@ -45,7 +56,12 @@ function MilestoneButton({ title }) {
 }
 
 MilestoneButton.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  image: PropTypes.string,
 };
 
 export default MilestoneButton;
+/*
+Finished creating the popup
+Later: include button/external links to the popup
+*/
