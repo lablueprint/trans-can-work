@@ -116,10 +116,10 @@ function Filtering() {
         const docsList = [];
         docSnap.docs.map((doc) => docsList.push(doc.data()));
         console.log(docsList);
-        // eslint-disable-next-line max-len
         setJobseekers(docsList.sort((jobseeker1, jobseeker2) => jobseeker1.name - jobseeker2.name));
-        // eslint-disable-next-line max-len
-        setFilteredNames(docsList.sort((jobseeker1, jobseeker2) => jobseeker1.name - jobseeker2.name));
+        setFilteredNames(
+          docsList.sort((jobseeker1, jobseeker2) => jobseeker1.name - jobseeker2.name),
+        );
       });
   }, []);
 
