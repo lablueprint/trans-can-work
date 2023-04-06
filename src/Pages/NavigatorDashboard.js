@@ -8,7 +8,7 @@ import Checkboxes from './Checkboxes';
 
 // later we can make each tab a different component, the individual tabs take a jobseeker as a prob
 
-function NavigatorDashboard() {
+export default function NavigatorDashboard() {
   // eslint-disable-next-line no-unused-vars
   const [seekerID, setSeekerID] = useState('');
   const updateJobseeker = async () => {
