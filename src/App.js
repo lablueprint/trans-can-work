@@ -13,7 +13,6 @@ import {
 import './App.css';
 import Footer from './Components/Footer/Footer';
 import Header from './Components/Navigation/Header';
-import NavigatorDashboard from './Pages/NavigatorDashboard';
 
 function App() {
   return (

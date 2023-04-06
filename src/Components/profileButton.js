@@ -1,27 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Avatar } from '@material-ui/core';
-// import { doc } from 'firebase/firestore';
-// import firebase from '../firebase';
 import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import './profileButton.css';
-// import Divider from '@mui/material/Divider';
-// import Paper from '@mui/material/Paper';
-// import MenuList from '@mui/material/MenuList';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-// import ListItemText from '@mui/material/ListItemText';
-// import ListItemIcon from '@mui/material/ListItemIcon';
-// import Typography from '@mui/material/Typography';
-// import ContentCut from '@mui/icons-material/ContentCut';
-// import ContentCopy from '@mui/icons-material/ContentCopy';
-// import ContentPaste from '@mui/icons-material/ContentPaste';
-// import Cloud from '@mui/icons-material/Cloud';
-// import { doc } from 'firebase/firestore';
-// import firebase from '../firebase';
 import { fetchJobseeker, updateJobseeker, deleteJobseeker } from '../Services/jobseeker-service';
-
-// import ProfileOutline from './profileOutline';
 
 function ProfileButton(props) {
   const {
@@ -29,22 +13,17 @@ function ProfileButton(props) {
   } = props;
   const [name, setName] = useState('');
   const [field, setField] = useState('');
-  // const [viewProfile, setViewProfile] = useState(false);
   const [archived, setArchived] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
+
   const open = Boolean(anchorEl);
-  // const db = firebase;
-  // const docRef = doc(db, 'jobseekers', jobseekerEmail);
 
   useEffect(() => {
     const logquery = async () => {
       const query = await fetchJobseeker(jobseekerEmail);
       setName(query.data().name);
       setField(query.data()['field of work']);
-      console.log(archived);
       setArchived(query.data().archive);
-      console.log(query.data().archive);
-      console.log(archived);
     };
 
     logquery();
@@ -65,13 +44,9 @@ function ProfileButton(props) {
     setAnchorEl(null);
   };
 
-  // const data = {
-  //   archive,
-  //   bookmark,
-  // };
-
   const archiveJobseeker = () => {
     updateJobseeker(jobseekerEmail, { archive: true });
+    setArchived(true);
   };
 
   const bookmarkJobseeker = () => {
@@ -80,6 +55,7 @@ function ProfileButton(props) {
 
   const unarchiveJobseeker = () => {
     updateJobseeker(jobseekerEmail, { archive: false });
+    setArchived(false);
   };
 
   const deleteSeeker = () => {
