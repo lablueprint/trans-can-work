@@ -25,7 +25,6 @@ function App() {
         <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/navigatordashboard" element={<NavigatorDashboard />} />
       </Routes>
       <Header />
       <Footer />
