@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import {
   IconButton, Chip, Box,
@@ -6,18 +5,23 @@ import {
 import { GridViewRounded } from '@mui/icons-material';
 import JobseekerMenu from './JobseekerMenu';
 
-const BUTTON_STYLE = {
-  padding: 0,
-  background: '#FFFBFE',
-  borderRadius: '1em',
-  boxSizing: 'border-box',
-  fontSize: '2em',
-};
-
-const BIGGER_STYLE = {
-  background: '#FFFBFE',
-  '&:hover': {
+const style = {
+  iconStyle: {
     background: '#FFFBFE',
+    '&:hover': {
+      background: '#FFFBFE',
+    },
+  },
+  buttonStyle: {
+    padding: 0,
+    background: '#FFFBFE',
+    borderRadius: '1em',
+    boxSizing: 'border-box',
+    fontSize: '2em',
+  },
+  chipStyle: {
+    backgroundColor: '#FFFBFE',
+    fontFamily: 'Montserrat',
   },
 };
 
@@ -57,18 +61,17 @@ function JobseekerNav() {
           aria-controls={open ? 'composition-menu' : undefined}
           aria-expanded={open ? 'true' : undefined}
           aria-haspopup="true"
-
           size="large"
-          sx={BIGGER_STYLE}
+          sx={style.iconStyle}
         >
-          <GridViewRounded sx={BUTTON_STYLE} />
+          <GridViewRounded sx={style.buttonStyle} />
         </IconButton>
         <div>
-          <Chip label="MENU" sx={{ backgroundColor: '#FFFBFE', fontFamily: 'Montserrat' }} />
+          <Chip label="MENU" sx={style.chipStyle} />
         </div>
       </Box>
       <JobseekerMenu open={open} handleClose={handleClose} />
-    </div >
+    </div>
   );
 }
 
