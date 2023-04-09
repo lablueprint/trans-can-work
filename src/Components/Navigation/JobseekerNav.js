@@ -1,6 +1,7 @@
+/* eslint-disable */
 import React from 'react';
 import {
-  IconButton,
+  IconButton, Chip, Box,
 } from '@mui/material';
 import { GridViewRounded } from '@mui/icons-material';
 import JobseekerMenu from './JobseekerMenu';
@@ -35,7 +36,6 @@ function JobseekerNav() {
     ) {
       return;
     }
-
     setOpen(false);
   };
 
@@ -51,36 +51,32 @@ function JobseekerNav() {
 
   return (
     <div>
-      <IconButton
-        ref={anchorRef}
-        id="composition-button"
-        aria-controls={open ? 'composition-menu' : undefined}
-        aria-expanded={open ? 'true' : undefined}
-        aria-haspopup="true"
-        onClick={handleToggle}
-        size="large"
-        sx={BIGGER_STYLE}
-      >
-        <GridViewRounded sx={BUTTON_STYLE} />
-      </IconButton>
+      <Box ref={anchorRef} onClick={handleToggle}>
+        <IconButton
+          id="composition-button"
+          aria-controls={open ? 'composition-menu' : undefined}
+          aria-expanded={open ? 'true' : undefined}
+          aria-haspopup="true"
+
+          size="large"
+          sx={BIGGER_STYLE}
+        >
+          <GridViewRounded sx={BUTTON_STYLE} />
+        </IconButton>
+        <div>
+          <Chip label="MENU" sx={{ backgroundColor: '#FFFBFE', fontFamily: 'Montserrat' }} />
+        </div>
+      </Box>
       <JobseekerMenu open={open} handleClose={handleClose} />
-    </div>
+    </div >
   );
 }
 
 export default JobseekerNav;
-
 /* NOTES
     Nav for Jobseeker view
         - button thing that pops up a list of links to stuff
         - https://mui.com/material-ui/react-dialog/#transitions
 
-    We use emails to identify users (jobseeker/nav/admin)
-        use static values for now
-        wait for it to be built out
-
-    NEXT STEPS:
-      1. add little bar thing at bottom of icon button
-      3. do links + styling
-
+    IGNORING STYLING FOR NOW
 */

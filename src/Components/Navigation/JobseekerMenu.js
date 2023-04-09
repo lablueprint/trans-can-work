@@ -22,7 +22,7 @@ const Transition = React.forwardRef((props, ref) => <Slide direction="right" ref
 
 function JobseekerMenu({ open, handleClose }) {
   const links = options.map((x) => (
-    <ListItem disableGutters>
+    <ListItem disableGutters key={x.name}>
       <ListItemButton>
         <Link to={x.link}>
           {x.name}
