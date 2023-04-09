@@ -3,13 +3,17 @@ import './Checkboxes.css';
 import { PropTypes } from 'prop-types';
 // later we can make each tab a different component, the individual tabs take a jobseeker as a prob
 
-function Checkboxes({ skills, checkedArr, setCheckedArr }) {
-  const handleOnChange = (position) => {
-    const updatedCheckedState = checkedArr.map((item, index) => (index === position
-      ? !item : item));
-    setCheckedArr(updatedCheckedState);
-  };
-  return (
+function Checkboxes(props) {
+    const skills = props.props.skills
+    const checkedArr = props.props.checkedArr
+    const setCheckedArr = props.props.setCheckedArr
+    const handleOnChange = (position) => {
+      const updatedCheckedState = checkedArr.map((item, index) =>
+        index === position ? !item : item
+      )
+      setCheckedArr(updatedCheckedState)
+    };
+    return (
     <div>
       {skills.map((name, index) => (
         <div className="row">
