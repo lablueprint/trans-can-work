@@ -1,0 +1,33 @@
+.MuiPaper-root {
+    padding-bottom: 10px;
+}
+
+.Avatar {
+    display: inline-block;
+    height: 40px
+}
+
+.Menu {
+    display: inline-block;
+    height: 40px
+}
+
+.Info {
+    width: 100px;
+    height: 40px;
+    display: inline-block;
+    position: relative;
+    top: 10px;
+}
+
+.Name {
+    font-size: medium;
+    font-weight: 200;
+    margin: auto;
+}
+
+.Field {
+    font-size: small;
+    font-weight: 200;
+    margin: auto;
+}
