@@ -124,12 +124,15 @@ function Register() {
         <p>Full Name</p>
         <input
           className="registerFormItem"
-          onChange={(e) => {
-            const [newFirstName, newLastName] = e.target.value.split(' ');
-            setFirstName(newFirstName);
-            setLastName(newLastName);
-          }}
-          value={`${firstName} ${lastName}`}
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          placeholder="First Name"
+        />
+        <input
+          className="registerFormItem"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          placeholder="Last Name"
         />
 
         <p>What best describes you?</p>
@@ -166,8 +169,6 @@ function Register() {
           />
           Jobseeker
         </label>
-        {/* </div> */}
-
         <input
           className="registerFormItem"
           value={email}
