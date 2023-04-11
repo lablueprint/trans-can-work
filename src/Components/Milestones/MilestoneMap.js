@@ -3,70 +3,114 @@ import React from 'react';
 import './MilestoneMap.css';
 import MilestoneButton from './MilestoneButton';
 
+
 const data = {
   content: {
     body: [
       {
         uid: 1,
-        image: require('../../Assets/assessment.png'),
+        imageDefault: require('../../Assets/assessment.png'),
+        imageUpdated: require('../../Assets/assessment.png'),
+        imageUHover: require('../../Assets/assessmentH.png'), 
         id: 'assessment',
-        title: '',
+        status: true, 
       },
       {
         uid: 2,
-        image: require('../../Assets/online-profile(b&w).png'),
+        imageDefault: require('../../Assets/online-profile(b&w).png'),
+        imageUpdated: require('../../Assets/online-profile.png'),
+        imageHover: require('../../Assets/online-profileH.png'), 
+        imageUHover: require('../../Assets/online-profileUH.png'), 
         id: 'online-profile',
-        title: '',
+        status: false, 
       },
       {
         uid: 3,
-        image: require('../../Assets/training(b&w).png'),
+        imageDefault: require('../../Assets/training-program(b&w).png'),
+        imageUpdated: require('../../Assets/training-program.png'),
+        imageHover: require('../../Assets/training-programH.png'), 
+        imageUHover: require('../../Assets/training-programUH.png'), 
         id: 'training-program',
-        title: '',
+        status: false, 
       },
       {
         uid: 4,
-        image: require('../../Assets/co-enroll(b&w).png'),
+        imageDefault: require('../../Assets/co-enroll(b&w).png'),
+        imageUpdated:require('../../Assets/co-enroll.png'),
+        imageHover: require('../../Assets/co-enrollH.png'), 
+        imageUHover: require('../../Assets/co-enrollUH.png'), 
         id: 'co-enroll',
-        title: '', 
+        status: false, 
       },
       {
         uid: 5,
-        image: require('../../Assets/workshop(b&w).png'),
+        imageDefault: require('../../Assets/workshop(b&w).png'),
+        imageUpdated: require('../../Assets/workshop.png'),
+        imageHover: require('../../Assets/workshopH.png'), 
+        imageUHover: require('../../Assets/workshopUH.png'), 
         id: 'workshop',
-        title: '',
+        status: false, 
       },
       {
         uid: 6,
-        image: require('../../Assets/internship(b&w).png'),
+        imageDefault: require('../../Assets/internship(b&w).png'),
+        imageUpdated: require('../../Assets/internships.png'),
+        imageHover: require('../../Assets/internshipH.png'), 
+        imageUHover: require('../../Assets/internshipUH.png'), 
         id: 'internship',
-        title: '',
+        status: false, 
       },
       {
         uid: 7,
-        image: require('../../Assets/job-fair(b&w).png'),
+        imageDefault: require('../../Assets/job-fair(b&w).png'),
+        imageUpdated: require('../../Assets/job-fair.png'),
+        imageHover: require('../../Assets/job-fairH.png'), 
+        imageUHover: require('../../Assets/job-fairUH.png'), 
         id: 'job-fair',
+        status: false, 
       },
       {
         uid: 8,
-        image: require('../../Assets/job-board(b&w).png'),
+        imageDefault: require('../../Assets/job-board(b&w).png'),
+        imageUpdated: require('../../Assets/job-board.png'),
+        imageHover: require('../../Assets/job-boardH.png'), 
+        imageUHover: require('../../Assets/job-boardUH.png'), 
         id: 'job-board',
+        status: false, 
       },
       {
         uid: 9,
-        image: require('../../Assets/resource(b&w).png'),
+        imageDefault: require('../../Assets/resource(b&w).png'),
+        imageUpdated: require('../../Assets/resource.png'),
+        imageHover: require('../../Assets/resourceH.png'), 
+        imageUHover: require('../../Assets/resourceUH.png'), 
         id: 'resource',
+        status: false, 
       },
       {
         uid: 10,
-        image: require('../../Assets/hiring(b&w).png'),
+        imageDefault: require('../../Assets/hiring-info(b&w).png'), 
+        imageUpdated: require('../../Assets/hiring-info.png'),
+        imageHover: require('../../Assets/hiring-infoH.png'), 
+        imageUHover: require('../../Assets/hiring-infoUH.png'), 
         id: 'hiring-info',
+        status: false, 
       },
     ],
   },
 };
 
-const MilestoneButtons = data.content.body.map((x) => <div key={x.uid} id={x.id}><MilestoneButton title={x.title} image={(x.image)} /></div>);
+const MilestoneButtons = data.content.body.map((x) => {
+  let imagePath = x.imageDefault
+  let hoveredPath = x.imageHover
+  if (x.status === true) {
+    imagePath = x.imageUpdated
+    hoveredPath = x.imageUHover
+  }
+  return <div key={x.uid} id={x.id} status={x.status}><MilestoneButton image={imagePath} imageHover={hoveredPath}/></div>
+})
+  
+
 
 function MilestoneMap() {
   return (
@@ -81,5 +125,5 @@ function MilestoneMap() {
 
 export default MilestoneMap;
 
-/* later: the margins are hard-coded #s so not good for all screen sizes
-         the map is slightly larger than the screen size so islands are cut off at the bottom */
+/* later: the margins are hard-coded #s so not good for all screen sizes */
+/* later: the bool variable status is hard-coded for now */

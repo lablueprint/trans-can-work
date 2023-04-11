@@ -17,15 +17,18 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-function MilestoneButton({ title, image, onClick }) {
+function MilestoneButton({ title, image, imageHover, onClick}) { 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [isHover, setIsHover] = React.useState(false); 
+  const handleOnMouseEnter = () => setIsHover(true); 
+  const handleOnMouseLeave = () => setIsHover(false); 
   return (
     <div>
-      <Button onClick={handleOpen}>
+      <Button onClick={handleOpen} onMouseEnter={handleOnMouseEnter} onMouseLeave={handleOnMouseLeave}>
         {title}
-        <img id="img" src={image} alt="island pic" />
+        {(isHover) ? <img id="img" src={imageHover} alt = "hovered pic"/> : <img id="img" src={image} alt="island pic"/>}
       </Button>
       <Modal
         open={open}
@@ -58,6 +61,8 @@ function MilestoneButton({ title, image, onClick }) {
 MilestoneButton.propTypes = {
   title: PropTypes.string,
   image: PropTypes.string,
+  imageHover: PropTypes.string,
+  onClick: PropTypes.func, 
 };
 
 export default MilestoneButton;
