@@ -1,4 +1,3 @@
-/*eslint-disable*/
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
@@ -17,18 +16,24 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-function MilestoneButton({ title, image, imageHover, onClick}) { 
+function MilestoneButton({
+  title, image, imageHover,
+}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [isHover, setIsHover] = React.useState(false); 
-  const handleOnMouseEnter = () => setIsHover(true); 
-  const handleOnMouseLeave = () => setIsHover(false); 
+  const [isHover, setIsHover] = React.useState(false);
+  const handleOnMouseEnter = () => setIsHover(true);
+  const handleOnMouseLeave = () => setIsHover(false);
   return (
     <div>
-      <Button onClick={handleOpen} onMouseEnter={handleOnMouseEnter} onMouseLeave={handleOnMouseLeave}>
+      <Button
+        onClick={handleOpen}
+        onMouseEnter={handleOnMouseEnter}
+        onMouseLeave={handleOnMouseLeave}
+      >
         {title}
-        {(isHover) ? <img id="img" src={imageHover} alt = "hovered pic"/> : <img id="img" src={image} alt="island pic"/>}
+        {(isHover) ? <img id="img" src={imageHover} alt="hovered pic" /> : <img id="img" src={image} alt="island pic" />}
       </Button>
       <Modal
         open={open}
@@ -59,10 +64,9 @@ function MilestoneButton({ title, image, imageHover, onClick}) {
 }
 
 MilestoneButton.propTypes = {
-  title: PropTypes.string,
-  image: PropTypes.string,
-  imageHover: PropTypes.string,
-  onClick: PropTypes.func, 
+  title: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  imageHover: PropTypes.string.isRequired,
 };
 
 export default MilestoneButton;
