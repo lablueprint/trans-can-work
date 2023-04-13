@@ -20,13 +20,15 @@ const data = {
 };
 
 export const getApprovalStatus = async (email) => {
-  const docSnap = await fetchJobseeker(email);
-  if (docSnap) {
-    const approveData = docSnap.data();
-    const approvalStatus = approveData.approval;
-    return approvalStatus;
+  try {
+    const docSnap = await fetchJobseeker(email);
+    if (docSnap.exists()) {
+      return docSnap.data().approval;
+    }
+    console.log(`Jobseeker ${email} not found`);
+  } catch (error) {
+    console.log(`Error getting approval status for ${email}: ${error.message}`);
   }
-  alert(`Jobseeker ${email} not found`);
   return null;
 };
 
@@ -45,6 +47,7 @@ function Register() {
   useEffect(() => {
     if (!loading && user) {
       setDisplayName(user.displayName);
+      console.log(user.displayName);
     }
   }, [user, loading]);
 
@@ -96,6 +99,8 @@ function Register() {
         } else {
           createAdmin(googleUser.email, data);
         }
+        const approves = await getApprovalStatus(email);
+        navigate(approves ? '/' : '/splash');
       })
       .catch((error) => {
         alert(error);
@@ -104,8 +109,7 @@ function Register() {
   };
   return (
     <div>
-      <h3>TransCanWork</h3>
-      <h2>Create Account</h2>
+
       {user !== null
           && (
           <div>
@@ -121,7 +125,6 @@ function Register() {
           </div>
           )}
       <div className="registerForm">
-        <p>Full Name</p>
         <input
           className="registerFormItem"
           value={firstName}
@@ -134,46 +137,21 @@ function Register() {
           onChange={(e) => setLastName(e.target.value)}
           placeholder="Last Name"
         />
-
-        <p>What best describes you?</p>
-        <label htmlFor="administrator">
-          <input
-            id="administrator"
-            type="checkbox"
-            name="accountType"
-            value="administrator"
-            checked={accountType === 'administrator'}
-            onChange={() => setAccountType('administrator')}
-          />
-          Administrator
-        </label>
-        <label htmlFor="navigator">
-          <input
-            id="navigator"
-            type="checkbox"
-            name="accountType"
-            value="navigator"
-            checked={accountType === 'navigator'}
-            onChange={() => setAccountType('navigator')}
-          />
-          Navigator
-        </label>
-        <label htmlFor="jobseeker">
-          <input
-            id="jobseeker"
-            type="checkbox"
-            name="accountType"
-            value="jobseeker"
-            checked={accountType === 'jobseeker'}
-            onChange={() => setAccountType('jobseeker')}
-          />
-          Jobseeker
-        </label>
+        <select
+          name="accountType"
+          className="registerFormItem"
+          onChange={(e) => setAccountType(e.target.value)}
+        >
+          <option disabled selected value> -- Select Account Type -- </option>
+          <option value="administrator">Administrator</option>
+          <option value="navigator">Navigator</option>
+          <option value="jobseeker">Jobseeker</option>
+        </select>
         <input
           className="registerFormItem"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email Address"
+          placeholder="E-mail Address"
         />
         <input
           className="registerFormItem"
@@ -187,7 +165,7 @@ function Register() {
           type="submit"
           onClick={() => { register(firstName, lastName, accountType, email, password); }}
         >
-          Sign Up
+          Submit
           {' '}
         </button>
         <button
@@ -199,7 +177,7 @@ function Register() {
         </button>
       </div>
       <div>
-        Already have an account?
+        Have an account? Sign in here!
         <Link to="/login">Login</Link>
       </div>
     </div>
