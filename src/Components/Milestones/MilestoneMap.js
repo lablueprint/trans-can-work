@@ -1,5 +1,3 @@
-/*eslint-disable*/
-
 import React from 'react';
 import './MilestoneMap.css';
 import MilestoneButton from './MilestoneButton';
@@ -121,7 +119,7 @@ const MilestoneButtons = data.content.body.map((x) => {
 
 function MilestoneMap() {
   return (
-    <div id="parent">
+    <div>
       <div className="grid-container">
         {MilestoneButtons}
       </div>

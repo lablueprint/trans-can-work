@@ -64,7 +64,7 @@ function JobseekerNav() {
   }, [open]);
 
   return (
-    <div id="child">
+    <div>
       <Box ref={anchorRef} onClick={handleToggle}>
         <IconButton
           id="composition-button"
