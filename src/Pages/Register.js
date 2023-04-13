@@ -99,7 +99,7 @@ function Register() {
         } else {
           createAdmin(googleUser.email, data);
         }
-        const approves = await getApprovalStatus(email);
+        const approves = await getApprovalStatus(googleUser.email);
         navigate(approves ? '/' : '/splash');
       })
       .catch((error) => {

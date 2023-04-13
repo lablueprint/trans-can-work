@@ -23,8 +23,9 @@ function Login() {
   const provider = new GoogleAuthProvider();
   function signInWithGoogle() {
     signInWithPopup(auth, provider)
-      .then(async () => {
-        const approves = await getApprovalStatus(email);
+      .then(async (result) => {
+        const { user: googleUser } = result;
+        const approves = await getApprovalStatus(googleUser.email);
         navigate(approves ? '/' : '/splash');
       }).catch((e) => {
       // Handle Errors here.
