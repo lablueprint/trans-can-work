@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React from 'react';
 import {
   Route, Routes,
@@ -40,10 +41,10 @@ function App() {
           )}
         />
       </Routes>
-      <Header />
+      {/* <Header /> */} 
       <Footer />
     </div>
   );
 }
-
+// temporarily commented out the nav-bar!
 export default App;
