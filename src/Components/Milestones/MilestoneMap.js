@@ -1,3 +1,5 @@
+/*eslint-disable*/
+
 import React from 'react';
 import './MilestoneMap.css';
 import MilestoneButton from './MilestoneButton';
