@@ -9,6 +9,7 @@ import {
   Register,
   Reset,
   Profile,
+  ProfileTemp,
 } from './Pages';
 import './App.css';
 import Footer from './Components/Footer/Footer';
@@ -27,6 +28,7 @@ function App() {
         <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/newprofile" element={<ProfileTemp />} />
         <Route path="/adminview" element={<AdminView />} />
 
         <Route
