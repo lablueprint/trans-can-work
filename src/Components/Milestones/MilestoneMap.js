@@ -10,8 +10,8 @@ const data = {
     body: [
       {
         uid: 1,
-        imageDefault: require('../../Assets/assessment.png'),
-        imageUpdated: require('../../Assets/assessment.png'),
+        imageDefault: require('../../Assets/Assessment.png'),
+        imageUpdated: require('../../Assets/Assessment.png'),
         imageUHover: require('../../Assets/assessmentH.png'),
         id: 'assessment',
         status: true,
@@ -121,7 +121,7 @@ const MilestoneButtons = data.content.body.map((x) => {
 
 function MilestoneMap() {
   return (
-    <div>
+    <div id="parent">
       <div className="grid-container">
         {MilestoneButtons}
       </div>

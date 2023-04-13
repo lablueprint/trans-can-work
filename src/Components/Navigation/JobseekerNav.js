@@ -11,6 +11,12 @@ const style = {
     '&:hover': {
       background: '#FFFBFE',
     },
+    boxShadow: '0px 2px 8px rgba(68, 87, 82, 0.25)',
+    position: 'absolute',
+    width: '80px',
+    height: '80px',
+    left: '44px',
+    top: '44px',
   },
   buttonStyle: {
     padding: 0,
@@ -22,6 +28,10 @@ const style = {
   chipStyle: {
     backgroundColor: '#FFFBFE',
     fontFamily: 'Montserrat',
+    boxShadow: '0px 2px 8px rgba(68, 87, 82, 0.25)',
+    position: 'absolute',
+    left: '52px',
+    top: '130px',
   },
 };
 
@@ -54,7 +64,7 @@ function JobseekerNav() {
   }, [open]);
 
   return (
-    <div>
+    <div id="child">
       <Box ref={anchorRef} onClick={handleToggle}>
         <IconButton
           id="composition-button"
