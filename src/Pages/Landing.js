@@ -39,8 +39,8 @@ function Landing() {
         <div className="Card">
           <AvatarCard
             user={user}
-            unapprovedUsers={unapprovedUsers}
-            setunapprovedUsers={setunapprovedUsers}
+            archivedUsers={unapprovedUsers}
+            setArchivedUsers={setunapprovedUsers}
           />
 
         </div>
