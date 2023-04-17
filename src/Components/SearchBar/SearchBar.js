@@ -9,15 +9,13 @@ function SearchBar({
 
   return (
     <div>
-      <header className="App-header">
-        <p className="titleText"> Search Bar </p>
-        <input
-          type="text"
-          className="searchBar"
-          onChange={(event) => setValue(event.target.value)}
-          value={value}
-        />
-      </header>
+      <p className="titleText"> Search Bar </p>
+      <input
+        type="text"
+        className="searchBar"
+        onChange={(event) => setValue(event.target.value)}
+        value={value}
+      />
     </div>
   );
 }
