@@ -1,34 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import {
-  fetchAllJobseekers,
-} from '../../Services/jobseeker-service';
+import React from 'react';
+import propTypes from 'prop-types';
 
-function SearchBar() {
-  const [value, setValue] = useState('');
-  const [result, setResult] = useState([]);
-  const names = [];
-
-  useEffect(() => {
-    fetchAllJobseekers()
-      .then((docs) => {
-        docs.forEach((doc) => {
-          names.push(doc.data().name);
-        });
-        names.sort();
-        if (value.length > 0) {
-          setResult([]);
-          const searchQuery = value.toLowerCase();
-          for (let step = 0; step < names.length; step += 1) {
-            const nam = names[step].toLowerCase();
-            if (nam.slice(0, searchQuery.length).indexOf(searchQuery) !== -1) {
-              setResult((prevResult) => [...prevResult, names[step]]);
-            }
-          }
-        } else {
-          setResult([]);
-        }
-      });
-  }, [value]);
+function SearchBar({
+  value, setValue,
+}) {
+  // const [value, setValue] = useState('');
+  // const [result, setResult] = useState([]);
 
   return (
     <div>
@@ -40,18 +17,14 @@ function SearchBar() {
           onChange={(event) => setValue(event.target.value)}
           value={value}
         />
-        <div className="searchBack">
-          {result.map((results, index) => (
-            <a href="#/" key={index.id}>
-              <div className="searchEntry">
-                {results}
-              </div>
-            </a>
-          ))}
-        </div>
       </header>
     </div>
   );
 }
+
+SearchBar.propTypes = {
+  value: propTypes.string.isRequired,
+  setValue: propTypes.func.isRequired,
+};
 
 export default SearchBar;
