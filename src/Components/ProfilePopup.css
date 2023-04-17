@@ -5,13 +5,33 @@
 
 .imageSection {
   background-image: url(/src/Assets/pirate-ship1.jpg);
+  width: 100%;
   height: 150px;
   background-position: center;
 }
 
+.profilePicButton {
+  position: absolute;
+  width: 10px;
+  top: 165px;
+  left: 130px;
+}
+
+.coverPicButton {
+  position: absolute;
+  width: 10px;
+  top: 100px;
+  right: 40px;
+}
+
 .buttonSection {
   position: absolute;
-  right: 50px;
+  right: 30px;
+  top: 10px;
+  width: 90px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .profilePic {
@@ -25,6 +45,8 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  width: 21rem;
+  overflow: hidden;
 }
 
 .profileLabel {
@@ -44,5 +66,13 @@
 }
 
 .bioSection {
-  top: 0;
+  width: 100%;
+}
+
+.inputSection {
+  height: 50px;
+}
+
+.inputTitle {
+  margin-bottom: 5px;
 }
