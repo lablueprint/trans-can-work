@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../Assets/Fonts/Montserrat-Thin.eot') format('embedded-opentype'), /* IE6-IE8 */
+         url('../Assets/Fonts/Montserrat-Thin.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../Assets/Fonts/Montserrat-Thin.woff') format('woff'), /* Pretty Modern Browsers */
+         url('../Assets/Fonts/Montserrat-Thin.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('../Assets/Fonts/Montserrat-Thin.svg') format('svg'); /* Legacy iOS */
+}
+
+.home-page-title{
+    font-family: 'Montserrat';
+    font-size: 3em;
+    font-weight: bold;
+    margin: 0;
+    text-align: left;
+    display:flex;
+}
+
+.tab-panel-grid-layout{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 15em);
+    grid-row-gap: 2em;
+    justify-content: space-evenly;
+    margin: 0 0 3rem;
+
+}

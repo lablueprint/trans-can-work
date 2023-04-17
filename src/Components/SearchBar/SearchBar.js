@@ -1,57 +1,62 @@
 import React, { useState, useEffect } from 'react';
-import {
-  fetchAllJobseekers,
-} from '../../Services/jobseeker-service';
+// import { v4 as uuidv4 } from 'uuid';
+import PropTypes from 'prop-types';
+import TuneIcon from '@mui/icons-material/Tune';
+import './SearchBar.css';
 
-function SearchBar() {
+function SearchBar({ names, setOutput, placeholder }) {
   const [value, setValue] = useState('');
   const [result, setResult] = useState([]);
-  const names = [];
 
   useEffect(() => {
-    fetchAllJobseekers()
-      .then((docs) => {
-        docs.forEach((doc) => {
-          names.push(doc.data().name);
-        });
-        names.sort();
-        if (value.length > 0) {
-          setResult([]);
-          const searchQuery = value.toLowerCase();
-          for (let step = 0; step < names.length; step += 1) {
-            const nam = names[step].toLowerCase();
-            if (nam.slice(0, searchQuery.length).indexOf(searchQuery) !== -1) {
-              setResult((prevResult) => [...prevResult, names[step]]);
-            }
-          }
-        } else {
-          setResult([]);
+    if (value.length > 0) {
+      setResult([]);
+      const searchQuery = value.toLowerCase();
+      for (let step = 0; step < names.length; step += 1) {
+        const nam = names[step].name.toLowerCase();
+        if (nam.slice(0, searchQuery.length).indexOf(searchQuery) !== -1) {
+          setResult((prevResult) => [...prevResult, names[step]]);
         }
-      });
+      }
+    } else {
+      setResult(names);
+    }
   }, [value]);
 
+  useEffect(() => setOutput(result), [result]);
+
   return (
-    <div>
-      <header className="App-header">
-        <p className="titleText"> Search Bar </p>
+    <div className="search-bar-container">
+      <div style={{
+        display: 'flex', flexDirection: 'row', border: '1px solid #D9D9D9', borderRadius: '30px', padding: '0 10px 0 20px', placeItems: 'center',
+      }}
+      >
         <input
           type="text"
-          className="searchBar"
+          className="search-bar"
           onChange={(event) => setValue(event.target.value)}
           value={value}
+          placeholder={placeholder}
         />
-        <div className="searchBack">
-          {result.map((results, index) => (
-            <a href="#/" key={index.id}>
-              <div className="searchEntry">
-                {results}
-              </div>
-            </a>
-          ))}
-        </div>
-      </header>
+        <TuneIcon />
+      </div>
     </div>
   );
 }
+
+SearchBar.propTypes = {
+  placeholder: PropTypes.string,
+  names: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    archived: PropTypes.string,
+    field: PropTypes.string,
+    email: PropTypes.string.isRequired,
+  })).isRequired,
+  setOutput: PropTypes.func.isRequired,
+};
+
+SearchBar.defaultProps = {
+  placeholder: '',
+};
 
 export default SearchBar;

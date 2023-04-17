@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { Button, Avatar } from '@material-ui/core';
 import { Link } from 'react-router-dom';
@@ -7,27 +8,24 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { fetchJobseeker, updateJobseeker, deleteJobseeker } from '../../Services/jobseeker-service';
 
-function ProfileButton(props) {
-  const {
-    jobseekerEmail,
-  } = props;
-  const [name, setName] = useState('');
-  const [field, setField] = useState('');
-  const [archived, setArchived] = useState(null);
+function ProfileButton({
+  profileName, workField, profileArchived, jobseekerEmail,
+}) {
+  const [archived, setArchived] = useState(profileArchived);
   const [anchorEl, setAnchorEl] = useState(null);
 
   const open = Boolean(anchorEl);
 
-  useEffect(() => {
-    const logquery = async () => {
-      const query = await fetchJobseeker(jobseekerEmail);
-      setName(query.data().name);
-      setField(query.data()['field of work']);
-      setArchived(query.data().archive);
-    };
+  // useEffect(() => {
+  //   const logquery = async () => {
+  //     const query = await fetchJobseeker(jobseekerEmail);
+  //     // setName(query.data().name);
+  //     // setField(query.data()['field of work']);
+  //     // setArchived(query.data().archive);
+  //   };
 
-    logquery();
-  }, []);
+  //   logquery();
+  // }, []);
 
   // for modal functionality later
   // const handleOpen = () => {
@@ -50,7 +48,7 @@ function ProfileButton(props) {
   };
 
   const bookmarkJobseeker = () => {
-    updateJobseeker(jobseekerEmail, { boookmark: true });
+    updateJobseeker(jobseekerEmail, { bookmark: true });
   };
 
   const unarchiveJobseeker = () => {
@@ -69,8 +67,8 @@ function ProfileButton(props) {
           <Avatar
             facebookId="100008343750912"
             style={{
-              height: '68px',
-              width: '68px',
+              height: '2em',
+              width: '2em',
               marginTop: '6px',
               marginBottom: '6px',
               marginLeft: '6px',
@@ -79,8 +77,8 @@ function ProfileButton(props) {
         </div>
         <br />
         <div className="container2">
-          <text>{name}</text>
-          <text>{field}</text>
+          <p style={{ margin: '0', lineHeight: '1em' }}>{profileName}</p>
+          <p style={{ margin: '0', lineHeight: '1em' }}>{workField}</p>
           <Link to="/profile">View Profile</Link>
           {/* MODAL STUFF FOR LATER FUNCTIONALITY
           <Button onClick={handleOpen}>View Profile</Button>
@@ -123,8 +121,8 @@ function ProfileButton(props) {
         <Avatar
           facebookId="100008343750912"
           style={{
-            height: '68px',
-            width: '68px',
+            height: '2em',
+            width: '2em',
             marginTop: '6px',
             marginBottom: '6px',
             marginLeft: '6px',
@@ -133,8 +131,8 @@ function ProfileButton(props) {
       </div>
       <br />
       <div className="container2">
-        <text>{name}</text>
-        <text>{field}</text>
+        <p style={{ margin: '0', lineHeight: '1em' }}>{profileName}</p>
+        <p style={{ margin: '0', lineHeight: '1em' }}>{workField}</p>
         <Link to="/profile">View Profile</Link>
         {/* MODAL STUFF SAVE FOR LATER
         <Button onClick={handleOpen}>View Profile</Button>
@@ -176,5 +174,8 @@ function ProfileButton(props) {
 export default ProfileButton;
 
 ProfileButton.propTypes = {
+  profileName: PropTypes.string.isRequired,
+  workField: PropTypes.string.isRequired,
+  profileArchived: PropTypes.bool.isRequired,
   jobseekerEmail: PropTypes.string.isRequired,
 };

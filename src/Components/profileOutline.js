@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { PropTypes } from 'prop-types';
 import Avatar from 'react-avatar';
@@ -9,6 +8,8 @@ import Button from '@mui/material/Button';
 import {
   fetchByNavigator, fetchAllJobseekers,
 } from '../Services/jobseeker-service';
+
+import TabPanel from './TabPanel';
 
 const demographicInfo = [{
   name: 'kaylee',
@@ -28,28 +29,6 @@ const demographicInfo = [{
   employmentStatus: 'space place',
   priorConvictions: 'hundreds',
 }];
-
-function TabPanel(props) {
-  const {
-    children, value, index, ...other
-  } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
 
 function a11yProps(index) {
   return {

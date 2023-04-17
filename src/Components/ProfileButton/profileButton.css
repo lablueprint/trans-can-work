@@ -1,21 +1,26 @@
 .container { 
     width: 80px; 
-    height: 80px;
-    vertical-align: middle;
+    /* vertical-align: middle; */
+    display:flex;
+    justify-content: center;
  }
 .outer-container{
     display: flex;  
     flex-direction: row;
-    height: 80px;
-    width: 250px; 
+    height: 5em;
+    width: 12em; 
     background-color: #FFFBFE;
+    border-radius: 10px;
+    border: 1px solid #CAC4D0;
 }
 .outer-container-archive{
     display: flex;  
     flex-direction: row;
-    height: 80px;
-    width: 250px; 
+    height: 5em;
+    width: 12em; 
     background-color: #CAC4D0; 
+    border-radius: 10px;
+    border: 1px solid #C9C5CA;
 }
 .container2 {
     width: 200px; 

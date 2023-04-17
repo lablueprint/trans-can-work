@@ -1,5 +1,5 @@
 import {
-  doc, setDoc, getDoc, updateDoc, deleteDoc,
+  doc, setDoc, getDoc, updateDoc, deleteDoc, collection, getDocs,
 } from 'firebase/firestore';
 import firebase from '../firebase';
 
@@ -47,4 +47,15 @@ export const deleteNavigator = async (email) => {
     .catch((error) => {
       console.log(error);
     });
+};
+
+export const fetchAllNavigators = async () => {
+  const colRef = collection(db, 'navigators');
+  try {
+    const docsSnap = await getDocs(colRef);
+    return docsSnap;
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
 };
