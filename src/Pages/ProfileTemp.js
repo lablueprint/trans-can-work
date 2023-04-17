@@ -53,6 +53,8 @@ function ProfileTemp() {
     prevOpen.current = open;
   }, [open]);
 
+  const profileBio = "Hey, I'm Joe! I’m a hopeful hire with a passion for product design. I'm always on the lookout for ways to make people's lives easy and enjoyable.\nWhen I'm not working on design projects, you'll find me exploring the great outdoors. Things like hiking, camping, and being in nature with my girlfriend Josie help me stay grounded and focused.";
+
   return (
     <div>
       <Box ref={anchorRef} onClick={handleToggle}>
@@ -70,7 +72,7 @@ function ProfileTemp() {
           <Chip label="MENU" sx={style.chipStyle} />
         </div>
       </Box>
-      <ProfilePopup open={open} handleClose={handleClose} />
+      <ProfilePopup open={open} handleClose={handleClose} firstName="Joe" lastName="Bruin" pronouns="He/Him" bio={profileBio} />
     </div>
   );
 }

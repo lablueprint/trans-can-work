@@ -1,0 +1,48 @@
+.containerSection {
+  border-radius: 30px;
+  background-color: black;
+}
+
+.imageSection {
+  background-image: url(/src/Assets/pirate-ship1.jpg);
+  height: 150px;
+  background-position: center;
+}
+
+.buttonSection {
+  position: absolute;
+  right: 50px;
+}
+
+.profilePic {
+  position: absolute;
+  left: 50px;
+  top: 90px;
+}
+
+.textSection {
+  padding: 30px 50px 50px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.profileLabel {
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  margin-top: 2rem;
+  height: 3rem;
+}
+
+.nameLabel {
+  font-size: 28px;
+}
+
+.pronounLabel {
+  margin: 12px;
+}
+
+.bioSection {
+  top: 0;
+}
