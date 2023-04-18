@@ -210,7 +210,7 @@ function Landing() {
     setFilteredNames(filteredChecks);
   }, [checkedInterests, checkedArr, jobseekers]);
 
-  console.log(jobseekers);
+  console.log(filteredNames);
 
   return (
     <div className="App">
@@ -218,15 +218,6 @@ function Landing() {
         value={value}
         setValue={setValue}
       />
-      {/* <div className="searchBack">
-        {result.map((results, index) => (
-          <a href="#/" key={index.id}>
-            <div className="searchEntry">
-              {results.name}
-            </div>
-          </a>
-        ))}
-      </div> */}
       <Filtering
         checkedArr={checkedArr}
         setCheckedArr={setCheckedArr}
@@ -235,7 +226,19 @@ function Landing() {
         skills={skills}
         interests={interests}
       />
-      {filteredNames.map((item) => (
+      {filteredNames.sort((a, b) => {
+        const nameA = a.name.toUpperCase();
+        const nameB = b.name.toUpperCase();
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+
+        // names must be equal
+        return 0;
+      }).map((item) => (
         <p>{item.name}</p>
       ))}
     </div>
