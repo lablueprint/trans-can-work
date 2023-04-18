@@ -87,10 +87,8 @@ function Landing() {
     'Web Design',
   ];
 
-  // search bar
   const [value, setValue] = useState('');
   const [result, setResult] = useState([]);
-  // filtering
   const [checkedArr, setCheckedArr] = useState(new Array(skills.length).fill(false));
   const [checkedInterests, setCheckedInterests] = useState(new Array(interests.length).fill(false));
   const [jobseekers, setJobseekers] = useState([]);
@@ -101,21 +99,19 @@ function Landing() {
     fetchAllJobseekers()
       .then((docs) => {
         docs.forEach((doc) => {
-          names.push(doc.data()); // was .name
+          names.push(doc.data());
         });
         setJobseekers(names);
       });
   }, []);
 
-  // search bar
   useEffect(() => {
     const names = [];
     fetchAllJobseekers()
       .then((docs) => {
         docs.forEach((doc) => {
-          names.push(doc.data()); // was .name
+          names.push(doc.data());
         });
-        // names.sort();
         if (value.length > 0) {
           setResult([]);
           const searchQuery = value.toLowerCase();
@@ -131,24 +127,6 @@ function Landing() {
       });
   }, [value]);
 
-  // filtering
-  // gets all jobseekers from backend and puts into jobseekers
-  // useEffect(() => {
-  //   fetchAllJobseekers()
-  //     .then((docSnap) => {
-  //       const docsList = [];
-  //       docSnap.docs.map((doc) => docsList.push(doc.data()));
-  //       // console.log(docsList);
-  //       setJobseekers(docsList.sort((jobseeker1, jobseeker2)
-  // => jobseeker1.name - jobseeker2.name));
-  //       // so filtered names starts as full array
-  //       setFilteredNames(
-  //         docsList.sort((jobseeker1, jobseeker2) => jobseeker1.name - jobseeker2.name),
-  //       );
-  //     });
-  // }, []);
-
-  // sets jobseekers equal to the search bar results
   useEffect(() => {
     setJobseekers(result);
   }, [result]);
@@ -168,30 +146,6 @@ function Landing() {
     });
     return checkedInterest;
   };
-
-  // useEffect(() => {
-  //   const checkedSkills = getCheckedSkills();
-  //   const filtered = jobseekers.filter((jobseeker) => {
-  //     let foundSkills = true;
-  //     checkedSkills.forEach((item) => {
-  //       if (!jobseeker.skills[item]) { foundSkills = false; }
-  //     });
-  //     return foundSkills;
-  //   });
-  //   setFilteredNames(filtered);
-  // }, [checkedArr]);
-
-  // useEffect(() => {
-  //   const checkedInterest = getCheckedInterests();
-  //   const filteredInterests = jobseekers.filter((jobseeker) => {
-  //     let foundInterests = true;
-  //     checkedInterest.forEach((item) => {
-  //       if (!jobseeker.interests[item]) { foundInterests = false; }
-  //     });
-  //     return foundInterests;
-  //   });
-  //   setFilteredNames(filteredInterests);
-  // }, [checkedInterests]);
 
   useEffect(() => {
     const checkedSkills = getCheckedSkills();
