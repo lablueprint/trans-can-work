@@ -4,9 +4,6 @@ import propTypes from 'prop-types';
 function SearchBar({
   value, setValue,
 }) {
-  // const [value, setValue] = useState('');
-  // const [result, setResult] = useState([]);
-
   return (
     <div>
       <p className="titleText"> Search Bar </p>

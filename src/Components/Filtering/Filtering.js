@@ -2,20 +2,11 @@ import React from 'react';
 import propTypes from 'prop-types';
 import Checkboxes from '../../Pages/Checkboxes';
 
-// import {
-//   fetchAllJobseekers,
-// } from '../../Services/jobseeker-service';
-
 function Filtering({
   checkedArr, setCheckedArr,
   checkedInterests, setCheckedInterests,
   skills, interests,
 }) {
-  // const [checkedArr, setCheckedArr] = useState(new Array(skills.length).fill(false));
-  // const [checkedInterests, setCheckedInterests] =
-  // const [jobseekers, setJobseekers] = useState([]);
-  // const [filteredNames, setFilteredNames] = useState([]);
-
   return (
     <div>
       <h1>Skills Checklist</h1>
