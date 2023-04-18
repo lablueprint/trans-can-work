@@ -5,6 +5,7 @@ import {
 import { db } from '../Components/firebase';
 import './NavigatorDashboard.css';
 import Checkboxes from './Checkboxes';
+import Notepad from '../Components/Notepad/Notepad';
 
 // later we can make each tab a different component, the individual tabs take a jobseeker as a prob
 
@@ -63,6 +64,7 @@ function NavigatorDashboard() {
       <div>
         [Image goes here]
       </div>
+      <Notepad />
       <div className="content">
         <div>
           <h1>Employment Roadmap</h1>

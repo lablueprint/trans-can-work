@@ -16,14 +16,25 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
-function MilestoneButton({ title }) {
+function MilestoneButton({
+  title, image, imageHover,
+}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [isHover, setIsHover] = React.useState(false);
+  const handleOnMouseEnter = () => setIsHover(true);
+  const handleOnMouseLeave = () => setIsHover(false);
   return (
     <div>
-      <Button onClick={handleOpen}>{title}</Button>
+      <Button
+        onClick={handleOpen}
+        onMouseEnter={handleOnMouseEnter}
+        onMouseLeave={handleOnMouseLeave}
+      >
+        {title}
+        {(isHover) ? <img id="img" src={imageHover} alt="hovered pic" /> : <img id="img" src={image} alt="island pic" />}
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -37,6 +48,14 @@ function MilestoneButton({ title }) {
           <Typography id="modal-modal-description" sx={{ mt: 60 }}>
             Here is a milestone description!
           </Typography>
+          <Button
+            variant="contained"
+            onClick={() => {
+              'Completed';
+            }}
+          >
+            Mark as Complete
+          </Button>
         </Box>
       </Modal>
     </div>
@@ -46,6 +65,12 @@ function MilestoneButton({ title }) {
 
 MilestoneButton.propTypes = {
   title: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  imageHover: PropTypes.string.isRequired,
 };
 
 export default MilestoneButton;
+/*
+Finished creating the popup
+Later: include button/external links to the popup
+*/

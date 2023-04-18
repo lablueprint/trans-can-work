@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React from 'react';
 import {
   Route, Routes,
@@ -10,12 +11,14 @@ import {
   Reset,
   Profile,
   Landing,
+  JobseekerData,
 } from './Pages';
 import './App.css';
 import Footer from './Components/Footer/Footer';
 import Header from './Components/Navigation/Header';
 import Splash from './Components/Splash';
 import approvalIcon from './Assets/mobile_friendly_24px.png';
+import AdminView from './Components/AdminView';
 
 function App() {
   return (
@@ -28,6 +31,8 @@ function App() {
         <Route path="/reset" element={<Reset />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/landing" element={<Landing />} />
+        <Route path="/onboard" element={<JobseekerData useremail="solia@goodpl.us" username="solia tennis" />} />
+        <Route path="/adminview" element={<AdminView />} />
         <Route
           path="/splash"
           element={(
@@ -39,10 +44,10 @@ function App() {
           )}
         />
       </Routes>
-      <Header />
+      {/* <Header /> */} 
       <Footer />
     </div>
   );
 }
-
+// temporarily commented out the nav-bar!
 export default App;

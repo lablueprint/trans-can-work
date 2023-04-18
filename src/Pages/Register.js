@@ -33,13 +33,14 @@ export const getApprovalStatus = async (email) => {
 };
 
 function Register() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [accountType, setAccountType] = useState('');
   const [user, loading] = useAuthState(auth);
-  const navigate = useNavigate();
   // We will use display name later, on the landing page
   // eslint-disable-next-line no-unused-vars
   const [displayName, setDisplayName] = useState('');
