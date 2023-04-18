@@ -60,10 +60,6 @@ function Register() {
       alert('Please select a role');
       return;
     }
-    if (firstName === '' || lastName !== '') {
-      alert('Please enter a valid name');
-      return;
-    }
     const registered = await registerWithEmailAndPassword(
       firstName,
       lastName,
@@ -91,10 +87,7 @@ function Register() {
       alert('Please select a role');
       return;
     }
-    if (firstName === '' || lastName !== '') {
-      alert('Please enter a valid name');
-      return;
-    }
+
     signInWithPopup(auth, provider)
       .then(async (result) => {
         // Signed in successfully with Google
