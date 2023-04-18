@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { getAuth } from 'firebase/auth';
 import { registerWithEmailAndPassword, logout, addToAdminPool } from '../Components/firebase';
+
 import './Register.css';
 
 const auth = getAuth();
 
 function Register() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -36,15 +39,16 @@ function Register() {
       console.log(firstName);
       addToAdminPool(firstName, lastName, email, password);
     } else {
-      const registered = await registerWithEmailAndPassword(
+      registerWithEmailAndPassword(
         firstName,
         lastName,
         accountType,
         email,
         password,
         setDisplayName,
-      );
-      if (registered === true) window.location.reload(true);
+      )
+        .then(() => { navigate('/onboard'); })
+        .catch((error) => { console.log(error); });
     }
   };
 

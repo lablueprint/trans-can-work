@@ -4,6 +4,7 @@ import Register from './Register';
 import Reset from './Reset';
 import NavigatorDashboard from './NavigatorDashboard';
 import Profile from './Profile';
+import JobseekerData from './JobseekerData';
 
 export {
   Home,
@@ -12,4 +13,5 @@ export {
   Reset,
   NavigatorDashboard,
   Profile,
+  JobseekerData,
 };
