@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React from 'react';
 import {
   Route, Routes,
@@ -9,7 +10,7 @@ import {
   Register,
   Reset,
   Profile,
-  ProfileTemp,
+  JobseekerData,
 } from './Pages';
 import './App.css';
 import Footer from './Components/Footer/Footer';
@@ -28,9 +29,8 @@ function App() {
         <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/newprofile" element={<ProfileTemp />} />
+        <Route path="/onboard" element={<JobseekerData useremail="solia@goodpl.us" username="solia tennis" />} />
         <Route path="/adminview" element={<AdminView />} />
-
         <Route
           path="/splash"
           element={(
@@ -42,10 +42,10 @@ function App() {
           )}
         />
       </Routes>
-      <Header />
+      {/* <Header /> */} 
       <Footer />
     </div>
   );
 }
-
+// temporarily commented out the nav-bar!
 export default App;
