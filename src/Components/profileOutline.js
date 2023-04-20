@@ -9,6 +9,7 @@ import Button from '@mui/material/Button';
 import {
   fetchByNavigator, fetchAllJobseekers,
 } from '../Services/jobseeker-service';
+import './profileOutline.css';
 
 const demographicInfo = [{
   name: 'kaylee',
@@ -134,64 +135,85 @@ export default function ProfileOutline() {
 
   if (userType === 'navigator' || (userType === 'admin' && isApproved)) {
     return (
-      <div className="App">
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="basic tabs example"
-          >
-            <Tab label="My Profile" {...a11yProps(0)} />
-            <Tab label="My Clients" {...a11yProps(1)} />
-          </Tabs>
-        </Box>
-        <TabPanel value={value} index={0}>
-          <Avatar facebookId="100008343750912" size="150" />
-          <header>
-            MY PROFILE
-          </header>
-          <label htmlFor="Name">
-            Name:
-            <input
-              id="Name"
-              defaultValue={demographicInfo[0].name}
-              disabled={disableButton}
-            />
-          </label>
+      <div>
+        <Avatar facebookId="100008343750912" size="150" />
+        <h1>
+          MY PROFILE
+        </h1>
+        <label htmlFor="FirstName">
+          First Name:
           <br />
-          <label htmlFor="Pronouns">
-            Pronouns:
-            <input
-              id="Pronouns"
-              defaultValue={demographicInfo[0].pronouns}
-              disabled={disableButton}
-            />
-          </label>
+          <inputs
+            id="Name"
+            defaultValue={demographicInfo[0].name}
+            disabled={disableButton}
+          />
+        </label>
+        <br />
+        <label htmlFor="LastName">
+          Last Name:
           <br />
-          <p>
-            Email:
-            {demographicInfo[0].email}
-          </p>
-          <label htmlFor="Bio">
-            Bio:
-            <input
-              id="Bio"
-              defaultValue=""
-              disabled={disableButton}
-            />
-          </label>
+          <input
+            id="Name"
+            defaultValue={demographicInfo[0].name}
+            disabled={disableButton}
+          />
+        </label>
+        <br />
+        <label htmlFor="Pronouns">
+          Pronouns:
           <br />
-          <Button onClick={() => setDisableButton(!disableButton)}>
-            <i />
-          </Button>
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          clients go here
-        </TabPanel>
+          <input
+            id="Pronouns"
+            defaultValue={demographicInfo[0].pronouns}
+            disabled={disableButton}
+          />
+        </label>
+        <br />
+        <label htmlFor="Phone">
+          Phone Number:
+          <br />
+          <input
+            id="Phone"
+            defaultValue={demographicInfo[0].phone}
+            disabled={disableButton}
+          />
+        </label>
+        <br />
+        <p>
+          Email:
+          <br />
+          {demographicInfo[0].email}
+        </p>
+        <label htmlFor="Password">
+          Password:
+          <br />
+          <input
+            id="Password"
+            defaultValue=""
+            disabled={disableButton}
+          />
+        </label>
+        <br />
+        <label htmlFor="Bio">
+          Bio:
+          <br />
+          <input
+            id="Bio"
+            defaultValue=""
+            disabled={disableButton}
+          />
+        </label>
+        <br />
+        <Button onClick={() => setDisableButton(!disableButton)}>
+          <i />
+        </Button>
 
       </div>
     );
   }
+
+  // STOP!
   if (userType === 'jobseeker') {
     return (
       <div className="App">
@@ -207,8 +229,17 @@ export default function ProfileOutline() {
         <TabPanel value={value} index={0}>
           <Avatar facebookId="100008343750912" size="150" />
           <br />
-          <label htmlFor="Name">
-            Name:
+          <label htmlFor="First Name">
+            First Name:
+            <input
+              id="Name"
+              defaultValue={demographicInfo[0].name}
+              disabled={disableButton}
+            />
+          </label>
+          <br />
+          <label htmlFor="Last Name">
+            Last Name:
             <input
               id="Name"
               defaultValue={demographicInfo[0].name}
