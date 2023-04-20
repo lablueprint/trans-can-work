@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Filtering from '../Components/Filtering/Filtering';
-import SearchBar from '../Components/SearchBar/SearchBar';
+import Filtering from './Filtering/Filtering';
+import SearchBar from './SearchBar/SearchBar';
 import { fetchAllJobseekers } from '../Services/jobseeker-service';
 
 function Landing() {
