@@ -188,7 +188,6 @@ function Landing() {
           return 1;
         }
 
-        // names must be equal
         return 0;
       }).map((item) => (
         <p>{item.name}</p>
