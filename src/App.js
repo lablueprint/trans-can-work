@@ -10,6 +10,7 @@ import {
   Register,
   Reset,
   Profile,
+  Landing,
   JobseekerData,
 } from './Pages';
 import './App.css';
@@ -29,6 +30,7 @@ function App() {
         <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/landing" element={<Landing />} />
         <Route path="/onboard" element={<JobseekerData useremail="solia@goodpl.us" username="solia tennis" />} />
         <Route path="/adminview" element={<AdminView />} />
         <Route
