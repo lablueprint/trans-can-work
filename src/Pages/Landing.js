@@ -164,8 +164,6 @@ function Landing() {
     setFilteredNames(filteredChecks);
   }, [checkedInterests, checkedArr, jobseekers]);
 
-  console.log(filteredNames);
-
   return (
     <div className="App">
       <SearchBar
