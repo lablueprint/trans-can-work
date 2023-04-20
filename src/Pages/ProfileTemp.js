@@ -78,6 +78,7 @@ function ProfileTemp() {
 }
 
 export default ProfileTemp;
+
 /* NOTES
     Nav for Jobseeker view
         - button thing that pops up a list of links to stuff

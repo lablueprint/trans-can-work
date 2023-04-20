@@ -48,7 +48,7 @@ function ProfilePopup({
               <IconButton style={{ backgroundColor: '#d3d3d3', width: 35, height: 35 }} onClick={() => { setEdit(!edit); }}>
                 <Edit style={{ width: 20, height: 20 }} />
               </IconButton>
-              <IconButton style={{ backgroundColor: '#d3d3d3' }} size="medium">
+              <IconButton style={{ backgroundColor: '#d3d3d3' }} onClick={handleClose} size="medium">
                 <Close />
               </IconButton>
             </>
