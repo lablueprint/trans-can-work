@@ -10,15 +10,17 @@ import {
   doc, setDoc, deleteDoc,
 } from 'firebase/firestore';
 import { PropTypes } from 'prop-types';
+// eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode';
 import './AvatarCard.css';
 
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-// import {
-//   useAuthState,
-// } from 'react-firebase-hooks/auth';
+// import { google } from 'googleapis';
+// import { useAuthState } from 'react-firebase-hooks/auth';
+// import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+// import { auth, db, firestore } from './firebase';
+
 import {
-  db, auth, // logInWithEmailAndPassword, logout,
+  db, auth,
 } from './firebase';
 
 const options = [
@@ -26,6 +28,8 @@ const options = [
   'Delete',
   'Download',
 ];
+
+// const window.googleDocCallback = function () { return true; };
 
 function AvatarCard({ user, archivedUsers, setArchivedUsers }) {
   const CLIENTID = '309643493967-7i1u1sdkg51j85ai9vehms86hpf7d1op.apps.googleusercontent.com';
@@ -75,15 +79,50 @@ function AvatarCard({ user, archivedUsers, setArchivedUsers }) {
               'Content-Type': 'application/json',
               Authorization: `Bearer ${tokenResponse.access_token}`,
             },
-            body: JSON.stringify({ name: 'Test Sheet For Demo Day', mimeType: 'application/vnd.google-apps.spreadsheet' }),
+            body: JSON.stringify({ name: 'Can u accept my cors request now?', mimeType: 'application/vnd.google-apps.spreadsheet', parents: ['1MG53LIVLSKPadcTeoiKLSIkvZHKLWV0s'] }),
+          }).then((res) => res.json()).then((val) => {
+            console.log(val);
+            const range = 'A1:F5';
+            // fetch(`https://sheets.googleapis.com/v4/spreadsheets/${val.id}:batchUpdate`, {
+            // &callback=googleDocCallback
+            fetch(`https://sheets.googleapis.com/v4/spreadsheets/${val.id}/values/${range}`, {
+
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${tokenResponse.access_token}`,
+                'Access-Control-Allow-Credentials': 'true',
+                'Access-Control-Allow-Origin': 'http://localhost:3000',
+              },
+              body: JSON.stringify({
+                values: [
+                  [
+                    'Name',
+                    'Job',
+                    'Pay',
+                  ],
+                  [
+                    'Avnish',
+                    'Developer at Oracle',
+                    '120000',
+                  ],
+                  [
+                    'Kaylee',
+                    'Consultant',
+                    '300000',
+                  ],
+                ],
+                majorDimension: 'ROWS',
+              }),
+            });
           });
         }
-        // setTokenClient(tokenResponse);
       },
     }));
 
     google.accounts.id.prompt();
   }, []);
+
   // const createSpreadsheet = async (fileName) => {
   //   // const accessToken = ''; // insert access token method here;
   //   console.log('reached create spreadsheet');
@@ -100,8 +139,77 @@ function AvatarCard({ user, archivedUsers, setArchivedUsers }) {
 
   // const zerofill = (i) => (i < 10 ? '0' : '') + i;
 
-  const createDriveFile = () => {
+  async function createSheet(data) {
+    try {
+      // credentials
+      const authUser = await auth.currentUser;
+      const authClient = await authUser.getIdToken();
+      const sheets = google.sheets({ version: 'v4', auth: authClient }); // the error line.
+
+      // create sheet
+      const res = await sheets.spreadsheets.create({
+        requestBody: {
+          properties: { title: '**insert jobseeker name** info' },
+          sheets: [
+            {
+              data: [
+                {
+                  rowData: data.map((item) => ({
+                    values: [
+                      { userEnteredValue: { stringValue: item.name } },
+                      { userEnteredValue: { boolValue: item.isJobseeker } },
+                      // etc
+                    ],
+                  })),
+                },
+              ],
+            },
+          ],
+        },
+      });
+
+      // Return the URL of the new sheet
+      return res.data.spreadsheetUrl;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  }
+
+  const createDriveFile = async () => {
     tokenClient.requestAccessToken();
+    // console.log('User', user);
+    // const docRef = doc(db, 'jobseekers', user.id);
+    // try {
+    //   const docSnap = await getDoc(docRef);
+    //   if (docSnap.exists()) {
+    //     console.log('Jobseeker: ', docSnap);
+    //     const jobseekerData = docSnap.data();
+    //     console.log(jobseekerData);
+
+    //     const data = jobseekerData.skillsChecklist.map((item) => ({
+    //       skill: item.name,
+    //       value: item.isJobseeker ? 'Yes' : 'No',
+    //     }));
+
+    //     console.log(data);
+
+    //     return docSnap;
+    //   }
+    //   console.log('Jobseeker ', user.id, ' does not exist');
+    //   return null;
+    // } catch (error) {
+    //   console.log(error);
+    //   return undefined;
+    // }
+
+    // const sheetUrl = await createSheet(user);
+
+    // if (sheetUrl) {
+    //   window.open(sheetUrl, '_blank');
+    // } else {
+    //   alert('Failed to export data');
+    // }
   };
 
   const handleClose = async (index) => {
@@ -119,6 +227,7 @@ function AvatarCard({ user, archivedUsers, setArchivedUsers }) {
 
     if (index === 2) {
       createDriveFile();
+
       // google.accounts.id.renderButton(document.getElementById("signInDiv"), {theme: "outline", size: "large"});
       // await signInWithGoogleAndCreateDoc(); // whatever is necessary to get me access token.
       // // const date = new Date();
