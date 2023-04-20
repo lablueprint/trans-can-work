@@ -1,3 +1,4 @@
 {
-    "eslint.nodeEnv": ""
+  "eslint.nodeEnv": "",
+  "editor.formatOnSave": true
 }
