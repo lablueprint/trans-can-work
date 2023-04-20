@@ -3,7 +3,9 @@ import Login from './Login';
 import Register from './Register';
 import Reset from './Reset';
 import NavigatorDashboard from './NavigatorDashboard';
+import JobseekerData from './JobseekerData';
 import Profile from './Profile';
+import Landing from './Landing';
 
 export {
   Home,
@@ -12,4 +14,6 @@ export {
   Reset,
   NavigatorDashboard,
   Profile,
+  JobseekerData,
+  Landing,
 };
