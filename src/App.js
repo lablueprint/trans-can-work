@@ -18,9 +18,27 @@ import Footer from './Components/Footer/Footer';
 import Header from './Components/Navigation/Header';
 import Splash from './Components/Splash';
 import approvalIcon from './Assets/mobile_friendly_24px.png';
-import AdminView from './Components/AdminView';
+import AdminView from './Components/AdminView';\
+import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
+import { useSelector, useDispatch } from "react-redux";
+import { saveUser } from "./redux/slice/authSlice";
 
 function App() {
+  initializeApp(firebaseConfig);
+  const auth = getAuth();
+  const user = useSelector((state) => state.auth.value);
+  console.log("user from state", user);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch(saveUser(user.refreshToken));
+      } else {
+        dispatch(saveUser(undefined));
+      }
+    });
+  }, [auth, dispatch]);
+  
   return (
     <div className="App">
       <Routes>
