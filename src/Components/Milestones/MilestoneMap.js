@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React from 'react';
 import './MilestoneMap.css';
 import MilestoneButton from './MilestoneButton';
@@ -11,6 +12,7 @@ const data = {
         imageDefault: require('../../Assets/Assessment.png'),
         imageUpdated: require('../../Assets/Assessment.png'),
         imageUHover: require('../../Assets/assessmentH.png'),
+        title: require('../../Assets/assessmentTitle.png'),
         id: 'assessment',
         status: true,
       },
@@ -20,6 +22,7 @@ const data = {
         imageUpdated: require('../../Assets/online-profile.png'),
         imageHover: require('../../Assets/online-profileH.png'),
         imageUHover: require('../../Assets/online-profileUH.png'),
+        title: require('../../Assets/online-profileTitle.png'), 
         id: 'online-profile',
         status: false,
       },
@@ -29,6 +32,7 @@ const data = {
         imageUpdated: require('../../Assets/training-program.png'),
         imageHover: require('../../Assets/training-programH.png'),
         imageUHover: require('../../Assets/training-programUH.png'),
+        title: require('../../Assets/training-programTitle.png'),
         id: 'training-program',
         status: false,
       },
@@ -38,6 +42,7 @@ const data = {
         imageUpdated: require('../../Assets/co-enroll.png'),
         imageHover: require('../../Assets/co-enrollH.png'),
         imageUHover: require('../../Assets/co-enrollUH.png'),
+        title: require('../../Assets/co-enrollTitle.png'),
         id: 'co-enroll',
         status: false,
       },
@@ -47,6 +52,7 @@ const data = {
         imageUpdated: require('../../Assets/workshop.png'),
         imageHover: require('../../Assets/workshopH.png'),
         imageUHover: require('../../Assets/workshopUH.png'),
+        title: require('../../Assets/workshopTitle.png'),
         id: 'workshop',
         status: false,
       },
@@ -56,6 +62,7 @@ const data = {
         imageUpdated: require('../../Assets/internships.png'),
         imageHover: require('../../Assets/internshipH.png'),
         imageUHover: require('../../Assets/internshipUH.png'),
+        title: require('../../Assets/internshipTitle.png'),
         id: 'internship',
         status: false,
       },
@@ -65,6 +72,7 @@ const data = {
         imageUpdated: require('../../Assets/job-fair.png'),
         imageHover: require('../../Assets/job-fairH.png'),
         imageUHover: require('../../Assets/job-fairUH.png'),
+        title: require('../../Assets/job-fairTitle.png'),
         id: 'job-fair',
         status: false,
       },
@@ -74,6 +82,7 @@ const data = {
         imageUpdated: require('../../Assets/job-board.png'),
         imageHover: require('../../Assets/job-boardH.png'),
         imageUHover: require('../../Assets/job-boardUH.png'),
+        title: require('../../Assets/job-boardTitle.png'),
         id: 'job-board',
         status: false,
       },
@@ -83,6 +92,7 @@ const data = {
         imageUpdated: require('../../Assets/resource.png'),
         imageHover: require('../../Assets/resourceH.png'),
         imageUHover: require('../../Assets/resourceUH.png'),
+        title: require('../../Assets/resourceTitle.png'),
         id: 'resource',
         status: false,
       },
@@ -92,6 +102,7 @@ const data = {
         imageUpdated: require('../../Assets/hiring-info.png'),
         imageHover: require('../../Assets/hiring-infoH.png'),
         imageUHover: require('../../Assets/hiring-infoUH.png'),
+        title: require('../../Assets/hiring-infoTitle.png'),
         id: 'hiring-info',
         status: false,
       },
@@ -112,14 +123,14 @@ const MilestoneButtons = data.content.body.map((x) => {
       id={x.id}
       status={x.status}
     >
-      <MilestoneButton image={imagePath} imageHover={hoveredPath} />
+      <MilestoneButton image={imagePath} imageHover={hoveredPath} title={x.title}/>
     </div>
   );
 });
 
 function MilestoneMap() {
   return (
-    <div>
+    <div id="parent">
       <div className="grid-container">
         {MilestoneButtons}
       </div>
