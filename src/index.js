@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
-import {store} from "./src/redux/store";
+import store from "./Redux/store";
 import { Provider } from 'react-redux';
 //../../Assets/title.png import reportWebVitals from './reportWebVitals';
 

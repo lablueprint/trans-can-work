@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   Route, Routes,
 } from 'react-router-dom';
@@ -18,14 +18,13 @@ import Footer from './Components/Footer/Footer';
 import Header from './Components/Navigation/Header';
 import Splash from './Components/Splash';
 import approvalIcon from './Assets/mobile_friendly_24px.png';
-import AdminView from './Components/AdminView';\
-import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
+import AdminView from './Components/AdminView';
+import {signOut, onAuthStateChanged } from "firebase/auth";
 import { useSelector, useDispatch } from "react-redux";
-import { saveUser } from "./redux/slice/authSlice";
+import { saveUser } from "./Redux/Slice/authSlices";
+import {auth} from './firebase'
 
 function App() {
-  initializeApp(firebaseConfig);
-  const auth = getAuth();
   const user = useSelector((state) => state.auth.value);
   console.log("user from state", user);
   const dispatch = useDispatch();
@@ -67,5 +66,4 @@ function App() {
     </div>
   );
 }
-// temporarily commented out the nav-bar!
 export default App;

@@ -7,6 +7,7 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     saveUser: (state, action) => {
+      // eslint-disable-next-line no-param-reassign
       state.value = action.payload;
     },
   },

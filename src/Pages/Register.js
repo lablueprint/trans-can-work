@@ -10,6 +10,7 @@ import { createAdmin } from '../Services/admin-service';
 import './Register.css';
 
 const auth = getAuth();
+
 // Sample data
 const data = {
   name: 'Solia',
