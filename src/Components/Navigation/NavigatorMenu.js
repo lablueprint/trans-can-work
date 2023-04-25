@@ -1,9 +1,8 @@
-/* eslint-disable */
 import React, { useState } from 'react';
 import {
-  Box, Tabs, Tab, Divider
+  Box, Tabs, Tab,
 } from '@mui/material';
-
+import { Link, Outlet } from 'react-router-dom';
 import './NavMenu.css';
 
 const style = {
@@ -12,25 +11,40 @@ const style = {
     textTransform: 'none',
     borderBottom: '1px solid #E7E0EC',
     height: '6px',
-    color: "#000000",
-    "&.Mui-selected": {
-      color: "#000000"
-    }
-  }
+    color: '#000000',
+    '&.Mui-selected': {
+      color: '#000000',
+    },
+  },
+  tabsStyle: {
+    borderRight: 1,
+    border: '2px dotted red',
+    margin: '7vh  0 0 5vw',
+  },
+  tabIndicatorStyle: {
+    left: 0,
+    backgroundColor: '#F83DA6',
+  },
+  panelStyle: {
+    alignSelf: 'start',
+    width: '100%',
+    margin: '5vh 1vw',
+    height: '100%',
+    border: '2px dotted blue',
+  },
 };
 
 const tabs = [
-  "Roadmap",
-  "Assessment",
-  "Online Profiles",
-  "Training Programs",
-  "Co-Enroll",
-  "Workshops",
-  "Internships",
-  "Job Fairs",
-  "Job Boards",
-  "Resources",
-  "Hired Info"
+  { title: 'Roadmap', link: 'roadmap' },
+  { title: 'Assessment', link: 'assessment' },
+  { title: 'Online Profiles', link: 'assessment' },
+  { title: 'Training Programs', link: 'assessment' },
+  { title: 'Workshops', link: 'assessment' },
+  { title: 'Internships', link: 'assessment' },
+  { title: 'Job Fairs', link: 'assessment' },
+  { title: 'Job Boards', link: 'assessment' },
+  { title: 'Resources', link: 'assessment' },
+  { title: 'Hired Info', link: 'assessment' },
 ];
 
 function NavigatorMenu() {
@@ -47,19 +61,33 @@ function NavigatorMenu() {
         value={value}
         onChange={handleChange}
         aria-label="Vertical tabs example"
-        sx={{ borderRight: 1, }}
+        sx={style.tabsStyle}
         TabIndicatorProps={{
-          sx: {
-            left: 0,
-            backgroundColor: '#F83DA6'
-          }
+          sx: style.tabIndicatorStyle,
         }}
       >
-        {tabs.map((x) => <Tab sx={style.tabStyle} label={x} />)}
+        {tabs.map((x) => (
+          <Tab
+            sx={style.tabStyle}
+            key={x.link}
+            label={x.title}
+            component={Link}
+            to={x.link}
+          />
+        ))}
       </Tabs>
-      <Box sx={{ alignSelf: 'center' }}>sdfd</Box>
+      <Box sx={style.panelStyle}><Outlet /></Box>
+
     </Box>
   );
 }
 
 export default NavigatorMenu;
+
+/* NOTES:
+- WIP, Debugging borders left in purposefully
+- Assessment and below tabs are part of one scrollable component
+  - TO-DO: Find a way to make tabs scroll to certain text/sections (??)
+  - STRETCH: When user scrolls, have tab indicator follow (big stretch)
+
+*/
