@@ -1,8 +1,6 @@
 /*eslint-disable*/
-import React, {useEffect} from 'react';
-import {
-  Route, Routes,
-} from 'react-router-dom';
+import React, { useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
 import {
   Home,
   Login,
@@ -12,17 +10,17 @@ import {
   Profile,
   Landing,
   JobseekerData,
-} from './Pages';
-import './App.css';
-import Footer from './Components/Footer/Footer';
-import Header from './Components/Navigation/Header';
-import Splash from './Components/Splash';
-import approvalIcon from './Assets/mobile_friendly_24px.png';
-import AdminView from './Components/AdminView';
-import {signOut, onAuthStateChanged } from "firebase/auth";
+} from "./Pages";
+import "./App.css";
+import Footer from "./Components/Footer/Footer";
+import Header from "./Components/Navigation/Header";
+import Splash from "./Components/Splash";
+import approvalIcon from "./Assets/mobile_friendly_24px.png";
+import AdminView from "./Components/AdminView";
+import { signOut, onAuthStateChanged } from "firebase/auth";
 import { useSelector, useDispatch } from "react-redux";
-import { saveUser } from "./Redux/Slice/authSlices";
-import {auth} from './firebase'
+import { saveUser } from "./Redux/slice/authSlices";
+import { auth } from "./firebase";
 
 function App() {
   const user = useSelector((state) => state.auth.value);
@@ -37,7 +35,7 @@ function App() {
       }
     });
   }, [auth, dispatch]);
-  
+
   return (
     <div className="App">
       <Routes>
@@ -48,20 +46,28 @@ function App() {
         <Route path="/reset" element={<Reset />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/landing" element={<Landing />} />
-        <Route path="/onboard" element={<JobseekerData useremail="solia@goodpl.us" username="solia tennis" />} />
+        <Route
+          path="/onboard"
+          element={
+            <JobseekerData
+              useremail="solia@goodpl.us"
+              username="solia tennis"
+            />
+          }
+        />
         <Route path="/adminview" element={<AdminView />} />
         <Route
           path="/splash"
-          element={(
+          element={
             <Splash
               header="Awaiting Approval"
               description="You have successfully signed up for an account. Please await approval from a TransCanWork Administator."
               graphic={<img alt="" src={approvalIcon} />}
             />
-          )}
+          }
         />
       </Routes>
-      {/* <Header /> */} 
+      {/* <Header /> */}
       <Footer />
     </div>
   );
