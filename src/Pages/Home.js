@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { Avatar } from '@material-ui/core';
 import {
   Tab, Tabs, Box,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { PropTypes } from 'prop-types';
 import TabPanel from '../Components/TabPanel';
 import SearchBar from '../Components/SearchBar/SearchBar';
 import './Home.css';
@@ -23,7 +25,7 @@ const HomeTab = styled((props) => <Tab disableRipple {...props} />)(() => ({
 
 }));
 
-export default function Home() {
+export default function Home({ profileName }) {
   const [value, setValue] = useState(0);
   const [archivedProfiles, setArchivedProfiles] = useState([]);
   const [notArchivedProfiles, setNotArchivedProfiles] = useState([]);
@@ -90,12 +92,34 @@ export default function Home() {
   return (
     <div style={{ marginTop: '5em' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider', marginLeft: '7em' }}>
-        <div style={{
-          display: 'flex', flexDirection: 'row', height: '3em', marginBottom: '2.5em',
-        }}
-        >
-          <div style={{ flex: '0 0 75%' }}><p className="home-page-title">Welcome, Nasser</p></div>
-          <div style={{ display: 'flex', alignItems: 'end', flex: '1 0 25%' }}><SearchBar names={currentAccounts} setOutput={setFilteredAccounts} placeholder="Search Accounts" /></div>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <div style={{ flex: '0 0 80%' }} />
+            <p className="home-page-header-profile-text">{profileName}</p>
+            <Avatar
+              facebookId="100008343750912"
+              style={{
+                height: '2em',
+                width: '2em',
+                marginTop: '6px',
+                marginBottom: '6px',
+                marginLeft: '6px',
+              }}
+            />
+          </div>
+          <div style={{
+            display: 'flex', flexDirection: 'row', height: '3em', marginBottom: '2.5em',
+          }}
+          >
+            <div style={{ flex: '0 0 75%' }}>
+              <p className="home-page-title">
+                Welcome,
+                {' '}
+                {profileName.split(' ')[0]}
+              </p>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'end', flex: '1 0 25%' }}><SearchBar names={currentAccounts} setOutput={setFilteredAccounts} placeholder="Search Accounts" /></div>
+          </div>
         </div>
         <Tabs
           value={value}
@@ -169,3 +193,11 @@ export default function Home() {
     </div>
   );
 }
+
+Home.propTypes = {
+  profileName: PropTypes.string,
+};
+
+Home.defaultProps = {
+  profileName: 'Nasser Elhajjaoui',
+};

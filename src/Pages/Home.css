@@ -1,10 +1,23 @@
 @font-face {
     font-family: 'Montserrat';
-    src: url('../Assets/Fonts/Montserrat-Thin.eot') format('embedded-opentype'), /* IE6-IE8 */
-         url('../Assets/Fonts/Montserrat-Thin.woff2') format('woff2'), /* Super Modern Browsers */
-         url('../Assets/Fonts/Montserrat-Thin.woff') format('woff'), /* Pretty Modern Browsers */
-         url('../Assets/Fonts/Montserrat-Thin.ttf')  format('truetype'), /* Safari, Android, iOS */
-         url('../Assets/Fonts/Montserrat-Thin.svg') format('svg'); /* Legacy iOS */
+    font-weight: normal;
+    font-style: normal;
+    src: url('../Assets/Fonts/Montserrat-Regular.eot') format('embedded-opentype'), /* IE6-IE8 */
+         url('../Assets/Fonts/Montserrat-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../Assets/Fonts/Montserrat-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+         url('../Assets/Fonts/Montserrat-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('../Assets/Fonts/Montserrat-Regular.svg') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    font-weight: bold;
+    font-style: normal;
+    src: url('../Assets/Fonts/Montserrat-Bold.eot') format('embedded-opentype'), /* IE6-IE8 */
+         url('../Assets/Fonts/Montserrat-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../Assets/Fonts/Montserrat-Bold.woff') format('woff'), /* Pretty Modern Browsers */
+         url('../Assets/Fonts/Montserrat-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('../Assets/Fonts/Montserrat-Bold.svg') format('svg'); /* Legacy iOS */
 }
 
 .home-page-title{
@@ -23,4 +36,21 @@
     justify-content: space-evenly;
     margin: 0 0 3rem;
 
+}
+
+.home-page-title{
+    font-family: 'Montserrat';
+    font-size: 3em;
+    font-weight: normal;
+    margin: 0;
+    text-align: left;
+    display:flex;
+}
+
+.home-page-header-profile-text{
+    font-family: 'Montserrat';
+    font-size: 1em;
+    font-weight: bold;
+    text-align: left;
+    display:flex;
 }
