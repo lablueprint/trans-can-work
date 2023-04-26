@@ -25,7 +25,7 @@ const HomeTab = styled((props) => <Tab disableRipple {...props} />)(() => ({
 
 }));
 
-export default function Home({ profileName }) {
+export default function Home({ profileName, role }) {
   const [value, setValue] = useState(0);
   const [archivedProfiles, setArchivedProfiles] = useState([]);
   const [notArchivedProfiles, setNotArchivedProfiles] = useState([]);
@@ -39,18 +39,29 @@ export default function Home({ profileName }) {
   };
 
   useEffect(() => {
-    if (value === 0) {
-      setCurrentAccounts(navigatorAccounts);
-      setFilteredAccounts(navigatorAccounts);
-    } else if (value === 1) {
-      setCurrentAccounts(notArchivedProfiles);
-      setFilteredAccounts(notArchivedProfiles);
-    } else if (value === 2) {
-      setCurrentAccounts(archivedProfiles);
-      setFilteredAccounts(archivedProfiles);
-    } else if (value === 3) {
-      setCurrentAccounts(unapprovedAccounts);
-      setFilteredAccounts(unapprovedAccounts);
+    console.log(value);
+    if (role === 'Admin') {
+      if (value === 0) {
+        setCurrentAccounts(navigatorAccounts);
+        setFilteredAccounts(navigatorAccounts);
+      } else if (value === 1) {
+        setCurrentAccounts(notArchivedProfiles);
+        setFilteredAccounts(notArchivedProfiles);
+      } else if (value === 2) {
+        setCurrentAccounts(archivedProfiles);
+        setFilteredAccounts(archivedProfiles);
+      } else if (value === 3) {
+        setCurrentAccounts(unapprovedAccounts);
+        setFilteredAccounts(unapprovedAccounts);
+      }
+    } else if (role === 'Navigator') {
+      if (value === 0) {
+        setCurrentAccounts(notArchivedProfiles);
+        setFilteredAccounts(notArchivedProfiles);
+      } else if (value === 1) {
+        setCurrentAccounts(archivedProfiles);
+        setFilteredAccounts(archivedProfiles);
+      }
     }
   }, [value]);
 
@@ -122,14 +133,15 @@ export default function Home({ profileName }) {
             onChange={handleChange}
             aria-label="basic tabs example"
           >
-            <HomeTab label="Navigators" {...a11yProps(0)} />
+            {role === 'Admin' && <HomeTab label="Navigators" {...a11yProps(0)} />}
             <HomeTab label="Clients" {...a11yProps(1)} />
-            <HomeTab label="Archive" {...a11yProps(0)} />
-            <HomeTab label="Unapproved Accounts" {...a11yProps(1)} />
+            <HomeTab label="Archive" {...a11yProps(2)} />
+            {role === 'Admin' && <HomeTab label="Unapproved Accounts" {...a11yProps(3)} />}
           </Tabs>
         </div>
 
       </Box>
+      {role === 'Admin' && (
       <TabPanel value={value} index={0}>
         <div className="tab-panel-grid-layout">
           {filteredAccounts
@@ -144,7 +156,8 @@ export default function Home({ profileName }) {
         ))}
         </div>
       </TabPanel>
-      <TabPanel value={value} index={1}>
+      )}
+      <TabPanel value={value} index={role === 'Admin' ? 1 : 0}>
         <div className="tab-panel-grid-layout">
           {filteredAccounts
         && filteredAccounts.map((element) => (
@@ -158,7 +171,7 @@ export default function Home({ profileName }) {
         ))}
         </div>
       </TabPanel>
-      <TabPanel value={value} index={2}>
+      <TabPanel value={value} index={role === 'Admin' ? 2 : 1}>
         <div className="tab-panel-grid-layout">
           {filteredAccounts
         && filteredAccounts.map((element) => (
@@ -172,6 +185,7 @@ export default function Home({ profileName }) {
         ))}
         </div>
       </TabPanel>
+      {role === 'Admin' && (
       <TabPanel value={value} index={3}>
         <div className="tab-panel-grid-layout">
           {filteredAccounts
@@ -186,6 +200,7 @@ export default function Home({ profileName }) {
         ))}
         </div>
       </TabPanel>
+      )}
 
     </div>
   );
@@ -193,8 +208,10 @@ export default function Home({ profileName }) {
 
 Home.propTypes = {
   profileName: PropTypes.string,
+  role: PropTypes.string,
 };
 
 Home.defaultProps = {
   profileName: 'Nasser Elhajjaoui',
+  role: 'Navigator',
 };
