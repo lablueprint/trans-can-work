@@ -90,11 +90,11 @@ export default function Home({ profileName }) {
   }, []);
 
   return (
-    <div style={{ marginTop: '5em' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider', marginLeft: '7em' }}>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <div style={{ display: 'flex', flexDirection: 'row' }}>
-            <div style={{ flex: '0 0 80%' }} />
+    <div className="home-page-container">
+      <Box sx={{ borderBottom: 1, borderColor: 'divider', boxShadow: '0 4px 4px #c9c9c9' }}>
+        <div className="home-page-headers-container">
+          <div className="home-page-header-name-and-icon-container">
+            <div className="home-page-header-empty-block" />
             <p className="home-page-header-profile-text">{profileName}</p>
             <Avatar
               facebookId="100008343750912"
@@ -107,10 +107,7 @@ export default function Home({ profileName }) {
               }}
             />
           </div>
-          <div style={{
-            display: 'flex', flexDirection: 'row', height: '3em', marginBottom: '2.5em',
-          }}
-          >
+          <div className="home-page-welcome-block-header">
             <div style={{ flex: '0 0 75%' }}>
               <p className="home-page-title">
                 Welcome,
@@ -118,20 +115,20 @@ export default function Home({ profileName }) {
                 {profileName.split(' ')[0]}
               </p>
             </div>
-            <div style={{ display: 'flex', alignItems: 'end', flex: '1 0 25%' }}><SearchBar names={currentAccounts} setOutput={setFilteredAccounts} placeholder="Search Accounts" /></div>
+            <div className="home-page-search-bar-container"><SearchBar names={currentAccounts} setOutput={setFilteredAccounts} placeholder="Search Accounts" /></div>
           </div>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="basic tabs example"
+          >
+            <HomeTab label="Navigators" {...a11yProps(0)} />
+            <HomeTab label="Clients" {...a11yProps(1)} />
+            <HomeTab label="Archive" {...a11yProps(0)} />
+            <HomeTab label="Unapproved Accounts" {...a11yProps(1)} />
+          </Tabs>
         </div>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
-          style={{ marginLeft: '1em' }}
-        >
-          <HomeTab label="Navigators" {...a11yProps(0)} />
-          <HomeTab label="Clients" {...a11yProps(1)} />
-          <HomeTab label="Archive" {...a11yProps(0)} />
-          <HomeTab label="Unapproved Accounts" {...a11yProps(1)} />
-        </Tabs>
+
       </Box>
       <TabPanel value={value} index={0}>
         <div className="tab-panel-grid-layout">

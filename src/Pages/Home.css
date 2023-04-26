@@ -54,3 +54,35 @@
     text-align: left;
     display:flex;
 }
+
+.home-page-container{
+    margin-top: 5em;
+}
+
+.home-page-headers-container{
+    display: flex;
+    flex-direction: column;
+    margin-left: 7em;
+}
+
+.home-page-header-name-and-icon-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.home-page-header-empty-block{
+    flex: 0 0 80%;
+}
+
+.home-page-welcome-block-header{
+    display: flex; 
+    flex-direction: row;
+    height: 3em;
+    margin-bottom: 2.5em;
+}
+
+.home-page-search-bar-container{
+    display: flex;
+    align-items: end;
+    flex: 1 0 25%;
+}
