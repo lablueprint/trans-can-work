@@ -55,7 +55,7 @@ function MilestoneButton({
         // aria-describedby="modal-modal-description"
       >
         <Box sx={style.Popup}>
-          <img id="hiiiiii" src={title} alt="island title" />
+          <img id="title" src={title} alt="island title" />
           <Typography sx={{ mt: 50 }} />
           <Button
             id="markAsComplete"
