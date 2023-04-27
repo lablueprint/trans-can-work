@@ -27,9 +27,10 @@ const style = {
   },
   panelStyle: {
     alignSelf: 'start',
-    width: '100%',
+    width: '78vw',
     margin: '5vh 1vw',
     height: '100%',
+    overflow: 'hidden',
     border: '2px dotted blue',
   },
 };
