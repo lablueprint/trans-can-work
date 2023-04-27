@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
 import TuneIcon from '@mui/icons-material/Tune';
 import './SearchBar.css';

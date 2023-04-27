@@ -1,6 +1,5 @@
 .container { 
     width: 80px; 
-    /* vertical-align: middle; */
     display:flex;
     justify-content: center;
  }
