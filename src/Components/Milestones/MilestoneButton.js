@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+import './MilestoneButton.css';
 
 const style = {
   Popup: {
@@ -54,9 +55,10 @@ function MilestoneButton({
         // aria-describedby="modal-modal-description"
       >
         <Box sx={style.Popup}>
-          <img id="title" src={title} alt="island title" />
+          <img id="hiiiiii" src={title} alt="island title" />
           <Typography sx={{ mt: 50 }} />
           <Button
+            id="markAsComplete"
             sx={style.Button}
             onClick={() => {
               'Completed';
