@@ -79,20 +79,20 @@ function AvatarCard({ user, archivedUsers, setArchivedUsers }) {
               'Content-Type': 'application/json',
               Authorization: `Bearer ${tokenResponse.access_token}`,
             },
-            body: JSON.stringify({ name: 'Can u accept my cors request now?', mimeType: 'application/vnd.google-apps.spreadsheet', parents: ['1MG53LIVLSKPadcTeoiKLSIkvZHKLWV0s'] }),
+            body: JSON.stringify({ name: 'proxy attempt 2?', mimeType: 'application/vnd.google-apps.spreadsheet', parents: ['1MG53LIVLSKPadcTeoiKLSIkvZHKLWV0s'] }),
           }).then((res) => res.json()).then((val) => {
             console.log(val);
             const range = 'A1:F5';
             // fetch(`https://sheets.googleapis.com/v4/spreadsheets/${val.id}:batchUpdate`, {
             // &callback=googleDocCallback
-            fetch(`https://sheets.googleapis.com/v4/spreadsheets/${val.id}/values/${range}`, {
+            fetch(`https://tcw-proxy-google-server.onrender.com/sheets.googleapis.com/v4/spreadsheets/${val.id}/values/${range}`, {
 
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${tokenResponse.access_token}`,
-                'Access-Control-Allow-Credentials': 'true',
-                'Access-Control-Allow-Origin': 'http://localhost:3000',
+                // 'Access-Control-Allow-Credentials': 'true',
+                // 'Access-Control-Allow-Origin': 'http://localhost:3000',
               },
               body: JSON.stringify({
                 values: [
