@@ -22,7 +22,7 @@ const data = {
         imageUpdated: require('../../Assets/online-profile.png'),
         imageHover: require('../../Assets/online-profileH.png'),
         imageUHover: require('../../Assets/online-profileUH.png'),
-        title: require('../../Assets/online-profileTitle.png'), 
+        title: require('../../Assets/online-profileTitle.png'),
         id: 'online-profile',
         status: false,
       },
@@ -36,16 +36,6 @@ const data = {
         id: 'training-program',
         status: false,
       },
-      // {
-      //   uid: 4,
-      //   imageDefault: require('../../Assets/co-enroll(b&w).png'),
-      //   imageUpdated: require('../../Assets/co-enroll.png'),
-      //   imageHover: require('../../Assets/co-enrollH.png'),
-      //   imageUHover: require('../../Assets/co-enrollUH.png'),
-      //   title: require('../../Assets/co-enrollTitle.png'),
-      //   id: 'co-enroll',
-      //   status: false,
-      // },
       {
         uid: 4,
         imageDefault: require('../../Assets/workshop(b&w).png'),
@@ -123,7 +113,7 @@ const MilestoneButtons = data.content.body.map((x) => {
       id={x.id}
       status={x.status}
     >
-      <MilestoneButton image={imagePath} imageHover={hoveredPath} title={x.title}/>
+      <MilestoneButton image={imagePath} imageHover={hoveredPath} title={x.title} />
     </div>
   );
 });
