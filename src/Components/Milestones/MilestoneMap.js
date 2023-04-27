@@ -22,7 +22,7 @@ const data = {
         imageUpdated: require('../../Assets/online-profile.png'),
         imageHover: require('../../Assets/online-profileH.png'),
         imageUHover: require('../../Assets/online-profileUH.png'),
-        title: require('../../Assets/online-profileTitle.png'), 
+        title: require('../../Assets/online-profileTitle.png'),
         id: 'online-profile',
         status: false,
       },
@@ -38,16 +38,6 @@ const data = {
       },
       {
         uid: 4,
-        imageDefault: require('../../Assets/co-enroll(b&w).png'),
-        imageUpdated: require('../../Assets/co-enroll.png'),
-        imageHover: require('../../Assets/co-enrollH.png'),
-        imageUHover: require('../../Assets/co-enrollUH.png'),
-        title: require('../../Assets/co-enrollTitle.png'),
-        id: 'co-enroll',
-        status: false,
-      },
-      {
-        uid: 5,
         imageDefault: require('../../Assets/workshop(b&w).png'),
         imageUpdated: require('../../Assets/workshop.png'),
         imageHover: require('../../Assets/workshopH.png'),
@@ -57,7 +47,7 @@ const data = {
         status: false,
       },
       {
-        uid: 6,
+        uid: 5,
         imageDefault: require('../../Assets/internship(b&w).png'),
         imageUpdated: require('../../Assets/internships.png'),
         imageHover: require('../../Assets/internshipH.png'),
@@ -67,7 +57,7 @@ const data = {
         status: false,
       },
       {
-        uid: 7,
+        uid: 6,
         imageDefault: require('../../Assets/job-fair(b&w).png'),
         imageUpdated: require('../../Assets/job-fair.png'),
         imageHover: require('../../Assets/job-fairH.png'),
@@ -77,7 +67,7 @@ const data = {
         status: false,
       },
       {
-        uid: 8,
+        uid: 7,
         imageDefault: require('../../Assets/job-board(b&w).png'),
         imageUpdated: require('../../Assets/job-board.png'),
         imageHover: require('../../Assets/job-boardH.png'),
@@ -87,7 +77,7 @@ const data = {
         status: false,
       },
       {
-        uid: 9,
+        uid: 8,
         imageDefault: require('../../Assets/resource(b&w).png'),
         imageUpdated: require('../../Assets/resource.png'),
         imageHover: require('../../Assets/resourceH.png'),
@@ -97,7 +87,7 @@ const data = {
         status: false,
       },
       {
-        uid: 10,
+        uid: 9,
         imageDefault: require('../../Assets/hiring-info(b&w).png'),
         imageUpdated: require('../../Assets/hiring-info.png'),
         imageHover: require('../../Assets/hiring-infoH.png'),
@@ -123,7 +113,7 @@ const MilestoneButtons = data.content.body.map((x) => {
       id={x.id}
       status={x.status}
     >
-      <MilestoneButton image={imagePath} imageHover={hoveredPath} title={x.title}/>
+      <MilestoneButton image={imagePath} imageHover={hoveredPath} title={x.title} />
     </div>
   );
 });
