@@ -1,29 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import firebase from 'firebase/app';
-import 'firebase/functions';
-// import { doc, getDoc } from 'firebase/firestore';
+import {
+  doc, getDoc,
+} from 'firebase/firestore';
+import firebase from '../firebase';
+
+const db = firebase;
 
 function Calendar() {
   const [calendarId, setCalendarId] = useState('');
   const [timeZone, setTimeZone] = useState('');
-
+  async function fetchData() {
+    const docRef = doc(db, 'resources', 'calendar');
+    try {
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setCalendarId(docSnap.data()['Internship Calendar']);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   useEffect(() => {
-    const userId = firebase.auth().currentUser.uid;
-    firebase.firestore().collection('resources').doc(userId).get()
-      .then((doc) => {
-        setCalendarId(doc.data().calendarId);
-      });
+    fetchData();
   }, []);
-
-  // const docRef = doc(db, "cities", "SF");
-  // const docSnap = await getDoc(docRef);
-
-  // if (docSnap.exists()) {
-  //   console.log("Document data:", docSnap.data());
-  // } else {
-  //   // docSnap.data() will be undefined in this case
-  //   console.log("No such document!");
-  // }
 
   useEffect(() => {
     setTimeZone(Intl.DateTimeFormat().resolvedOptions().timeZone);
