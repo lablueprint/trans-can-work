@@ -1,4 +1,3 @@
-/*eslint-disable*/
 import React from 'react';
 import MilestoneButton from './MilestoneButton';
 import './NavMap.css';
@@ -16,17 +15,17 @@ const jobseekerData = {
         status: true,
       },
       {
-        uid: "island2",
+        uid: 'island2',
         imageDefault: require('../../Assets/online-profile(b&w).png'),
         imageUpdated: require('../../Assets/online-profile.png'),
         imageHover: require('../../Assets/online-profileH.png'),
         imageUHover: require('../../Assets/online-profileUH.png'),
-        title: require('../../Assets/online-profileTitle.png'), 
+        title: require('../../Assets/online-profileTitle.png'),
         id: 'online-profileN',
         status: false,
       },
       {
-        uid: "island3",
+        uid: 'island3',
         imageDefault: require('../../Assets/training-program(b&w).png'),
         imageUpdated: require('../../Assets/training-program.png'),
         imageHover: require('../../Assets/training-programH.png'),
@@ -36,7 +35,7 @@ const jobseekerData = {
         status: false,
       },
       {
-        uid: "island4",
+        uid: 'island4',
         imageDefault: require('../../Assets/workshop(b&w).png'),
         imageUpdated: require('../../Assets/workshop.png'),
         imageHover: require('../../Assets/workshopH.png'),
@@ -46,7 +45,7 @@ const jobseekerData = {
         status: false,
       },
       {
-        uid: "island5",
+        uid: 'island5',
         imageDefault: require('../../Assets/internship(b&w).png'),
         imageUpdated: require('../../Assets/internships.png'),
         imageHover: require('../../Assets/internshipH.png'),
@@ -56,7 +55,7 @@ const jobseekerData = {
         status: false,
       },
       {
-        uid: "island6",
+        uid: 'island6',
         imageDefault: require('../../Assets/job-fair(b&w).png'),
         imageUpdated: require('../../Assets/job-fair.png'),
         imageHover: require('../../Assets/job-fairH.png'),
@@ -66,7 +65,7 @@ const jobseekerData = {
         status: false,
       },
       {
-        uid: "island7",
+        uid: 'island7',
         imageDefault: require('../../Assets/job-board(b&w).png'),
         imageUpdated: require('../../Assets/job-board.png'),
         imageHover: require('../../Assets/job-boardH.png'),
@@ -76,7 +75,7 @@ const jobseekerData = {
         status: false,
       },
       {
-        uid: "island8",
+        uid: 'island8',
         imageDefault: require('../../Assets/resource(b&w).png'),
         imageUpdated: require('../../Assets/resource.png'),
         imageHover: require('../../Assets/resourceH.png'),
@@ -86,7 +85,7 @@ const jobseekerData = {
         status: false,
       },
       {
-        uid: "island9",
+        uid: 'island9',
         imageDefault: require('../../Assets/hiring-info(b&w).png'),
         imageUpdated: require('../../Assets/hiring-info.png'),
         imageHover: require('../../Assets/hiring-infoH.png'),
@@ -100,7 +99,7 @@ const jobseekerData = {
 };
 
 const NavMapButtons = jobseekerData.content.body.map((x) => {
-    let imagePath = x.imageDefault;
+  let imagePath = x.imageDefault;
   let hoveredPath = x.imageHover;
   if (x.status === true) {
     imagePath = x.imageUpdated;
@@ -112,15 +111,15 @@ const NavMapButtons = jobseekerData.content.body.map((x) => {
       id={x.id}
       status={x.status}
     >
-      <MilestoneButton image={imagePath} imageHover={hoveredPath} title={x.title}/>
+      <MilestoneButton image={imagePath} imageHover={hoveredPath} title={x.title} />
     </div>
   );
 });
 
 function NavMap() {
   return (
-    <div className="grid" >
-        {NavMapButtons}
+    <div className="grid">
+      {NavMapButtons}
     </div>
   );
 }
