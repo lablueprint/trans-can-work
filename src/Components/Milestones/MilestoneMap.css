@@ -9,7 +9,7 @@
     background: linear-gradient(180deg, #EFFBFF 0%, #F5F1FF 69.61%, #FFF2F5 100%);
   }
   .map-title {
-    grid-area: 2 / 2 / span 2 / span 1; 
+    grid-area: 2 / 2 / span 1 / span 1; 
   }
   #roadmap-title {
     width: fit-content;
@@ -25,34 +25,27 @@
     width: fit-content; 
     height: fit-content;
     margin-top: -5vh;
-    margin-left: 30vw; 
+    margin-left: 35vw; 
     position: absolute;
   }
    #online-profile {
     width: fit-content;
     height: fit-content;
-    margin-top: -1vh;
-    margin-left: 57vw;
+    margin-top: 8vh;
+    margin-left: 60vw;
     position: absolute;
   }
   #training-program {
     width: fit-content; 
     height: fit-content;
-    margin-top: 15vh;
+    margin-top: 30vh;
     margin-left: 65vw; 
-    position: absolute;
-  }
-  #co-enroll {
-    width: fit-content; 
-    height: fit-content; 
-    margin-top: 40vh;
-    margin-left: 60vw;
     position: absolute;
   }
   #workshop {
     width: fit-content; 
     height: fit-content; 
-    margin-top: 65vh;
+    margin-top: 53vh;
     margin-left: 57vw;
     position: absolute; 
   }
@@ -60,27 +53,27 @@
     width: fit-content;
     height: fit-content; 
     margin-top: 65vh; 
-    margin-left: 35vw; 
+    margin-left: 42vw; 
     position: absolute; 
   }
   #job-fair {
     width: fit-content;
     height: fit-content; 
-    margin-top: 75vh; 
-    margin-left: 10vw; 
+    margin-top: 70vh; 
+    margin-left: 20vw; 
     position: absolute;
   }
   #job-board {
     width: fit-content; 
     height: fit-content; 
-    margin-top: 45vh; 
+    margin-top: 50vh; 
     margin-left: 2vw;
     position: absolute; 
   }
   #resource {
     width: fit-content;
     height: fit-content;
-    margin-top: 25vh;
+    margin-top: 30vh;
     margin-left: 3vw;
     position: absolute;
   }
