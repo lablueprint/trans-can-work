@@ -135,80 +135,134 @@ export default function ProfileOutline() {
 
   if (userType === 'navigator' || (userType === 'admin' && isApproved)) {
     return (
-      <div>
-        <Avatar facebookId="100008343750912" size="150" />
-        <h1>
-          MY PROFILE
-        </h1>
-        <label htmlFor="FirstName">
-          First Name:
-          <br />
-          <inputs
-            id="Name"
-            defaultValue={demographicInfo[0].name}
-            disabled={disableButton}
-          />
-        </label>
-        <br />
-        <label htmlFor="LastName">
-          Last Name:
-          <br />
-          <input
-            id="Name"
-            defaultValue={demographicInfo[0].name}
-            disabled={disableButton}
-          />
-        </label>
-        <br />
-        <label htmlFor="Pronouns">
-          Pronouns:
-          <br />
-          <input
-            id="Pronouns"
-            defaultValue={demographicInfo[0].pronouns}
-            disabled={disableButton}
-          />
-        </label>
-        <br />
-        <label htmlFor="Phone">
-          Phone Number:
-          <br />
-          <input
-            id="Phone"
-            defaultValue={demographicInfo[0].phone}
-            disabled={disableButton}
-          />
-        </label>
-        <br />
-        <p>
-          Email:
-          <br />
-          {demographicInfo[0].email}
-        </p>
-        <label htmlFor="Password">
-          Password:
-          <br />
-          <input
-            id="Password"
-            defaultValue=""
-            disabled={disableButton}
-          />
-        </label>
-        <br />
-        <label htmlFor="Bio">
-          Bio:
-          <br />
-          <input
-            id="Bio"
-            defaultValue=""
-            disabled={disableButton}
-          />
-        </label>
-        <br />
-        <Button onClick={() => setDisableButton(!disableButton)}>
-          <i />
-        </Button>
+      <div className="background">
+        <div className="top-container">
+          <div className="profile-photo-container">
+            <Avatar facebookId="100008343750912" size="150" sx={{ borderRadius: '100px' }} />
+            <h1>
+              MY PROFILE
+            </h1>
+          </div>
+          <div className="edit-button">
+            <Button
+              variant="outlined"
+              onClick={handleToggle}
+              sx={
+                disableButton ? {
+                  marginRight: '2%',
+                  background: '#FFFFFF',
+                  borderColor: 'black',
+                  color: 'black',
+                }
+                  : {
+                    marginRight: '2%',
+                    background: '#E4E6FF',
+                    borderColor: '#E4E6FF',
+                    color: 'black',
+                  }
+            }
+            >
+              {disableButton ? 'EDIT' : 'SAVE'}
+            </Button>
+            <div className="cancel-button">
+              {disableButton ? null : (
+                <Button
+                  onClick={handleToggle}
+                  sx={{
+                    marginTop: '2%',
+                    marginRight: '2%',
+                    background: '#FFFFFF',
+                    borderColor: 'black',
+                    color: 'black',
+                  }}
+                >
+                  CANCEL
+                </Button>
+              )}
 
+            </div>
+          </div>
+        </div>
+        <div className="outer-container">
+          <div className="left-column">
+            <label htmlFor="FirstName">
+              First Name:
+              <br />
+              <input
+                className={disableButton ? 'non-editable-field' : 'editable-field'}
+                id="FirstName"
+                defaultValue={demographicInfo[0].name}
+                disabled={disableButton}
+              />
+            </label>
+            <br />
+            <label htmlFor="Pronouns">
+              Pronouns:
+              <br />
+              <input
+                className={disableButton ? 'non-editable-field' : 'editable-field'}
+                id="Pronouns"
+                defaultValue={demographicInfo[0].pronouns}
+                disabled={disableButton}
+              />
+            </label>
+            <p>
+              <h2>
+                Email:
+              </h2>
+              <h3>
+                {demographicInfo[0].email}
+              </h3>
+            </p>
+          </div>
+          <div className="right-column">
+            <label htmlFor="LastName">
+              Last Name:
+              <input
+                className={disableButton ? 'non-editable-field' : 'editable-field'}
+                id="Name"
+                defaultValue={demographicInfo[0].name}
+                disabled={disableButton}
+              />
+            </label>
+            <br />
+            <label htmlFor="Phone">
+              Phone Number:
+              <br />
+              <input
+                className={disableButton ? 'non-editable-field' : 'editable-field'}
+                id="Phone"
+                defaultValue={demographicInfo[0].phone}
+                disabled={disableButton}
+              />
+            </label>
+            <br />
+            <label htmlFor="Password">
+              Password:
+              <br />
+              <input
+                className={disableButton ? 'non-editable-field' : 'editable-field'}
+                id="Password"
+                defaultValue=""
+                disabled={disableButton}
+              />
+            </label>
+          </div>
+        </div>
+        <br />
+        <div className="bio">
+          <label htmlFor="Bio">
+            Bio:
+            <br />
+            <input
+              className={disableButton ? 'non-editable-field' : 'editable-field'}
+              id="Bio"
+              defaultValue=""
+              disabled={disableButton}
+            />
+          </label>
+          <br />
+        </div>
       </div>
     );
   }
@@ -232,6 +286,7 @@ export default function ProfileOutline() {
           <label htmlFor="First Name">
             First Name:
             <input
+              className={disableButton ? 'non-editable-field' : 'editable-field'}
               id="Name"
               defaultValue={demographicInfo[0].name}
               disabled={disableButton}
@@ -241,6 +296,7 @@ export default function ProfileOutline() {
           <label htmlFor="Last Name">
             Last Name:
             <input
+              className={disableButton ? 'non-editable-field' : 'editable-field'}
               id="Name"
               defaultValue={demographicInfo[0].name}
               disabled={disableButton}
@@ -250,6 +306,7 @@ export default function ProfileOutline() {
           <label htmlFor="Pronouns">
             Pronouns:
             <input
+              className={disableButton ? 'non-editable-field' : 'editable-field'}
               id="Pronouns"
               defaultValue={demographicInfo[0].pronouns}
               disabled={disableButton}
@@ -264,15 +321,16 @@ export default function ProfileOutline() {
           <label htmlFor="Bio">
             Bio:
             <input
+              className={disableButton ? 'non-editable-field' : 'editable-field'}
               id="Bio"
               defaultValue=""
               disabled={disableButton}
             />
           </label>
           <br />
-          <Button onClick={handleToggle}>
-            <i />
-          </Button>
+          <Button
+            onClick={handleToggle}
+          />
         </TabPanel>
       </div>
     );
