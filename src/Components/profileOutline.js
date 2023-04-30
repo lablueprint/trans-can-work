@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import { PropTypes } from 'prop-types';
 import Avatar from 'react-avatar';
 import Button from '@mui/material/Button';
+import Pencil from '../Assets/pencil.svg';
 import {
   fetchByNavigator, fetchAllJobseekers,
 } from '../Services/jobseeker-service';
@@ -16,6 +17,7 @@ const demographicInfo = [{
   title: 'slayer',
   pronouns: 'she/her',
   email: 'kaeleytran@gmail.com',
+  password: 'poop',
   phone: '714-420-6969',
   city: 'Orange County',
   state: 'California',
@@ -139,7 +141,7 @@ export default function ProfileOutline() {
       <div className="background">
         <div className="top-container">
           <div className="profile-photo-container">
-            <Avatar facebookId="100008343750912" size="150" sx={{ borderRadius: '100px' }} />
+            <Avatar facebookId="100008343750912" size="150" sx={{ borderRadius: '100px' }} round />
             <h1>
               MY PROFILE
             </h1>
@@ -163,11 +165,19 @@ export default function ProfileOutline() {
                   }
             }
             >
+              {disableButton ? (
+                <img
+                  src={Pencil}
+                  alt="pencil icon next to edit button"
+                  style={{ marginRight: '12px' }}
+                />
+              ) : null}
               {disableButton ? 'EDIT' : 'SAVE'}
             </Button>
             <div className="cancel-button">
               {disableButton ? null : (
                 <Button
+                  variant="outlined"
                   onClick={handleToggle}
                   sx={{
                     marginTop: '2%',
@@ -212,7 +222,7 @@ export default function ProfileOutline() {
               Email:
               <input
                 className={disableButton ? 'non-editable-field' : 'editable-email-password'}
-                id="Pronouns"
+                id="Email" // why is this slightly right?????????
                 defaultValue={demographicInfo[0].email}
                 disabled={disableButton}
               />
@@ -246,7 +256,7 @@ export default function ProfileOutline() {
               <input
                 className={disableButton ? 'non-editable-field' : 'editable-email-password'}
                 id="Password"
-                defaultValue=""
+                defaultValue={demographicInfo[0].password}
                 disabled={disableButton}
               />
             </label>
@@ -352,6 +362,7 @@ ProfileOutline.propTypes = {
   title: PropTypes.string.isRequired,
   pronouns: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
   phone: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
   state: PropTypes.string.isRequired,
