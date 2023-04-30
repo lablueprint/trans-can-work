@@ -7,6 +7,7 @@ import { PropTypes } from 'prop-types';
 import Avatar from 'react-avatar';
 import Button from '@mui/material/Button';
 import Pencil from '../Assets/pencil.svg';
+import Eye from '../Assets/eye.svg';
 import {
   fetchByNavigator, fetchAllJobseekers,
 } from '../Services/jobseeker-service';
@@ -64,6 +65,7 @@ function a11yProps(index) {
 export default function ProfileOutline() {
   const [value, setValue] = React.useState(0);
   const [disableButton, setDisableButton] = React.useState(true);
+  const [passwordShown, setPasswordShown] = React.useState(false);
   // const [values, setValues] = React.useState(initialValues);
   // const [clients, setClients] = React.useState([]);
 
@@ -133,6 +135,7 @@ export default function ProfileOutline() {
     }
 
     setDisableButton(!disableButton);
+    setPasswordShown(!passwordShown);
   };
 
   // hey alan ! new updates!
@@ -253,12 +256,20 @@ export default function ProfileOutline() {
             <label htmlFor="Password">
               Password:
               <br />
-              <input
-                className={disableButton ? 'non-editable-field' : 'editable-email-password'}
-                id="Password"
-                defaultValue={demographicInfo[0].password}
-                disabled={disableButton}
-              />
+              <div>
+                <input
+                  className={disableButton ? 'non-editable-field' : 'editable-email-password'}
+                  type={passwordShown ? 'text' : 'password'}
+                  id="Password"
+                  defaultValue={demographicInfo[0].password}
+                  disabled={disableButton}
+                />
+                <img
+                  src={Eye}
+                  alt="eye icon in password field"
+                  style={{ marginRight: '12px' }} // hardcode this?
+                />
+              </div>
             </label>
           </div>
         </div>
@@ -335,6 +346,7 @@ export default function ProfileOutline() {
             Bio:
             <input
               className={disableButton ? 'non-editable-field' : 'editable-field'}
+              type="bio"
               id="Bio"
               defaultValue=""
               disabled={disableButton}
