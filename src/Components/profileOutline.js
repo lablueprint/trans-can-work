@@ -138,6 +138,10 @@ export default function ProfileOutline() {
     setPasswordShown(!passwordShown);
   };
 
+  const showPassword = () => {
+    setPasswordShown(!passwordShown);
+  };
+
   // hey alan ! new updates!
   if (userType === 'navigator' || (userType === 'admin' && isApproved)) {
     return (
@@ -177,7 +181,7 @@ export default function ProfileOutline() {
               ) : null}
               {disableButton ? 'EDIT' : 'SAVE'}
             </Button>
-            <div className="cancel-button">
+            {/* <div className="cancel-button">
               {disableButton ? null : (
                 <Button
                   variant="outlined"
@@ -194,7 +198,7 @@ export default function ProfileOutline() {
                 </Button>
               )}
 
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="outer-container">
@@ -223,6 +227,7 @@ export default function ProfileOutline() {
             <br />
             <label htmlFor="Email">
               Email:
+              <br />
               <input
                 className={disableButton ? 'non-editable-field' : 'editable-email-password'}
                 id="Email" // why is this slightly right?????????
@@ -268,6 +273,7 @@ export default function ProfileOutline() {
                   src={Eye}
                   alt="eye icon in password field"
                   style={{ marginRight: '12px' }} // hardcode this?
+                  onClick={showPassword}
                 />
               </div>
             </label>
