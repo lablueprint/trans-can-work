@@ -133,7 +133,7 @@ export default function ProfileOutline() {
     setDisableButton(!disableButton);
   };
 
-  // hey alan ! new updates! 
+  // hey alan ! new updates!
   if (userType === 'navigator' || (userType === 'admin' && isApproved)) {
     return (
       <div className="background">
@@ -207,14 +207,16 @@ export default function ProfileOutline() {
                 disabled={disableButton}
               />
             </label>
-            <p>
-              <h2>
-                Email:
-              </h2>
-              <h3>
-                {demographicInfo[0].email}
-              </h3>
-            </p>
+            <br />
+            <label htmlFor="Email">
+              Email:
+              <input
+                className={disableButton ? 'non-editable-field' : 'editable-email-password'}
+                id="Pronouns"
+                defaultValue={demographicInfo[0].email}
+                disabled={disableButton}
+              />
+            </label>
           </div>
           <div className="right-column">
             <label htmlFor="LastName">
@@ -242,7 +244,7 @@ export default function ProfileOutline() {
               Password:
               <br />
               <input
-                className={disableButton ? 'non-editable-field' : 'editable-field'}
+                className={disableButton ? 'non-editable-field' : 'editable-email-password'}
                 id="Password"
                 defaultValue=""
                 disabled={disableButton}
