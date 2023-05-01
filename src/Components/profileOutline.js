@@ -8,6 +8,7 @@ import Avatar from 'react-avatar';
 import Button from '@mui/material/Button';
 import Pencil from '../Assets/pencil.svg';
 import Eye from '../Assets/eye.svg';
+import Back from '../Assets/back.svg';
 import {
   fetchByNavigator, fetchAllJobseekers,
 } from '../Services/jobseeker-service';
@@ -150,8 +151,21 @@ export default function ProfileOutline() {
           <Box sx={{ borderBottom: 1, borderColor: 'divider', boxShadow: '0 4px 4px #c9c9c9' }}>
             <div className="profile-page-headers-container">
               <div className="profile-page-header-name-and-icon-container">
-                <div className="home-page-header-empty-block" />
-                <p className="home-page-header-profile-text">{demographicInfo[0].name}</p>
+                <div className="profile-page-back-empty-block" />
+                <img
+                  src={Back}
+                  alt="back-pointing arrow"
+                  style={{
+                    marginRight: '12px',
+                    width: '7.41px',
+                    height: '12px',
+                  }} // hardcode this?
+                />
+                <p className="profile-page-back-text">Back</p>
+              </div>
+              <div className="profile-page-header-name-and-icon-container">
+                <div className="profile-page-header-empty-block" />
+                <p className="profile-page-header-profile-text">{demographicInfo[0].name}</p>
                 <Avatar
                   facebookId="100008343750912"
                   size="40"

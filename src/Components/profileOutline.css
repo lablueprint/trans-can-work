@@ -172,10 +172,18 @@ input {
     display:flex;
 }
 
-.home-page-header-profile-text{
+.profile-page-header-profile-text{
     font-family: 'Montserrat';
     font-size: 1em;
     font-weight: bold;
+    text-align: left;
+    display:flex;
+}
+
+.profile-page-back-text{
+    font-family: 'Montserrat';
+    font-size: 1em;
+    font-weight: normal;
     text-align: left;
     display:flex;
 }
@@ -185,11 +193,15 @@ input {
     flex-direction: row;
 }
 
-.home-page-header-empty-block{
+.profile-page-header-empty-block{
     flex: 0 0 80%;
 }
 
-.home-page-welcome-block-header{
+.profile-page-back-empty-block{
+    flex: 0 0 0%;
+}
+
+.profile-page-welcome-block-header{
     display: flex; 
     flex-direction: row;
     height: 3em;
