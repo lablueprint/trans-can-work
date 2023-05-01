@@ -36,6 +36,12 @@ h3
 input {
     margin-left: 10%;
 }
+
+.MuiButton-outlined {
+    text-transform: none !important;
+
+  }
+
 .outer-container {
     display:flex; 
     flex-direction: row;
@@ -121,4 +127,43 @@ input {
     flex-direction: column;
     flex-wrap: wrap;
     gap: 10px
+}
+
+.profile-page-headers-container{
+    display: flex;
+    flex-direction: column;
+    margin-left: 7em;
+}
+
+.profile-page-title{
+    font-family: 'Montserrat';
+    font-size: 3em;
+    font-weight: normal;
+    margin: 0;
+    text-align: left;
+    display:flex;
+}
+
+.home-page-header-profile-text{
+    font-family: 'Montserrat';
+    font-size: 1em;
+    font-weight: bold;
+    text-align: left;
+    display:flex;
+}
+
+.profile-page-header-name-and-icon-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.home-page-header-empty-block{
+    flex: 0 0 80%;
+}
+
+.home-page-welcome-block-header{
+    display: flex; 
+    flex-direction: row;
+    height: 3em;
+    margin-bottom: 2.5em;
 }

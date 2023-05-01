@@ -146,6 +146,36 @@ export default function ProfileOutline() {
   if (userType === 'navigator' || (userType === 'admin' && isApproved)) {
     return (
       <div className="background">
+        <div className="header">
+          <Box sx={{ borderBottom: 1, borderColor: 'divider', boxShadow: '0 4px 4px #c9c9c9' }}>
+            <div className="profile-page-headers-container">
+              <div className="profile-page-header-name-and-icon-container">
+                <div className="home-page-header-empty-block" />
+                <p className="home-page-header-profile-text">{demographicInfo[0].name}</p>
+                <Avatar
+                  facebookId="100008343750912"
+                  size="40"
+                  styles={{
+                    height: '2em',
+                    width: '2em',
+                    marginTop: '6px',
+                    marginBottom: '6px',
+                    marginLeft: '6px',
+                  }}
+                  round
+                />
+              </div>
+              <div className="home-page-welcome-block-header">
+                <div style={{ flex: '0 0 75%' }}>
+                  <p className="profile-page-title">
+                    Profile Page
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </Box>
+        </div>
         <div className="top-container">
           <div className="profile-photo-container">
             <Avatar facebookId="100008343750912" size="150" sx={{ borderRadius: '100px' }} round />
@@ -179,7 +209,7 @@ export default function ProfileOutline() {
                   style={{ marginRight: '12px' }}
                 />
               ) : null}
-              {disableButton ? 'EDIT' : 'SAVE'}
+              {disableButton ? 'Edit Profile' : 'Save Changes'}
             </Button>
             {/* <div className="cancel-button">
               {disableButton ? null : (
