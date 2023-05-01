@@ -152,34 +152,36 @@ export default function ProfileOutline() {
             <div className="profile-page-headers-container">
               <div className="profile-page-header-name-and-icon-container">
                 <div className="profile-page-back-empty-block" />
-                <img
-                  src={Back}
-                  alt="back-pointing arrow"
-                  style={{
-                    marginRight: '12px',
-                    width: '7.41px',
-                    height: '12px',
-                  }} // hardcode this?
-                />
+                <div className="header-image-container">
+                  <img
+                    src={Back}
+                    alt="back-pointing arrow"
+                    style={{
+                      marginRight: '12px',
+                      width: '7.41px',
+                      height: '12px',
+                    }}
+                  />
+                </div>
                 <p className="profile-page-back-text">Back</p>
-              </div>
-              <div className="profile-page-header-name-and-icon-container">
                 <div className="profile-page-header-empty-block" />
                 <p className="profile-page-header-profile-text">{demographicInfo[0].name}</p>
-                <Avatar
-                  facebookId="100008343750912"
-                  size="40"
-                  styles={{
-                    height: '2em',
-                    width: '2em',
-                    marginTop: '6px',
-                    marginBottom: '6px',
-                    marginLeft: '6px',
-                  }}
-                  round
-                />
+                <div className="header-image-container">
+                  <Avatar
+                    facebookId="100008343750912"
+                    size="40"
+                    styles={{
+                      height: '2em',
+                      width: '2em',
+                      marginTop: '6px',
+                      marginBottom: '6px',
+                      marginLeft: '6px',
+                    }}
+                    round
+                  />
+                </div>
               </div>
-              <div className="home-page-welcome-block-header">
+              <div className="profile-page-welcome-block-header">
                 <div style={{ flex: '0 0 75%' }}>
                   <p className="profile-page-title">
                     Profile Page
@@ -245,97 +247,106 @@ export default function ProfileOutline() {
             </div> */}
           </div>
         </div>
-        <div className="outer-container">
-          <div className="left-column">
-            <label htmlFor="FirstName">
-              First Name:
-              <br />
-              <input
-                className={disableButton ? 'non-editable-field' : 'editable-field'}
-                id="FirstName"
-                defaultValue={demographicInfo[0].name}
-                disabled={disableButton}
-              />
-            </label>
-            <br />
-            <label htmlFor="Pronouns">
-              Pronouns:
-              <br />
-              <input
-                className={disableButton ? 'non-editable-field' : 'editable-field'}
-                id="Pronouns"
-                defaultValue={demographicInfo[0].pronouns}
-                disabled={disableButton}
-              />
-            </label>
-            <br />
-            <label htmlFor="Email">
-              Email:
-              <br />
-              <input
-                className={disableButton ? 'non-editable-field' : 'editable-email-password'}
-                id="Email" // why is this slightly right?????????
-                defaultValue={demographicInfo[0].email}
-                disabled={disableButton}
-              />
-            </label>
-          </div>
-          <div className="right-column">
-            <label htmlFor="LastName">
-              Last Name:
-              <input
-                className={disableButton ? 'non-editable-field' : 'editable-field'}
-                id="Name"
-                defaultValue={demographicInfo[0].name}
-                disabled={disableButton}
-              />
-            </label>
-            <br />
-            <label htmlFor="Phone">
-              Phone Number:
-              <br />
-              <input
-                className={disableButton ? 'non-editable-field' : 'editable-field'}
-                id="Phone"
-                defaultValue={demographicInfo[0].phone}
-                disabled={disableButton}
-              />
-            </label>
-            <br />
-            <label htmlFor="Password">
-              Password:
-              <br />
-              <div>
+        <div className="outermost-container">
+          <div className="outer-container">
+            <div className="left-column">
+              <label htmlFor="FirstName">
+                First Name:
+                <br />
                 <input
-                  className={disableButton ? 'non-editable-field' : 'editable-email-password'}
-                  type={passwordShown ? 'text' : 'password'}
-                  id="Password"
-                  defaultValue={demographicInfo[0].password}
+                  className={disableButton ? 'non-editable-field' : 'editable-field'}
+                  id="FirstName"
+                  defaultValue={demographicInfo[0].name}
                   disabled={disableButton}
                 />
-                <img
-                  src={Eye}
-                  alt="eye icon in password field"
-                  style={{ marginRight: '12px' }} // hardcode this?
-                  onClick={showPassword}
+              </label>
+              <br />
+              <label htmlFor="Pronouns">
+                Pronouns:
+                <br />
+                <input
+                  className={disableButton ? 'non-editable-field' : 'editable-field'}
+                  id="Pronouns"
+                  defaultValue={demographicInfo[0].pronouns}
+                  disabled={disableButton}
                 />
-              </div>
-            </label>
+              </label>
+              <br />
+              <label htmlFor="Email">
+                Email:
+                <br />
+                <input
+                  className={disableButton ? 'non-editable-field' : 'editable-email-password'}
+                  id="Email" // why is this slightly right?????????
+                  defaultValue={demographicInfo[0].email}
+                  disabled={disableButton}
+                />
+              </label>
+            </div>
+            <div className="right-column">
+              <label htmlFor="LastName">
+                Last Name:
+                {/* <br /> */}
+                <input
+                  className={disableButton ? 'non-editable-field' : 'editable-field'}
+                  id="Name"
+                  defaultValue={demographicInfo[0].name}
+                  disabled={disableButton}
+                />
+              </label>
+              <br />
+              <label htmlFor="Phone">
+                Phone Number:
+                <br />
+                <input
+                  className={disableButton ? 'non-editable-field' : 'editable-field'}
+                  id="Phone"
+                  defaultValue={demographicInfo[0].phone}
+                  disabled={disableButton}
+                />
+              </label>
+              <br />
+              <label htmlFor="Password">
+                Password:
+                <br />
+                <div>
+                  <input
+                    className={disableButton ? 'non-editable-field' : 'editable-email-password'}
+                    type={passwordShown ? 'text' : 'password'}
+                    id="Password"
+                    defaultValue={demographicInfo[0].password}
+                    disabled={disableButton}
+                  />
+                  <img
+                    src={Eye}
+                    role="button"
+                    alt="eye icon in password field"
+                    style={{ marginRight: '12px' }} // hardcode this?
+                    onClick={showPassword}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        showPassword();
+                      }
+                    }}
+                  />
+                </div>
+              </label>
+            </div>
           </div>
-        </div>
-        <br />
-        <div className="bio">
-          <label htmlFor="Bio">
-            Bio:
-            <br />
-            <input
-              className={disableButton ? 'non-editable-field' : 'editable-field'}
-              id="Bio"
-              defaultValue=""
-              disabled={disableButton}
-            />
-          </label>
           <br />
+          <div className="bio">
+            <label htmlFor="Bio">
+              Bio:
+              <br />
+              <input
+                className={disableButton ? 'non-editable-field' : 'editable-field'}
+                id="Bio"
+                defaultValue=""
+                disabled={disableButton}
+              />
+            </label>
+            <br />
+          </div>
         </div>
       </div>
     );

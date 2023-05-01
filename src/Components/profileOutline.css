@@ -28,6 +28,7 @@ h1 {
     line-height: 64px;
     margin-left: 6%;
   }
+
 label { 
     font-family: 'Montserrat';
     font-style: normal;
@@ -39,6 +40,7 @@ label {
     display: inline-block;
     text-align: left;
 }
+
 h2 { 
     font-family: 'Montserrat';
     font-style: normal;
@@ -48,6 +50,7 @@ h2 {
     display: flex;
     align-items: center;
 }
+
 h3 
 {
     font-family: 'Montserrat';
@@ -59,6 +62,7 @@ h3
     align-items: center;
     margin-left: 10%;
 }
+
 input {
     font-family: 'Montserrat';
     margin-left: 10%;
@@ -67,14 +71,20 @@ input {
 .MuiButton-outlined {
     font-family: 'Montserrat' !important;
     text-transform: none !important;
+    white-space: nowrap
 
   }
+
+.outermost-container {
+    flex-direction: row;
+    align-items: flex-start;
+}
 
 .outer-container {
     display:flex; 
     flex-direction: row;
     margin-top: 8%;
-    margin-left: 20%;
+    justify-content: center;
 }
 .profile-photo-container {
     display: flex;
@@ -91,6 +101,8 @@ input {
 .right-column {
     display: flex;
     flex-direction: column;
+    /* align-items: flex-start;
+    margin-left: 20%; */
 
 }
 .edit-button{
@@ -177,7 +189,8 @@ input {
     font-size: 1em;
     font-weight: bold;
     text-align: left;
-    display:flex;
+    display: flex;
+    margin-right: 1em;
 }
 
 .profile-page-back-text{
@@ -188,9 +201,16 @@ input {
     display:flex;
 }
 
+.header-image-container {
+    display: flex;
+    justify-content: center; /* center the child element horizontally */
+    align-items: center; /* center the child element vertically */
+  }
+
 .profile-page-header-name-and-icon-container{
     display: flex;
     flex-direction: row;
+    margin-top: 2.5em;
 }
 
 .profile-page-header-empty-block{
