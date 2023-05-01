@@ -180,7 +180,7 @@ export default function ProfileOutline() {
           <div className="profile-photo-container">
             <Avatar facebookId="100008343750912" size="150" sx={{ borderRadius: '100px' }} round />
             <h1>
-              MY PROFILE
+              {demographicInfo[0].name}
             </h1>
           </div>
           <div className="edit-button">
