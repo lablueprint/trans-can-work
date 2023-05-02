@@ -78,7 +78,7 @@ function Register() {
     }
     if (registered === true) {
       const approves = await getApprovalStatus(email);
-      navigate(approves ? '/' : '/splash');
+      navigate(approves ? '/home' : '/splash');
     }
   };
   const provider = new GoogleAuthProvider();
@@ -102,7 +102,7 @@ function Register() {
           createAdmin(googleUser.email, data);
         }
         const approves = await getApprovalStatus(googleUser.email);
-        navigate(approves ? '/' : '/splash');
+        navigate(approves ? '/home' : '/splash');
       })
       .catch((error) => {
         alert(error);
@@ -110,8 +110,7 @@ function Register() {
       });
   };
   return (
-    <div>
-
+    <div className="background">
       {user !== null
           && (
           <div>
