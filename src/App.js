@@ -1,8 +1,8 @@
 /*eslint-disable*/
 import React from 'react';
-import {
-  Route, Routes,
-} from 'react-router-dom';
+// import {
+//   Route, Routes,
+// } from 'react-router-dom';
 import {
   Home,
   Login,
@@ -14,16 +14,16 @@ import {
   JobseekerData,
 } from './Pages';
 import './App.css';
-import Footer from './Components/Footer/Footer';
-import Header from './Components/Navigation/Header';
-import Splash from './Components/Splash';
-import approvalIcon from './Assets/mobile_friendly_24px.png';
-import AdminView from './Components/AdminView';
+// import Footer from './Components/Footer/Footer';
+// import Header from './Components/Navigation/Header';
+// import Splash from './Components/Splash';
+// import approvalIcon from './Assets/mobile_friendly_24px.png';
+// import AdminView from './Components/AdminView';
 
 function App() {
   return (
     <div className="App">
-      <Routes>
+      {/* <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -43,9 +43,10 @@ function App() {
             />
           )}
         />
-      </Routes>
-      {/* <Header /> */} 
-      <Footer />
+      </Routes> */}
+      <JobseekerData></JobseekerData>
+      {/* <Header /> 
+      <Footer /> */}
     </div>
   );
 }
