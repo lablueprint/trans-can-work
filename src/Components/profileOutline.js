@@ -339,7 +339,7 @@ export default function ProfileOutline() {
               Bio:
               <br />
               <input
-                className={disableButton ? 'non-editable-field' : 'editable-field'}
+                className={disableButton ? 'non-editable-field-large' : 'editable-field-large'}
                 id="Bio"
                 defaultValue=""
                 disabled={disableButton}
