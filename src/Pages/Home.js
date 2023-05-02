@@ -1,14 +1,12 @@
 import React from 'react';
-// import MilestoneMap from '../Components/Milestones/MilestoneMap';
-// import JobseekerNav from '../Components/Navigation/JobseekerNav';
-import Calendar from '../Components/calendar';
+import MilestoneMap from '../Components/Milestones/MilestoneMap';
+import JobseekerNav from '../Components/Navigation/JobseekerNav';
 
 export default function Home() {
   return (
     <div>
-      {/* <MilestoneMap />
-      <JobseekerNav /> */}
-      <Calendar />
+      <MilestoneMap />
+      <JobseekerNav />
     </div>
   );
 }
