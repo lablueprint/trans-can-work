@@ -86,11 +86,13 @@ function AvatarCard({ user, archivedUsers, setArchivedUsers }) {
             // fetch(`https://sheets.googleapis.com/v4/spreadsheets/${val.id}:batchUpdate`, {
             // &callback=googleDocCallback
             // fetch(`https://tcw-proxy-google-server.onrender.com/sheets.googleapis.com/v4/spreadsheets/${val.id}/values/${range}`, {
-            fetch(`https://cors-anywhere.herokuapp.com/https://sheets.googleapis.com/v4/spreadsheets/${val.id}/values/${range}`, {
+            fetch(`https://cors-anywhere.herokuapp.com/https://sheets.googleapis.com/v4/spreadsheets/${val.id}/values/${range}?key=AIzaSyBiThiZwdEtWQJRmINwH-ADjLUHV2_Bsv4`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${tokenResponse.access_token}`,
+                Accept: 'application/json',
+
                 // 'Access-Control-Allow-Credentials': 'true',
                 // 'Access-Control-Allow-Origin': 'http://localhost:3000',
               },
