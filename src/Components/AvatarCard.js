@@ -24,9 +24,10 @@ import {
 } from './firebase';
 
 const options = [
-  'Unarchive',
+  'Approve',
   'Delete',
   'Download',
+  'Unarchive',
 ];
 
 // const window.googleDocCallback = function () { return true; };
@@ -51,6 +52,10 @@ function AvatarCard({ user, archivedUsers, setArchivedUsers }) {
     setUser(userObject);
   }
 
+  const approveUser = async (id) => {
+    const Ref = doc(db, 'jobseekers', id);
+    setDoc(Ref, { approval: true }, { merge: true });
+  };
   const updateArchived = async (id) => {
     const Ref = doc(db, 'jobseekers', id);
     setDoc(Ref, { archived: false }, { merge: true });
@@ -216,6 +221,7 @@ function AvatarCard({ user, archivedUsers, setArchivedUsers }) {
 
   const handleClose = async (index) => {
     if (index === 0) {
+      await approveUser(user.id);
       await updateArchived(user.id);
       const newUsers = archivedUsers.filter((seeker) => seeker.id !== user.id);
       setArchivedUsers(newUsers);
@@ -292,9 +298,11 @@ function AvatarCard({ user, archivedUsers, setArchivedUsers }) {
 
   );
 }
+
+export default AvatarCard;
+
 AvatarCard.propTypes = {
   user: PropTypes.shape.isRequired,
   setArchivedUsers: PropTypes.func.isRequired,
   archivedUsers: PropTypes.arrayOf(PropTypes.shape).isRequired,
 };
-export default AvatarCard;

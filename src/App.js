@@ -10,12 +10,15 @@ import {
   Register,
   Reset,
   Profile,
+  Landing,
+  JobseekerData,
 } from './Pages';
 import './App.css';
 import Footer from './Components/Footer/Footer';
 import Header from './Components/Navigation/Header';
+import Form from './Components/ExpressTest';
 import Splash from './Components/Splash';
-import approvalIcon from './Assets/mobile_friendly_24px.png';
+import approvalIcon from './Assets/trans flag graphic.svg';
 import AdminView from './Components/AdminView';
 
 function App() {
@@ -28,8 +31,9 @@ function App() {
         <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/landing" element={<Landing />} />
+        <Route path="/onboard" element={<JobseekerData useremail="solia@goodpl.us" username="solia tennis" />} />
         <Route path="/adminview" element={<AdminView />} />
-
         <Route
           path="/splash"
           element={(
@@ -41,9 +45,10 @@ function App() {
           )}
         />
       </Routes>
-      {/* <Header /> */} 
+      {/* <Header /> */}
+      {/* <Form /> */}
       <Footer />
-    </div>
+    </div >
   );
 }
 // temporarily commented out the nav-bar!
