@@ -85,8 +85,8 @@ function AvatarCard({ user, archivedUsers, setArchivedUsers }) {
             const range = 'A1:F5';
             // fetch(`https://sheets.googleapis.com/v4/spreadsheets/${val.id}:batchUpdate`, {
             // &callback=googleDocCallback
-            fetch(`https://tcw-proxy-google-server.onrender.com/sheets.googleapis.com/v4/spreadsheets/${val.id}/values/${range}`, {
-
+            // fetch(`https://tcw-proxy-google-server.onrender.com/sheets.googleapis.com/v4/spreadsheets/${val.id}/values/${range}`, {
+            fetch(`https://cors-anywhere.herokuapp.com/https://sheets.googleapis.com/v4/spreadsheets/${val.id}/values/${range}`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
