@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { fetchAllJobseekers } from "../Services/jobseeker-service";
+import React, { useState } from 'react';
+import axios from 'axios';
+import { fetchAllJobseekers } from '../Services/jobseeker-service';
 
-const Form = () => {
-  const [subject, setSubject] = useState("");
-  const [message, setMessage] = useState("");
+function Form() {
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
   const [emailList, setEmailList] = useState([]);
   const [isDisabled, setIsDisabled] = useState(false);
 
@@ -12,16 +12,17 @@ const Form = () => {
   const sendMail = async () => {
     if (subject && message) {
       const resp = await axios
-        .post("http://localhost:3001/no-progress-email", {
+        .post('http://localhost:3001/no-progress-email', {
           emailList,
           subject,
           message,
         })
-        .then(() => alert("Message Sent Successfully"))
-        .catch(() => alert("Message Failed to Send"));
+        .then(() => alert('Message Sent Successfully'))
+        .catch(() => alert('Message Failed to Send'));
+      console.log(resp);
       return;
     }
-    return alert("Fill the required fields.");
+    alert('Fill the required fields.');
   };
 
   const getAllEmails = () => {
@@ -41,6 +42,7 @@ const Form = () => {
 
           <form action="#">
             <div>
+              { /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
               <label htmlFor="subject">Subject</label>
               <input
                 id="subject"
@@ -51,11 +53,12 @@ const Form = () => {
               />
             </div>
             <div>
+              { /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
               <label htmlFor="message">Email Content</label>
               <textarea
                 id="message"
                 onChange={(e) => setMessage(e.target.value)}
-                palceholder="Body of the email"
+                placeholder="Body of the email"
                 rows="4"
               />
             </div>
@@ -76,6 +79,6 @@ const Form = () => {
       </section>
     </div>
   );
-};
+}
 
 export default Form;
