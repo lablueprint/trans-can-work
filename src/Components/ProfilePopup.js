@@ -6,7 +6,7 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import { Check, Close, Edit } from '@mui/icons-material';
 import TextField from '@mui/material/TextField';
-import profilepic from '../Assets/cartoon-parrot.jpeg';
+import profilepic from '../Assets/parrot_profile.png';
 
 const Transition = React.forwardRef((props, ref) => (
   <Slide direction="right" ref={ref} {...props} />
