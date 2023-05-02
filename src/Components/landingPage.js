@@ -39,7 +39,6 @@ function a11yProps(index) {
 
 export default function LandingPage() {
   const [value, setValue] = React.useState(0);
-  // const [disableButton, setDisableButton] = React.useState(true);
 
   const userType = 'navigator'; // or navigator or jobseeker
   const isApproved = false;
@@ -57,13 +56,11 @@ export default function LandingPage() {
       const clientList = await fetchByNavigator('solia@test.edu');
       console.log('clientList:');
       console.log(clientList);
-      // setClients(clientList);
     };
 
     const processAdmin = async () => {
       const clientList = await fetchAllJobseekers();
       console.log(clientList);
-      // setClients(clientList);
     };
 
     if (userType === 'navigator') {
@@ -76,30 +73,6 @@ export default function LandingPage() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  // i genuinely have no clue how this works:
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  // };
-
-  // const handleToggle = (e) => {
-  //   e.preventDefault();
-  //   if (!disableButton) { // then we want to save changes.
-  //     if (userType === 'navigator') {
-  //       // Since values is currently useless:
-  //       // but when we do have a json of new fields, then this would work:
-  //       // console.log(values);
-  //       // updateNavigator(email, values);
-  //     } else if (userType === 'admin' && isApproved) {
-  //       // console.log(values);
-  //       // updateAdmin(email, values);
-  //     } else if (userType === 'jobseeker') {
-  //       // updateJobseeker(email, values);
-  //     }
-  //   }
-
-  //   setDisableButton(!disableButton);
-  // };
 
   if (userType === 'navigator') {
     return (
