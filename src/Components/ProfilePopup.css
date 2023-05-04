@@ -4,7 +4,7 @@
 }
 
 .imageSection {
-  background-image: url(/src/Assets/pirate-ship1.jpg);
+  background-image: url(/src/Assets/pirate_ship.svg);
   width: 100%;
   height: 150px;
   background-position: center;
@@ -59,10 +59,12 @@
 
 .nameLabel {
   font-size: 28px;
+  font-family: 'Pirate';
 }
 
 .pronounLabel {
   margin: 12px;
+  font-family: 'Pirate';
 }
 
 .bioSection {
@@ -71,8 +73,14 @@
 
 .inputSection {
   height: 50px;
+  font-family: 'Montserrat';
 }
 
 .inputTitle {
   margin-bottom: 5px;
+  font-family: 'Montserrat';
+}
+
+.bio {
+  font-family: 'Montserrat';
 }

@@ -6,8 +6,13 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import { Check, Close, Edit } from '@mui/icons-material';
 import TextField from '@mui/material/TextField';
-import profilepic from '../Assets/parrot_profile.png';
+import Divider from '@mui/material/Divider';
+import profilepic from '../Assets/parrot_profile.svg';
 
+// const style = {
+//   width: '100%',
+//   maxWidth: 360,
+// };
 const Transition = React.forwardRef((props, ref) => (
   <Slide direction="right" ref={ref} {...props} />
 ));
@@ -48,7 +53,7 @@ function ProfilePopup({
               <IconButton style={{ backgroundColor: '#d3d3d3', width: 35, height: 35 }} onClick={() => { setEdit(!edit); }}>
                 <Edit style={{ width: 20, height: 20 }} />
               </IconButton>
-              <IconButton style={{ backgroundColor: '#d3d3d3' }} size="medium">
+              <IconButton style={{ backgroundColor: '#d3d3d3' }} onClick={handleClose} size="medium">
                 <Close />
               </IconButton>
             </>
@@ -59,7 +64,9 @@ function ProfilePopup({
           <Avatar
             alt="Jack Sparrow"
             src={profilepic}
-            style={{ width: '110px', height: '110px' }}
+            style={{
+              width: '110px', height: '110px', backgroundColor: 'white', boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)',
+            }}
           />
         </div>
         {edit ? (
@@ -119,15 +126,18 @@ function ProfilePopup({
               </>
             ) : (
 
-              <p>
+              <p className="bio">
                 {bio}
               </p>
 
             )}
           </div>
+          <Divider />
+
         </div>
 
       </Dialog>
+
     </div>
   );
 }
