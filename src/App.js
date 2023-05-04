@@ -14,8 +14,10 @@ import {
 } from './Pages';
 import './App.css';
 import Footer from './Components/Footer/Footer';
+import Header from './Components/Navigation/Header';
+import Form from './Components/ExpressTest';
 import Splash from './Components/Splash';
-import approvalIcon from './Assets/mobile_friendly_24px.png';
+import approvalIcon from './Assets/trans flag graphic.svg';
 import AdminView from './Components/AdminView';
 import NavigatorMenu from './Components/Navigation/NavigatorMenu';
 import MilestoneMap from './Components/Milestones/MilestoneMap';
@@ -49,6 +51,8 @@ function App() {
           )}
         />
       </Routes>
+      {/* <Header /> */}
+      {/* <Form /> */}
       <Footer />
     </div>
   );
