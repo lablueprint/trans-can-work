@@ -1,0 +1,136 @@
+h1 {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 57px;
+    line-height: 64px;
+    margin-left: 6%;
+  }
+
+/* label { 
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    display: flex;
+    align-items: flex-start;
+    display: inline-block;
+    text-align: left;
+    width: 100%
+} */
+
+h2 { 
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+h3 
+{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    margin-left: 10%;
+}
+
+input, textarea {
+    font-family: 'Montserrat';
+    margin-left: 10%;
+}
+
+.outer-container {
+    display:flex; 
+    flex-direction: row;
+    margin-top: 8%;
+    gap: 200px;
+    padding: 0;
+    margin: 0;
+    width: 80%;
+    margin: 0 auto;
+}
+.profile-photo-container {
+    display: flex;
+    margin-left: 10%;
+    margin-top: 10%;
+    width: 500px;
+}
+
+.edit-button{
+    display: flex;
+    align-items: flex-end;
+    align-self: flex-end;
+    margin-top: 5%;
+    margin-left: 30%;
+}
+.top-container{
+    display:flex; 
+    flex-direction: row;
+}
+
+.assessment-page-headers-container{
+    display: flex;
+    flex-direction: column;
+    margin-left: 7em;
+}
+
+.assessment-page-title{
+    font-family: 'Montserrat';
+    font-size: 3em;
+    font-weight: normal;
+    margin: 0;
+    text-align: left;
+    display:flex;
+}
+
+.assessment-page-header-profile-text{
+    font-family: 'Montserrat';
+    font-size: 1em;
+    font-weight: bold;
+    text-align: left;
+    display: flex;
+    margin-right: 1em;
+}
+
+.assessment-page-back-text{
+    font-family: 'Montserrat';
+    font-size: 1em;
+    font-weight: normal;
+    text-align: left;
+    display:flex;
+}
+
+.header-image-container {
+    display: flex;
+    justify-content: center; /* center the child element horizontally */
+    align-items: center; /* center the child element vertically */
+  }
+
+.assessment-page-header-name-and-icon-container{
+    display: flex;
+    flex-direction: row;
+    margin-top: 2.5em;
+}
+
+.assessment-page-header-empty-block{
+    flex: 0 0 80%;
+}
+
+.assessment-page-back-empty-block{
+    flex: 0 0 0%;
+}
+
+.assessment-page-welcome-block-header{
+    display: flex; 
+    flex-direction: row;
+    height: 3em;
+    margin-bottom: 2.5em;
+}
