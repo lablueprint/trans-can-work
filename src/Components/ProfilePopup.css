@@ -41,6 +41,7 @@
 }
 
 .textSection {
+  color: #484649;
   padding: 30px 50px 50px 50px;
   display: flex;
   flex-direction: column;
@@ -58,13 +59,16 @@
 }
 
 .nameLabel {
-  font-size: 28px;
+  font-size: 2.5rem;
   font-family: 'Pirate';
+  font-weight: 400;
 }
 
 .pronounLabel {
-  margin: 12px;
+  margin: 1.3rem;
   font-family: 'Pirate';
+  font-size: 1.5rem;
+
 }
 
 .bioSection {

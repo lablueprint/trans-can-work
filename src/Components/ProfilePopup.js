@@ -9,10 +9,23 @@ import TextField from '@mui/material/TextField';
 import Divider from '@mui/material/Divider';
 import profilepic from '../Assets/parrot_profile.svg';
 
-// const style = {
-//   width: '100%',
-//   maxWidth: 360,
-// };
+const style = {
+  container: {
+    position: 'relative',
+  },
+  //   divider: {
+  //     position: 'relative',
+  //   },
+  avatar: {
+    position: 'absolute',
+    top: '-55px',
+    left: 'calc(50% - 55px)',
+    width: '110px',
+    height: '110px',
+    backgroundColor: 'white',
+    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)',
+  },
+};
 const Transition = React.forwardRef((props, ref) => (
   <Slide direction="right" ref={ref} {...props} />
 ));
@@ -88,7 +101,7 @@ function ProfilePopup({
           <div className="profileLabel">
             <div className="nameLabel">
               {edit ? <h3>Edit Account</h3> : (
-                <h3>
+                <h3 className="nameLabel">
                   {firstName}
                   {' '}
                   {lastName}
@@ -134,6 +147,40 @@ function ProfilePopup({
           </div>
           <Divider />
 
+          <div style={style.container}>
+            {/* <Avatar
+              alt="Jack Sparrow"
+              src={profilepic}
+            /> */}
+          </div>
+          <p>Navigator</p>
+
+          <div className="profileLabel">
+            <Avatar
+              alt="Jack Sparrow"
+              src={profilepic}
+              style={{
+                width: '110px', height: '110px', backgroundColor: 'white', boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)',
+              }}
+            />
+            <div className="nameLabel">
+              {edit ? <h3>Edit Account</h3> : (
+                <h3 className="nameLabel">
+                  {firstName}
+                  {' '}
+                  {lastName}
+                </h3>
+              )}
+
+            </div>
+            <div className="pronounLabel">
+              {edit ? <h5>{' '}</h5> : (
+                <h5>
+                  {pronouns}
+                </h5>
+              )}
+            </div>
+          </div>
         </div>
 
       </Dialog>

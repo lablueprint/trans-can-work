@@ -37,3 +37,33 @@
     transform: rotate(360deg);
   }
 }
+@font-face {
+  font-family: 'Montserrat';
+  font-weight: normal;
+  font-style: normal;
+  src: url('./Assets/Fonts/Montserrat-Regular.eot') format('embedded-opentype'), /* IE6-IE8 */
+       url('./Assets/Fonts/Montserrat-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('./Assets/Fonts/Montserrat-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+       url('./Assets/Fonts/Montserrat-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('./Assets/Fonts/Montserrat-Regular.svg') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-weight: bold;
+  font-style: normal;
+  src: url('./Assets/Fonts/Montserrat-Bold.eot') format('embedded-opentype'), /* IE6-IE8 */
+       url('./Assets/Fonts/Montserrat-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+       url('./Assets/Fonts/Montserrat-Bold.woff') format('woff'), /* Pretty Modern Browsers */
+       url('./Assets/Fonts/Montserrat-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('./Assets/Fonts/Montserrat-Bold.svg') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+  font-family: 'Pirate';
+  font-weight: normal;
+  font-style: normal;
+  src: url('./Assets/Fonts/Pirates.otf') format('opentype'), 
+  url('./Assets/Fonts/Pirates.ttf') format('truetype');
+
+}
