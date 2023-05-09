@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import './NavigatorDashboard.css';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
+import Select from '@mui/material/Select';
 import Avatar from 'react-avatar';
+import { FormControl, MenuItem, InputLabel } from '@mui/material';
 import './JobseekerData.css';
 // import Back from '../Assets/Assessment.png';
 import { TextField, Button, Checkbox } from '@material-ui/core';
@@ -272,7 +274,25 @@ function Onboard({ username, useremail }) {
     });
   };
 
+  const clientInfo = [{ title: 'Authentic Name', toChange: jobseeker.name, placeholder: jobseeker.name },
+    { title: 'Pronouns', toChange: jobseeker.pronouns, placeholder: jobseeker.pronouns },
+    { title: 'Phone', toChange: jobseeker.phone, placeholder: jobseeker.phone },
+    { title: 'Email', toChange: jobseeker.email, placeholder: jobseeker.email },
+    { title: 'City/State', toChange: jobseeker.cityState, placeholder: jobseeker.cityState },
+    { title: 'Ethnicity', toChange: jobseeker.ethnicity, placeholder: jobseeker.ethnicity },
+    { title: 'Age', toChange: jobseeker.age, placeholder: jobseeker.age },
+    { title: 'Gender Identity', toChange: jobseeker.genderIdentity, placeholder: jobseeker.genderIdentity },
+    { title: 'Sexuality', toChange: jobseeker.sexuality, placeholder: jobseeker.sexuality },
+    { title: 'Veteran?', toChange: jobseeker.veteran, placeholder: jobseeker.veteran },
+    { title: 'Disability?', toChange: jobseeker.disability, placeholder: jobseeker.disability },
+    { title: 'Housing Situation', toChange: jobseeker.housingSituation, placeholder: jobseeker.housingSituation },
+    { title: 'Currently Employed?', toChange: jobseeker.employmentStatus, placeholder: jobseeker.employmentStatus },
+    { title: 'Prior Convictions?', toChange: jobseeker.convictions, placeholder: jobseeker.convictions },
+  ];
+
   const classes = useStyles();
+
+  console.log(jobseeker.cityState);
 
   return (
     <div>
@@ -293,7 +313,7 @@ function Onboard({ username, useremail }) {
                     }}
                   />
                 </div> */}
-                <p className="assessment-page-back-text">Back</p>
+                <p className="assessment-page-back-text">Return to Clients List</p>
                 <div className="assessment-page-header-empty-block" />
                 <p className="assessment-page-header-profile-text">{username}</p>
                 <div className="header-image-container">
@@ -314,7 +334,8 @@ function Onboard({ username, useremail }) {
               <div className="assessment-page-welcome-block-header">
                 <div style={{ flex: '0 0 75%' }}>
                   <p className="assessment-page-title">
-                    Profile Page
+                    {username}
+                    &apos;s Roadmap
                   </p>
                 </div>
               </div>
@@ -328,775 +349,47 @@ function Onboard({ username, useremail }) {
           <h1>Client Info</h1>
           <form>
             <div className="inputWrapper">
-              <div className="authName">
-                <CssTextField
-                  id="authName"
-                  focusColor="#0c0ca4"
-                  label="Authentic Name"
-                  variant="outlined"
-                  FormHelperTextProps={{ children: 'Label' }}
-                  focused
+              <div>
+                {clientInfo.map((item) => (
+                  <CssTextField
+                    focusColor="#0c0ca4"
+                    label={item.title}
+                    variant="outlined"
+                    FormHelperTextProps={{ children: 'Label' }}
+                    focused
                   // value={email}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      name: e.target.value,
-                    });
-                  }}
-                  placeholder={jobseeker.name}
-                  style={{ paddingBottom: '1%' }}
-                  InputProps={{
-                    className: classes.root,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      color: '#49454F',
-                      paddingLeft: '0.5%',
-                      width: '55.0vw',
-                      height: '3.2vw',
-                      fontSize: '0.9vw',
-                      fontWeight: 'bold',
-                    },
-                  }}
-                  InputLabelProps={{
-                    className: classes.labelInput,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      paddingLeft: '0.3%',
-                      backgroundColor: 'white',
-                    },
-                  }}
-                />
+                    onChange={(e) => {
+                      setJobseeker({
+                        ...jobseeker,
+                        toChange: e.target.value,
+                      });
+                    }}
+                    placeholder={item.placeholder}
+                    style={{ paddingBottom: '1%' }}
+                    InputProps={{
+                      className: classes.root,
+                      style: {
+                        fontFamily: 'Montserrat',
+                        color: '#49454F',
+                        paddingLeft: '0.5%',
+                        width: '55.0vw',
+                        height: '3.2vw',
+                        fontSize: '0.9vw',
+                        fontWeight: 'bold',
+                      },
+                    }}
+                    InputLabelProps={{
+                      className: classes.labelInput,
+                      style: {
+                        fontFamily: 'Montserrat',
+                        paddingLeft: '0.3%',
+                        backgroundColor: 'white',
+                      },
+                    }}
+                  />
+                ))}
               </div>
-              <div className="pronouns">
-                <CssTextField
-                  id="pronouns"
-                  focusColor="#0c0ca4"
-                  label="Pronouns"
-                  variant="outlined"
-                  FormHelperTextProps={{ children: 'Label' }}
-                  focused
-                  // value={email}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      pronouns: e.target.value,
-                    });
-                  }}
-                  placeholder={jobseeker.pronouns}
-                  style={{ paddingBottom: '1%' }}
-                  InputProps={{
-                    className: classes.root,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      color: '#49454F',
-                      paddingLeft: '0.5%',
-                      width: '55.0vw',
-                      height: '3.2vw',
-                      fontSize: '0.9vw',
-                      fontWeight: 'bold',
-                    },
-                  }}
-                  InputLabelProps={{
-                    className: classes.labelInput,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      paddingLeft: '0.3%',
-                      backgroundColor: 'white',
-                    },
-                  }}
-                />
-              </div>
-              <div className="phone">
-                <CssTextField
-                  id="phone"
-                  focusColor="#0c0ca4"
-                  label="Phone"
-                  variant="outlined"
-                  FormHelperTextProps={{ children: 'Label' }}
-                  focused
-                  // value={email}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      phone: e.target.value,
-                    });
-                  }}
-                  placeholder={jobseeker.phone}
-                  style={{ paddingBottom: '1%' }}
-                  InputProps={{
-                    className: classes.root,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      color: '#49454F',
-                      paddingLeft: '0.5%',
-                      width: '55.0vw',
-                      height: '3.2vw',
-                      fontSize: '0.9vw',
-                      fontWeight: 'bold',
-                    },
-                  }}
-                  InputLabelProps={{
-                    className: classes.labelInput,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      paddingLeft: '0.3%',
-                      backgroundColor: 'white',
-                    },
-                  }}
-                />
-              </div>
-              <div className="email">
-                <CssTextField
-                  id="email"
-                  focusColor="#0c0ca4"
-                  label="Email"
-                  variant="outlined"
-                  FormHelperTextProps={{ children: 'Label' }}
-                  focused
-                  // value={email}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      email: e.target.value,
-                    });
-                  }}
-                  placeholder={jobseeker.email}
-                  style={{ paddingBottom: '1%' }}
-                  InputProps={{
-                    className: classes.root,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      color: '#49454F',
-                      paddingLeft: '0.5%',
-                      width: '55.0vw',
-                      height: '3.2vw',
-                      fontSize: '0.9vw',
-                      fontWeight: 'bold',
-                    },
-                  }}
-                  InputLabelProps={{
-                    className: classes.labelInput,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      paddingLeft: '0.3%',
-                      backgroundColor: 'white',
-                    },
-                  }}
-                />
-              </div>
-              <div className="cityState">
-                <CssTextField
-                  id="cityState"
-                  focusColor="#0c0ca4"
-                  label="City State"
-                  variant="outlined"
-                  FormHelperTextProps={{ children: 'Label' }}
-                  focused
-                  // value={email}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      cityState: e.target.value,
-                    });
-                  }}
-                  placeholder={jobseeker.cityState}
-                  style={{ paddingBottom: '1%' }}
-                  InputProps={{
-                    className: classes.root,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      color: '#49454F',
-                      paddingLeft: '0.5%',
-                      width: '55.0vw',
-                      height: '3.2vw',
-                      fontSize: '0.9vw',
-                      fontWeight: 'bold',
-                    },
-                  }}
-                  InputLabelProps={{
-                    className: classes.labelInput,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      paddingLeft: '0.3%',
-                      backgroundColor: 'white',
-                    },
-                  }}
-                />
-              </div>
-              <div className="ethnicity">
-                <CssTextField
-                  id="ethnicity"
-                  focusColor="#0c0ca4"
-                  label="Ethnicity"
-                  variant="outlined"
-                  FormHelperTextProps={{ children: 'Label' }}
-                  focused
-                  // value={email}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      ethnicity: e.target.value,
-                    });
-                  }}
-                  placeholder={jobseeker.ethnicity}
-                  style={{ paddingBottom: '1%' }}
-                  InputProps={{
-                    className: classes.root,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      color: '#49454F',
-                      paddingLeft: '0.5%',
-                      width: '55.0vw',
-                      height: '3.2vw',
-                      fontSize: '0.9vw',
-                      fontWeight: 'bold',
-                    },
-                  }}
-                  InputLabelProps={{
-                    className: classes.labelInput,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      paddingLeft: '0.3%',
-                      backgroundColor: 'white',
-                    },
-                  }}
-                />
-              </div>
-              <div className="age">
-                <CssTextField
-                  id="age"
-                  focusColor="#0c0ca4"
-                  label="Age"
-                  variant="outlined"
-                  FormHelperTextProps={{ children: 'Label' }}
-                  focused
-                  // value={email}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      age: e.target.value,
-                    });
-                  }}
-                  placeholder={jobseeker.age}
-                  style={{ paddingBottom: '1%' }}
-                  InputProps={{
-                    className: classes.root,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      color: '#49454F',
-                      paddingLeft: '0.5%',
-                      width: '55.0vw',
-                      height: '3.2vw',
-                      fontSize: '0.9vw',
-                      fontWeight: 'bold',
-                    },
-                  }}
-                  InputLabelProps={{
-                    className: classes.labelInput,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      paddingLeft: '0.3%',
-                      backgroundColor: 'white',
-                    },
-                  }}
-                />
-              </div>
-              <div className="genderIdentity">
-                <CssTextField
-                  id="genderIdentity"
-                  focusColor="#0c0ca4"
-                  label="Gender Identity"
-                  variant="outlined"
-                  FormHelperTextProps={{ children: 'Label' }}
-                  focused
-                  // value={email}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      genderIdentity: e.target.value,
-                    });
-                  }}
-                  placeholder={jobseeker.ethnicity}
-                  style={{ paddingBottom: '1%' }}
-                  InputProps={{
-                    className: classes.root,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      color: '#49454F',
-                      paddingLeft: '0.5%',
-                      width: '55.0vw',
-                      height: '3.2vw',
-                      fontSize: '0.9vw',
-                      fontWeight: 'bold',
-                    },
-                  }}
-                  InputLabelProps={{
-                    className: classes.labelInput,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      paddingLeft: '0.3%',
-                      backgroundColor: 'white',
-                    },
-                  }}
-                />
-              </div>
-              <div className="sexuality">
-                <CssTextField
-                  id="sexuality"
-                  focusColor="#0c0ca4"
-                  label="Sexuality"
-                  variant="outlined"
-                  FormHelperTextProps={{ children: 'Label' }}
-                  focused
-                  // value={email}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      sexuality: e.target.value,
-                    });
-                  }}
-                  placeholder={jobseeker.sexuality}
-                  style={{ paddingBottom: '1%' }}
-                  InputProps={{
-                    className: classes.root,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      color: '#49454F',
-                      paddingLeft: '0.5%',
-                      width: '55.0vw',
-                      height: '3.2vw',
-                      fontSize: '0.9vw',
-                      fontWeight: 'bold',
-                    },
-                  }}
-                  InputLabelProps={{
-                    className: classes.labelInput,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      paddingLeft: '0.3%',
-                      backgroundColor: 'white',
-                    },
-                  }}
-                />
-              </div>
-              <div className="veteran">
-                <CssTextField
-                  id="veteram"
-                  focusColor="#0c0ca4"
-                  label="Veteran?"
-                  variant="outlined"
-                  FormHelperTextProps={{ children: 'Label' }}
-                  focused
-                  // value={email}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      veteran: e.target.value,
-                    });
-                  }}
-                  placeholder={jobseeker.veteran}
-                  style={{ paddingBottom: '1%' }}
-                  InputProps={{
-                    className: classes.root,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      color: '#49454F',
-                      paddingLeft: '0.5%',
-                      width: '55.0vw',
-                      height: '3.2vw',
-                      fontSize: '0.9vw',
-                      fontWeight: 'bold',
-                    },
-                  }}
-                  InputLabelProps={{
-                    className: classes.labelInput,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      paddingLeft: '0.3%',
-                      backgroundColor: 'white',
-                    },
-                  }}
-                />
-              </div>
-              <div className="disability">
-                <CssTextField
-                  id="disability"
-                  focusColor="#0c0ca4"
-                  label="Disability"
-                  variant="outlined"
-                  FormHelperTextProps={{ children: 'Label' }}
-                  focused
-                  // value={email}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      disability: e.target.value,
-                    });
-                  }}
-                  placeholder={jobseeker.disability}
-                  style={{ paddingBottom: '1%' }}
-                  InputProps={{
-                    className: classes.root,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      color: '#49454F',
-                      paddingLeft: '0.5%',
-                      width: '55.0vw',
-                      height: '3.2vw',
-                      fontSize: '0.9vw',
-                      fontWeight: 'bold',
-                    },
-                  }}
-                  InputLabelProps={{
-                    className: classes.labelInput,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      paddingLeft: '0.3%',
-                      backgroundColor: 'white',
-                    },
-                  }}
-                />
-              </div>
-              <div className="housingSituation">
-                <CssTextField
-                  id="housingSituation"
-                  focusColor="#0c0ca4"
-                  label="Housing Status"
-                  variant="outlined"
-                  FormHelperTextProps={{ children: 'Label' }}
-                  focused
-                  // value={email}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      housingSituation: e.target.value,
-                    });
-                  }}
-                  placeholder={jobseeker.housingSituation}
-                  style={{ paddingBottom: '1%' }}
-                  InputProps={{
-                    className: classes.root,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      color: '#49454F',
-                      paddingLeft: '0.5%',
-                      width: '55.0vw',
-                      height: '3.2vw',
-                      fontSize: '0.9vw',
-                      fontWeight: 'bold',
-                    },
-                  }}
-                  InputLabelProps={{
-                    className: classes.labelInput,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      paddingLeft: '0.3%',
-                      backgroundColor: 'white',
-                    },
-                  }}
-                />
-              </div>
-              <div className="employmentStatus">
-                <CssTextField
-                  id="employmentStatus"
-                  focusColor="#0c0ca4"
-                  label="Currently Employed?"
-                  variant="outlined"
-                  FormHelperTextProps={{ children: 'Label' }}
-                  focused
-                  // value={email}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      employmentStatus: e.target.value,
-                    });
-                  }}
-                  placeholder={jobseeker.employmentStatus}
-                  style={{ paddingBottom: '1%' }}
-                  InputProps={{
-                    className: classes.root,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      color: '#49454F',
-                      paddingLeft: '0.5%',
-                      width: '55.0vw',
-                      height: '3.2vw',
-                      fontSize: '0.9vw',
-                      fontWeight: 'bold',
-                    },
-                  }}
-                  InputLabelProps={{
-                    className: classes.labelInput,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      paddingLeft: '0.3%',
-                      backgroundColor: 'white',
-                    },
-                  }}
-                />
-              </div>
-              <div className="convictions">
-                <CssTextField
-                  id="convictions"
-                  focusColor="#0c0ca4"
-                  label="Prior Convictions?"
-                  variant="outlined"
-                  FormHelperTextProps={{ children: 'Label' }}
-                  focused
-                  // value={email}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      convictions: e.target.value,
-                    });
-                  }}
-                  placeholder={jobseeker.convictions}
-                  style={{ paddingBottom: '1%' }}
-                  InputProps={{
-                    className: classes.root,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      color: '#49454F',
-                      paddingLeft: '0.5%',
-                      width: '55.0vw',
-                      height: '3.2vw',
-                      fontSize: '0.9vw',
-                      fontWeight: 'bold',
-                    },
-                  }}
-                  InputLabelProps={{
-                    className: classes.labelInput,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      paddingLeft: '0.3%',
-                      backgroundColor: 'white',
-                    },
-                  }}
-                />
-              </div>
-
-              {/* hey */}
-              <label htmlFor="cityState">
-                Authentic Name
-                <input
-                  id="authName"
-                  placeholder={jobseeker.name}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      name: e.target.value,
-                    });
-                  }}
-                  type="text"
-                />
-              </label>
             </div>
-            <div className="inputWrapper">
-              <label htmlFor="pronouns">
-                Pronouns
-                <input
-                  id="pronouns"
-                  placeholder={jobseeker.pronouns}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      pronouns: e.target.value,
-                    });
-                  }}
-                  type="text"
-                />
-              </label>
-            </div>
-            <div className="inputWrapper">
-              <label htmlFor="phone">
-                Phone
-                <input
-                  id="phone"
-                  placeholder={jobseeker.phone}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      phone: e.target.value,
-                    });
-                  }}
-                  type="text"
-                />
-              </label>
-            </div>
-            <div className="inputWrapper">
-              <label htmlFor="email">
-                Email
-                <input
-                  readOnly // because email is the docid, so crucial that you cannot change it.
-                  id="email"
-                  placeholder={jobseeker.email}
-                  type="text"
-                />
-              </label>
-            </div>
-            <div className="inputWrapper">
-              <label htmlFor="cityState">
-                City/State
-                <input
-                  id="cityState"
-                  placeholder={jobseeker.cityState}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      cityState: e.target.value,
-                    });
-                  }}
-                  type="text"
-                />
-              </label>
-            </div>
-            <div className="inputWrapper">
-              <label htmlFor="ethnicity">
-                Ethnicity
-                <input
-                  id="ethnicity"
-                  placeholder={jobseeker.ethnicity}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      ethnicity: e.target.value,
-                    });
-                  }}
-                  type="text"
-                />
-              </label>
-            </div>
-            <div className="inputWrapper">
-              <label htmlFor="age">
-                Age
-                <input
-                  id="age"
-                  placeholder={jobseeker.age}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      age: e.target.value,
-                    });
-                  }}
-                  type="numer"
-                />
-              </label>
-            </div>
-            <div className="inputWrapper">
-              <label htmlFor="genderIdentity">
-                Gender Identity
-                <input
-                  id="genderIdentity"
-                  placeholder={jobseeker.genderIdentity}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      genderIdentity: e.target.value,
-                    });
-                  }}
-                  type="text"
-                />
-              </label>
-            </div>
-            <div className="inputWrapper">
-              <label htmlFor="sexuality">
-                Sexuality
-                <input
-                  id="sexuality"
-                  placeholder={jobseeker.sexuality}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      sexuality: e.target.value,
-                    });
-                  }}
-                  type="text"
-                />
-              </label>
-            </div>
-            <div className="inputWrapper">
-              <label htmlFor="veteran">
-                Veteran?
-                <input
-                  id="veteran"
-                  placeholder={jobseeker.veteran}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      veteran: e.target.value,
-                    });
-                  }}
-                  type="text"
-                />
-              </label>
-            </div>
-            <div className="inputWrapper">
-              <label htmlFor="disability">
-                Disability?
-                <input
-                  id="disability"
-                  placeholder={jobseeker.disability}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      disability: e.target.value,
-                    });
-                  }}
-                  type="text"
-                />
-              </label>
-            </div>
-            <div className="inputWrapper">
-              <label htmlFor="housingSituation">
-                Housing Situation
-                <input
-                  id="housingSituation"
-                  placeholder={jobseeker.housingSituation}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      housingSituation: e.target.value,
-                    });
-                  }}
-                  type="text"
-                />
-              </label>
-            </div>
-            <div className="inputWrapper">
-              <label htmlFor="employmentStatus">
-                Currently Employed?
-                <input
-                  id="employmentStatus"
-                  placeholder={jobseeker.employmentStatus}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      employmentStatus: e.target.value,
-                    });
-                  }}
-                  type="text"
-                />
-              </label>
-            </div>
-            <div className="inputWrapper">
-              <label htmlFor="convictions">
-                Convictions?
-                <input
-                  id="convictions"
-                  placeholder={jobseeker.convictions}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      convictions: e.target.value,
-                    });
-                  }}
-                  type="text"
-                />
-              </label>
-            </div>
-            {/*
-    employmentStatus: 'single',
-    convictions: 'no', */}
           </form>
         </div>
 
@@ -1115,7 +408,70 @@ function Onboard({ username, useremail }) {
           {jobseeker.education.map((educationObject, index) => (
             <div>
               <form>
-                <div className="inputWrapper">
+                <div>
+                  <FormControl sx={{
+                    color: '#49454F',
+                    width: '55.0vw',
+                    height: '3.2vw',
+                    fontSize: '0.9vw',
+                    fontWeight: 'bold',
+                    paddingBottom: '1%',
+                  }}
+                  >
+                    <InputLabel id="demo-simple-select-label">Degree?</InputLabel>
+                    <Select
+                      id="degree"
+                      autoWidth
+                      // value={age}
+                      label="Degree?"
+                      onChange={(e) => editEducation(e, 'degree', index)}
+                      MenuProps={{
+                        PaperProps: {
+                          style: {
+                            width: '55.0vw', // Set the desired width for the menu items
+                          },
+                        },
+                      }}
+                    >
+                      <MenuItem value="No">No</MenuItem>
+                      <MenuItem value="Yes">Yes</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
+                {jobseeker.education[index].degree === 'Yes' && (
+                  <CssTextField
+                    focusColor="#0c0ca4"
+                    label="Type of Degree"
+                    variant="outlined"
+                    FormHelperTextProps={{ children: 'Label' }}
+                    focused
+                // value={email}
+                    onChange={(e) => editEducation(e, 'degreeType', index)}
+                    // placeholder={item.placeholder}
+                    style={{ paddingBottom: '1%' }}
+                    InputProps={{
+                      className: classes.root,
+                      style: {
+                        fontFamily: 'Montserrat',
+                        color: '#49454F',
+                        paddingLeft: '0.5%',
+                        width: '55.0vw',
+                        height: '3.2vw',
+                        fontSize: '0.9vw',
+                        fontWeight: 'bold',
+                      },
+                    }}
+                    InputLabelProps={{
+                      className: classes.labelInput,
+                      style: {
+                        fontFamily: 'Montserrat',
+                        paddingLeft: '0.3%',
+                        backgroundColor: 'white',
+                      },
+                    }}
+                  />
+                )}
+                {/* <div className="inputWrapper">
                   <label htmlFor="degree">
                     Degree?
                     <select
@@ -1141,8 +497,71 @@ function Onboard({ username, useremail }) {
                     />
                   </label>
                 </div>
+                )} */}
+                <div>
+                  <FormControl sx={{
+                    color: '#49454F',
+                    width: '55.0vw',
+                    height: '3.2vw', // how to make the height
+                    fontSize: '0.9vw',
+                    fontWeight: 'bold',
+                    paddingBottom: '1%',
+                  }}
+                  >
+                    <InputLabel id="demo-simple-select-label">Certificate?</InputLabel>
+                    <Select
+                      id="certificate"
+                      autoWidth
+                      // value={age}
+                      label="Certificate?"
+                      onChange={(e) => editEducation(e, 'certificate', index)}
+                      MenuProps={{
+                        PaperProps: {
+                          style: {
+                            width: '55.0vw', // Set the desired width for the menu items
+                          },
+                        },
+                      }}
+                    >
+                      <MenuItem value="No">No</MenuItem>
+                      <MenuItem value="Yes">Yes</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
+                {jobseeker.education[index].certificate === 'Yes' && (
+                  <CssTextField
+                    focusColor="#0c0ca4"
+                    label="Type of Certificate"
+                    variant="outlined"
+                    FormHelperTextProps={{ children: 'Label' }}
+                    focused
+                // value={email}
+                    onChange={(e) => editEducation(e, 'certificateType', index)}
+                    // placeholder={item.placeholder}
+                    style={{ paddingBottom: '1%' }}
+                    InputProps={{
+                      className: classes.root,
+                      style: {
+                        fontFamily: 'Montserrat',
+                        color: '#49454F',
+                        paddingLeft: '0.5%',
+                        width: '55.0vw',
+                        height: '3.2vw',
+                        fontSize: '0.9vw',
+                        fontWeight: 'bold',
+                      },
+                    }}
+                    InputLabelProps={{
+                      className: classes.labelInput,
+                      style: {
+                        fontFamily: 'Montserrat',
+                        paddingLeft: '0.3%',
+                        backgroundColor: 'white',
+                      },
+                    }}
+                  />
                 )}
-                <div className="inputWrapper">
+                {/* <div className="inputWrapper">
                   <label htmlFor="cert">
                     Certificate?
                     <select
@@ -1168,7 +587,7 @@ function Onboard({ username, useremail }) {
                     />
                   </label>
                 </div>
-                )}
+                )} */}
               </form>
 
               <button type="button" onClick={(e) => deleteEducation(e, index)}>Delete ^ Education</button>
