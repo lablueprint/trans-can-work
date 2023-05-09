@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { registerWithEmailAndPassword, logout } from '../Components/firebase';
+// import { registerWithEmailAndPassword, logout } from '../Components/firebase';
 import { createNavigator } from '../Services/navigator-service';
 import { createJobseeker, fetchJobseeker } from '../Services/jobseeker-service';
 import { createAdmin } from '../Services/admin-service';
+import { register } from '../Services/user-service';
 
 import './Register.css';
 
@@ -54,22 +55,24 @@ function Register() {
   }, [user, loading]);
 
   const logoutUser = () => {
-    logout();
+    // logout();
     setDisplayName('');
   };
-  const register = async () => {
+
+  const registeration = async () => {
     if (accountType !== 'navigator' && accountType !== 'jobseeker' && accountType !== 'admin') {
       alert('Please select a role');
       return;
     }
-    const registered = await registerWithEmailAndPassword(
-      firstName,
-      lastName,
-      accountType,
-      email,
-      password,
-      setDisplayName,
-    );
+    const registered = register(firstName + lastName, accountType, email, password);
+    // const registered = await registerWithEmailAndPassword(
+    //   firstName,
+    //   lastName,
+    //   accountType,
+    //   email,
+    //   password,
+    //   setDisplayName,
+    // );
     if (accountType === 'navigator') {
       await createNavigator(email, data);
     } else if (accountType === 'jobseeker') {
@@ -114,7 +117,7 @@ function Register() {
     <div>
 
       {user !== null
-          && (
+        && (
           <div>
             <div>
               <button
@@ -126,7 +129,7 @@ function Register() {
               </button>
             </div>
           </div>
-          )}
+        )}
       <div className="registerForm">
         <input
           className="registerFormItem"
@@ -166,7 +169,7 @@ function Register() {
         <button
           className="registerFormItem"
           type="submit"
-          onClick={() => { register(firstName, lastName, accountType, email, password); }}
+          onClick={() => { registeration(firstName, lastName, accountType, email, password); }}
         >
           Submit
           {' '}

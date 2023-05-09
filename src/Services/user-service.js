@@ -55,8 +55,8 @@ export const signInWithGoogle = () => {
       const { user } = result;
       console.log(user);
       // save to store!!
-    //   const approves = await getApprovalStatus(googleUser.email);
-    //   navigate(approves ? '/' : '/splash');
+      //   const approves = await getApprovalStatus(googleUser.email);
+      //   navigate(approves ? '/' : '/splash');
     }).catch((e) => {
       // Handle Errors here.
       const errorCode = e.code;
