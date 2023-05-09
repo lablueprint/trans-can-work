@@ -1,10 +1,10 @@
 // do we want to id records by email?? or id - use addDoc if so
 import {
-  doc, setDoc, getDoc,
+  doc, setDoc, getDoc, updateDoc,
 } from 'firebase/firestore';
 import {
   GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword,
-  sendPasswordResetEmail, signOut, updateDoc,
+  sendPasswordResetEmail, signOut,
 } from 'firebase/auth';
 import { jobseekerInit, navigatorInit, adminInit } from './user-objects';
 import { db, auth } from '../firebase';
@@ -39,15 +39,12 @@ export const updateNavigator = async (email, data) => {
 
 /** Login Methods */
 export const login = async (email, password) => {
-  signInWithEmailAndPassword(auth, email.toLowerCase(), password).then((userCredential) => {
-    const { user } = userCredential;
-    // save to store!!
-    return user;
-  })
-    .catch((error) => {
-      console.error(error);
-      return error;
-    });
+  signInWithEmailAndPassword(auth, email.toLowerCase(), password)
+    .then((userCredential) => {
+      const { user } = userCredential;
+      return user;
+    })
+    .catch((error) => error);
 };
 
 export const signInWithGoogle = () => {
