@@ -12,6 +12,7 @@ import {
 import { PropTypes } from 'prop-types';
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode';
+import axios from 'axios';
 import './AvatarCard.css';
 
 // import { google } from 'googleapis';
@@ -86,22 +87,11 @@ function AvatarCard({ user, archivedUsers, setArchivedUsers }) {
             },
             body: JSON.stringify({ name: 'proxy attempt 2?', mimeType: 'application/vnd.google-apps.spreadsheet', parents: ['1MG53LIVLSKPadcTeoiKLSIkvZHKLWV0s'] }),
           }).then((res) => res.json()).then((val) => {
-            console.log(val);
-            const range = 'A1:F5';
-            // fetch(`https://sheets.googleapis.com/v4/spreadsheets/${val.id}:batchUpdate`, {
-            // &callback=googleDocCallback
-            // fetch(`https://tcw-proxy-google-server.onrender.com/sheets.googleapis.com/v4/spreadsheets/${val.id}/values/${range}`, {
-            fetch(`https://cors-anywhere.herokuapp.com/https://sheets.googleapis.com/v4/spreadsheets/${val.id}/values/${range}?key=AIzaSyBiThiZwdEtWQJRmINwH-ADjLUHV2_Bsv4`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${tokenResponse.access_token}`,
-                Accept: 'application/json',
-
-                // 'Access-Control-Allow-Credentials': 'true',
-                // 'Access-Control-Allow-Origin': 'http://localhost:3000',
-              },
-              body: JSON.stringify({
+            axios.put('http://localhost:3001/spreadsheetupdate', {
+              id: val.id,
+              range: 'A1:F5',
+              token: tokenResponse.access_token,
+              data: {
                 values: [
                   [
                     'Name',
@@ -120,8 +110,47 @@ function AvatarCard({ user, archivedUsers, setArchivedUsers }) {
                   ],
                 ],
                 majorDimension: 'ROWS',
-              }),
-            });
+              },
+            })
+              .then((response) => { alert('Message Sent Successfully'); console.log(response); })
+              .catch((err) => { alert('Message Failed to Send'); console.log(err); });
+
+            // console.log(val);
+            // const range = 'A1:F5';
+            // // fetch(`https://sheets.googleapis.com/v4/spreadsheets/${val.id}:batchUpdate`, {
+            // // &callback=googleDocCallback
+            // // fetch(`https://tcw-proxy-google-server.onrender.com/sheets.googleapis.com/v4/spreadsheets/${val.id}/values/${range}`, {
+            // fetch(`https://cors-anywhere.herokuapp.com/https://sheets.googleapis.com/v4/spreadsheets/${val.id}/values/${range}?key=AIzaSyBiThiZwdEtWQJRmINwH-ADjLUHV2_Bsv4`, {
+            //   method: 'POST',
+            //   headers: {
+            // 'Content-Type': 'application/json',
+            // Authorization: `Bearer ${tokenResponse.access_token}`,
+            // Accept: 'application/json',
+
+            //     // 'Access-Control-Allow-Credentials': 'true',
+            //     // 'Access-Control-Allow-Origin': 'http://localhost:3000',
+            //   },
+            //   body: JSON.stringify({
+            //     values: [
+            //       [
+            //         'Name',
+            //         'Job',
+            //         'Pay',
+            //       ],
+            //       [
+            //         'Avnish',
+            //         'Developer at Oracle',
+            //         '120000',
+            //       ],
+            //       [
+            //         'Kaylee',
+            //         'Consultant',
+            //         '300000',
+            //       ],
+            //     ],
+            //     majorDimension: 'ROWS',
+            //   }),
+            // });
           });
         }
       },
