@@ -73,9 +73,9 @@ export const signInWithGoogle = () => {
 const addUser = async (uid, email, authenticName, accountType) => {
   let userObject = {
     uid,
-    authenticName,
+    fullname: authenticName,
     bio: '',
-    approved: 'false',
+    approved: false,
     pronouns: '',
     role: { accountType },
     authProvider: 'local',
@@ -84,7 +84,7 @@ const addUser = async (uid, email, authenticName, accountType) => {
   if (accountType === 'jobseeker') userObject = { ...userObject, ...jobseekerInit };
   else if (accountType === 'navigator') userObject = { ...userObject, ...navigatorInit };
   else if (accountType === 'admin') userObject = { ...userObject, ...adminInit };
-
+  console.log(userObject);
   await setDoc(doc(db, 'users', email), userObject).then(() => {
     // save to store!
     // fix this in register.js, to authenticName
@@ -94,11 +94,11 @@ const addUser = async (uid, email, authenticName, accountType) => {
   }).catch((error) => console.error(error));
 };
 
-export const register = async (authenticName, accountType, email, password) => {
+export const register = async (data) => {
   try {
-    const res = await createUserWithEmailAndPassword(auth, email, password);
+    const res = await createUserWithEmailAndPassword(auth, data.email, data.password);
     const { user } = res;
-    await addUser(user.uid, authenticName, accountType);
+    await addUser(user.uid, data.email, data.name, data.role);
     // save token to store!
   } catch (err) {
     console.error(err);
