@@ -43,30 +43,44 @@ function ProfilePopup({
   return (
     <div className="containerSection">
       <Dialog
+        className="popup"
         open={open}
         TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
         maxWidth="xs"
-        PaperProps={{ style: { borderRadius: 30, maxHeight: '750px' } }}
+        PaperProps={{ style: { borderRadius: 30, maxHeight: '750px', maxWidth: '356px' } }}
       >
         <div className="buttonSection">
           {edit ? (
             <>
-              <IconButton style={{ backgroundColor: '#d3d3d3', width: 35, height: 35 }} onClick={() => { setEdit(!edit); }}>
-                <Close style={{ width: 20, height: 20 }} />
+              <IconButton
+                style={{
+                  backgroundColor: '#d3d3d3', width: 35, height: 35, left: 10, top: 10,
+                }}
+                onClick={() => { setEdit(!edit); }}
+              >
+                <Close style={{
+                  width: 20, height: 20,
+                }}
+                />
               </IconButton>
-              <IconButton style={{ backgroundColor: '#d3d3d3' }} onClick={() => { setEdit(!edit); }}>
+              <IconButton style={{ backgroundColor: '#d3d3d3', top: 10, left: 10 }} onClick={() => { setEdit(!edit); }}>
                 <Check />
               </IconButton>
             </>
           ) : (
             <>
-              <IconButton style={{ backgroundColor: '#d3d3d3', width: 35, height: 35 }} onClick={() => { setEdit(!edit); }}>
-                <Edit style={{ width: 20, height: 20 }} />
+              <IconButton
+                style={{
+                  backgroundColor: '#d3d3d3', width: 35, height: 35, left: 10, top: 10,
+                }}
+                onClick={() => { setEdit(!edit); }}
+              >
+                <Edit style={{ width: 20, height: 200 }} />
               </IconButton>
-              <IconButton style={{ backgroundColor: '#d3d3d3' }} onClick={handleClose} size="medium">
+              <IconButton style={{ backgroundColor: '#d3d3d3', left: 10, top: 10 }} onClick={handleClose} size="">
                 <Close />
               </IconButton>
             </>
@@ -78,7 +92,7 @@ function ProfilePopup({
             alt="Jack Sparrow"
             src={profilepic}
             style={{
-              width: '110px', height: '110px', backgroundColor: 'white', boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)',
+              width: '100px', height: '100px', backgroundColor: 'white', boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)',
             }}
           />
         </div>
@@ -145,26 +159,29 @@ function ProfilePopup({
 
             )}
           </div>
-          <Divider />
+          <Divider className="divider" />
 
         </div>
-        <div className="container">
-          <p className="nav">Navigator</p>
-          <div className="avatar">
-            <Avatar
-              alt="Jack Sparrow"
-              src={navpic}
-              style={{
-                width: '110px',
-                height: '110px',
-                backgroundColor: 'white',
-                boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)',
-              }}
-            />
-          </div>
-          <div className="details">
-            <h2>powell_cat</h2>
-            <p>powellcat@gmail.com</p>
+        <div className="navContainer">
+          <div className="navInnerContainer">
+            <div className="avatar">
+              <Avatar
+                alt="Jack Sparrow"
+                src={navpic}
+                style={{
+                  width: '80px',
+                  height: '80px',
+                  marginRight: '20px',
+                  backgroundColor: 'white',
+                  boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)',
+                }}
+              />
+            </div>
+            <div className="details">
+              <p className="nav">Navigator</p>
+              <h2 className="navigatorName">Powell Cat</h2>
+              <p className="navigatorEmail">powellcat@gmail.com</p>
+            </div>
           </div>
         </div>
 

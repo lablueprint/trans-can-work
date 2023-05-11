@@ -12,8 +12,8 @@ import {
   ProfileTemp,
 } from './Pages';
 import './App.css';
-import Footer from './Components/Footer/Footer';
-import Header from './Components/Navigation/Header';
+// import Footer from './Components/Footer/Footer';
+// import Header from './Components/Navigation/Header';
 import Splash from './Components/Splash';
 import approvalIcon from './Assets/mobile_friendly_24px.png';
 import AdminView from './Components/AdminView';
@@ -42,8 +42,8 @@ function App() {
           )}
         />
       </Routes>
-      <Header />
-      <Footer />
+      {/* <Header />
+      <Footer /> */}
     </div>
   );
 }

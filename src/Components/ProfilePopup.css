@@ -6,8 +6,9 @@
 .imageSection {
   background-image: url(/src/Assets/pirate_ship.svg);
   width: 100%;
-  height: 150px;
-  background-position: center;
+  min-height: 150px;
+  max-height: 150px;
+  background-size: cover;
 }
 
 .profilePicButton {
@@ -42,11 +43,11 @@
 
 .textSection {
   color: #484649;
-  padding: 30px 50px 50px 50px;
+  padding: 30px 50px 0px 50px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  width: 21rem;
+  width: 16rem;
   overflow: hidden;
 }
 
@@ -54,21 +55,22 @@
   display: flex;
   align-items: center;
   text-transform: uppercase;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   height: 3rem;
 }
 
 .nameLabel {
-  font-size: 2.5rem;
+  font-size: 2.75rem;
   font-family: 'Pirate';
   font-weight: 400;
+  text-transform: capitalize;
 }
 
 .pronounLabel {
-  margin: 1.3rem;
+  margin: 1rem;
   font-family: 'Pirate';
-  font-size: 1.5rem;
-
+  font-size: 1.75rem;
+  text-transform: capitalize;
 }
 
 .bioSection {
@@ -87,21 +89,67 @@
 
 .bio {
   font-family: 'Montserrat';
+  font-size: 0.9em;
+  margin: 0.5em 0 2.5em 0;
+  line-height: 1.5em;
 }
+
 .container {
   display: flex;
   /* align-items: center; */
-  overflow: hidden; /* will contain if #first is longer than #second */
-
+  overflow: hidden;
+  /* will contain if #first is longer than #second */
 }
 
 .avatar {
-  float:left; /* add this */
+  float: left;
+  /* add this */
 }
 
 .details {
   flex: 1 1 auto;
   display: flex;
-  overflow: hidden; /* if you don't want #second to wrap below #first */
+  overflow: hidden;
+  /* if you don't want #second to wrap below #first */
   flex-direction: column;
+  justify-content: center;
+}
+
+.nav {
+  font-family: 'Montserrat';
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.6em;
+  margin: 0 0 5px 0;
+}
+
+.navContainer {
+  margin: 20px 50px 40px 50px;
+  color: #484649;
+}
+
+.navInnerContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.navigatorName {
+  font-family: 'Pirate';
+  font-size: 2em;
+  margin: 0;
+}
+
+.navigatorEmail {
+  font-family: 'Montserrat';
+  font-size: 0.75em;
+  margin: 5px 0 0 0;
+}
+
+.inputTitle {
+  font-family: 'Montserrat';
+  font-size: 0.75em;
+}
+
+.inputSection {
+  margin-bottom: 2em;
 }
