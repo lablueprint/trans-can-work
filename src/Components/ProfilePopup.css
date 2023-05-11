@@ -88,3 +88,17 @@
 .bio {
   font-family: 'Montserrat';
 }
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  order: -1; /* positions the avatar to the left */
+}
+
+.details {
+  flex: 1 1 auto;
+  display: flex;
+  /* flex-direction: column; */
+}
