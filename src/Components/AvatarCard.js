@@ -41,7 +41,6 @@ export default function AvatarCard({ user, archivedUsers, setArchivedUsers }) {
     await deleteDoc(doc(db, 'jobseekers', id));
   };
 
-  // for Download:
   const downloadFile = ({ data, fileName, fileType }) => {
     const blob = new Blob([data], { type: fileType });
 
@@ -58,7 +57,6 @@ export default function AvatarCard({ user, archivedUsers, setArchivedUsers }) {
   };
 
   const exportToCsv = () => {
-    console.log(userData);
     const csv = ['User Information'];
     csv.push([`authenticName,${userData.authenticName}`]);
     csv.push([`pronouns,${userData.pronouns}`]);
@@ -71,39 +69,32 @@ export default function AvatarCard({ user, archivedUsers, setArchivedUsers }) {
 
     csv.push(['ClientInfo']);
 
-    for (const key in userData.clientInfo) {
-      const value = userData.clientInfo[key];
-      csv.push([`${key},${value}`]);
-    }
+    Object.entries(userData.clientInfo).forEach((e) => { csv.push([`${e[0]},${e[1]}`]); });
+
     csv.push([]);
 
     csv.push(['Skills Checklists:']);
     const skills = [];
-    for (const key in userData.skillsChecklist) {
-      const value = userData.skillsChecklist[key];
-      if (value) {
-        skills.push([`${key}`]);
-      }
-    }
+
+    Object.entries(userData.skillsChecklist).forEach((e) => {
+      if (e[1]) skills.push([`${e[0]}`]);
+    });
+
     csv.push(skills.join(','));
     csv.push([]);
 
     csv.push(['Industry Interests:']);
     const ii = [];
-    for (const key in userData.industryInterest) {
-      const value = userData.industryInterest[key];
-      if (value) {
-        ii.push([`${key}`]);
-      }
-    }
+    Object.entries(userData.industryInterest).forEach((e) => {
+      if (e[1]) ii.push([`${e[0]}`]);
+    });
+
     csv.push(ii.join(','));
 
     csv.push([]);
     csv.push(['Milestone Progress:']);
-    for (const key in userData.milestones) {
-      const value = userData.milestones[key];
-      csv.push([`${key}, ${value}`]);
-    }
+
+    Object.entries(userData.milestones).forEach((e) => { csv.push([`${e[0]},${e[1]}`]); });
 
     downloadFile({
       data: csv.join('\n'),
