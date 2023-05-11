@@ -148,25 +148,23 @@ function ProfilePopup({
           <Divider />
 
         </div>
-        <div>
+        <div className="container">
           <p className="nav">Navigator</p>
-          <div className="container">
-            <div className="avatar">
-              <Avatar
-                alt="Jack Sparrow"
-                src={navpic}
-                style={{
-                  width: '110px',
-                  height: '110px',
-                  backgroundColor: 'white',
-                  boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)',
-                }}
-              />
-            </div>
-            <div className="details">
-              <h2>powell_cat</h2>
-              <p>powellcat@gmail.com</p>
-            </div>
+          <div className="avatar">
+            <Avatar
+              alt="Jack Sparrow"
+              src={navpic}
+              style={{
+                width: '110px',
+                height: '110px',
+                backgroundColor: 'white',
+                boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)',
+              }}
+            />
+          </div>
+          <div className="details">
+            <h2>powell_cat</h2>
+            <p>powellcat@gmail.com</p>
           </div>
         </div>
 

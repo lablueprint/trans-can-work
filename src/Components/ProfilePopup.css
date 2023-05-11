@@ -90,15 +90,18 @@
 }
 .container {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
+  overflow: hidden; /* will contain if #first is longer than #second */
+
 }
 
 .avatar {
-  order: -1; /* positions the avatar to the left */
+  float:left; /* add this */
 }
 
 .details {
   flex: 1 1 auto;
   display: flex;
-  /* flex-direction: column; */
+  overflow: hidden; /* if you don't want #second to wrap below #first */
+  flex-direction: column;
 }
