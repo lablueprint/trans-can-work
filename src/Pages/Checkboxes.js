@@ -10,10 +10,16 @@ function Checkboxes({ skills, checkedArr, setCheckedArr }) {
     setCheckedArr(updatedCheckedState);
   };
   return (
-    <div>
+    <div className="checkboxes-container">
       {skills.map((name, index) => (
         <div className="row">
           <div>
+            <label
+              htmlFor={`custom-checkbox-${index}`}
+              className="checkbox-label"
+            >
+              {name}
+            </label>
             <input
               className="clickable"
               type="checkbox"
@@ -23,7 +29,6 @@ function Checkboxes({ skills, checkedArr, setCheckedArr }) {
               checked={checkedArr[index]}
               onChange={() => handleOnChange(index)}
             />
-            <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
           </div>
         </div>
       ))}

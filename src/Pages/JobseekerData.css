@@ -1,10 +1,9 @@
 h1 {
     font-family: 'Montserrat';
     font-style: normal;
-    font-weight: 400;
+    font-weight: 700;
     font-size: 57px;
     line-height: 64px;
-    margin-left: 6%;
   }
 
 /* label { 
@@ -23,11 +22,9 @@ h1 {
 h2 { 
     font-family: 'Montserrat';
     font-style: normal;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 16px;
     line-height: 20px;
-    display: flex;
-    align-items: center;
 }
 
 h3 
@@ -134,3 +131,36 @@ input, textarea {
     height: 3em;
     margin-bottom: 2.5em;
 }
+
+.education-buttons {
+    width: 12em;
+    height: 4em;
+    margin-bottom: 1%;
+    align-items: left;
+}
+
+/* .columns-container {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-top: 40px;
+}
+
+.checkbox-columns {
+    flex-direction: column;
+    width: 50%;
+} */
+
+.columns-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .checkboxes-column-left {
+    width: 50%; /* Adjust the width as needed */
+    /* Styles for the checkboxes columns */
+  }
+  .checkboxes-column-right {
+    width: 50%; /* Adjust the width as needed */
+    /* Styles for the checkboxes columns */
+  }

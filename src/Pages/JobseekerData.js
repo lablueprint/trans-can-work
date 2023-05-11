@@ -98,7 +98,7 @@ function Onboard({ username, useremail }) {
     'Programming Languages (ex. Perl, Python, Java, and Ruby)',
     'Retail',
     'Security',
-    'Search Engine and Keyowrd Optimization',
+    'Search Engine and Keyword Optimization',
     'Talent/Actor',
     'Tech',
     'Writer',
@@ -395,11 +395,23 @@ function Onboard({ username, useremail }) {
 
         <div>
           <h1>Previous Experience</h1>
-          <Checkboxes
-            skills={previousExperience}
-            checkedArr={checkedPrev}
-            setCheckedArr={setCheckedPrev}
-          />
+          <h2>Please check all the skill sets that apply to ye.</h2>
+        </div>
+        <div className="columns-container">
+          <div className="checkboxes-column-left">
+            <Checkboxes
+              skills={previousExperience.slice(0, 14)}
+              checkedArr={checkedPrev}
+              setCheckedArr={setCheckedPrev}
+            />
+          </div>
+          <div className="checkboxes-column-right">
+            <Checkboxes
+              skills={previousExperience.slice(14)}
+              checkedArr={checkedPrev}
+              setCheckedArr={setCheckedPrev}
+            />
+          </div>
         </div>
 
         <div>
@@ -415,7 +427,7 @@ function Onboard({ username, useremail }) {
                     height: '3.2vw',
                     fontSize: '0.9vw',
                     fontWeight: 'bold',
-                    paddingBottom: '1%',
+                    paddingBottom: '2%',
                   }}
                   >
                     <InputLabel id="demo-simple-select-label">Degree?</InputLabel>
@@ -590,12 +602,12 @@ function Onboard({ username, useremail }) {
                 )} */}
               </form>
 
-              <button type="button" onClick={(e) => deleteEducation(e, index)}>Delete ^ Education</button>
+              <button type="button" onClick={(e) => deleteEducation(e, index)} className="education-buttons">Delete Education</button>
             </div>
           ))}
         </div>
 
-        <button type="button" onClick={addEducation}>Add an Education</button>
+        <button type="button" onClick={addEducation} className="education-buttons">Add an Education</button>
 
         <div>
           <h1>List of Current/Previous Occupations</h1>
@@ -610,33 +622,61 @@ function Onboard({ username, useremail }) {
         </div>
 
         <div>
-          <h1>Interests Checklist</h1>
+          <h1>Industry Interest</h1>
+          <h2>In what areas of the followin' industries are ye open to explorin' or have an interest in possible future employment?</h2>
           <Checkboxes skills={interests} checkedArr={checkedInt} setCheckedArr={setCheckedInt} />
         </div>
 
         <div>
-          <h1>Dream Job</h1>
+          <h1>Industry Interest</h1>
+          <Checkboxes skills={interests} checkedArr={checkedInt} setCheckedArr={setCheckedInt} />
+        </div>
+
+        <div>
+          <h1>Ultimate Dream Job</h1>
           <form>
             <div className="inputWrapper">
-              <label htmlFor="dreamjob">
-                Dream Job
-                <input
-                  id="dreamjob"
-                  placeholder={jobseeker.dreamjob}
-                  onChange={(e) => {
-                    setJobseeker({
-                      ...jobseeker,
-                      dreamjob: e.target.value,
-                    });
-                  }}
-                  type="text"
-                />
-              </label>
+              <CssTextField
+                focusColor="#0c0ca4"
+                label="Dream Job"
+                variant="outlined"
+                FormHelperTextProps={{ children: 'Label' }}
+                focused
+                // value={email}
+                onChange={(e) => {
+                  setJobseeker({
+                    ...jobseeker,
+                    dreamjob: e.target.value,
+                  });
+                }}
+                placeholder={jobseeker.dreamjob}
+                style={{ paddingBottom: '1%' }}
+                InputProps={{
+                  className: classes.root,
+                  style: {
+                    fontFamily: 'Montserrat',
+                    color: '#49454F',
+                    paddingLeft: '0.5%',
+                    width: '55.0vw',
+                    height: '3.2vw',
+                    fontSize: '0.9vw',
+                    fontWeight: 'bold',
+                  },
+                }}
+                InputLabelProps={{
+                  className: classes.labelInput,
+                  style: {
+                    fontFamily: 'Montserrat',
+                    paddingLeft: '0.3%',
+                    backgroundColor: 'white',
+                  },
+                }}
+              />
             </div>
           </form>
         </div>
 
-        <button type="button" onClick={saveJobseeker}>Save Changes</button>
+        <button type="button" onClick={saveJobseeker} className="education-buttons">Save Changes</button>
       </div>
     </div>
   );
