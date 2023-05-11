@@ -13,6 +13,9 @@ import {
   fetchByNavigator, fetchAllJobseekers,
 } from '../Services/jobseeker-service';
 import './profileOutline.css';
+import { logout } from './firebase';
+import LogoutLogo from '../Assets/logout.svg';
+import BlueLogoutLogo from '../Assets/bluelogout.svg';
 
 const demographicInfo = [{
   name: 'kaylee',
@@ -67,6 +70,8 @@ export default function ProfileOutline() {
   const [value, setValue] = React.useState(0);
   const [disableButton, setDisableButton] = React.useState(true);
   const [passwordShown, setPasswordShown] = React.useState(false);
+  const [logoutPress, setLogoutPress] = React.useState(false);
+  // const navigate = useNavigate();
   // const [values, setValues] = React.useState(initialValues);
   // const [clients, setClients] = React.useState([]);
 
@@ -114,6 +119,11 @@ export default function ProfileOutline() {
     setValue(newValue);
   };
 
+  const logoutButton = () => {
+    setLogoutPress(!logoutPress);
+    logout();
+  };
+
   // i genuinely have no clue how this works:
   // const handleInputChange = (e) => {
   //   const { name, value } = e.target;
@@ -153,17 +163,21 @@ export default function ProfileOutline() {
               <div className="profile-page-header-name-and-icon-container">
                 <div className="profile-page-back-empty-block" />
                 <div className="header-image-container">
-                  <img
-                    src={Back}
-                    alt="back-pointing arrow"
-                    style={{
-                      marginRight: '12px',
-                      width: '7.41px',
-                      height: '12px',
-                    }}
-                  />
+                  <div className="back-button">
+                    <Button>
+                      <img
+                        src={Back}
+                        alt="back-pointing arrow"
+                        style={{
+                          marginRight: '12px',
+                          width: '7.41px',
+                          height: '12px',
+                        }}
+                      />
+                      Back
+                    </Button>
+                  </div>
                 </div>
-                <p className="profile-page-back-text">Back</p>
                 <div className="profile-page-header-empty-block" />
                 <p className="profile-page-header-profile-text">{demographicInfo[0].name}</p>
                 <div className="header-image-container">
@@ -195,9 +209,9 @@ export default function ProfileOutline() {
         <div className="top-container">
           <div className="profile-photo-container">
             <Avatar facebookId="100008343750912" size="150" sx={{ borderRadius: '100px' }} round />
-            <h1>
+            <p className="name-display">
               {demographicInfo[0].name}
-            </h1>
+            </p>
           </div>
           <div className="edit-button">
             <Button
@@ -213,7 +227,7 @@ export default function ProfileOutline() {
                   : {
                     marginRight: '2%',
                     background: '#E4E6FF',
-                    borderColor: '#E4E6FF',
+                    borderColor: 'black',
                     color: 'black',
                   }
             }
@@ -348,6 +362,45 @@ export default function ProfileOutline() {
               />
             </label>
             <br />
+            <div className="logout">
+              <Button
+                variant="text"
+                onClick={logoutButton}
+                sx={
+                logoutPress ? {
+                  marginRight: '2%',
+                  background: '#F5F5F5',
+                  borderColor: 'black',
+                  color: '#000DC8',
+                }
+                  : {
+                    marginRight: '2%',
+                    background: '#F5F5F5',
+                    borderColor: '#F5F5F5',
+                    color: 'black',
+                  }
+            }
+              >
+                {logoutPress ? (
+                  <img
+                    src={BlueLogoutLogo}
+                    alt="og logout"
+                    style={{
+                      marginRight: '12px',
+                      color: '#000DC8',
+                    }}
+                  />
+                )
+                  : (
+                    <img
+                      src={LogoutLogo}
+                      alt="blue logout logo"
+                      style={{ marginRight: '12px' }}
+                    />
+                  )}
+                Logout
+              </Button>
+            </div>
           </div>
         </div>
       </div>
