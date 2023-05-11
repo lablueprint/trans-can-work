@@ -1,38 +1,81 @@
-/* #img {
-    float: left; 
-    margin-left: 50px; 
-    margin-top: 100px; 
-    display: flex;
-    width: 50%; 
-} */
+#popup {
+    /* position: relative; */
+    width: 900px;
+    /* top: 10%; */
+    /* height: 90%;  */
+    /* top: 10px;
+    bottom: 10px; */
+    padding-bottom: 5%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background: #FFFBFE;
+    border-radius: 32px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 
-#markAsComplete {
-    box-sizing: border-box;
+    /* margin-top: -50px; */
+    /* left: 0 */
+}
 
-    /* Auto layout */
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 16px 24px;
-    gap: 10px;
+#incomplete {
+    padding: 20px 28px; 
+    left: calc(50% - 210px/2); 
+    top: calc(50% - 64px/2 + 324px); 
+    border: 2px solid #484649; 
+    box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
+    border-radius: 12px; 
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: 0.15px;
+    color: #484649;
+}
 
-    position: absolute;
-    width: 202px;
-    height: 56px;
-    left: calc(50% - 202px/2 - 0.5px);
-    top: calc(50% - 56px/2 - 70px);
+#completed{
+    padding: 20px 28px; 
+    left: calc(50% - 231px/2); 
+    top: calc(50% - 64px/2 + 31px); 
+    box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
+    border-radius: 12px; 
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: 0.15px;
+    color: #FFFBFE;
+    background: #484649;
+    border: 2px solid #484649;
+}
+#incomplete:hover {
+    background: #939094;
+    box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
+    color: #FFFBFE;
+    border: 2px solid #939094;
+}
 
-    /* Neutral/20 */
+#completed:hover {
+    background: #939094;
+    box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
+    color: #FFFBFE;
+    border: 2px solid #939094;
+}
 
-    /* border: 2px solid #484649; */
-    filter: drop-shadow(0px 4px 8px rgba(60, 55, 68, 0.25));
-    border-radius: 8px;
-    /* border: 2px red dotted;  */
+#close {
+    border-radius: 100%;
+    position: fixed;
+    top: 30px;
+    right: 350px;
 }
 
 #title {
-    align-items: center;
-    justify-content: center;
-    border: 2px red dotted; 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5%;
 }

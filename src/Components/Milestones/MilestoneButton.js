@@ -5,33 +5,12 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import './MilestoneButton.css';
+// import { createTheme } from '@mui/material';
+import backButton from '../../Assets/back button.png';
 
-const style = {
-  Popup: {
-    position: 'relative',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '900px',
-    background: '#FFFBFE',
-    border: '2px solid #000',
-    padding: 4,
-    borderRadius: '32px',
-  },
-
-  Button: {
-    border: '2px solid #484649',
-    padding: '16px 24px',
-    width: '202px',
-    height: '56px',
-    left: 'calc(50% - 202px/2 - 0.5px)',
-    top: 'calc(50% - 56px/2 - 70px)',
-    borderRadius: '8px',
-    filter: 'drop-shadow(0px 4px 8px rgba(60, 55, 68, 0.25))',
-  },
-};
 function MilestoneButton({
   title, image, imageHover,
+  // status,
 }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -39,9 +18,13 @@ function MilestoneButton({
   const [isHover, setIsHover] = React.useState(false);
   const handleOnMouseEnter = () => setIsHover(true);
   const handleOnMouseLeave = () => setIsHover(false);
+  const [isComplete, setComplete] = React.useState(false);
+  const toggleComplete = () => setComplete(!isComplete);
+
   return (
     <div>
       <Button
+        style={{ backgroundColor: 'transparent' }}
         onClick={handleOpen}
         onMouseEnter={handleOnMouseEnter}
         onMouseLeave={handleOnMouseLeave}
@@ -51,20 +34,25 @@ function MilestoneButton({
       <Modal
         open={open}
         onClose={handleClose}
-        // aria-labelledby="modal-modal-title"
-        // aria-describedby="modal-modal-description"
       >
-        <Box sx={style.Popup}>
+        <Box id="popup">
           <img id="title" src={title} alt="island title" />
           <Typography sx={{ mt: 50 }} />
           <Button
-            id="markAsComplete"
-            sx={style.Button}
-            onClick={() => {
-              'Completed';
-            }}
+          // {status}={!!(isComplete)}
+            disableRipple
+            onClick={toggleComplete}
+            id={(isComplete) ? 'completed' : 'incomplete'}
           >
-            Mark as Complete
+            {(isComplete) ? 'Marked as Completed' : 'Mark as Complete'}
+          </Button>
+          <Button
+            disableRipple
+            id="close"
+            style={{ backgroundColor: 'transparent' }}
+            onClick={handleClose}
+          >
+            <img src={backButton} alt="back button" />
           </Button>
         </Box>
       </Modal>
@@ -77,10 +65,11 @@ MilestoneButton.propTypes = {
   title: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   imageHover: PropTypes.string.isRequired,
+  // status: PropTypes.bool.isRequired,
 };
 
 export default MilestoneButton;
 /*
-Finished creating the popup
 Later: include button/external links to the popup
+TODO: make the islands turn into color when marked as complete
 */

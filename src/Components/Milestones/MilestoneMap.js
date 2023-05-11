@@ -68,11 +68,11 @@ const data = {
       },
       {
         uid: 7,
-        imageDefault: require('../../Assets/job-board(b&w).png'),
-        imageUpdated: require('../../Assets/job-board.png'),
-        imageHover: require('../../Assets/job-boardH.png'),
-        imageUHover: require('../../Assets/job-boardUH.png'),
-        title: require('../../Assets/job-boardTitle.png'),
+        imageDefault: require('../../Assets/job-portal(b&w).png'),
+        imageUpdated: require('../../Assets/job-portal.png'),
+        imageHover: require('../../Assets/job-portalH.png'),
+        imageUHover: require('../../Assets/job-portalUH.png'),
+        title: require('../../Assets/job-portalTitle.png'),
         id: 'job-board',
         status: false,
       },
@@ -111,9 +111,9 @@ const MilestoneButtons = data.content.body.map((x) => {
     <div
       key={x.uid}
       id={x.id}
-      status={x.status}
+      // status={x.status}
     >
-      <MilestoneButton image={imagePath} imageHover={hoveredPath} title={x.title} />
+      <MilestoneButton image={imagePath} imageHover={hoveredPath} title={x.title} status={x.status}/>
     </div>
   );
 });
