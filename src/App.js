@@ -49,8 +49,6 @@ function App() {
           )}
         />
       </Routes>
-      {/* <Header /> */}
-      {/* <Form /> */}
       <Footer />
     </div>
   );
