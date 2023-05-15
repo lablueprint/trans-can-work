@@ -1,0 +1,11 @@
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);  
+    padding: 70px;
+    height: 90vh;  
+    background: linear-gradient(180deg, #EFFBFF 0%, #F5F1FF 69.61%, #FFF2F5 100%);
+    justify-content: space-evenly;
+    justify-items: center;
+    align-content: space-evenly;
+    align-items: center;
+  }
