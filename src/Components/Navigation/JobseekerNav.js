@@ -1,9 +1,9 @@
 import React from 'react';
 import {
-  IconButton, Chip, Box,
+  IconButton, Box,
 } from '@mui/material';
-import { GridViewRounded } from '@mui/icons-material';
-import JobseekerMenu from './JobseekerMenu';
+import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
+import Calendar from '../calendar';
 
 const style = {
   iconStyle: {
@@ -19,19 +19,12 @@ const style = {
     top: '44px',
   },
   buttonStyle: {
-    padding: 0,
+    padding: 0.8,
     background: '#FFFBFE',
+    color: '#484649',
     borderRadius: '1em',
     boxSizing: 'border-box',
     fontSize: '2em',
-  },
-  chipStyle: {
-    backgroundColor: '#FFFBFE',
-    fontFamily: 'Montserrat',
-    boxShadow: '0px 2px 8px rgba(68, 87, 82, 0.25)',
-    position: 'absolute',
-    left: '52px',
-    top: '130px',
   },
 };
 
@@ -74,13 +67,11 @@ function JobseekerNav() {
           size="large"
           sx={style.iconStyle}
         >
-          <GridViewRounded sx={style.buttonStyle} />
+          <CalendarMonthRoundedIcon sx={style.buttonStyle} />
         </IconButton>
-        <div>
-          <Chip label="MENU" sx={style.chipStyle} />
-        </div>
       </Box>
-      <JobseekerMenu open={open} handleClose={handleClose} />
+      <Calendar open={open} handleClose={handleClose} />
+      {/* <JobseekerMenu open={open} handleClose={handleClose} /> */}
     </div>
   );
 }
