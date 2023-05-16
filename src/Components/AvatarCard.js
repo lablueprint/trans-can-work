@@ -13,7 +13,10 @@ import { PropTypes } from 'prop-types';
 import { db } from './firebase';
 import './AvatarCard.css';
 
+// import AuthURIRedirect from '../Services/authURI';
+
 const options = [
+  'Download',
   'Unarchive',
   'Delete',
 ];
@@ -34,14 +37,52 @@ function AvatarCard({ user, archivedUsers, setArchivedUsers }) {
     await deleteDoc(doc(db, 'jobseekers', id));
   };
 
+  const downloadData = async () => {
+    // AuthURIRedirect();
+
+    // const docId = 'jobseeker-document-id';
+
+    // // Authenticate the user
+    // const auth = new google.auth.GoogleAuth({
+    //   scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+    // });
+    // const authClient = await auth.getClient();
+
+    // // Retrieve data from Firestore
+    // const docRef = firestore.collection('trans-can-work').doc(docId);
+    // const doc = await docRef.get();
+
+    // // Create a new Google Sheet and add the data to it
+    // const sheets = google.sheets({ version: 'v4', auth: authClient });
+    // const spreadsheet = await sheets.spreadsheets.create({
+    //   requestBody: {
+    //     properties: {
+    //       title: 'jobseeker-email',
+    //     },
+    //   },
+    // });
+    // const values = [Object.values(doc.data())];
+    // await sheets.spreadsheets.values.append({
+    //   spreadsheetId: spreadsheet.data.spreadsheetId,
+    //   range: 'Sheet1!A1',
+    //   valueInputOption: 'RAW',
+    //   requestBody: {
+    //     values,
+    //   },
+    // });
+  };
+
   const handleClose = async (index) => {
     if (index === 0) {
+      downloadData();
+    }
+    if (index === 1) {
       await updateArchived(user.id);
       const newUsers = archivedUsers.filter((seeker) => seeker.id !== user.id);
       setArchivedUsers(newUsers);
     }
 
-    if (index === 1) {
+    if (index === 2) {
       await deleteDocument(user.id);
       const newUsers = archivedUsers.filter((seeker) => seeker.id !== user.id);
       setArchivedUsers(newUsers);

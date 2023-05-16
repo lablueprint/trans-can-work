@@ -12,7 +12,12 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "dotenv": "^16.0.3",
     "firebase": "^9.16.0",
+    "fs": "^0.0.1-security",
+    "googleapis": "^118.0.0",
+    "http2": "^3.3.7",
+    "path-browserify": "^1.0.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-avatar": "^5.0.3",
@@ -45,7 +50,14 @@
       "last 1 safari version"
     ]
   },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false,
+    "child_process": false
+  },
   "devDependencies": {
+    "dotenv-webpack": "^8.0.1",
     "eslint": "^8.35.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.27.5",

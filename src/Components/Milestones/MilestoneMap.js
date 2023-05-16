@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import React from 'react';
 import './MilestoneMap.css';
 import MilestoneButton from './MilestoneButton';
@@ -110,6 +111,7 @@ const MilestoneButtons = data.content.body.map((x) => {
     <div
       key={x.uid}
       id={x.id}
+      // eslint-disable-next-line react/no-unknown-property
       status={x.status}
     >
       <MilestoneButton image={imagePath} imageHover={hoveredPath} />
