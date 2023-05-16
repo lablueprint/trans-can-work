@@ -75,6 +75,8 @@
 
 .bioSection {
   width: 100%;
+  max-height: 500px;
+  overflow-y: scroll;
 }
 
 .inputSection {

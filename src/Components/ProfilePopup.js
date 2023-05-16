@@ -7,25 +7,11 @@ import IconButton from '@material-ui/core/IconButton';
 import { Check, Close, Edit } from '@mui/icons-material';
 import TextField from '@mui/material/TextField';
 import Divider from '@mui/material/Divider';
+import { InputAdornment } from '@material-ui/core';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
 import profilepic from '../Assets/parrot_profile.svg';
 import navpic from '../Assets/powell_cat.svg';
-// const style = {
-//   container: {
-//     position: 'relative',
-//   },
-//   divider: {
-//     position: 'relative',
-//   },
-//   avatar: {
-//     position: 'absolute',
-//     top: '-55px',
-//     left: 'calc(50% - 55px)',
-//     width: '110px',
-//     height: '110px',
-//     backgroundColor: 'white',
-//     boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)',
-//   },
-// };
+
 const Transition = React.forwardRef((props, ref) => (
   <Slide direction="right" ref={ref} {...props} />
 ));
@@ -39,9 +25,13 @@ function ProfilePopup({
   bio,
 }) {
   const [edit, setEdit] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
+  const handleToggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
   return (
-    <div className="containerSection">
+    <div className="containerSection" style={{ maxHeight: '500px', overflowY: 'scroll' }}>
       <Dialog
         className="popup"
         open={open}
@@ -136,7 +126,12 @@ function ProfilePopup({
               <>
                 <div className="inputSection">
                   <h5 className="inputTitle">FIRST NAME</h5>
-                  <TextField variant="outlined" defaultValue={firstName} size="small" fullWidth />
+                  <TextField
+                    variant="outlined"
+                    defaultValue={firstName}
+                    size="small"
+                    fullWidth
+                  />
                 </div>
                 <div className="inputSection">
                   <h5 className="inputTitle">LAST NAME</h5>
@@ -150,6 +145,28 @@ function ProfilePopup({
                   <h5 className="inputTitle">BIO</h5>
                   <TextField variant="outlined" defaultValue={bio} size="small" fullWidth multiline maxRows={4} />
                 </div>
+                <div style={{ marginTop: '100px' }} className="inputSection">
+                  <h5 className="inputTitle">EMAIL</h5>
+                  <TextField variant="outlined" defaultValue={pronouns} size="small" fullWidth disabled />
+                  <div className="inputSection">
+                    <h5 className="inputTitle">PASSWORD</h5>
+                    <TextField
+                      type={showPassword ? 'text' : 'password'}
+                      variant="outlined"
+                      fullWidth
+                      disabled
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton onClick={handleToggleShowPassword}>
+                              {showPassword ? <Visibility /> : <VisibilityOff />}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  </div>
+                </div>
               </>
             ) : (
 
@@ -159,10 +176,11 @@ function ProfilePopup({
 
             )}
           </div>
-          <Divider className="divider" />
 
         </div>
+        {!edit && (
         <div className="navContainer">
+          <Divider style={{ marginBottom: '40px' }} className="divider" />
           <div className="navInnerContainer">
             <div className="avatar">
               <Avatar
@@ -184,6 +202,7 @@ function ProfilePopup({
             </div>
           </div>
         </div>
+        )}
 
       </Dialog>
 
