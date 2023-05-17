@@ -1,22 +1,18 @@
 import React from 'react';
-import { PropTypes } from 'prop-types';
 import './Splash.css';
 
-function Splash({ header, description, graphic }) {
+const transFlag = require('../Assets/transFlag.png');
+const awaitingApproval = require('../Assets/awaitingApproval.png');
+const awaitingText = require('../Assets/awaitingText.png');
+
+function Splash() {
   return (
     <div className="container">
-      <h2 className="header">Trans Can Work</h2>
-      <h1 className="header">{header}</h1>
-      {graphic}
-      <p>{description}</p>
+      <img src={awaitingApproval} className="awaitingApproval" alt="awaitingApproval" />
+      <img src={awaitingText} className="awaitingText" alt="awaitingText" />
+      <img src={transFlag} className="transFlag" alt="transFlag" />
     </div>
   );
 }
-
-Splash.propTypes = {
-  header: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  graphic: PropTypes.element.isRequired,
-};
 
 export default Splash;

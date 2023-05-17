@@ -59,6 +59,7 @@ const useStyles = makeStyles({
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
@@ -70,6 +71,8 @@ function Login() {
     if (loggedIn) {
       const approves = await getApprovalStatus(email);
       navigate(approves ? '/home' : '/splash');
+    } else {
+      setError(true);
     }
   };
   const provider = new GoogleAuthProvider();
@@ -83,7 +86,6 @@ function Login() {
       // Handle Errors here.
         const errorCode = e.code;
         console.log(errorCode);
-
         const googleErrorMessage = e.message;
         console.log(googleErrorMessage);
       });
@@ -91,11 +93,41 @@ function Login() {
 
   const classes = useStyles();
 
+  const inputProps = {
+    className: classes.root,
+    style: {
+      fontFamily: 'Montserrat',
+      color: '#49454F',
+      paddingLeft: '0.5%',
+      width: '55.0vw',
+      height: '3.2vw',
+      fontSize: '0.9vw',
+      fontWeight: 'bold',
+    },
+  };
+  const inputLabelProps = {
+    className: classes.labelInput,
+    style: {
+      fontFamily: 'Montserrat',
+      paddingLeft: '0.3%',
+      backgroundColor: 'white',
+    },
+  };
+
+  const buttonStyle = {
+    fontSize: '0.85vw',
+    fontWeight: 'bold',
+    fontFamily: 'Montserrat',
+    textTransform: 'none',
+    width: '55.0vw',
+    height: '3.2vw',
+  };
+
   return (
     <>
       <div className="landingSplash" id="landingSplash">
         <div className="header">
-          <img src={TCWLogo} className="TCWimage" alt="TCWLogo" />
+          <img src={TCWLogo} className="TCWlogo" alt="TCWLogo" />
           <div className="headerTitle">
             <div className="font"> Welcome to</div>
             <img src={TCWTitle} className="TCWimage" alt="TCWTitle" />
@@ -125,33 +157,15 @@ function Login() {
               focusColor="#0c0ca4"
               label="Email Address"
               variant="outlined"
-              FormHelperTextProps={{ children: 'Label' }}
               autoComplete={rememberMe}
               focused
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
               style={{ paddingBottom: '1%' }}
-              InputProps={{
-                className: classes.root,
-                style: {
-                  fontFamily: 'Montserrat',
-                  color: '#49454F',
-                  paddingLeft: '0.5%',
-                  width: '55.0vw',
-                  height: '3.2vw',
-                  fontSize: '0.9vw',
-                  fontWeight: 'bold',
-                },
-              }}
-              InputLabelProps={{
-                className: classes.labelInput,
-                style: {
-                  fontFamily: 'Montserrat',
-                  paddingLeft: '0.3%',
-                  backgroundColor: 'white',
-                },
-              }}
+              InputProps={inputProps}
+              InputLabelProps={inputLabelProps}
+              error={error}
             />
           </div>
           <div className="loginInput">
@@ -167,29 +181,16 @@ function Login() {
               placeholder="Password"
               type={showPassword ? 'text' : 'password'}
               InputProps={{
-                className: classes.root,
-                style: {
-                  fontFamily: 'Montserrat',
-                  paddingLeft: '0.5%',
-                  width: '55.0vw',
-                  height: '3.2vw',
-                  fontSize: '0.9vw',
-                  fontWeight: 'bold',
-                },
+                ...inputProps,
                 endAdornment: (
                   <InputAdornment position="start" onClick={() => setShowPassword(!showPassword)}>
                     <VisibilityIcon fontSize="large" />
                   </InputAdornment>
                 ),
               }}
-              InputLabelProps={{
-                className: classes.labelInput,
-                style: {
-                  fontFamily: 'Montserrat',
-                  paddingLeft: '0.3%',
-                  backgroundColor: 'white',
-                },
-              }}
+              InputLabelProps={inputLabelProps}
+              error={error}
+
             />
           </div>
 
@@ -199,12 +200,13 @@ function Login() {
                 style={{
                   color: '#0c0ca4',
                   paddingRight: '1.5%',
+                  paddingBottom: '4%',
                   transform: 'scale(1)',
                 }}
                 onChange={() => setRememberMe(!rememberMe)}
               />
               <div style={{
-                paddingTop: '3.1%',
+                paddingTop: '2%',
               }}
               >
                 {' '}
@@ -212,9 +214,6 @@ function Login() {
               </div>
             </div>
             <Link
-              style={{
-                paddingTop: '0.8%',
-              }}
               className="forgotPassword"
               to="/reset"
             >
@@ -229,20 +228,11 @@ function Login() {
               type="button"
               variant="contained"
               color="primary"
-              className="loginButton"
               onClick={() => login()}
-              style={{
-                fontSize: '0.85vw',
-                fontWeight: 'bold',
-                fontFamily: 'Montserrat',
-                textTransform: 'none',
-                width: '55.0vw',
-                height: '3.2vw',
-              }}
+              style={buttonStyle}
             >
               Login
             </Button>
-
           </div>
           <div className="loginInput">
             <Button
@@ -252,14 +242,7 @@ function Login() {
               variant="outlined"
               startIcon={<GoogleIcon style={{ fontSize: '1.2vw' }} />}
               className={classes.button}
-              style={{
-                fontSize: '0.85vw',
-                fontWeight: 'bold',
-                fontFamily: 'Montserrat',
-                textTransform: 'none',
-                width: '55.0vw',
-                height: '3.2vw',
-              }}
+              style={buttonStyle}
             >
               &nbsp;Login with Google
             </Button>
@@ -268,11 +251,11 @@ function Login() {
           <img src={TCWLogo2} className="TcwLogo2" alt="TCWLogo2" />
 
           <div className="register">
-            Don&apos;t Have An Account?
-            <b />
+            <div style={{ paddingBottom: '3%' }}>
+              Don&apos;t Have An Account?
+            </div>
             <Link to="/register">Create Account</Link>
           </div>
-          <img src={arrow} className="arrowImage2" alt="arrow" />
 
         </div>
       </div>

@@ -19,14 +19,15 @@ import Header from './Components/Navigation/Header';
 import Splash from './Components/Splash';
 import approvalIcon from './Assets/mobile_friendly_24px.png';
 import AdminView from './Components/AdminView';
+import ScrollToTop from './Pages/scrollToTop';
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<><ScrollToTop/><Login /></>}/>
         <Route path="/home" element={<Home />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<><ScrollToTop/><Register /></>} />
         <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/profile" element={<Profile />} />

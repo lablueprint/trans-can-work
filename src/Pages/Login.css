@@ -59,6 +59,9 @@
   padding-top: 2%;
 }
 .font{
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
   font-family: 'Montserrat', sans-serif;  
   font-size: 45px;
   font-weight: 450;
@@ -95,10 +98,18 @@
   font-family: 'Montserrat', sans-serif;
   font-size: 1.0vw;
 }
-
+.TCWlogo{
+  display: flex;
+  align-self: center;
+  min-width: 28%;
+  max-width: 30%;
+  min-height: 28%;
+  max-height: 30%;
+}
 .TCWimage{
   display: flex;
   align-self: flex-start;
+  
 }
 .arrowImage{
   display: flex;
