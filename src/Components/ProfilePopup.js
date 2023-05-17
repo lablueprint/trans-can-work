@@ -9,9 +9,62 @@ import TextField from '@mui/material/TextField';
 import Divider from '@mui/material/Divider';
 import { InputAdornment } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
+import Button from '@mui/material/Button';
 import profilepic from '../Assets/parrot_profile.svg';
 import navpic from '../Assets/powell_cat.svg';
 
+const backgroundColors = ['#FF968A', '#FFCCB6', '#FFFFB5', '#CCE2CB', '#A2E1DB', '#D4F0F0', '#CBAACB', '#FEE1E8'];
+
+const styles = {
+  avatar: {
+    width: '100px',
+    height: '100px',
+    backgroundColor: 'white',
+    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)',
+
+  },
+  containerSection: {
+    maxHeight: '500px',
+    overflowY: 'scroll',
+  },
+  close: {
+    width: '20',
+    height: '20',
+  },
+  cancel: {
+    backgroundColor: '#d3d3d3',
+    width: '35',
+    height: '35',
+    left: '10',
+    top: '10',
+
+  },
+  confirm: {
+    backgroundColor: '#d3d3d3',
+    top: '10',
+    left: '10,',
+  },
+  edit: {
+    width: '20',
+    height: '20',
+    color: '#fff',
+  },
+  mainEdit: {
+    width: '20',
+    height: '20',
+  },
+  profileButton: {
+    backgroundColor: '#222',
+    width: '35',
+    height: '35',
+  },
+  divider: {
+    marginBottom: '30px',
+  },
+  email: {
+    marginTop: '100px',
+  },
+};
 const Transition = React.forwardRef((props, ref) => (
   <Slide direction="right" ref={ref} {...props} />
 ));
@@ -26,12 +79,14 @@ function ProfilePopup({
 }) {
   const [edit, setEdit] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [editBackground, setEditBackground] = useState(false);
+  const [editProfilePic, setProfilePic] = useState(false);
 
   const handleToggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
   return (
-    <div className="containerSection" style={{ maxHeight: '500px', overflowY: 'scroll' }}>
+    <div className="containerSection" style={styles.containerSection}>
       <Dialog
         className="popup"
         open={open}
@@ -46,31 +101,24 @@ function ProfilePopup({
           {edit ? (
             <>
               <IconButton
-                style={{
-                  backgroundColor: '#d3d3d3', width: 35, height: 35, left: 10, top: 10,
-                }}
+                style={styles.cancel}
                 onClick={() => { setEdit(!edit); }}
               >
-                <Close style={{
-                  width: 20, height: 20,
-                }}
-                />
+                <Close style={styles.close} />
               </IconButton>
-              <IconButton style={{ backgroundColor: '#d3d3d3', top: 10, left: 10 }} onClick={() => { setEdit(!edit); }}>
+              <IconButton style={styles.confirm} onClick={() => { setEdit(!edit); }}>
                 <Check />
               </IconButton>
             </>
           ) : (
             <>
               <IconButton
-                style={{
-                  backgroundColor: '#d3d3d3', width: 35, height: 35, left: 10, top: 10,
-                }}
+                style={styles.cancel}
                 onClick={() => { setEdit(!edit); }}
               >
-                <Edit style={{ width: 20, height: 200 }} />
+                <Edit style={styles.mainEdit} />
               </IconButton>
-              <IconButton style={{ backgroundColor: '#d3d3d3', left: 10, top: 10 }} onClick={handleClose} size="">
+              <IconButton style={styles.confirm} onClick={handleClose} size="">
                 <Close />
               </IconButton>
             </>
@@ -81,23 +129,59 @@ function ProfilePopup({
           <Avatar
             alt="Jack Sparrow"
             src={profilepic}
-            style={{
-              width: '100px', height: '100px', backgroundColor: 'white', boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)',
-            }}
+            style={styles.avatar}
           />
         </div>
         {edit ? (
           <>
             <div className="profilePicButton">
-              <IconButton style={{ backgroundColor: '#222', width: 35, height: 35 }}>
-                <Edit style={{ width: 20, height: 20, color: '#fff' }} />
+              <IconButton onClick={() => setProfilePic(true)} style={styles.profileButton}>
+                <Edit style={styles.edit} />
               </IconButton>
             </div>
+            <Dialog open={editProfilePic} onClose={() => setProfilePic(false)}>
+              <div>
+                <h3>Choose Profile Picture</h3>
+                {backgroundColors.map((color) => (
+                  <Button
+                    key={color}
+                    style={{
+                      backgroundColor: color,
+                      width: 50,
+                      height: 65,
+                      borderRadius: '50%',
+                      margin: 5,
+                    }}
+                  />
+                ))}
+              </div>
+
+              <Button onClick={() => setProfilePic(false)}>Save</Button>
+            </Dialog>
             <div className="coverPicButton">
-              <IconButton style={{ backgroundColor: '#222', width: 35, height: 35 }}>
-                <Edit style={{ width: 20, height: 20, color: '#fff' }} />
+              <IconButton onClick={() => setEditBackground(true)} style={styles.profileButton}>
+                <Edit style={styles.edit} />
               </IconButton>
             </div>
+            <Dialog open={editBackground} onClose={() => setEditBackground(false)}>
+              <div>
+                <h3>Choose Background Color</h3>
+                {backgroundColors.map((color) => (
+                  <Button
+                    key={color}
+                    style={{
+                      backgroundColor: color,
+                      width: 50,
+                      height: 65,
+                      borderRadius: '50%',
+                      margin: 5,
+                    }}
+                  />
+                ))}
+              </div>
+
+              <Button onClick={() => setEditBackground(false)}>Save</Button>
+            </Dialog>
           </>
         ) : <div /> }
         <div className="textSection">
@@ -145,9 +229,9 @@ function ProfilePopup({
                   <h5 className="inputTitle">BIO</h5>
                   <TextField variant="outlined" defaultValue={bio} size="small" fullWidth multiline maxRows={4} />
                 </div>
-                <div style={{ marginTop: '100px' }} className="inputSection">
+                <div style={styles.email} className="inputSection">
                   <h5 className="inputTitle">EMAIL</h5>
-                  <TextField variant="outlined" defaultValue={pronouns} size="small" fullWidth disabled />
+                  <TextField variant="outlined" defaultValue="aaronshi@gmail.com" size="small" fullWidth disabled />
                   <div className="inputSection">
                     <h5 className="inputTitle">PASSWORD</h5>
                     <TextField
@@ -155,6 +239,7 @@ function ProfilePopup({
                       variant="outlined"
                       fullWidth
                       disabled
+                      defaultValue="puppylover1234"
                       InputProps={{
                         endAdornment: (
                           <InputAdornment position="end">
@@ -180,19 +265,13 @@ function ProfilePopup({
         </div>
         {!edit && (
         <div className="navContainer">
-          <Divider style={{ marginBottom: '40px' }} className="divider" />
+          <Divider style={styles.divider} className="divider" />
           <div className="navInnerContainer">
             <div className="avatar">
               <Avatar
                 alt="Jack Sparrow"
                 src={navpic}
-                style={{
-                  width: '80px',
-                  height: '80px',
-                  marginRight: '20px',
-                  backgroundColor: 'white',
-                  boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)',
-                }}
+                style={styles.avatar}
               />
             </div>
             <div className="details">
