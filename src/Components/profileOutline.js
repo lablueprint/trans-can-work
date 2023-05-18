@@ -7,7 +7,8 @@ import { PropTypes } from 'prop-types';
 import Avatar from 'react-avatar';
 import Button from '@mui/material/Button';
 import { Dialog } from '@mui/material';
-import { Edit, Close } from '@mui/icons-material';
+import { Edit } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 import Pencil from '../Assets/pencil.svg';
 import Eye from '../Assets/eye.svg';
 import Back from '../Assets/back.svg';
@@ -18,8 +19,7 @@ import './profileOutline.css';
 import { logout } from './firebase';
 import LogoutLogo from '../Assets/logout.svg';
 import BlueLogoutLogo from '../Assets/bluelogout.svg';
-import { Link } from 'react-router-dom';
-import { IconButton } from '@material-ui/core';
+import ProfilePicPlaceholder from '../Assets/profilephotoplaceholder.svg';
 
 const demographicInfo = [{
   name: 'kaylee',
@@ -221,16 +221,35 @@ export default function ProfileOutline() {
         </div>
         <div className="top-container">
           <div className="profile-photo-container">
-            <Avatar facebookId="100008343750912" size="150" sx={{ borderRadius: '100px' }} round />
+            <Avatar src={ProfilePicPlaceholder} size="150" sx={{ borderRadius: '100px' }} round />
             <div
               className="profilePicButton"
             >
-              <IconButton
+              <button
+                type="button"
+                className="editProfilePicButton"
                 onClick={() => setProfilePic(true)}
-                className="editButton"
+                style={{
+                  background: '#FFFFFF',
+                  borderColor: 'black',
+                  color: 'black',
+                  borderRadius: '50%',
+                  alignSelf: 'flex-end',
+                  height: 41,
+                  width: 41,
+                  padding: 10,
+                  position: 'absolute',
+                  bottom: 20,
+                  right: 20,
+                }}
               >
-                <Edit />
-              </IconButton>
+                <Edit sx={{
+                  height: 18,
+                  width: 18,
+                }}
+                />
+              </button>
+
             </div>
             <Dialog open={editProfilePic} onClose={() => setProfilePic(false)}>
               <div>

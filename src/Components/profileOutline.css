@@ -292,9 +292,18 @@ input {
 }
 
 .profilePicButton {
-    /* background: #000FF0;
-    width: 35 !important;
-    height: 35 !important;
-    border-radius: 50%; 
-    display:flex; */
+    width: 35px;
+    position: relative;
 }
+
+/* #editProfilePicButton{
+    min-width: none !important; 
+    background: '#FFFFFF';
+    border-color: 'black';
+    color: 'black';
+    border-radius: '50%';
+    align-self: 'flex-end';
+    height: 64;
+    width: 35;
+    text-transform: none !important;
+} */
