@@ -116,7 +116,6 @@ function Register() {
   useEffect(() => {
     if (!loading && user) {
       setDisplayName(user.displayName);
-      // console.log(user.displayName);
     }
   }, [user, loading]);
 
@@ -150,15 +149,23 @@ function Register() {
     if (errorFlag) {
       return;
     }
-
-    const registered = await registerWithEmailAndPassword(
-      firstName,
-      lastName,
-      accountType,
-      email,
-      password,
-      setDisplayName,
-    );
+    if (password.length < 6) {
+      alert('Please ensure your password is at least 6 characters');
+      return;
+    }
+    let registered;
+    try {
+      registered = await registerWithEmailAndPassword(
+        firstName,
+        lastName,
+        accountType,
+        email,
+        password,
+        setDisplayName,
+      );
+    } catch (error) {
+      alert(error);
+    }
     if (accountType === 'navigator') {
       await createNavigator(email, data);
     } else if (accountType === 'jobseeker') {
