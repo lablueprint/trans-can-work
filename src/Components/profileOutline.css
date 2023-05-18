@@ -81,7 +81,6 @@ input, textarea {
 font-family: 'Montserrat' !important;
 text-transform: none !important;
 white-space: nowrap
-
 }
 
 .outermost-container {
@@ -290,4 +289,12 @@ input {
     align-self: flex-end;
     margin-top: 5%;
     margin-bottom: 5%;
+}
+
+.profilePicButton {
+    /* background: #000FF0;
+    width: 35 !important;
+    height: 35 !important;
+    border-radius: 50%; 
+    display:flex; */
 }

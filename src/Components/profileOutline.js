@@ -6,6 +6,8 @@ import Box from '@mui/material/Box';
 import { PropTypes } from 'prop-types';
 import Avatar from 'react-avatar';
 import Button from '@mui/material/Button';
+import { Dialog } from '@mui/material';
+import { Edit, Close } from '@mui/icons-material';
 import Pencil from '../Assets/pencil.svg';
 import Eye from '../Assets/eye.svg';
 import Back from '../Assets/back.svg';
@@ -16,6 +18,8 @@ import './profileOutline.css';
 import { logout } from './firebase';
 import LogoutLogo from '../Assets/logout.svg';
 import BlueLogoutLogo from '../Assets/bluelogout.svg';
+import { Link } from 'react-router-dom';
+import { IconButton } from '@material-ui/core';
 
 const demographicInfo = [{
   name: 'kaylee',
@@ -66,11 +70,14 @@ function a11yProps(index) {
   };
 }
 
+const backgroundColors = ['#FF968A', '#FFCCB6', '#FFFFB5', '#CCE2CB', '#A2E1DB', '#D4F0F0', '#CBAACB', '#FEE1E8'];
+
 export default function ProfileOutline() {
   const [value, setValue] = React.useState(0);
   const [disableButton, setDisableButton] = React.useState(true);
   const [passwordShown, setPasswordShown] = React.useState(false);
   const [logoutPress, setLogoutPress] = React.useState(false);
+  const [editProfilePic, setProfilePic] = React.useState(false);
   // const navigate = useNavigate();
   // const [values, setValues] = React.useState(initialValues);
   // const [clients, setClients] = React.useState([]);
@@ -164,18 +171,24 @@ export default function ProfileOutline() {
                 <div className="profile-page-back-empty-block" />
                 <div className="header-image-container">
                   <div className="back-button">
-                    <Button>
-                      <img
-                        src={Back}
-                        alt="back-pointing arrow"
+                    <Link to="/">
+                      <Button
                         style={{
-                          marginRight: '12px',
-                          width: '7.41px',
-                          height: '12px',
+                          color: 'black',
                         }}
-                      />
-                      Back
-                    </Button>
+                      >
+                        <img
+                          src={Back}
+                          alt="back-pointing arrow"
+                          style={{
+                            marginRight: '12px',
+                            width: '7.41px',
+                            height: '12px',
+                          }}
+                        />
+                        Back
+                      </Button>
+                    </Link>
                   </div>
                 </div>
                 <div className="profile-page-header-empty-block" />
@@ -209,6 +222,34 @@ export default function ProfileOutline() {
         <div className="top-container">
           <div className="profile-photo-container">
             <Avatar facebookId="100008343750912" size="150" sx={{ borderRadius: '100px' }} round />
+            <div
+              className="profilePicButton"
+            >
+              <IconButton
+                onClick={() => setProfilePic(true)}
+                className="editButton"
+              >
+                <Edit />
+              </IconButton>
+            </div>
+            <Dialog open={editProfilePic} onClose={() => setProfilePic(false)}>
+              <div>
+                <h3>Choose Profile Picture</h3>
+                {backgroundColors.map((color) => (
+                  <Button
+                    key={color}
+                    style={{
+                      backgroundColor: color,
+                      width: 50,
+                      height: 65,
+                      borderRadius: '50%',
+                      margin: 5,
+                    }}
+                  />
+                ))}
+              </div>
+              <Button onClick={() => setProfilePic(false)}>Save</Button>
+            </Dialog>
             <p className="name-display">
               {demographicInfo[0].name}
             </p>
