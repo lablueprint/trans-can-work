@@ -12,6 +12,10 @@ import InputAdornment from '@mui/material/InputAdornment';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import GoogleIcon from '@mui/icons-material/Google';
 import { styled, makeStyles } from '@material-ui/core/styles';
+import Save from '../Assets/save.svg';
+import Add from '../Assets/add.svg';
+import Delete from '../Assets/delete.svg';
+import Back from '../Assets/back.svg';
 import { createJobseeker } from '../Services/jobseeker-service';
 import Checkboxes from './Checkboxes';
 
@@ -335,17 +339,12 @@ function Onboard({ username, useremail }) {
             <div className="assessment-page-headers-container">
               <div className="assessment-page-header-name-and-icon-container">
                 <div className="assessment-page-back-empty-block" />
-                {/* <div className="header-image-container">
+                <div className="header-image-container">
                   <img
                     src={Back}
                     alt="back-pointing arrow"
-                    style={{
-                      marginRight: '12px',
-                      width: '7.41px',
-                      height: '12px',
-                    }}
                   />
-                </div> */}
+                </div>
                 <p className="assessment-page-back-text">Return to Clients List</p>
                 <div className="assessment-page-header-empty-block" />
                 <p className="assessment-page-header-profile-text">{username}</p>
@@ -448,7 +447,7 @@ function Onboard({ username, useremail }) {
         </div>
 
         <div>
-          <h1>Education Info</h1>
+          <h1 className="h1-altered">Education Info</h1>
           {jobseeker.education.map((educationObject, index) => (
             <div>
               <form>
@@ -456,13 +455,19 @@ function Onboard({ username, useremail }) {
                   <FormControl sx={{
                     color: '#49454F',
                     width: '55.0vw',
-                    height: '9.2vh',
+                    height: '4.2vh',
                     fontSize: '0.9vw',
                     fontWeight: 'bold',
                     paddingBottom: '2%',
                   }}
                   >
-                    <InputLabel id="demo-simple-select-label">Degree?</InputLabel>
+                    <InputLabel
+                      id="demo-simple-select-label"
+                      className="dropdown"
+                    >
+                      Degree?
+
+                    </InputLabel>
                     <Select
                       id="degree"
                       autoWidth
@@ -504,7 +509,7 @@ function Onboard({ username, useremail }) {
                         color: '#49454F',
                         paddingLeft: '0.5%',
                         width: '55.0vw',
-                        height: '3.2vh',
+                        height: '3.2vw',
                         fontSize: '0.9vw',
                         fontWeight: 'bold',
                       },
@@ -519,33 +524,6 @@ function Onboard({ username, useremail }) {
                     }}
                   />
                 )}
-                {/* <div className="inputWrapper">
-                  <label htmlFor="degree">
-                    Degree?
-                    <select
-                      id="degree"
-                      placeholder={educationObject.degree}
-                      onChange={(e) => editEducation(e, 'degree', index)}
-                      type="text"
-                    >
-                      <option value="No">No</option>
-                      <option value="Yes">Yes</option>
-                    </select>
-                  </label>
-                </div>
-                {jobseeker.education[index].degree === 'Yes' && (
-                <div className="inputWrapper">
-                  <label htmlFor="degreeType">
-                    Type of Degree
-                    <input
-                      id="degreeType"
-                      placeholder={educationObject.degreeType}
-                      onChange={(e) => editEducation(e, 'degreeType', index)}
-                      type="text"
-                    />
-                  </label>
-                </div>
-                )} */}
                 <div>
                   <FormControl sx={{
                     color: '#49454F',
@@ -638,18 +616,33 @@ function Onboard({ username, useremail }) {
                 )} */}
               </form>
               <div className="left-button">
-                <button type="button" onClick={(e) => deleteEducation(e, index)} className="delete-buttons">Delete Education</button>
+                <button type="button" onClick={(e) => deleteEducation(e, index)} className="delete-buttons">
+                  <img
+                    src={Delete}
+                    alt="delete icon"
+                    style={{ marginRight: '12px' }}
+                  />
+                  Delete Education
+
+                </button>
               </div>
             </div>
           ))}
         </div>
-        <br />
         <div className="left-button">
-          <button type="button" onClick={addEducation} className="delete-buttons">Add an Education</button>
+          <button type="button" onClick={addEducation} className="add-buttons">
+            <img
+              src={Add}
+              alt="add icon"
+              style={{ marginRight: '12px' }}
+            />
+            Add Education
+
+          </button>
         </div>
 
         <div>
-          <h1>List of Current/Previous Occupations</h1>
+          <h1 className="h1-altered">List of Current/Previous Occupations</h1>
           <form>
             <div>
               {jobseeker.occupation.map((occupationObject, index) => (
@@ -688,13 +681,27 @@ function Onboard({ username, useremail }) {
                     />
                   </form>
                   <div className="left-button">
-                    <button type="button" onClick={(e) => deleteOccupation(e, index)} className="delete-buttons">Delete Occupation</button>
+                    <button type="button" onClick={(e) => deleteOccupation(e, index)} className="delete-buttons">
+                      <img
+                        src={Delete}
+                        alt="delete icon"
+                        style={{ marginRight: '12px' }}
+                      />
+                      Delete Occupation
+                    </button>
                   </div>
                 </div>
               ))}
             </div>
             <div className="left-button">
-              <button type="button" onClick={addOccupation} className="delete-buttons">Add an Occupation</button>
+              <button type="button" onClick={addOccupation} className="add-buttons">
+                <img
+                  src={Add}
+                  alt="add icon"
+                  style={{ marginRight: '12px' }}
+                />
+                Add Occupation
+              </button>
             </div>
           </form>
         </div>
@@ -779,7 +786,14 @@ function Onboard({ username, useremail }) {
           </form>
         </div>
         <div className="left-button">
-          <button type="button" onClick={saveJobseeker} className="delete-buttons">Save Changes</button>
+          <button type="button" onClick={saveJobseeker} className="add-buttons">
+            <img
+              src={Save}
+              alt="save icon"
+              style={{ marginRight: '12px' }}
+            />
+            Save Changes
+          </button>
         </div>
 
       </div>

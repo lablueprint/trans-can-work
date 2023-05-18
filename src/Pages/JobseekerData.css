@@ -1,11 +1,40 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-weight: normal;
+    font-style: normal;
+    src: url('../Assets/Fonts/Montserrat-Regular.eot') format('embedded-opentype'), /* IE6-IE8 */
+         url('../Assets/Fonts/Montserrat-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../Assets/Fonts/Montserrat-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+         url('../Assets/Fonts/Montserrat-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('../Assets/Fonts/Montserrat-Regular.svg') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    font-weight: bold;
+    font-style: normal;
+    src: url('../Assets/Fonts/Montserrat-Bold.eot') format('embedded-opentype'), /* IE6-IE8 */
+         url('../Assets/Fonts/Montserrat-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../Assets/Fonts/Montserrat-Bold.woff') format('woff'), /* Pretty Modern Browsers */
+         url('../Assets/Fonts/Montserrat-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('../Assets/Fonts/Montserrat-Bold.svg') format('svg'); /* Legacy iOS */
+}
+
 h1 {
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 700;
-    font-size: 57px;
-    line-height: 64px;
+    font-size: 1.2em;
+    line-height: 1em;
     text-align: left;
-    margin-left: 5.6em;
+    margin-left: 16.3em;
+  }
+
+.h1-altered {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    text-align: left;
   }
 
 /* label { 
@@ -28,7 +57,7 @@ h2 {
     font-size: 16px;
     line-height: 20px;
     text-align: left;
-    margin-left: 5.6em;
+    margin-left: 19.5em;
 }
 
 h3 
@@ -128,47 +157,39 @@ input, textarea {
     margin-bottom: 2.5em;
 }
 
-.delete-buttons {
-    width: 12em;
+.add-buttons {
+    width: 14em;
     height: 4em;
     margin-bottom: 1%;
-    /* float: left; */
     background-color: #000AA0;
     color: white;
     border-radius: 5px;
     border: none;
-    /* margin-right: 1em;
-    margin-left: 5.6em; */
+    font-family: 'Montserrat';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-buttons {
+    width: 14em;
+    height: 4em;
+    margin-bottom: 1%;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    border-color: black;
+    font-family: 'Montserrat';
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .left-button {
     text-align: left;
-    /* margin-bottom: 1%; */
-    padding-left: 20.22em;
+    margin-bottom: .3em;
+    padding-left: 19.7em;
 }
-
-.other-buttons {
-    width: 12em;
-    height: 4em;
-    margin-bottom: 1%;
-    float: left;
-    background-color: #000AA0;
-    color: white;
-    border-radius: 5px;
-    border: none;
-}
-
-/* .columns-container {
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    margin-top: 40px;
-}
-
-.checkbox-columns {
-    flex-direction: column;
-    width: 50%;
-} */
 
 .columns-container {
     display: flex;
@@ -182,4 +203,8 @@ input, textarea {
   .checkboxes-column-right {
     width: 50%; /* Adjust the width as needed */
     /* Styles for the checkboxes columns */
+  }
+
+  .dropdown {
+    height: 10000px;
   }
