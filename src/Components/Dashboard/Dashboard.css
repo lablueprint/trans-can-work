@@ -1,3 +1,14 @@
+.home-page-container{
+    margin-top: 1em;
+}
+
+.home-page-headers-container{
+    display: flex;
+    flex-direction: column;
+    padding: 0 4em;
+    box-shadow: 0 4px 4px #c9c9c9;
+}
+
 .home-page-title{
     font-family: 'Montserrat';
     font-size: 3em;
@@ -5,15 +16,6 @@
     margin: 0;
     text-align: left;
     display:flex;
-}
-
-.tab-panel-grid-layout{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 15em);
-    grid-row-gap: 2em;
-    justify-content: space-evenly;
-    margin: 3rem 1rem;
-
 }
 
 .home-page-title{
@@ -30,39 +32,35 @@
     font-size: 1em;
     font-weight: bold;
     text-align: left;
-    display:flex;
-}
-
-.home-page-container{
-    margin-top: 5em;
-}
-
-.home-page-headers-container{
-    display: flex;
-    flex-direction: column;
-    margin-left: 7em;
 }
 
 .home-page-header-name-and-icon-container{
     display: flex;
     flex-direction: row;
-}
-
-.home-page-header-empty-block{
-    flex: 0 0 80%;
+    justify-content: right;
+    column-gap: 1em;
 }
 
 .home-page-welcome-block-header{
     display: flex; 
     flex-direction: row;
-    height: 3em;
+    min-height: 3em;
     margin-bottom: 2.5em;
+    justify-content: space-between;
 }
 
 .home-page-search-bar-container{
     display: flex;
     align-items: end;
-    flex: 1 0 25%;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 16em);
+    grid-row-gap: 1em;
+    justify-content: space-evenly;
+    margin: 3rem 1rem;
+
 }
 
 .profile-avatar{
@@ -71,8 +69,4 @@
     margin-top: 6px;
     margin-bottom: 6px;
     margin-left: 6px;
-}
-
-.home-page-welcome-container{
-    flex: 0 0 75%;
 }
