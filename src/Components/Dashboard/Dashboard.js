@@ -24,51 +24,56 @@ function a11yProps(index) {
 
 const HomeTab = styled((props) => <Tab disableRipple {...props} />)(() => ({
   textTransform: 'none',
-
 }));
 
+/* the current version of the dashboard will not work with the switch to the users table
+    - need to consider the new object format
+    - admin + navigators have different levels of access, so this will cause issues with user rules
+      -> should only fetch the necessary + accessible info!
+*/
 export default function Dashboard({ profileName, role }) {
-  const [value, setValue] = useState(0);
-  const [archivedProfiles, setArchivedProfiles] = useState([]);
-  const [notArchivedProfiles, setNotArchivedProfiles] = useState([]);
-  const [currentAccounts, setCurrentAccounts] = useState([]);
-  const [navigatorAccounts, setNavigatorAccounts] = useState([]);
-  const [filteredAccounts, setFilteredAccounts] = useState([]);
+  const [tabValue, setValue] = useState(0);
+
+  // data from firebase
+  const [clients, setClients] = useState([]);
+  const [archivedClients, setArchivedProfiles] = useState([]);
+  const [navigators, setNavigators] = useState([]);
   const [unapprovedAccounts, setUnapprovedAccounts] = useState([]);
 
+  // data for display
+  const [currentTabAccounts, setCurrentTabAccounts] = useState([]);
+  const [filteredAccounts, setFilteredAccounts] = useState([]);
+
+  // handle tab change
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  // set the current accounts display (depending on the role type)
   useEffect(() => {
     if (role === 'Admin') {
-      if (value === 0) {
-        setCurrentAccounts(navigatorAccounts);
-        setFilteredAccounts(navigatorAccounts);
-      } else if (value === 1) {
-        setCurrentAccounts(notArchivedProfiles);
-        setFilteredAccounts(notArchivedProfiles);
-      } else if (value === 2) {
-        setCurrentAccounts(archivedProfiles);
-        setFilteredAccounts(archivedProfiles);
-      } else if (value === 3) {
-        setCurrentAccounts(unapprovedAccounts);
-        setFilteredAccounts(unapprovedAccounts);
+      if (tabValue === 0) {
+        setCurrentTabAccounts(navigators);
+      } else if (tabValue === 1) {
+        setCurrentTabAccounts(clients);
+      } else if (tabValue === 2) {
+        setCurrentTabAccounts(archivedClients);
+      } else if (tabValue === 3) {
+        setCurrentTabAccounts(unapprovedAccounts);
       }
     } else if (role === 'Navigator') {
-      if (value === 0) {
-        setCurrentAccounts(notArchivedProfiles);
-        setFilteredAccounts(notArchivedProfiles);
-      } else if (value === 1) {
-        setCurrentAccounts(archivedProfiles);
-        setFilteredAccounts(archivedProfiles);
+      if (tabValue === 0) {
+        setCurrentTabAccounts(clients);
+      } else if (tabValue === 1) {
+        setCurrentTabAccounts(archivedClients);
       }
     }
-  }, [value]);
+  }, [tabValue, navigators, clients, archivedClients, unapprovedAccounts, role]);
 
   useEffect(() => {
-    const info = [];
-    const navInfo = [];
+    // eventually change this to just get each record listed in the user record
+    const clientsTemp = [];
+    const navTemp = [];
     async function loadData() {
       const docs = await fetchAllJobseekers();
       const navProfiles = await fetchAllNavigators();
@@ -77,26 +82,24 @@ export default function Dashboard({ profileName, role }) {
         const elem = {
           name: element.data().name, archived: element.data().archived, field: element.data()['field of work'], email: element.id, interests: element.data().interests, skills: element.data().skills,
         };
-        info.push(elem);
+        clientsTemp.push(elem);
       });
 
       navProfiles.forEach((element) => {
         const elem = {
           name: element.data().name, archived: element.data().archived, field: element.data()['field of work'], email: element.id, interests: element.data().interests, skills: element.data().skills,
         };
-        navInfo.push(elem);
+        navTemp.push(elem);
         console.log(element.data());
       });
 
-      const archivedAccounts = info.filter((element) => element.archived);
-      const unarchivedAccounts = info.filter((element) => !element.archived);
-      const unapprovedAccs = info.filter((element) => !element.approval);
+      const archivedAccounts = clientsTemp.filter((element) => element.archived);
+      const unarchivedAccounts = clientsTemp.filter((element) => !element.archived);
+      const unapprovedAccs = clientsTemp.filter((element) => !element.approval);
 
       setArchivedProfiles(archivedAccounts);
-      setNotArchivedProfiles(unarchivedAccounts);
-      setNavigatorAccounts(navInfo);
-      setCurrentAccounts(navInfo);
-      setFilteredAccounts(navInfo);
+      setClients(unarchivedAccounts);
+      setNavigators(navTemp);
       setUnapprovedAccounts(unapprovedAccs);
     }
     loadData();
@@ -122,10 +125,10 @@ export default function Dashboard({ profileName, role }) {
                 {profileName.split(' ')[0]}
               </p>
             </div>
-            <div className="home-page-search-bar-container"><SearchAndFilter names={currentAccounts} setOutput={setFilteredAccounts} placeholder="Search Accounts" /></div>
+            <div className="home-page-search-bar-container"><SearchAndFilter names={currentTabAccounts} setOutput={setFilteredAccounts} placeholder="Search Accounts" /></div>
           </div>
           <Tabs
-            value={value}
+            value={tabValue}
             onChange={handleChange}
             aria-label="basic tabs example"
           >
@@ -135,10 +138,9 @@ export default function Dashboard({ profileName, role }) {
             {role === 'Admin' && <HomeTab label="Unapproved Accounts" {...a11yProps(3)} />}
           </Tabs>
         </div>
-
       </Box>
       {role === 'Admin' && (
-      <TabPanel value={value} index={0}>
+      <TabPanel value={tabValue} index={0}>
         <div>
           {filteredAccounts && filteredAccounts.length
             ? (
@@ -159,7 +161,7 @@ export default function Dashboard({ profileName, role }) {
         </div>
       </TabPanel>
       )}
-      <TabPanel value={value} index={role === 'Admin' ? 1 : 0}>
+      <TabPanel value={tabValue} index={role === 'Admin' ? 1 : 0}>
         <div>
           {filteredAccounts && filteredAccounts.length
             ? (
@@ -179,7 +181,7 @@ export default function Dashboard({ profileName, role }) {
             ) : <NoAccounts />}
         </div>
       </TabPanel>
-      <TabPanel value={value} index={role === 'Admin' ? 2 : 1}>
+      <TabPanel value={tabValue} index={role === 'Admin' ? 2 : 1}>
         <div>
           {filteredAccounts && filteredAccounts.length
             ? (
@@ -200,7 +202,7 @@ export default function Dashboard({ profileName, role }) {
         </div>
       </TabPanel>
       {role === 'Admin' && (
-      <TabPanel value={value} index={3}>
+      <TabPanel value={tabValue} index={3}>
         <div>
           {filteredAccounts && filteredAccounts.length
             ? (
@@ -233,5 +235,5 @@ Dashboard.propTypes = {
 
 Dashboard.defaultProps = {
   profileName: 'Nasser Elhajjaoui',
-  role: 'Navigator',
+  role: 'Admin',
 };

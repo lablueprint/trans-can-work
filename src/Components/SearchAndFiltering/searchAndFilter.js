@@ -126,7 +126,7 @@ function SearchAndFilter({ names, setOutput }) {
     } else {
       setJobseekers(names);
     }
-  }, [value]);
+  }, [value, names]);
 
   const getCheckedSkills = () => {
     const checkedSkills = [];
@@ -164,7 +164,7 @@ function SearchAndFilter({ names, setOutput }) {
     } else {
       setOutput(jobseekers);
     }
-  }, [checkedInterests, checkedArr, jobseekers]);
+  }, [checkedInterests, checkedArr, jobseekers, names]);
 
   return (
     <div className="App">
