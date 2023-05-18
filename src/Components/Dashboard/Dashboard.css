@@ -12,7 +12,7 @@
     grid-template-columns: repeat(auto-fill, 15em);
     grid-row-gap: 2em;
     justify-content: space-evenly;
-    margin: 0 0 3rem;
+    margin: 3rem 1rem;
 
 }
 

@@ -37,7 +37,6 @@ function App() {
         <Route path="/landing" element={<Landing />} />
         <Route path="/onboard" element={<JobseekerData useremail="solia@goodpl.us" username="solia tennis" />} />
         <Route path="/adminview" element={<AdminView />} />
-
         <Route
           path="/splash"
           element={(

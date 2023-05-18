@@ -6,7 +6,6 @@ import {
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { PropTypes } from 'prop-types';
-import TabPanel from '../TabPanel';
 import SearchAndFilter from '../SearchAndFiltering/searchAndFilter';
 import '../../Pages/Home.css';
 import './Dashboard.css';
@@ -139,13 +138,10 @@ export default function Dashboard({ profileName, role }) {
           </Tabs>
         </div>
       </Box>
-      {role === 'Admin' && (
-      <TabPanel value={tabValue} index={0}>
-        <div>
-          {filteredAccounts && filteredAccounts.length
-            ? (
-              <div className="tab-panel-grid-layout">
-                {
+      {filteredAccounts && filteredAccounts.length
+        ? (
+          <div className="tab-panel-grid-layout">
+            {
                 filteredAccounts.map((element) => (
                   <ProfileButton
                     key={uuidv4()}
@@ -156,74 +152,8 @@ export default function Dashboard({ profileName, role }) {
                   />
                 ))
               }
-              </div>
-            ) : <NoAccounts />}
-        </div>
-      </TabPanel>
-      )}
-      <TabPanel value={tabValue} index={role === 'Admin' ? 1 : 0}>
-        <div>
-          {filteredAccounts && filteredAccounts.length
-            ? (
-              <div className="tab-panel-grid-layout">
-                {
-                filteredAccounts.map((element) => (
-                  <ProfileButton
-                    key={uuidv4()}
-                    profileName={element.name}
-                    profileArchived={element.archived}
-                    workField={element.field}
-                    jobseekerEmail={element.email}
-                  />
-                ))
-              }
-              </div>
-            ) : <NoAccounts />}
-        </div>
-      </TabPanel>
-      <TabPanel value={tabValue} index={role === 'Admin' ? 2 : 1}>
-        <div>
-          {filteredAccounts && filteredAccounts.length
-            ? (
-              <div className="tab-panel-grid-layout">
-                {
-                filteredAccounts.map((element) => (
-                  <ProfileButton
-                    key={uuidv4()}
-                    profileName={element.name}
-                    profileArchived={element.archived}
-                    workField={element.field}
-                    jobseekerEmail={element.email}
-                  />
-                ))
-              }
-              </div>
-            ) : <NoAccounts />}
-        </div>
-      </TabPanel>
-      {role === 'Admin' && (
-      <TabPanel value={tabValue} index={3}>
-        <div>
-          {filteredAccounts && filteredAccounts.length
-            ? (
-              <div className="tab-panel-grid-layout">
-                {
-                filteredAccounts.map((element) => (
-                  <ProfileButton
-                    key={uuidv4()}
-                    profileName={element.name}
-                    profileArchived={element.archived}
-                    workField={element.field}
-                    jobseekerEmail={element.email}
-                  />
-                ))
-              }
-              </div>
-            ) : <NoAccounts />}
-        </div>
-      </TabPanel>
-      )}
-
+          </div>
+        ) : <NoAccounts />}
     </div>
   );
 }
