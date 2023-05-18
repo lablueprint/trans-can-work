@@ -4,6 +4,8 @@ h1 {
     font-weight: 700;
     font-size: 57px;
     line-height: 64px;
+    text-align: left;
+    margin-left: 5.6em;
   }
 
 /* label { 
@@ -25,6 +27,8 @@ h2 {
     font-weight: 400;
     font-size: 16px;
     line-height: 20px;
+    text-align: left;
+    margin-left: 5.6em;
 }
 
 h3 
@@ -59,14 +63,6 @@ input, textarea {
     margin-left: 10%;
     margin-top: 10%;
     width: 500px;
-}
-
-.edit-button{
-    display: flex;
-    align-items: flex-end;
-    align-self: flex-end;
-    margin-top: 5%;
-    margin-left: 30%;
 }
 .top-container{
     display:flex; 
@@ -132,11 +128,34 @@ input, textarea {
     margin-bottom: 2.5em;
 }
 
-.education-buttons {
+.delete-buttons {
     width: 12em;
     height: 4em;
     margin-bottom: 1%;
-    align-items: left;
+    /* float: left; */
+    background-color: #000AA0;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    /* margin-right: 1em;
+    margin-left: 5.6em; */
+}
+
+.left-button {
+    text-align: left;
+    /* margin-bottom: 1%; */
+    padding-left: 20.22em;
+}
+
+.other-buttons {
+    width: 12em;
+    height: 4em;
+    margin-bottom: 1%;
+    float: left;
+    background-color: #000AA0;
+    color: white;
+    border-radius: 5px;
+    border: none;
 }
 
 /* .columns-container {

@@ -69,7 +69,7 @@ function Onboard({ username, useremail }) {
       certificate: 'No',
       certificateType: 'ur house',
     }],
-    occupation: 'None',
+    occupation: ['None'],
     // TODO: once the hifi fully defines the add + delete functionality
     // occupation should be an array same as education.
     dreamjob: 'None',
@@ -253,6 +253,19 @@ function Onboard({ username, useremail }) {
       });
     }
   };
+  const addOccupation = (event) => {
+    event.preventDefault();
+    const temp = [...jobseeker.occupation];
+    if (temp.length >= 3) {
+      alert('If you have more than three past positions, please put the most recent three.');
+    } else {
+      temp.push('None');
+      setJobseeker({
+        ...jobseeker,
+        occupation: temp,
+      });
+    }
+  };
 
   const editEducation = (event, element, index) => {
     event.preventDefault();
@@ -264,6 +277,16 @@ function Onboard({ username, useremail }) {
     });
   };
 
+  const editOccupation = (event, index) => {
+    event.preventDefault();
+    const temp = [...jobseeker.occupation];
+    temp[index] = event.target.value;
+    setJobseeker({
+      ...jobseeker,
+      occupation: temp,
+    });
+  };
+
   const deleteEducation = (event, index) => {
     event.preventDefault();
     const temp = [...jobseeker.education];
@@ -271,6 +294,16 @@ function Onboard({ username, useremail }) {
     setJobseeker({
       ...jobseeker,
       education: temp,
+    });
+  };
+
+  const deleteOccupation = (event, index) => {
+    event.preventDefault();
+    const temp = [...jobseeker.occupation];
+    temp.splice(index, 1);
+    setJobseeker({
+      ...jobseeker,
+      occupation: temp,
     });
   };
 
@@ -416,7 +449,6 @@ function Onboard({ username, useremail }) {
 
         <div>
           <h1>Education Info</h1>
-
           {jobseeker.education.map((educationObject, index) => (
             <div>
               <form>
@@ -424,7 +456,7 @@ function Onboard({ username, useremail }) {
                   <FormControl sx={{
                     color: '#49454F',
                     width: '55.0vw',
-                    height: '3.2vw',
+                    height: '9.2vh',
                     fontSize: '0.9vw',
                     fontWeight: 'bold',
                     paddingBottom: '2%',
@@ -440,7 +472,11 @@ function Onboard({ username, useremail }) {
                       MenuProps={{
                         PaperProps: {
                           style: {
-                            width: '55.0vw', // Set the desired width for the menu items
+                            color: '#49454F',
+                            width: '55.0vw',
+                            fontSize: '0.9vw',
+                            fontWeight: 'bold',
+                            paddingBottom: '2%',
                           },
                         },
                       }}
@@ -468,7 +504,7 @@ function Onboard({ username, useremail }) {
                         color: '#49454F',
                         paddingLeft: '0.5%',
                         width: '55.0vw',
-                        height: '3.2vw',
+                        height: '3.2vh',
                         fontSize: '0.9vw',
                         fontWeight: 'bold',
                       },
@@ -601,36 +637,103 @@ function Onboard({ username, useremail }) {
                 </div>
                 )} */}
               </form>
-
-              <button type="button" onClick={(e) => deleteEducation(e, index)} className="education-buttons">Delete Education</button>
+              <div className="left-button">
+                <button type="button" onClick={(e) => deleteEducation(e, index)} className="delete-buttons">Delete Education</button>
+              </div>
             </div>
           ))}
         </div>
-
-        <button type="button" onClick={addEducation} className="education-buttons">Add an Education</button>
+        <br />
+        <div className="left-button">
+          <button type="button" onClick={addEducation} className="delete-buttons">Add an Education</button>
+        </div>
 
         <div>
           <h1>List of Current/Previous Occupations</h1>
           <form>
-            <div className="inputWrapper">
-              <label htmlFor="occupation">
-                Most Recent Occupation
-                <input id="occupation" placeholder={jobseeker.occupation} type="text" />
-              </label>
+            <div>
+              {jobseeker.occupation.map((occupationObject, index) => (
+                <div>
+                  <form>
+                    <CssTextField
+                      focusColor="#0c0ca4"
+                      label={`Occupation ${index + 1}`}
+                      variant="outlined"
+                      FormHelperTextProps={{ children: 'Label' }}
+                      focused
+                // value={email}
+                      onChange={(e) => editOccupation(e, index)}
+                    // placeholder={item.placeholder}
+                      style={{ paddingBottom: '1%' }}
+                      InputProps={{
+                        className: classes.root,
+                        style: {
+                          fontFamily: 'Montserrat',
+                          color: '#49454F',
+                          paddingLeft: '0.5%',
+                          width: '55.0vw',
+                          height: '3.2vw',
+                          fontSize: '0.9vw',
+                          fontWeight: 'bold',
+                        },
+                      }}
+                      InputLabelProps={{
+                        className: classes.labelInput,
+                        style: {
+                          fontFamily: 'Montserrat',
+                          paddingLeft: '0.3%',
+                          backgroundColor: 'white',
+                        },
+                      }}
+                    />
+                  </form>
+                  <div className="left-button">
+                    <button type="button" onClick={(e) => deleteOccupation(e, index)} className="delete-buttons">Delete Occupation</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="left-button">
+              <button type="button" onClick={addOccupation} className="delete-buttons">Add an Occupation</button>
             </div>
           </form>
         </div>
 
-        <div>
-          <h1>Industry Interest</h1>
-          <h2>In what areas of the followin' industries are ye open to explorin' or have an interest in possible future employment?</h2>
-          <Checkboxes skills={interests} checkedArr={checkedInt} setCheckedArr={setCheckedInt} />
-        </div>
+        <br />
 
         <div>
           <h1>Industry Interest</h1>
-          <Checkboxes skills={interests} checkedArr={checkedInt} setCheckedArr={setCheckedInt} />
+          <h2>
+            In what areas of the followin&apos; industries are
+            ye open to explorin&apos; or have an interest in possible future employment?
+
+          </h2>
+          <div className="columns-container">
+            <div className="checkboxes-column-left">
+              <Checkboxes
+                skills={interests.slice(0, 22)}
+                checkedArr={checkedPrev}
+                setCheckedArr={setCheckedPrev}
+              />
+            </div>
+            <div className="checkboxes-column-right">
+              <Checkboxes
+                skills={interests.slice(22)}
+                checkedArr={checkedPrev}
+                setCheckedArr={setCheckedPrev}
+              />
+            </div>
+          </div>
         </div>
+
+        {/* <div>
+          <h1>Skills Checklist</h1>
+          <Checkboxes
+            skills={skillsChecklist}
+            checkedArr={checkedInt}
+            setCheckedArr={setCheckedInt}
+          />
+        </div> */}
 
         <div>
           <h1>Ultimate Dream Job</h1>
@@ -675,8 +778,10 @@ function Onboard({ username, useremail }) {
             </div>
           </form>
         </div>
+        <div className="left-button">
+          <button type="button" onClick={saveJobseeker} className="delete-buttons">Save Changes</button>
+        </div>
 
-        <button type="button" onClick={saveJobseeker} className="education-buttons">Save Changes</button>
       </div>
     </div>
   );
