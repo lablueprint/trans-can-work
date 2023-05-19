@@ -86,7 +86,8 @@ const Transition = React.forwardRef((props, ref) => (
 
 /* TODO:
   - Dynamically pull navigator from backend
-  - Add change profile pic functionality once designs done */
+  - Add change profile pic functionality once designs done
+  - only display password if the user isnt signed in with google */
 function ProfilePopup({
   open,
   handleClose,
