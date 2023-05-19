@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Dialog, Slide } from '@mui/material';
 import './ProfilePopup.css';
@@ -10,21 +10,24 @@ import Divider from '@mui/material/Divider';
 import { InputAdornment } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import Button from '@mui/material/Button';
+import { doc, setDoc } from 'firebase/firestore';
 import profilepic from '../Assets/parrot_profile.svg';
 import navpic from '../Assets/powell_cat.svg';
+import { fetchJobseeker } from '../Services/jobseeker-service';
+import firebase from '../firebase';
 
 const backgroundColors = ['#FF968A', '#FFCCB6', '#FFFFB5', '#CCE2CB', '#A2E1DB', '#D4F0F0', '#CBAACB', '#FEE1E8'];
 
 const styles = {
   avatar: {
-    width: '100px',
-    height: '100px',
+    width: '5em',
+    height: '5em',
     backgroundColor: 'white',
-    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)',
+    boxShadow: '0px 0.5em 0.75em rgba(0, 0, 0, 0.5)',
 
   },
   containerSection: {
-    maxHeight: '500px',
+    maxHeight: '7em',
     overflowY: 'scroll',
   },
   close: {
@@ -35,7 +38,7 @@ const styles = {
     backgroundColor: '#d3d3d3',
     width: '35',
     height: '35',
-    left: '10',
+    right: '0.7em',
     top: '10',
 
   },
@@ -47,41 +50,103 @@ const styles = {
   edit: {
     width: '20',
     height: '20',
-    color: '#fff',
+    backgroundColor: '#d3d3d3',
+
   },
   mainEdit: {
     width: '20',
     height: '20',
   },
   profileButton: {
-    backgroundColor: '#222',
+    backgroundColor: '#d3d3d3',
     width: '35',
     height: '35',
   },
   divider: {
-    marginBottom: '30px',
+    marginBottom: '2em',
   },
   email: {
-    marginTop: '100px',
+    marginTop: '6.5em',
+  },
+  done: {
+    textTransform: 'None',
+    color: '#484649',
+    fontFamily: 'Montserrat',
+    maxWidth: '5em',
+    alignSelf: 'center',
+    fontWeight: 'bold',
+  },
+  colorPopup: {
+    margin: '50%',
   },
 };
 const Transition = React.forwardRef((props, ref) => (
   <Slide direction="right" ref={ref} {...props} />
 ));
 
+/* TODO:
+  - Dynamically pull navigator from backend
+  - Add change profile pic functionality once designs done */
 function ProfilePopup({
   open,
   handleClose,
-  firstName,
-  lastName,
-  pronouns,
-  bio,
 }) {
+  const testemail = 'bboy@tt.com';
+  const db = firebase;
+  const docRef = doc(db, 'jobseekers', testemail);
+
   const [edit, setEdit] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [editBackground, setEditBackground] = useState(false);
-  const [editProfilePic, setProfilePic] = useState(false);
+  const [editProfilePic, setEditProfilePic] = useState(false);
 
+  // const [profilePic, setProfilePic] = useState('');
+  const [bg, setBg] = useState('');
+
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [pronouns, setPronouns] = useState('');
+  const [bio, setBio] = useState('');
+
+  useEffect(() => {
+    const logquery = async () => {
+      const query = await fetchJobseeker(testemail);
+      const data = query.data();
+      if (data.firstName != null) {
+        setFirstName(data.firstName);
+      }
+      if (data.lastName != null) {
+        setLastName(data.lastName);
+      }
+      if (data.pronouns != null) {
+        setPronouns(data.pronouns);
+      }
+      if (data.bio != null) {
+        setBio(data.bio);
+      }
+      if (data.profilePic != null) {
+        // setProfilePic(data.profilePic);
+      }
+      if (data.color != null) {
+        setBg(data.color);
+        console.log('background', data.color);
+      }
+    };
+
+    logquery();
+  }, []);
+  const handleClick = (color) => {
+    const data = {
+      color,
+    };
+    setDoc(docRef, data, { merge: true })
+      .then(() => {
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    setBg(color);
+  };
   const handleToggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -124,7 +189,7 @@ function ProfilePopup({
             </>
           )}
         </div>
-        <div className="imageSection" />
+        <div className="imageSection" style={{ backgroundColor: bg }} />
         <div className="profilePic">
           <Avatar
             alt="Jack Sparrow"
@@ -135,39 +200,50 @@ function ProfilePopup({
         {edit ? (
           <>
             <div className="profilePicButton">
-              <IconButton onClick={() => setProfilePic(true)} style={styles.profileButton}>
+              <IconButton onClick={() => setEditProfilePic(true)} style={styles.profileButton}>
                 <Edit style={styles.edit} />
               </IconButton>
             </div>
-            <Dialog open={editProfilePic} onClose={() => setProfilePic(false)}>
-              <div>
-                <h3>Choose Profile Picture</h3>
-                {backgroundColors.map((color) => (
-                  <Button
-                    key={color}
-                    style={{
-                      backgroundColor: color,
-                      width: 50,
-                      height: 65,
-                      borderRadius: '50%',
-                      margin: 5,
-                    }}
-                  />
-                ))}
+            <Dialog
+              PaperProps={{ style: { borderRadius: 30 } }}
+              open={editProfilePic}
+              onClose={() => setEditProfilePic(false)}
+            >
+              <h3 className="backgroundHeader">Choose Profile Picture</h3>
+              <div className="colorPopup">
+                <div>
+                  {backgroundColors.map((color) => (
+                    <Button
+                      key={color}
+                      style={{
+                        backgroundColor: color,
+                        width: 50,
+                        height: 65,
+                        borderRadius: '50%',
+                        margin: 5,
+                      }}
+                    />
+                  ))}
+                </div>
               </div>
 
-              <Button onClick={() => setProfilePic(false)}>Save</Button>
+              <Button variant="outlined" style={styles.done} onClick={() => setEditProfilePic(false)}>Done</Button>
             </Dialog>
             <div className="coverPicButton">
               <IconButton onClick={() => setEditBackground(true)} style={styles.profileButton}>
                 <Edit style={styles.edit} />
               </IconButton>
             </div>
-            <Dialog open={editBackground} onClose={() => setEditBackground(false)}>
+            <Dialog
+              PaperProps={{ style: { borderRadius: 30 } }}
+              open={editBackground}
+              onClose={() => setEditBackground(false)}
+            >
               <div>
-                <h3>Choose Background Color</h3>
+                <h3 className="backgroundHeader">Choose Background Color</h3>
                 {backgroundColors.map((color) => (
                   <Button
+                    onClick={() => handleClick(color)}
                     key={color}
                     style={{
                       backgroundColor: color,
@@ -180,7 +256,7 @@ function ProfilePopup({
                 ))}
               </div>
 
-              <Button onClick={() => setEditBackground(false)}>Save</Button>
+              <Button style={styles.done} onClick={() => setEditBackground(false)}>Done</Button>
             </Dialog>
           </>
         ) : <div /> }
@@ -294,8 +370,4 @@ export default ProfilePopup;
 ProfilePopup.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
-  firstName: PropTypes.string.isRequired,
-  lastName: PropTypes.string.isRequired,
-  pronouns: PropTypes.string.isRequired,
-  bio: PropTypes.string.isRequired,
 };

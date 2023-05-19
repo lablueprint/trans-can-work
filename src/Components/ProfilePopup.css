@@ -1,21 +1,20 @@
 .containerSection {
-  border-radius: 30px;
+  border-radius: 3em;
   background-color: black;
 }
 
 .imageSection {
-  background-image: url(/src/Assets/pirate_ship.svg);
   width: 100%;
-  min-height: 150px;
-  max-height: 150px;
+  min-height: 10em;
+  max-height: 10em;
   background-size: cover;
 }
 
 .profilePicButton {
   position: absolute;
-  width: 10px;
-  top: 165px;
-  left: 130px;
+  width: 0.75em;
+  top: 9.5em;
+  left: 8em;
 }
 
 .coverPicButton {
@@ -37,8 +36,8 @@
 
 .profilePic {
   position: absolute;
-  left: 50px;
-  top: 90px;
+  left: 3em;
+  top: 6em;
 }
 
 .textSection {
@@ -75,7 +74,7 @@
 
 .bioSection {
   width: 100%;
-  max-height: 500px;
+  max-height: 25em;
   overflow-y: scroll;
 }
 
@@ -92,13 +91,12 @@
 .bio {
   font-family: 'Montserrat';
   font-size: 0.9em;
-  margin: 0.5em 0 2.5em 0;
+  margin: 0.5em 0 1em 0;
   line-height: 1.5em;
 }
 
 .container {
   display: flex;
-  /* align-items: center; */
   overflow: hidden;
   /* will contain if #first is longer than #second */
 }
@@ -112,6 +110,7 @@
   flex: 1 1 auto;
   display: flex;
   overflow: hidden;
+  margin-left: 20px;
   /* if you don't want #second to wrap below #first */
   flex-direction: column;
   justify-content: center;
@@ -154,4 +153,17 @@
 
 .inputSection {
   margin-bottom: 2em;
+}
+
+.backgroundHeader {
+  text-align: center;
+  font-family: 'Montserrat';
+  color: #484649;
+
+}
+
+.colorPopup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
