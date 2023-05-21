@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Select from '@mui/material/Select';
 import Avatar from 'react-avatar';
-import { FormControl, MenuItem, InputLabel } from '@mui/material';
+import {
+  FormControl, MenuItem, InputLabel, NativeSelect,
+} from '@mui/material';
 import './JobseekerData.css';
 // import Back from '../Assets/Assessment.png';
 import { TextField, Button, Checkbox } from '@material-ui/core';
@@ -57,20 +59,33 @@ const styles = {
     color: '#49454F',
     fontSize: '0.9vw',
     fontWeight: 'bold',
+    // border: '2px solid #0c0ca4',
+    // borderRadius: '4px',
+    width: '55.0vw',
+    height: '3.2vw',
+    paddingLeft: '1.7%',
+    textDecoration: 'none',
   },
   inputLabel: {
-    color: 'red',
+    borderBottom: 'none',
+    color: '#0c0ca4',
     fontFamily: 'Montserrat',
-    fontWeight: 'bold',
+    fontWeight: 'normal',
     fontSize: '0.9vw',
-    paddingBottom: '2%',
+    // paddingBottom: '2%',
+    paddingTop: '2.4%',
     textAlign: 'left',
+    backgroundColor: 'white',
+    paddingLeft: '1%',
+    paddingRight: '1%',
+    textDecoration: 'none',
   },
   formControl: {
     // no font properties in this?
     width: '55.0vw',
     paddingBottom: '1%',
     textAlign: 'left',
+    textDecoration: 'none',
   },
 };
 
@@ -474,15 +489,31 @@ function Onboard({ username, useremail }) {
               <form>
                 <div>
                   <FormControl style={styles.formControl}>
+                    <InputLabel style={styles.inputLabel}>
+                      Age
+                    </InputLabel>
+                    <NativeSelect
+                      defaultValue={10}
+                      style={styles.dropdownOptions}
+                    >
+                      {/* <option value="" disabled>
+                        Select Option
+                      </option> */}
+                      <option value={10} style={styles.dropdownOptions}>Ten</option>
+                      <option value={20} style={styles.dropdownOptions}>Twenty</option>
+                      <option value={30} style={styles.dropdownOptions}>Thirty</option>
+                    </NativeSelect>
+                    <br />
+                    <br />
                     <CssTextField
                       focusColor="#0c0ca4"
-                      label={`Occupation ${index + 1}`}
+                      label="Degree?"
                       variant="outlined"
                       FormHelperTextProps={{ children: 'Label' }}
                       focused
                 // value={email}
-                      onChange={(e) => editOccupation(e, index)}
-                    // placeholder={item.placeholder}
+                      onChange={(e) => editEducation(e, 'degree', index)}
+                      placeholder="Degree?"
                       style={{ paddingBottom: '1%' }}
                       InputProps={{
                         className: classes.root,
@@ -505,11 +536,29 @@ function Onboard({ username, useremail }) {
                         },
                       }}
                     >
-                      <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
-                      <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
-                      <MenuItem value="Progress" style={styles.dropdownOptions}>In Progress</MenuItem>
+                      <Select
+                        id="degree"
+                        autoWidth
+                      // value={age}
+                        label="Degree?"
+                        onChange={(e) => editEducation(e, 'degree', index)}
+                        MenuProps={{
+                          PaperProps: {
+                            style: {
+                              color: '#49454F',
+                              width: '55.0vw',
+                              fontSize: '0.9vw',
+                              fontWeight: 'bold',
+                            },
+                          },
+                        }}
+                      >
+                        <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
+                        <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
+                        <MenuItem value="Progress" style={styles.dropdownOptions}>In Progress</MenuItem>
+                      </Select>
                     </CssTextField>
-                    <Select
+                    {/* <Select
                       id="degree"
                       autoWidth
                       // value={age}
@@ -529,11 +578,12 @@ function Onboard({ username, useremail }) {
                       <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
                       <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
                       <MenuItem value="Progress" style={styles.dropdownOptions}>In Progress</MenuItem>
-                    </Select>
+                    </Select> */}
                   </FormControl>
                 </div>
                 <div>
                   <FormControl style={styles.formControl}>
+
                     <InputLabel
                       id="demo-simple-select-label"
                       className="dropdown"
