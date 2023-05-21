@@ -170,6 +170,9 @@ input, textarea {
     align-items: center;
     justify-content: center;
 }
+.add-buttons:hover {
+    background-color: #AAAFFA;
+}
 
 .delete-buttons {
     width: 14em;
@@ -183,6 +186,10 @@ input, textarea {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.delete-buttons:hover {
+    background-color: #D9D9D9;
+    border: 0px;
 }
 
 .left-button {

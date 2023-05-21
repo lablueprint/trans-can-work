@@ -498,13 +498,14 @@ function Onboard({ username, useremail }) {
                     <NativeSelect
                       defaultValue={10}
                       style={styles.dropdownOptions}
+                      onChange={(e) => editEducation(e, 'degree', index)}
                     >
                       {/* <option value="" disabled>
                         Select Option
                       </option> */}
-                      <option value={10} style={styles.dropdownOptions}>Ten</option>
-                      <option value={20} style={styles.dropdownOptions}>Twenty</option>
-                      <option value={30} style={styles.dropdownOptions}>Thirty</option>
+                      <option value="Yes" style={styles.dropdownOptions}>Yes</option>
+                      <option value="No" style={styles.dropdownOptions}>No</option>
+                      <option value="Progress" style={styles.dropdownOptions}>In Progress</option>
                     </NativeSelect>
                     <br />
                     <br />
