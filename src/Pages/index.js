@@ -2,12 +2,18 @@ import Home from './Home';
 import Login from './Login';
 import Register from './Register';
 import Reset from './Reset';
-import Profile from './Profile'
+import NavigatorDashboard from './NavigatorDashboard';
+import JobseekerData from './JobseekerData';
+import Profile from './Profile';
+import Landing from './Landing';
 
 export {
- Home,
- Login,
- Register,
- Reset,
- Profile,
+  Home,
+  Login,
+  Register,
+  Reset,
+  NavigatorDashboard,
+  Profile,
+  JobseekerData,
+  Landing,
 };

@@ -1,0 +1,11 @@
+.Card {
+    padding-left: 50px;
+    width: 180px;
+  }
+  
+  .Cards {
+    display: flex;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  
