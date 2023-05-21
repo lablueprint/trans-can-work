@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React/* , { useEffect } */ from 'react';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
@@ -14,8 +14,7 @@ import Pencil from '../Assets/pencil.svg';
 import Eye from '../Assets/eye.svg';
 import Back from '../Assets/back.svg';
 import {
-  fetchByNavigator, fetchAllJobseekers,
-  // fetchJobseeker,
+// fetchJobseeker,
 } from '../Services/jobseeker-service';
 import './profileOutline.css';
 import { logout } from './firebase';
@@ -367,31 +366,20 @@ export default function ProfileOutline() {
                 Password:
                 <br />
                 <div className="eyeContainer">
-                  <Button
-                    className={disableButton ? 'eyeNone' : 'eye'}
+                  <img
+                    src={Eye}
+                      // eslint-disable-next-line max-len
+                      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
+                    role="button"
+                    alt="eye icon in password field"
                     onClick={showPassword}
                     readOnly
+                    className={disableButton ? 'eyeNone' : 'eye'}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter' || e.key === ' ') {
                         showPassword();
                       }
                     }}
-                  />
-                  {passwordShown ? (
-                    // TODO: make closed eye icon to add
-                    <img
-                      alt="eye closed icon in password field"
-                      src={Eye}
-                    />
-                  ) : (
-                    <img
-                      alt="eye icon in password field"
-                      src={Eye}
-                    />
-                  )}
-                  <img
-                    alt="eye icon in password field"
-                    src={Eye}
                   />
                   <input
                     className={disableButton ? 'non-editable-field' : 'editable-email-password'}
