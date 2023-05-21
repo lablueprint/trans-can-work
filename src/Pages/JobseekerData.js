@@ -8,9 +8,9 @@ import { FormControl, MenuItem, InputLabel } from '@mui/material';
 import './JobseekerData.css';
 // import Back from '../Assets/Assessment.png';
 import { TextField, Button, Checkbox } from '@material-ui/core';
-import InputAdornment from '@mui/material/InputAdornment';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import GoogleIcon from '@mui/icons-material/Google';
+// import InputAdornment from '@mui/material/InputAdornment';
+// import VisibilityIcon from '@mui/icons-material/Visibility';
+// import GoogleIcon from '@mui/icons-material/Google';
 import { styled, makeStyles } from '@material-ui/core/styles';
 import Save from '../Assets/save.svg';
 import Add from '../Assets/add.svg';
@@ -51,6 +51,29 @@ const useStyles = makeStyles({
   },
 });
 
+const styles = {
+  dropdownOptions: {
+    fontFamily: 'Montserrat',
+    color: '#49454F',
+    fontSize: '0.9vw',
+    fontWeight: 'bold',
+  },
+  inputLabel: {
+    color: 'red',
+    fontFamily: 'Montserrat',
+    fontWeight: 'bold',
+    fontSize: '0.9vw',
+    paddingBottom: '2%',
+    textAlign: 'left',
+  },
+  formControl: {
+    // no font properties in this?
+    width: '55.0vw',
+    paddingBottom: '1%',
+    textAlign: 'left',
+  },
+};
+
 function Onboard({ username, useremail }) {
   const [jobseeker, setJobseeker] = useState({
     name: username,
@@ -74,8 +97,6 @@ function Onboard({ username, useremail }) {
       certificateType: 'ur house',
     }],
     occupation: ['None'],
-    // TODO: once the hifi fully defines the add + delete functionality
-    // occupation should be an array same as education.
     dreamjob: 'None',
   });
 
@@ -452,21 +473,73 @@ function Onboard({ username, useremail }) {
             <div>
               <form>
                 <div>
-                  <FormControl sx={{
-                    color: '#49454F',
-                    width: '55.0vw',
-                    height: '4.2vh',
-                    fontSize: '0.9vw',
-                    fontWeight: 'bold',
-                    paddingBottom: '2%',
-                  }}
-                  >
+                  <FormControl style={styles.formControl}>
+                    <CssTextField
+                      focusColor="#0c0ca4"
+                      label={`Occupation ${index + 1}`}
+                      variant="outlined"
+                      FormHelperTextProps={{ children: 'Label' }}
+                      focused
+                // value={email}
+                      onChange={(e) => editOccupation(e, index)}
+                    // placeholder={item.placeholder}
+                      style={{ paddingBottom: '1%' }}
+                      InputProps={{
+                        className: classes.root,
+                        style: {
+                          fontFamily: 'Montserrat',
+                          color: '#49454F',
+                          paddingLeft: '0.5%',
+                          width: '55.0vw',
+                          height: '3.2vw',
+                          fontSize: '0.9vw',
+                          fontWeight: 'bold',
+                        },
+                      }}
+                      InputLabelProps={{
+                        className: classes.labelInput,
+                        style: {
+                          fontFamily: 'Montserrat',
+                          paddingLeft: '0.3%',
+                          backgroundColor: 'white',
+                        },
+                      }}
+                    >
+                      <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
+                      <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
+                      <MenuItem value="Progress" style={styles.dropdownOptions}>In Progress</MenuItem>
+                    </CssTextField>
+                    <Select
+                      id="degree"
+                      autoWidth
+                      // value={age}
+                      label="Degree?"
+                      onChange={(e) => editEducation(e, 'degree', index)}
+                      MenuProps={{
+                        PaperProps: {
+                          style: {
+                            color: '#49454F',
+                            width: '55.0vw',
+                            fontSize: '0.9vw',
+                            fontWeight: 'bold',
+                          },
+                        },
+                      }}
+                    >
+                      <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
+                      <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
+                      <MenuItem value="Progress" style={styles.dropdownOptions}>In Progress</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
+                <div>
+                  <FormControl style={styles.formControl}>
                     <InputLabel
                       id="demo-simple-select-label"
                       className="dropdown"
+                      style={styles.inputLabel}
                     >
                       Degree?
-
                     </InputLabel>
                     <Select
                       id="degree"
@@ -481,17 +554,17 @@ function Onboard({ username, useremail }) {
                             width: '55.0vw',
                             fontSize: '0.9vw',
                             fontWeight: 'bold',
-                            paddingBottom: '2%',
                           },
                         },
                       }}
                     >
-                      <MenuItem value="No">No</MenuItem>
-                      <MenuItem value="Yes">Yes</MenuItem>
+                      <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
+                      <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
+                      <MenuItem value="Progress" style={styles.dropdownOptions}>In Progress</MenuItem>
                     </Select>
                   </FormControl>
                 </div>
-                {jobseeker.education[index].degree === 'Yes' && (
+                {(jobseeker.education[index].degree === 'Progress' || jobseeker.education[index].degree === 'Yes') && (
                   <CssTextField
                     focusColor="#0c0ca4"
                     label="Type of Degree"
@@ -525,16 +598,15 @@ function Onboard({ username, useremail }) {
                   />
                 )}
                 <div>
-                  <FormControl sx={{
-                    color: '#49454F',
-                    width: '55.0vw',
-                    height: '3.2vw', // how to make the height
-                    fontSize: '0.9vw',
-                    fontWeight: 'bold',
-                    paddingBottom: '1%',
-                  }}
-                  >
-                    <InputLabel id="demo-simple-select-label">Certificate?</InputLabel>
+                  <FormControl style={styles.formControl}>
+                    <InputLabel
+                      id="demo-simple-select-label"
+                      className="dropdown"
+                      style={styles.inputLabel}
+                    >
+                      Certificate?
+
+                    </InputLabel>
                     <Select
                       id="certificate"
                       autoWidth
@@ -544,17 +616,21 @@ function Onboard({ username, useremail }) {
                       MenuProps={{
                         PaperProps: {
                           style: {
-                            width: '55.0vw', // Set the desired width for the menu items
+                            color: '#49454F',
+                            width: '55.0vw',
+                            fontSize: '0.9vw',
+                            fontWeight: 'bold',
                           },
                         },
                       }}
                     >
-                      <MenuItem value="No">No</MenuItem>
-                      <MenuItem value="Yes">Yes</MenuItem>
+                      <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
+                      <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
+                      <MenuItem value="Progress" style={styles.dropdownOptions}>In Progress</MenuItem>
                     </Select>
                   </FormControl>
                 </div>
-                {jobseeker.education[index].certificate === 'Yes' && (
+                {(jobseeker.education[index].certificate === 'Progress' || jobseeker.education[index].certificate === 'Yes') && (
                   <CssTextField
                     focusColor="#0c0ca4"
                     label="Type of Certificate"
@@ -587,33 +663,6 @@ function Onboard({ username, useremail }) {
                     }}
                   />
                 )}
-                {/* <div className="inputWrapper">
-                  <label htmlFor="cert">
-                    Certificate?
-                    <select
-                      id="cert"
-                      placeholder={educationObject.certificate}
-                      onChange={(e) => editEducation(e, 'certificate', index)}
-                      type="text"
-                    >
-                      <option value="No">No</option>
-                      <option value="Yes">Yes</option>
-                    </select>
-                  </label>
-                </div>
-                {jobseeker.education[index].certificate === 'Yes' && (
-                <div className="inputWrapper">
-                  <label htmlFor="certType">
-                    Type of Certificate:
-                    <input
-                      id="certType"
-                      placeholder={educationObject.certificateType}
-                      onChange={(e) => editEducation(e, 'certificateType', index)}
-                      type="text"
-                    />
-                  </label>
-                </div>
-                )} */}
               </form>
               <div className="left-button">
                 <button type="button" onClick={(e) => deleteEducation(e, index)} className="delete-buttons">

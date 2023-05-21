@@ -204,7 +204,3 @@ input, textarea {
     width: 50%; /* Adjust the width as needed */
     /* Styles for the checkboxes columns */
   }
-
-  .dropdown {
-    height: 10000px;
-  }
