@@ -64,6 +64,7 @@ const styles = {
   },
   divider: {
     marginBottom: '2em',
+    borderBottomWidth: '0.15em',
   },
   email: {
     marginTop: '6.5em',
