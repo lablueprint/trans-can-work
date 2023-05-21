@@ -14,7 +14,6 @@ import Pencil from '../Assets/pencil.svg';
 import Eye from '../Assets/eye.svg';
 import Back from '../Assets/back.svg';
 import {
-  fetchByNavigator, fetchAllJobseekers,
   fetchJobseeker,
 } from '../Services/jobseeker-service';
 import './profileOutline.css';
@@ -86,50 +85,10 @@ export default function ProfileOutline() {
   const [bg, setBg] = React.useState('');
   const db = firebase;
   const docRef = doc(db, 'jobseekers', testemail);
-
-  // const navigate = useNavigate();
-  // const [values, setValues] = React.useState(initialValues);
-  // const [clients, setClients] = React.useState([]);
-
-  // so since we are NOT reusing this component for both personal profiles
-  // and looking at other account profiles, we would use userData
-  // and would have different initialValues, but not a backend call for it.
-
-  // another important point: the states, e.g. values and disable buttons being set to userData
-  // and false mean that if changes are made and not saved, the changes are reverted.
-
-  // sample info from userData:
-  const userType = 'navigator'; // or navigator or jobseeker
+  const userType = 'navigator';
   const isApproved = false;
 
-  useEffect(() => {
-    const logquery = async () => {
-      const query = await fetchAllJobseekers();
-      console.log(query);
-    };
-    logquery();
-  }, []);
-
-  useEffect(() => {
-    const processNav = async () => {
-      const clientList = await fetchByNavigator('solia@test.edu');
-      console.log('clientList:');
-      console.log(clientList);
-      // setClients(clientList);
-    };
-
-    const processAdmin = async () => {
-      const clientList = await fetchAllJobseekers();
-      console.log(clientList);
-      // setClients(clientList);
-    };
-
-    if (userType === 'navigator') {
-      processNav();
-    } else if (userType === 'admin' && isApproved) {
-      processAdmin();
-    }
-  }, []);
+  // add backend call to dynamically get navigator info
 
   useEffect(() => {
     const logquery = async () => {
@@ -152,29 +111,8 @@ export default function ProfileOutline() {
     logout();
   };
 
-  // i genuinely have no clue how this works:
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  // };
-
-  const handleToggle = (e) => {
-    e.preventDefault();
-    if (!disableButton) { // then we want to save changes.
-      if (userType === 'navigator') {
-        // Since values is currently useless:
-        // but when we do have a json of new fields, then this would work:
-        // console.log(values);
-        // updateNavigator(email, values);
-      } else if (userType === 'admin' && isApproved) {
-        // console.log(values);
-        // updateAdmin(email, values);
-      } else if (userType === 'jobseeker') {
-        // updateJobseeker(email, values);
-      }
-    }
-
+  const handleEdit = () => {
     setDisableButton(!disableButton);
-    setPasswordShown(!passwordShown);
   };
 
   const showPassword = () => {
@@ -230,7 +168,7 @@ export default function ProfileOutline() {
                 <p className="profile-page-header-profile-text">{demographicInfo[0].name}</p>
                 <div className="header-image-container">
                   <Avatar
-                    facebookId="100008343750912"
+                    src={ProfilePicPlaceholder}
                     size="40"
                     styles={{
                       height: '2em',
@@ -320,7 +258,7 @@ export default function ProfileOutline() {
           <div className="edit-button">
             <Button
               variant="outlined"
-              onClick={handleToggle}
+              onClick={handleEdit}
               sx={
                 disableButton ? {
                   marginRight: '2%',
@@ -396,7 +334,7 @@ export default function ProfileOutline() {
                 <input
                   className={disableButton ? 'non-editable-field' : 'editable-email-password'}
                   readOnly
-                  id="Email" // why is this slightly right?????????
+                  id="Email"
                   defaultValue={demographicInfo[0].email}
                   disabled={disableButton}
                 />
@@ -429,20 +367,31 @@ export default function ProfileOutline() {
                 Password:
                 <br />
                 <div className="eyeContainer">
-                  <img
-                    src={Eye}
-                      // eslint-disable-next-line max-len
-                      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
-                    role="button"
-                    alt="eye icon in password field"
+                  <Button
+                    className={disableButton ? 'eyeNone' : 'eye'}
                     onClick={showPassword}
                     readOnly
-                    className={disableButton ? 'eyeNone' : 'eye'}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter' || e.key === ' ') {
                         showPassword();
                       }
                     }}
+                  />
+                  {passwordShown ? (
+                    // TODO: make closed eye icon to add
+                    <img
+                      alt="eye closed icon in password field"
+                      src={Eye}
+                    />
+                  ) : (
+                    <img
+                      alt="eye icon in password field"
+                      src={Eye}
+                    />
+                  )}
+                  <img
+                    alt="eye icon in password field"
+                    src={Eye}
                   />
                   <input
                     className={disableButton ? 'non-editable-field' : 'editable-email-password'}
@@ -577,7 +526,7 @@ export default function ProfileOutline() {
           </label>
           <br />
           <Button
-            onClick={handleToggle}
+            onClick={handleEdit}
           />
         </TabPanel>
       </div>
