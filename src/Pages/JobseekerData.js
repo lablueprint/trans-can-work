@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import './JobseekerData.css';
 // import Back from '../Assets/Assessment.png';
-import { TextField, Button, Checkbox } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 // import InputAdornment from '@mui/material/InputAdornment';
 // import VisibilityIcon from '@mui/icons-material/Visibility';
 // import GoogleIcon from '@mui/icons-material/Google';
@@ -183,6 +183,7 @@ function Onboard({ username, useremail }) {
     'ServSafe / Food Safety Certification / Food Handlers Card',
   ];
 
+  // eslint-disable-next-line no-unused-vars
   const skillsChecklist = [
     {
       name: 'Applied Academic Skills',
@@ -266,7 +267,9 @@ function Onboard({ username, useremail }) {
     'Web Design',
   ];
 
+  // eslint-disable-next-line no-unused-vars
   const [checkedSkills, setCheckedSkills] = useState(new Array(skills.length).fill(false));
+  // eslint-disable-next-line no-unused-vars
   const [checkedInt, setCheckedInt] = useState(new Array(interests.length).fill(false));
   const [checkedPrev, setCheckedPrev] = useState(new Array(interests.length).fill(false));
 
@@ -577,7 +580,8 @@ function Onboard({ username, useremail }) {
                     >
                       <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
                       <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
-                      <MenuItem value="Progress" style={styles.dropdownOptions}>In Progress</MenuItem>
+                      <MenuItem value="Progress" style={styles.dropdownOptions}>
+                      In Progress</MenuItem>
                     </Select> */}
                   </FormControl>
                 </div>

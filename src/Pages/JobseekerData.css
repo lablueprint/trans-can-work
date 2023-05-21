@@ -196,13 +196,9 @@ input, textarea {
     justify-content: space-between;
   }
   
-  .checkboxes-column-left {
-    width: 50%; /* Adjust the width as needed */
-    /* Styles for the checkboxes columns */
-  }
+  .checkboxes-column-left,
   .checkboxes-column-right {
-    width: 50%; /* Adjust the width as needed */
-    /* Styles for the checkboxes columns */
+    flex: 1;
   }
 
   .MuiNativeSelect-root::before,
@@ -219,4 +215,21 @@ input, textarea {
   .MuiNativeSelect-standard::after,
   .muiInput-root::after {
     display: none;
+}
+
+.clickable {
+    right: 0;
+    float: right;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.checkbox-label {
+    width: 80%;
+    text-align: left;
+}
+
+.row {
+    position: relative;
 }
