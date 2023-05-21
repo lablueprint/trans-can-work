@@ -2,6 +2,7 @@
 import React from 'react';
 import './MilestoneMap.css';
 import MilestoneButton from './MilestoneButton';
+import IslandPopup from './IslandPopup';
 import title from '../../Assets/title.png';
 
 const data = {
@@ -111,9 +112,8 @@ const MilestoneButtons = data.content.body.map((x) => {
     <div
       key={x.uid}
       id={x.id}
-      // status={x.status}
     >
-      <MilestoneButton image={imagePath} imageHover={hoveredPath} title={x.title} status={x.status}/>
+      <MilestoneButton image={imagePath} imageHover={hoveredPath} title={x.title} id={x.id} status={x.status}/>
     </div>
   );
 });

@@ -1,0 +1,32 @@
+.jobFair {
+    position: absolute;
+    margin: 10px;
+    top: 275px;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    /* font-family: 'Liesel Printed';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 85%; */
+}
+
+.checkBoxesJob {
+    position: fixed;
+    margin-top: 350px;
+    width: 50%;
+}
+
+.labelJob {
+    margin-bottom: 100px;
+}
+
+.col1Job {
+    float: left;
+    margin-left: 150px;
+}
+
+.col2Job {
+    float: right;
+}

@@ -1,0 +1,34 @@
+.workshop {
+    position: absolute;
+    margin: 10px;
+    top: 230px;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    /* font-family: 'Liesel Printed';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 85%; */
+}
+
+.line1 {
+    border: 1px solid rgba(147, 144, 148, 1); 
+    width: 50%;
+    top: 90%;
+}
+
+.checkBoxes {
+    position: fixed;
+    margin-top: 275px;
+    width: 50%;
+}
+
+.col1 {
+    float: left;
+    margin-left: 150px;
+}
+
+.col2 {
+    float: right;
+}
