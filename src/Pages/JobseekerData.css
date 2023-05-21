@@ -204,3 +204,19 @@ input, textarea {
     width: 50%; /* Adjust the width as needed */
     /* Styles for the checkboxes columns */
   }
+
+  .MuiNativeSelect-root::before,
+  .MuiNativeSelect-select::before,
+  .MuiNativeSelect-multiple::before,
+  .MuiNativeSelect-filled::before,
+  .MuiNativeSelect-outlined::before,
+  .MuiNativeSelect-standard::before,
+  .MuiNativeSelect-root::after,
+  .MuiNativeSelect-select::after,
+  .MuiNativeSelect-multiple::after,
+  .MuiNativeSelect-filled::after,
+  .MuiNativeSelect-outlined::after,
+  .MuiNativeSelect-standard::after,
+  .muiInput-root::after {
+    display: none;
+}
