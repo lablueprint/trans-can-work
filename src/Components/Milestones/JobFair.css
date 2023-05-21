@@ -19,7 +19,7 @@
 }
 
 .labelJob {
-    margin-bottom: 100px;
+    margin-bottom: 10px;
 }
 
 .col1Job {
@@ -29,4 +29,9 @@
 
 .col2Job {
     float: right;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
 }
