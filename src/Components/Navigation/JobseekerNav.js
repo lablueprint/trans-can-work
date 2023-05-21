@@ -3,7 +3,7 @@ import {
   IconButton, Box,
 } from '@mui/material';
 import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
-import Calendar from '../calendar';
+import Calendar from '../Calendar/Calendar';
 
 const style = {
   iconStyle: {

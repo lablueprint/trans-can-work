@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { registerWithEmailAndPassword, logout } from '../Components/firebase';
+import { registerWithEmailAndPassword, logout } from '../firebase';
 import { createNavigator } from '../Services/navigator-service';
 import { createJobseeker, fetchJobseeker } from '../Services/jobseeker-service';
 import { createAdmin } from '../Services/admin-service';
