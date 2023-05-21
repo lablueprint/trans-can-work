@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { IconButton, Avatar, StylesProvider } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
@@ -34,15 +35,12 @@ const styles = {
 };
 
 function ProfileButton({
-  profileName, workField, profileArchived, jobseekerEmail, icon, accountType,
+  id, profileName, workField, jobseekerEmail, icon, accountType, isArchived, isApproved, isAdmin,
+  editField, bookmarked, deleteAccount,
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [bookmarked, setBookmarked] = useState(false);
+  const [menuItems, setMenuItems] = useState([]);
   const open = Boolean(anchorEl);
-
-  const handleBookmark = () => {
-    setBookmarked(!bookmarked);
-  };
 
   const openOptions = (event) => {
     setAnchorEl(event.currentTarget);
@@ -52,23 +50,21 @@ function ProfileButton({
   };
 
   // change frontend ver too!
+  // handlers for drop down menu actions
   const archiveJobseeker = () => {
-    updateJobseeker(jobseekerEmail, { archive: true });
+    editField(id, 'archived', !isArchived);
   };
 
   const bookmarkJobseeker = () => {
-    updateJobseeker(jobseekerEmail, { bookmark: true });
-  };
-
-  const unarchiveJobseeker = () => {
-    updateJobseeker(jobseekerEmail, { archive: false });
+    editField(id, 'bookmarked', !bookmarked);
   };
 
   const deleteSeeker = () => {
-    deleteJobseeker(jobseekerEmail);
+    deleteAccount(id);
   };
 
-  const menuItems = [
+  // items for the drop down menu
+  const menuOptions = [
     {
       label: 'Archive',
       fx: archiveJobseeker,
@@ -76,7 +72,7 @@ function ProfileButton({
     },
     {
       label: 'Unarchive',
-      fx: unarchiveJobseeker,
+      fx: archiveJobseeker,
       icon: <FolderOutlinedIcon fontSize="small" />,
     },
     {
@@ -91,7 +87,7 @@ function ProfileButton({
     },
     {
       label: 'Delete',
-      fx: deleteJobseeker,
+      fx: deleteSeeker,
       icon: <DeleteOutlineOutlinedIcon fontSize="small" />,
     },
     {
@@ -101,11 +97,35 @@ function ProfileButton({
     },
   ];
 
+  // different set of menu items dependent on the tab
+  const reduceMenuItems = () => {
+    let items = [];
+    if (!isApproved) {
+      items = ['Approve', 'Delete'];
+    } else if (isArchived) {
+      items = ['Unarchive', 'Delete'];
+    } else {
+      items = ['Delete', 'Download'];
+      if (accountType === 'client') {
+        items.push('Archive');
+        if (isAdmin) {
+          items.push('Re-assign');
+        }
+      }
+    }
+    return menuOptions.filter((item) => items.includes(item.label));
+  };
+
+  useEffect(() => {
+    setMenuItems(reduceMenuItems());
+  }, [isArchived, isApproved, isAdmin]);
+
+  // styling for button dependent on type of account
   let color;
 
-  if (accountType === 'navigator') {
+  if (accountType === 'navigator' && isApproved === true) {
     color = 'navigator-bg';
-  } else if (profileArchived === true) {
+  } else if (isArchived === true) {
     color = 'archived-bg';
   } else {
     color = 'unarchived-bg';
@@ -129,12 +149,12 @@ function ProfileButton({
       <div className="text-container">
         <p className="name-text">{profileName}</p>
         <p className="job-text">{workField}</p>
-        {!profileArchived && <Link className="view-profile-link" to="/profile">View Profile</Link>}
+        {!isArchived && <Link className="view-profile-link" to="/profile">View Profile</Link>}
       </div>
       <div className="button-container">
         <IconButton
           id="bookmark"
-          onClick={handleBookmark}
+          onClick={bookmarkJobseeker}
           size="small"
         >
           {bookmarked ? <BookmarkIcon /> : <BookmarkBorderIcon /> }
@@ -173,7 +193,10 @@ function ProfileButton({
           }}
         >
           {menuItems.map((element) => (
-            <MenuItem onClick={element.fx}>
+            <MenuItem
+              key={uuidv4()}
+              onClick={element.fx}
+            >
               <ListItemIcon>
                 {element.icon}
               </ListItemIcon>
@@ -191,28 +214,21 @@ function ProfileButton({
 export default ProfileButton;
 
 ProfileButton.propTypes = {
+  id: PropTypes.string.isRequired,
   profileName: PropTypes.string.isRequired,
-  workField: PropTypes.string.isRequired,
-  profileArchived: PropTypes.bool.isRequired,
+  workField: PropTypes.string,
   jobseekerEmail: PropTypes.string.isRequired,
   accountType: PropTypes.string.isRequired,
-  icon: PropTypes.oneOfType([
-    PropTypes.shape({
-      uri: PropTypes.string,
-      headers: PropTypes.objectOf(PropTypes.string),
-    }),
-    PropTypes.number,
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        uri: PropTypes.string,
-        width: PropTypes.number,
-        height: PropTypes.number,
-        headers: PropTypes.objectOf(PropTypes.string),
-      }),
-    ),
-  ]),
+  isArchived: PropTypes.bool.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
+  isApproved: PropTypes.bool.isRequired,
+  bookmarked: PropTypes.bool.isRequired,
+  icon: PropTypes.string,
+  editField: PropTypes.func.isRequired,
+  deleteAccount: PropTypes.func.isRequired,
 };
 
 ProfileButton.defaultProps = {
   icon: undefined,
+  workField: '',
 };

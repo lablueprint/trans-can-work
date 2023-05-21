@@ -9,7 +9,7 @@ import { PropTypes } from 'prop-types';
 import SearchAndFilter from '../SearchAndFiltering/searchAndFilter';
 import '../../Pages/Home.css';
 import './Dashboard.css';
-import ProfileButton from '../ProfileButton/profileButton';
+import ProfileButton from './profileButton';
 import { fetchAllJobseekers } from '../../Services/jobseeker-service';
 import { fetchAllNavigators } from '../../Services/navigator-service';
 import NoAccounts from './NoAccounts';
@@ -58,13 +58,32 @@ export default function Dashboard({ profileName, role }) {
     setValue(newValue);
   };
 
+  // handle edits to different accounts - will change with new backend!
+  const editField = (setState, id, field, value) => {
+    setState((prev) => {
+      const obj = { ...prev.find((el) => el.id === id) };
+      const remaining = prev.filter((el) => el.id !== id);
+      obj[field] = value;
+      return [...remaining, obj];
+    });
+  };
+
+  const editClient = (id, field, value) => { editField(setClients, id, field, value); };
+  const editNavigator = (id, field, value) => { editField(setNavigators, id, field, value); };
+
+  const deleteAccount = (setState, id) => {
+    setState((prev) => prev.filter((el) => el.id !== id));
+  };
+
+  const deleteClient = (id) => { deleteAccount(setClients, id); };
+  const deleteNavigator = (id) => { deleteAccount(setNavigators, id); };
+
   // set the current accounts display (depending on the role type)
   useEffect(() => {
     if (role === 'Admin') {
       // navigators
       if (tabValue === 0) {
         setCurrentTabAccounts(navigators);
-
       // unarchived clients
       } else if (tabValue === 1) {
         setCurrentTabAccounts(clients.filter((element) => !element.archived));
@@ -110,7 +129,7 @@ export default function Dashboard({ profileName, role }) {
           // get bookmarked and iconNumber from data somehow! eventually!
           bookmarked: false,
           iconNumber: 0,
-          accountType: 'jobseeker',
+          accountType: 'client',
         };
         clientsTemp.push(elem);
       });
@@ -119,9 +138,9 @@ export default function Dashboard({ profileName, role }) {
         const elem = {
           id: element.id,
           name: element.data().name,
-          archived: element.data().archived,
+          archived: false,
           approval: element.data().approval,
-          field: element.data()['field of work'],
+          field: 'Navigator',
           email: element.id,
           interests: element.data().interests,
           skills: element.data().skills,
@@ -135,11 +154,14 @@ export default function Dashboard({ profileName, role }) {
 
       const approvedClients = clientsTemp.filter((element) => element.approval === true);
       // unnapproved acts should include admin + navigators eventually
-      const unapprovedAccs = clientsTemp.filter((element) => !element.approval);
+      const unapprovedClients = clientsTemp.filter((element) => !element.approval);
+
+      const approvedNavigators = navTemp.filter((element) => element.approval === true);
+      const unapprovedNavigators = navTemp.filter((element) => !element.approval);
 
       setClients(approvedClients);
-      setNavigators(navTemp);
-      setUnapprovedAccounts(unapprovedAccs);
+      setNavigators(approvedNavigators);
+      setUnapprovedAccounts([...unapprovedClients, ...unapprovedNavigators]);
     }
     loadData();
   }, []);
@@ -160,7 +182,9 @@ export default function Dashboard({ profileName, role }) {
             {' '}
             {profileName.split(' ')[0]}
           </p>
-          <div className="home-page-search-bar-container"><SearchAndFilter names={currentTabAccounts} setOutput={setFilteredAccounts} placeholder="Search Accounts" /></div>
+          <div className="home-page-search-bar-container">
+            <SearchAndFilter accounts={currentTabAccounts} setOutput={setFilteredAccounts} placeholder="Search Accounts" />
+          </div>
         </div>
         <Tabs
           value={tabValue}
@@ -177,18 +201,26 @@ export default function Dashboard({ profileName, role }) {
         ? (
           <div className="profile-grid">
             {
-                filteredAccounts.map((element) => (
+              filteredAccounts
+                .sort((a, b) => (+b.bookmarked) - (+a.bookmarked) || a.name.localeCompare(b.name))
+                .map((element) => (
                   <ProfileButton
                     key={uuidv4()}
+                    id={element.id}
                     profileName={element.name}
-                    profileArchived={element.archived}
                     workField={element.field}
                     jobseekerEmail={element.email}
                     icon={icons[element.iconNumber]}
                     accountType={element.accountType}
+                    bookmarked={element.bookmarked}
+                    isArchived={element.archived}
+                    isApproved={element.approval}
+                    isAdmin={role === 'Admin'}
+                    editField={element.accountType === 'client' ? editClient : editNavigator}
+                    deleteAccount={element.accountType === 'client' ? deleteClient : deleteNavigator}
                   />
                 ))
-              }
+            }
           </div>
         ) : <NoAccounts />}
     </div>

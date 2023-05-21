@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import Checkboxes from '../../Pages/Checkboxes';
+import Checkboxes from '../Checkboxes/Checkboxes';
 
 function Filtering({
   checkedArr, setCheckedArr,

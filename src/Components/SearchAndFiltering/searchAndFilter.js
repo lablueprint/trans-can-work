@@ -3,102 +3,100 @@ import PropTypes from 'prop-types';
 
 import TuneIcon from '@mui/icons-material/Tune';
 import Popover from '@mui/material/Popover';
-import Filtering from '../Filtering/Filtering';
-import SearchBar from '../SearchBar/SearchBar';
+import Filtering from './Filtering';
+
+import SearchBar from './SearchBar';
 
 import './searchAndFilter.css';
 
-function SearchAndFilter({ names, setOutput }) {
-  const skills = ['Accounting Software',
-    'Administrative',
-    'Adobe Software Suite',
-    'Bilingual',
-    'Brand Management',
-    'Cold Calling',
-    'Computer Software and Application Software',
-    'CPR',
-    'Customer Service',
-    'Database Management',
-    'Excel',
-    'Graphic Design',
-    'Machinery Skills',
-    'Marketing Campaign Management',
-    'Mobile Development',
-    'Multilingual',
-    'Negotiation',
-    'Patient Scheduling Software',
-    'Philanthropy',
-    'Photo Editing',
-    'Photography',
-    'Photoshop',
-    'Powerpoint',
-    'Programming Languages: Ex. Perl, Python, Java and Ruby',
-    'Project Management',
-    'Public Speaking',
-    'Search Engine and Keyword Optimization',
-    'Statistical Analysis',
-    'Type 60+WPM',
-    'User Interface Design',
-    'Wood Working',
-    'Word',
-    'Writing',
-    'Money Handling',
-    'Customer Service',
-    'Inventory Management',
-    'ServSafe / Food Safety Certification / Food Handlers Card',
-  ];
+const skills = ['Accounting Software',
+  'Administrative',
+  'Adobe Software Suite',
+  'Bilingual',
+  'Brand Management',
+  'Cold Calling',
+  'Computer Software and Application Software',
+  'CPR',
+  'Customer Service',
+  'Database Management',
+  'Excel',
+  'Graphic Design',
+  'Machinery Skills',
+  'Marketing Campaign Management',
+  'Mobile Development',
+  'Multilingual',
+  'Negotiation',
+  'Patient Scheduling Software',
+  'Philanthropy',
+  'Photo Editing',
+  'Photography',
+  'Photoshop',
+  'Powerpoint',
+  'Programming Languages: Ex. Perl, Python, Java and Ruby',
+  'Project Management',
+  'Public Speaking',
+  'Search Engine and Keyword Optimization',
+  'Statistical Analysis',
+  'Type 60+WPM',
+  'User Interface Design',
+  'Wood Working',
+  'Word',
+  'Writing',
+  'Money Handling',
+  'Customer Service',
+  'Inventory Management',
+  'ServSafe / Food Safety Certification / Food Handlers Card',
+];
 
-  const interests = ['Accounting/Bookkeeping',
-    'App Type Jobs',
-    'Architecture/Construction',
-    'Audio/Video Technology & Communication',
-    'Barista',
-    'Bartender',
-    'Bookkeeping',
-    'Business Management and Administration',
-    'Call Center',
-    'Caregiver',
-    'Carpenter',
-    'Cashier',
-    'Data Entry',
-    'Delivery Driver',
-    'Education & Training',
-    'Engineering',
-    'Finance',
-    'Fundraising',
-    'Graphic Design',
-    'Health/Medical',
-    'Hospitality',
-    'Human Resources',
-    'IT (Information Technology)',
-    'Janitorial',
-    'Legal',
-    'Marketing/Sales',
-    'Massage Therapy',
-    'Non Profit',
-    'Personal Assistant',
-    'Pharmasist',
-    'Philantropy',
-    'Photographer',
-    'Production',
-    'Public Relations',
-    'Real Estate',
-    'Remote',
-    'Retail',
-    'Sales',
-    'Security',
-    'Server/Host',
-    'Social Media Management',
-    'Web Design',
-  ];
+const interests = ['Accounting/Bookkeeping',
+  'App Type Jobs',
+  'Architecture/Construction',
+  'Audio/Video Technology & Communication',
+  'Barista',
+  'Bartender',
+  'Bookkeeping',
+  'Business Management and Administration',
+  'Call Center',
+  'Caregiver',
+  'Carpenter',
+  'Cashier',
+  'Data Entry',
+  'Delivery Driver',
+  'Education & Training',
+  'Engineering',
+  'Finance',
+  'Fundraising',
+  'Graphic Design',
+  'Health/Medical',
+  'Hospitality',
+  'Human Resources',
+  'IT (Information Technology)',
+  'Janitorial',
+  'Legal',
+  'Marketing/Sales',
+  'Massage Therapy',
+  'Non Profit',
+  'Personal Assistant',
+  'Pharmasist',
+  'Philantropy',
+  'Photographer',
+  'Production',
+  'Public Relations',
+  'Real Estate',
+  'Remote',
+  'Retail',
+  'Sales',
+  'Security',
+  'Server/Host',
+  'Social Media Management',
+  'Web Design',
+];
 
-  const [value, setValue] = useState('');
-  // const [result, setResult] = useState([]);
+function SearchAndFilter({ accounts, setOutput }) {
+  const [searchTerms, setSearchTerms] = useState('');
   const [checkedArr, setCheckedArr] = useState(new Array(skills.length).fill(false));
   const [checkedInterests, setCheckedInterests] = useState(new Array(interests.length).fill(false));
-  const [jobseekers, setJobseekers] = useState([]);
   const [filterAnchorElement, setFilterAnchorElement] = useState(null);
-  // const [filteredNames, setFilteredNames] = useState([]);
 
   const filteringPopoverOpen = Boolean(filterAnchorElement);
   const filterPopoverId = filteringPopoverOpen ? 'simple-popover' : undefined;
@@ -111,23 +109,16 @@ function SearchAndFilter({ names, setOutput }) {
     setFilterAnchorElement(null);
   };
 
-  useEffect(() => {
-    if (value.length > 0) {
-      let searchResults = [];
-      const searchQuery = value.toLowerCase();
-      for (let step = 0; step < names.length; step += 1) {
-        const nam = names[step].name.toLowerCase();
-        if (nam.slice(0, searchQuery.length).indexOf(searchQuery) !== -1) {
-          searchResults = [...searchResults, names[step]];
-        }
-      }
-
-      setJobseekers(searchResults);
-    } else {
-      setJobseekers(names);
+  // search methods
+  const search = (items) => {
+    if (searchTerms.length > 0) {
+      const searchQuery = searchTerms.toLowerCase();
+      return items.filter((element) => element.name.toLowerCase().includes(searchQuery));
     }
-  }, [value, names]);
+    return items;
+  };
 
+  // filtering methods
   const getCheckedSkills = () => {
     const checkedSkills = [];
     checkedArr.forEach((item, index) => {
@@ -144,34 +135,43 @@ function SearchAndFilter({ names, setOutput }) {
     return checkedInterest;
   };
 
-  useEffect(() => {
+  const filter = (items) => {
     const checkedSkills = getCheckedSkills();
     const checkedInterest = getCheckedInterests();
 
     if (checkedSkills.length || checkedInterest.length) {
-      const filteredChecks = jobseekers.filter((jobseeker) => {
+      const filteredChecks = items.filter((item) => {
         let foundInterests = true;
         let foundSkills = true;
-        checkedInterest.forEach((item) => {
-          if (!jobseeker.interests[item]) { foundInterests = false; }
+        checkedInterest.forEach((interest) => {
+          // this level of error-checking only necessary due to flawed backend - change in future
+          if (!('interests' in item) || item.interests === undefined || !(interest in item.interests) || !item.interests[interest]) {
+            foundInterests = false;
+          }
         });
-        checkedSkills.forEach((item) => {
-          if (!jobseeker.skills[item]) { foundSkills = false; }
+        checkedSkills.forEach((skill) => {
+          if (!('skills' in item) || item.skills === undefined || !(skill in item.skills) || !item.skills[skill]) {
+            foundSkills = false;
+            console.log(skill);
+          }
         });
         return foundInterests && foundSkills;
       });
-      setOutput(filteredChecks);
-    } else {
-      setOutput(jobseekers);
+      return filteredChecks;
     }
-  }, [checkedInterests, checkedArr, jobseekers, names]);
+    return items;
+  };
+
+  useEffect(() => {
+    setOutput(filter(search(accounts)));
+  }, [searchTerms, checkedInterests, checkedArr, accounts]);
 
   return (
     <div className="App">
       <div className="search-bar-container">
         <SearchBar
-          value={value}
-          setValue={setValue}
+          value={searchTerms}
+          setValue={setSearchTerms}
           placeholder="Search here!"
         />
         <button className="filter-button" aria-label="search bar" type="button" onClick={FilterHandleClick}><TuneIcon /></button>
@@ -202,9 +202,9 @@ function SearchAndFilter({ names, setOutput }) {
 }
 
 SearchAndFilter.propTypes = {
-  names: PropTypes.arrayOf(PropTypes.shape({
+  accounts: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
-    archived: PropTypes.string,
+    archived: PropTypes.bool,
     field: PropTypes.string,
     email: PropTypes.string.isRequired,
   })).isRequired,
