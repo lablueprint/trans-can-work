@@ -14,7 +14,8 @@ import Pencil from '../Assets/pencil.svg';
 import Eye from '../Assets/eye.svg';
 import Back from '../Assets/back.svg';
 import {
-  fetchJobseeker,
+  fetchByNavigator, fetchAllJobseekers,
+  // fetchJobseeker,
 } from '../Services/jobseeker-service';
 import './profileOutline.css';
 import { logout } from './firebase';
@@ -82,7 +83,7 @@ export default function ProfileOutline() {
   const [passwordShown, setPasswordShown] = React.useState(false);
   const [logoutPress, setLogoutPress] = React.useState(false);
   const [editProfilePic, setEditProfilePic] = React.useState(false);
-  const [bg, setBg] = React.useState('');
+  // const [bg, setBg] = React.useState('');
   const db = firebase;
   const docRef = doc(db, 'jobseekers', testemail);
   const userType = 'navigator';
@@ -90,17 +91,17 @@ export default function ProfileOutline() {
 
   // add backend call to dynamically get navigator info
 
-  useEffect(() => {
-    const logquery = async () => {
-      const query = await fetchJobseeker(testemail);
-      const data = query.data();
-      if (data.color != null) {
-        setBg(data.color);
-        console.log('background', data.color);
-      }
-    };
-    logquery();
-  }, []);
+  // useEffect(() => {
+  //   const logquery = async () => {
+  //     const query = await fetchJobseeker(testemail);
+  //     const data = query.data();
+  //     if (data.color != null) {
+  //       setBg(data.color);
+  //       console.log('background', data.color);
+  //     }
+  //   };
+  //   logquery();
+  // }, []);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -129,11 +130,10 @@ export default function ProfileOutline() {
       .catch((error) => {
         console.log(error);
       });
-    setBg(color);
+    // setBg(color);
     setEditProfilePic(!editProfilePic);
   };
 
-  // hey alan ! new updates!
   if (userType === 'navigator' || (userType === 'admin' && isApproved)) {
     return (
       <div className="background">
