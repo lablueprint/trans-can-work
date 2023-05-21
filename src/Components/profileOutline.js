@@ -9,17 +9,20 @@ import Button from '@mui/material/Button';
 import { Dialog } from '@mui/material';
 import { Edit } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import { doc, setDoc } from 'firebase/firestore';
 import Pencil from '../Assets/pencil.svg';
 import Eye from '../Assets/eye.svg';
 import Back from '../Assets/back.svg';
 import {
   fetchByNavigator, fetchAllJobseekers,
+  fetchJobseeker,
 } from '../Services/jobseeker-service';
 import './profileOutline.css';
 import { logout } from './firebase';
 import LogoutLogo from '../Assets/logout.svg';
 import BlueLogoutLogo from '../Assets/bluelogout.svg';
 import ProfilePicPlaceholder from '../Assets/profilephotoplaceholder.svg';
+import firebase from '../firebase';
 
 const demographicInfo = [{
   name: 'kaylee',
@@ -40,6 +43,8 @@ const demographicInfo = [{
   employmentStatus: 'space place',
   priorConvictions: 'hundreds',
 }];
+
+const testemail = 'bboy@tt.com';
 
 function TabPanel(props) {
   const {
@@ -77,7 +82,11 @@ export default function ProfileOutline() {
   const [disableButton, setDisableButton] = React.useState(true);
   const [passwordShown, setPasswordShown] = React.useState(false);
   const [logoutPress, setLogoutPress] = React.useState(false);
-  const [editProfilePic, setProfilePic] = React.useState(false);
+  const [editProfilePic, setEditProfilePic] = React.useState(false);
+  const [bg, setBg] = React.useState('');
+  const db = firebase;
+  const docRef = doc(db, 'jobseekers', testemail);
+
   // const navigate = useNavigate();
   // const [values, setValues] = React.useState(initialValues);
   // const [clients, setClients] = React.useState([]);
@@ -122,6 +131,18 @@ export default function ProfileOutline() {
     }
   }, []);
 
+  useEffect(() => {
+    const logquery = async () => {
+      const query = await fetchJobseeker(testemail);
+      const data = query.data();
+      if (data.color != null) {
+        setBg(data.color);
+        console.log('background', data.color);
+      }
+    };
+    logquery();
+  }, []);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -158,6 +179,20 @@ export default function ProfileOutline() {
 
   const showPassword = () => {
     setPasswordShown(!passwordShown);
+  };
+
+  const handleClick = (color) => {
+    const data = {
+      color,
+    };
+    setDoc(docRef, data, { merge: true })
+      .then(() => {
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    setBg(color);
+    setEditProfilePic(!editProfilePic);
   };
 
   // hey alan ! new updates!
@@ -222,13 +257,21 @@ export default function ProfileOutline() {
         <div className="top-container">
           <div className="profile-photo-container">
             <Avatar src={ProfilePicPlaceholder} size="150" sx={{ borderRadius: '100px' }} round />
+            {/* <div
+              className="imageSection"
+              style={{
+                backgroundColor: bg,
+                width: 100,
+                height: 100,
+              }}
+            /> */}
             <div
               className="profilePicButton"
             >
               <button
                 type="button"
                 className="editProfilePicButton"
-                onClick={() => setProfilePic(true)}
+                onClick={() => setEditProfilePic(true)}
                 style={{
                   background: '#FFFFFF',
                   borderColor: 'black',
@@ -251,11 +294,12 @@ export default function ProfileOutline() {
               </button>
 
             </div>
-            <Dialog open={editProfilePic} onClose={() => setProfilePic(false)}>
+            <Dialog open={editProfilePic} onClose={() => setEditProfilePic(false)}>
               <div>
                 <h3>Choose Profile Picture</h3>
                 {backgroundColors.map((color) => (
                   <Button
+                    onClick={() => handleClick(color)}
                     key={color}
                     style={{
                       backgroundColor: color,
@@ -267,7 +311,7 @@ export default function ProfileOutline() {
                   />
                 ))}
               </div>
-              <Button onClick={() => setProfilePic(false)}>Save</Button>
+              <Button onClick={() => setEditProfilePic(false)}>Save</Button>
             </Dialog>
             <p className="name-display">
               {demographicInfo[0].name}
@@ -351,6 +395,7 @@ export default function ProfileOutline() {
                 <br />
                 <input
                   className={disableButton ? 'non-editable-field' : 'editable-email-password'}
+                  readOnly
                   id="Email" // why is this slightly right?????????
                   defaultValue={demographicInfo[0].email}
                   disabled={disableButton}
@@ -391,6 +436,7 @@ export default function ProfileOutline() {
                     role="button"
                     alt="eye icon in password field"
                     onClick={showPassword}
+                    readOnly
                     className={disableButton ? 'eyeNone' : 'eye'}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter' || e.key === ' ') {
@@ -401,6 +447,7 @@ export default function ProfileOutline() {
                   <input
                     className={disableButton ? 'non-editable-field' : 'editable-email-password'}
                     type={passwordShown ? 'text' : 'password'}
+                    readOnly
                     id="Password"
                     defaultValue={demographicInfo[0].password}
                     disabled={disableButton}
