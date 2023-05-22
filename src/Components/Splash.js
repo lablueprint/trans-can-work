@@ -7,8 +7,8 @@ function Splash({ header, description, graphic }) {
     <div className="container">
       <h2 className="header">Trans Can Work</h2>
       <h1 className="header">{header}</h1>
-      {graphic}
       <p>{description}</p>
+      {graphic}
     </div>
   );
 }

@@ -1,30 +1,54 @@
 import React, { useEffect, useState } from 'react';
-
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { getAuth } from 'firebase/auth';
-import { registerWithEmailAndPassword, logout, addToAdminPool } from '../Components/firebase';
+import { registerWithEmailAndPassword, logout } from '../Components/firebase';
+import { createNavigator } from '../Services/navigator-service';
+import { createJobseeker, fetchJobseeker } from '../Services/jobseeker-service';
+import { createAdmin } from '../Services/admin-service';
+
 import './Register.css';
 
 const auth = getAuth();
+// Sample data
+const data = {
+  name: 'Solia',
+  paper: 'ayub',
+  'fun fact': 'ableist',
+  'helen keller': 'does not exist',
+  approval: false,
+};
+
+export const getApprovalStatus = async (email) => {
+  try {
+    const docSnap = await fetchJobseeker(email);
+    if (docSnap.exists()) {
+      return docSnap.data().approval;
+    }
+    console.log(`Jobseeker ${email} not found`);
+  } catch (error) {
+    console.log(`Error getting approval status for ${email}: ${error.message}`);
+  }
+  return null;
+};
 
 function Register() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [accountType, setAccountType] = useState('');
   const [user, loading] = useAuthState(auth);
+  // We will use display name later, on the landing page
   // eslint-disable-next-line no-unused-vars
   const [displayName, setDisplayName] = useState('');
-  // const [registeredAsAdmin, setRegisteredAsAdmin] = useState(false);
+  // If we want to see if user is logged in
   useEffect(() => {
-    // if (!loading && user)
-    //   {
-    //     setDisplayName(user.displayName)
-    //     console.log(user.displayName)
-    //   }
-
+    if (!loading && user) {
+      setDisplayName(user.displayName);
+    }
   }, [user, loading]);
 
   const logoutUser = () => {
@@ -32,11 +56,17 @@ function Register() {
     setDisplayName('');
   };
   const register = async () => {
-    if (accountType === 'administrator') {
-      console.log(firstName);
-      addToAdminPool(firstName, lastName, email, password);
-    } else {
-      const registered = await registerWithEmailAndPassword(
+    if (accountType !== 'navigator' && accountType !== 'jobseeker' && accountType !== 'admin') {
+      alert('Please select a role');
+      return;
+    }
+    if (password.length < 6) {
+      alert('Please ensure your password is at least 6 characters');
+      return;
+    }
+    let registered;
+    try {
+      registered = await registerWithEmailAndPassword(
         firstName,
         lastName,
         accountType,
@@ -44,10 +74,49 @@ function Register() {
         password,
         setDisplayName,
       );
-      if (registered === true) window.location.reload(true);
+    } catch (error) {
+      alert(error);
+    }
+    if (accountType === 'navigator') {
+      await createNavigator(email, data);
+    } else if (accountType === 'jobseeker') {
+      await createJobseeker(email, data);
+    } else {
+      await createAdmin(email, data);
+    }
+    if (registered === true) {
+      const approves = await getApprovalStatus(email);
+      navigate(approves ? '/' : '/splash');
     }
   };
+  const provider = new GoogleAuthProvider();
 
+  const handleGoogleSignUp = async () => {
+    if (accountType !== 'navigator' && accountType !== 'jobseeker' && accountType !== 'admin') {
+      alert('Please select a role');
+      return;
+    }
+
+    signInWithPopup(auth, provider)
+      .then(async (result) => {
+        // Signed in successfully with Google
+        // The signed-in user info.
+        const { user: googleUser } = result;
+        if (accountType === 'navigator') {
+          createNavigator(googleUser.email, data);
+        } else if (accountType === 'jobseeker') {
+          createJobseeker(googleUser.email, data);
+        } else {
+          createAdmin(googleUser.email, data);
+        }
+        const approves = await getApprovalStatus(googleUser.email);
+        navigate(approves ? '/' : '/splash');
+      })
+      .catch((error) => {
+        alert(error);
+        // Sign-in with Google failed
+      });
+  };
   return (
     <div>
 
@@ -55,9 +124,6 @@ function Register() {
           && (
           <div>
             <div>
-              Hello
-              {' '}
-              {user.displayName}
               <button
                 type="button"
                 onClick={() => logoutUser()}
@@ -68,13 +134,6 @@ function Register() {
             </div>
           </div>
           )}
-      {user === null && (
-        <div>
-          <div>
-            Hello
-          </div>
-        </div>
-      )}
       <div className="registerForm">
         <input
           className="registerFormItem"
@@ -119,10 +178,13 @@ function Register() {
           Submit
           {' '}
         </button>
-        {/* <button
-            onClick={() => registerWithEmailAndPassword(
-              firstName, lastName, accountType, email, password)}
-            >Register</button> */}
+        <button
+          type="button"
+          className="loginInput"
+          onClick={() => handleGoogleSignUp()}
+        >
+          Sign in with Google
+        </button>
       </div>
       <div>
         Have an account? Sign in here!

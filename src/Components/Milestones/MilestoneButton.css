@@ -1,0 +1,26 @@
+.markAsComplete {
+    border-radius: 2px, red, dotted; 
+    box-sizing: border-box;
+
+/* Auto layout */
+
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: flex-start;
+padding: 16px 24px;
+gap: 10px;
+
+position: absolute;
+width: 202px;
+height: 56px;
+left: calc(50% - 202px/2 - 0.5px);
+top: calc(50% - 56px/2 - 70px);
+
+/* Neutral/20 */
+
+border: 2px solid #484649;
+filter: drop-shadow(0px 4px 8px rgba(60, 55, 68, 0.25));
+border-radius: 8px;
+
+}
