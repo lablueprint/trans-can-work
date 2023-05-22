@@ -6,17 +6,17 @@ import {
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { PropTypes } from 'prop-types';
-import SearchAndFilter from '../SearchAndFiltering/searchAndFilter';
-import '../../Pages/Home.css';
+import SearchAndFilter from '../Components/SearchAndFiltering/searchAndFilter';
+import './Home.css';
 import './Dashboard.css';
-import ProfileButton from './profileButton';
-import { fetchAllJobseekers } from '../../Services/jobseeker-service';
-import { fetchAllNavigators } from '../../Services/navigator-service';
-import NoAccounts from './NoAccounts';
+import ProfileButton from '../Components/Dashboard/profileButton';
+import { fetchAllJobseekers } from '../Services/jobseeker-service';
+import { fetchAllNavigators } from '../Services/navigator-service';
+import NoAccounts from '../Components/Dashboard/NoAccounts';
 
 // profile image imports
-import skater from '../../Assets/ProfileIcons/monogram.png';
-import dog from '../../Assets/ProfileIcons/monogram-2.png';
+import skater from '../Assets/ProfileIcons/monogram.png';
+import dog from '../Assets/ProfileIcons/monogram-2.png';
 
 const icons = [
   skater,

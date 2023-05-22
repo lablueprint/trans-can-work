@@ -6,6 +6,7 @@ import NavigatorDashboard from './NavigatorDashboard';
 import JobseekerData from './JobseekerData';
 import Profile from './Profile';
 import Landing from './Landing';
+import Dashboard from './Dashboard';
 
 export {
   Home,
@@ -16,4 +17,5 @@ export {
   Profile,
   JobseekerData,
   Landing,
+  Dashboard,
 };
