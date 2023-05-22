@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import backButton from '../../Assets/back button.png';
@@ -30,10 +29,9 @@ function IslandPopup({
         onClose={handleClose}
       >
         <Box id="popup">
-          {toBeRendered}
           <img id="title" src={title} alt="island title" />
           <hr className="line" />
-          <Typography sx={{ mt: 50 }} />
+          {toBeRendered}
           <Button
             disableRipple
             onClick={toggleComplete}

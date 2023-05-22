@@ -19,7 +19,7 @@ function OnlineProfile() {
       <form className="textFields">
         <div className="form-row">
           <label htmlFor="linkedin" className="form-row-label">
-            LINKEDIN
+            LinkedIn
             <input
               type="text"
               name="linkedin"
@@ -28,7 +28,7 @@ function OnlineProfile() {
             />
           </label>
           <label htmlFor="facebook" className="form-row-label">
-            FACEBOOK
+            Facebook
             <input
               type="text"
               name="facebook"
@@ -39,7 +39,7 @@ function OnlineProfile() {
         </div>
         <div className="form-row">
           <label htmlFor="imdb" className="form-row-label">
-            IMDB
+            Imdb
             <input
               type="text"
               name="imdb"
@@ -48,7 +48,7 @@ function OnlineProfile() {
             />
           </label>
           <label htmlFor="other" className="form-row-label">
-            OTHER
+            Other
             <input
               type="text"
               name="other"
