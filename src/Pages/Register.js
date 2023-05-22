@@ -165,6 +165,7 @@ function Register() {
       );
     } catch (error) {
       alert(error);
+      return;
     }
     if (accountType === 'navigator') {
       await createNavigator(email, data);
