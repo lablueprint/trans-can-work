@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import {
   useAuthState,
 } from 'react-firebase-hooks/auth';
-import { auth, logInWithEmailAndPassword, logout } from '../Components/firebase';
+import { auth, logInWithEmailAndPassword, logout } from '../firebase';
 import { getApprovalStatus } from './Register';
 import './Login.css';
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './NavigatorDashboard.css';
 import PropTypes from 'prop-types';
-import Checkboxes from './Checkboxes';
+import Checkboxes from '../Components/Dashboard/Checkboxes';
 import { createJobseeker } from '../Services/jobseeker-service';
 
 function Onboard({ username, useremail }) {
