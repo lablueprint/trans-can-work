@@ -282,24 +282,6 @@ export default function ProfileOutline() {
               ) : null}
               {disableButton ? 'Edit Profile' : 'Save Changes'}
             </Button>
-            {/* <div className="cancel-button">
-              {disableButton ? null : (
-                <Button
-                  variant="outlined"
-                  onClick={handleToggle}
-                  sx={{
-                    marginTop: '2%',
-                    marginRight: '2%',
-                    background: '#FFFFFF',
-                    borderColor: 'black',
-                    color: 'black',
-                  }}
-                >
-                  CANCEL
-                </Button>
-              )}
-
-            </div> */}
           </div>
         </div>
         <div className="outermost-container">
@@ -519,13 +501,6 @@ export default function ProfileOutline() {
       </div>
     );
   }
-
-  // TODO: here would be the splash screen for "waiting for admin approval"
-  return (
-    <div>
-      Waiting for admin approval...
-    </div>
-  );
 }
 
 ProfileOutline.propTypes = {
