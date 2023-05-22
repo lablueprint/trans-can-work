@@ -4,7 +4,6 @@ import Register from './Register';
 import Reset from './Reset';
 import NavigatorDashboard from './NavigatorDashboard';
 import JobseekerData from './JobseekerData';
-import Profile from './Profile';
 import Landing from './Landing';
 
 export {
@@ -13,7 +12,6 @@ export {
   Register,
   Reset,
   NavigatorDashboard,
-  Profile,
   JobseekerData,
   Landing,
 };

@@ -151,8 +151,9 @@ function Register() {
           name="accountType"
           className="registerFormItem"
           onChange={(e) => setAccountType(e.target.value)}
+          defaultValue="DEFAULT"
         >
-          <option disabled selected value> -- Select Account Type -- </option>
+          <option disabled value="DEFAULT"> -- Select Account Type -- </option>
           <option value="administrator">Administrator</option>
           <option value="navigator">Navigator</option>
           <option value="jobseeker">Jobseeker</option>
