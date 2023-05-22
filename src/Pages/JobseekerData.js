@@ -514,7 +514,7 @@ function Onboard({ username, useremail }) {
           {jobseeker.education.map((educationObject, index) => (
             <div>
               <form>
-                <div>
+                {/* <div>
                   <FormControl style={styles.formControl}>
                     <Select
                       label="Degree?"
@@ -525,7 +525,7 @@ function Onboard({ username, useremail }) {
                       <MenuItem value="Progress">Still Working On</MenuItem>
                     </Select>
                   </FormControl>
-                </div>
+                </div> */}
                 <div>
                   <FormControl style={styles.formControl}>
                     <InputLabel style={styles.inputLabel}>

@@ -285,6 +285,7 @@ input, textarea {
     background-color: #000AA0 !important;
     font-family: 'Montserrat' !important;
     font-weight: 700 !important;
+    font-size: 0.9vw !important;
 }
 
 .MuiSelect-select {
