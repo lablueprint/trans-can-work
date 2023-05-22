@@ -8,8 +8,8 @@ const jobseekerData = {
     body: [
       {
         uid: 'island1',
-        imageDefault: require('../../Assets/Images/assessment.png'),
-        imageUpdated: require('../../Assets/Images/assessment.png'),
+        imageDefault: require('../../Assets/Images/Assessment.png'),
+        imageUpdated: require('../../Assets/Images/Assessment.png'),
         imageUHover: require('../../Assets/Images/assessmentH.png'),
         title: require('../../Assets/Images/assessment-title.png'),
         id: 'assessmentN',

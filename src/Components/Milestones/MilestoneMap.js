@@ -9,8 +9,8 @@ const data = {
     body: [
       {
         uid: 1,
-        imageDefault: require('../../Assets/Images/assessment.png'),
-        imageUpdated: require('../../Assets/Images/assessment.png'),
+        imageDefault: require('../../Assets/Images/Assessment.png'),
+        imageUpdated: require('../../Assets/Images/Assessment.png'),
         imageUHover: require('../../Assets/Images/assessmentH.png'),
         title: require('../../Assets/Images/assessment-title.png'),
         id: 'assessment',
@@ -39,7 +39,7 @@ const data = {
       {
         uid: 4,
         imageDefault: require('../../Assets/Images/workshop(b&w).png'),
-        imageUpdated: require('../../Assets/Images/assessment.png'),
+        imageUpdated: require('../../Assets/Images/Assessment.png'),
         imageHover: require('../../Assets/Images/workshopH.png'),
         imageUHover: require('../../Assets/Images/workshopUH.png'),
         title: require('../../Assets/Images/workshop-title.png'),
