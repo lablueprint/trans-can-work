@@ -54,7 +54,5 @@ MilestoneButton.propTypes = {
 
 export default MilestoneButton;
 /*
-Later: include button/external links to the popup
-TODO: make the islands turn into color when marked as complete
 TODO: making the popup contents
 */

@@ -51,3 +51,54 @@ input {
     word-wrap: break-word;
 }
 
+/* #incomplete {
+    padding: 20px 28px; 
+    left: calc(50% - 210px/2); 
+    top: calc(50% - 64px/2 + 324px); 
+    border: 2px solid #484649; 
+    box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
+    border-radius: 12px; 
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: 0.15px;
+    color: #484649;
+    margin-top: -50px;
+    position: absolute;
+}
+
+#completed{
+    padding: 20px 28px; 
+    left: calc(50% - 231px/2); 
+    top: calc(50% - 64px/2 + 31px); 
+    box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
+    border-radius: 12px; 
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: 0.15px;
+    color: #FFFBFE;
+    background: #484649;
+    border: 2px solid #484649;
+    margin-top: -50px;
+    position: absolute;
+}
+#incomplete:hover {
+    background: #939094;
+    box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
+    color: #FFFBFE;
+    border: 2px solid #939094;
+}
+
+#completed:hover {
+    background: #939094;
+    box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
+    color: #FFFBFE;
+    border: 2px solid #939094;
+} */

@@ -8,10 +8,12 @@ import backButton from '../../Assets/back button.png';
 import OnlineProfile from './OnlineProfile';
 import Workshop from './Workshop';
 import JobFair from './JobFair';
+import Resources from './Resources';
 import './IslandPopup.css';
 
 function IslandPopup({
-  title, isOpen, handleClose, isComplete, toggleComplete, id,
+  title, isOpen, handleClose, id, isComplete, toggleComplete, // markAsComplete,
+  // jobLink, resourceLink,
 }) {
   let toBeRendered;
   if (id === 'assessment') {
@@ -22,6 +24,8 @@ function IslandPopup({
     toBeRendered = <Workshop />;
   } else if (id === 'job-fair') {
     toBeRendered = <JobFair />;
+  } else if (id === 'resource') {
+    toBeRendered = <Resources />;
   }
   return (
     <div>
@@ -41,6 +45,41 @@ function IslandPopup({
           >
             {(isComplete) ? 'Marked as Completed' : 'Mark as Complete'}
           </Button>
+          {/* <div>
+            {(markAsComplete)
+              ? (
+                <Button
+                  disableRipple
+                  onClick={toggleComplete}
+                  id={(isComplete) ? 'completed' : 'incomplete'}
+                >
+                  {(isComplete) ? 'Marked as Completed' : 'Mark as Complete'}
+                </Button>
+              )
+              : <div />}
+          </div>
+          <div>
+            {(jobLink)
+              ? (
+                <Button
+                  disableRipple
+                >
+                  Job Portal Link
+                </Button>
+              )
+              : <div />}
+          </div>
+          <div>
+            {(resourceLink)
+              ? (
+                <Button
+                  disableRipple
+                >
+                  Resources Link
+                </Button>
+              )
+              : <div />}
+          </div> */}
           <Button
             disableRipple
             id="close"
@@ -62,6 +101,13 @@ IslandPopup.propTypes = {
   isComplete: PropTypes.bool.isRequired,
   toggleComplete: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
+  // markAsComplete: PropTypes.bool.isRequired,
+  // jobLink: PropTypes.string.isRequired,
+  // resourceLink: PropTypes.string.isRequired,
 };
+
+/* ELETE: mark as complete have bool flag, link buttons have a prop that takes a string
+that is a link and if there is a link, make that button appear. use flexbox to position
+both buttons */
 
 export default IslandPopup;

@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './OnlineProfile.css';
+// import Button from '@mui/material/Button';
 
 function OnlineProfile() {
   const [inputs, setInputs] = useState({});
+  const [isComplete, setComplete] = React.useState(false);
+  const toggleComplete = () => setComplete(!isComplete);
 
   const handleChange = (event) => {
     const { name } = event.target;
@@ -58,6 +61,17 @@ function OnlineProfile() {
           </label>
         </div>
       </form>
+      <div
+        isComplete={isComplete}
+        toggleComplete={toggleComplete}
+      />
+      {/* <Button
+        disableRipple
+        onClick={toggleComplete}
+        id={(isComplete) ? 'completed' : 'incomplete'}
+      >
+        {(isComplete) ? 'Marked as Completed' : 'Mark as Complete'}
+      </Button> */}
     </div>
   );
 }

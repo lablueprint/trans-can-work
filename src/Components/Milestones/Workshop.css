@@ -18,6 +18,11 @@
     top: 90%;
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+}
+
 .checkBoxes {
     position: fixed;
     margin-top: 275px;
