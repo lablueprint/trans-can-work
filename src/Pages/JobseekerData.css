@@ -148,7 +148,7 @@ input, textarea {
 }
 
 .assessment-page-header-empty-block{
-    flex: 0 0 80%;
+    flex: 0 0 60%;
 }
 
 .assessment-page-back-empty-block{
@@ -206,6 +206,9 @@ input, textarea {
 .columns-container {
     display: flex;
     justify-content: space-between;
+    width: 50em;
+    margin: 0 auto;
+    gap: 5em;
   }
   
   .checkboxes-column-left,

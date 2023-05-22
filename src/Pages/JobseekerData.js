@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import './NavigatorDashboard.css';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
-import Select from '@mui/material/Select';
 import Avatar from 'react-avatar';
 import {
-  FormControl, MenuItem, InputLabel, NativeSelect,
+  FormControl, InputLabel, NativeSelect,
 } from '@mui/material';
 import './JobseekerData.css';
 // import Back from '../Assets/Assessment.png';
@@ -113,7 +112,8 @@ function Onboard({ username, useremail }) {
     dreamjob: 'None',
   });
 
-  const previousExperience = ['Admin',
+  const previousExperience1 = [
+    'Admin',
     'Bartender',
     'Construction',
     'Cosmetology',
@@ -127,6 +127,8 @@ function Onboard({ username, useremail }) {
     'Food Service',
     'Grant Writer',
     'Graphic Design',
+  ];
+  const previousExperience2 = [
     'Hospitality',
     'Management',
     'Marketing',
@@ -142,44 +144,44 @@ function Onboard({ username, useremail }) {
     'Writer',
   ];
 
-  const skills = ['Accounting Software',
-    'Administrative',
-    'Adobe Software Suite',
-    'Bilingual',
-    'Brand Management',
-    'Cold Calling',
-    'Computer Software and Application Software',
-    'CPR',
-    'Customer Service',
-    'Database Management',
-    'Excel',
-    'Graphic Design',
-    'Machinery Skills',
-    'Marketing Campaign Management',
-    'Mobile Development',
-    'Multilingual',
-    'Negotiation',
-    'Patient Scheduling Software',
-    'Philanthropy',
-    'Photo Editing',
-    'Photography',
-    'Photoshop',
-    'Powerpoint',
-    'Programming Languages: Ex. Perl, Python, Java and Ruby',
-    'Project Management',
-    'Public Speaking',
-    'Search Engine and Keyword Optimization',
-    'Statistical Analysis',
-    'Type 60+WPM',
-    'User Interface Design',
-    'Wood Working',
-    'Word',
-    'Writing',
-    'Money Handling',
-    'Customer Service',
-    'Inventory Management',
-    'ServSafe / Food Safety Certification / Food Handlers Card',
-  ];
+  // const skills = ['Accounting Software',
+  //   'Administrative',
+  //   'Adobe Software Suite',
+  //   'Bilingual',
+  //   'Brand Management',
+  //   'Cold Calling',
+  //   'Computer Software and Application Software',
+  //   'CPR',
+  //   'Customer Service',
+  //   'Database Management',
+  //   'Excel',
+  //   'Graphic Design',
+  //   'Machinery Skills',
+  //   'Marketing Campaign Management',
+  //   'Mobile Development',
+  //   'Multilingual',
+  //   'Negotiation',
+  //   'Patient Scheduling Software',
+  //   'Philanthropy',
+  //   'Photo Editing',
+  //   'Photography',
+  //   'Photoshop',
+  //   'Powerpoint',
+  //   'Programming Languages: Ex. Perl, Python, Java and Ruby',
+  //   'Project Management',
+  //   'Public Speaking',
+  //   'Search Engine and Keyword Optimization',
+  //   'Statistical Analysis',
+  //   'Type 60+WPM',
+  //   'User Interface Design',
+  //   'Wood Working',
+  //   'Word',
+  //   'Writing',
+  //   'Money Handling',
+  //   'Customer Service',
+  //   'Inventory Management',
+  //   'ServSafe / Food Safety Certification / Food Handlers Card',
+  // ];
 
   // eslint-disable-next-line no-unused-vars
   const skillsChecklist = [
@@ -221,7 +223,8 @@ function Onboard({ username, useremail }) {
     },
   ];
 
-  const interests = ['Accounting/Bookkeeping',
+  const interests1 = [
+    'Accounting/Bookkeeping',
     'App Type Jobs',
     'Architecture/Construction',
     'Audio/Video Technology & Communication',
@@ -242,6 +245,8 @@ function Onboard({ username, useremail }) {
     'Graphic Design',
     'Health/Medical',
     'Hospitality',
+  ];
+  const interests2 = [
     'Human Resources',
     'IT (Information Technology)',
     'Janitorial',
@@ -266,10 +271,13 @@ function Onboard({ username, useremail }) {
   ];
 
   // eslint-disable-next-line no-unused-vars
-  const [checkedSkills, setCheckedSkills] = useState(new Array(skills.length).fill(false));
+  // const [checkedSkills1, setCheckedSkills1] = useState(new Array(skills1.length).fill(false));
+  // const [checkedSkills2, setCheckedSkills2] = useState(new Array(skills2.length).fill(false));
   // eslint-disable-next-line no-unused-vars
-  const [checkedInt, setCheckedInt] = useState(new Array(interests.length).fill(false));
-  const [checkedPrev, setCheckedPrev] = useState(new Array(interests.length).fill(false));
+  const [checkedInt1, setCheckedInt1] = useState(new Array(interests1.length).fill(false));
+  const [checkedInt2, setCheckedInt2] = useState(new Array(interests2.length).fill(false));
+  const [checkedPrev1, setCheckedPrev1] = useState(new Array(previousExperience1.length).fill(false));
+  const [checkedPrev2, setCheckedPrev2] = useState(new Array(previousExperience2.length).fill(false));
 
   const saveJobseeker = (event) => {
     event.preventDefault();
@@ -380,6 +388,7 @@ function Onboard({ username, useremail }) {
                   <img
                     src={Back}
                     alt="back-pointing arrow"
+                    style={{ marginRight: '1em' }}
                   />
                 </div>
                 <p className="assessment-page-back-text">Return to Clients List</p>
@@ -472,16 +481,16 @@ function Onboard({ username, useremail }) {
         <div className="columns-container">
           <div className="checkboxes-column-left">
             <Checkboxes
-              skills={previousExperience.slice(0, 14)}
-              checkedArr={checkedPrev}
-              setCheckedArr={setCheckedPrev}
+              skills={previousExperience1}
+              checkedArr={checkedPrev1}
+              setCheckedArr={setCheckedPrev1}
             />
           </div>
           <div className="checkboxes-column-right">
             <Checkboxes
-              skills={previousExperience.slice(14)}
-              checkedArr={checkedPrev}
-              setCheckedArr={setCheckedPrev}
+              skills={previousExperience2}
+              checkedArr={checkedPrev2}
+              setCheckedArr={setCheckedPrev2}
             />
           </div>
         </div>
@@ -509,37 +518,40 @@ function Onboard({ username, useremail }) {
                   </FormControl>
                 </div>
                 {(jobseeker.education[index].degree === 'Progress' || jobseeker.education[index].degree === 'Yes') && (
-                  <CssTextField
-                    focusColor="#0c0ca4"
-                    label="Type of Degree"
-                    variant="outlined"
-                    FormHelperTextProps={{ children: 'Label' }}
-                    focused
+                  <div>
+                    <div className="baby-divider" />
+                    <CssTextField
+                      focusColor="#0c0ca4"
+                      label="Type of Degree"
+                      variant="outlined"
+                      FormHelperTextProps={{ children: 'Label' }}
+                      focused
                 // value={email}
-                    onChange={(e) => editEducation(e, 'degreeType', index)}
+                      onChange={(e) => editEducation(e, 'degreeType', index)}
                     // placeholder={item.placeholder}
-                    style={{ paddingBottom: '1%' }}
-                    InputProps={{
-                      className: classes.root,
-                      style: {
-                        fontFamily: 'Montserrat',
-                        color: '#49454F',
-                        paddingLeft: '0.5%',
-                        width: '55.0vw',
-                        height: '3.2vw',
-                        fontSize: '0.9vw',
-                        fontWeight: 'bold',
-                      },
-                    }}
-                    InputLabelProps={{
-                      className: classes.labelInput,
-                      style: {
-                        fontFamily: 'Montserrat',
-                        paddingLeft: '0.3%',
-                        backgroundColor: 'white',
-                      },
-                    }}
-                  />
+                      style={{ paddingBottom: '1%' }}
+                      InputProps={{
+                        className: classes.root,
+                        style: {
+                          fontFamily: 'Montserrat',
+                          color: '#49454F',
+                          paddingLeft: '0.5%',
+                          width: '55.0vw',
+                          height: '3.2vw',
+                          fontSize: '0.9vw',
+                          fontWeight: 'bold',
+                        },
+                      }}
+                      InputLabelProps={{
+                        className: classes.labelInput,
+                        style: {
+                          fontFamily: 'Montserrat',
+                          paddingLeft: '0.3%',
+                          backgroundColor: 'white',
+                        },
+                      }}
+                    />
+                  </div>
                 )}
                 <div>
                   <FormControl style={styles.formControl}>
@@ -558,37 +570,40 @@ function Onboard({ username, useremail }) {
                   </FormControl>
                 </div>
                 {(jobseeker.education[index].certificate === 'Progress' || jobseeker.education[index].certificate === 'Yes') && (
-                  <CssTextField
-                    focusColor="#0c0ca4"
-                    label="Type of Certificate"
-                    variant="outlined"
-                    FormHelperTextProps={{ children: 'Label' }}
-                    focused
+                  <div>
+                    <div className="baby-divider" />
+                    <CssTextField
+                      focusColor="#0c0ca4"
+                      label="Type of Certificate"
+                      variant="outlined"
+                      FormHelperTextProps={{ children: 'Label' }}
+                      focused
                 // value={email}
-                    onChange={(e) => editEducation(e, 'certificateType', index)}
+                      onChange={(e) => editEducation(e, 'certificateType', index)}
                     // placeholder={item.placeholder}
-                    style={{ paddingBottom: '1%' }}
-                    InputProps={{
-                      className: classes.root,
-                      style: {
-                        fontFamily: 'Montserrat',
-                        color: '#49454F',
-                        paddingLeft: '0.5%',
-                        width: '55.0vw',
-                        height: '3.2vw',
-                        fontSize: '0.9vw',
-                        fontWeight: 'bold',
-                      },
-                    }}
-                    InputLabelProps={{
-                      className: classes.labelInput,
-                      style: {
-                        fontFamily: 'Montserrat',
-                        paddingLeft: '0.3%',
-                        backgroundColor: 'white',
-                      },
-                    }}
-                  />
+                      style={{ paddingBottom: '1%' }}
+                      InputProps={{
+                        className: classes.root,
+                        style: {
+                          fontFamily: 'Montserrat',
+                          color: '#49454F',
+                          paddingLeft: '0.5%',
+                          width: '55.0vw',
+                          height: '3.2vw',
+                          fontSize: '0.9vw',
+                          fontWeight: 'bold',
+                        },
+                      }}
+                      InputLabelProps={{
+                        className: classes.labelInput,
+                        style: {
+                          fontFamily: 'Montserrat',
+                          paddingLeft: '0.3%',
+                          backgroundColor: 'white',
+                        },
+                      }}
+                    />
+                  </div>
                 )}
               </form>
               <div className="baby-divider" />
@@ -695,16 +710,16 @@ function Onboard({ username, useremail }) {
           <div className="columns-container">
             <div className="checkboxes-column-left">
               <Checkboxes
-                skills={interests.slice(0, 22)}
-                checkedArr={checkedPrev}
-                setCheckedArr={setCheckedPrev}
+                skills={interests1}
+                checkedArr={checkedInt1}
+                setCheckedArr={setCheckedInt1}
               />
             </div>
             <div className="checkboxes-column-right">
               <Checkboxes
-                skills={interests.slice(22)}
-                checkedArr={checkedPrev}
-                setCheckedArr={setCheckedPrev}
+                skills={interests2}
+                checkedArr={checkedInt2}
+                setCheckedArr={setCheckedInt2}
               />
             </div>
           </div>
