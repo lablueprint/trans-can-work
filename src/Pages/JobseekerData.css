@@ -20,6 +20,14 @@
          url('../Assets/Fonts/Montserrat-Bold.svg') format('svg'); /* Legacy iOS */
 }
 
+.baby-divider {
+    height: 0.8em;
+}
+
+.section-divider {
+    height: 3em;
+}
+
 h1 {
     font-family: 'Montserrat';
     font-style: normal;
@@ -31,10 +39,7 @@ h1 {
   }
 
 .h1-altered {
-    font-family: 'Montserrat';
-    font-style: normal;
     font-weight: 400;
-    text-align: left;
   }
 
 /* label { 

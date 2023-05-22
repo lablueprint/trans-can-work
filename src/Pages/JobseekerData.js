@@ -59,8 +59,8 @@ const styles = {
     color: '#49454F',
     fontSize: '0.9vw',
     fontWeight: 'bold',
-    // border: '2px solid #0c0ca4',
-    // borderRadius: '4px',
+    border: '1.5px solid #0c0ca4',
+    borderRadius: '4px',
     width: '55.0vw',
     height: '3.2vw',
     paddingLeft: '1.7%',
@@ -72,8 +72,7 @@ const styles = {
     fontFamily: 'Montserrat',
     fontWeight: 'normal',
     fontSize: '0.9vw',
-    // paddingBottom: '2%',
-    paddingTop: '2.4%',
+    marginTop: '2%',
     textAlign: 'left',
     backgroundColor: 'white',
     paddingLeft: '1%',
@@ -83,7 +82,6 @@ const styles = {
   formControl: {
     // no font properties in this?
     width: '55.0vw',
-    paddingBottom: '1%',
     textAlign: 'left',
     textDecoration: 'none',
   },
@@ -417,7 +415,9 @@ function Onboard({ username, useremail }) {
       </div>
       <div className="content">
         <div>
+          <div className="section-divider" />
           <h1>Client Info</h1>
+          <div className="baby-divider" />
           <form>
             <div className="inputWrapper">
               <div>
@@ -465,6 +465,7 @@ function Onboard({ username, useremail }) {
         </div>
 
         <div>
+          <div className="section-divider" />
           <h1>Previous Experience</h1>
           <h2>Please check all the skill sets that apply to ye.</h2>
         </div>
@@ -486,6 +487,7 @@ function Onboard({ username, useremail }) {
         </div>
 
         <div>
+          <div className="section-divider" />
           <h1 className="h1-altered">Education Info</h1>
           {jobseeker.education.map((educationObject, index) => (
             <div>
@@ -493,130 +495,17 @@ function Onboard({ username, useremail }) {
                 <div>
                   <FormControl style={styles.formControl}>
                     <InputLabel style={styles.inputLabel}>
-                      Age
+                      Degree?
                     </InputLabel>
                     <NativeSelect
-                      defaultValue={10}
+                      defaultValue="No"
                       style={styles.dropdownOptions}
                       onChange={(e) => editEducation(e, 'degree', index)}
                     >
-                      {/* <option value="" disabled>
-                        Select Option
-                      </option> */}
                       <option value="Yes" style={styles.dropdownOptions}>Yes</option>
                       <option value="No" style={styles.dropdownOptions}>No</option>
                       <option value="Progress" style={styles.dropdownOptions}>In Progress</option>
                     </NativeSelect>
-                    <br />
-                    <br />
-                    <CssTextField
-                      focusColor="#0c0ca4"
-                      label="Degree?"
-                      variant="outlined"
-                      FormHelperTextProps={{ children: 'Label' }}
-                      focused
-                // value={email}
-                      onChange={(e) => editEducation(e, 'degree', index)}
-                      placeholder="Degree?"
-                      style={{ paddingBottom: '1%' }}
-                      InputProps={{
-                        className: classes.root,
-                        style: {
-                          fontFamily: 'Montserrat',
-                          color: '#49454F',
-                          paddingLeft: '0.5%',
-                          width: '55.0vw',
-                          height: '3.2vw',
-                          fontSize: '0.9vw',
-                          fontWeight: 'bold',
-                        },
-                      }}
-                      InputLabelProps={{
-                        className: classes.labelInput,
-                        style: {
-                          fontFamily: 'Montserrat',
-                          paddingLeft: '0.3%',
-                          backgroundColor: 'white',
-                        },
-                      }}
-                    >
-                      <Select
-                        id="degree"
-                        autoWidth
-                      // value={age}
-                        label="Degree?"
-                        onChange={(e) => editEducation(e, 'degree', index)}
-                        MenuProps={{
-                          PaperProps: {
-                            style: {
-                              color: '#49454F',
-                              width: '55.0vw',
-                              fontSize: '0.9vw',
-                              fontWeight: 'bold',
-                            },
-                          },
-                        }}
-                      >
-                        <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
-                        <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
-                        <MenuItem value="Progress" style={styles.dropdownOptions}>In Progress</MenuItem>
-                      </Select>
-                    </CssTextField>
-                    {/* <Select
-                      id="degree"
-                      autoWidth
-                      // value={age}
-                      label="Degree?"
-                      onChange={(e) => editEducation(e, 'degree', index)}
-                      MenuProps={{
-                        PaperProps: {
-                          style: {
-                            color: '#49454F',
-                            width: '55.0vw',
-                            fontSize: '0.9vw',
-                            fontWeight: 'bold',
-                          },
-                        },
-                      }}
-                    >
-                      <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
-                      <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
-                      <MenuItem value="Progress" style={styles.dropdownOptions}>
-                      In Progress</MenuItem>
-                    </Select> */}
-                  </FormControl>
-                </div>
-                <div>
-                  <FormControl style={styles.formControl}>
-
-                    <InputLabel
-                      id="demo-simple-select-label"
-                      className="dropdown"
-                      style={styles.inputLabel}
-                    >
-                      Degree?
-                    </InputLabel>
-                    <Select
-                      id="degree"
-                      autoWidth
-                      // value={age}
-                      label="Degree?"
-                      onChange={(e) => editEducation(e, 'degree', index)}
-                      MenuProps={{
-                        PaperProps: {
-                          style: {
-                            color: '#49454F',
-                            width: '55.0vw',
-                            fontSize: '0.9vw',
-                            fontWeight: 'bold',
-                          },
-                        },
-                      }}
-                    >
-                      <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
-                      <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
-                      <MenuItem value="Progress" style={styles.dropdownOptions}>In Progress</MenuItem>
-                    </Select>
                   </FormControl>
                 </div>
                 {(jobseeker.education[index].degree === 'Progress' || jobseeker.education[index].degree === 'Yes') && (
@@ -654,35 +543,18 @@ function Onboard({ username, useremail }) {
                 )}
                 <div>
                   <FormControl style={styles.formControl}>
-                    <InputLabel
-                      id="demo-simple-select-label"
-                      className="dropdown"
-                      style={styles.inputLabel}
-                    >
-                      Certificate?
-
+                    <InputLabel style={styles.inputLabel}>
+                      Certificate
                     </InputLabel>
-                    <Select
-                      id="certificate"
-                      autoWidth
-                      // value={age}
-                      label="Certificate?"
+                    <NativeSelect
+                      defaultValue="No"
+                      style={styles.dropdownOptions}
                       onChange={(e) => editEducation(e, 'certificate', index)}
-                      MenuProps={{
-                        PaperProps: {
-                          style: {
-                            color: '#49454F',
-                            width: '55.0vw',
-                            fontSize: '0.9vw',
-                            fontWeight: 'bold',
-                          },
-                        },
-                      }}
                     >
-                      <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
-                      <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
-                      <MenuItem value="Progress" style={styles.dropdownOptions}>In Progress</MenuItem>
-                    </Select>
+                      <option value="Yes" style={styles.dropdownOptions}>Yes</option>
+                      <option value="No" style={styles.dropdownOptions}>No</option>
+                      <option value="Progress" style={styles.dropdownOptions}>In Progress</option>
+                    </NativeSelect>
                   </FormControl>
                 </div>
                 {(jobseeker.education[index].certificate === 'Progress' || jobseeker.education[index].certificate === 'Yes') && (
@@ -719,6 +591,7 @@ function Onboard({ username, useremail }) {
                   />
                 )}
               </form>
+              <div className="baby-divider" />
               <div className="left-button">
                 <button type="button" onClick={(e) => deleteEducation(e, index)} className="delete-buttons">
                   <img
@@ -746,7 +619,9 @@ function Onboard({ username, useremail }) {
         </div>
 
         <div>
+          <div className="section-divider" />
           <h1 className="h1-altered">List of Current/Previous Occupations</h1>
+          <div className="baby-divider" />
           <form>
             <div>
               {jobseeker.occupation.map((occupationObject, index) => (
@@ -809,10 +684,8 @@ function Onboard({ username, useremail }) {
             </div>
           </form>
         </div>
-
-        <br />
-
         <div>
+          <div className="section-divider" />
           <h1>Industry Interest</h1>
           <h2>
             In what areas of the followin&apos; industries are
@@ -847,6 +720,7 @@ function Onboard({ username, useremail }) {
         </div> */}
 
         <div>
+          <div className="section-divider" />
           <h1>Ultimate Dream Job</h1>
           <form>
             <div className="inputWrapper">
@@ -899,7 +773,7 @@ function Onboard({ username, useremail }) {
             Save Changes
           </button>
         </div>
-
+        <div className="section-divider" />
       </div>
     </div>
   );
