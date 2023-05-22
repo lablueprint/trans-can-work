@@ -248,3 +248,8 @@ input, textarea {
 .row {
     position: relative;
 }
+
+.dropit {
+    color: purple;
+    background-color: white;
+}

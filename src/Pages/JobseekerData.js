@@ -95,18 +95,18 @@ function Onboard({ username, useremail }) {
     cityState: 'City/State',
     ethnicity: 'Ethnicity',
     age: 100,
-    gender: 'Female',
-    sexuality: 'chair',
-    veteran: 'no',
-    disability: 'no',
-    housingSituation: 'shit show',
-    employmentStatus: 'single',
-    convictions: 'no',
+    genderIdentity: 'Female',
+    sexuality: 'Pansexual',
+    veteran: 'No',
+    disability: 'No',
+    housingSituation: 'Housed',
+    employmentStatus: 'Unemployed',
+    convictions: 'No',
     education: [{
       degree: 'No',
-      degreeType: 'ur moms bed',
+      degreeType: 'hi',
       certificate: 'No',
-      certificateType: 'ur house',
+      certificateType: 'hey',
     }],
     occupation: ['None'],
     dreamjob: 'None',
@@ -276,8 +276,10 @@ function Onboard({ username, useremail }) {
   // eslint-disable-next-line no-unused-vars
   const [checkedInt1, setCheckedInt1] = useState(new Array(interests1.length).fill(false));
   const [checkedInt2, setCheckedInt2] = useState(new Array(interests2.length).fill(false));
-  const [checkedPrev1, setCheckedPrev1] = useState(new Array(previousExperience1.length).fill(false));
-  const [checkedPrev2, setCheckedPrev2] = useState(new Array(previousExperience2.length).fill(false));
+  const [checkedPrev1,
+    setCheckedPrev1] = useState(new Array(previousExperience1.length).fill(false));
+  const [checkedPrev2,
+    setCheckedPrev2] = useState(new Array(previousExperience2.length).fill(false));
 
   const saveJobseeker = (event) => {
     event.preventDefault();
@@ -511,9 +513,9 @@ function Onboard({ username, useremail }) {
                       style={styles.dropdownOptions}
                       onChange={(e) => editEducation(e, 'degree', index)}
                     >
-                      <option value="Yes" style={styles.dropdownOptions}>Yes</option>
-                      <option value="No" style={styles.dropdownOptions}>No</option>
-                      <option value="Progress" style={styles.dropdownOptions}>In Progress</option>
+                      <option value="Yes" className="dropit">Yes</option>
+                      <option value="No" className="dropit">No</option>
+                      <option value="Progress" className="dropit">Still Working On</option>
                     </NativeSelect>
                   </FormControl>
                 </div>
@@ -565,7 +567,7 @@ function Onboard({ username, useremail }) {
                     >
                       <option value="Yes" style={styles.dropdownOptions}>Yes</option>
                       <option value="No" style={styles.dropdownOptions}>No</option>
-                      <option value="Progress" style={styles.dropdownOptions}>In Progress</option>
+                      <option value="Progress" style={styles.dropdownOptions}>Still Working On</option>
                     </NativeSelect>
                   </FormControl>
                 </div>
