@@ -14,7 +14,6 @@ import {
 } from './Pages';
 import './App.css';
 import Footer from './Components/Footer/Footer';
-
 import Splash from './Components/Splash';
 import approvalIcon from './Assets/trans flag graphic.svg';
 import AdminView from './Components/AdminView';
@@ -50,11 +49,8 @@ function App() {
           )}
         />
       </Routes>
-      {/* <Header /> */}
-      {/* <Form /> */}
       <Footer />
     </div>
   );
 }
-// temporarily commented out the nav-bar!
 export default App;
