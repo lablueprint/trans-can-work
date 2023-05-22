@@ -366,21 +366,20 @@ export default function ProfileOutline() {
                 Password:
                 <br />
                 <div className="eyeContainer">
-                  <img
-                    src={Eye}
-                      // eslint-disable-next-line max-len
-                      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
-                    role="button"
-                    alt="eye icon in password field"
+                  <button
+                    type="button"
                     onClick={showPassword}
-                    readOnly
+                    disabled={disableButton}
                     className={disableButton ? 'eyeNone' : 'eye'}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter' || e.key === ' ') {
                         showPassword();
                       }
                     }}
-                  />
+                  >
+                    <img src={Eye} alt="eye icon in password field" />
+                  </button>
+
                   <input
                     className={disableButton ? 'non-editable-field' : 'editable-email-password'}
                     type={passwordShown ? 'text' : 'password'}
