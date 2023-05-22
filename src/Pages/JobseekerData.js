@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import './JobseekerData.css';
 // import Back from '../Assets/Assessment.png';
-import { TextField } from '@material-ui/core';
+import { TextField, Select, MenuItem } from '@material-ui/core';
 // import InputAdornment from '@mui/material/InputAdornment';
 // import VisibilityIcon from '@mui/icons-material/Visibility';
 // import GoogleIcon from '@mui/icons-material/Google';
@@ -78,11 +78,21 @@ const styles = {
     paddingRight: '1%',
     textDecoration: 'none',
   },
+  inputLabelNew: {
+    color: '#0c0ca4',
+    fontSize: '0.9vw',
+    // marginBottom: '40%',
+    // position: 'absolute',
+    // bottom: '90px',
+  },
   formControl: {
     // no font properties in this?
     width: '55.0vw',
     textAlign: 'left',
     textDecoration: 'none',
+  },
+  purpleBackground: {
+    backgroundColor: 'purple',
   },
 };
 
@@ -500,9 +510,22 @@ function Onboard({ username, useremail }) {
         <div>
           <div className="section-divider" />
           <h1 className="h1-altered">Education Info</h1>
+          <div className="baby-divider" />
           {jobseeker.education.map((educationObject, index) => (
             <div>
               <form>
+                <div>
+                  <FormControl style={styles.formControl}>
+                    <Select
+                      label="Degree?"
+                      onChange={(e) => editEducation(e, 'degree', index)}
+                    >
+                      <MenuItem value="Yes">Yes</MenuItem>
+                      <MenuItem value="No">No</MenuItem>
+                      <MenuItem value="Progress">Still Working On</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
                 <div>
                   <FormControl style={styles.formControl}>
                     <InputLabel style={styles.inputLabel}>
@@ -512,6 +535,11 @@ function Onboard({ username, useremail }) {
                       defaultValue="No"
                       style={styles.dropdownOptions}
                       onChange={(e) => editEducation(e, 'degree', index)}
+                      MenuProps={{
+                        PaperProps: {
+                          style: styles.purpleBackground,
+                        },
+                      }}
                     >
                       <option value="Yes" className="dropit">Yes</option>
                       <option value="No" className="dropit">No</option>

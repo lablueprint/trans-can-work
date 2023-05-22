@@ -232,6 +232,22 @@ input, textarea {
     display: none;
 }
 
+.MuiSelect-root::before,
+  .MuiSelect-select::before,
+  .MuiSelect-multiple::before,
+  .MuiSelect-filled::before,
+  .MuiSelect-outlined::before,
+  .MuiNativeSelect-standard::before,
+  .MuiSelect-root::after,
+  .MuiSelect-select::after,
+  .MuiSelect-multiple::after,
+  .MuiSelect-filled::after,
+  .MuiSelect-outlined::after,
+  .MuiSelect-standard::after,
+  .muiInput-root::after {
+    display: none;
+}
+
 .clickable {
     right: 0;
     float: right;
@@ -252,4 +268,42 @@ input, textarea {
 .dropit {
     color: purple;
     background-color: white;
+}
+
+.inputNames {
+    color: #0c0ca4;
+    font-size: .35em;
+    font-family: 'Montserrat';
+    position: absolute;
+    background-color: white;
+    left: 2%;
+    margin-bottom: 10em !important;
+}
+
+.MuiMenuItem-root {
+    color: white !important;
+    background-color: #000AA0 !important;
+    font-family: 'Montserrat' !important;
+    font-weight: 700 !important;
+}
+
+.MuiSelect-select {
+    color: #49454F !important;
+    font-family: 'Montserrat' !important;
+    font-weight: 700 !important;
+    padding-left: 1.7% !important;
+    font-size: 0.9vw !important;
+    border: 1.5px solid #0c0ca4 !important;
+    height: 2.2vw !important;
+    border-radius: 4px !important;
+    /* fontFamily: 'Montserrat',
+    color: '#49454F',
+    fontSize: '0.9vw',
+    fontWeight: 'bold',
+    border: '1.5px solid #0c0ca4',
+    borderRadius: '4px',
+    width: '55.0vw',
+    height: '3.2vw',
+    paddingLeft: '1.7%',
+    textDecoration: 'none', */
 }
