@@ -177,6 +177,7 @@ function ProfileButton({
           PaperProps={{
             style: {
               width: '10em',
+              padding: 0.10,
             },
           }}
           MenuListProps={{

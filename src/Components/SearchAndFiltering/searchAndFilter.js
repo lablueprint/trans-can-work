@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-
 import TuneIcon from '@mui/icons-material/Tune';
-import Popover from '@mui/material/Popover';
+import { Dialog, Slide } from '@mui/material';
 import Filtering from './Filtering';
-
 import SearchBar from './SearchBar';
 
 import './searchAndFilter.css';
@@ -92,22 +90,45 @@ const interests = ['Accounting/Bookkeeping',
   'Web Design',
 ];
 
-function SearchAndFilter({ accounts, setOutput }) {
+const Transition = React.forwardRef((props, ref) => (
+  <Slide direction="right" ref={ref} {...props} />
+));
+
+function SearchAndFilter({
+  accounts, setOutput,
+}) {
   const [searchTerms, setSearchTerms] = useState('');
   const [checkedArr, setCheckedArr] = useState(new Array(skills.length).fill(false));
   const [checkedInterests, setCheckedInterests] = useState(new Array(interests.length).fill(false));
-  const [filterAnchorElement, setFilterAnchorElement] = useState(null);
 
-  const filteringPopoverOpen = Boolean(filterAnchorElement);
-  const filterPopoverId = filteringPopoverOpen ? 'simple-popover' : undefined;
+  // filtering dialog
+  const [open, setOpen] = React.useState(false);
 
-  const FilterHandleClick = (event) => {
-    setFilterAnchorElement(event.currentTarget);
+  const anchorRef = React.useRef(null);
+
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
   };
 
-  const FilterHandleClose = () => {
-    setFilterAnchorElement(null);
+  const handleClose = (event) => {
+    if (
+      anchorRef.current
+      && anchorRef.current.contains(event.target)
+    ) {
+      return;
+    }
+    setOpen(false);
   };
+
+  // return focus to the button when we transitioned from !open -> open
+  const prevOpen = React.useRef(open);
+  React.useEffect(() => {
+    if (prevOpen.current === true && open === false) {
+      anchorRef.current?.focus();
+    }
+
+    prevOpen.current = open;
+  }, [open]);
 
   // search methods
   const search = (items) => {
@@ -174,29 +195,29 @@ function SearchAndFilter({ accounts, setOutput }) {
           setValue={setSearchTerms}
           placeholder="Search here!"
         />
-        <button className="filter-button" aria-label="search bar" type="button" onClick={FilterHandleClick}><TuneIcon /></button>
+        <button className="filter-button" aria-label="search bar" type="button" onClick={handleToggle}><TuneIcon /></button>
       </div>
 
-      <Popover
-        id={filterPopoverId}
-        open={filteringPopoverOpen}
-        anchorEl={filterAnchorElement}
-        onClose={FilterHandleClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
+      <Dialog
+        className="popup"
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="filtering-dialog-description"
+        maxWidth="s"
+        PaperProps={{ style: { borderRadius: 30, maxHeight: '750px', maxWidth: '356px' } }}
       >
         <Filtering
-          anchorElement={filterAnchorElement}
           checkedArr={checkedArr}
           setCheckedArr={setCheckedArr}
           checkedInterests={checkedInterests}
           setCheckedInterests={setCheckedInterests}
           skills={skills}
           interests={interests}
+          handleClose={handleClose}
         />
-      </Popover>
+      </Dialog>
     </div>
   );
 }

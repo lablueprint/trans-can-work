@@ -30,9 +30,40 @@ function a11yProps(index) {
   };
 }
 
-const HomeTab = styled((props) => <Tab disableRipple {...props} />)(() => ({
-  textTransform: 'none',
-}));
+const StyledTabs = styled((props) => (
+  <Tabs
+    {...props}
+    TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
+  />
+))({
+  '& .MuiTabs-indicator': {
+    display: 'flex',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+  },
+  '& .MuiTabs-indicatorSpan': {
+    width: '100%',
+    backgroundColor: '#1C1B1F',
+  },
+});
+
+const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
+  ({ theme }) => ({
+    backgroundColor: 'transparent',
+
+    fontFamily: 'Montserrat',
+    color: '#1C1B1F',
+
+    textTransform: 'none',
+    fontSize: '.9rem',
+    marginRight: theme.spacing(1),
+
+    '&.Mui-selected': {
+      color: '#1C1B1F',
+    },
+
+  }),
+);
 
 /* the current version of the dashboard will not work with the switch to the users table
     - need to consider the new object format
@@ -186,16 +217,16 @@ export default function Dashboard({ profileName, role }) {
             <SearchAndFilter accounts={currentTabAccounts} setOutput={setFilteredAccounts} placeholder="Search Accounts" />
           </div>
         </div>
-        <Tabs
+        <StyledTabs
           value={tabValue}
           onChange={handleChange}
           aria-label="Account type tabs"
         >
-          {role === 'Admin' && <HomeTab label="Navigators" {...a11yProps(0)} />}
-          <HomeTab label="Clients" {...a11yProps(1)} />
-          <HomeTab label="Archive" {...a11yProps(2)} />
-          {role === 'Admin' && <HomeTab label="Unapproved Accounts" {...a11yProps(3)} />}
-        </Tabs>
+          {role === 'Admin' && <StyledTab label="Navigators" {...a11yProps(0)} />}
+          <StyledTab label="Clients" {...a11yProps(1)} />
+          <StyledTab label="Archive" {...a11yProps(2)} />
+          {role === 'Admin' && <StyledTab label="Unapproved Accounts" {...a11yProps(3)} />}
+        </StyledTabs>
       </div>
       {filteredAccounts && filteredAccounts.length !== 0
         ? (

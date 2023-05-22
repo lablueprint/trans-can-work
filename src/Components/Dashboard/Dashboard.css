@@ -56,10 +56,10 @@
 
 .profile-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 16em);
+    grid-template-columns: repeat(auto-fill, 16.5em);
     grid-row-gap: 1em;
     justify-content: space-evenly;
-    margin: 3rem 1rem;
+    margin: 3rem 2rem;
 
 }
 
