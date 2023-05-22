@@ -16,7 +16,7 @@ function Login() {
   return (
     <div>
       {user !== null
-          && (
+        && (
           <div>
             <div>
               Hello
@@ -31,7 +31,7 @@ function Login() {
               </button>
             </div>
           </div>
-          )}
+        )}
       {user === null && (
         <div>
           <div>

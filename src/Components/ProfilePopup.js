@@ -4,11 +4,12 @@ import { Dialog, Slide } from '@mui/material';
 import './ProfilePopup.css';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
-import { Check, Close, Edit } from '@mui/icons-material';
+import {
+  Check, Close, Edit, Visibility, VisibilityOff,
+} from '@mui/icons-material';
 import TextField from '@mui/material/TextField';
 import Divider from '@mui/material/Divider';
 import { InputAdornment } from '@material-ui/core';
-import { Visibility, VisibilityOff } from '@material-ui/icons';
 import Button from '@mui/material/Button';
 import { doc, setDoc } from 'firebase/firestore';
 import profilepic from '../Assets/parrot_profile.svg';
@@ -263,7 +264,7 @@ function ProfilePopup({
               <Button style={styles.done} onClick={() => setEditBackground(false)}>Done</Button>
             </Dialog>
           </>
-        ) : <div /> }
+        ) : <div />}
         <div className="textSection">
           {' '}
           <div className="profileLabel">
@@ -344,23 +345,23 @@ function ProfilePopup({
 
         </div>
         {!edit && (
-        <div className="navContainer">
-          <Divider style={styles.divider} className="divider" />
-          <div className="navInnerContainer">
-            <div className="avatar">
-              <Avatar
-                alt="Jack Sparrow"
-                src={navpic}
-                style={styles.avatar}
-              />
-            </div>
-            <div className="details">
-              <p className="nav">Navigator</p>
-              <h2 className="navigatorName">Powell Cat</h2>
-              <p className="navigatorEmail">powellcat@gmail.com</p>
+          <div className="navContainer">
+            <Divider style={styles.divider} className="divider" />
+            <div className="navInnerContainer">
+              <div className="avatar">
+                <Avatar
+                  alt="Jack Sparrow"
+                  src={navpic}
+                  style={styles.avatar}
+                />
+              </div>
+              <div className="details">
+                <p className="nav">Navigator</p>
+                <h2 className="navigatorName">Powell Cat</h2>
+                <p className="navigatorEmail">powellcat@gmail.com</p>
+              </div>
             </div>
           </div>
-        </div>
         )}
 
       </Dialog>

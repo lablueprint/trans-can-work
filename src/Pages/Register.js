@@ -52,7 +52,7 @@ function Register() {
     <div>
 
       {user !== null
-          && (
+        && (
           <div>
             <div>
               Hello
@@ -67,7 +67,7 @@ function Register() {
               </button>
             </div>
           </div>
-          )}
+        )}
       {user === null && (
         <div>
           <div>

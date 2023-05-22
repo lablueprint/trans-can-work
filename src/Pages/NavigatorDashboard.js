@@ -13,8 +13,8 @@ function NavigatorDashboard() {
   // eslint-disable-next-line no-unused-vars
   const [seekerID, setSeekerID] = useState('');
   const updateJobseeker = async () => {
-  // const ref = doc(db, 'jobseekers', { seekerID });
-  // await update need to update db first
+    // const ref = doc(db, 'jobseekers', { seekerID });
+    // await update need to update db first
   };
 
   const [jobseeker, setJobseeker] = useState({
