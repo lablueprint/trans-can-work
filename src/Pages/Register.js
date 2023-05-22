@@ -121,7 +121,7 @@ function Register() {
     <div>
 
       {user !== null
-          && (
+        && (
           <div>
             <div>
               <button
@@ -133,7 +133,7 @@ function Register() {
               </button>
             </div>
           </div>
-          )}
+        )}
       <div className="registerForm">
         <input
           className="registerFormItem"

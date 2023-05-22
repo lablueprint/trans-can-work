@@ -11,6 +11,7 @@ import {
   Profile,
   Landing,
   JobseekerData,
+  ProfileTemp,
 } from './Pages';
 import './App.css';
 import Footer from './Components/Footer/Footer';
@@ -36,6 +37,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/landing" element={<Landing />} />
         <Route path="/onboard" element={<JobseekerData useremail="solia@goodpl.us" username="solia tennis" />} />
+        <Route path="/newprofile" element={<ProfileTemp />} />
         <Route path="/adminview" element={<AdminView />} />
 
         <Route

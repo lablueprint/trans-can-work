@@ -28,7 +28,7 @@ function Login() {
         const approves = await getApprovalStatus(googleUser.email);
         navigate(approves ? '/' : '/splash');
       }).catch((e) => {
-      // Handle Errors here.
+        // Handle Errors here.
         const errorCode = e.code;
         console.log(errorCode);
 
@@ -40,7 +40,7 @@ function Login() {
   return (
     <div>
       {user !== null
-          && (
+        && (
           <div>
             <div>
               <button
@@ -52,7 +52,7 @@ function Login() {
               </button>
             </div>
           </div>
-          )}
+        )}
       <div className="login">
         <input
           className="loginInput"

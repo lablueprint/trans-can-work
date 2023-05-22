@@ -50,8 +50,8 @@ function MilestoneButton({
       <Modal
         open={open}
         onClose={handleClose}
-        // aria-labelledby="modal-modal-title"
-        // aria-describedby="modal-modal-description"
+      // aria-labelledby="modal-modal-title"
+      // aria-describedby="modal-modal-description"
       >
         <Box sx={style.Popup}>
           <img id="title" src={title} alt="island title" />

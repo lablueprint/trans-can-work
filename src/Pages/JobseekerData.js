@@ -266,17 +266,17 @@ function Onboard({ username, useremail }) {
                   </label>
                 </div>
                 {jobseeker.education[index].degree === 'Yes' && (
-                <div className="inputWrapper">
-                  <label htmlFor="degreeType">
-                    Type of Degree
-                    <input
-                      id="degreeType"
-                      placeholder={educationObject.degreeType}
-                      onChange={(e) => editEducation(e, 'degreeType', index)}
-                      type="text"
-                    />
-                  </label>
-                </div>
+                  <div className="inputWrapper">
+                    <label htmlFor="degreeType">
+                      Type of Degree
+                      <input
+                        id="degreeType"
+                        placeholder={educationObject.degreeType}
+                        onChange={(e) => editEducation(e, 'degreeType', index)}
+                        type="text"
+                      />
+                    </label>
+                  </div>
                 )}
                 <div className="inputWrapper">
                   <label htmlFor="cert">
@@ -293,17 +293,17 @@ function Onboard({ username, useremail }) {
                   </label>
                 </div>
                 {jobseeker.education[index].certificate === 'Yes' && (
-                <div className="inputWrapper">
-                  <label htmlFor="certType">
-                    Type of Certificate:
-                    <input
-                      id="certType"
-                      placeholder={educationObject.certificateType}
-                      onChange={(e) => editEducation(e, 'certificateType', index)}
-                      type="text"
-                    />
-                  </label>
-                </div>
+                  <div className="inputWrapper">
+                    <label htmlFor="certType">
+                      Type of Certificate:
+                      <input
+                        id="certType"
+                        placeholder={educationObject.certificateType}
+                        onChange={(e) => editEducation(e, 'certificateType', index)}
+                        type="text"
+                      />
+                    </label>
+                  </div>
                 )}
               </form>
 
