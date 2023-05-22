@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Route, Routes,
 } from 'react-router-dom';
+// import { Archive } from '@mui/icons-material';
 import {
   Home,
   Login,
@@ -10,6 +11,7 @@ import {
   Reset,
   Profile,
   ProfileTemp,
+  ArchiveTemp,
 } from './Pages';
 import './App.css';
 // import Footer from './Components/Footer/Footer';
@@ -36,6 +38,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/newprofile" element={<ProfileTemp />} />
         <Route path="/adminview" element={<AdminView />} />
+        <Route path="/archivepopuptesting" element={<ArchiveTemp />} />
 
         <Route
           path="/splash"

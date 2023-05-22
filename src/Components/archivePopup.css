@@ -1,0 +1,169 @@
+.containerSection {
+    border-radius: 3em;
+    background-color: black;
+  }
+  
+  .imageSection {
+    width: 100%;
+    min-height: 10em;
+    max-height: 10em;
+    background-size: cover;
+  }
+  
+  .profilePicButton {
+    position: absolute;
+    width: 0.75em;
+    top: 9.5em;
+    left: 8em;
+  }
+  
+  .coverPicButton {
+    position: absolute;
+    width: 10px;
+    top: 100px;
+    right: 40px;
+  }
+  
+  .buttonSection {
+    position: absolute;
+    right: 30px;
+    top: 10px;
+    width: 90px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .profilePic {
+    position: absolute;
+    left: 3em;
+    top: 6em;
+  }
+  
+  .textSection {
+    color: #484649;
+    padding: 30px 50px 0px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 16rem;
+    overflow: hidden;
+  }
+  
+  .profileLabel {
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    margin-top: 1.5rem;
+    height: 3rem;
+  }
+  
+  .nameLabel {
+    font-size: 2.75rem;
+    font-family: 'Pirate';
+    font-weight: 400;
+    text-transform: capitalize;
+  }
+  
+  .pronounLabel {
+    margin: 1rem;
+    font-family: 'Pirate';
+    font-size: 1.75rem;
+    text-transform: capitalize;
+  }
+  
+  .bioSection {
+    width: 100%;
+    max-height: 25em;
+    overflow-y: scroll;
+  }
+  
+  .inputSection {
+    height: 50px;
+    font-family: 'Montserrat';
+  }
+  
+  .inputTitle {
+    margin-bottom: 5px;
+    font-family: 'Montserrat';
+  }
+  
+  .bio {
+    font-family: 'Montserrat';
+    font-size: 0.9em;
+    margin: 0.5em 0 1em 0;
+    line-height: 1.5em;
+  }
+  
+  .container {
+    display: flex;
+    overflow: hidden;
+    /* will contain if #first is longer than #second */
+  }
+  
+  .avatar {
+    float: left;
+    /* add this */
+  }
+  
+  .details {
+    flex: 1 1 auto;
+    display: flex;
+    overflow: hidden;
+    margin-left: 20px;
+    /* if you don't want #second to wrap below #first */
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .nav {
+    font-family: 'Montserrat';
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.6em;
+    margin: 0 0 5px 0;
+  }
+  
+  .navContainer {
+    margin: 20px 50px 40px 50px;
+    color: #484649;
+  }
+  
+  .navInnerContainer {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .navigatorName {
+    font-family: 'Pirate';
+    font-size: 2em;
+    margin: 0;
+  }
+  
+  .navigatorEmail {
+    font-family: 'Montserrat';
+    font-size: 0.75em;
+    margin: 5px 0 0 0;
+  }
+  
+  .inputTitle {
+    font-family: 'Montserrat';
+    font-size: 0.75em;
+  }
+  
+  .inputSection {
+    margin-bottom: 2em;
+  }
+  
+  .backgroundHeader {
+    text-align: center;
+    font-family: 'Montserrat';
+    color: #484649;
+  
+  }
+  
+  .colorPopup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
