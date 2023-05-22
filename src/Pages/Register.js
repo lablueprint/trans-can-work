@@ -295,9 +295,9 @@ function Register() {
                   display: 'flex',
                   flexDirection: 'row',
                   justifyContent: 'space-between',
-                  width: '277%',
+                  width: '54.0vw',
                   color: 'blue',
-                  paddingTop: '5%',
+                  paddingTop: '4%',
                 }}
               >
                 <FormControlLabel
