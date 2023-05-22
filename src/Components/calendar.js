@@ -5,13 +5,14 @@ import {
 } from 'firebase/firestore';
 import { Dialog, Slide, IconButton } from '@mui/material';
 import { CloseRounded } from '@mui/icons-material';
+import Divider from '@mui/material/Divider';
 import firebase from '../firebase';
 
 const db = firebase;
 
 const style = {
   dialog: {
-    borderRadius: '50px',
+    borderRadius: '5em',
   },
   button: {
     margin: '2vh 1.5vw 0 0',
@@ -22,6 +23,10 @@ const style = {
     padding: '0 10vw 3vh 10vw',
     textAlign: 'center',
     fontFamily: 'Pirate',
+    fontSize: '2.9rem',
+    textTransform: 'capitalize',
+    color: '#484649',
+
   },
   calendar: {
     padding: '5vw',
@@ -77,20 +82,20 @@ function Calendar({ open, handleClose }) {
           </IconButton>
         </div>
         <div style={style.header}>
-          <h1>
+          <h3>
             TCW Events
             <br />
             Calendar
-          </h1>
+          </h3>
         </div>
         <div>
-          <hr />
+          <Divider variant="middle" sx={{ borderBottomWidth: '0.15em' }} />
         </div>
         <div className="popup-content" style={style.calendar}>
           <iframe
             src={`https://calendar.google.com/calendar/embed?src=${calendarId}&ctz=${timeZone}&mode=MONTH`}
             style={{
-              border: '0', width: '100%', height: '350px', frameborder: '0', scrolling: 'no',
+              border: '0', width: '100%', height: '25em', frameborder: '0', scrolling: 'no',
             }}
             title="Calendar"
           />
