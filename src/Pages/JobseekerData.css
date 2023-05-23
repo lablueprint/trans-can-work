@@ -297,6 +297,7 @@ input, textarea {
     border: 1.5px solid #0c0ca4 !important;
     height: 2.2vw !important;
     border-radius: 4px !important;
+    bottom: 20px !important;
     /* fontFamily: 'Montserrat',
     color: '#49454F',
     fontSize: '0.9vw',
