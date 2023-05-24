@@ -331,7 +331,7 @@ function Register() {
                     <CssRadio />
                   )}
                   label="Adminstrator"
-                  onChange={() => setAccount('adminstrator')}
+                  onChange={() => setAccount('admin')}
                 />
               </RadioGroup>
             </FormControl>
