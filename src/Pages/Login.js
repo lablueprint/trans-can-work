@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
-// import { Link as ScrollLink } from 'react-scroll';
-// import {
-//   useAuthState,
-// } from 'react-firebase-hooks/auth';
 import {
   TextField, Button, Checkbox,
 } from '@material-ui/core';
@@ -13,7 +9,6 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import GoogleIcon from '@mui/icons-material/Google';
 import { styled, makeStyles } from '@material-ui/core/styles';
 import { auth, logInWithEmailAndPassword } from '../Components/firebase';
-// import { logout } from '../Components/firebase';
 import { getApprovalStatus } from './Register';
 import './Login.css';
 
