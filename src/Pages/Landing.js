@@ -36,7 +36,7 @@ function Landing() {
   return (
     <div className="Cards">
       {unapprovedUsers.map((user) => (
-        <div className="Card">
+        <div className="Card" key={user.id}>
           <AvatarCard
             user={user}
             archivedUsers={unapprovedUsers}
