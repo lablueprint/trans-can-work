@@ -7,3 +7,63 @@
     border: 1px solid #ccc; 
     margin-bottom: 5px
   }
+  .background{
+    margin: 0 auto;
+    background-image: url('../Assets/Images/gradient.png');
+    background-repeat: 'no-repeat';
+    background-size: 100% 100%;
+    margin: 0;
+  }
+  .loginPage {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding-bottom: 10%;
+    padding-top: 15%;
+    padding-left: 15%;
+  }
+  .landingSplash{
+    background-color: #F6F2F6;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding-left: 10%;
+    padding-bottom: 10%;
+  }
+  .footer{
+    display: flex;
+  }
+  .footerBody{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 42px;
+    font-weight: 450;
+    width: 80%;
+    padding-left: 1%;
+    padding-bottom: 1%;
+    text-align: left;
+  }
+  .TcwLogo2{
+    align-self: flex-end;
+    padding-right: 8%;
+    min-width: 25%;
+    max-width: 35%;
+    min-height: 25%;
+    max-height: 35%;
+    right: 2em;
+  }
+  
+  .forgot{
+    font-size: 3.25rem;
+    font-family: 'Pirate';
+    font-weight: 400;
+    text-transform: capitalize;
+  }
+  
+  .enterEmail{
+    font-family: 'Montserrat';
+    font-size: 1em;
+    font-weight: normal;
+    margin: 0;
+    text-align: left;
+    display:flex;
+  }
