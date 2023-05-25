@@ -39,15 +39,12 @@ export const updateNavigator = async (email, data) => {
 
 /** Login Methods */
 export const login = async (email, password) => {
-  signInWithEmailAndPassword(auth, email.toLowerCase(), password).then((userCredential) => {
-    const { user } = userCredential;
-    // save to store!!
-    return user;
-  })
-    .catch((error) => {
-      console.error(error);
-      return error;
-    });
+  signInWithEmailAndPassword(auth, email.toLowerCase(), password)
+    .then((userCredential) => {
+      const { user } = userCredential;
+      return user;
+    })
+    .catch((error) => error);
 };
 
 export const signInWithGoogle = () => {
