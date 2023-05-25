@@ -15,7 +15,6 @@ import {
 } from './Pages';
 import './App.css';
 import Footer from './Components/Footer/Footer';
-import ExpressTest from './Components/ExpressTest';
 
 import Splash from './Components/Splash/Splash';
 import approvalIcon from './Assets/Images/trans-flag-graphic.svg';
@@ -53,7 +52,6 @@ function App() {
           )}
         />
       </Routes>
-      <ExpressTest />
       <Footer />
     </div>
   );
