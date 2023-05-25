@@ -11,6 +11,7 @@ import {
   Landing,
   JobseekerData,
   ProfileTemp,
+  Home,
 } from './Pages';
 import './App.css';
 import Footer from './Components/Footer/Footer';
@@ -27,13 +28,17 @@ function App() {
     <div className="App">
       <Routes>
         <Route
-          path="/"
+          path="/login"
           element={(
             <>
               <ScrollToTop />
               <Login />
             </>
 )}
+        />
+        <Route
+          path="/"
+          element={<Home />}
         />
         <Route
           path="/register"
