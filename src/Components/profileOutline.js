@@ -28,7 +28,7 @@ const demographicInfo = [{
   title: 'slayer',
   pronouns: 'she/her',
   email: 'kaeleytran@gmail.com',
-  password: 'poop',
+  password: 'iLoveBlueprint',
   phone: '714-420-6969',
   city: 'Orange County',
   state: 'California',
@@ -348,7 +348,7 @@ export default function ProfileOutline() {
                 Password:
                 <br />
                 <div className="eyeContainer">
-                  <button
+                  {/* <button
                     type="button"
                     onClick={showPassword}
                     disabled={disableButton}
@@ -360,7 +360,23 @@ export default function ProfileOutline() {
                     }}
                   >
                     <img src={Eye} alt="eye icon in password field" />
-                  </button>
+                  </button> */}
+
+                  <img
+                    src={Eye}
+                      // eslint-disable-next-line max-len
+                      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
+                    role="button"
+                    alt="eye icon in password field"
+                    onClick={showPassword}
+                    readOnly
+                    className={disableButton ? 'eyeNone' : 'eye'}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        showPassword();
+                      }
+                    }}
+                  />
 
                   <input
                     className={disableButton ? 'non-editable-field' : 'editable-email-password'}
