@@ -57,7 +57,9 @@ function JobseekerNav() {
   const prevOpen = React.useRef(open);
   React.useEffect(() => {
     if (prevOpen.current === true && open === false) {
-      anchorRef.current?.focus();
+      if (anchorRef.current !== undefined) {
+        anchorRef.current.focus();
+      }
     }
 
     prevOpen.current = open;

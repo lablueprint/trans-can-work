@@ -26,7 +26,8 @@ function Landing() {
         unapproved.push(js);
       });
     } catch (error) {
-      console.log(error);
+      // eslint-disable-next-line no-alert
+      alert(error);
     }
     setunapprovedUsers(unapproved);
   };
