@@ -3,7 +3,6 @@ import {
   Route, Routes,
 } from 'react-router-dom';
 import {
-  Home,
   Login,
   NavigatorDashboard,
   Register,
@@ -19,6 +18,7 @@ import Footer from './Components/Footer/Footer';
 import Splash from './Components/Splash/Splash';
 import approvalIcon from './Assets/Images/trans-flag-graphic.svg';
 import AdminView from './Components/Dashboard/AdminView';
+import ScrollToTop from './Pages/scrollToTop';
 import NavigatorMenu from './Components/Navigation/NavigatorMenu';
 import MilestoneMap from './Components/Milestones/MilestoneMap';
 
@@ -26,13 +26,28 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={(
+            <>
+              <ScrollToTop />
+              <Login />
+            </>
+)}
+        />
+        <Route
+          path="/register"
+          element={(
+            <>
+              <ScrollToTop />
+              <Register />
+            </>
+)}
+        />
         <Route path="/home" element={<NavigatorMenu />}>
           <Route path="roadmap" element={<MilestoneMap />} />
           <Route path="assessment" element={<NavigatorDashboard />} />
         </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
         <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/profile" element={<Profile />} />

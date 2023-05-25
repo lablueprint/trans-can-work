@@ -12,8 +12,8 @@ import Divider from '@mui/material/Divider';
 import { InputAdornment } from '@material-ui/core';
 import Button from '@mui/material/Button';
 import { doc, setDoc } from 'firebase/firestore';
-import profilepic from '../Assets/parrot_profile.svg';
-import navpic from '../Assets/powell_cat.svg';
+import profilepic from '../Assets/Images/parrot-profile.svg';
+import navpic from '../Assets/Images/powell-cat.svg';
 import { fetchJobseeker } from '../Services/jobseeker-service';
 import firebase from '../firebase';
 
