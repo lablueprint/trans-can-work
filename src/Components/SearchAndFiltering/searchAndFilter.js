@@ -4,102 +4,17 @@ import TuneIcon from '@mui/icons-material/Tune';
 import { Dialog, Slide } from '@mui/material';
 import Filtering from './Filtering';
 import SearchBar from './SearchBar';
-
+import { skills, interests } from './FilterConstants';
 import './searchAndFilter.css';
-
-const skills = ['Accounting Software',
-  'Administrative',
-  'Adobe Software Suite',
-  'Bilingual',
-  'Brand Management',
-  'Cold Calling',
-  'Computer Software and Application Software',
-  'CPR',
-  'Customer Service',
-  'Database Management',
-  'Excel',
-  'Graphic Design',
-  'Machinery Skills',
-  'Marketing Campaign Management',
-  'Mobile Development',
-  'Multilingual',
-  'Negotiation',
-  'Patient Scheduling Software',
-  'Philanthropy',
-  'Photo Editing',
-  'Photography',
-  'Photoshop',
-  'Powerpoint',
-  'Programming Languages: Ex. Perl, Python, Java and Ruby',
-  'Project Management',
-  'Public Speaking',
-  'Search Engine and Keyword Optimization',
-  'Statistical Analysis',
-  'Type 60+WPM',
-  'User Interface Design',
-  'Wood Working',
-  'Word',
-  'Writing',
-  'Money Handling',
-  'Customer Service',
-  'Inventory Management',
-  'ServSafe / Food Safety Certification / Food Handlers Card',
-];
-
-const interests = ['Accounting/Bookkeeping',
-  'App Type Jobs',
-  'Architecture/Construction',
-  'Audio/Video Technology & Communication',
-  'Barista',
-  'Bartender',
-  'Bookkeeping',
-  'Business Management and Administration',
-  'Call Center',
-  'Caregiver',
-  'Carpenter',
-  'Cashier',
-  'Data Entry',
-  'Delivery Driver',
-  'Education & Training',
-  'Engineering',
-  'Finance',
-  'Fundraising',
-  'Graphic Design',
-  'Health/Medical',
-  'Hospitality',
-  'Human Resources',
-  'IT (Information Technology)',
-  'Janitorial',
-  'Legal',
-  'Marketing/Sales',
-  'Massage Therapy',
-  'Non Profit',
-  'Personal Assistant',
-  'Pharmasist',
-  'Philantropy',
-  'Photographer',
-  'Production',
-  'Public Relations',
-  'Real Estate',
-  'Remote',
-  'Retail',
-  'Sales',
-  'Security',
-  'Server/Host',
-  'Social Media Management',
-  'Web Design',
-];
 
 const Transition = React.forwardRef((props, ref) => (
   <Slide direction="right" ref={ref} {...props} />
 ));
 
 function SearchAndFilter({
-  accounts, setOutput,
+  accounts, setOutput, checkedArr, setCheckedArr, checkedInterests, setCheckedInterests,
 }) {
   const [searchTerms, setSearchTerms] = useState('');
-  const [checkedArr, setCheckedArr] = useState(new Array(skills.length).fill(false));
-  const [checkedInterests, setCheckedInterests] = useState(new Array(interests.length).fill(false));
 
   // filtering dialog
   const [open, setOpen] = React.useState(false);
@@ -173,7 +88,6 @@ function SearchAndFilter({
         checkedSkills.forEach((skill) => {
           if (!('skills' in item) || item.skills === undefined || !(skill in item.skills) || !item.skills[skill]) {
             foundSkills = false;
-            console.log(skill);
           }
         });
         return foundInterests && foundSkills;
@@ -230,6 +144,10 @@ SearchAndFilter.propTypes = {
     email: PropTypes.string.isRequired,
   })).isRequired,
   setOutput: PropTypes.func.isRequired,
+  checkedArr: PropTypes.arrayOf(PropTypes.bool).isRequired, // i think this is
+  setCheckedArr: PropTypes.func.isRequired,
+  checkedInterests: PropTypes.arrayOf(PropTypes.bool).isRequired, // i think this is
+  setCheckedInterests: PropTypes.func.isRequired,
 };
 
 export default SearchAndFilter;

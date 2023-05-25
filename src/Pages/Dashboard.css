@@ -58,9 +58,8 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, 16.5em);
     grid-row-gap: 1em;
-    justify-content: space-evenly;
-    margin: 3rem 2rem;
-
+    justify-content: space-between;
+    margin: 1.5rem 4rem;
 }
 
 .profile-avatar{
@@ -69,4 +68,8 @@
     margin-top: 6px;
     margin-bottom: 6px;
     margin-left: 6px;
+}
+
+.profile-chip-container {
+    margin: 2rem 4rem;
 }

@@ -17,5 +17,4 @@
     display: flex;
     justify-content: end;
     align-items: center;
-    overflow-y: scroll;
-  }
+}

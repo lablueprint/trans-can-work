@@ -24,6 +24,7 @@ const styles = {
     padding: 0,
   },
 };
+
 function Checkboxes({ skills, checkedArr, setCheckedArr }) {
   const handleOnChange = (position) => {
     const updatedCheckedState = checkedArr.map((item, index) => (index === position

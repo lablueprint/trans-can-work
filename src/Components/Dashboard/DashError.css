@@ -1,14 +1,14 @@
-.no-accounts-container{
+.dash-error-container{
     width: 100%;
 }
 
-.no-aacounts-text-container{
+.dash-error-text-container{
     font-family: montserrat;
     font-size: 1.5rem;
     width: 55%;
-    margin: 5rem auto 3rem auto;
+    margin: 3rem auto 3rem auto;
 }
 
-.no-accounts-image{
+.dash-error-image{
     height: 30vw;
 }

@@ -7,12 +7,14 @@ import {
 import { styled } from '@mui/material/styles';
 import { PropTypes } from 'prop-types';
 import SearchAndFilter from '../Components/SearchAndFiltering/searchAndFilter';
+import FilterChips from '../Components/SearchAndFiltering/FilterChips';
 import './Home.css';
 import './Dashboard.css';
 import ProfileButton from '../Components/Dashboard/profileButton';
 import { fetchAllJobseekers } from '../Services/jobseeker-service';
 import { fetchAllNavigators } from '../Services/navigator-service';
-import NoAccounts from '../Components/Dashboard/NoAccounts';
+import DashError from '../Components/Dashboard/DashError';
+import { skills, interests } from '../Components/SearchAndFiltering/FilterConstants';
 
 // profile image imports
 import skater from '../Assets/ProfileIcons/monogram.png';
@@ -74,6 +76,11 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
 */
 export default function Dashboard({ profileName, role }) {
   const [tabValue, setValue] = useState(0);
+  const [hasAssignments, setHasAssignments] = useState(false);
+
+  // states for filtering
+  const [checkedSkills, setCheckedSkills] = useState(new Array(skills.length).fill(false));
+  const [checkedInterests, setCheckedInterests] = useState(new Array(interests.length).fill(false));
 
   // data from firebase
   const [clients, setClients] = useState([]);
@@ -182,6 +189,7 @@ export default function Dashboard({ profileName, role }) {
         };
         navTemp.push(elem);
       });
+      setHasAssignments(role === 'Admin' || clientsTemp.length !== 0);
 
       const approvedClients = clientsTemp.filter((element) => element.approval === true);
       // unnapproved acts should include admin + navigators eventually
@@ -214,7 +222,15 @@ export default function Dashboard({ profileName, role }) {
             {profileName.split(' ')[0]}
           </p>
           <div className="home-page-search-bar-container">
-            <SearchAndFilter accounts={currentTabAccounts} setOutput={setFilteredAccounts} placeholder="Search Accounts" />
+            <SearchAndFilter
+              accounts={currentTabAccounts}
+              checkedArr={checkedSkills}
+              setCheckedArr={setCheckedSkills}
+              checkedInterests={checkedInterests}
+              setCheckedInterests={setCheckedInterests}
+              setOutput={setFilteredAccounts}
+              placeholder="Search Accounts"
+            />
           </div>
         </div>
         <StyledTabs
@@ -228,10 +244,23 @@ export default function Dashboard({ profileName, role }) {
           {role === 'Admin' && <StyledTab label="Unapproved Accounts" {...a11yProps(3)} />}
         </StyledTabs>
       </div>
-      {filteredAccounts && filteredAccounts.length !== 0
+      {hasAssignments
         ? (
-          <div className="profile-grid">
-            {
+          <>
+            <div className="profile-chip-container">
+              <FilterChips
+                checkedSkills={checkedSkills}
+                setCheckedSkills={setCheckedSkills}
+                checkedInterests={checkedInterests}
+                setCheckedInterests={setCheckedInterests}
+                skills={skills}
+                interests={interests}
+              />
+            </div>
+            {filteredAccounts && filteredAccounts.length !== 0
+              ? (
+                <div className="profile-grid">
+                  {
               filteredAccounts
                 .sort((a, b) => (+b.bookmarked) - (+a.bookmarked) || a.name.localeCompare(b.name))
                 .map((element) => (
@@ -252,8 +281,19 @@ export default function Dashboard({ profileName, role }) {
                   />
                 ))
             }
-          </div>
-        ) : <NoAccounts />}
+                </div>
+              ) : (
+                <DashError
+                  text="No clients meet the specified search criteria. Please modify the filters."
+                />
+              )}
+          </>
+        )
+        : (
+          <DashError
+            text="You currently have no assigned clients. Please contact a TransCanWork administrator if you believe this is a mistake."
+          />
+        )}
     </div>
   );
 }
