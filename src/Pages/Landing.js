@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import {
   collection, query, where, getDocs,
 } from 'firebase/firestore';
-import AvatarCard from '../Components/AvatarCard';
-import { db } from '../Components/firebase';
-// import './AdminView.css';
+import AvatarCard from '../Components/Dashboard/AvatarCard';
+import { db } from '../firebase';
 
 function Landing() {
   // query all seekers

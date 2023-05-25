@@ -1,7 +1,6 @@
 import React from 'react';
 import './Checkboxes.css';
 import { PropTypes } from 'prop-types';
-// later we can make each tab a different component, the individual tabs take a jobseeker as a prob
 
 function Checkboxes({ skills, checkedArr, setCheckedArr }) {
   const handleOnChange = (position) => {

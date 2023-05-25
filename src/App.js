@@ -11,13 +11,14 @@ import {
   Profile,
   Landing,
   JobseekerData,
+  ProfileTemp,
 } from './Pages';
 import './App.css';
 import Footer from './Components/Footer/Footer';
 
-import Splash from './Components/Splash';
-import approvalIcon from './Assets/trans flag graphic.svg';
-import AdminView from './Components/AdminView';
+import Splash from './Components/Splash/Splash';
+import approvalIcon from './Assets/Images/trans-flag-graphic.svg';
+import AdminView from './Components/Dashboard/AdminView';
 import NavigatorMenu from './Components/Navigation/NavigatorMenu';
 import MilestoneMap from './Components/Milestones/MilestoneMap';
 
@@ -37,6 +38,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/landing" element={<Landing />} />
         <Route path="/onboard" element={<JobseekerData useremail="solia@goodpl.us" username="solia tennis" />} />
+        <Route path="/newprofile" element={<ProfileTemp />} />
         <Route path="/adminview" element={<AdminView />} />
 
         <Route
@@ -50,11 +52,8 @@ function App() {
           )}
         />
       </Routes>
-      {/* <Header /> */}
-      {/* <Form /> */}
       <Footer />
     </div>
   );
 }
-// temporarily commented out the nav-bar!
 export default App;
