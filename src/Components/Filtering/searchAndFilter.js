@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Filtering from './Filtering/Filtering';
-import SearchBar from './SearchBar/SearchBar';
-import { fetchAllJobseekers } from '../Services/jobseeker-service';
+import Filtering from './Filtering';
+import SearchBar from '../SearchBar/SearchBar';
+import { fetchAllJobseekers } from '../../Services/jobseeker-service';
 
 function Landing() {
   const skills = ['Accounting Software',

@@ -10,8 +10,8 @@ import {
   doc, setDoc, deleteDoc,
 } from 'firebase/firestore';
 import { PropTypes } from 'prop-types';
-import userData from './SampleUserData.json';
-import { db } from './firebase';
+// import userData from './SampleUserData.json';
+import { db } from '../../firebase';
 import './AvatarCard.css';
 
 const options = [
@@ -58,43 +58,43 @@ export default function AvatarCard({ user, archivedUsers, setArchivedUsers }) {
 
   const exportToCsv = () => {
     const csv = ['User Information'];
-    csv.push([`authenticName,${userData.authenticName}`]);
-    csv.push([`pronouns,${userData.pronouns}`]);
-    csv.push([`bio,${userData.bio}`]);
-    csv.push([`role,${userData.role}`]);
-    csv.push([`approved,${userData.approved}`]);
-    csv.push([`uid,${userData.uid}`]);
-    csv.push([`navigator,${userData.navigator}`]);
+    // csv.push([`authenticName,${userData.authenticName}`]);
+    // csv.push([`pronouns,${userData.pronouns}`]);
+    // csv.push([`bio,${userData.bio}`]);
+    // csv.push([`role,${userData.role}`]);
+    // csv.push([`approved,${userData.approved}`]);
+    // csv.push([`uid,${userData.uid}`]);
+    // csv.push([`navigator,${userData.navigator}`]);
     csv.push([]);
 
     csv.push(['ClientInfo']);
 
-    Object.entries(userData.clientInfo).forEach((e) => { csv.push([`${e[0]},${e[1]}`]); });
+    // Object.entries(userData.clientInfo).forEach((e) => { csv.push([`${e[0]},${e[1]}`]); });
 
     csv.push([]);
 
     csv.push(['Skills Checklists:']);
     const skills = [];
 
-    Object.entries(userData.skillsChecklist).forEach((e) => {
-      if (e[1]) skills.push([`${e[0]}`]);
-    });
+    // Object.entries(userData.skillsChecklist).forEach((e) => {
+    //   if (e[1]) skills.push([`${e[0]}`]);
+    // });
 
     csv.push(skills.join(','));
     csv.push([]);
 
     csv.push(['Industry Interests:']);
     const ii = [];
-    Object.entries(userData.industryInterest).forEach((e) => {
-      if (e[1]) ii.push([`${e[0]}`]);
-    });
+    // Object.entries(userData.industryInterest).forEach((e) => {
+    //   if (e[1]) ii.push([`${e[0]}`]);
+    // });
 
     csv.push(ii.join(','));
 
     csv.push([]);
     csv.push(['Milestone Progress:']);
 
-    Object.entries(userData.milestones).forEach((e) => { csv.push([`${e[0]},${e[1]}`]); });
+    // Object.entries(userData.milestones).forEach((e) => { csv.push([`${e[0]},${e[1]}`]); });
 
     downloadFile({
       data: csv.join('\n'),
