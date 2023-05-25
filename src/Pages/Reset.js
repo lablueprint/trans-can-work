@@ -11,6 +11,8 @@ function Reset() {
   return (
     <div>
       <div className="reset">
+        <p>Forgot Password</p>
+        <p>Enter your email to receive a reset link</p>
         <input
           type="text"
           className="resetInput"
@@ -23,14 +25,15 @@ function Reset() {
           className="resetInput"
           onClick={() => sendPasswordReset(email)}
         >
-          Send password reset email
+          Send
         </button>
         <div>
-          Don&apost have an account?
           {' '}
-          <Link to="/register">Register</Link>
+          <Link to="/login">
+            {' '}
+            Back to login page
+          </Link>
           {' '}
-          now.
         </div>
       </div>
     </div>
