@@ -8,16 +8,16 @@ import InputAdornment from '@mui/material/InputAdornment';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import GoogleIcon from '@mui/icons-material/Google';
 import { styled, makeStyles } from '@material-ui/core/styles';
-import { auth, logInWithEmailAndPassword } from '../Components/firebase';
+import { auth, logInWithEmailAndPassword } from '../firebase';
 import { getApprovalStatus } from './Register';
 import './Login.css';
 
-const TCWLogo = require('../Assets/TCW-logo.png');
-const TCWLogo2 = require('../Assets/tcwLogo2.png');
-const TCWTitle = require('../Assets/TCW-title.png');
-const islands = require('../Assets/islands.png');
-const arrow = require('../Assets/arrow.png');
-const loginArt = require('../Assets/login.png');
+const TCWLogo = require('../Assets/Images/TCW-logo.png');
+const TCWLogo2 = require('../Assets/Images/tcw-logo2.png');
+const TCWTitle = require('../Assets/Images/TCW-title.png');
+const islands = require('../Assets/Images/islands.png');
+const arrow = require('../Assets/Images/arrow.png');
+const loginArt = require('../Assets/Images/login.png');
 
 const CssTextField = styled(TextField, {
   shouldForwardProp: (props) => props !== 'focusColor',
@@ -78,7 +78,7 @@ function Login() {
         const approves = await getApprovalStatus(googleUser.email);
         navigate(approves ? '/home' : '/splash');
       }).catch((e) => {
-      // Handle Errors here.
+        // Handle Errors here.
         const errorCode = e.code;
         console.log(errorCode);
         const googleErrorMessage = e.message;

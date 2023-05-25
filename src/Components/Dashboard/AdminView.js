@@ -3,7 +3,7 @@ import {
   collection, query, where, getDocs,
 } from 'firebase/firestore';
 import AvatarCard from './AvatarCard';
-import { db } from './firebase';
+import { db } from '../../firebase';
 import './AdminView.css';
 
 export default function AdminView() {

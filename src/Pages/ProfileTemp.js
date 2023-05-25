@@ -1,9 +1,9 @@
 import React from 'react';
 import {
-  IconButton, Box,
+  IconButton, Chip, Box,
 } from '@mui/material';
-import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
-import Calendar from '../Calendar/Calendar';
+import { GridViewRounded } from '@mui/icons-material';
+import ProfilePopup from '../Components/ProfilePopup';
 
 const style = {
   iconStyle: {
@@ -11,24 +11,21 @@ const style = {
     '&:hover': {
       background: '#FFFBFE',
     },
-    boxShadow: '0px 2px 8px rgba(68, 87, 82, 0.25)',
-    position: 'absolute',
-    width: '80px',
-    height: '80px',
-    left: '44px',
-    top: '44px',
   },
   buttonStyle: {
-    padding: 0.8,
+    padding: 0,
     background: '#FFFBFE',
-    color: '#484649',
     borderRadius: '1em',
     boxSizing: 'border-box',
     fontSize: '2em',
   },
+  chipStyle: {
+    backgroundColor: '#FFFBFE',
+    fontFamily: 'Montserrat',
+  },
 };
 
-function JobseekerNav() {
+function ProfileTemp() {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
 
@@ -57,7 +54,7 @@ function JobseekerNav() {
   }, [open]);
 
   return (
-    <div id="child">
+    <div>
       <Box ref={anchorRef} onClick={handleToggle}>
         <IconButton
           id="composition-button"
@@ -67,16 +64,18 @@ function JobseekerNav() {
           size="large"
           sx={style.iconStyle}
         >
-          <CalendarMonthRoundedIcon sx={style.buttonStyle} />
+          <GridViewRounded sx={style.buttonStyle} />
         </IconButton>
+        <div>
+          <Chip label="MENU" sx={style.chipStyle} />
+        </div>
       </Box>
-      <Calendar open={open} handleClose={handleClose} />
-      {/* <JobseekerMenu open={open} handleClose={handleClose} /> */}
+      <ProfilePopup open={open} handleClose={handleClose} />
     </div>
   );
 }
 
-export default JobseekerNav;
+export default ProfileTemp;
 /* NOTES
     Nav for Jobseeker view
         - button thing that pops up a list of links to stuff

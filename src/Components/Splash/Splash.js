@@ -1,9 +1,9 @@
 import React from 'react';
 import './Splash.css';
 
-const transFlag = require('../Assets/transFlag.png');
-const awaitingApproval = require('../Assets/awaitingApproval.png');
-const awaitingText = require('../Assets/awaitingText.png');
+const transFlag = require('../../Assets/Images/trans-flag-graphic.svg');
+const awaitingApproval = require('../../Assets/Images/awaiting-approval.png');
+const awaitingText = require('../../Assets/Images/awaiting-text.png');
 
 function Splash() {
   return (

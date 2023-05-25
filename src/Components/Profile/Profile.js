@@ -8,7 +8,7 @@ import Avatar from 'react-avatar';
 import Button from '@mui/material/Button';
 import {
   fetchByNavigator, fetchAllJobseekers,
-} from '../Services/jobseeker-service';
+} from '../../Services/jobseeker-service';
 
 const demographicInfo = [{
   name: 'kaylee',

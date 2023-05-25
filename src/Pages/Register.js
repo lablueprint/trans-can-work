@@ -9,18 +9,18 @@ import GoogleIcon from '@mui/icons-material/Google';
 import InputAdornment from '@mui/material/InputAdornment';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { styled, makeStyles } from '@material-ui/core/styles';
-import { registerWithEmailAndPassword } from '../Components/firebase';
+import { registerWithEmailAndPassword } from '../firebase';
 import { createNavigator } from '../Services/navigator-service';
 import { createJobseeker, fetchJobseeker } from '../Services/jobseeker-service';
 import { createAdmin } from '../Services/admin-service';
 import './Register.css';
 
-const arrow = require('../Assets/arrow.png');
-const TCWLogo = require('../Assets/TCW-logo.png');
-const TCWTitle = require('../Assets/TCW-title.png');
-const islands = require('../Assets/islands.png');
-const createAccountArt = require('../Assets/createAccount.png');
-const TCWLogo2 = require('../Assets/tcwLogo2.png');
+const arrow = require('../Assets/Images/arrow.png');
+const TCWLogo = require('../Assets/Images/TCW-logo.png');
+const TCWTitle = require('../Assets/Images/TCW-title.png');
+const islands = require('../Assets/Images/islands.png');
+const createAccountArt = require('../Assets/Images/create-account.png');
+const TCWLogo2 = require('../Assets/Images/tcw-logo2.png');
 
 const CssTextField = styled(TextField, {
   shouldForwardProp: (props) => props !== 'focusColor',
