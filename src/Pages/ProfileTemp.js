@@ -3,7 +3,7 @@ import {
   IconButton, Chip, Box,
 } from '@mui/material';
 import { GridViewRounded } from '@mui/icons-material';
-import ProfilePopup from '../Components/ProfilePopup';
+import ProfilePopup from '../Components/Profile/ProfilePopup';
 
 const style = {
   iconStyle: {
