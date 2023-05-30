@@ -67,14 +67,14 @@ export const signInWithGoogle = () => {
 };
 
 /** Sign up Methods */
-const addUser = async (uid, email, authenticName, accountType) => {
+const addUser = async (uid, email, authenticName, pronouns, accountType) => {
   let userObject = {
     uid,
     fullname: authenticName,
     bio: '',
     approved: false,
-    pronouns: '',
-    role: { accountType },
+    pronouns,
+    accountType,
     authProvider: 'local',
     email,
   };
@@ -95,9 +95,10 @@ export const register = async (data) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, data.email, data.password);
     const { user } = res;
-    await addUser(user.uid, data.email, data.name, data.role);
+    await addUser(user.uid, data.email, data.name, data.pronouns, data.role);
     // save token to store!
   } catch (err) {
+    alert('Register failed: Account already exists');
     console.error(err);
   }
 };
@@ -113,6 +114,7 @@ export const handleGoogleSignUp = async (accountType) => {
     await addUser(user.uid, user.displayName, accountType);
     // save token to store!
   } catch (error) {
+    alert('GoogleSignUp Error');
     console.error(error);
   }
 };
@@ -122,6 +124,7 @@ export const logout = () => {
   signOut(auth).then(() => {
     // Sign-out successful. update store
   }).catch((error) => {
+    alert(error);
     console.error(error);
   });
 };
@@ -131,6 +134,7 @@ export const sendPasswordReset = async (email) => {
   try {
     await sendPasswordResetEmail(auth, email);
   } catch (err) {
+    alert('sendPasswordReset Error');
     console.error(err);
   }
 };

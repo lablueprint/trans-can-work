@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAuth } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
-// import { registerWithEmailAndPassword, logout } from '../Components/firebase';
 import { fetchJobseeker } from '../Services/jobseeker-service';
 import { register, logout, handleGoogleSignUp } from '../Services/user-service';
 
@@ -35,8 +34,6 @@ function Register() {
   const [pronouns, setPronouns] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [firstName, setFirstName] = useState('');
-  // const [lastName, setLastName] = useState('');
   const [accountType, setAccountType] = useState('');
   const [user, loading] = useAuthState(auth);
   // We will use display name later, on the landing page
@@ -66,51 +63,7 @@ function Register() {
 
   const registeration = async () => {
     await register(data);
-
-    // i think register is incomplete on my end
-    // await setDoc(doc(db, 'users', email), data).then(() => {
-    //   console.log('create new user');
-    // }).catch((err) => {
-    //   alert(err.stack);
-    // });
   };
-
-  // const registeration = async () => {
-  //   if (accountType !== 'navigator' && accountType !== 'jobseeker' && accountType !== 'admin') {
-  //     alert('Please select a role');
-  //     return;
-  //   }
-  //   const registered = await register(fullName, accountType, email, password);
-
-  //   // const registered = await registerWithEmailAndPassword(
-  //   //   firstName,
-  //   //   lastName,
-  //   //   accountType,
-  //   //   email,
-  //   //   password,
-  //   //   setDisplayName,
-  //   // );
-  //   data = {
-  //     name: fullName,
-  //     approval: false,
-  //     pronouns,
-  //     role: accountType,
-  //   };
-
-  //   if (accountType === 'navigator') {
-  //     await createNavigator(email, data);
-  //   } else if (accountType === 'jobseeker') {
-  //     await createJobseeker(email, data);
-  //   } else {
-  //     await createAdmin(email, data);
-  //   }
-
-  //   if (registered === true) {
-  //     const approves = await getApprovalStatus(email);
-  //     navigate(approves ? '/' : '/splash');
-  //   }
-  // };
-  // const provider = new GoogleAuthProvider();
 
   const handleGoogle = async () => {
     if (accountType !== 'navigator' && accountType !== 'jobseeker' && accountType !== 'admin') {
@@ -130,25 +83,6 @@ function Register() {
         alert(error);
         // Sign-in with Google failed
       });
-    // signInWithPopup(auth, provider)
-    //   .then(async (result) => {
-    //     // Signed in successfully with Google
-    //     // The signed-in user info.
-    //     const { user: googleUser } = result;
-    //     if (accountType === 'navigator') {
-    //       createNavigator(googleUser.email, data);
-    //     } else if (accountType === 'jobseeker') {
-    //       createJobseeker(googleUser.email, data);
-    //     } else {
-    //       createAdmin(googleUser.email, data);
-    //     }
-    //     const approves = await getApprovalStatus(googleUser.email);
-    //     navigate(approves ? '/' : '/splash');
-    //   })
-    //   .catch((error) => {
-    //     alert(error);
-    //     // Sign-in with Google failed
-    //   });
   };
   return (
     <div>
