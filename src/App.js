@@ -19,22 +19,34 @@ import approvalIcon from "./Assets/mobile_friendly_24px.png";
 import AdminView from "./Components/AdminView";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { useSelector, useDispatch } from "react-redux";
-import { saveUser } from "./Redux/slice/authSlices";
+import { login, logout } from "./Redux/Slice/authSlices";
+import {fetchUser} from './Services/user-service';
 import { auth } from "./firebase";
 
 function App() {
   const user = useSelector((state) => state.auth.value);
-  console.log("user from state", user);
   const dispatch = useDispatch();
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        dispatch(saveUser(user.refreshToken));
+        console.log(user);
+        fetchUser(user.email).then((doc) => {
+          const userState ={
+            email: user.email,
+            accessToken: user.accessToken,
+            refreshToken: user.refreshToken,
+            user: doc.data(),
+          }
+          console.log(userState);
+          dispatch(login(userState));
+        });
       } else {
-        dispatch(saveUser(undefined));
+        console.log('logged out');
+        dispatch(logout());
       }
     });
-  }, [auth, dispatch]);
+    unsubscribe();
+  }, [auth]);
 
   return (
     <div className="App">

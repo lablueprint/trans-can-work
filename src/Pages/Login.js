@@ -1,58 +1,52 @@
 import React, { useState } from 'react';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
+// import { useSelector } from 'react-redux';
 import {
-  useAuthState,
-} from 'react-firebase-hooks/auth';
-import { auth, logInWithEmailAndPassword, logout } from '../Components/firebase';
-import { getApprovalStatus } from './Register';
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
+import { logout } from '../Services/user-service';
+import { auth } from '../firebase';
 import './Login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [user] = useAuthState(auth);
+  // const user = useSelector((state) => state.auth.value);
   const navigate = useNavigate();
-  const login = async () => {
-    const loggedIn = await logInWithEmailAndPassword(email.toLowerCase(), password);
-    if (loggedIn) {
-      const approves = await getApprovalStatus(email);
-      navigate(approves ? '/' : '/splash');
-    }
-  };
-  const provider = new GoogleAuthProvider();
-  function signInWithGoogle() {
-    signInWithPopup(auth, provider)
-      .then(async (result) => {
-        const { user: googleUser } = result;
-        const approves = await getApprovalStatus(googleUser.email);
-        navigate(approves ? '/' : '/splash');
-      }).catch((e) => {
-      // Handle Errors here.
-        const errorCode = e.code;
-        console.log(errorCode);
 
-        const googleErrorMessage = e.message;
-        console.log(googleErrorMessage);
+  const onLogin = async (event) => {
+    event.preventDefault();
+    signInWithEmailAndPassword(auth, email.toLowerCase(), password)
+      .then((userCredential) => {
+        // edit store
+        const userTemp = userCredential.user;
+        console.log(userTemp);
+        navigate('/');
+      })
+      .catch((error) => {
+        // add proper error handling
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log('An error occured: ', errorCode, errorMessage);
       });
-  }
+  };
 
   return (
     <div>
-      {user !== null
-          && (
+      {/* user !== undefined
+          &&  ( */
+        <div>
           <div>
-            <div>
-              <button
-                type="submit"
-                onClick={() => logout()}
-              >
-                Sign Out
+            <button
+              type="submit"
+              onClick={() => logout()}
+            >
+              Sign Out
 
-              </button>
-            </div>
+            </button>
           </div>
-          )}
+        </div>
+          /* ) */}
       <div className="login">
         <input
           className="loginInput"
@@ -69,14 +63,14 @@ function Login() {
           placeholder="Password"
         />
         <button
-          type="button"
+          type="submit"
           className="loginInput"
-          onClick={() => login()}
+          onClick={onLogin}
         >
           Login
         </button>
-        <button type="button" onClick={signInWithGoogle}>Log in with Google</button>
-
+        {/* <button type="submit" onClick={(event) =>
+          onSubmit(event, signInWithGoogle())}>Log in with Google</button> */}
         <div>
           <Link to="/reset">Forgot Password?</Link>
         </div>

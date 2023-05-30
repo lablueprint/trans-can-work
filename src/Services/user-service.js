@@ -119,7 +119,9 @@ export const handleGoogleSignUp = async (accountType) => {
 
 /** Sign Out Methods */
 export const logout = () => {
+  console.log('logging out');
   signOut(auth).then(() => {
+    console.log('success');
     // Sign-out successful. update store
   }).catch((error) => {
     console.error(error);

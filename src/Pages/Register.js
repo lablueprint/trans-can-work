@@ -65,21 +65,6 @@ function Register() {
       return;
     }
     const registered = register(firstName + lastName, accountType, email, password);
-    // const registered = await registerWithEmailAndPassword(
-    //   firstName,
-    //   lastName,
-    //   accountType,
-    //   email,
-    //   password,
-    //   setDisplayName,
-    // );
-    if (accountType === 'navigator') {
-      await createNavigator(email, data);
-    } else if (accountType === 'jobseeker') {
-      await createJobseeker(email, data);
-    } else {
-      await createAdmin(email, data);
-    }
     if (registered === true) {
       const approves = await getApprovalStatus(email);
       navigate(approves ? '/' : '/splash');
