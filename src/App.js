@@ -48,7 +48,6 @@ function App() {
           <Route path="assessment" element={<NavigatorDashboard />} />
         </Route>
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
         <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/landing" element={<Landing />} />

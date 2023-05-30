@@ -36,7 +36,7 @@ export default function AdminView() {
   return (
     <div className="Cards">
       {archivedUsers.map((user) => (
-        <div className="Card">
+        <div className="Card" key={user.id}>
           <AvatarCard
             user={user}
             archivedUsers={archivedUsers}
