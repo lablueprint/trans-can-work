@@ -3,22 +3,20 @@ import './NavigatorDashboard.css';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Avatar from 'react-avatar';
+import { Link } from 'react-router-dom';
 import {
   FormControl, InputLabel, NativeSelect,
 } from '@mui/material';
 import './JobseekerData.css';
 // import Back from '../Assets/Assessment.png';
 import { TextField, Select, MenuItem } from '@material-ui/core';
-// import InputAdornment from '@mui/material/InputAdornment';
-// import VisibilityIcon from '@mui/icons-material/Visibility';
-// import GoogleIcon from '@mui/icons-material/Google';
 import { styled, makeStyles } from '@material-ui/core/styles';
 import Save from '../Assets/save.svg';
 import Add from '../Assets/add.svg';
 import Delete from '../Assets/delete.svg';
 import Back from '../Assets/back.svg';
 import { createJobseeker } from '../Services/jobseeker-service';
-import Checkboxes from './Checkboxes';
+import Checkboxes from '../Components/Checkboxes/Checkboxes';
 
 const CssTextField = styled(TextField, {
   shouldForwardProp: (props) => props !== 'focusColor',
@@ -81,9 +79,6 @@ const styles = {
   inputLabelNew: {
     color: '#0c0ca4',
     fontSize: '0.9vw',
-    // marginBottom: '40%',
-    // position: 'absolute',
-    // bottom: '90px',
   },
   formControl: {
     // no font properties in this?
@@ -112,6 +107,7 @@ function Onboard({ username, useremail }) {
     housingSituation: 'Housed',
     employmentStatus: 'Unemployed',
     convictions: 'No',
+    // prevExperience: ,
     education: [{
       degree: 'No',
       degreeType: 'hi',
@@ -194,43 +190,33 @@ function Onboard({ username, useremail }) {
   // ];
 
   // eslint-disable-next-line no-unused-vars
-  const skillsChecklist = [
-    {
-      name: 'Applied Academic Skills',
-      elements: ['Math Strategies/Procedures', 'Reading', 'Scientific Principles/Procedures', 'Writing'],
-    },
-    {
-      name: 'Critical Thinking Skills',
-      elements: ['Thinks Creatively', 'Thinks Critically', 'Makes Sound Decisions', 'Plans/Organizes', 'Reasons', 'Solves Problems'],
-    },
-    {
-      name: 'Interpersonal Skills',
-      elements: ['Exercises leadership', 'Negotiates to resolve conflict', 'Responds to customer needs', 'Respects Individual Differences', 'Understands Teamwork and works with others'],
-    },
-    {
-      name: 'Personal Qualities',
-      elements: ['Adapts and Shows Flexibility', 'Demonstrates Integrity', 'Demonstrates Professionalism', 'Demonstrates Responsibility and Self-Discipline', 'Displays a Positive Attitude and Sense of Self-Worth', 'Takes Initiative', 'Takes Responsibility for Professional Growth', 'Works Independently'],
-    },
-    {
-      name: 'Resource Management',
-      elements: ['Manages Money', 'Manages Personnel', 'Manages Resources', 'Manages Time'],
-    },
-    {
-      name: 'Information Use',
-      elements: ['Analyzes', 'Communicates', 'Locates', 'Organizes', 'Uses'],
-    },
-    {
-      name: 'Communication Skills',
-      elements: ['Communicates Verbally', 'Comprehends Written Material', 'Conveys Information in Writing', 'Listens Actively', 'Observes Carefully'],
-    },
-    {
-      name: 'Systems Thinking',
-      elements: ['Understands and Uses Systems', 'Monitors Systems', 'Improves Systems'],
-    },
-    {
-      name: 'Technology Use',
-      elements: ['Understands and Uses Technology'],
-    },
+  const skills1 = [
+    'Applied Academic Skills',
+    'Critical Thinking Skills',
+    'Interpersonal Skills',
+    'Personal Qualities',
+  ];
+
+  const skills2 = [
+    'Resource Management',
+    'Information Use',
+    'Communication Skills',
+    'Systems Thinking',
+    'Technology Use',
+  ];
+
+  const subskills1 = [
+    ['Math Strategies/Procedures', 'Reading', 'Scientific Principles/Procedures', 'Writing'],
+    ['Thinks Creatively', 'Thinks Critically', 'Makes Sound Decisions', 'Plans/Organizes', 'Reasons', 'Solves Problems'],
+    ['Exercises leadership', 'Negotiates to resolve conflict', 'Responds to customer needs', 'Respects Individual Differences', 'Understands Teamwork and works with others'],
+    ['Adapts and Shows Flexibility', 'Demonstrates Integrity', 'Demonstrates Professionalism', 'Demonstrates Responsibility and Self-Discipline', 'Displays a Positive Attitude and Sense of Self-Worth', 'Takes Initiative', 'Takes Responsibility for Professional Growth', 'Works Independently'],
+  ];
+  const subskills2 = [
+    ['Manages Money', 'Manages Personnel', 'Manages Resources', 'Manages Time'],
+    ['Analyzes', 'Communicates', 'Locates', 'Organizes', 'Uses'],
+    ['Communicates Verbally', 'Comprehends Written Material', 'Conveys Information in Writing', 'Listens Actively', 'Observes Carefully'],
+    ['Understands and Uses Systems', 'Monitors Systems', 'Improves Systems'],
+    ['Understands and Uses Technology'],
   ];
 
   const interests1 = [
@@ -281,9 +267,8 @@ function Onboard({ username, useremail }) {
   ];
 
   // eslint-disable-next-line no-unused-vars
-  // const [checkedSkills1, setCheckedSkills1] = useState(new Array(skills1.length).fill(false));
-  // const [checkedSkills2, setCheckedSkills2] = useState(new Array(skills2.length).fill(false));
-  // eslint-disable-next-line no-unused-vars
+  const [checkedSkills1, setCheckedSkills1] = useState(new Array(skills1.length).fill(false));
+  const [checkedSkills2, setCheckedSkills2] = useState(new Array(skills2.length).fill(false));
   const [checkedInt1, setCheckedInt1] = useState(new Array(interests1.length).fill(false));
   const [checkedInt2, setCheckedInt2] = useState(new Array(interests2.length).fill(false));
   const [checkedPrev1,
@@ -292,6 +277,7 @@ function Onboard({ username, useremail }) {
     setCheckedPrev2] = useState(new Array(previousExperience2.length).fill(false));
 
   const saveJobseeker = (event) => {
+    // concatenate arrays
     event.preventDefault();
     createJobseeker(jobseeker.email, jobseeker);
   };
@@ -403,7 +389,7 @@ function Onboard({ username, useremail }) {
                     style={{ marginRight: '1em' }}
                   />
                 </div>
-                <p className="assessment-page-back-text">Return to Clients List</p>
+                <Link to="/dashboard" className="assessment-page-back-text">Return to Clients List</Link>
                 <div className="assessment-page-header-empty-block" />
                 <p className="assessment-page-header-profile-text">{username}</p>
                 <div className="header-image-container">
@@ -735,7 +721,6 @@ function Onboard({ username, useremail }) {
           <h2>
             In what areas of the followin&apos; industries are
             ye open to explorin&apos; or have an interest in possible future employment?
-
           </h2>
           <div className="columns-container">
             <div className="checkboxes-column-left">
@@ -755,14 +740,30 @@ function Onboard({ username, useremail }) {
           </div>
         </div>
 
-        {/* <div>
+        <div>
           <h1>Skills Checklist</h1>
-          <Checkboxes
-            skills={skillsChecklist}
-            checkedArr={checkedInt}
-            setCheckedArr={setCheckedInt}
-          />
-        </div> */}
+          <h2>
+            Please check all the skill sets that apply to ye.
+          </h2>
+          <div className="columns-container">
+            <div className="checkboxes-column-left">
+              <Checkboxes
+                skills={skills1}
+                checkedArr={checkedSkills1}
+                setCheckedArr={setCheckedSkills1}
+                subskills={subskills1}
+              />
+            </div>
+            <div className="checkboxes-column-right">
+              <Checkboxes
+                skills={skills2}
+                checkedArr={checkedSkills2}
+                setCheckedArr={setCheckedSkills2}
+                subskills={subskills2}
+              />
+            </div>
+          </div>
+        </div>
 
         <div>
           <div className="section-divider" />
