@@ -11,7 +11,6 @@ import { getAuth } from 'firebase/auth';
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 // eslint-disable-next-line no-unused-vars
 const key = process.env.REACT_APP_FIREBASE_API_KEY;
-console.log(process.env);
 
 const firebaseConfig = {
   apiKey: 'AIzaSyC84QEm_BT77ocIwq1FrmeOOkX1yuikJaU',

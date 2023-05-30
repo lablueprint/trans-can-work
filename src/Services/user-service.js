@@ -67,21 +67,21 @@ export const signInWithGoogle = () => {
 };
 
 /** Sign up Methods */
-const addUser = async (uid, email, authenticName, accountType) => {
+const addUser = async (uid, email, authenticName, pronouns, accountType) => {
   let userObject = {
     uid,
-    authenticName,
+    fullname: authenticName,
     bio: '',
-    approved: 'false',
-    pronouns: '',
-    role: { accountType },
+    approved: false,
+    pronouns,
+    accountType,
     authProvider: 'local',
     email,
   };
   if (accountType === 'jobseeker') userObject = { ...userObject, ...jobseekerInit };
   else if (accountType === 'navigator') userObject = { ...userObject, ...navigatorInit };
   else if (accountType === 'admin') userObject = { ...userObject, ...adminInit };
-
+  console.log(userObject);
   await setDoc(doc(db, 'users', email), userObject).then(() => {
     // save to store!
     // fix this in register.js, to authenticName
@@ -91,13 +91,14 @@ const addUser = async (uid, email, authenticName, accountType) => {
   }).catch((error) => console.error(error));
 };
 
-export const register = async (authenticName, accountType, email, password) => {
+export const register = async (data) => {
   try {
-    const res = await createUserWithEmailAndPassword(auth, email, password);
+    const res = await createUserWithEmailAndPassword(auth, data.email, data.password);
     const { user } = res;
-    await addUser(user.uid, authenticName, accountType);
+    await addUser(user.uid, data.email, data.name, data.pronouns, data.role);
     // save token to store!
   } catch (err) {
+    alert('Register failed: Account already exists');
     console.error(err);
   }
 };
@@ -113,6 +114,7 @@ export const handleGoogleSignUp = async (accountType) => {
     await addUser(user.uid, user.displayName, accountType);
     // save token to store!
   } catch (error) {
+    alert('GoogleSignUp Error');
     console.error(error);
   }
 };
@@ -124,6 +126,7 @@ export const logout = () => {
     console.log('success');
     // Sign-out successful. update store
   }).catch((error) => {
+    alert(error);
     console.error(error);
   });
 };
@@ -133,6 +136,7 @@ export const sendPasswordReset = async (email) => {
   try {
     await sendPasswordResetEmail(auth, email);
   } catch (err) {
+    alert('sendPasswordReset Error');
     console.error(err);
   }
 };

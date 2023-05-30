@@ -1,25 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
-// import { registerWithEmailAndPassword, logout } from '../Components/firebase';
-import { createNavigator } from '../Services/navigator-service';
-import { createJobseeker, fetchJobseeker } from '../Services/jobseeker-service';
-import { createAdmin } from '../Services/admin-service';
-import { register } from '../Services/user-service';
+import { fetchJobseeker } from '../Services/jobseeker-service';
+import { register, logout, handleGoogleSignUp } from '../Services/user-service';
 
 import './Register.css';
 
-const auth = getAuth();
+// cases:
+//   - if email already if use
+//   - if password is invalid
+//   - if fields are blank
 
-// Sample data
-const data = {
-  name: 'Solia',
-  paper: 'ayub',
-  'fun fact': 'ableist',
-  'helen keller': 'does not exist',
-  approval: false,
-};
+const auth = getAuth();
 
 export const getApprovalStatus = async (email) => {
   try {
@@ -37,10 +30,10 @@ export const getApprovalStatus = async (email) => {
 function Register() {
   const navigate = useNavigate();
 
+  const [fullName, setFullName] = useState('');
+  const [pronouns, setPronouns] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
   const [accountType, setAccountType] = useState('');
   const [user, loading] = useAuthState(auth);
   // We will use display name later, on the landing page
@@ -54,42 +47,35 @@ function Register() {
     }
   }, [user, loading]);
 
+  const data = {
+    name: fullName,
+    email,
+    password,
+    approval: false,
+    pronouns,
+    role: accountType,
+  };
+
   const logoutUser = () => {
-    // logout();
+    logout(); // should set auth to make user null and disappear as well
     setDisplayName('');
   };
 
   const registeration = async () => {
-    if (accountType !== 'navigator' && accountType !== 'jobseeker' && accountType !== 'admin') {
-      alert('Please select a role');
-      return;
-    }
-    const registered = register(firstName + lastName, accountType, email, password);
-    if (registered === true) {
-      const approves = await getApprovalStatus(email);
-      navigate(approves ? '/' : '/splash');
-    }
+    await register(data);
   };
-  const provider = new GoogleAuthProvider();
 
-  const handleGoogleSignUp = async () => {
+  const handleGoogle = async () => {
     if (accountType !== 'navigator' && accountType !== 'jobseeker' && accountType !== 'admin') {
-      alert('Please select a role');
+      alert('Please select a role'); // eslint-disable-line no-alert
       return;
     }
-
-    signInWithPopup(auth, provider)
+    handleGoogleSignUp(accountType)
       .then(async (result) => {
         // Signed in successfully with Google
         // The signed-in user info.
         const { user: googleUser } = result;
-        if (accountType === 'navigator') {
-          createNavigator(googleUser.email, data);
-        } else if (accountType === 'jobseeker') {
-          createJobseeker(googleUser.email, data);
-        } else {
-          createAdmin(googleUser.email, data);
-        }
+        registeration(email, data);
         const approves = await getApprovalStatus(googleUser.email);
         navigate(approves ? '/' : '/splash');
       })
@@ -98,9 +84,29 @@ function Register() {
         // Sign-in with Google failed
       });
   };
+
   return (
     <div>
-
+      <section>
+        <div>
+          <h3>Welcome to</h3>
+          <h2>TransCanWork</h2>
+        </div>
+        <div>
+          <p>
+            Trans Can Work (TCW) is a nonprofit organization committed to advancing
+            workplace inclusion through innovative training strategies and workforce development.
+          </p>
+          <div>
+            <p>
+              <b>Sign up</b>
+              {' '}
+              for an Employment Roadmap today!
+            </p>
+            {/* insert image */}
+          </div>
+        </div>
+      </section>
       {user !== null
         && (
           <div>
@@ -110,34 +116,38 @@ function Register() {
                 onClick={() => logoutUser()}
               >
                 Sign Out
-
               </button>
+              <h2>
+                welcome
+                {' '}
+                {fullName}
+              </h2>
             </div>
           </div>
         )}
       <div className="registerForm">
-        <input
-          className="registerFormItem"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-          placeholder="First Name"
-        />
-        <input
-          className="registerFormItem"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-          placeholder="Last Name"
-        />
         <select
           name="accountType"
           className="registerFormItem"
           onChange={(e) => setAccountType(e.target.value)}
         >
-          <option disabled selected value> -- Select Account Type -- </option>
-          <option value="administrator">Administrator</option>
+          <option disabled selected value>What best describes you?</option>
           <option value="navigator">Navigator</option>
           <option value="jobseeker">Jobseeker</option>
+          <option value="administrator">Administrator</option>
         </select>
+        <input
+          className="registerFormItem"
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
+          placeholder="Full Name"
+        />
+        <input
+          className="registerFormItem"
+          value={pronouns}
+          onChange={(e) => setPronouns(e.target.value)}
+          placeholder="Pronouns"
+        />
         <input
           className="registerFormItem"
           value={email}
@@ -154,7 +164,7 @@ function Register() {
         <button
           className="registerFormItem"
           type="submit"
-          onClick={() => { registeration(firstName, lastName, accountType, email, password); }}
+          onClick={() => { registeration(); }}
         >
           Submit
           {' '}
@@ -162,7 +172,7 @@ function Register() {
         <button
           type="button"
           className="loginInput"
-          onClick={() => handleGoogleSignUp()}
+          onClick={() => handleGoogle()}
         >
           Sign in with Google
         </button>

@@ -29,7 +29,6 @@ function App() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        console.log(user);
         fetchUser(user.email).then((doc) => {
           const userState ={
             email: user.email,
@@ -37,11 +36,9 @@ function App() {
             refreshToken: user.refreshToken,
             user: doc.data(),
           }
-          console.log(userState);
           dispatch(login(userState));
         });
       } else {
-        console.log('logged out');
         dispatch(logout());
       }
     });
