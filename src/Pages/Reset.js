@@ -18,6 +18,7 @@ const styles = {
   arrow: { marginRight: '0.5em' },
   separator: { paddingBottom: '3%' },
   linkContainer: { display: 'flex', justifyContent: 'center' },
+  confirm: { marginBottom: '7em' },
 };
 
 const CssTextField = styled(TextField, {
@@ -57,15 +58,17 @@ function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
-
+  const [sentReset, setSentReset] = useState(false);
   const classes = useStyles();
-
+  const passwordReset = (sendEmail) => {
+    setSentReset(true);
+    sendPasswordReset(sendEmail);
+  };
   const inputProps = {
     className: classes.root,
     style: {
       fontFamily: 'Montserrat',
       color: '#49454F',
-      // paddingLeft: '0.5%',
       width: '55.0vw',
       height: '3.2vw',
       fontSize: '0.9vw',
@@ -94,53 +97,61 @@ function Login() {
       <div className="logoContainer">
         <img src={TCWLogo2} className="TcwLogo2" alt="TCW Logo" />
       </div>
-      <div>
-        <p className="forgot">Forgot Password</p>
-        <p className="enterEmail">Enter your email to receive a reset link.</p>
-        <div className="loginInput">
-          <CssTextField
-            id="email"
-            focusColor="#0c0ca4"
-            label="Email Address"
-            variant="outlined"
-            autoComplete={rememberMe}
-            focused
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
-            style={{ paddingBottom: '1%' }}
-            InputProps={inputProps}
-            InputLabelProps={inputLabelProps}
-            error={error}
-          />
+      {sentReset ? (
+        <div style={styles.confirm}>
+          <p className="forgot">Forgot Password</p>
+          <p className="enterEmail">A password reset email has been sent. Check your email within the next 10 minutes to reset your password.</p>
         </div>
+      )
+        : (
+          <div>
+            <p className="forgot">Forgot Password</p>
+            <p className="enterEmail">Enter your email to receive a reset link.</p>
+            <div className="loginInput">
+              <CssTextField
+                id="email"
+                focusColor="#0c0ca4"
+                label="Email Address"
+                variant="outlined"
+                autoComplete={rememberMe}
+                focused
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+                style={{ paddingBottom: '1%' }}
+                InputProps={inputProps}
+                InputLabelProps={inputLabelProps}
+                error={error}
+              />
+            </div>
 
-        <div className="loginInput">
-          <Button
-            type="button"
-            variant="contained"
-            color="primary"
-            onClick={() => sendPasswordReset(email)}
-            style={buttonStyle}
-          >
-            Send
-          </Button>
-        </div>
-        <div>
-          <div style={styles.separator} />
-          <div style={styles.linkContainer}>
-            <Link
-              style={styles.link}
-              to="/"
-            >
-              <ArrowBack style={styles.arrow} />
-              <p>Back to login page</p>
-            </Link>
+            <div className="loginInput">
+              <Button
+                type="button"
+                variant="contained"
+                color="primary"
+                onClick={() => passwordReset(email)}
+                style={buttonStyle}
+              >
+                Send
+              </Button>
+            </div>
+            <div>
+              <div style={styles.separator} />
+              <div style={styles.linkContainer}>
+                <Link
+                  style={styles.link}
+                  to="/"
+                >
+                  <ArrowBack style={styles.arrow} />
+                  <p>Back to login page</p>
+                </Link>
+              </div>
+
+            </div>
+
           </div>
-
-        </div>
-
-      </div>
+        )}
     </div>
   );
 }
