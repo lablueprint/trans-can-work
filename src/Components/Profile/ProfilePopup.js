@@ -12,13 +12,23 @@ import Divider from '@mui/material/Divider';
 import { InputAdornment } from '@material-ui/core';
 import Button from '@mui/material/Button';
 import { doc, setDoc } from 'firebase/firestore';
-import profilepic from '../../Assets/Images/parrot-profile.svg';
+// import profilepic from '../../Assets/Images/parrot-profile.svg';
+import compass from '../../Assets/Images/compass.svg';
+import wheel from '../../Assets/Images/wheel.svg';
+import anchor from '../../Assets/Images/anchor.svg';
+import octopus from '../../Assets/Images/octopus.svg';
+import flag from '../../Assets/Images/flag.svg';
+import sword from '../../Assets/Images/sword.svg';
+import pirateHat from '../../Assets/Images/pirate-hat.svg';
+import boat from '../../Assets/Images/boat.svg';
+import map from '../../Assets/Images/map.svg';
+
 import navpic from '../../Assets/Images/powell-cat.svg';
 import { fetchJobseeker } from '../../Services/jobseeker-service';
 import firebase from '../../firebase';
 
 const backgroundColors = ['#FF968A', '#FFCCB6', '#FFFFB5', '#CCE2CB', '#A2E1DB', '#D4F0F0', '#CBAACB', '#FEE1E8'];
-
+const profilePics = [compass, wheel, anchor, octopus, flag, sword, pirateHat, boat, map];
 const styles = {
   avatar: {
     width: '5em',
@@ -105,7 +115,7 @@ function ProfilePopup({
   const [editBackground, setEditBackground] = useState(false);
   const [editProfilePic, setEditProfilePic] = useState(false);
 
-  // const [profilePic, setProfilePic] = useState('');
+  const [pfp, setPfp] = useState('');
   const [bg, setBg] = useState('');
 
   const [firstName, setFirstName] = useState('');
@@ -130,7 +140,8 @@ function ProfilePopup({
         setBio(data.bio);
       }
       if (data.profilePic != null) {
-        // setProfilePic(data.profilePic);
+        setPfp(data.profilePic);
+        console.log('profilePic', data.profilePic);
       }
       if (data.color != null) {
         setBg(data.color);
@@ -151,6 +162,19 @@ function ProfilePopup({
         console.log(error);
       });
     setBg(color);
+  };
+
+  const handleProfileClick = (profilePic) => {
+    const data = {
+      profilePic,
+    };
+    setDoc(docRef, data, { merge: true })
+      .then(() => {
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    setPfp(profilePic);
   };
   const handleToggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -197,8 +221,8 @@ function ProfilePopup({
         <div className="imageSection" style={{ backgroundColor: bg }} />
         <div className="profilePic">
           <Avatar
-            alt="Jack Sparrow"
-            src={profilepic}
+            alt="Jobseeker Profile Picture"
+            src={pfp}
             style={styles.avatar}
           />
         </div>
@@ -217,16 +241,12 @@ function ProfilePopup({
               <h3 className="backgroundHeader">Choose Profile Picture</h3>
               <div className="colorPopup">
                 <div>
-                  {backgroundColors.map((color) => (
-                    <Button
-                      key={color}
-                      style={{
-                        backgroundColor: color,
-                        width: 50,
-                        height: 65,
-                        borderRadius: '50%',
-                        margin: 5,
-                      }}
+                  {profilePics.map((profilePic) => (
+                    <Avatar
+                      onClick={() => handleProfileClick(profilePic)}
+                      alt="Jobseeker Profile Picture"
+                      src={profilePic}
+                      style={styles.avatar}
                     />
                   ))}
                 </div>
