@@ -5,11 +5,20 @@ import {
   TextField, Button,
 } from '@material-ui/core';
 import { styled, makeStyles } from '@material-ui/core/styles';
-
+import { ArrowBack } from '@material-ui/icons';
 import { sendPasswordReset } from '../firebase';
 import './Reset.css';
 
 const TCWLogo2 = require('../Assets/Images/TCW-banner-black.png');
+
+const styles = {
+  link: {
+    textDecoration: 'none', color: '#111111', fontFamily: 'Montserrat', display: 'flex', alignItems: 'center',
+  },
+  arrow: { marginRight: '0.5em' },
+  separator: { paddingBottom: '3%' },
+  linkContainer: { display: 'flex', justifyContent: 'center' },
+};
 
 const CssTextField = styled(TextField, {
   shouldForwardProp: (props) => props !== 'focusColor',
@@ -56,7 +65,7 @@ function Login() {
     style: {
       fontFamily: 'Montserrat',
       color: '#49454F',
-      paddingLeft: '0.5%',
+      // paddingLeft: '0.5%',
       width: '55.0vw',
       height: '3.2vw',
       fontSize: '0.9vw',
@@ -67,7 +76,6 @@ function Login() {
     className: classes.labelInput,
     style: {
       fontFamily: 'Montserrat',
-      paddingLeft: '0.3%',
       backgroundColor: 'white',
     },
   };
@@ -82,11 +90,13 @@ function Login() {
   };
 
   return (
-    <div className="background">
-      <img src={TCWLogo2} className="TcwLogo2" alt="TCWLogo2" />
-      <div className="loginPage">
+    <div className="resetBackground">
+      <div className="logoContainer">
+        <img src={TCWLogo2} className="TcwLogo2" alt="TCW Logo" />
+      </div>
+      <div>
         <p className="forgot">Forgot Password</p>
-        <p className="enterEmail">Enter your email to receive a reset link</p>
+        <p className="enterEmail">Enter your email to receive a reset link.</p>
         <div className="loginInput">
           <CssTextField
             id="email"
@@ -116,9 +126,18 @@ function Login() {
             Send
           </Button>
         </div>
-        <div className="register">
-          <div style={{ paddingBottom: '3%' }} />
-          <Link to="/"> Back to login page</Link>
+        <div>
+          <div style={styles.separator} />
+          <div style={styles.linkContainer}>
+            <Link
+              style={styles.link}
+              to="/"
+            >
+              <ArrowBack style={styles.arrow} />
+              <p>Back to login page</p>
+            </Link>
+          </div>
+
         </div>
 
       </div>
