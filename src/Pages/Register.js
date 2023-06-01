@@ -431,7 +431,7 @@ function Register() {
               {' '}
               Have An Account?
             </div>
-            <Link to="/">Login</Link>
+            <Link to="/login">Login</Link>
           </div>
         </div>
       </div>

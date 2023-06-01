@@ -9,7 +9,8 @@ import {
   Reset,
   Landing,
   JobseekerData,
-  ProfileTemp,
+  // ProfileTemp,
+  Home,
 } from './Pages';
 import './App.css';
 import Footer from './Components/Footer/Footer';
@@ -26,13 +27,17 @@ function App() {
     <div className="App">
       <Routes>
         <Route
-          path="/"
+          path="/login"
           element={(
             <>
               <ScrollToTop />
               <Login />
             </>
 )}
+        />
+        <Route
+          path="/"
+          element={<Home />}
         />
         <Route
           path="/register"
@@ -52,7 +57,7 @@ function App() {
         <Route path="/reset" element={<Reset />} />
         <Route path="/landing" element={<Landing />} />
         <Route path="/onboard" element={<JobseekerData useremail="solia@goodpl.us" username="solia tennis" />} />
-        <Route path="/newprofile" element={<ProfileTemp />} />
+        {/* <Route path="/newprofile" element={<ProfileTemp />} /> */}
         <Route path="/adminview" element={<AdminView />} />
 
         <Route
