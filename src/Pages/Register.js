@@ -337,7 +337,6 @@ function Register() {
           <div className="registerInput">
             <CssTextField
               id="First Name&nbsp;"
-              focusColor="#0c0ca4"
               label="First Name"
               variant="outlined"
               focused
@@ -353,7 +352,6 @@ function Register() {
           <div className="registerInput">
             <CssTextField
               id="Last Name"
-              focusColor="#0c0ca4"
               label="Last Name&nbsp;"
               variant="outlined"
               focused
@@ -369,7 +367,6 @@ function Register() {
           <div className="registerInput">
             <CssTextField
               id="email"
-              focusColor="#0c0ca4"
               label="Email Address&nbsp;"
               variant="outlined"
               focused
@@ -390,7 +387,6 @@ function Register() {
               value={password}
               error={passwordError}
               focused
-              focusColor="#0c0ca4"
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
               type={showPassword ? 'text' : 'password'}
