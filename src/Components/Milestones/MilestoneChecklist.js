@@ -10,16 +10,23 @@ import { DisabledByDefaultRounded } from '@mui/icons-material';
       value: a boolean for whether checked or not
       bullets: an array of strings for bullet points you want underneath
     }
+
+  If you're trying to make a checklist that needs to interact with backend,
+  you can copy pasta this code into ur own component and modify it to take
+  data from backend + a handleChange function rather than taking metadata from
+  props. #sorryidonthavethebackendapinordoiknowwhatitsgonnabesothisismetrynahelp
+  this component is prolly incomplete do it urself #cyakid
 */
 
 const style = {
   container: {
+    border: '2px dotted red',
     width: '40vw',
     alignSelf: 'center',
   },
   checklistWrapper: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(2, 1fr)',
+    // gridTemplateColumns: 'repeat(2, 1fr)',
     gridAutoRows: 'minmax(auto, auto)',
     gridGap: '10px',
   },
@@ -52,9 +59,13 @@ const style = {
     justifyContent: 'space-between',
   },
 };
-function MilestoneChecklist({ checkboxes }) {
+function MilestoneChecklist({ checkboxes, columns }) {
+  // Configure style to specified # of columns
+  // style.checklistWrapper.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+  style.checklistWrapper = { ...style.checklistWrapper, gridTemplateColumns: `repeat(${columns}, 1fr)` };
+
   const checklist = checkboxes.map((x) => (
-    <div>
+    <div key={x.label}>
       <FormControlLabel
         sx={style.formControl}
         label={<Typography sx={style.checkboxLabel}>{x.label}</Typography>}
@@ -95,8 +106,14 @@ MilestoneChecklist.propTypes = {
       bullets: PropTypes.arrayOf(PropTypes.string),
     }),
   ),
+  columns: PropTypes.number,
 };
 
 MilestoneChecklist.defaultProps = {
   checkboxes: [],
+  columns: 1,
 };
+
+/*
+
+*/
