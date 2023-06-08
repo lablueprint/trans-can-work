@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './NavigatorDashboard.css';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
@@ -81,7 +81,6 @@ const styles = {
     fontSize: '0.9vw',
   },
   formControl: {
-    // no font properties in this?
     width: '55.0vw',
     textAlign: 'left',
     textDecoration: 'none',
@@ -124,45 +123,6 @@ function Onboard({ username, useremail }) {
     'Writer',
   ];
 
-  // const skills = ['Accounting Software',
-  //   'Administrative',
-  //   'Adobe Software Suite',
-  //   'Bilingual',
-  //   'Brand Management',
-  //   'Cold Calling',
-  //   'Computer Software and Application Software',
-  //   'CPR',
-  //   'Customer Service',
-  //   'Database Management',
-  //   'Excel',
-  //   'Graphic Design',
-  //   'Machinery Skills',
-  //   'Marketing Campaign Management',
-  //   'Mobile Development',
-  //   'Multilingual',
-  //   'Negotiation',
-  //   'Patient Scheduling Software',
-  //   'Philanthropy',
-  //   'Photo Editing',
-  //   'Photography',
-  //   'Photoshop',
-  //   'Powerpoint',
-  //   'Programming Languages: Ex. Perl, Python, Java and Ruby',
-  //   'Project Management',
-  //   'Public Speaking',
-  //   'Search Engine and Keyword Optimization',
-  //   'Statistical Analysis',
-  //   'Type 60+WPM',
-  //   'User Interface Design',
-  //   'Wood Working',
-  //   'Word',
-  //   'Writing',
-  //   'Money Handling',
-  //   'Customer Service',
-  //   'Inventory Management',
-  //   'ServSafe / Food Safety Certification / Food Handlers Card',
-  // ];
-
   // eslint-disable-next-line no-unused-vars
   const skills1 = [
     'Applied Academic Skills',
@@ -178,8 +138,6 @@ function Onboard({ username, useremail }) {
     'Systems Thinking',
     'Technology Use',
   ];
-
-  const skills = skills1.concat(skills2);
 
   const subskills1 = [
     ['Math Strategies/Procedures', 'Reading', 'Scientific Principles/Procedures', 'Writing'],
@@ -288,33 +246,41 @@ function Onboard({ username, useremail }) {
     checkedInterests = checkedInt1.concat(checkedInt2);
     checkedSkills = checkedSkills1.concat(checkedSkills2);
     checkedPrev = checkedPrev1.concat(checkedPrev2);
-    console.log(checkedInterests);
-    console.log(checkedSkills);
-    console.log(checkedPrev);
   }
 
-  // work on this
-  function populateInterests() {
+  async function populateInterests() {
     const tempInterests = interests1.concat(interests2);
-    const tempSkills = skills1.concat(skills2);
-    const tempPrev = previousExperience1.concat(previousExperience2);
+    const interestPairs = {};
     tempInterests.forEach((interest, index) => {
-      console.log(interest, checkedInterests[index]);
-      setJobseeker((prevJobseeker) => ({
-        ...prevJobseeker,
-        interests: {
-          ...prevJobseeker.interests,
-          [interest]: checkedInterests[index],
-        },
-      }));
+      interestPairs[interest] = checkedInterests[index];
+    });
+    const tempSkills = skills1.concat(skills2);
+    const skillPairs = {};
+    tempSkills.forEach((skill, index) => {
+      skillPairs[skill] = checkedSkills[index];
+    });
+    console.log(skillPairs);
+    const tempPrev = previousExperience1.concat(previousExperience2);
+    const prevPairs = {};
+    tempPrev.forEach((prev, index) => {
+      prevPairs[prev] = checkedPrev[index];
+    });
+    await setJobseeker({
+      ...jobseeker,
+      interests: interestPairs,
+      skills: skillPairs,
+      previousExperience: prevPairs,
     });
   }
 
-  const saveJobseeker = (event) => {
+  const saveJobseeker = async () => {
     combineCheckboxes();
     populateInterests();
-    event.preventDefault();
-    createJobseeker(jobseeker.email, jobseeker);
+    // console.log('heyyyyyy');
+    // populateInterests().then(() => {
+    //   // console.log('hi3', jobseeker);
+    //   createJobseeker(jobseeker.email, jobseeker);
+    // });
   };
 
   const addEducation = (event) => {
@@ -407,7 +373,18 @@ function Onboard({ username, useremail }) {
 
   const classes = useStyles();
 
-  return (
+  useEffect(() => {
+    console.log('penis');
+    saveJobseeker(); // remove create jobseeker here; but DO HAVE setJobseeker
+    console.log('heyyy');
+  }, [checkedInt1, checkedInt2, checkedPrev1,
+    checkedPrev2, checkedSkills1, checkedSkills2]); // do NOT have jobseeker in the depenency list
+
+  useEffect(() => {
+    createJobseeker(jobseeker.email, jobseeker);
+  }, [jobseeker]);
+
+  return ( // do NOT have createJobseeker anywhere in onChange
     <div>
       <div className="Page Title">
         <div className="header">
@@ -842,7 +819,7 @@ function Onboard({ username, useremail }) {
             </div>
           </form>
         </div>
-        <div className="left-button">
+        {/* <div className="left-button">
           <button type="button" onClick={saveJobseeker} className="add-buttons">
             <img
               src={Save}
@@ -851,7 +828,7 @@ function Onboard({ username, useremail }) {
             />
             Save Changes
           </button>
-        </div>
+        </div> */}
         <div className="section-divider" />
       </div>
     </div>
