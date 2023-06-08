@@ -92,32 +92,6 @@ const styles = {
 };
 
 function Onboard({ username, useremail }) {
-  const [jobseeker, setJobseeker] = useState({
-    name: username,
-    pronouns: 'Pronouns',
-    phone: 'Phone',
-    email: useremail,
-    cityState: 'City/State',
-    ethnicity: 'Ethnicity',
-    age: 100,
-    genderIdentity: 'Female',
-    sexuality: 'Pansexual',
-    veteran: 'No',
-    disability: 'No',
-    housingSituation: 'Housed',
-    employmentStatus: 'Unemployed',
-    convictions: 'No',
-    // prevExperience: ,
-    education: [{
-      degree: 'No',
-      degreeType: 'hi',
-      certificate: 'No',
-      certificateType: 'hey',
-    }],
-    occupation: ['None'],
-    dreamjob: 'None',
-  });
-
   const previousExperience1 = [
     'Admin',
     'Bartender',
@@ -205,6 +179,8 @@ function Onboard({ username, useremail }) {
     'Technology Use',
   ];
 
+  const skills = skills1.concat(skills2);
+
   const subskills1 = [
     ['Math Strategies/Procedures', 'Reading', 'Scientific Principles/Procedures', 'Writing'],
     ['Thinks Creatively', 'Thinks Critically', 'Makes Sound Decisions', 'Plans/Organizes', 'Reasons', 'Solves Problems'],
@@ -266,6 +242,10 @@ function Onboard({ username, useremail }) {
     'Web Design',
   ];
 
+  let checkedInterests = [];
+  let checkedSkills = [];
+  let checkedPrev = [];
+
   // eslint-disable-next-line no-unused-vars
   const [checkedSkills1, setCheckedSkills1] = useState(new Array(skills1.length).fill(false));
   const [checkedSkills2, setCheckedSkills2] = useState(new Array(skills2.length).fill(false));
@@ -276,8 +256,63 @@ function Onboard({ username, useremail }) {
   const [checkedPrev2,
     setCheckedPrev2] = useState(new Array(previousExperience2.length).fill(false));
 
+  const [jobseeker, setJobseeker] = useState({
+    name: username,
+    pronouns: 'Pronouns',
+    phone: 'Phone',
+    email: useremail,
+    cityState: 'City/State',
+    ethnicity: 'Ethnicity',
+    age: 'Age',
+    genderIdentity: 'Gender Identity',
+    sexuality: 'Sexuality',
+    veteran: 'Veteran',
+    disability: 'Disability',
+    housingSituation: 'Housing Situation',
+    employmentStatus: 'Employment Status',
+    convictions: 'Convictions',
+    interests: {},
+    skills: {},
+    previousExperience: {},
+    education: [{
+      degree: '',
+      degreeType: '',
+      certificate: '',
+      certificateType: '',
+    }],
+    occupation: ['Occupation'],
+    dreamjob: 'Dream Job',
+  });
+
+  function combineCheckboxes() {
+    checkedInterests = checkedInt1.concat(checkedInt2);
+    checkedSkills = checkedSkills1.concat(checkedSkills2);
+    checkedPrev = checkedPrev1.concat(checkedPrev2);
+    console.log(checkedInterests);
+    console.log(checkedSkills);
+    console.log(checkedPrev);
+  }
+
+  // work on this
+  function populateInterests() {
+    const tempInterests = interests1.concat(interests2);
+    const tempSkills = skills1.concat(skills2);
+    const tempPrev = previousExperience1.concat(previousExperience2);
+    tempInterests.forEach((interest, index) => {
+      console.log(interest, checkedInterests[index]);
+      setJobseeker((prevJobseeker) => ({
+        ...prevJobseeker,
+        interests: {
+          ...prevJobseeker.interests,
+          [interest]: checkedInterests[index],
+        },
+      }));
+    });
+  }
+
   const saveJobseeker = (event) => {
-    // concatenate arrays
+    combineCheckboxes();
+    populateInterests();
     event.preventDefault();
     createJobseeker(jobseeker.email, jobseeker);
   };
@@ -354,25 +389,23 @@ function Onboard({ username, useremail }) {
     });
   };
 
-  const clientInfo = [{ title: 'Authentic Name', toChange: jobseeker.name, placeholder: jobseeker.name },
-    { title: 'Pronouns', toChange: jobseeker.pronouns, placeholder: jobseeker.pronouns },
-    { title: 'Phone', toChange: jobseeker.phone, placeholder: jobseeker.phone },
-    { title: 'Email', toChange: jobseeker.email, placeholder: jobseeker.email },
-    { title: 'City/State', toChange: jobseeker.cityState, placeholder: jobseeker.cityState },
-    { title: 'Ethnicity', toChange: jobseeker.ethnicity, placeholder: jobseeker.ethnicity },
-    { title: 'Age', toChange: jobseeker.age, placeholder: jobseeker.age },
-    { title: 'Gender Identity', toChange: jobseeker.genderIdentity, placeholder: jobseeker.genderIdentity },
-    { title: 'Sexuality', toChange: jobseeker.sexuality, placeholder: jobseeker.sexuality },
-    { title: 'Veteran?', toChange: jobseeker.veteran, placeholder: jobseeker.veteran },
-    { title: 'Disability?', toChange: jobseeker.disability, placeholder: jobseeker.disability },
-    { title: 'Housing Situation', toChange: jobseeker.housingSituation, placeholder: jobseeker.housingSituation },
-    { title: 'Currently Employed?', toChange: jobseeker.employmentStatus, placeholder: jobseeker.employmentStatus },
-    { title: 'Prior Convictions?', toChange: jobseeker.convictions, placeholder: jobseeker.convictions },
+  const clientInfo = [{ title: 'Authentic Name', toChange: 'name', placeholder: jobseeker.name },
+    { title: 'Pronouns', toChange: 'pronouns', placeholder: jobseeker.pronouns },
+    { title: 'Phone', toChange: 'phone', placeholder: jobseeker.phone },
+    { title: 'Email', toChange: 'email', placeholder: jobseeker.email },
+    { title: 'City/State', toChange: 'cityState', placeholder: jobseeker.cityState },
+    { title: 'Ethnicity', toChange: 'ethnicity', placeholder: jobseeker.ethnicity },
+    { title: 'Age', toChange: 'age', placeholder: jobseeker.age },
+    { title: 'Gender Identity', toChange: 'genderIdentity', placeholder: jobseeker.genderIdentity },
+    { title: 'Sexuality', toChange: 'sexuality', placeholder: jobseeker.sexuality },
+    { title: 'Veteran?', toChange: 'veteran', placeholder: jobseeker.veteran },
+    { title: 'Disability?', toChange: 'disability', placeholder: jobseeker.disability },
+    { title: 'Housing Situation', toChange: 'housingSituation', placeholder: jobseeker.housingSituation },
+    { title: 'Currently Employed?', toChange: 'employmentStatus', placeholder: jobseeker.employmentStatus },
+    { title: 'Prior Convictions?', toChange: 'convictions', placeholder: jobseeker.convictions },
   ];
 
   const classes = useStyles();
-
-  console.log(jobseeker.cityState);
 
   return (
     <div>
@@ -439,7 +472,7 @@ function Onboard({ username, useremail }) {
                     onChange={(e) => {
                       setJobseeker({
                         ...jobseeker,
-                        toChange: e.target.value,
+                        [item.toChange]: e.target.value,
                       });
                     }}
                     placeholder={item.placeholder}
