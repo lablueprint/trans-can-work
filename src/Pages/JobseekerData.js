@@ -259,7 +259,6 @@ function Onboard({ username, useremail }) {
     tempSkills.forEach((skill, index) => {
       skillPairs[skill] = checkedSkills[index];
     });
-    console.log(skillPairs);
     const tempPrev = previousExperience1.concat(previousExperience2);
     const prevPairs = {};
     tempPrev.forEach((prev, index) => {
@@ -374,9 +373,7 @@ function Onboard({ username, useremail }) {
   const classes = useStyles();
 
   useEffect(() => {
-    console.log('penis');
     saveJobseeker(); // remove create jobseeker here; but DO HAVE setJobseeker
-    console.log('heyyy');
   }, [checkedInt1, checkedInt2, checkedPrev1,
     checkedPrev2, checkedSkills1, checkedSkills2]); // do NOT have jobseeker in the depenency list
 
