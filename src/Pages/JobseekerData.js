@@ -9,9 +9,8 @@ import {
 } from '@mui/material';
 import './JobseekerData.css';
 // import Back from '../Assets/Assessment.png';
-import { TextField, Select, MenuItem } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import { styled, makeStyles } from '@material-ui/core/styles';
-import Save from '../Assets/save.svg';
 import Add from '../Assets/add.svg';
 import Delete from '../Assets/delete.svg';
 import Back from '../Assets/back.svg';
@@ -275,11 +274,6 @@ function Onboard({ username, useremail }) {
   const saveJobseeker = async () => {
     combineCheckboxes();
     populateInterests();
-    // console.log('heyyyyyy');
-    // populateInterests().then(() => {
-    //   // console.log('hi3', jobseeker);
-    //   createJobseeker(jobseeker.email, jobseeker);
-    // });
   };
 
   const addEducation = (event) => {
