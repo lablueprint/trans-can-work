@@ -810,16 +810,6 @@ function Onboard({ username, useremail }) {
             </div>
           </form>
         </div>
-        {/* <div className="left-button">
-          <button type="button" onClick={saveJobseeker} className="add-buttons">
-            <img
-              src={Save}
-              alt="save icon"
-              style={{ marginRight: '12px' }}
-            />
-            Save Changes
-          </button>
-        </div> */}
         <div className="section-divider" />
       </div>
     </div>

@@ -1,3 +1,106 @@
+{{!-- <!DOCTYPE html>
+<html>
+
+<head>
+  <title>TCW - Incomplete Milestones!</title>
+  <style>
+    /* Global Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #333333;
+      background-color: #f6f6f6;
+    }
+
+    /* Container Styles */
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Header Styles */
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.2;
+      color: #2c3e50;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Body Styles */
+    .body {
+      margin-bottom: 20px;
+      background-color: #f9f3d4;
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .body p {
+      margin: 0 0 20px;
+    }
+
+    /* Button Styles */
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #2c3e50;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 30px;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #34495e;
+    }
+
+    /* Footer Styles */
+    .footer {
+      text-align: center;
+      color: #777777;
+    }
+
+    .footer p {
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>TCW - Incomplete Milestones!</h1>
+    </div>
+
+    <div class="body">
+      <p>Hello {{message}},</p>
+      <p>If you're getting this it means you're not done with recruiting and you're SLACKING...</p>
+      <img src="/assets/tcw.jpg" alt="TCW Logo" width="200" height="200" style="display:block">
+      <p>
+        <a href="#" class="button">Complete Milestone</a>
+      </p>
+    </div>
+
+    <div class="footer">
+      <p>Here's a link to our website: <a href="https://www.tcklibrary.org/">https://www.tcklibrary.org/</a></p>
+    </div>
+  </div>
+</body>
+
+</html> --}}
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -55,9 +158,14 @@
         text-align: center;
         font-size: 14px;
       }
+
+      /* Button Styles */
+      .button:hover {
+        background-color: #F5A9B8;
+      }
       .button {
         display: inline-block;
-        background-color: #000FF0;
+        background-color: #5BCEFA;
         color: #ffffff;
         text-decoration: none;
         padding: 10px 20px;
@@ -69,12 +177,14 @@
   <body>
     <div class="container">
       <div class="header">
-        <h1 style="margin-top: 0;">TCW says hello</h1>
+        <h1 style="margin-top: 0;">TCW - Incomplete Milestones</h1>
       </div>
       <div class="content">
         <p>Hello {{message}},</p>
         <p>If you're getting this it means you're not done with recruiting and you're SLACKING...</p>
-        {{!-- <img src="/assets/tcw.jpg" alt="TCW Logo" width="200" height="200" style="display:block"> --}}
+        <p>
+          <a href="#" class="button">Complete Milestone</a>
+        </p>
       </div>
       <div class="footer">
         <p>Here's a link to our website: <a href="https://www.tcklibrary.org/">https://www.tcklibrary.org/</a></p>

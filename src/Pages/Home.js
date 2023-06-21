@@ -6,8 +6,8 @@ import NavMap from '../Components/Milestones/NavMap';
 export default function Home() {
   return (
     <div>
-      <MilestoneMap />
       <JobseekerNav />
+      <MilestoneMap />
       <NavMap />
     </div>
   );
