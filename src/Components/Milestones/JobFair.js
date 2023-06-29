@@ -1,14 +1,17 @@
 import React from 'react';
 import './JobFair.css';
+import Button from '@mui/material/Button';
 
 function JobFair() {
+  const [isComplete, setComplete] = React.useState(false);
+  const toggleComplete = () => setComplete(!isComplete);
   return (
-    <div>
+    <div className="jobContainer">
       <h6 className="jobFair">
         Share with us any Job Fairs ye have attended. These are nah just limited to Trans
         Can Work&apos; Empower! career fairs.
       </h6>
-      <div className="checkBoxesJob">
+      {/* <div className="checkBoxesJob">
         <div className="col1Job">
           <form>
             <label htmlFor="career" className="labelJob">
@@ -55,7 +58,18 @@ function JobFair() {
             </label>
           </form>
         </div>
-      </div>
+      </div> */}
+      <div
+        isComplete={isComplete}
+        toggleComplete={toggleComplete}
+      />
+      <Button
+        disableRipple
+        onClick={toggleComplete}
+        id={(isComplete) ? 'completed' : 'incomplete'}
+      >
+        {(isComplete) ? 'Marked as Completed' : 'Mark as Complete'}
+      </Button>
     </div>
   );
 }

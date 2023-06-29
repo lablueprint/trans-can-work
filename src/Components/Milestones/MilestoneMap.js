@@ -74,7 +74,7 @@ const data = {
         imageHover: require('../../Assets/job-portalH.png'),
         imageUHover: require('../../Assets/job-portalUH.png'),
         title: require('../../Assets/job-portalTitle.png'),
-        id: 'job-board',
+        id: 'job-portal',
         status: false,
       },
       {
@@ -120,16 +120,13 @@ const MilestoneButtons = data.content.body.map((x) => {
 
 function MilestoneMap() {
   return (
-    <div id="parent">
+    <div>
       <div className="grid-container">
+        <div id="roadmap-title"><img src={title} alt="roadmap title" /></div>
         {MilestoneButtons}
       </div>
-      <div id="roadmap-title"><img src={title} alt="roadmap title" /></div>
     </div>
   );
 }
 
 export default MilestoneMap;
-
-/* later: the margins are hard-coded #s so not good for all screen sizes */
-/* later: the bool variable status is hard-coded for now */

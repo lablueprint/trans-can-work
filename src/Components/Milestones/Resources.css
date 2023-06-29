@@ -1,4 +1,4 @@
-.onlineProfile {
+.resource {
     font-family: 'Liesel';
     font-size: 32px;
     color: #484649;
@@ -6,39 +6,35 @@
     text-align: center;
     margin: 1.5em auto;
     width: 80%;
-} 
-input {
-    padding: 16px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 2px solid #484649;
-    border-radius: 8px;
-    background-color: #FFFBFE;
-    width: 100%;
 }
 
-.textFields {
-    width: 80%;
-    margin: 0 auto;
-}
-
-.onlineProfile-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 2em;
-}
-  
-.onlineProfile-row-label {
-    flex-basis: 48%;
-    font-family: 'Pirate';
-    font-size: 2.5rem;
-    display: block;
-}
-
-#incomplete {
+#resourceButton {
     padding: 20px 28px; 
-    left: calc(50% - 210px/2); 
-    top: calc(50% - 64px/2 + 324px); 
+    border: 2px solid #484649; 
+    box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
+    border-radius: 12px; 
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    text-transform: none;
+    letter-spacing: 0.15px;
+    color: #484649;
+}
+
+#resourceButton:hover {
+    background: #939094;
+    box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
+    color: white;
+    border: 2px solid #939094;
+}
+
+#incompleteResources {
+    padding: 20px 28px; 
+    /* left: calc(50% - 210px/2); 
+    top: calc(50% - 64px/2 + 324px);  */
     border: 2px solid #484649; 
     box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
     border-radius: 12px; 
@@ -53,10 +49,10 @@ input {
     color: #484649;
 }
 
-#completed{
+#completedResources{
     padding: 20px 28px; 
-    left: calc(50% - 231px/2); 
-    top: calc(50% - 64px/2 + 31px); 
+    /* left: calc(50% - 231px/2); 
+    top: calc(50% - 64px/2 + 31px);  */
     box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
     border-radius: 12px; 
     font-family: 'Montserrat';
@@ -71,16 +67,24 @@ input {
     background: #484649;
     border: 2px solid #484649;
 }
-#incomplete:hover {
+#incompleteResources:hover {
     background: #939094;
     box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
     color: #FFFBFE;
     border: 2px solid #939094;
 }
 
-#completed:hover {
+#completedResources:hover {
     background: #939094;
     box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
     color: #FFFBFE;
     border: 2px solid #939094;
+}
+
+.resources-row {
+    display: flex;
+    margin-bottom: 2em;
+    width: 50%;
+    margin: 0 auto;
+    justify-content: space-between;
 }

@@ -1,0 +1,33 @@
+.assessment {
+    /* margin: 10px; */
+    align-items: center;
+    justify-content: center;
+    /* top: 230px;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%); */
+    /* font-family: 'Liesel Printed';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 85%; */
+}
+
+.skillsChecklist{
+    font-family: 'Pirate';
+    font-size: 56px;
+    color: rgba(72, 70, 73, 1);
+    font-weight: 400;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 1px;
+}
+
+.content {
+    font-family: 'Liesel';
+    font-size: 32px;
+    color: rgba(72, 70, 73, 1);
+    font-weight: 400;
+    text-align: center;
+    margin-top: 5px;
+}

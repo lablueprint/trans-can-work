@@ -1,15 +1,11 @@
 .workshop {
-    position: absolute;
-    margin: 10px;
-    top: 230px;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-    /* font-family: 'Liesel Printed';
-    font-style: normal;
-    font-weight: 400;
+    font-family: 'Liesel';
     font-size: 32px;
-    line-height: 85%; */
+    color: #484649;
+    font-weight: 400;
+    text-align: center;
+    margin: 1.5em auto;
+    width: 80%;
 }
 
 .line1 {
@@ -18,7 +14,23 @@
     top: 90%;
 }
 
-form {
+.workshop-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2em;
+}
+  
+.workshop-row-label {
+    flex-basis: 48%;
+    font-family: 'Pirate';
+    font-size: 2.5rem;
+    display: block;
+    font-weight: 400;
+    color: #484649;
+    text-align: center;
+}
+
+/* form {
     display: flex;
     flex-direction: column;
 }
@@ -36,4 +48,4 @@ form {
 
 .col2 {
     float: right;
-}
+} */

@@ -3,3 +3,38 @@
     width: 100%;
     top: 40%;
 }
+
+#title {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.modal {
+    overflow: scroll;
+}
+
+#popup {
+    /* position: relative; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 900px;
+    /* top: 10%; */
+    /* height: 90%;  */
+    /* top: 10px;
+    bottom: 10px; */
+    padding-bottom: 5%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background: #FFFBFE;
+    border-radius: 32px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+    /* margin-top: -50px; */
+    /* left: 0 */
+}

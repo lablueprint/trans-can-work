@@ -18,8 +18,8 @@ function MilestoneButton({
   const [isHover, setIsHover] = React.useState(false);
   const handleOnMouseEnter = () => setIsHover(true);
   const handleOnMouseLeave = () => setIsHover(false);
-  const [isComplete, setComplete] = React.useState(false);
-  const toggleComplete = () => setComplete(!isComplete);
+  // const [isComplete, setComplete] = React.useState(false);
+  // const toggleComplete = () => setComplete(!isComplete);
 
   return (
     <div>
@@ -36,8 +36,8 @@ function MilestoneButton({
         title={title}
         isOpen={open}
         handleClose={handleClose}
-        isComplete={isComplete}
-        toggleComplete={toggleComplete}
+        // isComplete={isComplete}
+        // toggleComplete={toggleComplete}
         id={id}
       />
     </div>
