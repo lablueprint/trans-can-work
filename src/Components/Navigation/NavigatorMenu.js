@@ -38,7 +38,7 @@ const style = {
 const tabs = [
   { title: 'Roadmap', link: 'roadmap' },
   { title: 'Assessment', link: 'assessment' },
-  { title: 'Online Profiles', link: 'assessment' },
+  { title: 'Online Profiles', link: 'onlineprofiles' },
   { title: 'Training Programs', link: 'assessment' },
   { title: 'Workshops', link: 'assessment' },
   { title: 'Internships', link: 'assessment' },

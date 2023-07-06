@@ -17,6 +17,7 @@ import './App.css';
 import Footer from './Components/Footer/Footer';
 
 import Splash from './Components/Splash/Splash';
+import OnlineProfiles from './Components/OnlineProfiles/OnlineProfiles';
 import approvalIcon from './Assets/Images/trans-flag-graphic.svg';
 import AdminView from './Components/Dashboard/AdminView';
 import ScrollToTop from './Pages/scrollToTop';
@@ -52,6 +53,7 @@ function App() {
         <Route path="/home" element={<NavigatorMenu />}>
           <Route path="roadmap" element={<MilestoneMap />} />
           <Route path="assessment" element={<NavigatorDashboard />} />
+          <Route path="onlineprofiles" element={<OnlineProfiles />} />
         </Route>
         <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />
         <Route path="/reset" element={<Reset />} />
