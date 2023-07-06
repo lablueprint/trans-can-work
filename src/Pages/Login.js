@@ -149,10 +149,8 @@ function Login() {
           <div className="loginInput">
             <CssTextField
               id="email"
-              focusColor="#0c0ca4"
               label="Email Address"
               variant="outlined"
-              autoComplete={rememberMe}
               focused
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -169,9 +167,7 @@ function Login() {
               label="Password"
               variant="outlined"
               value={password}
-              autoComplete={rememberMe}
               focused
-              focusColor="#0c0ca4"
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
               type={showPassword ? 'text' : 'password'}

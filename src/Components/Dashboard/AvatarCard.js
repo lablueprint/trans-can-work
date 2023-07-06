@@ -126,7 +126,7 @@ export default function AvatarCard({ user, archivedUsers, setArchivedUsers }) {
   const { name } = user.data;
   const field = user.data['field of work'];
   return (
-    <Paper className="Contents" elevation={3} rounded>
+    <Paper className="Contents" elevation={3}>
       <div className="Avatar">
         <Avatar>{name.substring(0, 1).toUpperCase()}</Avatar>
       </div>
