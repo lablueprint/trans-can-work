@@ -57,7 +57,6 @@ function Onboard({ username, useremail }) {
     'Word',
     'Writing',
     'Money Handling',
-    'Customer Service',
     'Inventory Management',
     'ServSafe / Food Safety Certification / Food Handlers Card',
   ];
