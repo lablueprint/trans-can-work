@@ -11,7 +11,7 @@ function Checkboxes({ skills, checkedArr, setCheckedArr }) {
   return (
     <div>
       {skills.map((name, index) => (
-        <div className="row">
+        <div className="row" key={name}>
           <div>
             <input
               className="clickable"
@@ -31,7 +31,7 @@ function Checkboxes({ skills, checkedArr, setCheckedArr }) {
 }
 Checkboxes.propTypes = {
   skills: PropTypes.arrayOf(PropTypes.string).isRequired,
-  checkedArr: PropTypes.arrayOf(PropTypes.boolean).isRequired,
+  checkedArr: PropTypes.arrayOf(PropTypes.bool).isRequired,
   setCheckedArr: PropTypes.func.isRequired,
 };
 
