@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import './NavigatorDashboard.css';
 import PropTypes from 'prop-types';
+<<<<<<< HEAD
 import Checkboxes from '../Components/Checkboxes/Checkboxes';
+=======
+import Checkboxes from '../Components/Dashboard/Checkboxes';
+>>>>>>> 77d5c1ff62eda519b4db02efbf0983c121971635
 import { createJobseeker } from '../Services/jobseeker-service';
 
 function Onboard({ username, useremail }) {
@@ -57,7 +61,6 @@ function Onboard({ username, useremail }) {
     'Word',
     'Writing',
     'Money Handling',
-    'Customer Service',
     'Inventory Management',
     'ServSafe / Food Safety Certification / Food Handlers Card',
   ];
@@ -266,17 +269,17 @@ function Onboard({ username, useremail }) {
                   </label>
                 </div>
                 {jobseeker.education[index].degree === 'Yes' && (
-                <div className="inputWrapper">
-                  <label htmlFor="degreeType">
-                    Type of Degree
-                    <input
-                      id="degreeType"
-                      placeholder={educationObject.degreeType}
-                      onChange={(e) => editEducation(e, 'degreeType', index)}
-                      type="text"
-                    />
-                  </label>
-                </div>
+                  <div className="inputWrapper">
+                    <label htmlFor="degreeType">
+                      Type of Degree
+                      <input
+                        id="degreeType"
+                        placeholder={educationObject.degreeType}
+                        onChange={(e) => editEducation(e, 'degreeType', index)}
+                        type="text"
+                      />
+                    </label>
+                  </div>
                 )}
                 <div className="inputWrapper">
                   <label htmlFor="cert">
@@ -293,17 +296,17 @@ function Onboard({ username, useremail }) {
                   </label>
                 </div>
                 {jobseeker.education[index].certificate === 'Yes' && (
-                <div className="inputWrapper">
-                  <label htmlFor="certType">
-                    Type of Certificate:
-                    <input
-                      id="certType"
-                      placeholder={educationObject.certificateType}
-                      onChange={(e) => editEducation(e, 'certificateType', index)}
-                      type="text"
-                    />
-                  </label>
-                </div>
+                  <div className="inputWrapper">
+                    <label htmlFor="certType">
+                      Type of Certificate:
+                      <input
+                        id="certType"
+                        placeholder={educationObject.certificateType}
+                        onChange={(e) => editEducation(e, 'certificateType', index)}
+                        type="text"
+                      />
+                    </label>
+                  </div>
                 )}
               </form>
 

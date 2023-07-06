@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import {
   collection, query, where, getDocs,
 } from 'firebase/firestore';
-import AvatarCard from '../Components/AvatarCard';
-import { db } from '../Components/firebase';
-// import './AdminView.css';
+import AvatarCard from '../Components/Dashboard/AvatarCard';
+import { db } from '../firebase';
 
 function Landing() {
   // query all seekers
@@ -26,7 +25,8 @@ function Landing() {
         unapproved.push(js);
       });
     } catch (error) {
-      console.log(error);
+      // eslint-disable-next-line no-alert
+      alert(error);
     }
     setunapprovedUsers(unapproved);
   };
@@ -36,7 +36,7 @@ function Landing() {
   return (
     <div className="Cards">
       {unapprovedUsers.map((user) => (
-        <div className="Card">
+        <div className="Card" key={user.id}>
           <AvatarCard
             user={user}
             archivedUsers={unapprovedUsers}

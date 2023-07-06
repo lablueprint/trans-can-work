@@ -10,12 +10,14 @@ import {
   doc, setDoc, deleteDoc,
 } from 'firebase/firestore';
 import { PropTypes } from 'prop-types';
-import { db } from './firebase';
+// import userData from './SampleUserData.json';
+import { db } from '../../firebase';
 import './AvatarCard.css';
 
 const options = [
   'Approve',
   'Unarchive',
+  'Download',
   'Delete',
 ];
 
@@ -39,6 +41,68 @@ export default function AvatarCard({ user, archivedUsers, setArchivedUsers }) {
     await deleteDoc(doc(db, 'jobseekers', id));
   };
 
+  const downloadFile = ({ data, fileName, fileType }) => {
+    const blob = new Blob([data], { type: fileType });
+
+    const a = document.createElement('a');
+    a.download = fileName;
+    a.href = window.URL.createObjectURL(blob);
+    const clickEvt = new MouseEvent('click', {
+      view: window,
+      bubbles: true,
+      cancelable: true,
+    });
+    a.dispatchEvent(clickEvt);
+    a.remove();
+  };
+
+  const exportToCsv = () => {
+    const csv = ['User Information'];
+    // csv.push([`authenticName,${userData.authenticName}`]);
+    // csv.push([`pronouns,${userData.pronouns}`]);
+    // csv.push([`bio,${userData.bio}`]);
+    // csv.push([`role,${userData.role}`]);
+    // csv.push([`approved,${userData.approved}`]);
+    // csv.push([`uid,${userData.uid}`]);
+    // csv.push([`navigator,${userData.navigator}`]);
+    csv.push([]);
+
+    csv.push(['ClientInfo']);
+
+    // Object.entries(userData.clientInfo).forEach((e) => { csv.push([`${e[0]},${e[1]}`]); });
+
+    csv.push([]);
+
+    csv.push(['Skills Checklists:']);
+    const skills = [];
+
+    // Object.entries(userData.skillsChecklist).forEach((e) => {
+    //   if (e[1]) skills.push([`${e[0]}`]);
+    // });
+
+    csv.push(skills.join(','));
+    csv.push([]);
+
+    csv.push(['Industry Interests:']);
+    const ii = [];
+    // Object.entries(userData.industryInterest).forEach((e) => {
+    //   if (e[1]) ii.push([`${e[0]}`]);
+    // });
+
+    csv.push(ii.join(','));
+
+    csv.push([]);
+    csv.push(['Milestone Progress:']);
+
+    // Object.entries(userData.milestones).forEach((e) => { csv.push([`${e[0]},${e[1]}`]); });
+
+    downloadFile({
+      data: csv.join('\n'),
+      fileName: 'aaron.csv',
+      fileType: 'text/csv',
+    });
+  };
+
   const handleClose = async (index) => {
     if (index === 0) {
       await approveUser(user.id);
@@ -52,13 +116,17 @@ export default function AvatarCard({ user, archivedUsers, setArchivedUsers }) {
       const newUsers = archivedUsers.filter((seeker) => seeker.id !== user.id);
       setArchivedUsers(newUsers);
     }
+
+    if (index === 2) {
+      exportToCsv();
+    }
     setAnchorEl(null);
   };
 
   const { name } = user.data;
   const field = user.data['field of work'];
   return (
-    <Paper className="Contents" elevation={3} rounded>
+    <Paper className="Contents" elevation={3}>
       <div className="Avatar">
         <Avatar>{name.substring(0, 1).toUpperCase()}</Avatar>
       </div>

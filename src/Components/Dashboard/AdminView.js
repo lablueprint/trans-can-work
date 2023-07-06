@@ -3,7 +3,7 @@ import {
   collection, query, where, getDocs,
 } from 'firebase/firestore';
 import AvatarCard from './AvatarCard';
-import { db } from './firebase';
+import { db } from '../../firebase';
 import './AdminView.css';
 
 export default function AdminView() {
@@ -36,7 +36,7 @@ export default function AdminView() {
   return (
     <div className="Cards">
       {archivedUsers.map((user) => (
-        <div className="Card">
+        <div className="Card" key={user.id}>
           <AvatarCard
             user={user}
             archivedUsers={archivedUsers}

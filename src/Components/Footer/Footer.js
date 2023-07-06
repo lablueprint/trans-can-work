@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import Logo from '../../Assets/tcw.jpg';
-import FacebookLogo from '../../Assets/facebook-footer-logo.svg';
-import InstagramLogo from '../../Assets/instagram-footer-logo.svg';
-import TwitterLogo from '../../Assets/twitter-footer-logo.svg';
+import Logo from '../../Assets/Images/tcw.jpg';
+import FacebookLogo from '../../Assets/Images/facebook-footer-logo.svg';
+import InstagramLogo from '../../Assets/Images/instagram-footer-logo.svg';
+import TwitterLogo from '../../Assets/Images/twitter-footer-logo.svg';
 import './Footer.css';
 
 function Footer() {

@@ -3,14 +3,13 @@ import {
   Route, Routes,
 } from 'react-router-dom';
 import {
-  Home,
   Login,
   NavigatorDashboard,
   Register,
   Reset,
-  Profile,
   Landing,
   JobseekerData,
+<<<<<<< HEAD
   Dashboard,
 } from './Pages';
 import './App.css';
@@ -18,6 +17,18 @@ import Footer from './Components/Footer/Footer';
 import Splash from './Components/Splash';
 import approvalIcon from './Assets/trans flag graphic.svg';
 import AdminView from './Components/AdminView';
+=======
+  // ProfileTemp,
+  Home,
+} from './Pages';
+import './App.css';
+import Footer from './Components/Footer/Footer';
+
+import Splash from './Components/Splash/Splash';
+import approvalIcon from './Assets/Images/trans-flag-graphic.svg';
+import AdminView from './Components/Dashboard/AdminView';
+import ScrollToTop from './Pages/scrollToTop';
+>>>>>>> 77d5c1ff62eda519b4db02efbf0983c121971635
 import NavigatorMenu from './Components/Navigation/NavigatorMenu';
 import MilestoneMap from './Components/Milestones/MilestoneMap';
 
@@ -25,18 +36,38 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/login"
+          element={(
+            <>
+              <ScrollToTop />
+              <Login />
+            </>
+)}
+        />
+        <Route
+          path="/"
+          element={<Home />}
+        />
+        <Route
+          path="/register"
+          element={(
+            <>
+              <ScrollToTop />
+              <Register />
+            </>
+)}
+        />
         <Route path="/home" element={<NavigatorMenu />}>
           <Route path="roadmap" element={<MilestoneMap />} />
           <Route path="assessment" element={<NavigatorDashboard />} />
         </Route>
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
         <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />
         <Route path="/reset" element={<Reset />} />
-        <Route path="/profile" element={<Profile />} />
         <Route path="/landing" element={<Landing />} />
         <Route path="/onboard" element={<JobseekerData useremail="solia@goodpl.us" username="solia tennis" />} />
+        {/* <Route path="/newprofile" element={<ProfileTemp />} /> */}
         <Route path="/adminview" element={<AdminView />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route
@@ -54,5 +85,4 @@ function App() {
     </div>
   );
 }
-// temporarily commented out the nav-bar!
 export default App;
