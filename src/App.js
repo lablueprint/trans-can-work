@@ -56,8 +56,7 @@ function App() {
         <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/landing" element={<Landing />} />
-        <Route path="/onboard" element={<JobseekerData useremail="solia@goodpl.us" username="solia tennis" />} />
-        {/* <Route path="/newprofile" element={<ProfileTemp />} /> */}
+        <Route path="/onboard" element={<JobseekerData useremail="solia@goodpl.us" username="Solia Nasser" />} />
         <Route path="/adminview" element={<AdminView />} />
 
         <Route

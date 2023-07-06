@@ -145,7 +145,6 @@ function ProfilePopup({
       }
       if (data.color != null) {
         setBg(data.color);
-        // console.log('background', data.color);
       }
     };
 

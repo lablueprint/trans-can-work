@@ -9,7 +9,7 @@ const db = firebase;
 // data in form {"name": "John"} for instance; remember event.preventDefault() when using.
 export const createJobseeker = async (email, data) => {
   await setDoc(doc(db, 'jobseekers', email), data).then(() => {
-    console.log('created new jobseeker');
+    console.log('created new jobseeker', email, data);
   }).catch((err) => {
     alert(err.stack);
   });
