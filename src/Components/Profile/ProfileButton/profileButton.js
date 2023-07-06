@@ -5,7 +5,7 @@ import { PropTypes } from 'prop-types';
 import './profileButton.css';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { fetchJobseeker, updateJobseeker, deleteJobseeker } from '../../Services/jobseeker-service';
+import { fetchJobseeker, updateJobseeker, deleteJobseeker } from '../../../Services/jobseeker-service';
 
 function ProfileButton(props) {
   const {

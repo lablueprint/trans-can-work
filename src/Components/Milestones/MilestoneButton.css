@@ -41,6 +41,9 @@
     left: 50%;
     transform: translateX(-50%);
 }
+.markAsComplete {
+    border-radius: 2px, red, dotted; 
+    box-sizing: border-box;
 
 #completed{
     padding: 20px 28px; 

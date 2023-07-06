@@ -2,19 +2,18 @@ import React, { useState, useEffect } from 'react';
 import {
   collection, query, where, getDocs,
 } from 'firebase/firestore';
-import AvatarCard from './AvatarCard';
-import { db } from './firebase';
-import './AdminView.css';
+import AvatarCard from '../Components/Dashboard/AvatarCard';
+import { db } from '../firebase';
 
-export default function AdminView() {
+function Landing() {
   // query all seekers
-  const [archivedUsers, setArchivedUsers] = useState([]);
+  const [unapprovedUsers, setunapprovedUsers] = useState([]);
 
-  const getArchived = async () => {
-    const archived = [];
+  const getUnapprovedUsers = async () => {
+    const unapproved = [];
     try {
       const Ref = collection(db, 'jobseekers');
-      const q = query(Ref, where('archived', '==', true));
+      const q = query(Ref, where('approval', '==', false));
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         const data = doc.data();
@@ -23,24 +22,24 @@ export default function AdminView() {
           data,
           id,
         };
-        archived.push(js);
+        unapproved.push(js);
       });
     } catch (error) {
       console.log(error);
     }
-    setArchivedUsers(archived);
+    setunapprovedUsers(unapproved);
   };
   useEffect(() => {
-    getArchived(setArchivedUsers);
+    getUnapprovedUsers(setunapprovedUsers);
   }, []);
   return (
     <div className="Cards">
-      {archivedUsers.map((user) => (
+      {unapprovedUsers.map((user) => (
         <div className="Card">
           <AvatarCard
             user={user}
-            archivedUsers={archivedUsers}
-            setArchivedUsers={setArchivedUsers}
+            archivedUsers={unapprovedUsers}
+            setArchivedUsers={setunapprovedUsers}
           />
 
         </div>
@@ -49,3 +48,4 @@ export default function AdminView() {
 
   );
 }
+export default Landing;
