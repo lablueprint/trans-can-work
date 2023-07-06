@@ -20,7 +20,6 @@ export const fetchJobseeker = async (email) => {
   try {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      // console.log('jobseeker: ', docSnap);
       return docSnap;
     }
     console.log('jobseeker ', email, ' does not exist');
