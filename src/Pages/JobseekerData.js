@@ -8,7 +8,6 @@ import {
   FormControl, InputLabel, NativeSelect,
 } from '@mui/material';
 import './JobseekerData.css';
-// import Back from '../Assets/Assessment.png';
 import { TextField } from '@material-ui/core';
 import { styled, makeStyles } from '@material-ui/core/styles';
 import Add from '../Assets/add.svg';
@@ -122,7 +121,6 @@ function Onboard({ username, useremail }) {
     'Writer',
   ];
 
-  // eslint-disable-next-line no-unused-vars
   const skills1 = [
     'Applied Academic Skills',
     'Critical Thinking Skills',
@@ -203,7 +201,6 @@ function Onboard({ username, useremail }) {
   let checkedSkills = [];
   let checkedPrev = [];
 
-  // eslint-disable-next-line no-unused-vars
   const [checkedSkills1, setCheckedSkills1] = useState(new Array(skills1.length).fill(false));
   const [checkedSkills2, setCheckedSkills2] = useState(new Array(skills2.length).fill(false));
   const [checkedInt1, setCheckedInt1] = useState(new Array(interests1.length).fill(false));
@@ -367,15 +364,15 @@ function Onboard({ username, useremail }) {
   const classes = useStyles();
 
   useEffect(() => {
-    saveJobseeker(); // remove create jobseeker here; but DO HAVE setJobseeker
+    saveJobseeker();
   }, [checkedInt1, checkedInt2, checkedPrev1,
-    checkedPrev2, checkedSkills1, checkedSkills2]); // do NOT have jobseeker in the depenency list
+    checkedPrev2, checkedSkills1, checkedSkills2]);
 
   useEffect(() => {
     createJobseeker(jobseeker.email, jobseeker);
   }, [jobseeker]);
 
-  return ( // do NOT have createJobseeker anywhere in onChange
+  return (
     <div>
       <div className="Page Title">
         <div className="header">
@@ -436,7 +433,6 @@ function Onboard({ username, useremail }) {
                     variant="outlined"
                     FormHelperTextProps={{ children: 'Label' }}
                     focused
-                  // value={email}
                     onChange={(e) => {
                       setJobseeker({
                         ...jobseeker,
@@ -501,18 +497,6 @@ function Onboard({ username, useremail }) {
           {jobseeker.education.map((educationObject, index) => (
             <div>
               <form>
-                {/* <div>
-                  <FormControl style={styles.formControl}>
-                    <Select
-                      label="Degree?"
-                      onChange={(e) => editEducation(e, 'degree', index)}
-                    >
-                      <MenuItem value="Yes">Yes</MenuItem>
-                      <MenuItem value="No">No</MenuItem>
-                      <MenuItem value="Progress">Still Working On</MenuItem>
-                    </Select>
-                  </FormControl>
-                </div> */}
                 <div>
                   <FormControl style={styles.formControl}>
                     <InputLabel style={styles.inputLabel}>
@@ -543,9 +527,7 @@ function Onboard({ username, useremail }) {
                       variant="outlined"
                       FormHelperTextProps={{ children: 'Label' }}
                       focused
-                // value={email}
                       onChange={(e) => editEducation(e, 'degreeType', index)}
-                    // placeholder={item.placeholder}
                       style={{ paddingBottom: '1%' }}
                       InputProps={{
                         className: classes.root,
@@ -595,9 +577,7 @@ function Onboard({ username, useremail }) {
                       variant="outlined"
                       FormHelperTextProps={{ children: 'Label' }}
                       focused
-                // value={email}
                       onChange={(e) => editEducation(e, 'certificateType', index)}
-                    // placeholder={item.placeholder}
                       style={{ paddingBottom: '1%' }}
                       InputProps={{
                         className: classes.root,
@@ -665,9 +645,7 @@ function Onboard({ username, useremail }) {
                       variant="outlined"
                       FormHelperTextProps={{ children: 'Label' }}
                       focused
-                // value={email}
                       onChange={(e) => editOccupation(e, index)}
-                    // placeholder={item.placeholder}
                       style={{ paddingBottom: '1%' }}
                       InputProps={{
                         className: classes.root,
@@ -777,7 +755,6 @@ function Onboard({ username, useremail }) {
                 variant="outlined"
                 FormHelperTextProps={{ children: 'Label' }}
                 focused
-                // value={email}
                 onChange={(e) => {
                   setJobseeker({
                     ...jobseeker,
