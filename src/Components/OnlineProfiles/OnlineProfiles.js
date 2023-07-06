@@ -44,7 +44,6 @@ function OnlineProfiles() {
     created: '',
     notes: '',
   }]);
-  // make profile (the array) the state
 
   const addOnlineProfile = (event) => {
     event.preventDefault();
