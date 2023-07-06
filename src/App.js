@@ -7,7 +7,6 @@ import {
   NavigatorDashboard,
   Register,
   Reset,
-  Profile,
   Landing,
   JobseekerData,
   // ProfileTemp,
@@ -55,12 +54,11 @@ function App() {
           <Route path="assessment" element={<NavigatorDashboard />} />
           <Route path="onlineprofiles" element={<OnlineProfiles />} />
         </Route>
+        <Route path="/login" element={<Login />} />
         <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />
         <Route path="/reset" element={<Reset />} />
-        <Route path="/profile" element={<Profile />} />
         <Route path="/landing" element={<Landing />} />
-        <Route path="/onboard" element={<JobseekerData useremail="solia@goodpl.us" username="solia tennis" />} />
-        {/* <Route path="/newprofile" element={<ProfileTemp />} /> */}
+        <Route path="/onboard" element={<JobseekerData useremail="solia@goodpl.us" username="Solia Nasser" />} />
         <Route path="/adminview" element={<AdminView />} />
 
         <Route
