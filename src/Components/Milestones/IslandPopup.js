@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
-// import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import backButton from '../../Assets/back button.png';
@@ -16,7 +15,7 @@ import Internship from './Internship';
 import './IslandPopup.css';
 
 function IslandPopup({
-  title, isOpen, handleClose, id, // isComplete, toggleComplete, // markAsComplete,
+  title, isOpen, handleClose, id, isComplete, toggleComplete, // markAsComplete,
   // jobLink, resourceLink,
 }) {
   let toBeRendered;
@@ -38,69 +37,33 @@ function IslandPopup({
     toBeRendered = <Internship />;
   }
   return (
-
-    <Modal
-      className="modal"
-      open={isOpen}
-      onClose={handleClose}
-    >
-      <Box id="popup">
-        <img id="title" src={title} alt="island title" />
-        <hr className="line" />
-        {toBeRendered}
-        {/* <Button
-          disableRipple
-          onClick={toggleComplete}
-          id={(isComplete) ? 'completed' : 'incomplete'}
-        >
-          {(isComplete) ? 'Marked as Completed' : 'Mark as Complete'}
-        </Button> */}
-        {/* <div>
-            {(markAsComplete)
-              ? (
-                <Button
-                  disableRipple
-                  onClick={toggleComplete}
-                  id={(isComplete) ? 'completed' : 'incomplete'}
-                >
-                  {(isComplete) ? 'Marked as Completed' : 'Mark as Complete'}
-                </Button>
-              )
-              : <div />}
-          </div>
-          <div>
-            {(jobLink)
-              ? (
-                <Button
-                  disableRipple
-                >
-                  Job Portal Link
-                </Button>
-              )
-              : <div />}
-          </div>
-          <div>
-            {(resourceLink)
-              ? (
-                <Button
-                  disableRipple
-                >
-                  Resources Link
-                </Button>
-              )
-              : <div />}
-          </div> */}
-        <Button
-          disableRipple
-          id="close"
-          style={{ backgroundColor: 'transparent' }}
-          onClick={handleClose}
-        >
-          <img src={backButton} alt="back button" />
-        </Button>
-      </Box>
-    </Modal>
-
+    <div>
+      <Modal
+        open={isOpen}
+        onClose={handleClose}
+      >
+        <Box id="popup">
+          <img id="title" src={title} alt="island title" />
+          <hr className="line" />
+          {toBeRendered}
+          <Button
+            disableRipple
+            onClick={toggleComplete}
+            id={(isComplete) ? 'completed' : 'incomplete'}
+          >
+            {(isComplete) ? 'Marked as Completed' : 'Mark as Complete'}
+          </Button>
+          <Button
+            disableRipple
+            id="close"
+            style={{ backgroundColor: 'transparent' }}
+            onClick={handleClose}
+          >
+            <img src={backButton} alt="back button" />
+          </Button>
+        </Box>
+      </Modal>
+    </div>
   );
 }
 
@@ -108,8 +71,8 @@ IslandPopup.propTypes = {
   title: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
-  // isComplete: PropTypes.bool.isRequired,
-  // toggleComplete: PropTypes.func.isRequired,
+  isComplete: PropTypes.bool.isRequired,
+  toggleComplete: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   // markAsComplete: PropTypes.bool.isRequired,
   // jobLink: PropTypes.string.isRequired,

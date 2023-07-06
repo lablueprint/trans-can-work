@@ -39,21 +39,6 @@
 }
 
 @font-face {
-  font-family: 'Pirate';
-  font-weight: normal;
-  font-style: normal;
-  src: url('./Assets/Fonts/Pirates.otf') format('opentype'), 
-  url('./Assets/Fonts/Pirates.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Liesel';
-  font-weight: normal;
-  font-style: normal;
-  src: url('./Assets/Fonts/Liesel-Printed-Regular.otf') format('opentype');
-}
-
-@font-face {
   font-family: 'Montserrat';
   font-weight: normal;
   font-style: normal;
@@ -73,4 +58,19 @@
        url('./Assets/Fonts/Montserrat-Bold.woff') format('woff'), /* Pretty Modern Browsers */
        url('./Assets/Fonts/Montserrat-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
        url('./Assets/Fonts/Montserrat-Bold.svg') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+  font-family: 'Pirate';
+  font-weight: normal;
+  font-style: normal;
+  src: url('./Assets/Fonts/Pirates.otf') format('opentype'), 
+  url('./Assets/Fonts/Pirates.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Liesel';
+  font-weight: normal;
+  font-style: normal;
+  src: url('./Assets/Fonts/Liesel-Printed-Regular.otf') format('opentype');
 }

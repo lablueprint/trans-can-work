@@ -20,9 +20,9 @@ function OnlineProfile() {
         the followin&apos; Social Media sites once ye&apos;ve set&apos; em up.
       </h6>
       <form className="textFields">
-        <div className="onlineProfile-row">
-          <label htmlFor="linkedin" className="onlineProfile-row-label">
-            Linkedin
+        <div className="form-row">
+          <label htmlFor="linkedin" className="form-row-label">
+            LinkedIn
             <input
               type="text"
               name="linkedin"
@@ -30,7 +30,7 @@ function OnlineProfile() {
               onChange={handleChange}
             />
           </label>
-          <label htmlFor="facebook" className="onlineProfile-row-label">
+          <label htmlFor="facebook" className="form-row-label">
             Facebook
             <input
               type="text"
@@ -40,8 +40,8 @@ function OnlineProfile() {
             />
           </label>
         </div>
-        <div className="onlineProfile-row">
-          <label htmlFor="imdb" className="onlineProfile-row-label">
+        <div className="form-row">
+          <label htmlFor="imdb" className="form-row-label">
             Imdb
             <input
               type="text"
@@ -50,7 +50,7 @@ function OnlineProfile() {
               onChange={handleChange}
             />
           </label>
-          <label htmlFor="other" className="onlineProfile-row-label">
+          <label htmlFor="other" className="form-row-label">
             Other
             <input
               type="text"
