@@ -45,7 +45,7 @@ function OnlineProfiles() {
     notes: '',
   }]);
 
-  const addOnlineProfile = (event) => {
+  const addOnlineProfile = async (event) => {
     event.preventDefault();
     console.log(profile);
     const temp = [...profile];
@@ -57,7 +57,7 @@ function OnlineProfiles() {
       notes: '',
     });
     console.log(temp);
-    setProfile(temp);
+    await setProfile((pastProfiles) => pastProfiles.push(temp));
     console.log(profile);
   };
 
