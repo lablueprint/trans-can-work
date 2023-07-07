@@ -11,7 +11,7 @@ import './NavMenu.css';
 const options = [
   { name: 'Assessment', link: '/assessment' },
   { name: 'Online Profiles', link: '/onlineprofiles' },
-  { name: 'Training Programs', link: '/assessment' },
+  { name: 'Training Programs', link: '/training' },
   { name: 'Co-Enroll', link: '/assessment' },
   { name: 'Workshops', link: '/assessment' },
   { name: 'Internships', link: '/assessment' },

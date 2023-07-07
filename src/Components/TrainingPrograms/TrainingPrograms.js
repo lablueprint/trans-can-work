@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import './OnlineProfiles.css';
+import './TrainingPrograms.css';
 import { TextField } from '@material-ui/core';
 import { styled, makeStyles } from '@material-ui/core/styles';
 import Add from '../../Assets/add.svg';
 
-function OnlineProfiles() {
+function TrainingPrograms() {
   const CssTextField = styled(TextField, {
     shouldForwardProp: (props) => props !== 'focusColor',
   })((p) => ({
@@ -39,17 +39,29 @@ function OnlineProfiles() {
 
   const classes = useStyles();
 
-  const [profile, setProfile] = useState([{
-    website: '',
-    tools: '',
-    created: '',
+  const [allPrograms, setAllPrograms] = useState([{
+    program: '',
+    referral: '',
+    start: '',
+    enrolled: '',
+    end: '',
+    completed: '',
+    notes: '',
+  },
+  {
+    program: '',
+    referral: '',
+    start: '',
+    enrolled: '',
+    end: '',
+    completed: '',
     notes: '',
   }]);
 
-  const addOnlineProfile = async (event) => {
+  const addProgram = async (event) => {
     event.preventDefault();
-    console.log(profile);
-    const temp = [...profile];
+    console.log(allPrograms);
+    const temp = [...allPrograms];
     console.log(temp);
     temp.push({
       website: '',
@@ -58,28 +70,28 @@ function OnlineProfiles() {
       notes: '',
     });
     console.log(temp);
-    await setProfile((pastProfiles) => pastProfiles.push(temp));
-    console.log(profile);
+    await setAllPrograms((pastProfiles) => pastProfiles.push(temp));
+    console.log(allPrograms);
   };
 
-  const editOnlineProfile = (event, element, index) => {
+  const editProgram = (event, element, index) => {
     console.log(event.target.value);
     event.preventDefault();
-    console.log(profile[index][element]);
-    const temp = [...profile];
+    console.log(allPrograms[index][element]);
+    const temp = [...allPrograms];
     console.log(temp[index][element]);
     temp[index][element] = event.target.value;
-    setProfile(temp);
-    console.log(profile);
+    setAllPrograms(temp);
+    console.log(allPrograms);
   };
 
   return (
     <div>
       <div className="temp" />
-      <div className="op-title">Online Employment Profiles</div>
+      <div className="op-title">Training Programs</div>
       <div className="between-inputs" />
       <div className="width-55vw">
-        <button type="button" onClick={addOnlineProfile} className="op-add-button">
+        <button type="button" onClick={addProgram} className="op-add-button">
           <img
             src={Add}
             alt="add icon"
@@ -90,17 +102,17 @@ function OnlineProfiles() {
       </div>
       <div className="between-inputs" />
       <div>
-        {profile.map((profileObject, index) => (
+        {allPrograms.map((profileObject, index) => (
           <div>
             <form>
               <div>
                 <CssTextField
                   focusColor="#0c0ca4"
-                  label="Website"
+                  label="Training Program"
                   variant="outlined"
                   FormHelperTextProps={{ children: 'Label' }}
                   focused
-                  onChange={(e) => editOnlineProfile(e, 'website', index)}
+                  onChange={(e) => editProgram(e, 'program', index)}
                   style={{ paddingBottom: '1%' }}
                   InputProps={{
                     className: classes.root,
@@ -126,11 +138,11 @@ function OnlineProfiles() {
                 <div className="between-inputs" />
                 <CssTextField
                   focusColor="#0c0ca4"
-                  label="Tools This Site Provides"
+                  label="Date Referral Sent"
                   variant="outlined"
                   FormHelperTextProps={{ children: 'Label' }}
                   focused
-                  onChange={(e) => editOnlineProfile(e, 'tools', index)}
+                  onChange={(e) => editProgram(e, 'referral', index)}
                   style={{ paddingBottom: '1%' }}
                   InputProps={{
                     className: classes.root,
@@ -156,11 +168,101 @@ function OnlineProfiles() {
                 <div className="between-inputs" />
                 <CssTextField
                   focusColor="#0c0ca4"
-                  label="Created an Account?"
+                  label="Start Date"
                   variant="outlined"
                   FormHelperTextProps={{ children: 'Label' }}
                   focused
-                  onChange={(e) => editOnlineProfile(e, 'created', index)}
+                  onChange={(e) => editProgram(e, 'start', index)}
+                  style={{ paddingBottom: '1%' }}
+                  InputProps={{
+                    className: classes.root,
+                    style: {
+                      fontFamily: 'Montserrat',
+                      color: '#49454F',
+                      paddingLeft: '0.5%',
+                      width: '55.0vw',
+                      height: '3.2vw',
+                      fontSize: '0.9vw',
+                      fontWeight: 'bold',
+                    },
+                  }}
+                  InputLabelProps={{
+                    className: classes.labelInput,
+                    style: {
+                      fontFamily: 'Montserrat',
+                      paddingLeft: '0.3%',
+                      backgroundColor: 'white',
+                    },
+                  }}
+                />
+                <div className="between-inputs" />
+                <CssTextField
+                  focusColor="#0c0ca4"
+                  label="Date Officially Enrolled"
+                  variant="outlined"
+                  FormHelperTextProps={{ children: 'Label' }}
+                  focused
+                  onChange={(e) => editProgram(e, 'enrolled', index)}
+                  style={{ paddingBottom: '1%' }}
+                  InputProps={{
+                    className: classes.root,
+                    style: {
+                      fontFamily: 'Montserrat',
+                      color: '#49454F',
+                      paddingLeft: '0.5%',
+                      width: '55.0vw',
+                      height: '3.2vw',
+                      fontSize: '0.9vw',
+                      fontWeight: 'bold',
+                    },
+                  }}
+                  InputLabelProps={{
+                    className: classes.labelInput,
+                    style: {
+                      fontFamily: 'Montserrat',
+                      paddingLeft: '0.3%',
+                      backgroundColor: 'white',
+                    },
+                  }}
+                />
+                <div className="between-inputs" />
+                <CssTextField
+                  focusColor="#0c0ca4"
+                  label="End Date"
+                  variant="outlined"
+                  FormHelperTextProps={{ children: 'Label' }}
+                  focused
+                  onChange={(e) => editProgram(e, 'end', index)}
+                  style={{ paddingBottom: '1%' }}
+                  InputProps={{
+                    className: classes.root,
+                    style: {
+                      fontFamily: 'Montserrat',
+                      color: '#49454F',
+                      paddingLeft: '0.5%',
+                      width: '55.0vw',
+                      height: '3.2vw',
+                      fontSize: '0.9vw',
+                      fontWeight: 'bold',
+                    },
+                  }}
+                  InputLabelProps={{
+                    className: classes.labelInput,
+                    style: {
+                      fontFamily: 'Montserrat',
+                      paddingLeft: '0.3%',
+                      backgroundColor: 'white',
+                    },
+                  }}
+                />
+                <div className="between-inputs" />
+                <CssTextField
+                  focusColor="#0c0ca4"
+                  label="Date Completed Training"
+                  variant="outlined"
+                  FormHelperTextProps={{ children: 'Label' }}
+                  focused
+                  onChange={(e) => editProgram(e, 'completed', index)}
                   style={{ paddingBottom: '1%' }}
                   InputProps={{
                     className: classes.root,
@@ -190,7 +292,7 @@ function OnlineProfiles() {
                   variant="outlined"
                   FormHelperTextProps={{ children: 'Label' }}
                   focused
-                  onChange={(e) => editOnlineProfile(e, 'notes', index)}
+                  onChange={(e) => editProgram(e, 'notes', index)}
                   style={{ paddingBottom: '1%' }}
                   InputProps={{
                     className: classes.root,
@@ -213,8 +315,7 @@ function OnlineProfiles() {
                     },
                   }}
                 />
-                <div className="between-inputs" />
-                <div className="between-inputs" />
+                <div className="next-program" />
               </div>
             </form>
           </div>
@@ -225,4 +326,4 @@ function OnlineProfiles() {
   );
 }
 
-export default OnlineProfiles;
+export default TrainingPrograms;

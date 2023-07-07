@@ -39,7 +39,7 @@ const tabs = [
   { title: 'Roadmap', link: 'roadmap' },
   { title: 'Assessment', link: 'assessment' },
   { title: 'Online Profiles', link: 'onlineprofiles' },
-  { title: 'Training Programs', link: 'assessment' },
+  { title: 'Training Programs', link: 'training' },
   { title: 'Workshops', link: 'assessment' },
   { title: 'Internships', link: 'assessment' },
   { title: 'Job Fairs', link: 'assessment' },
