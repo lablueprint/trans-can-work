@@ -1,5 +1,26 @@
-export const jobseekerInit = {
+export const userDataObject = {
+  firstName: '',
+  lastName: '',
+  pronouns: '',
+  approved: false,
+  role: '',
+  bio: '',
+  phoneNumber: '',
+};
+
+export const jobseekerUserInit = {
   navigator: '',
+};
+
+export const navigatorUserInit = {
+  jobseekers: [],
+};
+
+export const adminUserInit = {
+
+};
+
+export const jobseekerDataObject = {
   clientInfo: {
     Phone: '',
     'City/State': '',
@@ -75,13 +96,4 @@ export const jobseekerInit = {
     'online profile': 'incomplete',
     resources: 'incomplete',
   },
-
-};
-
-export const navigatorInit = {
-  jobseekers: [],
-};
-
-export const adminInit = {
-
 };

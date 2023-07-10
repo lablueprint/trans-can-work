@@ -1,6 +1,5 @@
-// do we want to id records by email?? or id - use addDoc if so
 import {
-  doc, setDoc, getDoc, updateDoc,
+  doc, setDoc, getDoc, updateDoc, collection, getDocs, query, where, deleteDoc,
 } from 'firebase/firestore';
 import {
   GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword,
@@ -9,7 +8,7 @@ import {
 import { jobseekerInit, navigatorInit, adminInit } from './user-objects';
 import { db, auth } from '../firebase';
 
-// fetch + update
+/** *********** CRUD FUNCTIONS ************ */
 export const fetchUser = async (email) => {
   const docRef = doc(db, 'users', email);
   try {
@@ -26,16 +25,48 @@ export const fetchUser = async (email) => {
   }
 };
 
-export const updateNavigator = async (email, data) => {
+export const fetchAllUsers = async () => {
+  const colRef = collection(db, 'users');
+  try {
+    const docsSnap = await getDocs(colRef);
+    return docsSnap;
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+};
+
+export const fetchUsersByNavigator = async (email) => {
+  const colRef = collection(db, 'users');
+  const navRef = doc(db, 'users', email);
+  try {
+    const docsSnap = await getDocs(query(colRef, where('navigator', '==', navRef)));
+    return docsSnap;
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+};
+
+// update this method to accomodate changes into store!
+export const updateUser = async (email, data) => {
   await updateDoc(doc(db, 'users', email), data)
     .then(() => {
-      console.log('updated navigator ', email);
+      console.log('updated user ', email);
     }).catch((err) => {
       alert(err.stack);
     });
 };
 
-// edit this method to use store eventually!
+// could add check for if the user is a jobseeker + deletion of their record if necessary
+export const deleteUser = async (email) => {
+  await deleteDoc(doc(db, 'users', email)).then(() => {
+    console.log('User account ', email, ' has been deleted successfully.');
+  })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
 /** Login Methods */
 export const login = async (email, password) => {
@@ -140,6 +171,3 @@ export const sendPasswordReset = async (email) => {
     console.error(err);
   }
 };
-
-/** Delete Account */
-// add later!
