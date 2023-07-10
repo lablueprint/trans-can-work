@@ -16,8 +16,9 @@ function Notepad() {
   useEffect(() => {
     const logquery = async () => {
       const query = await fetchJobseeker(testemail);
-      if (query.notes != null) {
-        setNotes(query.notes);
+      const data = query.data();
+      if (data.notes != null) {
+        setNotes(data.notes);
       }
     };
 
