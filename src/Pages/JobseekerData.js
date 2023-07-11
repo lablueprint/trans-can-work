@@ -327,25 +327,32 @@ function Onboard({ username, useremail }) {
 
   const deleteEducation = (event, index) => {
     event.preventDefault();
-    const temp = [...jobseeker.education];
-    temp.splice(index, 1);
-    setJobseeker({
-      ...jobseeker,
-      education: temp,
-    });
+    // const temp = [...jobseeker.education];
+    // temp.splice(index, 1);
+    // setJobseeker({
+    //   ...jobseeker,
+    //   education: temp,
+    // });
   };
 
-  const deleteOccupation = async (event, index) => {
-    event.preventDefault();
-    const temp = [...jobseeker.occupation];
+  const deleteOccupation = async (index) => {
+    // event.preventDefault();
+    // const temp = [...jobseeker.occupation];
+    // console.log(index);
+    // console.log(temp);
+    // temp.splice(index, 1);
+    // console.log(temp);
+    // await setJobseeker({
+    //   ...jobseeker,
+    //   occupation: temp,
+    // });
+    // console.log(jobseeker.occupation);
+    const temp = jobseeker;
     console.log(index);
     console.log(temp);
-    temp.splice(index, 1);
+    temp.occupation.splice(index, 1);
     console.log(temp);
-    await setJobseeker({
-      ...jobseeker,
-      occupation: temp,
-    });
+    await setJobseeker(temp);
     console.log(jobseeker.occupation);
   };
 
@@ -674,7 +681,7 @@ function Onboard({ username, useremail }) {
                     />
                   </form>
                   <div className="left-button">
-                    <button type="button" onClick={(e) => deleteOccupation(e, index)} className="delete-buttons">
+                    <button type="button" onClick={(e) => { e.preventDefault(); deleteOccupation(index).then(console.log(jobseeker.occupation)); }} className="delete-buttons">
                       <img
                         src={Delete}
                         alt="delete icon"
