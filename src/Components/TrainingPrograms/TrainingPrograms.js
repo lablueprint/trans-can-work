@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './TrainingPrograms.css';
 import { TextField } from '@material-ui/core';
-import { styled, makeStyles } from '@material-ui/core/styles';
+import { styled } from '@material-ui/core/styles';
 import Add from '../../Assets/add.svg';
 
 function TrainingPrograms() {
@@ -28,16 +28,16 @@ function TrainingPrograms() {
     },
   }));
 
-  const useStyles = makeStyles({
-    labelInput: {
-      fontSize: '0.9vw',
-    },
-    button: {
-      border: '3px solid',
-    },
-  });
+  // const useStyles = makeStyles({
+  //   labelInput: {
+  //     fontSize: '0.9vw',
+  //   },
+  //   button: {
+  //     border: '3px solid',
+  //   },
+  // });
 
-  const classes = useStyles();
+  // const classes = useStyles();
 
   const [allPrograms, setAllPrograms] = useState([{
     program: '',
@@ -115,7 +115,7 @@ function TrainingPrograms() {
                   onChange={(e) => editProgram(e, 'program', index)}
                   style={{ paddingBottom: '1%' }}
                   InputProps={{
-                    className: classes.root,
+                    // className: classes.root,
                     style: {
                       fontFamily: 'Montserrat',
                       color: '#49454F',
@@ -127,11 +127,12 @@ function TrainingPrograms() {
                     },
                   }}
                   InputLabelProps={{
-                    className: classes.labelInput,
+                    // className: classes.labelInput,
                     style: {
                       fontFamily: 'Montserrat',
                       paddingLeft: '0.3%',
                       backgroundColor: 'white',
+                      fontSize: '0.9vw',
                     },
                   }}
                 />
@@ -145,7 +146,7 @@ function TrainingPrograms() {
                   onChange={(e) => editProgram(e, 'referral', index)}
                   style={{ paddingBottom: '1%' }}
                   InputProps={{
-                    className: classes.root,
+                    // className: classes.root,
                     style: {
                       fontFamily: 'Montserrat',
                       color: '#49454F',
@@ -157,11 +158,12 @@ function TrainingPrograms() {
                     },
                   }}
                   InputLabelProps={{
-                    className: classes.labelInput,
+                    // className: classes.labelInput,
                     style: {
                       fontFamily: 'Montserrat',
                       paddingLeft: '0.3%',
                       backgroundColor: 'white',
+                      fontSize: '0.9vw',
                     },
                   }}
                 />
@@ -175,7 +177,7 @@ function TrainingPrograms() {
                   onChange={(e) => editProgram(e, 'start', index)}
                   style={{ paddingBottom: '1%' }}
                   InputProps={{
-                    className: classes.root,
+                    // className: classes.root,
                     style: {
                       fontFamily: 'Montserrat',
                       color: '#49454F',
@@ -187,11 +189,12 @@ function TrainingPrograms() {
                     },
                   }}
                   InputLabelProps={{
-                    className: classes.labelInput,
+                    // className: classes.labelInput,
                     style: {
                       fontFamily: 'Montserrat',
                       paddingLeft: '0.3%',
                       backgroundColor: 'white',
+                      fontSize: '0.9vw',
                     },
                   }}
                 />
@@ -205,7 +208,7 @@ function TrainingPrograms() {
                   onChange={(e) => editProgram(e, 'enrolled', index)}
                   style={{ paddingBottom: '1%' }}
                   InputProps={{
-                    className: classes.root,
+                    // className: classes.root,
                     style: {
                       fontFamily: 'Montserrat',
                       color: '#49454F',
@@ -217,11 +220,12 @@ function TrainingPrograms() {
                     },
                   }}
                   InputLabelProps={{
-                    className: classes.labelInput,
+                    // className: classes.labelInput,
                     style: {
                       fontFamily: 'Montserrat',
                       paddingLeft: '0.3%',
                       backgroundColor: 'white',
+                      fontSize: '0.9vw',
                     },
                   }}
                 />
@@ -235,7 +239,7 @@ function TrainingPrograms() {
                   onChange={(e) => editProgram(e, 'end', index)}
                   style={{ paddingBottom: '1%' }}
                   InputProps={{
-                    className: classes.root,
+                    // className: classes.root,
                     style: {
                       fontFamily: 'Montserrat',
                       color: '#49454F',
@@ -247,11 +251,12 @@ function TrainingPrograms() {
                     },
                   }}
                   InputLabelProps={{
-                    className: classes.labelInput,
+                    // className: classes.labelInput,
                     style: {
                       fontFamily: 'Montserrat',
                       paddingLeft: '0.3%',
                       backgroundColor: 'white',
+                      fontSize: '0.9vw',
                     },
                   }}
                 />
@@ -265,7 +270,7 @@ function TrainingPrograms() {
                   onChange={(e) => editProgram(e, 'completed', index)}
                   style={{ paddingBottom: '1%' }}
                   InputProps={{
-                    className: classes.root,
+                    // className: classes.root,
                     style: {
                       fontFamily: 'Montserrat',
                       color: '#49454F',
@@ -277,11 +282,12 @@ function TrainingPrograms() {
                     },
                   }}
                   InputLabelProps={{
-                    className: classes.labelInput,
+                    // className: classes.labelInput,
                     style: {
                       fontFamily: 'Montserrat',
                       paddingLeft: '0.3%',
                       backgroundColor: 'white',
+                      fontSize: '0.9vw',
                     },
                   }}
                 />
@@ -295,7 +301,7 @@ function TrainingPrograms() {
                   onChange={(e) => editProgram(e, 'notes', index)}
                   style={{ paddingBottom: '1%' }}
                   InputProps={{
-                    className: classes.root,
+                    // className: classes.root,
                     style: {
                       fontFamily: 'Montserrat',
                       color: '#49454F',
@@ -307,11 +313,12 @@ function TrainingPrograms() {
                     },
                   }}
                   InputLabelProps={{
-                    className: classes.labelInput,
+                    // className: classes.labelInput,
                     style: {
                       fontFamily: 'Montserrat',
                       paddingLeft: '0.3%',
                       backgroundColor: 'white',
+                      fontSize: '0.9vw',
                     },
                   }}
                 />

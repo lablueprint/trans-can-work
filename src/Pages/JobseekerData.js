@@ -335,14 +335,18 @@ function Onboard({ username, useremail }) {
     });
   };
 
-  const deleteOccupation = (event, index) => {
+  const deleteOccupation = async (event, index) => {
     event.preventDefault();
     const temp = [...jobseeker.occupation];
+    console.log(index);
+    console.log(temp);
     temp.splice(index, 1);
-    setJobseeker({
+    console.log(temp);
+    await setJobseeker({
       ...jobseeker,
       occupation: temp,
     });
+    console.log(jobseeker.occupation);
   };
 
   const clientInfo = [{ title: 'Authentic Name', toChange: 'name', placeholder: jobseeker.name },
