@@ -70,12 +70,12 @@ const data = {
       },
       {
         uid: 7,
-        imageDefault: require('../../Assets/Images/job-board(b&w).png'),
-        imageUpdated: require('../../Assets/Images/job-board.png'),
-        imageHover: require('../../Assets/Images/job-boardH.png'),
-        imageUHover: require('../../Assets/Images/job-boardUH.png'),
-        title: require('../../Assets/Images/job-board-title.png'),
-        id: 'job-board',
+        imageDefault: require('../../Assets/Images/job-portal(b&w).png'),
+        imageUpdated: require('../../Assets/Images/job-portal.png'),
+        imageHover: require('../../Assets/Images/job-portalH.png'),
+        imageUHover: require('../../Assets/Images/job-portalUH.png'),
+        title: require('../../Assets/Images/job-portal-title.png'),
+        id: 'job-portal',
         status: false,
       },
       {

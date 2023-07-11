@@ -6,6 +6,7 @@
     text-align: center;
     margin: 1.5em auto;
     width: 80%;
+    border: 2px red dotted;
 }
 
 #resourceButton {
