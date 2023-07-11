@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 // import { useSelector } from 'react-redux';
 import { TextField, Button, Checkbox } from '@material-ui/core';
@@ -7,12 +7,12 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import GoogleIcon from '@mui/icons-material/Google';
 import { styled, makeStyles } from '@material-ui/core/styles';
 
+import { useSelector } from 'react-redux';
 import {
-  signInWithEmailAndPassword,
-  GoogleAuthProvider, signInWithPopup,
-} from 'firebase/auth';
-// import { logout } from '../Services/user-service';
-import { auth } from '../firebase';
+  login, handleGoogleSignIn,
+  logout,
+} from '../Services/user-service';
+
 import './Login.css';
 
 const TCWLogo = require('../Assets/Images/TCW-logo.png');
@@ -61,20 +61,13 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
-  // const user = useSelector((state) => state.auth.value);
+  const user = useSelector((state) => state.auth.value);
+
   const navigate = useNavigate();
 
   const onLogin = async (event) => {
     event.preventDefault();
-    signInWithEmailAndPassword(auth, email.toLowerCase(), password)
-      .then((userCredential) => {
-        // edit store
-        const userTemp = userCredential.user;
-        console.log(userTemp);
-        navigate('/');
-        // depending on approval status
-        // navigate(approves ? '/home' : '/splash');
-      })
+    login(email.toLowerCase(), password)
       .catch((e) => {
         // add proper error handling
         const errorCode = e.code;
@@ -84,22 +77,21 @@ function Login() {
       });
   };
 
-  const provider = new GoogleAuthProvider();
   function signInWithGoogle() {
-    signInWithPopup(auth, provider)
-      .then(async (result) => {
-        const { user: googleUser } = result;
-        console.log(googleUser);
-        // depending on approval status
-        // navigate(approves ? '/home' : '/splash');
-      }).catch((e) => {
-        // Handle Errors here.
-        const errorCode = e.code;
-        console.log(errorCode);
-        const googleErrorMessage = e.message;
-        console.log(googleErrorMessage);
-      });
+    handleGoogleSignIn().catch((e) => {
+      // add proper error handling
+      const errorCode = e.code;
+      console.log(errorCode);
+      const googleErrorMessage = e.message;
+      console.log(googleErrorMessage);
+    });
   }
+
+  useEffect(() => {
+    if (user && user.isLoggedIn && user.user !== undefined) {
+      navigate(user.user.approved ? '/home' : '/splash');
+    }
+  }, [user]);
 
   const classes = useStyles();
 
@@ -238,7 +230,7 @@ function Login() {
               type="button"
               variant="contained"
               color="primary"
-              onClick={() => onLogin()}
+              onClick={onLogin}
               style={buttonStyle}
             >
               Login
@@ -266,7 +258,17 @@ function Login() {
             </div>
             <Link to="/register">Create Account</Link>
           </div>
-
+          <Button
+            type="button"
+            color="primary"
+            onClick={() => logout()}
+            variant="outlined"
+            startIcon={<GoogleIcon style={{ fontSize: '1.2vw' }} />}
+            className={classes.button}
+            style={buttonStyle}
+          >
+              &nbsp;Logout
+          </Button>
         </div>
       </div>
     </>

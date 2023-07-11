@@ -1,4 +1,5 @@
 export const userDataObject = {
+  uid: '',
   firstName: '',
   lastName: '',
   pronouns: '',
@@ -14,10 +15,6 @@ export const jobseekerUserInit = {
 
 export const navigatorUserInit = {
   jobseekers: [],
-};
-
-export const adminUserInit = {
-
 };
 
 export const jobseekerDataObject = {

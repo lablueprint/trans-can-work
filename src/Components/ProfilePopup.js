@@ -15,7 +15,7 @@ import { doc, setDoc } from 'firebase/firestore';
 import profilepic from '../Assets/Images/parrot-profile.svg';
 import navpic from '../Assets/Images/powell-cat.svg';
 import { fetchJobseeker } from '../Services/jobseeker-service';
-import firebase from '../firebase';
+import { db } from '../firebase';
 
 const backgroundColors = ['#FF968A', '#FFCCB6', '#FFFFB5', '#CCE2CB', '#A2E1DB', '#D4F0F0', '#CBAACB', '#FEE1E8'];
 
@@ -97,7 +97,6 @@ function ProfilePopup({
   handleClose,
 }) {
   const testemail = 'bboy@tt.com';
-  const db = firebase;
   const docRef = doc(db, 'jobseekers', testemail);
 
   const [edit, setEdit] = useState(false);

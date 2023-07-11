@@ -6,9 +6,7 @@ import {
 import { Dialog, Slide, IconButton } from '@mui/material';
 import { CloseRounded } from '@mui/icons-material';
 import Divider from '@mui/material/Divider';
-import firebase from '../../firebase';
-
-const db = firebase;
+import { db } from '../../firebase';
 
 const style = {
   dialog: {

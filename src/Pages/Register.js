@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { getAuth } from 'firebase/auth';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-// cases:
-//   - if email already if use
-//   - if password is invalid
-//   - if fields are blank
 import {
   TextField, Button, withStyles, FormControl, RadioGroup, FormLabel, FormControlLabel, Radio,
 } from '@material-ui/core';
@@ -71,10 +66,8 @@ const useStyles = makeStyles({
   },
 });
 
-const auth = getAuth();
-
 function Register() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -84,41 +77,21 @@ function Register() {
   const [lastNameError, setLastNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
-  const [accountType, setAccountType] = useState('jobseeker');
-  const [user, loading] = useAuthState(auth);
-
-  // We will use display name later, on the landing page
-  // eslint-disable-next-line no-unused-vars
-  const [displayName, setDisplayName] = useState('');
-  // If we want to see if user is logged in
+  const [role, setRole] = useState('jobseeker');
+  const user = useSelector((state) => state.auth.value);
 
   useEffect(() => {
-    if (!loading && user) {
-      setDisplayName(user.displayName);
+    if (user && user.isLoggedIn && user.user !== undefined) {
+      navigate(user.user.approved ? '/home' : '/splash');
     }
-  }, [user, loading]);
+  }, [user]);
 
   const data = {
-    firstName,
-    lastName,
     email,
     password,
-    approval: false,
-    role: accountType,
-  };
-
-  const registeration = async () => {
-    try {
-      await register(data);
-    } catch (error) {
-      alert(error);
-    }
-
-    // change this! if the registration succeeds, navigate away, else stay + alert user
-    // if (registered === true) {
-    //   const approves = await getApprovalStatus(email);
-    //   navigate(approves ? '/home' : '/splash');
-    // }
+    role,
+    firstName,
+    lastName,
   };
 
   const onSubmit = async () => {
@@ -144,39 +117,29 @@ function Register() {
     if (password === '') {
       setPasswordError(true);
       errorFlag = true;
+    } else if (password.length < 6) {
+      setPasswordError(true);
+      errorFlag = true;
+      alert('Please ensure your password is at least 6 characters');
     } else {
       setPasswordError(false);
     }
-
     if (errorFlag) {
       return;
     }
-    if (password.length < 6) {
-      alert('Please ensure your password is at least 6 characters');
-    }
 
-    registeration();
+    register(data)
+      .catch((error) => {
+        console.log(error);
+        alert(`Registration Failed: ${error}`);
+      });
   };
 
   const handleGoogle = async () => {
-    if (accountType !== 'navigator' && accountType !== 'jobseeker' && accountType !== 'admin') {
-      alert('Please select a role'); // eslint-disable-line no-alert
-      return;
-    }
-
-    handleGoogleSignUp(accountType)
-      .then(async (result) => {
-        // Signed in successfully with Google
-        // The signed-in user info.
-        const { user: googleUser } = result;
-        registeration(email, data);
-        console.log(googleUser);
-        // also change error checking here!
-        // navigate(approves ? '/home' : '/splash');
-      })
+    handleGoogleSignUp(role)
       .catch((error) => {
-        alert(error);
-        // Sign-in with Google failed
+        console.log(error);
+        alert(`Google Registration Failed ${error}`);
       });
   };
 
@@ -213,8 +176,7 @@ function Register() {
   };
 
   const setAccount = (value) => {
-    setAccountType(value);
-    console.log(value);
+    setRole(value);
   };
 
   return (

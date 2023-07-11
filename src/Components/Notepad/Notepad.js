@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import Modal from '@material-ui/core/Modal';
 import { doc, setDoc } from 'firebase/firestore';
 import { fetchJobseeker } from '../../Services/jobseeker-service';
-import { db } from '../firebase';
+import { db } from '../../firebase';
 import './Notepad.css';
 
 function Notepad() {

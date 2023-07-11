@@ -6,59 +6,67 @@ import {
   NavigatorDashboard,
   Register,
   Reset,
-  Profile,
   Landing,
   JobseekerData,
-  ProfileTemp,
+  Home,
 } from './Pages';
 import "./App.css";
 import Footer from "./Components/Footer/Footer";
-import Splash from "./Components/Splash";
-import approvalIcon from "./Assets/mobile_friendly_24px.png";
-import AdminView from "./Components/AdminView";
+import Splash from "./Components/Splash/Splash";
+import approvalIcon from './Assets/Images/trans-flag-graphic.svg';
+import AdminView from './Components/Dashboard/AdminView';
 import ScrollToTop from './Pages/scrollToTop';
 import NavigatorMenu from './Components/Navigation/NavigatorMenu';
 import MilestoneMap from './Components/Milestones/MilestoneMap';
 import { onAuthStateChanged } from "firebase/auth";
 import { useSelector, useDispatch } from "react-redux";
 import { login, logout } from "./Redux/Slice/authSlices";
-import {fetchUser} from './Services/user-service';
+import { fetchUser, addUser } from './Services/user-service';
 import { auth } from "./firebase";
 
 
 function App() {
-  const user = useSelector((state) => state.auth.value);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.value);
+
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        fetchUser(user.email).then((doc) => {
-          const userState ={
-            email: user.email,
-            accessToken: user.accessToken,
-            refreshToken: user.refreshToken,
-            user: doc.data(),
+    // on any firebase auth change 
+    const unsubscribe = onAuthStateChanged(auth, async (state) => {
+      // if logged in
+      if (state != null) {
+        // refresh the user data and redux state
+        fetchUser(state.email).then((doc) => {
+          const userState = {
+            email: state.email,
+            accessToken: state.accessToken,
+            refreshToken: state.refreshToken,
+            user: doc !== undefined ? doc.data(): undefined,
           }
           dispatch(login(userState));
+        }).catch((error) => {
         });
-      } else {
+      // if logged out
+      } else if (user != undefined) {
+        // clear redux state
         dispatch(logout());
       }
     });
-    unsubscribe();
-  }, [auth]);
+    return()=>{
+      unsubscribe();
+    }
+  }, []);
 
   return (
     <div className="App">
       <Routes>
         <Route
-          path="/"
+          exact path="/"
           element={(
             <>
               <ScrollToTop />
               <Login />
             </>
-)}
+        )}
         />
         <Route
           path="/register"
@@ -67,18 +75,17 @@ function App() {
               <ScrollToTop />
               <Register />
             </>
-)}
+        )}
         />
         <Route path="/home" element={<NavigatorMenu />}>
           <Route path="roadmap" element={<MilestoneMap />} />
           <Route path="assessment" element={<NavigatorDashboard />} />
         </Route>
+        <Route path="/login" element={<Login />} />
         <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />
         <Route path="/reset" element={<Reset />} />
-        <Route path="/profile" element={<Profile />} />
         <Route path="/landing" element={<Landing />} />
         <Route path="/onboard" element={<JobseekerData useremail="solia@goodpl.us" username="solia tennis" />} />
-        <Route path="/newprofile" element={<ProfileTemp />} />
         <Route path="/adminview" element={<AdminView />} />
 
         <Route

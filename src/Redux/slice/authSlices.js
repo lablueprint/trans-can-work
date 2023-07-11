@@ -10,25 +10,31 @@ const initialState = {
 };
 
 export const authSlice = createSlice({
-  name: 'user',
+  name: 'auth',
   initialState,
   reducers: {
     login: (state, action) => {
       const {
         email, accessToken, refreshToken, user,
       } = action.payload;
-      state.isLoggedIn = true;
-      state.email = email;
-      state.accessToken = accessToken;
-      state.refreshToken = refreshToken;
-      state.user = user;
+      state.value = {
+        isLoggedIn: true,
+        email,
+        accessToken,
+        refreshToken,
+        user,
+      };
     },
     logout: (state) => {
       console.log('logout');
       state.value = initialState;
     },
+    updateUser: (state, action) => {
+      console.log(action.payload);
+      state.value = { ...state.value, user: action.payload };
+    },
   },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { login, logout, updateUser } = authSlice.actions;
 export default authSlice.reducer;

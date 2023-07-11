@@ -2,13 +2,39 @@ import {
   doc, setDoc, getDoc, updateDoc, collection, getDocs, query, where, deleteDoc,
 } from 'firebase/firestore';
 import {
-  GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword,
-  sendPasswordResetEmail, signOut,
+  GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword,
+  sendPasswordResetEmail, signOut, signInWithEmailAndPassword,
 } from 'firebase/auth';
-import { jobseekerInit, navigatorInit, adminInit } from './user-objects';
+import {
+  jobseekerUserInit, navigatorUserInit, jobseekerDataObject,
+} from './user-objects';
 import { db, auth } from '../firebase';
 
+const provider = new GoogleAuthProvider();
+
 /** *********** CRUD FUNCTIONS ************ */
+export const createUser = async (uid, email, role, firstName = '', lastName = '', pronouns = '', bio = '', phoneNumber = '') => {
+  let userObject = {
+    approved: false,
+    uid,
+    firstName,
+    lastName,
+    pronouns,
+    role,
+    bio,
+    phoneNumber,
+  };
+  if (role === 'jobseeker') userObject = { ...userObject, ...jobseekerUserInit };
+  else if (role === 'navigator') userObject = { ...userObject, ...navigatorUserInit };
+
+  console.log(userObject);
+  await setDoc(doc(db, 'users', email), userObject).then(async () => {
+    if (role === 'jobseeker') {
+      await setDoc(doc(db, 'jobseekerData', email), jobseekerDataObject);
+    }
+  });
+};
+
 export const fetchUser = async (email) => {
   const docRef = doc(db, 'users', email);
   try {
@@ -18,10 +44,10 @@ export const fetchUser = async (email) => {
       return docSnap;
     }
     console.log('user ', email, ' does not exist');
-    return null;
+    return undefined;
   } catch (error) {
     console.log(error);
-    return undefined;
+    return error;
   }
 };
 
@@ -68,89 +94,38 @@ export const deleteUser = async (email) => {
     });
 };
 
-/** Login Methods */
+/** *********** SIGN IN FUNCTIONS ************ */
+
 export const login = async (email, password) => {
-  signInWithEmailAndPassword(auth, email.toLowerCase(), password)
-    .then((userCredential) => {
-      const { user } = userCredential;
-      return user;
-    })
-    .catch((error) => error);
+  await signInWithEmailAndPassword(auth, email, password);
 };
 
-export const signInWithGoogle = () => {
-  const provider = new GoogleAuthProvider();
-
-  signInWithPopup(auth, provider)
-    .then(async (result) => {
-      const { user } = result;
-      console.log(user);
-      // save to store!!
-      //   const approves = await getApprovalStatus(googleUser.email);
-      //   navigate(approves ? '/' : '/splash');
-    }).catch((e) => {
-      // Handle Errors here.
-      const errorCode = e.code;
-      console.log(errorCode);
-      const googleErrorMessage = e.message;
-      console.log(googleErrorMessage);
-    });
-};
-
-/** Sign up Methods */
-const addUser = async (uid, email, authenticName, pronouns, accountType) => {
-  let userObject = {
-    uid,
-    fullname: authenticName,
-    bio: '',
-    approved: false,
-    pronouns,
-    accountType,
-    authProvider: 'local',
-    email,
-  };
-  if (accountType === 'jobseeker') userObject = { ...userObject, ...jobseekerInit };
-  else if (accountType === 'navigator') userObject = { ...userObject, ...navigatorInit };
-  else if (accountType === 'admin') userObject = { ...userObject, ...adminInit };
-  console.log(userObject);
-  await setDoc(doc(db, 'users', email), userObject).then(() => {
-    // save to store!
-    // fix this in register.js, to authenticName
-    // updateProfile(auth.currentUser, {
-    //   displayName: firstName,
-    // });
-  }).catch((error) => console.error(error));
-};
-
-export const register = async (data) => {
-  try {
-    const res = await createUserWithEmailAndPassword(auth, data.email, data.password);
-    const { user } = res;
-    await addUser(user.uid, data.email, data.name, data.pronouns, data.role);
-    // save token to store!
-  } catch (err) {
-    alert('Register failed: Account already exists');
-    console.error(err);
-  }
-};
-
-export const handleGoogleSignUp = async (accountType) => {
-  const provider = new GoogleAuthProvider();
-
-  try {
-    const result = signInWithPopup(auth, provider);
-    // Signed in successfully with Google
-    // The signed-in user info.
+// this function doesn't properly handle the case if the user had not previously been created!
+// we couldn't know from the login screen what role the user wants
+export const handleGoogleSignIn = async () => {
+  await signInWithPopup(auth, provider).then(async (result) => {
     const { user } = result;
-    await addUser(user.uid, user.displayName, accountType);
-    // save token to store!
-  } catch (error) {
-    alert('GoogleSignUp Error');
-    console.error(error);
-  }
+    console.log(user);
+    // handle the issue here!
+  });
 };
 
-/** Sign Out Methods */
+/** *********** SIGN UP FUNCTIONS ************ */
+export const register = async (data) => {
+  const res = await createUserWithEmailAndPassword(auth, data.email, data.password);
+  const { user } = res;
+  await createUser(user.uid, data.email, data.role, data.firstName, data.lastName);
+};
+
+export const handleGoogleSignUp = async (role) => {
+  await signInWithPopup(auth, provider).then(async (result) => {
+    const { user } = result;
+    console.log(user);
+    await createUser(user.uid, user.email, role, user.displayName);
+  });
+};
+
+/** *********** SIGN OUT FUNCTIONS ************ */
 export const logout = () => {
   console.log('logging out');
   signOut(auth).then(() => {
@@ -162,7 +137,7 @@ export const logout = () => {
   });
 };
 
-/** Account Fixes */
+/** *********** ACCOUNT FUNCTIONS ************ */
 export const sendPasswordReset = async (email) => {
   try {
     await sendPasswordResetEmail(auth, email);
