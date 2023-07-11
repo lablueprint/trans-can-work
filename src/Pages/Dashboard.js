@@ -206,22 +206,22 @@ export default function Dashboard({ profileName, role }) {
   }, []);
 
   return (
-    <div className="home-page-container">
-      <div className="home-page-headers-container">
-        <div className="home-page-header-name-and-icon-container">
-          <p className="home-page-header-profile-text">{profileName}</p>
+    <div className="dashboard-page-container">
+      <div className="dashboard-page-headers-container">
+        <div className="dashboard-page-header-name-and-icon-container">
+          <p className="dashboard-page-header-profile-text">{profileName}</p>
           <Avatar
             facebookId="100008343750912"
             className="profile-avatar"
           />
         </div>
-        <div className="home-page-welcome-block-header">
-          <p className="home-page-title">
+        <div className="dashboard-page-welcome-block-header">
+          <p className="dashboard-page-title">
             Welcome,
             {' '}
             {profileName.split(' ')[0]}
           </p>
-          <div className="home-page-search-bar-container">
+          <div className="dashboard-page-search-bar-container">
             <SearchAndFilter
               accounts={currentTabAccounts}
               checkedArr={checkedSkills}

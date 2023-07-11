@@ -1,15 +1,15 @@
-.home-page-container{
+.dashboard-page-container{
     margin-top: 1em;
 }
 
-.home-page-headers-container{
+.dashboard-page-headers-container{
     display: flex;
     flex-direction: column;
     padding: 0 4em;
     box-shadow: 0 4px 4px #c9c9c9;
 }
 
-.home-page-title{
+.dashboard-page-title{
     font-family: 'Montserrat';
     font-size: 3em;
     font-weight: bold;
@@ -18,7 +18,7 @@
     display:flex;
 }
 
-.home-page-title{
+.dashboard-page-title{
     font-family: 'Montserrat';
     font-size: 3em;
     font-weight: normal;
@@ -27,21 +27,21 @@
     display:flex;
 }
 
-.home-page-header-profile-text{
+.dashboard-page-header-profile-text{
     font-family: 'Montserrat';
     font-size: 1em;
     font-weight: bold;
     text-align: left;
 }
 
-.home-page-header-name-and-icon-container{
+.dashboard-page-header-name-and-icon-container{
     display: flex;
     flex-direction: row;
     justify-content: right;
     column-gap: 1em;
 }
 
-.home-page-welcome-block-header{
+.dashboard-page-welcome-block-header{
     display: flex; 
     flex-direction: row;
     min-height: 3em;
@@ -49,7 +49,7 @@
     justify-content: space-between;
 }
 
-.home-page-search-bar-container{
+.dashboard-page-search-bar-container{
     display: flex;
     align-items: end;
 }

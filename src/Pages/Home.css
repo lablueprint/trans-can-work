@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 @font-face {
     font-family: 'Montserrat';
     font-weight: normal;
@@ -21,7 +20,6 @@
          url('../Assets/Fonts/Montserrat-Bold.svg') format('svg'); /* Legacy iOS */
 }
 
-=======
 
 .home-page-title{
     font-family: 'Montserrat';
@@ -89,4 +87,3 @@
     align-items: end;
     flex: 1 0 25%;
 }
->>>>>>> 77d5c1ff62eda519b4db02efbf0983c121971635

@@ -85,15 +85,10 @@ function JobseekerNav() {
   // return focus to the button when we transitioned from !open -> open
   const prevOpen1 = React.useRef(open1);
   React.useEffect(() => {
-<<<<<<< HEAD
-    if (prevOpen.current === true && open === false) {
-      anchorRef.current.focus();
-=======
     if (prevOpen1.current === true && open1 === false) {
       if (anchorRef1.current) {
         anchorRef1.current.focus();
       }
->>>>>>> 77d5c1ff62eda519b4db02efbf0983c121971635
     }
 
     prevOpen1.current = open1;

@@ -9,17 +9,9 @@ import {
   Reset,
   Landing,
   JobseekerData,
-<<<<<<< HEAD
-  Dashboard,
-} from './Pages';
-import './App.css';
-import Footer from './Components/Footer/Footer';
-import Splash from './Components/Splash';
-import approvalIcon from './Assets/trans flag graphic.svg';
-import AdminView from './Components/AdminView';
-=======
   // ProfileTemp,
   Home,
+  Dashboard,
 } from './Pages';
 import './App.css';
 import Footer from './Components/Footer/Footer';
@@ -28,7 +20,6 @@ import Splash from './Components/Splash/Splash';
 import approvalIcon from './Assets/Images/trans-flag-graphic.svg';
 import AdminView from './Components/Dashboard/AdminView';
 import ScrollToTop from './Pages/scrollToTop';
->>>>>>> 77d5c1ff62eda519b4db02efbf0983c121971635
 import NavigatorMenu from './Components/Navigation/NavigatorMenu';
 import MilestoneMap from './Components/Milestones/MilestoneMap';
 

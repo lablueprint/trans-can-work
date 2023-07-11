@@ -4,11 +4,7 @@ import {
 } from 'firebase/firestore';
 import { db } from '../firebase';
 import './NavigatorDashboard.css';
-<<<<<<< HEAD
-import Checkboxes from '../Components/Checkboxes/Checkboxes';
-=======
 import Checkboxes from '../Components/Dashboard/Checkboxes';
->>>>>>> 77d5c1ff62eda519b4db02efbf0983c121971635
 import Notepad from '../Components/Notepad/Notepad';
 
 // later we can make each tab a different component, the individual tabs take a jobseeker as a prob
