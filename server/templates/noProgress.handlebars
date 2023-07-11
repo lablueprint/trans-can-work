@@ -101,80 +101,98 @@
 
 </html> --}}
 
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="UTF-8">
-    <title>TCW says hello</title>
-    <style>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCW - no progress</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style type="text/css">
       body {
-        font-family: 'Trebuchet MS', sans-serif;
-        font-size: 16px;
-        color: #333333;
-        line-height: 1.5;
+        margin: 0;
+        background-color: #FFFBFE;
+        max-width: 959px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        text-align: center;
+        font-size: 28px;
+        color: #3C3744;
+        line-height: 150%;
       }
-      h1, h2, h3, h4, h5, h6 {
-        font-family: 'Trebuchet MS', sans-serif;
-        font-weight: bold;
-        color: #333333;
-        margin-top: 0;
-        margin-bottom: 10px;
+      .wrapper {
+        width: 100%;
+        table-layout: fixed;
+        background-color: #FFFBFE;
       }
-      p {
-        margin-top: 0;
-        margin-bottom: 10px;
-      }
-      a {
-        text-decoration: none;
-        color: #fff;
-      }
-      img {
-        display: block;
-        max-width: 100%;
-        height: auto;
+      .main {
+        margin: 0 auto;
+        width: 100%;
+        max-width: 600px;
+        border-spacing: 0;
+        font-family: 'Montserrat', sans-serif;
+        color: #3C3744;
       }
       .container {
         width: 100%;
-        max-width: 600px;
+        width: 735px;
         margin: 0 auto;
-        background-color: #f7f7f7;
-        border-radius: 10px;
+        background-color: #FFFBFE;
         overflow: hidden;
+        gap: 24px;
       }
-      .header {
-        background: linear-gradient(to right, #5BCEFA 0%, #F5A9B8 100%);
-        padding: 20px;
-        color: #ffffff;
-        text-align: center;
+      h1 {
+        text-transform: uppercase;
+        font-family: 'Pirate';
       }
-      .content {
-        background-color: #ffffff;
-        padding: 20px;
-        text-align: center;
+      a {
+        text-decoration: none;
+        margin-bottom: 27px;
+        padding-bottom: 116px;
       }
-      .footer {
-        background: linear-gradient(to right, #F5A9B8 0%, #5BCEFA 100%);
-        padding: 20px;
-        text-align: center;
-        font-size: 14px;
+      img {
+        width: 420px;
+        max-width: 100%;
+        flex-shrink: 0;
       }
-
+      
       /* Button Styles */
       .button:hover {
-        background-color: #F5A9B8;
+        background-color: #6a6a6a;
       }
       .button {
-        display: inline-block;
-        background-color: #5BCEFA;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 800;
+        display: inline-flex;
+        background-color: #484649;
         color: #ffffff;
         text-decoration: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        margin-top: 20px;
+        border-radius: 20.25px;
+        padding: 33.75px 47.25px;
+        background: var(--neutral-20, #484649);
+        box-shadow: 0px 6.75px 13.5px 0px rgba(60, 55, 68, 0.25);
       }
     </style>
   </head>
   <body>
+    <center class="wrapper">
+      <table class"main" width="100%">
+        <tr>
+          <td style="text-align: center;padding: 15px;">
+            <h1>hey, {{message}}</h1>
+            <p>It looks like you have some uncompleted milestones waiting for you over at TransCanWork. Ready to set sail and take the next step in your career?</p>
+            <a href="#" class="button">View Your Roadmap</a>
+            <img src="trans-flag-graphic.png" alt="trans flag graphic" width="420" style="max-width: 100%;" title="trans flag graphic"/>
+          </td>
+        </tr>
+      </table>
+    </center>
+  </body>
+</html>
+  {{!-- <body>
     <div class="container">
       <div class="header">
         <h1 style="margin-top: 0;">TCW - Incomplete Milestones</h1>
@@ -190,5 +208,5 @@
         <p>Here's a link to our website: <a href="https://www.tcklibrary.org/">https://www.tcklibrary.org/</a></p>
       </div>
     </div>
-  </body>
+  </body> --}}
 </html>

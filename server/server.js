@@ -1,24 +1,26 @@
-const express = require("express");
+const express = require('express');
+
 const app = express();
-const cors = require("cors");
+const cors = require('cors');
+
 const port = 3001;
-const NoProgress = require("./email/noProgress.js");
-const CompleteMilestone = require("./email/completeMilestone.js");
+const NoProgress = require('./email/noProgress.js');
+const CompleteMilestone = require('./email/completeMilestone.js');
 
 // cors
 app.use(cors());
-app.use(express.json({ limit: "25mb" }));
-app.use(express.urlencoded({ limit: "25mb", extended: true }));
+app.use(express.json({ limit: '25mb' }));
+app.use(express.urlencoded({ limit: '25mb', extended: true }));
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader('Access-Control-Allow-Origin', '*');
   next();
 });
 
-app.get("/", (req, res) => {
-  res.send("server running");
+app.get('/', (req, res) => {
+  res.send('server running');
 });
 
-app.post("/no-progress-email", (req, res) => {
+app.post('/no-progress-email', (req, res) => {
   console.log(req.body);
   NoProgress(req.body)
     .then((response) => res.send(response.message))
@@ -27,7 +29,7 @@ app.post("/no-progress-email", (req, res) => {
     });
 });
 
-app.post("/milestone-email", (req, res) => {
+app.post('/milestone-email', (req, res) => {
   console.log(req.body);
   CompleteMilestone(req.body)
     .then((response) => res.send(response.message))
