@@ -10,7 +10,6 @@ import { styled, makeStyles } from '@material-ui/core/styles';
 import { useSelector } from 'react-redux';
 import {
   login, handleGoogleSignIn,
-  logout,
 } from '../Services/user-service';
 
 import './Login.css';
@@ -258,17 +257,6 @@ function Login() {
             </div>
             <Link to="/register">Create Account</Link>
           </div>
-          <Button
-            type="button"
-            color="primary"
-            onClick={() => logout()}
-            variant="outlined"
-            startIcon={<GoogleIcon style={{ fontSize: '1.2vw' }} />}
-            className={classes.button}
-            style={buttonStyle}
-          >
-              &nbsp;Logout
-          </Button>
         </div>
       </div>
     </>
