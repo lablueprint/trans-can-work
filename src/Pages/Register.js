@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { useSelector } from 'react-redux';
+
 import {
   TextField, Button, withStyles, FormControl, RadioGroup, FormLabel, FormControlLabel, Radio,
 } from '@material-ui/core';
@@ -9,10 +9,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 import InputAdornment from '@mui/material/InputAdornment';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { styled, makeStyles } from '@material-ui/core/styles';
-import { registerWithEmailAndPassword } from '../firebase';
-import { createNavigator } from '../Services/navigator-service';
-import { createJobseeker, fetchJobseeker } from '../Services/jobseeker-service';
-import { createAdmin } from '../Services/admin-service';
+import { register, handleGoogleSignUp } from '../Services/user-service';
 import './Register.css';
 
 const arrow = require('../Assets/Images/arrow.png');
@@ -69,29 +66,6 @@ const useStyles = makeStyles({
   },
 });
 
-const auth = getAuth();
-// Sample data
-const data = {
-  name: 'Solia',
-  paper: 'ayub',
-  'fun fact': 'ableist',
-  'helen keller': 'does not exist',
-  approval: false,
-};
-
-export const getApprovalStatus = async (email) => {
-  try {
-    const docSnap = await fetchJobseeker(email);
-    if (docSnap.exists()) {
-      return docSnap.data().approval;
-    }
-    console.log(`Jobseeker ${email} not found`);
-  } catch (error) {
-    console.log(`Error getting approval status for ${email}: ${error.message}`);
-  }
-  return null;
-};
-
 function Register() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -103,21 +77,24 @@ function Register() {
   const [lastNameError, setLastNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
-  const [accountType, setAccountType] = useState('jobseeker');
-  const [user, loading] = useAuthState(auth);
-
-  // We will use display name later, on the landing page
-  // eslint-disable-next-line no-unused-vars
-  const [displayName, setDisplayName] = useState('');
-  // If we want to see if user is logged in
+  const [role, setRole] = useState('jobseeker');
+  const user = useSelector((state) => state.auth.value);
 
   useEffect(() => {
-    if (!loading && user) {
-      setDisplayName(user.displayName);
+    if (user && user.isLoggedIn && user.user !== undefined) {
+      navigate(user.user.approved ? '/home' : '/splash');
     }
-  }, [user, loading]);
+  }, [user]);
 
-  const register = async () => {
+  const data = {
+    email,
+    password,
+    role,
+    firstName,
+    lastName,
+  };
+
+  const onSubmit = async () => {
     let errorFlag = false;
     if (firstName === '') {
       setFirstNameError(true);
@@ -140,69 +117,29 @@ function Register() {
     if (password === '') {
       setPasswordError(true);
       errorFlag = true;
+    } else if (password.length < 6) {
+      setPasswordError(true);
+      errorFlag = true;
+      alert('Please ensure your password is at least 6 characters');
     } else {
       setPasswordError(false);
     }
-
     if (errorFlag) {
       return;
     }
-    if (password.length < 6) {
-      alert('Please ensure your password is at least 6 characters');
-      return;
-    }
-    let registered;
-    try {
-      registered = await registerWithEmailAndPassword(
-        firstName,
-        lastName,
-        accountType,
-        email,
-        password,
-        setDisplayName,
-      );
-    } catch (error) {
-      alert(error);
-      return;
-    }
-    if (accountType === 'navigator') {
-      await createNavigator(email, data);
-    } else if (accountType === 'jobseeker') {
-      await createJobseeker(email, data);
-    } else {
-      await createAdmin(email, data);
-    }
-    if (registered === true) {
-      const approves = await getApprovalStatus(email);
-      navigate(approves ? '/home' : '/splash');
-    }
-  };
-  const provider = new GoogleAuthProvider();
 
-  const handleGoogleSignUp = async () => {
-    if (accountType !== 'navigator' && accountType !== 'jobseeker' && accountType !== 'admin') {
-      alert('Please select a role');
-      return;
-    }
-
-    signInWithPopup(auth, provider)
-      .then(async (result) => {
-        // Signed in successfully with Google
-        // The signed-in user info.
-        const { user: googleUser } = result;
-        if (accountType === 'navigator') {
-          createNavigator(googleUser.email, data);
-        } else if (accountType === 'jobseeker') {
-          createJobseeker(googleUser.email, data);
-        } else {
-          createAdmin(googleUser.email, data);
-        }
-        const approves = await getApprovalStatus(googleUser.email);
-        navigate(approves ? '/home' : '/splash');
-      })
+    register(data)
       .catch((error) => {
-        alert(error);
-        // Sign-in with Google failed
+        console.log(error);
+        alert(`Registration Failed: ${error}`);
+      });
+  };
+
+  const handleGoogle = async () => {
+    handleGoogleSignUp(role)
+      .catch((error) => {
+        console.log(error);
+        alert(`Google Registration Failed ${error}`);
       });
   };
 
@@ -239,8 +176,7 @@ function Register() {
   };
 
   const setAccount = (value) => {
-    setAccountType(value);
-    console.log(value);
+    setRole(value);
   };
 
   return (
@@ -406,7 +342,7 @@ function Register() {
               type="button"
               variant="contained"
               color="primary"
-              onClick={() => { register(firstName, lastName, accountType, email, password); }}
+              onClick={onSubmit}
               style={buttonStyle}
             >
               Sign Up
@@ -416,7 +352,7 @@ function Register() {
             <Button
               type="button"
               color="primary"
-              onClick={() => handleGoogleSignUp()}
+              onClick={handleGoogle}
               variant="outlined"
               startIcon={<GoogleIcon style={{ fontSize: '1.2vw' }} />}
               className={classes.button}
@@ -431,7 +367,7 @@ function Register() {
               {' '}
               Have An Account?
             </div>
-            <Link to="/login">Login</Link>
+            <Link to="/">Login</Link>
           </div>
         </div>
       </div>
