@@ -234,7 +234,7 @@ function Onboard({ username, useremail }) {
       certificate: '',
       certificateType: '',
     }],
-    occupation: ['Occupation'],
+    occupation: [],
     dreamjob: 'Dream Job',
   });
 
@@ -291,13 +291,14 @@ function Onboard({ username, useremail }) {
       });
     }
   };
+
   const addOccupation = (event) => {
     event.preventDefault();
     const temp = [...jobseeker.occupation];
     if (temp.length >= 3) {
       alert('If you have more than three past positions, please put the most recent three.');
     } else {
-      temp.push('None');
+      temp.push('');
       setJobseeker({
         ...jobseeker,
         occupation: temp,
@@ -335,26 +336,36 @@ function Onboard({ username, useremail }) {
     // });
   };
 
-  const deleteOccupation = async (index) => {
-    // event.preventDefault();
-    // const temp = [...jobseeker.occupation];
-    // console.log(index);
-    // console.log(temp);
-    // temp.splice(index, 1);
-    // console.log(temp);
-    // await setJobseeker({
-    //   ...jobseeker,
-    //   occupation: temp,
-    // });
-    // console.log(jobseeker.occupation);
-    const temp = jobseeker;
-    console.log(index);
-    console.log(temp);
-    temp.occupation.splice(index, 1);
-    console.log(temp);
-    await setJobseeker(temp);
+  const deleteOccupation = (index) => {
+    setJobseeker((prevJobseeker) => {
+      const temp = { ...prevJobseeker };
+      temp.occupation.splice(index, 1);
+      return { ...temp };
+    });
     console.log(jobseeker.occupation);
   };
+
+  // const deleteOccupation = async (index) => {
+  // event.preventDefault();
+  // const temp = [...jobseeker.occupation];
+  // console.log(index);
+  // console.log(temp);
+  // temp.splice(index, 1);
+  // console.log(temp);
+  // await setJobseeker({
+  //   ...jobseeker,
+  //   occupation: temp,
+  // });
+  // console.log(jobseeker.occupation);
+  // const temp = jobseeker;
+  // console.log(index);
+  // console.log(temp);
+  // temp.occupation.splice(index, 1);
+  // console.log(temp);
+  // await setJobseeker(temp);
+  // console.log(jobseeker.occupation);
+
+  // };
 
   const clientInfo = [{ title: 'Authentic Name', toChange: 'name', placeholder: jobseeker.name },
     { title: 'Pronouns', toChange: 'pronouns', placeholder: jobseeker.pronouns },
@@ -657,6 +668,7 @@ function Onboard({ username, useremail }) {
                       FormHelperTextProps={{ children: 'Label' }}
                       focused
                       onChange={(e) => editOccupation(e, index)}
+                      value={occupationObject}
                       style={{ paddingBottom: '1%' }}
                       InputProps={{
                         className: classes.root,
@@ -681,7 +693,7 @@ function Onboard({ username, useremail }) {
                     />
                   </form>
                   <div className="left-button">
-                    <button type="button" onClick={(e) => { e.preventDefault(); deleteOccupation(index).then(console.log(jobseeker.occupation)); }} className="delete-buttons">
+                    <button type="button" className="delete-buttons" onClick={(e) => { e.preventDefault(); deleteOccupation(index).then(console.log(jobseeker.occupation)); }}>
                       <img
                         src={Delete}
                         alt="delete icon"
