@@ -25,7 +25,8 @@ function Landing() {
         unapproved.push(js);
       });
     } catch (error) {
-      console.log(error);
+      // eslint-disable-next-line no-alert
+      alert(error);
     }
     setunapprovedUsers(unapproved);
   };
@@ -35,7 +36,7 @@ function Landing() {
   return (
     <div className="Cards">
       {unapprovedUsers.map((user) => (
-        <div className="Card">
+        <div className="Card" key={user.id}>
           <AvatarCard
             user={user}
             archivedUsers={unapprovedUsers}

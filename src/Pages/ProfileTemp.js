@@ -3,7 +3,7 @@ import {
   IconButton, Chip, Box,
 } from '@mui/material';
 import { GridViewRounded } from '@mui/icons-material';
-import ProfilePopup from '../Components/ProfilePopup';
+import ProfilePopup from '../Components/Profile/ProfilePopup';
 
 const style = {
   iconStyle: {
@@ -47,7 +47,9 @@ function ProfileTemp() {
   const prevOpen = React.useRef(open);
   React.useEffect(() => {
     if (prevOpen.current === true && open === false) {
-      anchorRef.current?.focus();
+      if (anchorRef.current) {
+        anchorRef.current.focus();
+      }
     }
 
     prevOpen.current = open;

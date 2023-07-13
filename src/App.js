@@ -66,7 +66,11 @@ function App() {
               <ScrollToTop />
               <Login />
             </>
-        )}
+          )}
+        />
+        <Route
+          path="/"
+          element={<Home />}
         />
         <Route
           path="/register"
@@ -75,7 +79,7 @@ function App() {
               <ScrollToTop />
               <Register />
             </>
-        )}
+          )}
         />
         <Route path="/home" element={<NavigatorMenu />}>
           <Route path="roadmap" element={<MilestoneMap />} />
@@ -85,7 +89,7 @@ function App() {
         <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/landing" element={<Landing />} />
-        <Route path="/onboard" element={<JobseekerData useremail="solia@goodpl.us" username="solia tennis" />} />
+        <Route path="/onboard" element={<JobseekerData useremail="solia@goodpl.us" username="Solia Nasser" />} />
         <Route path="/adminview" element={<AdminView />} />
 
         <Route
