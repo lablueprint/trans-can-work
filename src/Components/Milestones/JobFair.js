@@ -1,6 +1,5 @@
 import React from 'react';
 import './JobFair.css';
-import Button from '@mui/material/Button';
 
 function JobFair() {
   const [isComplete, setComplete] = React.useState(false);
@@ -63,13 +62,6 @@ function JobFair() {
         isComplete={isComplete}
         toggleComplete={toggleComplete}
       />
-      <Button
-        disableRipple
-        onClick={toggleComplete}
-        id={(isComplete) ? 'completed' : 'incomplete'}
-      >
-        {(isComplete) ? 'Marked as Completed' : 'Mark as Complete'}
-      </Button>
     </div>
   );
 }

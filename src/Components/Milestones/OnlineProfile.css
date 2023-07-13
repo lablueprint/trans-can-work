@@ -2,13 +2,14 @@
     margin: 1.5em auto;
     font-family: 'Liesel';
     font-size: 1.75rem;
+    font-weight: 400;
     width: 80%;
     text-align: center;
     line-height: 2rem;
     color: #484649;
 } 
 
-input {
+.profileInput {
     padding: 16px;
     margin: 8px 0;
     box-sizing: border-box;
@@ -34,24 +35,6 @@ input {
     font-family: 'Pirate';
     font-size: 2.5rem;
     display: block;
-}
-
-#incomplete {
-    padding: 20px 28px; 
-    left: calc(50% - 210px/2); 
-    top: calc(50% - 64px/2 + 324px); 
-    border: 2px solid #484649; 
-    box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
-    border-radius: 12px; 
-    font-family: 'Montserrat';
-    text-transform: none;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 24px;
-    text-align: center;
-    letter-spacing: 0.15px;
-    color: #484649;
 }
 
 .form-item {

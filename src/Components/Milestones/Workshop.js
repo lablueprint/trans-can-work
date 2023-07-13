@@ -1,6 +1,5 @@
 import React from 'react';
 import './Workshop.css';
-import Button from '@mui/material/Button';
 
 function Workshop() {
   const [isComplete, setComplete] = React.useState(false);
@@ -71,13 +70,6 @@ function Workshop() {
         isComplete={isComplete}
         toggleComplete={toggleComplete}
       />
-      <Button
-        disableRipple
-        onClick={toggleComplete}
-        id={(isComplete) ? 'completed' : 'incomplete'}
-      >
-        {(isComplete) ? 'Marked as Completed' : 'Mark as Complete'}
-      </Button>
     </div>
   );
 }

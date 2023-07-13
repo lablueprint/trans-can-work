@@ -22,13 +22,6 @@ function Resources() {
           isComplete={isComplete}
           toggleComplete={toggleComplete}
         />
-        <Button
-          disableRipple
-          onClick={toggleComplete}
-          id={(isComplete) ? 'completedResources' : 'incompleteResources'}
-        >
-          {(isComplete) ? 'Marked as Completed' : 'Mark as Complete'}
-        </Button>
       </div>
     </div>
   );

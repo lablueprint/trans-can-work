@@ -1,9 +1,8 @@
-/*eslint-disable*/
+/* eslint-disable */
 import React from 'react';
 import './MilestoneMap.css';
 import MilestoneButton from './MilestoneButton';
 import IslandPopup from './IslandPopup';
-//import title from '../../Assets/title.png';
 import title from '../../Assets/Images/title.png';
 
 const data = {
@@ -114,9 +113,7 @@ const MilestoneButtons = data.content.body.map((x) => {
       key={x.uid}
       id={x.id}
     >
-      {/* <MilestoneButton image={imagePath} imageHover={hoveredPath} title={x.title} id={x.id} status={x.status}/> */}
-      {/*the bottom one is the updated one but still need to see which one to keep*/}
-      <MilestoneButton image={imagePath} imageHover={hoveredPath} title={x.title} />
+      <MilestoneButton image={imagePath} imageHover={hoveredPath} title={x.title} id={x.id} status={x.status} />
     </div>
   );
 });

@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
-import Button from '@mui/material/Button';
 import './OnlineProfile.css';
 
 function OnlineProfile() {
   const [inputs, setInputs] = useState({});
-  const [isComplete, setComplete] = React.useState(false);
-  const toggleComplete = () => setComplete(!isComplete);
 
   const handleChange = (event) => {
     const { name } = event.target;
@@ -20,19 +17,21 @@ function OnlineProfile() {
         the followin&apos; Social Media sites once ye&apos;ve set&apos; em up.
       </h6>
       <form className="textFields">
-        <div className="form-row">
-          <label htmlFor="linkedin" className="form-row-label">
-            LinkedIn
+        <div className="onlineProfile-row">
+          <label htmlFor="linkedin" className="onlineProfile-row-label">
+            Linkedin
             <input
+              className="profileInput"
               type="text"
               name="linkedin"
               value={inputs.linkedin || ''}
               onChange={handleChange}
             />
           </label>
-          <label htmlFor="facebook" className="form-row-label">
+          <label htmlFor="facebook" className="onlineProfile-row-label">
             Facebook
             <input
+              className="profileInput"
               type="text"
               name="facebook"
               value={inputs.facebook || ''}
@@ -40,19 +39,21 @@ function OnlineProfile() {
             />
           </label>
         </div>
-        <div className="form-row">
-          <label htmlFor="imdb" className="form-row-label">
+        <div className="onlineProfile-row">
+          <label htmlFor="imdb" className="onlineProfile-row-label">
             Imdb
             <input
+              className="profileInput"
               type="text"
               name="imdb"
               value={inputs.imdb || ''}
               onChange={handleChange}
             />
           </label>
-          <label htmlFor="other" className="form-row-label">
+          <label htmlFor="other" className="onlineProfile-row-label">
             Other
             <input
+              className="profileInput"
               type="text"
               name="other"
               value={inputs.other || ''}
@@ -61,17 +62,6 @@ function OnlineProfile() {
           </label>
         </div>
       </form>
-      <div
-        isComplete={isComplete}
-        toggleComplete={toggleComplete}
-      />
-      <Button
-        disableRipple
-        onClick={toggleComplete}
-        id={(isComplete) ? 'completed' : 'incomplete'}
-      >
-        {(isComplete) ? 'Marked as Completed' : 'Mark as Complete'}
-      </Button>
     </div>
   );
 }

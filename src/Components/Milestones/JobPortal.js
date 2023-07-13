@@ -22,14 +22,6 @@ function JobPortal() {
           isComplete={isComplete}
           toggleComplete={toggleComplete}
         />
-        <Button
-          disableRipple
-          onClick={toggleComplete}
-          id={(isComplete) ? 'completedJobPortal' : 'incompleteJobPortal'}
-        >
-          {(isComplete) ? 'Marked as Completed' : 'Mark as Complete'}
-        </Button>
-
       </div>
     </div>
   );

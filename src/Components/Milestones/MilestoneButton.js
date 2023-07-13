@@ -2,12 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import IslandPopup from './IslandPopup';
-// import Typography from '@mui/material/Typography';
-// import Modal from '@mui/material/Modal';
-// import Box from '@mui/material/Box';
 import './MilestoneButton.css';
-// import { createTheme } from '@mui/material';
-// import backButton from '../../Assets/back button.png';
 
 function MilestoneButton({
   title, image, imageHover, id,
@@ -18,8 +13,8 @@ function MilestoneButton({
   const [isHover, setIsHover] = React.useState(false);
   const handleOnMouseEnter = () => setIsHover(true);
   const handleOnMouseLeave = () => setIsHover(false);
-  // const [isComplete, setComplete] = React.useState(false);
-  // const toggleComplete = () => setComplete(!isComplete);
+  const [isComplete, setComplete] = React.useState(false);
+  const toggleComplete = () => setComplete(!isComplete);
 
   return (
     <div>
@@ -36,8 +31,8 @@ function MilestoneButton({
         title={title}
         isOpen={open}
         handleClose={handleClose}
-        // isComplete={isComplete}
-        // toggleComplete={toggleComplete}
+        isComplete={isComplete}
+        toggleComplete={toggleComplete}
         id={id}
       />
     </div>
@@ -53,6 +48,3 @@ MilestoneButton.propTypes = {
 };
 
 export default MilestoneButton;
-/*
-TODO: making the popup contents
-*/

@@ -6,7 +6,6 @@
     text-align: center;
     margin: 1.5em auto;
     width: 80%;
-    border: 2px red dotted;
 }
 
 #resourceButton {
@@ -32,10 +31,8 @@
     border: 2px solid #939094;
 }
 
-#incompleteResources {
+/* #incompleteResources {
     padding: 20px 28px; 
-    /* left: calc(50% - 210px/2); 
-    top: calc(50% - 64px/2 + 324px);  */
     border: 2px solid #484649; 
     box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
     border-radius: 12px; 
@@ -52,8 +49,6 @@
 
 #completedResources{
     padding: 20px 28px; 
-    /* left: calc(50% - 231px/2); 
-    top: calc(50% - 64px/2 + 31px);  */
     box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
     border-radius: 12px; 
     font-family: 'Montserrat';
@@ -68,6 +63,7 @@
     background: #484649;
     border: 2px solid #484649;
 }
+
 #incompleteResources:hover {
     background: #939094;
     box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
@@ -80,7 +76,7 @@
     box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
     color: #FFFBFE;
     border: 2px solid #939094;
-}
+} */
 
 .resources-row {
     display: flex;

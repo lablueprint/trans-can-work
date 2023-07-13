@@ -1,6 +1,5 @@
 import React from 'react';
 import './Internship.css';
-import Button from '@mui/material/Button';
 
 function Internship() {
   const [isComplete, setComplete] = React.useState(false);
@@ -16,13 +15,6 @@ function Internship() {
         isComplete={isComplete}
         toggleComplete={toggleComplete}
       />
-      <Button
-        disableRipple
-        onClick={toggleComplete}
-        id={(isComplete) ? 'completed' : 'incomplete'}
-      >
-        {(isComplete) ? 'Marked as Completed' : 'Mark as Complete'}
-      </Button>
     </div>
   );
 }

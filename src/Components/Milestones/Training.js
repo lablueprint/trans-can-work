@@ -1,6 +1,5 @@
 import React from 'react';
 import './Training.css';
-import Button from '@mui/material/Button';
 
 function Training() {
   const [isComplete, setComplete] = React.useState(false);
@@ -12,13 +11,6 @@ function Training() {
         isComplete={isComplete}
         toggleComplete={toggleComplete}
       />
-      <Button
-        disableRipple
-        onClick={toggleComplete}
-        id={(isComplete) ? 'completed' : 'incomplete'}
-      >
-        {(isComplete) ? 'Marked as Completed' : 'Mark as Complete'}
-      </Button>
     </div>
   );
 }
