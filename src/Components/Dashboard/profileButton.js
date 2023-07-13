@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { IconButton, Avatar, StylesProvider } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
-import './profileButton.css';
+import './ProfileButton.css';
 import {
   Menu, MenuItem, ListItemIcon, ListItemText,
 } from '@mui/material';
@@ -124,15 +124,15 @@ function ProfileButton({
   let color;
 
   if (accountType === 'navigator' && isApproved === true) {
-    color = 'navigator-bg';
+    color = 'profile-button-navigator-bg';
   } else if (isArchived === true) {
-    color = 'archived-bg';
+    color = 'profile-button-archived-bg';
   } else {
-    color = 'unarchived-bg';
+    color = 'profile-button-unarchived-bg';
   }
 
   return (
-    <div className={`outer-container ${color}`}>
+    <div className={`profile-button-outer-container ${color}`}>
       {icon === undefined
         ? (
           <Avatar
@@ -146,12 +146,12 @@ function ProfileButton({
           />
         )}
       <br />
-      <div className="text-container">
-        <p className="name-text">{profileName}</p>
-        <p className="job-text">{workField}</p>
-        {!isArchived && <Link className="view-profile-link" to="/profile">View Profile</Link>}
+      <div className="profile-button-text-container">
+        <p className="profile-button-name-text">{profileName}</p>
+        <p className="profile-button-job-text">{workField}</p>
+        {!isArchived && <Link className="profile-button-view-link" to="/profile">View Profile</Link>}
       </div>
-      <div className="button-container">
+      <div className="profile-button-button-container">
         <IconButton
           id="bookmark"
           onClick={bookmarkJobseeker}
@@ -178,11 +178,12 @@ function ProfileButton({
             style: {
               width: '10em',
               padding: 0.10,
+              backgroundColor: 'white',
             },
           }}
           MenuListProps={{
             'aria-labelledby': 'options',
-            sx: { py: 0 },
+            sx: { py: 0, color: '#111111' },
           }}
           anchorOrigin={{
             vertical: 'bottom',

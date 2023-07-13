@@ -10,7 +10,7 @@ import SearchAndFilter from '../Components/SearchAndFiltering/searchAndFilter';
 import FilterChips from '../Components/SearchAndFiltering/FilterChips';
 import './Home.css';
 import './Dashboard.css';
-import ProfileButton from '../Components/Dashboard/profileButton';
+import ProfileButton from '../Components/Dashboard/ProfileButton';
 import { fetchAllJobseekers } from '../Services/jobseeker-service';
 import { fetchAllNavigators } from '../Services/navigator-service';
 import DashError from '../Components/Dashboard/DashError';
@@ -212,7 +212,7 @@ export default function Dashboard({ profileName, role }) {
           <p className="dashboard-page-header-profile-text">{profileName}</p>
           <Avatar
             facebookId="100008343750912"
-            className="profile-avatar"
+            className="profile-button-avatar"
           />
         </div>
         <div className="dashboard-page-welcome-block-header">
@@ -247,7 +247,7 @@ export default function Dashboard({ profileName, role }) {
       {hasAssignments
         ? (
           <>
-            <div className="profile-chip-container">
+            <div className="dashboard-page-chip-container">
               <FilterChips
                 checkedSkills={checkedSkills}
                 setCheckedSkills={setCheckedSkills}
@@ -259,7 +259,7 @@ export default function Dashboard({ profileName, role }) {
             </div>
             {filteredAccounts && filteredAccounts.length !== 0
               ? (
-                <div className="profile-grid">
+                <div className="dashboard-page-profile-grid">
                   {
               filteredAccounts
                 .sort((a, b) => (+b.bookmarked) - (+a.bookmarked) || a.name.localeCompare(b.name))

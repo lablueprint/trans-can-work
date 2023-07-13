@@ -1,15 +1,13 @@
 import {
   doc, setDoc, query, where, getDoc, getDocs, updateDoc, deleteDoc, collection,
 } from 'firebase/firestore';
-import firebase from '../firebase';
-
-const db = firebase;
+import { db } from '../firebase';
 
 // CRUD functions
 // data in form {"name": "John"} for instance; remember event.preventDefault() when using.
 export const createJobseeker = async (email, data) => {
   await setDoc(doc(db, 'jobseekers', email), data).then(() => {
-    console.log('created new jobseeker');
+    console.log('created new jobseeker', email, data);
   }).catch((err) => {
     alert(err.stack);
   });

@@ -54,7 +54,7 @@
     align-items: end;
 }
 
-.profile-grid {
+.dashboard-page-profile-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, 16.5em);
     grid-row-gap: 1em;
@@ -62,7 +62,7 @@
     margin: 1.5rem 4rem;
 }
 
-.profile-avatar{
+.profile-button-avatar{
     height: 2em;
     width: 2em;
     margin-top: 6px;
@@ -70,6 +70,6 @@
     margin-left: 6px;
 }
 
-.profile-chip-container {
+.dashboard-page-chip-container {
     margin: 2rem 4rem;
 }
