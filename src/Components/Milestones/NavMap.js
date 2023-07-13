@@ -110,6 +110,7 @@ const NavMapButtons = jobseekerData.content.body.map((x) => {
     <div
       key={x.uid}
       id={x.id}
+      status={x.status}
     >
       <MilestoneButton image={imagePath} imageHover={hoveredPath} title={x.title} />
     </div>

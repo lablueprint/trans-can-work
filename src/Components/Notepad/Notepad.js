@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import Modal from '@material-ui/core/Modal';
 import { doc, setDoc } from 'firebase/firestore';
 import { fetchJobseeker } from '../../Services/jobseeker-service';
-import firebase from '../../firebase';
+import { db } from '../../firebase';
 import './Notepad.css';
 
 function Notepad() {
@@ -11,7 +11,6 @@ function Notepad() {
   const [notes, setNotes] = useState('');
   const [open, setOpen] = useState(false);
 
-  const db = firebase;
   const docRef = doc(db, 'jobseekers', testemail);
 
   useEffect(() => {
