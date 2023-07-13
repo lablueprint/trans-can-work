@@ -63,7 +63,7 @@ function OnlineProfiles() {
 
   const deleteOnlineProfile = async (event, index) => {
     event.preventDefault();
-    const temp = [profile];
+    const temp = [...profile];
     temp.splice(index, 1);
     await setProfile(temp);
   };
@@ -71,7 +71,7 @@ function OnlineProfiles() {
   const editOnlineProfile = (event, element, index) => {
     event.preventDefault();
     const temp = [...profile];
-    temp[index][element] += event.target.value;
+    temp[index][element] = event.target.value;
     console.log(temp);
     setProfile(temp);
     console.log(profile);
@@ -87,6 +87,10 @@ function OnlineProfiles() {
             <div>
               <form>
                 <div>
+                  <input
+                    // value={profileObject.website}
+                    onChange={(e) => editOnlineProfile(e, 'website', index)}
+                  />
                   <CssTextField
                     focusColor="#0c0ca4"
                     label="Website"
@@ -95,6 +99,7 @@ function OnlineProfiles() {
                     focused
                     onChange={(e) => editOnlineProfile(e, 'website', index)}
                     style={{ paddingBottom: '1%' }}
+                    value={profileObject.website}
                     InputProps={{
                     // className: classes.root,
                       style: {
@@ -126,6 +131,7 @@ function OnlineProfiles() {
                     focused
                     onChange={(e) => editOnlineProfile(e, 'tools', index)}
                     style={{ paddingBottom: '1%' }}
+                    value={profileObject.tools}
                     InputProps={{
                     // className: classes.root,
                       style: {
@@ -157,6 +163,7 @@ function OnlineProfiles() {
                     focused
                     onChange={(e) => editOnlineProfile(e, 'created', index)}
                     style={{ paddingBottom: '1%' }}
+                    value={profileObject.created}
                     InputProps={{
                     // className: classes.root,
                       style: {
@@ -188,6 +195,7 @@ function OnlineProfiles() {
                     focused
                     onChange={(e) => editOnlineProfile(e, 'notes', index)}
                     style={{ paddingBottom: '1%' }}
+                    value={profileObject.notes}
                     InputProps={{
                     // className: classes.root,
                       style: {
