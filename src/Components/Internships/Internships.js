@@ -46,6 +46,9 @@ function Internships() {
       end: '',
       referralDate: '',
       applied: '',
+      accepted: '',
+      completed: '',
+      notes: '',
     };
     await setAllInternships([...allInternships, temp]);
   };
@@ -148,6 +151,39 @@ function Internships() {
                     value={internshipObject.applied}
                     focused
                     onChange={(e) => editInternship(e, 'applied', index)}
+                    InputProps={textFieldStyles.inputProps}
+                    InputLabelProps={textFieldStyles.labelProps}
+                  />
+                  <div className="i-between-inputs" />
+                  <TextField
+                    id="outlined-basic"
+                    label="Client Officially Accepted into internship?"
+                    variant="outlined"
+                    value={internshipObject.accepted}
+                    focused
+                    onChange={(e) => editInternship(e, 'accepted', index)}
+                    InputProps={textFieldStyles.inputProps}
+                    InputLabelProps={textFieldStyles.labelProps}
+                  />
+                  <div className="i-between-inputs" />
+                  <TextField
+                    id="outlined-basic"
+                    label="Client Successfully Completed Internship?"
+                    variant="outlined"
+                    value={internshipObject.completed}
+                    focused
+                    onChange={(e) => editInternship(e, 'completed', index)}
+                    InputProps={textFieldStyles.inputProps}
+                    InputLabelProps={textFieldStyles.labelProps}
+                  />
+                  <div className="i-between-inputs" />
+                  <TextField
+                    id="outlined-basic"
+                    label="Notes"
+                    variant="outlined"
+                    value={internshipObject.notes}
+                    focused
+                    onChange={(e) => editInternship(e, 'notes', index)}
                     InputProps={textFieldStyles.inputProps}
                     InputLabelProps={textFieldStyles.labelProps}
                   />
