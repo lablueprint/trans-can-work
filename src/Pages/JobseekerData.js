@@ -528,7 +528,7 @@ function Onboard({ username, useremail }) {
                       defaultValue="No"
                       style={styles.dropdownOptions}
                       onChange={(e) => editEducation(e, 'degree', index)}
-                      MenuProps={{
+                      menuprops={{
                         PaperProps: {
                           style: styles.purpleBackground,
                         },

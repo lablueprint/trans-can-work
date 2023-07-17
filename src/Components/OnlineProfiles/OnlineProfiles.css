@@ -75,6 +75,10 @@
     border: 0px;
 }
 
-.between-inputs {
+.op-between-inputs {
+    height: 1.4em;
+}
+
+.op-between-buttons {
     height: 1em;
 }

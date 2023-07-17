@@ -1,44 +1,30 @@
 import React, { useState } from 'react';
 import './OnlineProfiles.css';
 import { TextField } from '@material-ui/core';
-import { styled } from '@material-ui/core/styles';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
 
 function OnlineProfiles() {
-  const CssTextField = styled(TextField, {
-    shouldForwardProp: (props) => props !== 'focusColor',
-  })((p) => ({
-    // input label when focused
-    '& label.Mui-focused': {
-      color: p.focusColor,
-    },
-    // focused color for input with variant='standard'
-    '& .MuiInput-underline:after': {
-      borderBottomColor: p.focusColor,
-    },
-    // focused color for input with variant='filled'
-    '& .MuiFilledInput-underline:after': {
-      borderBottomColor: p.focusColor,
-    },
-    // focused color for input with variant='outlined'
-    '& .MuiOutlinedInput-root': {
-      '&.Mui-focused fieldset': {
-        borderColor: p.focusColor,
+  const textFieldStyles = {
+    inputProps: {
+      style: {
+        fontFamily: 'Montserrat',
+        color: '#49454F',
+        width: '55.0vw',
+        height: '3.2vw',
+        fontSize: '0.9vw',
+        fontWeight: 'bold',
+        borderColor: '#000AA0',
       },
     },
-  }));
-
-  // const useStyles = makeStyles({
-  //   labelInput: {
-  //     fontSize: '0.9vw',
-  //   },
-  //   button: {
-  //     border: '3px solid',
-  //   },
-  // });
-
-  // const classes = useStyles();
+    labelProps: {
+      style: {
+        fontFamily: 'Montserrat',
+        fontSize: '0.9vw',
+        color: '#000AA0',
+      },
+    },
+  };
 
   const [profile, setProfile] = useState([{
     website: '',
@@ -49,16 +35,13 @@ function OnlineProfiles() {
 
   const addOnlineProfile = async (event) => {
     event.preventDefault();
-    console.log(profile);
     const temp = {
       website: '',
       tools: '',
       created: '',
       notes: '',
     };
-    console.log(temp);
     await setProfile([...profile, temp]);
-    console.log(profile);
   };
 
   const deleteOnlineProfile = async (event, index) => {
@@ -72,9 +55,7 @@ function OnlineProfiles() {
     event.preventDefault();
     const temp = [...profile];
     temp[index][element] = event.target.value;
-    console.log(temp);
     setProfile(temp);
-    console.log(profile);
   };
 
   return (
@@ -87,138 +68,50 @@ function OnlineProfiles() {
             <div>
               <form>
                 <div>
-                  <input
-                    // value={profileObject.website}
-                    onChange={(e) => editOnlineProfile(e, 'website', index)}
-                  />
-                  <CssTextField
-                    focusColor="#0c0ca4"
+                  <TextField
+                    id="outlined-basic"
                     label="Website"
                     variant="outlined"
-                    FormHelperTextProps={{ children: 'Label' }}
+                    value={profileObject.website}
                     focused
                     onChange={(e) => editOnlineProfile(e, 'website', index)}
-                    style={{ paddingBottom: '1%' }}
-                    value={profileObject.website}
-                    InputProps={{
-                    // className: classes.root,
-                      style: {
-                        fontFamily: 'Montserrat',
-                        color: '#49454F',
-                        paddingLeft: '0.5%',
-                        width: '55.0vw',
-                        height: '3.2vw',
-                        fontSize: '0.9vw',
-                        fontWeight: 'bold',
-                      },
-                    }}
-                    InputLabelProps={{
-                    // className: classes.labelInput,
-                      style: {
-                        fontFamily: 'Montserrat',
-                        paddingLeft: '0.3%',
-                        backgroundColor: 'white',
-                        fontSize: '0.9vw',
-                      },
-                    }}
+                    InputProps={textFieldStyles.inputProps}
+                    InputLabelProps={textFieldStyles.labelProps}
                   />
-                  <div className="between-inputs" />
-                  <CssTextField
-                    focusColor="#0c0ca4"
+                  <div className="op-between-inputs" />
+                  <TextField
+                    id="outlined-basic"
                     label="Tools This Site Provides"
                     variant="outlined"
-                    FormHelperTextProps={{ children: 'Label' }}
+                    value={profileObject.tools}
                     focused
                     onChange={(e) => editOnlineProfile(e, 'tools', index)}
-                    style={{ paddingBottom: '1%' }}
-                    value={profileObject.tools}
-                    InputProps={{
-                    // className: classes.root,
-                      style: {
-                        fontFamily: 'Montserrat',
-                        color: '#49454F',
-                        paddingLeft: '0.5%',
-                        width: '55.0vw',
-                        height: '3.2vw',
-                        fontSize: '0.9vw',
-                        fontWeight: 'bold',
-                      },
-                    }}
-                    InputLabelProps={{
-                    // className: classes.labelInput,
-                      style: {
-                        fontFamily: 'Montserrat',
-                        paddingLeft: '0.3%',
-                        backgroundColor: 'white',
-                        fontSize: '0.9vw',
-                      },
-                    }}
+                    InputProps={textFieldStyles.inputProps}
+                    InputLabelProps={textFieldStyles.labelProps}
                   />
-                  <div className="between-inputs" />
-                  <CssTextField
-                    focusColor="#0c0ca4"
+                  <div className="op-between-inputs" />
+                  <TextField
+                    id="outlined-basic"
                     label="Created an Account?"
                     variant="outlined"
-                    FormHelperTextProps={{ children: 'Label' }}
+                    value={profileObject.created}
                     focused
                     onChange={(e) => editOnlineProfile(e, 'created', index)}
-                    style={{ paddingBottom: '1%' }}
-                    value={profileObject.created}
-                    InputProps={{
-                    // className: classes.root,
-                      style: {
-                        fontFamily: 'Montserrat',
-                        color: '#49454F',
-                        paddingLeft: '0.5%',
-                        width: '55.0vw',
-                        height: '3.2vw',
-                        fontSize: '0.9vw',
-                        fontWeight: 'bold',
-                      },
-                    }}
-                    InputLabelProps={{
-                    // className: classes.labelInput,
-                      style: {
-                        fontFamily: 'Montserrat',
-                        paddingLeft: '0.3%',
-                        backgroundColor: 'white',
-                        fontSize: '0.9vw',
-                      },
-                    }}
+                    InputProps={textFieldStyles.inputProps}
+                    InputLabelProps={textFieldStyles.labelProps}
                   />
-                  <div className="between-inputs" />
-                  <CssTextField
-                    focusColor="#0c0ca4"
+                  <div className="op-between-inputs" />
+                  <TextField
+                    id="outlined-basic"
                     label="Notes"
                     variant="outlined"
-                    FormHelperTextProps={{ children: 'Label' }}
+                    value={profileObject.notes}
                     focused
                     onChange={(e) => editOnlineProfile(e, 'notes', index)}
-                    style={{ paddingBottom: '1%' }}
-                    value={profileObject.notes}
-                    InputProps={{
-                    // className: classes.root,
-                      style: {
-                        fontFamily: 'Montserrat',
-                        color: '#49454F',
-                        paddingLeft: '0.5%',
-                        width: '55.0vw',
-                        height: '3.2vw',
-                        fontSize: '0.9vw',
-                        fontWeight: 'bold',
-                      },
-                    }}
-                    InputLabelProps={{
-                    // className: classes.labelInput,
-                      style: {
-                        fontFamily: 'Montserrat',
-                        paddingLeft: '0.3%',
-                        backgroundColor: 'white',
-                        fontSize: '0.9vw',
-                      },
-                    }}
+                    InputProps={textFieldStyles.inputProps}
+                    InputLabelProps={textFieldStyles.labelProps}
                   />
-                  <div className="between-inputs" />
+                  <div className="op-between-inputs" />
                 </div>
               </form>
             </div>
@@ -232,7 +125,7 @@ function OnlineProfiles() {
                 Delete Profile
               </button>
             </div>
-            <div className="between-inputs" />
+            <div className="op-between-buttons" />
           </div>
         ))}
         <div className="width-55vw">
