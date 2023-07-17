@@ -20,7 +20,7 @@ function TrainingPrograms() {
     labelProps: {
       style: {
         fontFamily: 'Montserrat',
-        fontSize: '0.9vw',
+        fontSize: '0.95vw',
         color: '#000AA0',
       },
     },

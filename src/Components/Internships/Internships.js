@@ -20,8 +20,8 @@ function Internships() {
     labelProps: {
       style: {
         fontFamily: 'Montserrat',
-        fontSize: '0.9vw',
         color: '#000AA0',
+        fontSize: '0.95vw',
       },
     },
   };
