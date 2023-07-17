@@ -24,8 +24,9 @@
     height: 5em;
 }
 
-.op-title {
+.tp-title {
     width: 56.3vw;
+    padding-bottom: 1.2em;
     margin: 0 auto;
     text-align: left;
     font-family: 'Montserrat';
@@ -51,10 +52,10 @@
     justify-content: center;
 }
 
-.between-inputs {
-    height: 1em;
+.tp-between-inputs {
+    height: 1.4em;
 }
 
-.next-program {
-    height: 7em;
+.tp-between-buttons {
+    height: 1em;
 }

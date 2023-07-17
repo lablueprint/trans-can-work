@@ -1,54 +1,31 @@
 import React, { useState } from 'react';
 import './TrainingPrograms.css';
 import { TextField } from '@material-ui/core';
-import { styled } from '@material-ui/core/styles';
 import Add from '../../Assets/add.svg';
+import Delete from '../../Assets/delete.svg';
 
 function TrainingPrograms() {
-  const CssTextField = styled(TextField, {
-    shouldForwardProp: (props) => props !== 'focusColor',
-  })((p) => ({
-    // input label when focused
-    '& label.Mui-focused': {
-      color: p.focusColor,
-    },
-    // focused color for input with variant='standard'
-    '& .MuiInput-underline:after': {
-      borderBottomColor: p.focusColor,
-    },
-    // focused color for input with variant='filled'
-    '& .MuiFilledInput-underline:after': {
-      borderBottomColor: p.focusColor,
-    },
-    // focused color for input with variant='outlined'
-    '& .MuiOutlinedInput-root': {
-      '&.Mui-focused fieldset': {
-        borderColor: p.focusColor,
+  const textFieldStyles = {
+    inputProps: {
+      style: {
+        fontFamily: 'Montserrat',
+        color: '#49454F',
+        width: '55.0vw',
+        height: '3.2vw',
+        fontSize: '0.9vw',
+        fontWeight: 'bold',
+        borderColor: '#000AA0',
       },
     },
-  }));
-
-  // const useStyles = makeStyles({
-  //   labelInput: {
-  //     fontSize: '0.9vw',
-  //   },
-  //   button: {
-  //     border: '3px solid',
-  //   },
-  // });
-
-  // const classes = useStyles();
-
+    labelProps: {
+      style: {
+        fontFamily: 'Montserrat',
+        fontSize: '0.9vw',
+        color: '#000AA0',
+      },
+    },
+  };
   const [allPrograms, setAllPrograms] = useState([{
-    program: '',
-    referral: '',
-    start: '',
-    enrolled: '',
-    end: '',
-    completed: '',
-    notes: '',
-  },
-  {
     program: '',
     referral: '',
     start: '',
@@ -60,26 +37,29 @@ function TrainingPrograms() {
 
   const addProgram = async (event) => {
     event.preventDefault();
-    console.log(allPrograms);
-    const temp = [...allPrograms];
-    console.log(temp);
-    temp.push({
-      website: '',
-      tools: '',
-      created: '',
+    const temp = {
+      program: '',
+      referral: '',
+      start: '',
+      enrolled: '',
+      end: '',
+      completed: '',
       notes: '',
-    });
-    console.log(temp);
-    await setAllPrograms((pastProfiles) => pastProfiles.push(temp));
+    };
+    await setAllPrograms([...allPrograms, temp]);
     console.log(allPrograms);
   };
 
-  const editProgram = (event, element, index) => {
-    console.log(event.target.value);
+  const deleteProgram = async (event, index) => {
     event.preventDefault();
-    console.log(allPrograms[index][element]);
     const temp = [...allPrograms];
-    console.log(temp[index][element]);
+    temp.splice(index, 1);
+    await setAllPrograms(temp);
+  };
+
+  const editProgram = (event, element, index) => {
+    event.preventDefault();
+    const temp = [...allPrograms];
     temp[index][element] = event.target.value;
     setAllPrograms(temp);
     console.log(allPrograms);
@@ -88,8 +68,108 @@ function TrainingPrograms() {
   return (
     <div>
       <div className="temp" />
-      <div className="op-title">Training Programs</div>
+      <div className="tp-title">Training Programs</div>
       <div className="between-inputs" />
+      <div>
+        {allPrograms.map((programObject, index) => (
+          <div>
+            <div>
+              <form>
+                <div>
+                  <TextField
+                    id="outlined-basic"
+                    label="Training Program"
+                    variant="outlined"
+                    value={programObject.program}
+                    focused
+                    onChange={(e) => editProgram(e, 'program', index)}
+                    InputProps={textFieldStyles.inputProps}
+                    InputLabelProps={textFieldStyles.labelProps}
+                  />
+                  <div className="tp-between-inputs" />
+                  <TextField
+                    id="outlined-basic"
+                    label="Date Referral Sent"
+                    variant="outlined"
+                    value={programObject.referral}
+                    focused
+                    onChange={(e) => editProgram(e, 'referral', index)}
+                    InputProps={textFieldStyles.inputProps}
+                    InputLabelProps={textFieldStyles.labelProps}
+                  />
+                  <div className="tp-between-inputs" />
+                  <TextField
+                    id="outlined-basic"
+                    label="Start Date"
+                    variant="outlined"
+                    value={programObject.start}
+                    focused
+                    onChange={(e) => editProgram(e, 'start', index)}
+                    InputProps={textFieldStyles.inputProps}
+                    InputLabelProps={textFieldStyles.labelProps}
+                  />
+                  <div className="tp-between-inputs" />
+                  <TextField
+                    id="outlined-basic"
+                    label="Date Officially Enrolled"
+                    variant="outlined"
+                    value={programObject.enrolled}
+                    focused
+                    onChange={(e) => editProgram(e, 'enrolled', index)}
+                    InputProps={textFieldStyles.inputProps}
+                    InputLabelProps={textFieldStyles.labelProps}
+                  />
+                  <div className="tp-between-inputs" />
+                  <TextField
+                    id="outlined-basic"
+                    label="End Date"
+                    variant="outlined"
+                    value={programObject.end}
+                    focused
+                    onChange={(e) => editProgram(e, 'end', index)}
+                    InputProps={textFieldStyles.inputProps}
+                    InputLabelProps={textFieldStyles.labelProps}
+                  />
+                  <div className="tp-between-inputs" />
+                  <TextField
+                    id="outlined-basic"
+                    label="Date Completed Training"
+                    variant="outlined"
+                    value={programObject.completed}
+                    focused
+                    onChange={(e) => editProgram(e, 'completed', index)}
+                    InputProps={textFieldStyles.inputProps}
+                    InputLabelProps={textFieldStyles.labelProps}
+                  />
+                  <div className="tp-between-inputs" />
+                  <TextField
+                    id="outlined-basic"
+                    label="Notes"
+                    variant="outlined"
+                    value={programObject.notes}
+                    focused
+                    onChange={(e) => editProgram(e, 'notes', index)}
+                    InputProps={textFieldStyles.inputProps}
+                    InputLabelProps={textFieldStyles.labelProps}
+                  />
+                  <div className="tp-between-inputs" />
+                </div>
+              </form>
+            </div>
+            <div className="width-55vw">
+              <button type="button" onClick={(e) => deleteProgram(e, index)} className="op-delete-button">
+                <img
+                  src={Delete}
+                  alt="delete icon"
+                  style={{ marginRight: '12px' }}
+                />
+                Delete Profile
+              </button>
+            </div>
+            <div className="tp-between-buttons" />
+          </div>
+        ))}
+      </div>
       <div className="width-55vw">
         <button type="button" onClick={addProgram} className="op-add-button">
           <img
@@ -99,234 +179,6 @@ function TrainingPrograms() {
           />
           Add Profile
         </button>
-      </div>
-      <div className="between-inputs" />
-      <div>
-        {allPrograms.map((profileObject, index) => (
-          <div>
-            <form>
-              <div>
-                <CssTextField
-                  focusColor="#0c0ca4"
-                  label="Training Program"
-                  variant="outlined"
-                  FormHelperTextProps={{ children: 'Label' }}
-                  focused
-                  onChange={(e) => editProgram(e, 'program', index)}
-                  style={{ paddingBottom: '1%' }}
-                  InputProps={{
-                    // className: classes.root,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      color: '#49454F',
-                      paddingLeft: '0.5%',
-                      width: '55.0vw',
-                      height: '3.2vw',
-                      fontSize: '0.9vw',
-                      fontWeight: 'bold',
-                    },
-                  }}
-                  InputLabelProps={{
-                    // className: classes.labelInput,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      paddingLeft: '0.3%',
-                      backgroundColor: 'white',
-                      fontSize: '0.9vw',
-                    },
-                  }}
-                />
-                <div className="between-inputs" />
-                <CssTextField
-                  focusColor="#0c0ca4"
-                  label="Date Referral Sent"
-                  variant="outlined"
-                  FormHelperTextProps={{ children: 'Label' }}
-                  focused
-                  onChange={(e) => editProgram(e, 'referral', index)}
-                  style={{ paddingBottom: '1%' }}
-                  InputProps={{
-                    // className: classes.root,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      color: '#49454F',
-                      paddingLeft: '0.5%',
-                      width: '55.0vw',
-                      height: '3.2vw',
-                      fontSize: '0.9vw',
-                      fontWeight: 'bold',
-                    },
-                  }}
-                  InputLabelProps={{
-                    // className: classes.labelInput,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      paddingLeft: '0.3%',
-                      backgroundColor: 'white',
-                      fontSize: '0.9vw',
-                    },
-                  }}
-                />
-                <div className="between-inputs" />
-                <CssTextField
-                  focusColor="#0c0ca4"
-                  label="Start Date"
-                  variant="outlined"
-                  FormHelperTextProps={{ children: 'Label' }}
-                  focused
-                  onChange={(e) => editProgram(e, 'start', index)}
-                  style={{ paddingBottom: '1%' }}
-                  InputProps={{
-                    // className: classes.root,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      color: '#49454F',
-                      paddingLeft: '0.5%',
-                      width: '55.0vw',
-                      height: '3.2vw',
-                      fontSize: '0.9vw',
-                      fontWeight: 'bold',
-                    },
-                  }}
-                  InputLabelProps={{
-                    // className: classes.labelInput,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      paddingLeft: '0.3%',
-                      backgroundColor: 'white',
-                      fontSize: '0.9vw',
-                    },
-                  }}
-                />
-                <div className="between-inputs" />
-                <CssTextField
-                  focusColor="#0c0ca4"
-                  label="Date Officially Enrolled"
-                  variant="outlined"
-                  FormHelperTextProps={{ children: 'Label' }}
-                  focused
-                  onChange={(e) => editProgram(e, 'enrolled', index)}
-                  style={{ paddingBottom: '1%' }}
-                  InputProps={{
-                    // className: classes.root,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      color: '#49454F',
-                      paddingLeft: '0.5%',
-                      width: '55.0vw',
-                      height: '3.2vw',
-                      fontSize: '0.9vw',
-                      fontWeight: 'bold',
-                    },
-                  }}
-                  InputLabelProps={{
-                    // className: classes.labelInput,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      paddingLeft: '0.3%',
-                      backgroundColor: 'white',
-                      fontSize: '0.9vw',
-                    },
-                  }}
-                />
-                <div className="between-inputs" />
-                <CssTextField
-                  focusColor="#0c0ca4"
-                  label="End Date"
-                  variant="outlined"
-                  FormHelperTextProps={{ children: 'Label' }}
-                  focused
-                  onChange={(e) => editProgram(e, 'end', index)}
-                  style={{ paddingBottom: '1%' }}
-                  InputProps={{
-                    // className: classes.root,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      color: '#49454F',
-                      paddingLeft: '0.5%',
-                      width: '55.0vw',
-                      height: '3.2vw',
-                      fontSize: '0.9vw',
-                      fontWeight: 'bold',
-                    },
-                  }}
-                  InputLabelProps={{
-                    // className: classes.labelInput,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      paddingLeft: '0.3%',
-                      backgroundColor: 'white',
-                      fontSize: '0.9vw',
-                    },
-                  }}
-                />
-                <div className="between-inputs" />
-                <CssTextField
-                  focusColor="#0c0ca4"
-                  label="Date Completed Training"
-                  variant="outlined"
-                  FormHelperTextProps={{ children: 'Label' }}
-                  focused
-                  onChange={(e) => editProgram(e, 'completed', index)}
-                  style={{ paddingBottom: '1%' }}
-                  InputProps={{
-                    // className: classes.root,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      color: '#49454F',
-                      paddingLeft: '0.5%',
-                      width: '55.0vw',
-                      height: '3.2vw',
-                      fontSize: '0.9vw',
-                      fontWeight: 'bold',
-                    },
-                  }}
-                  InputLabelProps={{
-                    // className: classes.labelInput,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      paddingLeft: '0.3%',
-                      backgroundColor: 'white',
-                      fontSize: '0.9vw',
-                    },
-                  }}
-                />
-                <div className="between-inputs" />
-                <CssTextField
-                  focusColor="#0c0ca4"
-                  label="Notes"
-                  variant="outlined"
-                  FormHelperTextProps={{ children: 'Label' }}
-                  focused
-                  onChange={(e) => editProgram(e, 'notes', index)}
-                  style={{ paddingBottom: '1%' }}
-                  InputProps={{
-                    // className: classes.root,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      color: '#49454F',
-                      paddingLeft: '0.5%',
-                      width: '55.0vw',
-                      height: '3.2vw',
-                      fontSize: '0.9vw',
-                      fontWeight: 'bold',
-                    },
-                  }}
-                  InputLabelProps={{
-                    // className: classes.labelInput,
-                    style: {
-                      fontFamily: 'Montserrat',
-                      paddingLeft: '0.3%',
-                      backgroundColor: 'white',
-                      fontSize: '0.9vw',
-                    },
-                  }}
-                />
-                <div className="next-program" />
-              </div>
-            </form>
-          </div>
-        ))}
       </div>
 
     </div>
