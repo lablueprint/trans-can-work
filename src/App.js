@@ -23,6 +23,7 @@ import AdminView from './Components/Dashboard/AdminView';
 import ScrollToTop from './Pages/scrollToTop';
 import NavigatorMenu from './Components/Navigation/NavigatorMenu';
 import MilestoneMap from './Components/Milestones/MilestoneMap';
+import Internships from './Components/Internships/Internships';
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
           <Route path="assessment" element={<NavigatorDashboard />} />
           <Route path="onlineprofiles" element={<OnlineProfiles />} />
           <Route path="training" element={<TrainingPrograms />} />
+          <Route path="internships" element={<Internships />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />

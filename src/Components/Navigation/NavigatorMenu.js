@@ -41,7 +41,7 @@ const tabs = [
   { title: 'Online Profiles', link: 'onlineprofiles' },
   { title: 'Training Programs', link: 'training' },
   { title: 'Workshops', link: 'assessment' },
-  { title: 'Internships', link: 'assessment' },
+  { title: 'Internships', link: 'internships' },
   { title: 'Job Fairs', link: 'assessment' },
   { title: 'Job Boards', link: 'assessment' },
   { title: 'Resources', link: 'assessment' },

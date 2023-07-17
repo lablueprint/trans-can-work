@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import './TrainingPrograms.css';
+import './Internships.css';
 import { TextField } from '@material-ui/core';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
 
-function TrainingPrograms() {
+function Internships() {
   const textFieldStyles = {
     inputProps: {
       style: {
@@ -25,164 +25,163 @@ function TrainingPrograms() {
       },
     },
   };
-  const [allPrograms, setAllPrograms] = useState([{
+
+  const [allInternships, setAllInternships] = useState([{
+    company: '',
     program: '',
-    referral: '',
+    position: '',
     start: '',
-    enrolled: '',
     end: '',
-    completed: '',
-    notes: '',
+    referralDate: '',
+    applied: '',
   }]);
 
-  const addProgram = async (event) => {
+  const addInternship = async (event) => {
     event.preventDefault();
     const temp = {
+      company: '',
       program: '',
-      referral: '',
+      position: '',
       start: '',
-      enrolled: '',
       end: '',
-      completed: '',
-      notes: '',
+      referralDate: '',
+      applied: '',
     };
-    await setAllPrograms([...allPrograms, temp]);
-    console.log(allPrograms);
+    await setAllInternships([...allInternships, temp]);
   };
 
-  const deleteProgram = async (event, index) => {
+  const deleteInternship = async (event, index) => {
     event.preventDefault();
-    const temp = [...allPrograms];
+    const temp = [...allInternships];
     temp.splice(index, 1);
-    await setAllPrograms(temp);
+    await setAllInternships(temp);
   };
 
-  const editProgram = (event, element, index) => {
+  const editInternship = (event, element, index) => {
     event.preventDefault();
-    const temp = [...allPrograms];
+    const temp = [...allInternships];
     temp[index][element] = event.target.value;
-    setAllPrograms(temp);
-    console.log(allPrograms);
+    setAllInternships(temp);
+    console.log(allInternships);
   };
 
   return (
     <div>
       <div className="temp" />
-      <div className="tp-title">Training Programs</div>
-      <div className="between-inputs" />
+      <div className="i-title">Internships</div>
       <div>
-        {allPrograms.map((programObject, index) => (
+        {allInternships.map((internshipObject, index) => (
           <div>
             <div>
               <form>
                 <div>
                   <TextField
                     id="outlined-basic"
-                    label="Training Program"
+                    label="Company/Org of Internship"
                     variant="outlined"
-                    value={programObject.program}
+                    value={internshipObject.company}
                     focused
-                    onChange={(e) => editProgram(e, 'program', index)}
+                    onChange={(e) => editInternship(e, 'company', index)}
                     InputProps={textFieldStyles.inputProps}
                     InputLabelProps={textFieldStyles.labelProps}
                   />
-                  <div className="tp-between-inputs" />
+                  <div className="op-between-inputs" />
                   <TextField
                     id="outlined-basic"
-                    label="Date Referral Sent"
+                    label="Program Name"
                     variant="outlined"
-                    value={programObject.referral}
+                    value={internshipObject.program}
                     focused
-                    onChange={(e) => editProgram(e, 'referral', index)}
+                    onChange={(e) => editInternship(e, 'program', index)}
                     InputProps={textFieldStyles.inputProps}
                     InputLabelProps={textFieldStyles.labelProps}
                   />
-                  <div className="tp-between-inputs" />
+                  <div className="i-between-inputs" />
+                  <TextField
+                    id="outlined-basic"
+                    label="Position"
+                    variant="outlined"
+                    value={internshipObject.position}
+                    focused
+                    onChange={(e) => editInternship(e, 'position', index)}
+                    InputProps={textFieldStyles.inputProps}
+                    InputLabelProps={textFieldStyles.labelProps}
+                  />
+                  <div className="i-between-inputs" />
                   <TextField
                     id="outlined-basic"
                     label="Start Date"
                     variant="outlined"
-                    value={programObject.start}
+                    value={internshipObject.start}
                     focused
-                    onChange={(e) => editProgram(e, 'start', index)}
+                    onChange={(e) => editInternship(e, 'start', index)}
                     InputProps={textFieldStyles.inputProps}
                     InputLabelProps={textFieldStyles.labelProps}
                   />
-                  <div className="tp-between-inputs" />
-                  <TextField
-                    id="outlined-basic"
-                    label="Date Officially Enrolled"
-                    variant="outlined"
-                    value={programObject.enrolled}
-                    focused
-                    onChange={(e) => editProgram(e, 'enrolled', index)}
-                    InputProps={textFieldStyles.inputProps}
-                    InputLabelProps={textFieldStyles.labelProps}
-                  />
-                  <div className="tp-between-inputs" />
+                  <div className="i-between-inputs" />
                   <TextField
                     id="outlined-basic"
                     label="End Date"
                     variant="outlined"
-                    value={programObject.end}
+                    value={internshipObject.end}
                     focused
-                    onChange={(e) => editProgram(e, 'end', index)}
+                    onChange={(e) => editInternship(e, 'end', index)}
                     InputProps={textFieldStyles.inputProps}
                     InputLabelProps={textFieldStyles.labelProps}
                   />
-                  <div className="tp-between-inputs" />
+                  <div className="i-between-inputs" />
                   <TextField
                     id="outlined-basic"
-                    label="Date Completed Training"
+                    label="Date Referral Sent (If Applicable)"
                     variant="outlined"
-                    value={programObject.completed}
+                    value={internshipObject.referralDate}
                     focused
-                    onChange={(e) => editProgram(e, 'completed', index)}
+                    onChange={(e) => editInternship(e, 'referralDate', index)}
                     InputProps={textFieldStyles.inputProps}
                     InputLabelProps={textFieldStyles.labelProps}
                   />
-                  <div className="tp-between-inputs" />
+                  <div className="i-between-inputs" />
                   <TextField
                     id="outlined-basic"
-                    label="Notes"
+                    label="Did Client Apply for Position? (If Applicable)"
                     variant="outlined"
-                    value={programObject.notes}
+                    value={internshipObject.applied}
                     focused
-                    onChange={(e) => editProgram(e, 'notes', index)}
+                    onChange={(e) => editInternship(e, 'applied', index)}
                     InputProps={textFieldStyles.inputProps}
                     InputLabelProps={textFieldStyles.labelProps}
                   />
-                  <div className="tp-between-inputs" />
+                  <div className="i-between-inputs" />
                 </div>
               </form>
             </div>
             <div className="width-55vw">
-              <button type="button" onClick={(e) => deleteProgram(e, index)} className="op-delete-button">
+              <button type="button" onClick={(e) => deleteInternship(e, index)} className="i-delete-button">
                 <img
                   src={Delete}
                   alt="delete icon"
                   style={{ marginRight: '12px' }}
                 />
-                Delete Program
+                Delete Internship
               </button>
             </div>
-            <div className="tp-between-buttons" />
+            <div className="i-between-buttons" />
           </div>
         ))}
-      </div>
-      <div className="width-55vw">
-        <button type="button" onClick={addProgram} className="op-add-button">
-          <img
-            src={Add}
-            alt="add icon"
-            style={{ marginRight: '12px' }}
-          />
-          Add Program
-        </button>
+        <div className="width-55vw">
+          <button type="button" onClick={addInternship} className="i-add-button">
+            <img
+              src={Add}
+              alt="add icon"
+              style={{ marginRight: '12px' }}
+            />
+            Add Internship
+          </button>
+        </div>
       </div>
 
     </div>
   );
 }
 
-export default TrainingPrograms;
+export default Internships;

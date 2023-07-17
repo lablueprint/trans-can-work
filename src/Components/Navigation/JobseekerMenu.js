@@ -14,7 +14,7 @@ const options = [
   { name: 'Training Programs', link: '/training' },
   { name: 'Co-Enroll', link: '/assessment' },
   { name: 'Workshops', link: '/assessment' },
-  { name: 'Internships', link: '/assessment' },
+  { name: 'Internships', link: '/internships' },
   { name: 'Job Fairs', link: '/assessment' },
   { name: 'Job Boards', link: '/assessment' },
   { name: 'Resources', link: '/assessment' },
