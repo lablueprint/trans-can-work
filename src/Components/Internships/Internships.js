@@ -34,6 +34,9 @@ function Internships() {
     end: '',
     referralDate: '',
     applied: '',
+    accepted: '',
+    completed: '',
+    notes: '',
   }]);
 
   const addInternship = async (event) => {
@@ -68,6 +71,19 @@ function Internships() {
     console.log(allInternships);
   };
 
+  const fieldProps = [
+    { label: 'Company/Org of Internship', value: 'company', changeParameter: 'company' },
+    { label: 'Program Name', value: 'program', changeParameter: 'program' },
+    { label: 'Position', value: 'position', changeParameter: 'position' },
+    { label: 'Start Date', value: 'start', changeParameter: 'start' },
+    { label: 'End Date', value: 'end', changeParameter: 'end' },
+    { label: 'Date Referral Sent (If Applicable)', value: 'referralDate', changeParameter: 'referralDate' },
+    { label: 'Did Client Apply for position? (If Applicable)', value: 'applied', changeParameter: 'applied' },
+    { label: 'Client Officially Accepted into internship?', value: 'accepted', changeParameter: 'end' },
+    { label: 'Client Successfully Completed Internship?', value: 'completed', changeParameter: 'referralDate' },
+    { label: 'Notes', value: 'notes', changeParameter: 'applied' },
+  ];
+
   return (
     <div>
       <div className="temp" />
@@ -78,7 +94,23 @@ function Internships() {
             <div>
               <form>
                 <div>
-                  <TextField
+                  {fieldProps.map((field) => (
+                    <div>
+                      <TextField
+                        id="outlined-basic"
+                        label={field.label}
+                        variant="outlined"
+                        value={internshipObject[field.value]}
+                        focused
+                        onChange={(e) => editInternship(e, field.changeParameter, index)}
+                        InputProps={textFieldStyles.inputProps}
+                        InputLabelProps={textFieldStyles.labelProps}
+                      />
+                      <div className="op-between-inputs" />
+                    </div>
+                  ))}
+                  {/* break */}
+                  {/* <TextField
                     id="outlined-basic"
                     label="Company/Org of Internship"
                     variant="outlined"
@@ -187,7 +219,7 @@ function Internships() {
                     InputProps={textFieldStyles.inputProps}
                     InputLabelProps={textFieldStyles.labelProps}
                   />
-                  <div className="i-between-inputs" />
+                  <div className="i-between-inputs" /> */}
                 </div>
               </form>
             </div>

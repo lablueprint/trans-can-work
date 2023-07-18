@@ -58,6 +58,13 @@ function OnlineProfiles() {
     setProfile(temp);
   };
 
+  const fieldProps = [
+    { label: 'Company/Org of Internship', value: 'website' },
+    { label: 'Tools This Site Provides', value: 'tools' },
+    { label: 'Created an Account?', value: 'created' },
+    { label: 'Notes', value: 'notes' },
+  ];
+
   return (
     <div>
       <div className="temp" />
@@ -68,7 +75,22 @@ function OnlineProfiles() {
             <div>
               <form>
                 <div>
-                  <TextField
+                  {fieldProps.map((field) => (
+                    <div>
+                      <TextField
+                        id="outlined-basic"
+                        label={field.label}
+                        variant="outlined"
+                        value={profileObject[field.value]}
+                        focused
+                        onChange={(e) => editOnlineProfile(e, field.value, index)}
+                        InputProps={textFieldStyles.inputProps}
+                        InputLabelProps={textFieldStyles.labelProps}
+                      />
+                      <div className="op-between-inputs" />
+                    </div>
+                  ))}
+                  {/* <TextField
                     id="outlined-basic"
                     label="Website"
                     variant="outlined"
@@ -111,7 +133,7 @@ function OnlineProfiles() {
                     InputProps={textFieldStyles.inputProps}
                     InputLabelProps={textFieldStyles.labelProps}
                   />
-                  <div className="op-between-inputs" />
+                  <div className="op-between-inputs" /> */}
                 </div>
               </form>
             </div>
