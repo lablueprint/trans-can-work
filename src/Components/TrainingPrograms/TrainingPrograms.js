@@ -65,6 +65,16 @@ function TrainingPrograms() {
     console.log(allPrograms);
   };
 
+  const fieldProps = [
+    { label: 'Company/Org of Internship', value: 'program' },
+    { label: 'Date Referral Sent', value: 'referral' },
+    { label: 'Start Date', value: 'start' },
+    { label: 'Date Officially Enrolled', value: 'enrolled' },
+    { label: 'End Date', value: 'end' },
+    { label: 'Date Completed Training', value: 'completed' },
+    { label: 'Notes', value: 'notes' },
+  ];
+
   return (
     <div>
       <div className="temp" />
@@ -76,83 +86,21 @@ function TrainingPrograms() {
             <div>
               <form>
                 <div>
-                  <TextField
-                    id="outlined-basic"
-                    label="Training Program"
-                    variant="outlined"
-                    value={programObject.program}
-                    focused
-                    onChange={(e) => editProgram(e, 'program', index)}
-                    InputProps={textFieldStyles.inputProps}
-                    InputLabelProps={textFieldStyles.labelProps}
-                  />
-                  <div className="tp-between-inputs" />
-                  <TextField
-                    id="outlined-basic"
-                    label="Date Referral Sent"
-                    variant="outlined"
-                    value={programObject.referral}
-                    focused
-                    onChange={(e) => editProgram(e, 'referral', index)}
-                    InputProps={textFieldStyles.inputProps}
-                    InputLabelProps={textFieldStyles.labelProps}
-                  />
-                  <div className="tp-between-inputs" />
-                  <TextField
-                    id="outlined-basic"
-                    label="Start Date"
-                    variant="outlined"
-                    value={programObject.start}
-                    focused
-                    onChange={(e) => editProgram(e, 'start', index)}
-                    InputProps={textFieldStyles.inputProps}
-                    InputLabelProps={textFieldStyles.labelProps}
-                  />
-                  <div className="tp-between-inputs" />
-                  <TextField
-                    id="outlined-basic"
-                    label="Date Officially Enrolled"
-                    variant="outlined"
-                    value={programObject.enrolled}
-                    focused
-                    onChange={(e) => editProgram(e, 'enrolled', index)}
-                    InputProps={textFieldStyles.inputProps}
-                    InputLabelProps={textFieldStyles.labelProps}
-                  />
-                  <div className="tp-between-inputs" />
-                  <TextField
-                    id="outlined-basic"
-                    label="End Date"
-                    variant="outlined"
-                    value={programObject.end}
-                    focused
-                    onChange={(e) => editProgram(e, 'end', index)}
-                    InputProps={textFieldStyles.inputProps}
-                    InputLabelProps={textFieldStyles.labelProps}
-                  />
-                  <div className="tp-between-inputs" />
-                  <TextField
-                    id="outlined-basic"
-                    label="Date Completed Training"
-                    variant="outlined"
-                    value={programObject.completed}
-                    focused
-                    onChange={(e) => editProgram(e, 'completed', index)}
-                    InputProps={textFieldStyles.inputProps}
-                    InputLabelProps={textFieldStyles.labelProps}
-                  />
-                  <div className="tp-between-inputs" />
-                  <TextField
-                    id="outlined-basic"
-                    label="Notes"
-                    variant="outlined"
-                    value={programObject.notes}
-                    focused
-                    onChange={(e) => editProgram(e, 'notes', index)}
-                    InputProps={textFieldStyles.inputProps}
-                    InputLabelProps={textFieldStyles.labelProps}
-                  />
-                  <div className="tp-between-inputs" />
+                  {fieldProps.map((field) => (
+                    <div>
+                      <TextField
+                        id="outlined-basic"
+                        label={field.label}
+                        variant="outlined"
+                        value={programObject[field.value]}
+                        focused
+                        onChange={(e) => editProgram(e, field.value, index)}
+                        InputProps={textFieldStyles.inputProps}
+                        InputLabelProps={textFieldStyles.labelProps}
+                      />
+                      <div className="op-between-inputs" />
+                    </div>
+                  ))}
                 </div>
               </form>
             </div>

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import './OnlineProfiles.css';
+import './Workshops.css';
 import { TextField } from '@material-ui/core';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
 
-function OnlineProfiles() {
+function Workshops() {
   const textFieldStyles = {
     inputProps: {
       style: {
@@ -25,52 +25,54 @@ function OnlineProfiles() {
       },
     },
   };
-
-  const [profile, setProfile] = useState([{
-    website: '',
-    tools: '',
-    created: '',
+  const [allWorkshops, setAllWorkshops] = useState([{
+    name: '',
+    date: '',
+    attended: '',
     notes: '',
   }]);
 
-  const addOnlineProfile = async (event) => {
+  const addWorkshop = async (event) => {
     event.preventDefault();
     const temp = {
-      website: '',
-      tools: '',
-      created: '',
+      name: '',
+      date: '',
+      attended: '',
       notes: '',
     };
-    await setProfile([...profile, temp]);
+    await setAllWorkshops([...allWorkshops, temp]);
+    console.log(allWorkshops);
   };
 
-  const deleteOnlineProfile = async (event, index) => {
+  const deleteWorkshop = async (event, index) => {
     event.preventDefault();
-    const temp = [...profile];
+    const temp = [...allWorkshops];
     temp.splice(index, 1);
-    await setProfile(temp);
+    await setAllWorkshops(temp);
   };
 
-  const editOnlineProfile = (event, element, index) => {
+  const editWorkshop = (event, element, index) => {
     event.preventDefault();
-    const temp = [...profile];
+    const temp = [...allWorkshops];
     temp[index][element] = event.target.value;
-    setProfile(temp);
+    setAllWorkshops(temp);
+    console.log(allWorkshops);
   };
 
   const fieldProps = [
-    { label: 'Company/Org of Internship', value: 'website' },
-    { label: 'Tools This Site Provides', value: 'tools' },
-    { label: 'Created an Account?', value: 'created' },
+    { label: 'Workshop', value: 'name' },
+    { label: 'Date of Workshop', value: 'date' },
+    { label: 'Attended Workshop?', value: 'attended' },
     { label: 'Notes', value: 'notes' },
   ];
 
   return (
     <div>
       <div className="temp" />
-      <div className="op-title">Online Employment Profiles</div>
+      <div className="tp-title">Workshops</div>
+      <div className="between-inputs" />
       <div>
-        {profile.map((profileObject, index) => (
+        {allWorkshops.map((workshopObject, index) => (
           <div>
             <div>
               <form>
@@ -81,9 +83,9 @@ function OnlineProfiles() {
                         id="outlined-basic"
                         label={field.label}
                         variant="outlined"
-                        value={profileObject[field.value]}
+                        value={workshopObject[field.value]}
                         focused
-                        onChange={(e) => editOnlineProfile(e, field.value, index)}
+                        onChange={(e) => editWorkshop(e, field.value, index)}
                         InputProps={textFieldStyles.inputProps}
                         InputLabelProps={textFieldStyles.labelProps}
                       />
@@ -94,32 +96,32 @@ function OnlineProfiles() {
               </form>
             </div>
             <div className="width-55vw">
-              <button type="button" onClick={(e) => deleteOnlineProfile(e, index)} className="op-delete-button">
+              <button type="button" onClick={(e) => deleteWorkshop(e, index)} className="op-delete-button">
                 <img
                   src={Delete}
                   alt="delete icon"
                   style={{ marginRight: '12px' }}
                 />
-                Delete Profile
+                Delete Workshop
               </button>
             </div>
-            <div className="op-between-buttons" />
+            <div className="tp-between-buttons" />
           </div>
         ))}
-        <div className="width-55vw">
-          <button type="button" onClick={addOnlineProfile} className="op-add-button">
-            <img
-              src={Add}
-              alt="add icon"
-              style={{ marginRight: '12px' }}
-            />
-            Add Profile
-          </button>
-        </div>
+      </div>
+      <div className="width-55vw">
+        <button type="button" onClick={addWorkshop} className="op-add-button">
+          <img
+            src={Add}
+            alt="add icon"
+            style={{ marginRight: '12px' }}
+          />
+          Add Workshop
+        </button>
       </div>
 
     </div>
   );
 }
 
-export default OnlineProfiles;
+export default Workshops;

@@ -13,7 +13,7 @@ const options = [
   { name: 'Online Profiles', link: '/onlineprofiles' },
   { name: 'Training Programs', link: '/training' },
   { name: 'Co-Enroll', link: '/assessment' },
-  { name: 'Workshops', link: '/assessment' },
+  { name: 'Workshops', link: '/workshops' },
   { name: 'Internships', link: '/internships' },
   { name: 'Job Fairs', link: '/assessment' },
   { name: 'Job Boards', link: '/assessment' },

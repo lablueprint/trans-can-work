@@ -24,7 +24,7 @@
     height: 5em;
 }
 
-.op-title {
+.i-title {
     width: 56.3vw;
     padding-bottom: 1.2em;
     margin: 0 auto;
@@ -38,7 +38,7 @@
     margin: 0 auto;
 }
 
-.op-add-button {
+.i-add-button {
     margin-top: -1em;
     width: 14em;
     height: 4em;
@@ -53,11 +53,11 @@
     justify-content: center;
 }
 
-.op-add-button:hover {
+.i-add-button:hover {
     background-color: #AAAFFA;
 }
 
-.op-delete-button {
+.i-delete-button {
     width: 14em;
     height: 4em;
     margin-bottom: 1%;
@@ -70,23 +70,15 @@
     align-items: center;
     justify-content: center;
 }
-.op-delete-button:hover {
+.i-delete-button:hover {
     background-color: #D9D9D9;
     border: 0px;
 }
 
-.op-between-inputs {
+.i-between-inputs {
     height: 1.4em;
 }
 
-.op-between-buttons {
+.i-between-buttons {
     height: 1em;
-}
-
-.MuiOutlinedInput-root.Mui-focused, .MuiOutlinedInput-notchedOutline {
-    border-color: #000AA0 !important;
-}
-
-.PrivateNotchedOutline-legendLabelled-19 {
-    width: auto !important;
 }
