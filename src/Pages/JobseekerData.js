@@ -326,6 +326,7 @@ function Onboard({ username, useremail }) {
     });
   };
 
+  // eslint-disable-next-line no-unused-vars
   const deleteEducation = (event, index) => {
     event.preventDefault();
     // const temp = [...jobseeker.education];
