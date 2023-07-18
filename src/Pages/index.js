@@ -6,6 +6,7 @@ import NavigatorDashboard from './NavigatorDashboard';
 import JobseekerData from './JobseekerData';
 import Profile from './Profile';
 import ProfileTemp from './ProfileTemp';
+import ArchiveTemp from './ArchiveTemp';
 
 export {
   Home,
@@ -15,4 +16,5 @@ export {
   NavigatorDashboard,
   Profile,
   ProfileTemp,
+  ArchiveTemp,
 };

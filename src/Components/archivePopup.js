@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Dialog, Slide } from '@mui/material';
+import {
+  Dialog, RadioGroup, Slide, Radio,
+} from '@mui/material';
 import './archivePopup.css';
-// import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import { Close } from '@mui/icons-material';
-// import TextField from '@mui/material/TextField';
-// import Divider from '@mui/material/Divider';
-// import { InputAdornment } from '@material-ui/core';
-// import { Visibility, VisibilityOff } from '@material-ui/icons';
 import { getDocs, collection } from 'firebase/firestore';
-// import navpic from '../Assets/powell_cat.svg';
+// import Avatar from 'react-avatar';
+import FormControlLabel from '@mui/material/FormControlLabel';
+// import MuiCheckbox from '@mui/material/Checkbox';
+// import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
+// import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
+import { Button } from 'react-bootstrap';
 import firebase from '../firebase';
+// import NavigatorCard from './navigatorCard';
 
 const styles = {
   avatar: {
@@ -26,29 +29,6 @@ const styles = {
     overflowY: 'scroll',
   },
   close: {
-    width: '20',
-    height: '20',
-  },
-  cancel: {
-    backgroundColor: '#d3d3d3',
-    width: '35',
-    height: '35',
-    right: '0.7em',
-    top: '10',
-
-  },
-  confirm: {
-    backgroundColor: '#d3d3d3',
-    top: '10',
-    left: '10,',
-  },
-  edit: {
-    width: '20',
-    height: '20',
-    backgroundColor: '#d3d3d3',
-
-  },
-  mainEdit: {
     width: '20',
     height: '20',
   },
@@ -75,6 +55,17 @@ const styles = {
   colorPopup: {
     margin: '50%',
   },
+  confirm: {
+    height: '63px',
+    width: '172px',
+    borderColor: '#000DC8',
+    borderRadius: '5px',
+    backgroundColor: '#FFFBFE',
+  },
+  confirmText: {
+    fontSize: '16px',
+    fontWeight: 'bold',
+  },
 };
 const Transition = React.forwardRef((props, ref) => (
   <Slide direction="right" ref={ref} {...props} />
@@ -93,18 +84,14 @@ function ArchivePopup({
   const db = firebase;
   const [navigators, setNagivators] = useState([]);
 
-  //   const [edit, setEdit] = useState(false);
-  //   const [showPassword, setShowPassword] = useState(false);
-  //   const [editBackground, setEditBackground] = useState(false);
-  //   const [editProfilePic, setEditProfilePic] = useState(false);
-
   // const [profilePic, setProfilePic] = useState('');
   //   const [bg, setBg] = useState('');
 
-  //   const [firstName, setFirstName] = useState('');
-  //   const [lastName, setLastName] = useState('');
-  //   const [pronouns, setPronouns] = useState('');
-  //   const [bio, setBio] = useState('');
+  // const [selectedValue, setSelectedValue] = React.useState('a');
+
+  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setSelectedValue(event.target.value);
+  // };
 
   const fetchNavigators = async () => {
     const colRef = collection(db, 'navigators');
@@ -121,17 +108,30 @@ function ArchivePopup({
   useEffect(() => {
     const logquery = async () => {
       const query = await fetchNavigators();
+      console.log(query);
+      const nvgtrs = [];
       query.forEach((element) => {
         const elem = {
           name: element.data().name,
+          id: `${element.data().name}id`,
         };
-        navigators.push(elem);
+        nvgtrs.push(elem);
         console.log(elem);
       });
+      setNagivators(nvgtrs);
     };
 
+    /*
+    .then((docs) => {
+      docs.forEach(async (doc) => {
+        await setEmailList((e) => [...e, doc.id]);
+      });
+    });
+    */
+    console.log('i fire once');
     logquery();
   }, []);
+
   //   const handleClick = (color) => {
   //     const data = {
   //       color,
@@ -149,6 +149,12 @@ function ArchivePopup({
   //     setShowPassword(!showPassword);
   //   };
 
+  // pass in navigator and set navigator, whenever the button for radio thing
+  // is clicked (in the component) set navigator
+  // on confirm want to submit the navigator
+
+  // to make sure only one is clicked
+  //
   return (
     <div className="containerSection" style={styles.containerSection}>
       <Dialog
@@ -159,19 +165,61 @@ function ArchivePopup({
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
         maxWidth="xs"
-        PaperProps={{ style: { borderRadius: 30, maxHeight: '750px', maxWidth: '356px' } }}
+        PaperProps={{
+          style: {
+            borderRadius: 30,
+            maxHeight: '679px',
+            maxWidth: '471px',
+            minWidth: '471px',
+            backgroundColor: '#FFFBFE',
+            padding: '2em',
+          },
+        }}
+        sx={{
+          // minHeight: '100px',
+          // maxWidth: '100px',
+        }}
       >
-        <div className="buttonSection">
-          <IconButton style={styles.confirm} onClick={handleClose} size="">
+        <div className="closebuttonSection">
+          <IconButton
+            onClick={handleClose}
+            // sx={{
+            //   backgroundColor: '#000000',
+            // }}
+          >
             <Close />
           </IconButton>
         </div>
-        navigators
-        {
-            navigators.map((element) => `${element.name}\n`)
-        }
-        soemthing goes here
-
+        <div className="title">
+          Navigators
+        </div>
+        <RadioGroup>
+          {navigators.map((element) => (
+            <FormControlLabel
+              value={element.id}
+              control={<Radio />}
+              label={element.name}
+              style={{
+                marginTop: '1.5em',
+                borderBottom: '1px solid #CAC4D0',
+              }}
+            />
+          ))}
+        </RadioGroup>
+        <Button
+          variant="outlined"
+          style={{
+            height: '63px',
+            width: '172px',
+            borderColor: '#000DC8',
+            borderRadius: '5px',
+            backgroundColor: '#FFFBFE',
+          }}
+        >
+          {' '}
+          <p style={styles.confirmText}>Confirm</p>
+          {' '}
+        </Button>
       </Dialog>
 
     </div>

@@ -24,14 +24,11 @@
     right: 40px;
   }
   
-  .buttonSection {
+  .closebuttonSection {
+    justify-content: flex-start;
     position: absolute;
-    right: 30px;
-    top: 10px;
-    width: 90px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    top: 1em; 
+    left: 1em; 
   }
   
   .profilePic {
@@ -166,4 +163,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  
+  .title {
+    display: flex;
+    margin-bottom: 1em;
+    margin-top: 2em;
+    justify-content: center;
   }
