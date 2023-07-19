@@ -15,7 +15,7 @@ const options = [
   { name: 'Co-Enroll', link: '/assessment' },
   { name: 'Workshops', link: '/workshops' },
   { name: 'Internships', link: '/internships' },
-  { name: 'Job Fairs', link: '/assessment' },
+  { name: 'Job Fairs', link: '/jobfairs' },
   { name: 'Job Boards', link: '/assessment' },
   { name: 'Resources', link: '/assessment' },
   { name: 'Hiring Info', link: '/assessment' },

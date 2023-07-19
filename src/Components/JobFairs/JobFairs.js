@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import './OnlineProfiles.css';
+import './JobFairs.css';
 import { TextField } from '@material-ui/core';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
 
-function OnlineProfiles() {
+function JobFairs() {
   const textFieldStyles = {
     inputProps: {
       style: {
@@ -15,6 +15,7 @@ function OnlineProfiles() {
         fontSize: '0.9vw',
         fontWeight: 'bold',
         borderColor: '#000AA0',
+        borderWidth: '1px',
         backgroundColor: '#F7F8FE',
       },
     },
@@ -27,52 +28,54 @@ function OnlineProfiles() {
       },
     },
   };
-
-  const [profile, setProfile] = useState([{
-    website: '',
-    tools: '',
-    created: '',
+  const [jobFairs, setJobFairs] = useState([{
+    name: '',
+    date: '',
+    attended: '',
     notes: '',
   }]);
 
-  const addOnlineProfile = async (event) => {
+  const addJobFair = async (event) => {
     event.preventDefault();
     const temp = {
-      website: '',
-      tools: '',
-      created: '',
+      name: '',
+      date: '',
+      attended: '',
       notes: '',
     };
-    await setProfile([...profile, temp]);
+    await setJobFairs([...jobFairs, temp]);
+    console.log(jobFairs);
   };
 
-  const deleteOnlineProfile = async (event, index) => {
+  const deleteJobFair = async (event, index) => {
     event.preventDefault();
-    const temp = [...profile];
+    const temp = [...jobFairs];
     temp.splice(index, 1);
-    await setProfile(temp);
+    await setJobFairs(temp);
   };
 
-  const editOnlineProfile = (event, element, index) => {
+  const editJobFair = (event, element, index) => {
     event.preventDefault();
-    const temp = [...profile];
+    const temp = [...jobFairs];
     temp[index][element] = event.target.value;
-    setProfile(temp);
+    setJobFairs(temp);
+    console.log(jobFairs);
   };
 
   const fieldProps = [
-    { label: 'Company/Org of Internship', value: 'website' },
-    { label: 'Tools This Site Provides', value: 'tools' },
-    { label: 'Created an Account?', value: 'created' },
+    { label: 'Job Fair', value: 'name' },
+    { label: 'Date of Job Fair', value: 'date' },
+    { label: 'Attended Job Fair?', value: 'attended' },
     { label: 'Notes', value: 'notes' },
   ];
 
   return (
     <div>
       <div className="temp" />
-      <div className="op-title">Online Employment Profiles</div>
+      <div className="tp-title">Job Fairs</div>
+      <div className="between-inputs" />
       <div>
-        {profile.map((profileObject, index) => (
+        {jobFairs.map((jobFairObject, index) => (
           <div>
             <div>
               <form>
@@ -83,9 +86,9 @@ function OnlineProfiles() {
                         id="outlined-basic"
                         label={field.label}
                         variant="outlined"
-                        value={profileObject[field.value]}
+                        value={jobFairObject[field.value]}
                         focused
-                        onChange={(e) => editOnlineProfile(e, field.value, index)}
+                        onChange={(e) => editJobFair(e, field.value, index)}
                         InputProps={textFieldStyles.inputProps}
                         InputLabelProps={textFieldStyles.labelProps}
                       />
@@ -96,32 +99,32 @@ function OnlineProfiles() {
               </form>
             </div>
             <div className="width-55vw">
-              <button type="button" onClick={(e) => deleteOnlineProfile(e, index)} className="op-delete-button">
+              <button type="button" onClick={(e) => deleteJobFair(e, index)} className="op-delete-button">
                 <img
                   src={Delete}
                   alt="delete icon"
                   style={{ marginRight: '12px' }}
                 />
-                Delete Profile
+                Delete Job Fair
               </button>
             </div>
-            <div className="op-between-buttons" />
+            <div className="tp-between-buttons" />
           </div>
         ))}
-        <div className="width-55vw">
-          <button type="button" onClick={addOnlineProfile} className="op-add-button">
-            <img
-              src={Add}
-              alt="add icon"
-              style={{ marginRight: '12px' }}
-            />
-            Add Profile
-          </button>
-        </div>
+      </div>
+      <div className="width-55vw">
+        <button type="button" onClick={addJobFair} className="op-add-button">
+          <img
+            src={Add}
+            alt="add icon"
+            style={{ marginRight: '12px' }}
+          />
+          Add Job Fair
+        </button>
       </div>
 
     </div>
   );
 }
 
-export default OnlineProfiles;
+export default JobFairs;

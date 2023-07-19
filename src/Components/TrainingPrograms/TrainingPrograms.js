@@ -15,6 +15,7 @@ function TrainingPrograms() {
         fontSize: '0.9vw',
         fontWeight: 'bold',
         borderColor: '#000AA0',
+        backgroundColor: '#F7F8FE',
       },
     },
     labelProps: {
@@ -22,6 +23,7 @@ function TrainingPrograms() {
         fontFamily: 'Montserrat',
         fontSize: '0.95vw',
         color: '#000AA0',
+        backgroundColor: '#FFFFFF',
       },
     },
   };

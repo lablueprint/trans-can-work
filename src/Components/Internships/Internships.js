@@ -15,13 +15,15 @@ function Internships() {
         fontSize: '0.9vw',
         fontWeight: 'bold',
         borderColor: '#000AA0',
+        backgroundColor: '#F7F8FE',
       },
     },
     labelProps: {
       style: {
         fontFamily: 'Montserrat',
-        color: '#000AA0',
         fontSize: '0.95vw',
+        color: '#000AA0',
+        backgroundColor: '#FFFFFF',
       },
     },
   };
