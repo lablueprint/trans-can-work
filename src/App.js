@@ -27,6 +27,7 @@ import Internships from './Components/Internships/Internships';
 import Workshops from './Components/Workshops/Workshops';
 import JobFairs from './Components/JobFairs/JobFairs';
 import JobBoards from './Components/JobBoards/JobBoards';
+import HiredInfo from './Components/HiredInfo/HiredInfo';
 
 function App() {
   return (
@@ -63,6 +64,7 @@ function App() {
           <Route path="workshops" element={<Workshops />} />
           <Route path="jobfairs" element={<JobFairs />} />
           <Route path="jobboards" element={<JobBoards />} />
+          <Route path="hiredinfo" element={<HiredInfo />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />

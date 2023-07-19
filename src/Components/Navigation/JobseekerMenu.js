@@ -18,7 +18,7 @@ const options = [
   { name: 'Job Fairs', link: '/jobfairs' },
   { name: 'Job Boards', link: '/jobboards' },
   { name: 'Resources', link: '/assessment' },
-  { name: 'Hiring Info', link: '/assessment' },
+  { name: 'Hiring Info', link: '/hiredinfo' },
 ];
 
 const style = {

@@ -63,9 +63,9 @@ function JobBoards() {
   };
 
   const fieldProps = [
-    { label: 'Name of Jobs Board', value: 'name' },
+    { label: 'Name of Job Board', value: 'name' },
     { label: 'Created Profile?', value: 'profile' },
-    { label: 'Admitted into Jobs Board?', value: 'admitted' },
+    { label: 'Admitted into Job Board?', value: 'admitted' },
     { label: 'Notes', value: 'notes' },
   ];
 

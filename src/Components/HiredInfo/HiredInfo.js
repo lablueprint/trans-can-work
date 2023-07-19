@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import './Internships.css';
+import './HiredInfo.css';
 import { TextField } from '@material-ui/core';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
 
-function Internships() {
+function HiredInfo() {
   const textFieldStyles = {
     inputProps: {
       style: {
@@ -74,22 +74,21 @@ function Internships() {
   };
 
   const fieldProps = [
-    { label: 'Company/Org of Internship', value: 'company' },
-    { label: 'Program Name', value: 'program' },
-    { label: 'Position', value: 'position' },
-    { label: 'Start Date', value: 'start' },
-    { label: 'End Date', value: 'end' },
-    { label: 'Date Referral Sent (If Applicable)', value: 'referralDate' },
-    { label: 'Did Client Apply for position? (If Applicable)', value: 'applied' },
-    { label: 'Client Officially Accepted into internship?', value: 'accepted' },
-    { label: 'Client Successfully Completed Internship?', value: 'completed' },
-    { label: 'Notes', value: 'notes' },
+    { label: 'Name of Company', value: 'company' },
+    { label: 'Hired Date', value: 'date' },
+    { label: 'Field of Work', value: 'field' },
+    { label: 'Job Title', value: 'title' },
+    { label: 'Supervisor Name', value: 'supervisor' },
+    { label: 'Contact Email', value: 'email' },
+    { label: 'Contact Phone Number', value: 'phone' },
+    { label: 'Hourly Pay', value: 'pay' },
+    { label: 'Offers Benefits?', value: 'benefits' },
   ];
 
   return (
     <div>
       <div className="temp" />
-      <div className="i-title">Internships</div>
+      <div className="i-title">Hired Info</div>
       <div>
         {allInternships.map((internshipObject, index) => (
           <div>
@@ -104,7 +103,7 @@ function Internships() {
                         variant="outlined"
                         value={internshipObject[field.value]}
                         focused
-                        onChange={(e) => editInternship(e, field.value, index)}
+                        onChange={(e) => editInternship(e, field.changeParameter, index)}
                         InputProps={textFieldStyles.inputProps}
                         InputLabelProps={textFieldStyles.labelProps}
                       />
@@ -121,7 +120,7 @@ function Internships() {
                   alt="delete icon"
                   style={{ marginRight: '12px' }}
                 />
-                Delete Internship
+                Delete Section
               </button>
             </div>
             <div className="i-between-buttons" />
@@ -134,7 +133,7 @@ function Internships() {
               alt="add icon"
               style={{ marginRight: '12px' }}
             />
-            Add Internship
+            Add Section
           </button>
         </div>
       </div>
@@ -143,4 +142,4 @@ function Internships() {
   );
 }
 
-export default Internships;
+export default HiredInfo;

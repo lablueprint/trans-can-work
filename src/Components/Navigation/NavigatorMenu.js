@@ -45,7 +45,7 @@ const tabs = [
   { title: 'Job Fairs', link: 'jobfairs' },
   { title: 'Job Boards', link: 'jobboards' },
   { title: 'Resources', link: 'assessment' },
-  { title: 'Hired Info', link: 'assessment' },
+  { title: 'Hired Info', link: 'hiredinfo' },
 ];
 
 function NavigatorMenu() {
