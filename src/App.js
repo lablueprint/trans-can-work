@@ -26,6 +26,7 @@ import MilestoneMap from './Components/Milestones/MilestoneMap';
 import Internships from './Components/Internships/Internships';
 import Workshops from './Components/Workshops/Workshops';
 import JobFairs from './Components/JobFairs/JobFairs';
+import JobBoards from './Components/JobBoards/JobBoards';
 
 function App() {
   return (
@@ -61,6 +62,7 @@ function App() {
           <Route path="internships" element={<Internships />} />
           <Route path="workshops" element={<Workshops />} />
           <Route path="jobfairs" element={<JobFairs />} />
+          <Route path="jobboards" element={<JobBoards />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />
