@@ -17,7 +17,7 @@ const options = [
   { name: 'Internships', link: '/internships' },
   { name: 'Job Fairs', link: '/jobfairs' },
   { name: 'Job Boards', link: '/jobboards' },
-  { name: 'Resources', link: '/assessment' },
+  { name: 'Resources', link: '/resources' },
   { name: 'Hiring Info', link: '/hiredinfo' },
 ];
 

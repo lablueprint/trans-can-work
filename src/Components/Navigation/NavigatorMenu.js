@@ -44,7 +44,7 @@ const tabs = [
   { title: 'Internships', link: 'internships' },
   { title: 'Job Fairs', link: 'jobfairs' },
   { title: 'Job Boards', link: 'jobboards' },
-  { title: 'Resources', link: 'assessment' },
+  { title: 'Resources', link: 'resources' },
   { title: 'Hired Info', link: 'hiredinfo' },
 ];
 
