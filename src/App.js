@@ -58,7 +58,7 @@ function App() {
         />
         <Route path="/home" element={<NavigatorMenu />}>
           <Route path="roadmap" element={<MilestoneMap />} />
-          <Route path="assessment" element={<NavigatorDashboard />} />
+          <Route path="assessment" element={<JobseekerData />} />
           <Route path="onlineprofiles" element={<OnlineProfiles />} />
           <Route path="training" element={<TrainingPrograms />} />
           <Route path="internships" element={<Internships />} />

@@ -89,6 +89,29 @@ const styles = {
 };
 
 function Onboard({ username, useremail }) {
+  const textFieldStyles = {
+    inputProps: {
+      style: {
+        fontFamily: 'Montserrat',
+        color: '#49454F',
+        width: '55.0vw',
+        height: '3.2vw',
+        fontSize: '0.9vw',
+        fontWeight: 'bold',
+        borderColor: 'red',
+        backgroundColor: '#F7F8FE',
+      },
+    },
+    labelProps: {
+      style: {
+        fontFamily: 'Montserrat',
+        fontSize: '0.95vw',
+        color: '#000AA0',
+        backgroundColor: '#FFFFFF',
+      },
+    },
+  };
+
   const previousExperience1 = [
     'Admin',
     'Bartender',
@@ -234,7 +257,7 @@ function Onboard({ username, useremail }) {
       certificate: '',
       certificateType: '',
     }],
-    occupation: [],
+    occupation: [''],
     dreamjob: 'Dream Job',
   });
 
@@ -328,6 +351,7 @@ function Onboard({ username, useremail }) {
 
   const deleteEducation = (event, index) => {
     event.preventDefault();
+    console.log(index);
     // const temp = [...jobseeker.education];
     // temp.splice(index, 1);
     // setJobseeker({
@@ -397,22 +421,33 @@ function Onboard({ username, useremail }) {
   return (
     <div>
       <div className="Page Title">
-        <div className="header">
+        <div className="headers">
           <Box sx={{ borderBottom: 1, borderColor: 'divider', boxShadow: '0 4px 4px #c9c9c9' }}>
-            <div className="assessment-page-headers-container">
-              <div className="assessment-page-header-name-and-icon-container">
-                <div className="assessment-page-back-empty-block" />
-                <div className="header-image-container">
+            <div className="all-header-items">
+              <div className="left-header-contents">
+                <div className="go-back">
                   <img
                     src={Back}
                     alt="back-pointing arrow"
-                    style={{ marginRight: '1em' }}
+                    className="go-back-arrow"
                   />
+                  <Link
+                    to="/dashboard"
+                    className="assessment-page-back-text"
+                  >
+                    Return to Clients List
+                  </Link>
                 </div>
-                <Link to="/dashboard" className="assessment-page-back-text">Return to Clients List</Link>
-                <div className="assessment-page-header-empty-block" />
-                <p className="assessment-page-header-profile-text">{username}</p>
-                <div className="header-image-container">
+                <div className="username-text-roadmap">
+                  {username}
+                  &apos;s Roadmap
+                </div>
+              </div>
+              <div className="right-header-contents">
+                <div className="align-helper">
+                  <div className="username-text">
+                    {username}
+                  </div>
                   <Avatar
                     facebookId="100008343750912"
                     size="40"
@@ -427,63 +462,37 @@ function Onboard({ username, useremail }) {
                   />
                 </div>
               </div>
-              <div className="assessment-page-welcome-block-header">
-                <div style={{ flex: '0 0 75%' }}>
-                  <p className="assessment-page-title">
-                    {username}
-                    &apos;s Roadmap
-                  </p>
-                </div>
-              </div>
             </div>
-
           </Box>
         </div>
       </div>
       <div className="content">
         <div>
           <div className="section-divider" />
-          <h1>Client Info</h1>
+          <div className="assessment-section-title">Client Info</div>
           <div className="baby-divider" />
           <form>
             <div className="inputWrapper">
               <div>
                 {clientInfo.map((item) => (
-                  <CssTextField
-                    focusColor="#0c0ca4"
-                    label={item.title}
-                    variant="outlined"
-                    FormHelperTextProps={{ children: 'Label' }}
-                    focused
-                    onChange={(e) => {
-                      setJobseeker({
-                        ...jobseeker,
-                        [item.toChange]: e.target.value,
-                      });
-                    }}
-                    placeholder={item.placeholder}
-                    style={{ paddingBottom: '1%' }}
-                    InputProps={{
-                      className: classes.root,
-                      style: {
-                        fontFamily: 'Montserrat',
-                        color: '#49454F',
-                        paddingLeft: '0.5%',
-                        width: '55.0vw',
-                        height: '3.2vw',
-                        fontSize: '0.9vw',
-                        fontWeight: 'bold',
-                      },
-                    }}
-                    InputLabelProps={{
-                      className: classes.labelInput,
-                      style: {
-                        fontFamily: 'Montserrat',
-                        paddingLeft: '0.3%',
-                        backgroundColor: 'white',
-                      },
-                    }}
-                  />
+                  <div>
+                    <TextField
+                      id="outlined-basic"
+                      label={item.title}
+                      variant="outlined"
+                      placeholder={item.placeholder}
+                      focused
+                      onChange={(e) => {
+                        setJobseeker({
+                          ...jobseeker,
+                          [item.toChange]: e.target.value,
+                        });
+                      }}
+                      InputProps={textFieldStyles.inputProps}
+                      InputLabelProps={textFieldStyles.labelProps}
+                    />
+                    <div className="op-between-inputs" />
+                  </div>
                 ))}
               </div>
             </div>
@@ -492,8 +501,8 @@ function Onboard({ username, useremail }) {
 
         <div>
           <div className="section-divider" />
-          <h1>Previous Experience</h1>
-          <h2>Please check all the skill sets that apply to ye.</h2>
+          <div className="assessment-section-title">Previous Experience</div>
+          <div className="assessment-section-subtitle">Please check all the skill sets that apply to ye.</div>
         </div>
         <div className="columns-container">
           <div className="checkboxes-column-left">
@@ -514,7 +523,7 @@ function Onboard({ username, useremail }) {
 
         <div>
           <div className="section-divider" />
-          <h1 className="h1-altered">Education Info</h1>
+          <div className="assessment-section-title">Education Info</div>
           <div className="baby-divider" />
           {jobseeker.education.map((educationObject, index) => (
             <div>
@@ -654,7 +663,7 @@ function Onboard({ username, useremail }) {
 
         <div>
           <div className="section-divider" />
-          <h1 className="h1-altered">List of Current/Previous Occupations</h1>
+          <div className="assessment-section-title">List of Current/Previous Occupations</div>
           <div className="baby-divider" />
           <form>
             <div>
@@ -719,11 +728,11 @@ function Onboard({ username, useremail }) {
         </div>
         <div>
           <div className="section-divider" />
-          <h1>Industry Interest</h1>
-          <h2>
+          <div className="assessment-section-title">Industry Interest</div>
+          <div className="assessment-section-subtitle">
             In what areas of the followin&apos; industries are
             ye open to explorin&apos; or have an interest in possible future employment?
-          </h2>
+          </div>
           <div className="columns-container">
             <div className="checkboxes-column-left">
               <Checkboxes
@@ -743,10 +752,10 @@ function Onboard({ username, useremail }) {
         </div>
 
         <div>
-          <h1>Skills Checklist</h1>
-          <h2>
+          <div className="assessment-section-title">Skills Checklist</div>
+          <div className="assessment-section-subtitle">
             Please check all the skill sets that apply to ye.
-          </h2>
+          </div>
           <div className="columns-container">
             <div className="checkboxes-column-left">
               <Checkboxes
@@ -769,7 +778,8 @@ function Onboard({ username, useremail }) {
 
         <div>
           <div className="section-divider" />
-          <h1>Ultimate Dream Job</h1>
+          <div className="assessment-section-title">Ultimate Dream Job</div>
+          <div className="baby-divider" />
           <form>
             <div className="inputWrapper">
               <CssTextField

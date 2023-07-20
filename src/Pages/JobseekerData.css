@@ -28,42 +28,89 @@
     height: 3em;
 }
 
-h1 {
+.all-header-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto;
+    padding-bottom: 4em;
+    padding-top: 2.5em;
+}
+
+.go-back {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.go-back-arrow {
+    width: 0.6em;
+    height: 0.8em;
+    margin-right: 1.5em;
+    padding-bottom: 2px;
+}
+
+.assessment-page-back-text{
+    font-family: 'Montserrat';
+    font-size: 1em;
+    font-weight: normal;
+    text-align: left;
+    text-decoration: none;
+    color: black;
+}
+
+.username-text-roadmap {
+    font-family: 'Montserrat';
+    font-size: 2.5em;
+    font-weight: 400;
+    text-align: left;
+}
+
+.left-header-contents {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+}
+
+.right-header-contents {
+}
+
+.align-helper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.username-text {
+    font-size: 1em;
+    font-weight: 700;
+    font-family: 'Montserrat';
+    padding-right: 1em;
+}
+
+.assessment-section-title {
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 700;
     font-size: 1.2em;
     line-height: 1em;
     text-align: left;
-    margin-left: 16.3em;
-  }
-
-.h1-altered {
-    font-weight: 400;
-  }
-
-/* label { 
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 20px;
-    display: flex;
-    align-items: flex-start;
-    display: inline-block;
-    text-align: left;
-    width: 100%
-} */
-
-h2 { 
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    text-align: left;
-    margin-left: 19.5em;
+    width: 57.0vw;
+    margin: 0 auto;
+    padding-bottom: 0.5em;
 }
+
+.assessment-section-subtitle { 
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-size: 1.1em;
+    text-align: left;
+    width: 57.0vw;
+    margin: 0 auto;
+    padding-bottom: 0.5em;
+}
+/* add to all H2 */
 
 h3 
 {
@@ -106,7 +153,8 @@ input, textarea {
 .assessment-page-headers-container{
     display: flex;
     flex-direction: column;
-    margin-left: 7em;
+    width: 100%;
+    padding-bottom: 3em;
 }
 
 .assessment-page-title{
@@ -115,7 +163,7 @@ input, textarea {
     font-weight: normal;
     margin: 0;
     text-align: left;
-    display:flex;
+    display: flex;
 }
 
 .assessment-page-header-profile-text{
@@ -125,17 +173,6 @@ input, textarea {
     text-align: left;
     display: flex;
     margin-right: 1em;
-}
-
-.assessment-page-back-text{
-    font-family: 'Montserrat';
-    font-size: 1em;
-    font-weight: normal;
-    text-align: left;
-    display:flex;
-    color: black;
-    text-decoration: none;
-    padding-top: 1em;
 }
 
 .header-image-container {
@@ -203,7 +240,8 @@ input, textarea {
 .left-button {
     text-align: left;
     margin-bottom: .3em;
-    padding-left: 19.7em;
+    width: 57.0vw;
+    margin: 0 auto;
 }
 
 .columns-container {

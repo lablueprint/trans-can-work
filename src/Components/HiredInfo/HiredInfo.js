@@ -28,7 +28,7 @@ function HiredInfo() {
     },
   };
 
-  const [allInternships, setAllInternships] = useState([{
+  const [allHiredInfo, setAllHiredInfo] = useState([{
     company: '',
     program: '',
     position: '',
@@ -41,7 +41,7 @@ function HiredInfo() {
     notes: '',
   }]);
 
-  const addInternship = async (event) => {
+  const addHiredInfo = async (event) => {
     event.preventDefault();
     const temp = {
       company: '',
@@ -55,22 +55,22 @@ function HiredInfo() {
       completed: '',
       notes: '',
     };
-    await setAllInternships([...allInternships, temp]);
+    await setAllHiredInfo([...allHiredInfo, temp]);
   };
 
-  const deleteInternship = async (event, index) => {
+  const deleteHiredInfo = async (event, index) => {
     event.preventDefault();
-    const temp = [...allInternships];
+    const temp = [...allHiredInfo];
     temp.splice(index, 1);
-    await setAllInternships(temp);
+    await setAllHiredInfo(temp);
   };
 
-  const editInternship = (event, element, index) => {
+  const editHiredInfo = (event, element, index) => {
     event.preventDefault();
-    const temp = [...allInternships];
+    const temp = [...allHiredInfo];
     temp[index][element] = event.target.value;
-    setAllInternships(temp);
-    console.log(allInternships);
+    setAllHiredInfo(temp);
+    console.log(allHiredInfo);
   };
 
   const fieldProps = [
@@ -90,7 +90,7 @@ function HiredInfo() {
       <div className="temp" />
       <div className="i-title">Hired Info</div>
       <div>
-        {allInternships.map((internshipObject, index) => (
+        {allHiredInfo.map((internshipObject, index) => (
           <div>
             <div>
               <form>
@@ -103,7 +103,7 @@ function HiredInfo() {
                         variant="outlined"
                         value={internshipObject[field.value]}
                         focused
-                        onChange={(e) => editInternship(e, field.changeParameter, index)}
+                        onChange={(e) => editHiredInfo(e, field.changeParameter, index)}
                         InputProps={textFieldStyles.inputProps}
                         InputLabelProps={textFieldStyles.labelProps}
                       />
@@ -114,7 +114,7 @@ function HiredInfo() {
               </form>
             </div>
             <div className="width-55vw">
-              <button type="button" onClick={(e) => deleteInternship(e, index)} className="i-delete-button">
+              <button type="button" onClick={(e) => deleteHiredInfo(e, index)} className="i-delete-button">
                 <img
                   src={Delete}
                   alt="delete icon"
@@ -127,7 +127,7 @@ function HiredInfo() {
           </div>
         ))}
         <div className="width-55vw">
-          <button type="button" onClick={addInternship} className="i-add-button">
+          <button type="button" onClick={addHiredInfo} className="i-add-button">
             <img
               src={Add}
               alt="add icon"

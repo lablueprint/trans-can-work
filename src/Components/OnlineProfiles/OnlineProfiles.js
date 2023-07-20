@@ -14,7 +14,7 @@ function OnlineProfiles() {
         height: '3.2vw',
         fontSize: '0.9vw',
         fontWeight: 'bold',
-        borderColor: '#000AA0',
+        borderColor: 'red',
         backgroundColor: '#F7F8FE',
       },
     },

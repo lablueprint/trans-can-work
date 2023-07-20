@@ -85,7 +85,7 @@
 
 .MuiOutlinedInput-root.Mui-focused, .MuiOutlinedInput-notchedOutline {
     border-color: #000AA0 !important;
-    
+    border-width: 1px;
 }
 
 .PrivateNotchedOutline-legendLabelled-19 {
