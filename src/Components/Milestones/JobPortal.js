@@ -3,8 +3,8 @@ import './JobPortal.css';
 import Button from '@mui/material/Button';
 
 function JobPortal() {
-  const [isComplete, setComplete] = React.useState(false);
-  const toggleComplete = () => setComplete(!isComplete);
+  // const [isComplete, setComplete] = React.useState(false);
+  // const toggleComplete = () => setComplete(!isComplete);
   return (
     <div>
       <h6 className="jobPortal">Enter here for access to our Trans Can Work Job Portal.</h6>
@@ -18,10 +18,10 @@ function JobPortal() {
           </Button>
         </div>
 
-        <div
+        {/* <div
           isComplete={isComplete}
           toggleComplete={toggleComplete}
-        />
+        /> */}
       </div>
     </div>
   );

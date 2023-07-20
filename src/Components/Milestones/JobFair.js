@@ -2,8 +2,8 @@ import React from 'react';
 import './JobFair.css';
 
 function JobFair() {
-  const [isComplete, setComplete] = React.useState(false);
-  const toggleComplete = () => setComplete(!isComplete);
+  // const [isComplete, setComplete] = React.useState(false);
+  // const toggleComplete = () => setComplete(!isComplete);
   return (
     <div className="jobContainer">
       <h6 className="jobFair">
@@ -58,10 +58,10 @@ function JobFair() {
           </form>
         </div>
       </div> */}
-      <div
+      {/* <div
         isComplete={isComplete}
         toggleComplete={toggleComplete}
-      />
+      /> */}
     </div>
   );
 }

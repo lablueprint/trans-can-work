@@ -1,20 +1,26 @@
 .grid-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);  
-  padding: 70px;
-  height: 90vh;  
+  padding: 15vh 5vw;
+  height: 70vh;  
   background: linear-gradient(180deg, #EFFBFF 0%, #F5F1FF 69.61%, #FFF2F5 100%);
 }
 
 #roadmap-title {
   width: fit-content;
   height: fit-content;    
+  width: 100%;
   position: absolute;
   top:0;
   bottom: 0;
   left: 0;
   right: 0;
   margin: auto;
+}
+
+#roadmap-title img {
+  width: 100%;
+  max-width: 25em;
 }
 
 #assessment {
@@ -28,8 +34,8 @@
 #online-profile {
   width: fit-content;
   height: fit-content;
-  margin-top: 8vh;
-  margin-left: 60vw;
+  margin-top: 12vh;
+  margin-left: 62vw;
   position: absolute;
 }
 
@@ -37,54 +43,159 @@
   width: fit-content; 
   height: fit-content;
   margin-top: 30vh;
-  margin-left: 65vw; 
+  margin-left: 62vw; 
   position: absolute;
 }
 
 #workshop {
   width: fit-content; 
   height: fit-content; 
-  margin-top: 53vh;
-  margin-left: 57vw;
+  margin-top: 48vh;
+  margin-left: 58vw;
   position: absolute; 
 }
 
 #internship {
   width: fit-content;
   height: fit-content; 
-  margin-top: 65vh; 
-  margin-left: 42vw; 
+  margin-top: 55vh; 
+  margin-left: 37vw; 
   position: absolute; 
 }
 
 #job-fair {
   width: fit-content;
   height: fit-content; 
-  margin-top: 70vh; 
-  margin-left: 20vw; 
+  margin-top: 58vh; 
+  margin-left: 10vw; 
   position: absolute;
 }
 
 #job-portal {
   width: fit-content; 
   height: fit-content; 
-  margin-top: 50vh; 
-  margin-left: 2vw;
+  margin-top: 35vh; 
+  margin-left: 0vw;
   position: absolute; 
 }
 
 #resource {
   width: fit-content;
   height: fit-content;
-  margin-top: 30vh;
-  margin-left: 3vw;
+  margin-top: 20vh;
+  margin-left: -2vw;
   position: absolute;
 }
 
 #hiring-info {
   width: fit-content; 
   height: fit-content; 
-  margin-top: 1vh; 
-  margin-left: 8vw;
+  margin-top: 2vh; 
+  margin-left: 4vw;
   position: absolute;
 } 
+
+@media only screen and (max-aspect-ratio: 1/1) {
+  .grid-container {
+    display: block;
+    padding-top: 5vh;
+    height: 260vh;  
+  }
+
+  #roadmap-title {
+    top: 4em;
+    bottom: auto;
+    width: 100%;
+  }
+
+  #roadmap-title img {
+    width: 100%;
+    max-width: 25em;
+  }
+
+  #assessment,
+  #online-profile,
+  #training-program,
+  #workshop,
+  #internship,
+  #job-fair,
+  #job-portal,
+  #resource,
+  #hiring-info {
+    width: 100vw;
+    max-width: 20em;
+    height: 20em;
+    margin: 0;
+  }
+
+  #assessment div button,
+  #online-profile div button,
+  #training-program div button,
+  #workshop div button,
+  #internship div button,
+  #job-fair div button,
+  #job-portal div button,
+  #resource div button,
+  #hiring-info div button {
+    width: 100%;
+    height: auto;
+  } 
+
+  #assessment div button img,
+  #online-profile div button img,
+  #training-program div button img,
+  #workshop div button img,
+  #internship div button img,
+  #job-fair div button img,
+  #job-portal div button img,
+  #resource div button img,
+  #hiring-info div button img {
+    width: 100%;
+    max-width: 32em;
+    height: auto;
+  } 
+
+  #online-profile,
+  #workshop,
+  #job-fair,
+  #resource {
+    right: 5vw;
+  }
+
+  #assessment {
+    margin-top: 32vh;
+  }
+
+  #online-profile {
+    margin-top: 56vh;
+    right: 5vw;
+  }
+
+  #training-program {
+    margin-top: 80vh;
+  }
+
+  #workshop {
+    margin-top: 104vh;
+  }
+
+  #internship {
+    margin-top: 128vh;
+  }
+
+  #job-fair {
+    margin-top: 156vh;
+  }
+
+  #job-portal {
+    margin-top: 180vh;
+  }
+
+  #resource {
+    margin-top: 214vh;
+  }
+
+  #hiring-info {
+    margin-top: 232vh;
+  }
+}

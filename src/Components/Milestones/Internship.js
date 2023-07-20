@@ -2,8 +2,8 @@ import React from 'react';
 import './Internship.css';
 
 function Internship() {
-  const [isComplete, setComplete] = React.useState(false);
-  const toggleComplete = () => setComplete(!isComplete);
+  // const [isComplete, setComplete] = React.useState(false);
+  // const toggleComplete = () => setComplete(!isComplete);
   return (
     <div>
       <h6 className="internship">
@@ -11,10 +11,10 @@ function Internship() {
         <br />
         ye have enrolled or been accepted.
       </h6>
-      <div
+      {/* <div
         isComplete={isComplete}
         toggleComplete={toggleComplete}
-      />
+      /> */}
     </div>
   );
 }

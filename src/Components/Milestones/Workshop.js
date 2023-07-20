@@ -2,8 +2,8 @@ import React from 'react';
 import './Workshop.css';
 
 function Workshop() {
-  const [isComplete, setComplete] = React.useState(false);
-  const toggleComplete = () => setComplete(!isComplete);
+  // const [isComplete, setComplete] = React.useState(false);
+  // const toggleComplete = () => setComplete(!isComplete);
   return (
     <div>
       <h6 className="workshop">
@@ -66,10 +66,10 @@ function Workshop() {
           </form> */}
       {/* </div>
       </div> */}
-      <div
+      {/* <div
         isComplete={isComplete}
         toggleComplete={toggleComplete}
-      />
+      /> */}
     </div>
   );
 }
