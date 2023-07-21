@@ -4,9 +4,10 @@ import Register from './Register';
 import Reset from './Reset';
 import NavigatorDashboard from './NavigatorDashboard';
 import JobseekerData from './JobseekerData';
-import Profile from './Profile';
+// import Profile from './Profile';
 import ProfileTemp from './ProfileTemp';
 import ArchiveTemp from './ArchiveTemp';
+import Landing from './Landing';
 
 export {
   Home,
@@ -14,7 +15,9 @@ export {
   Register,
   Reset,
   NavigatorDashboard,
-  Profile,
+  // Profile,
   ProfileTemp,
   ArchiveTemp,
+  JobseekerData,
+  Landing,
 };
