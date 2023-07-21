@@ -193,16 +193,30 @@ function ArchivePopup({
         <div className="title">
           Navigators
         </div>
-        <RadioGroup>
+        <RadioGroup
+          style={{
+            width: '100%',
+          }}
+        >
           {navigators.map((element) => (
             <FormControlLabel
               value={element.id}
               control={<Radio />}
+              labelPlacement="start"
               label={element.name}
               style={{
+                display: 'flex',
                 marginTop: '1.5em',
                 borderBottom: '1px solid #CAC4D0',
+                width: '100%',
               }}
+              sx={{
+                labelPlacementStart: {
+                  justifyContent: 'space-between',
+                },
+              }}
+              // classes={{
+              // }}
             />
           ))}
         </RadioGroup>
