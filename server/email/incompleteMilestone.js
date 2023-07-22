@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-const dotenv = require('dotenv').config();
+// const dotenv = require('dotenv').config();
 const hbs = require('nodemailer-express-handlebars');
 const path = require('path');
 const image = require('../assets/trans_flag_graphic.png');
@@ -19,10 +19,12 @@ const MilestoneEmail = ({ emailList, subject, message }) => new Promise((resolve
 
   const handlebarOptions = {
     viewEngine: {
-      partialsDir: path.resolve('./templates/'),
+      extname: '.handlebars',
       defaultLayout: false,
+      partialsDir: path.resolve('./templates'),
     },
-    viewPath: path.resolve('./templates/'),
+    viewPath: path.resolve('./templates'),
+    extName: '.handlebars',
   };
 
   transporter.use('compile', hbs(handlebarOptions));

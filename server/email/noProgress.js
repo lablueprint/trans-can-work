@@ -26,7 +26,7 @@ const NoProgressEmail = ({ emailList, subject, message }) => new Promise((resolv
 
   transporter.use('compile', hbs(handlebarOptions));
 
-  const testerEmail = ['arwaidev@gmail.com', 'ryeo@g.ucla.edu'];
+  const testerEmail = ['arwaidev@gmail.com'];
 
   for (let i = 0; i < testerEmail.length; i++) {
     setTimeout(() => {
