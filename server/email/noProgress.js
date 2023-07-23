@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-const dotenv = require('dotenv').config();
+require('dotenv').config();
 const hbs = require('nodemailer-express-handlebars');
 const path = require('path');
 
