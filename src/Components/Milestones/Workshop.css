@@ -49,3 +49,17 @@
 .col2 {
     float: right;
 } */
+
+@media only screen and (max-aspect-ratio: 1/1) {
+    .workshop-row {
+        display: block;
+    }
+
+    .workshop-row {
+     margin-bottom: 0;
+    }
+
+    .workshop-row-label {
+        margin-bottom: 0.5em;
+    }
+  }

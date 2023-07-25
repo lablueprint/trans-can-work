@@ -22,6 +22,8 @@
     text-transform: none;
     letter-spacing: 0.15px;
     color: #484649;
+    margin: 0 auto;
+    display: block;
 }
 
 #resourceButton:hover {

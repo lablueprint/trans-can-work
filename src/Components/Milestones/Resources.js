@@ -8,21 +8,19 @@ function Resources() {
   return (
     <div>
       <h6 className="resource">Enter here fer access to a treasure trove o&apos; Resources.</h6>
-      <div className="resources-row">
-        <div>
-          <Button
-            disableRipple
-            id="resourceButton"
-          >
-            Resources Link
-          </Button>
-        </div>
+      <div>
+        <Button
+          disableRipple
+          id="resourceButton"
+        >
+          Resources Link
+        </Button>
+      </div>
 
-        {/* <div
+      {/* <div
           isComplete={isComplete}
           toggleComplete={toggleComplete}
         /> */}
-      </div>
     </div>
   );
 }

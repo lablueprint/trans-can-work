@@ -8,21 +8,17 @@ function JobPortal() {
   return (
     <div>
       <h6 className="jobPortal">Enter here for access to our Trans Can Work Job Portal.</h6>
-      <div className="jobPortal-row">
-        <div>
-          <Button
-            disableRipple
-            id="jobPortalButton"
-          >
-            Job Portal Link
-          </Button>
-        </div>
+      <Button
+        disableRipple
+        id="jobPortalButton"
+      >
+        Job Portal Link
+      </Button>
 
-        {/* <div
+      {/* <div
           isComplete={isComplete}
           toggleComplete={toggleComplete}
         /> */}
-      </div>
     </div>
   );
 }
