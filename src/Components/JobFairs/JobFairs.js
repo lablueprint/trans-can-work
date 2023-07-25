@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import './TrainingPrograms.css';
+import './JobFairs.css';
 import { TextField } from '@material-ui/core';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
 
-function TrainingPrograms() {
+function JobFairs() {
   const textFieldStyles = {
     inputProps: {
       style: {
@@ -15,6 +15,7 @@ function TrainingPrograms() {
         fontSize: '0.9vw',
         fontWeight: 'bold',
         borderColor: '#000AA0',
+        borderWidth: '1px',
         backgroundColor: '#F7F8FE',
       },
     },
@@ -27,63 +28,54 @@ function TrainingPrograms() {
       },
     },
   };
-  const [allPrograms, setAllPrograms] = useState([{
-    program: '',
-    referral: '',
-    start: '',
-    enrolled: '',
-    end: '',
-    completed: '',
+  const [jobFairs, setJobFairs] = useState([{
+    name: '',
+    date: '',
+    attended: '',
     notes: '',
   }]);
 
-  const addProgram = async (event) => {
+  const addJobFair = async (event) => {
     event.preventDefault();
     const temp = {
-      program: '',
-      referral: '',
-      start: '',
-      enrolled: '',
-      end: '',
-      completed: '',
+      name: '',
+      date: '',
+      attended: '',
       notes: '',
     };
-    await setAllPrograms([...allPrograms, temp]);
-    console.log(allPrograms);
+    await setJobFairs([...jobFairs, temp]);
+    console.log(jobFairs);
   };
 
-  const deleteProgram = async (event, index) => {
+  const deleteJobFair = async (event, index) => {
     event.preventDefault();
-    const temp = [...allPrograms];
+    const temp = [...jobFairs];
     temp.splice(index, 1);
-    await setAllPrograms(temp);
+    await setJobFairs(temp);
   };
 
-  const editProgram = (event, element, index) => {
+  const editJobFair = (event, element, index) => {
     event.preventDefault();
-    const temp = [...allPrograms];
+    const temp = [...jobFairs];
     temp[index][element] = event.target.value;
-    setAllPrograms(temp);
-    console.log(allPrograms);
+    setJobFairs(temp);
+    console.log(jobFairs);
   };
 
   const fieldProps = [
-    { label: 'Company/Org of Internship', value: 'program' },
-    { label: 'Date Referral Sent', value: 'referral' },
-    { label: 'Start Date', value: 'start' },
-    { label: 'Date Officially Enrolled', value: 'enrolled' },
-    { label: 'End Date', value: 'end' },
-    { label: 'Date Completed Training', value: 'completed' },
+    { label: 'Job Fair', value: 'name' },
+    { label: 'Date of Job Fair', value: 'date' },
+    { label: 'Attended Job Fair?', value: 'attended' },
     { label: 'Notes', value: 'notes' },
   ];
 
   return (
     <div>
       <div className="temp" />
-      <div className="tp-title">Training Programs</div>
+      <div className="tp-title">Job Fairs</div>
       <div className="between-inputs" />
       <div>
-        {allPrograms.map((programObject, index) => (
+        {jobFairs.map((jobFairObject, index) => (
           <div>
             <div>
               <form>
@@ -94,9 +86,9 @@ function TrainingPrograms() {
                         id="outlined-basic"
                         label={field.label}
                         variant="outlined"
-                        value={programObject[field.value]}
+                        value={jobFairObject[field.value]}
                         focused
-                        onChange={(e) => editProgram(e, field.value, index)}
+                        onChange={(e) => editJobFair(e, field.value, index)}
                         InputProps={textFieldStyles.inputProps}
                         InputLabelProps={textFieldStyles.labelProps}
                       />
@@ -107,13 +99,13 @@ function TrainingPrograms() {
               </form>
             </div>
             <div className="width-55vw">
-              <button type="button" onClick={(e) => deleteProgram(e, index)} className="op-delete-button">
+              <button type="button" onClick={(e) => deleteJobFair(e, index)} className="op-delete-button">
                 <img
                   src={Delete}
                   alt="delete icon"
                   style={{ marginRight: '12px' }}
                 />
-                Delete Program
+                Delete Job Fair
               </button>
             </div>
             <div className="tp-between-buttons" />
@@ -121,13 +113,13 @@ function TrainingPrograms() {
         ))}
       </div>
       <div className="width-55vw">
-        <button type="button" onClick={addProgram} className="op-add-button">
+        <button type="button" onClick={addJobFair} className="op-add-button">
           <img
             src={Add}
             alt="add icon"
             style={{ marginRight: '12px' }}
           />
-          Add Program
+          Add Job Fair
         </button>
       </div>
 
@@ -135,4 +127,4 @@ function TrainingPrograms() {
   );
 }
 
-export default TrainingPrograms;
+export default JobFairs;

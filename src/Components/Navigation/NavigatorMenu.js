@@ -40,12 +40,12 @@ const tabs = [
   { title: 'Assessment', link: 'assessment' },
   { title: 'Online Profiles', link: 'onlineprofiles' },
   { title: 'Training Programs', link: 'training' },
-  { title: 'Workshops', link: 'assessment' },
+  { title: 'Workshops', link: 'workshops' },
   { title: 'Internships', link: 'internships' },
-  { title: 'Job Fairs', link: 'assessment' },
-  { title: 'Job Boards', link: 'assessment' },
-  { title: 'Resources', link: 'assessment' },
-  { title: 'Hired Info', link: 'assessment' },
+  { title: 'Job Fairs', link: 'jobfairs' },
+  { title: 'Job Boards', link: 'jobboards' },
+  { title: 'Resources', link: 'resources' },
+  { title: 'Hired Info', link: 'hiredinfo' },
 ];
 
 function NavigatorMenu() {

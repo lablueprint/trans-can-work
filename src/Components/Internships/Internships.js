@@ -15,13 +15,15 @@ function Internships() {
         fontSize: '0.9vw',
         fontWeight: 'bold',
         borderColor: '#000AA0',
+        backgroundColor: '#F7F8FE',
       },
     },
     labelProps: {
       style: {
         fontFamily: 'Montserrat',
-        color: '#000AA0',
         fontSize: '0.95vw',
+        color: '#000AA0',
+        backgroundColor: '#FFFFFF',
       },
     },
   };
@@ -34,6 +36,9 @@ function Internships() {
     end: '',
     referralDate: '',
     applied: '',
+    accepted: '',
+    completed: '',
+    notes: '',
   }]);
 
   const addInternship = async (event) => {
@@ -68,6 +73,19 @@ function Internships() {
     console.log(allInternships);
   };
 
+  const fieldProps = [
+    { label: 'Company/Org of Internship', value: 'company' },
+    { label: 'Program Name', value: 'program' },
+    { label: 'Position', value: 'position' },
+    { label: 'Start Date', value: 'start' },
+    { label: 'End Date', value: 'end' },
+    { label: 'Date Referral Sent (If Applicable)', value: 'referralDate' },
+    { label: 'Did Client Apply for position? (If Applicable)', value: 'applied' },
+    { label: 'Client Officially Accepted into internship?', value: 'accepted' },
+    { label: 'Client Successfully Completed Internship?', value: 'completed' },
+    { label: 'Notes', value: 'notes' },
+  ];
+
   return (
     <div>
       <div className="temp" />
@@ -78,116 +96,21 @@ function Internships() {
             <div>
               <form>
                 <div>
-                  <TextField
-                    id="outlined-basic"
-                    label="Company/Org of Internship"
-                    variant="outlined"
-                    value={internshipObject.company}
-                    focused
-                    onChange={(e) => editInternship(e, 'company', index)}
-                    InputProps={textFieldStyles.inputProps}
-                    InputLabelProps={textFieldStyles.labelProps}
-                  />
-                  <div className="op-between-inputs" />
-                  <TextField
-                    id="outlined-basic"
-                    label="Program Name"
-                    variant="outlined"
-                    value={internshipObject.program}
-                    focused
-                    onChange={(e) => editInternship(e, 'program', index)}
-                    InputProps={textFieldStyles.inputProps}
-                    InputLabelProps={textFieldStyles.labelProps}
-                  />
-                  <div className="i-between-inputs" />
-                  <TextField
-                    id="outlined-basic"
-                    label="Position"
-                    variant="outlined"
-                    value={internshipObject.position}
-                    focused
-                    onChange={(e) => editInternship(e, 'position', index)}
-                    InputProps={textFieldStyles.inputProps}
-                    InputLabelProps={textFieldStyles.labelProps}
-                  />
-                  <div className="i-between-inputs" />
-                  <TextField
-                    id="outlined-basic"
-                    label="Start Date"
-                    variant="outlined"
-                    value={internshipObject.start}
-                    focused
-                    onChange={(e) => editInternship(e, 'start', index)}
-                    InputProps={textFieldStyles.inputProps}
-                    InputLabelProps={textFieldStyles.labelProps}
-                  />
-                  <div className="i-between-inputs" />
-                  <TextField
-                    id="outlined-basic"
-                    label="End Date"
-                    variant="outlined"
-                    value={internshipObject.end}
-                    focused
-                    onChange={(e) => editInternship(e, 'end', index)}
-                    InputProps={textFieldStyles.inputProps}
-                    InputLabelProps={textFieldStyles.labelProps}
-                  />
-                  <div className="i-between-inputs" />
-                  <TextField
-                    id="outlined-basic"
-                    label="Date Referral Sent (If Applicable)"
-                    variant="outlined"
-                    value={internshipObject.referralDate}
-                    focused
-                    onChange={(e) => editInternship(e, 'referralDate', index)}
-                    InputProps={textFieldStyles.inputProps}
-                    InputLabelProps={textFieldStyles.labelProps}
-                  />
-                  <div className="i-between-inputs" />
-                  <TextField
-                    id="outlined-basic"
-                    label="Did Client Apply for Position? (If Applicable)"
-                    variant="outlined"
-                    value={internshipObject.applied}
-                    focused
-                    onChange={(e) => editInternship(e, 'applied', index)}
-                    InputProps={textFieldStyles.inputProps}
-                    InputLabelProps={textFieldStyles.labelProps}
-                  />
-                  <div className="i-between-inputs" />
-                  <TextField
-                    id="outlined-basic"
-                    label="Client Officially Accepted into internship?"
-                    variant="outlined"
-                    value={internshipObject.accepted}
-                    focused
-                    onChange={(e) => editInternship(e, 'accepted', index)}
-                    InputProps={textFieldStyles.inputProps}
-                    InputLabelProps={textFieldStyles.labelProps}
-                  />
-                  <div className="i-between-inputs" />
-                  <TextField
-                    id="outlined-basic"
-                    label="Client Successfully Completed Internship?"
-                    variant="outlined"
-                    value={internshipObject.completed}
-                    focused
-                    onChange={(e) => editInternship(e, 'completed', index)}
-                    InputProps={textFieldStyles.inputProps}
-                    InputLabelProps={textFieldStyles.labelProps}
-                  />
-                  <div className="i-between-inputs" />
-                  <TextField
-                    id="outlined-basic"
-                    label="Notes"
-                    variant="outlined"
-                    value={internshipObject.notes}
-                    focused
-                    onChange={(e) => editInternship(e, 'notes', index)}
-                    InputProps={textFieldStyles.inputProps}
-                    InputLabelProps={textFieldStyles.labelProps}
-                  />
-                  <div className="i-between-inputs" />
+                  {fieldProps.map((field) => (
+                    <div>
+                      <TextField
+                        id="outlined-basic"
+                        label={field.label}
+                        variant="outlined"
+                        value={internshipObject[field.value]}
+                        focused
+                        onChange={(e) => editInternship(e, field.value, index)}
+                        InputProps={textFieldStyles.inputProps}
+                        InputLabelProps={textFieldStyles.labelProps}
+                      />
+                      <div className="op-between-inputs" />
+                    </div>
+                  ))}
                 </div>
               </form>
             </div>

@@ -14,7 +14,8 @@ function OnlineProfiles() {
         height: '3.2vw',
         fontSize: '0.9vw',
         fontWeight: 'bold',
-        borderColor: '#000AA0',
+        borderColor: 'red',
+        backgroundColor: '#F7F8FE',
       },
     },
     labelProps: {
@@ -22,6 +23,7 @@ function OnlineProfiles() {
         fontFamily: 'Montserrat',
         fontSize: '0.95vw',
         color: '#000AA0',
+        backgroundColor: '#FFFFFF',
       },
     },
   };
@@ -57,6 +59,13 @@ function OnlineProfiles() {
     temp[index][element] = event.target.value;
     setProfile(temp);
   };
+
+  const fieldProps = [
+    { label: 'Company/Org of Internship', value: 'website' },
+    { label: 'Tools This Site Provides', value: 'tools' },
+    { label: 'Created an Account?', value: 'created' },
+    { label: 'Notes', value: 'notes' },
+  ];
 
   return (
     <div>

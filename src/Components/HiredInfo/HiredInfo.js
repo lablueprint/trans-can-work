@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import './TrainingPrograms.css';
+import './HiredInfo.css';
 import { TextField } from '@material-ui/core';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
 
-function TrainingPrograms() {
+function HiredInfo() {
   const textFieldStyles = {
     inputProps: {
       style: {
@@ -27,63 +27,70 @@ function TrainingPrograms() {
       },
     },
   };
-  const [allPrograms, setAllPrograms] = useState([{
+
+  const [allHiredInfo, setAllHiredInfo] = useState([{
+    company: '',
     program: '',
-    referral: '',
+    position: '',
     start: '',
-    enrolled: '',
     end: '',
+    referralDate: '',
+    applied: '',
+    accepted: '',
     completed: '',
     notes: '',
   }]);
 
-  const addProgram = async (event) => {
+  const addHiredInfo = async (event) => {
     event.preventDefault();
     const temp = {
+      company: '',
       program: '',
-      referral: '',
+      position: '',
       start: '',
-      enrolled: '',
       end: '',
+      referralDate: '',
+      applied: '',
+      accepted: '',
       completed: '',
       notes: '',
     };
-    await setAllPrograms([...allPrograms, temp]);
-    console.log(allPrograms);
+    await setAllHiredInfo([...allHiredInfo, temp]);
   };
 
-  const deleteProgram = async (event, index) => {
+  const deleteHiredInfo = async (event, index) => {
     event.preventDefault();
-    const temp = [...allPrograms];
+    const temp = [...allHiredInfo];
     temp.splice(index, 1);
-    await setAllPrograms(temp);
+    await setAllHiredInfo(temp);
   };
 
-  const editProgram = (event, element, index) => {
+  const editHiredInfo = (event, element, index) => {
     event.preventDefault();
-    const temp = [...allPrograms];
+    const temp = [...allHiredInfo];
     temp[index][element] = event.target.value;
-    setAllPrograms(temp);
-    console.log(allPrograms);
+    setAllHiredInfo(temp);
+    console.log(allHiredInfo);
   };
 
   const fieldProps = [
-    { label: 'Company/Org of Internship', value: 'program' },
-    { label: 'Date Referral Sent', value: 'referral' },
-    { label: 'Start Date', value: 'start' },
-    { label: 'Date Officially Enrolled', value: 'enrolled' },
-    { label: 'End Date', value: 'end' },
-    { label: 'Date Completed Training', value: 'completed' },
-    { label: 'Notes', value: 'notes' },
+    { label: 'Name of Company', value: 'company' },
+    { label: 'Hired Date', value: 'date' },
+    { label: 'Field of Work', value: 'field' },
+    { label: 'Job Title', value: 'title' },
+    { label: 'Supervisor Name', value: 'supervisor' },
+    { label: 'Contact Email', value: 'email' },
+    { label: 'Contact Phone Number', value: 'phone' },
+    { label: 'Hourly Pay', value: 'pay' },
+    { label: 'Offers Benefits?', value: 'benefits' },
   ];
 
   return (
     <div>
       <div className="temp" />
-      <div className="tp-title">Training Programs</div>
-      <div className="between-inputs" />
+      <div className="i-title">Hired Info</div>
       <div>
-        {allPrograms.map((programObject, index) => (
+        {allHiredInfo.map((internshipObject, index) => (
           <div>
             <div>
               <form>
@@ -94,9 +101,9 @@ function TrainingPrograms() {
                         id="outlined-basic"
                         label={field.label}
                         variant="outlined"
-                        value={programObject[field.value]}
+                        value={internshipObject[field.value]}
                         focused
-                        onChange={(e) => editProgram(e, field.value, index)}
+                        onChange={(e) => editHiredInfo(e, field.changeParameter, index)}
                         InputProps={textFieldStyles.inputProps}
                         InputLabelProps={textFieldStyles.labelProps}
                       />
@@ -107,32 +114,32 @@ function TrainingPrograms() {
               </form>
             </div>
             <div className="width-55vw">
-              <button type="button" onClick={(e) => deleteProgram(e, index)} className="op-delete-button">
+              <button type="button" onClick={(e) => deleteHiredInfo(e, index)} className="i-delete-button">
                 <img
                   src={Delete}
                   alt="delete icon"
                   style={{ marginRight: '12px' }}
                 />
-                Delete Program
+                Delete Section
               </button>
             </div>
-            <div className="tp-between-buttons" />
+            <div className="i-between-buttons" />
           </div>
         ))}
-      </div>
-      <div className="width-55vw">
-        <button type="button" onClick={addProgram} className="op-add-button">
-          <img
-            src={Add}
-            alt="add icon"
-            style={{ marginRight: '12px' }}
-          />
-          Add Program
-        </button>
+        <div className="width-55vw">
+          <button type="button" onClick={addHiredInfo} className="i-add-button">
+            <img
+              src={Add}
+              alt="add icon"
+              style={{ marginRight: '12px' }}
+            />
+            Add Section
+          </button>
+        </div>
       </div>
 
     </div>
   );
 }
 
-export default TrainingPrograms;
+export default HiredInfo;

@@ -1,9 +1,7 @@
 import {
   doc, setDoc, getDoc, updateDoc, deleteDoc,
 } from 'firebase/firestore';
-import firebase from '../firebase';
-
-const db = firebase;
+import { db } from '../firebase';
 
 // CRUD functions
 // data in form {"name": "John"} for instance.
