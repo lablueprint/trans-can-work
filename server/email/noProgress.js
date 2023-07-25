@@ -16,17 +16,25 @@ const NoProgressEmail = ({ emailList, subject, message }) => new Promise((resolv
     },
   });
 
+  const viewPath = path.resolve('./templates/views');
+  const partialsPath = path.resolve('./templates/partials');
+
   const handlebarOptions = {
     viewEngine: {
-      partialsDir: path.resolve('./templates/'),
+      extName: '.handlebars',
+      layoutsDir: viewPath,
       defaultLayout: false,
+      partialsDir: partialsPath,
+      // express,
     },
-    viewPath: path.resolve('./templates/'),
+    viewPath,
+    extName: '.handlebars',
   };
 
   transporter.use('compile', hbs(handlebarOptions));
 
   const testerEmail = ['arwaidev@gmail.com'];
+  const image = { filename: 'trans_flag_graphic.png', path: path.resolve(__dirname, '../assets/trans_flag_graphic.png') };
 
   for (let i = 0; i < testerEmail.length; i++) {
     setTimeout(() => {
@@ -34,11 +42,15 @@ const NoProgressEmail = ({ emailList, subject, message }) => new Promise((resolv
         from: senderEmail,
         to: testerEmail[i],
         subject,
-        template: 'noProgress',
+        template: 'index',
         context: {
           username: emailList[i],
           message,
+          image,
         },
+        attachments: [
+          { filename: 'trans_flag_graphic.png', path: path.resolve(__dirname, '../assets/trans_flag_graphic.png') },
+        ],
       };
 
       transporter.sendMail(mailConfigs, (error, info) => {

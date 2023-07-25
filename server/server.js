@@ -35,6 +35,11 @@ cron.schedule('0 12 * * 1', () => { sendEmails(); }, { timezone: 'America/Los_An
 // everything that isn't MilestonesComplete gets an appropriate email sent
 // MilestoneComplete gets an autoemail send trigger that isn't a part of this issue
 
+// last edit date and aremilestonescomplete
+// if jobseeker or navigator makes any changes
+// check if firebase keeps track of specific record change dates
+// where would the app trigger the field?
+
 // for testing purposes
 app.post('/no-progress-email', (req, res) => {
   console.log(req.body);
