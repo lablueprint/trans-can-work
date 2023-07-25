@@ -173,3 +173,17 @@
     font-family: "Montserrat";
     font-weight: 500;
   }
+
+  .form-label .MuiRadio-root {
+    right: 3em;
+    position: absolute;
+  }
+
+  .button {
+    height: 63px;
+    width: 172px;
+    border-color: #000DC8 !important;
+    border-radius: 5px;
+    background-color: #FFFBFE;
+    border-style: solid !important;
+  }

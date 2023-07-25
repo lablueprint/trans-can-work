@@ -7,7 +7,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import GoogleIcon from '@mui/icons-material/Google';
 import { styled, makeStyles } from '@material-ui/core/styles';
 
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import {
   login, handleGoogleSignIn,
 } from '../Services/user-service';
@@ -60,6 +60,7 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
+  // eslint-disable-next-line no-undef
   const user = useSelector((state) => state.auth.value);
 
   const navigate = useNavigate();

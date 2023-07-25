@@ -45,7 +45,7 @@ const dummyNavigators = [
     id: 'jungkook@gmail.com',
     approved: true,
     bio: 'i love tcq',
-    firstName: 'Jungkook',
+    firstName: 'Junglecock',
     lastName: 'Jeon',
     jobseekers: [],
     phoneNumber: '6969',
@@ -182,8 +182,8 @@ function ArchivePopup({
   };
 
   const handleconfirm = () => {
-    console.log (selectedValue); 
-  }
+    console.log(selectedValue);
+  };
 
   useEffect(() => {
   }, [selectedValue]);
@@ -274,13 +274,14 @@ function ArchivePopup({
             <FormControlLabel
               value={element.id}
               control={<Radio />}
-              labelPlacement="start"
+              labelPlacement="end"
               label={element.firstName}
               style={{
                 display: 'flex',
                 marginTop: '1.5em',
                 borderBottom: '1px solid #CAC4D0',
                 width: '100%',
+                marginRight: '4em',
               }}
               onChange={(e) => handleChange(e)}
               sx={{
@@ -288,6 +289,8 @@ function ArchivePopup({
                   justifyContent: 'space-between',
                 },
               }}
+              className="form-label"
+
               // classes={{
               // }}
               // take event handler id thingy
@@ -302,14 +305,8 @@ function ArchivePopup({
         </RadioGroup>
         <Button
           variant="outlined"
-          style={{
-            height: '63px',
-            width: '172px',
-            borderColor: '#000DC8',
-            borderRadius: '5px',
-            backgroundColor: '#FFFBFE',
-          }}
           onClick={handleconfirm}
+          className="button"
         >
           {' '}
           <p style={styles.confirmText}>Confirm</p>
