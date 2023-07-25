@@ -16,6 +16,94 @@ import { Button } from 'react-bootstrap';
 import firebase from '../firebase';
 // import NavigatorCard from './navigatorCard';
 
+const dummyNavigators = [
+  {
+    id: 'harrystyles@gmail.com',
+    approved: true,
+    bio: 'i love tcq',
+    firstName: 'Harry',
+    lastName: 'Styles',
+    jobseekers: [],
+    phoneNumber: '6969',
+    pronouns: 'he/him',
+    role: 'navigator',
+    uid: '1234567urmom',
+  },
+  {
+    id: 'v@gmail.com',
+    approved: true,
+    bio: 'i love tcq',
+    firstName: 'Taehyung',
+    lastName: 'Kim',
+    jobseekers: [],
+    phoneNumber: '6969',
+    pronouns: 'he/him',
+    role: 'navigator',
+    uid: '1234567urmom',
+  },
+  {
+    id: 'jungkook@gmail.com',
+    approved: true,
+    bio: 'i love tcq',
+    firstName: 'Jungkook',
+    lastName: 'Jeon',
+    jobseekers: [],
+    phoneNumber: '6969',
+    pronouns: 'he/him',
+    role: 'navigator',
+    uid: '1234567urmom',
+  },
+  {
+    id: 'jimin@gmail.com',
+    approved: true,
+    bio: 'i love tcq',
+    firstName: 'Jimin',
+    lastName: 'Park',
+    jobseekers: [],
+    phoneNumber: '6969',
+    pronouns: 'he/him',
+    role: 'navigator',
+    uid: '1234567urmom',
+  },
+  {
+    id: 'rm@gmail.com',
+    approved: true,
+    bio: 'i love tcq',
+    firstName: 'Namjoon',
+    lastName: 'Kim',
+    jobseekers: [],
+    phoneNumber: '6969',
+    pronouns: 'he/him',
+    role: 'navigator',
+    uid: '1234567urmom',
+  },
+  {
+    id: 'jin@gmail.com',
+    approved: true,
+    bio: 'i love tcq',
+    firstName: 'Seokjin',
+    lastName: 'Kim',
+    jobseekers: [],
+    phoneNumber: '6969',
+    pronouns: 'he/him',
+    role: 'navigator',
+    uid: '1234567urmom',
+  },
+];
+
+const dummyUser = {
+  id: 'dbaliga@g.ucla.edu',
+  approved: false,
+  bio: '',
+  firstName: '',
+  lastName: '',
+  navigator: '',
+  phoneNumber: '',
+  pronouns: '',
+  role: 'jobseeker',
+  uid: 'bhPDCNQ2F4Y7MGRQ9ZbEsS7nrw53',
+};
+
 const styles = {
   avatar: {
     width: '5em',
@@ -82,79 +170,63 @@ function ArchivePopup({
   handleClose,
 }) {
   const db = firebase;
-  const [navigators, setNagivators] = useState([]);
+  const [navigators, setNagivators] = useState(dummyNavigators);
 
   // const [profilePic, setProfilePic] = useState('');
   //   const [bg, setBg] = useState('');
 
-  // const [selectedValue, setSelectedValue] = React.useState('a');
+  const [selectedValue, setSelectedValue] = React.useState('if you see this first its wrong');
 
-  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setSelectedValue(event.target.value);
-  // };
-
-  const fetchNavigators = async () => {
-    const colRef = collection(db, 'navigators');
-    try {
-      const docsSnap = await getDocs(colRef);
-      // use docsSnap.docs.map(doc => doc.data());
-      return docsSnap;
-    } catch (error) {
-      console.log(error);
-      return undefined;
-    }
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value);
   };
 
-  useEffect(() => {
-    const logquery = async () => {
-      const query = await fetchNavigators();
-      console.log(query);
-      const nvgtrs = [];
-      query.forEach((element) => {
-        const elem = {
-          name: element.data().name,
-          id: `${element.data().name}id`,
-        };
-        nvgtrs.push(elem);
-        console.log(elem);
-      });
-      setNagivators(nvgtrs);
-    };
+  const handleconfirm = () => {
+    console.log (selectedValue); 
+  }
 
-    /*
+  useEffect(() => {
+  }, [selectedValue]);
+
+  // const fetchNavigators = async () => {
+  //   const colRef = collection(db, 'navigators');
+  //   try {
+  //     const docsSnap = await getDocs(colRef);
+  //     // use docsSnap.docs.map(doc => doc.data());
+  //     return docsSnap;
+  //   } catch (error) {
+  //     console.log(error);
+  //     return undefined;
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   const logquery = async () => {
+  //     const query = await fetchNavigators();
+  //     console.log(query);
+  //     const nvgtrs = [];
+  //     query.forEach((element) => {
+  //       const elem = {
+  //         name: element.data().name,
+  //         id: `${element.data().name}id`,
+  //       };
+  //       nvgtrs.push(elem);
+  //       console.log(elem);
+  //     });
+  //     setNagivators(nvgtrs);
+  //   };
+
+  /*
     .then((docs) => {
       docs.forEach(async (doc) => {
         await setEmailList((e) => [...e, doc.id]);
       });
     });
     */
-    console.log('i fire once');
-    logquery();
-  }, []);
+  //   console.log('i fire once');
+  //   logquery();
+  // }, []);
 
-  //   const handleClick = (color) => {
-  //     const data = {
-  //       color,
-  //     };
-  //     setDoc(docRef, data, { merge: true })
-  //       .then(() => {
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //     setBg(color);
-  //   };
-
-  //   const handleToggleShowPassword = () => {
-  //     setShowPassword(!showPassword);
-  //   };
-
-  // pass in navigator and set navigator, whenever the button for radio thing
-  // is clicked (in the component) set navigator
-  // on confirm want to submit the navigator
-
-  // to make sure only one is clicked
-  //
   return (
     <div className="containerSection" style={styles.containerSection}>
       <Dialog
@@ -203,13 +275,14 @@ function ArchivePopup({
               value={element.id}
               control={<Radio />}
               labelPlacement="start"
-              label={element.name}
+              label={element.firstName}
               style={{
                 display: 'flex',
                 marginTop: '1.5em',
                 borderBottom: '1px solid #CAC4D0',
                 width: '100%',
               }}
+              onChange={(e) => handleChange(e)}
               sx={{
                 labelPlacementStart: {
                   justifyContent: 'space-between',
@@ -217,6 +290,13 @@ function ArchivePopup({
               }}
               // classes={{
               // }}
+              // take event handler id thingy
+              // then
+              // on confirm
+              // push id thingy to jobseeker navigator field
+              // update navigator with jobseeker
+                // use real navigator objects, copy a few objects that have navigator role
+                // just copy email as id
             />
           ))}
         </RadioGroup>
@@ -229,6 +309,7 @@ function ArchivePopup({
             borderRadius: '5px',
             backgroundColor: '#FFFBFE',
           }}
+          onClick={handleconfirm}
         >
           {' '}
           <p style={styles.confirmText}>Confirm</p>

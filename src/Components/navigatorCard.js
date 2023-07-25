@@ -6,7 +6,6 @@ import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import MuiCheckbox from '@mui/material/Checkbox';
 
-
 function Checkbox({ icon, checkedIcon }) {
   return (
     <FormControlLabel

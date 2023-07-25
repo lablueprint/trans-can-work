@@ -8,18 +8,16 @@ import {
   NavigatorDashboard,
   Register,
   Reset,
-  Profile,
   ProfileTemp,
   ArchiveTemp,
   Landing,
   JobseekerData,
 } from './Pages';
 import './App.css';
-// import Footer from './Components/Footer/Footer';
+import Footer from './Components/Footer/Footer';
 // import Header from './Components/Navigation/Header';
-import Splash from './Components/Splash';
-import approvalIcon from './Assets/trans flag graphic.svg';
-import AdminView from './Components/AdminView';
+import Splash from './Components/Splash/Splash';
+import approvalIcon from './Assets/Images/trans-flag-graphic.svg';
 import ScrollToTop from './Pages/scrollToTop';
 import NavigatorMenu from './Components/Navigation/NavigatorMenu';
 import MilestoneMap from './Components/Milestones/MilestoneMap';
@@ -93,11 +91,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />
         <Route path="/reset" element={<Reset />} />
-        <Route path="/profile" element={<Profile />} />
         <Route path="/newprofile" element={<ProfileTemp />} />
         <Route path="/landing" element={<Landing />} />
         <Route path="/onboard" element={<JobseekerData useremail="solia@goodpl.us" username="Solia Nasser" />} />
-        <Route path="/adminview" element={<AdminView />} />
         <Route path="/archivepopuptesting" element={<ArchiveTemp />} />
 
         <Route
