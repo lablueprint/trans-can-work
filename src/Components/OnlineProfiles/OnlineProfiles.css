@@ -82,3 +82,7 @@
 .op-between-buttons {
     height: 1em;
 }
+
+.input-field * {
+    border-width: 1px !important;
+}

@@ -313,10 +313,10 @@ input, textarea {
     textDecoration: 'none', */
 }
 
-.MuiOutlinedInput-root.Mui-focused, .MuiOutlinedInput-notchedOutline {
+/* .MuiOutlinedInput-root.Mui-focused, .MuiOutlinedInput-notchedOutline {
     border-color: red !important;
 }
 
 .PrivateNotchedOutline-legendLabelled-19 {
     width: auto !important;
-}
+} */

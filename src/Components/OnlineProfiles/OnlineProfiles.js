@@ -77,6 +77,7 @@ function OnlineProfiles() {
                     onChange={(e) => editOnlineProfile(e, 'website', index)}
                     InputProps={textFieldStyles.inputProps}
                     InputLabelProps={textFieldStyles.labelProps}
+                    className="input-field"
                   />
                   <div className="op-between-inputs" />
                   <TextField
@@ -88,6 +89,7 @@ function OnlineProfiles() {
                     onChange={(e) => editOnlineProfile(e, 'tools', index)}
                     InputProps={textFieldStyles.inputProps}
                     InputLabelProps={textFieldStyles.labelProps}
+                    className="input-field"
                   />
                   <div className="op-between-inputs" />
                   <TextField
@@ -99,6 +101,7 @@ function OnlineProfiles() {
                     onChange={(e) => editOnlineProfile(e, 'created', index)}
                     InputProps={textFieldStyles.inputProps}
                     InputLabelProps={textFieldStyles.labelProps}
+                    className="input-field"
                   />
                   <div className="op-between-inputs" />
                   <TextField
@@ -110,6 +113,7 @@ function OnlineProfiles() {
                     onChange={(e) => editOnlineProfile(e, 'notes', index)}
                     InputProps={textFieldStyles.inputProps}
                     InputLabelProps={textFieldStyles.labelProps}
+                    className="input-field"
                   />
                   <div className="op-between-inputs" />
                 </div>
