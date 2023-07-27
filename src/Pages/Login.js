@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import {
-  TextField, Button, Checkbox,
-} from '@material-ui/core';
+// import { useSelector } from 'react-redux';
+import { TextField, Button, Checkbox } from '@material-ui/core';
 import InputAdornment from '@mui/material/InputAdornment';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import GoogleIcon from '@mui/icons-material/Google';
 import { styled, makeStyles } from '@material-ui/core/styles';
-import { auth, logInWithEmailAndPassword } from '../firebase';
-import { getApprovalStatus } from './Register';
+
+import { useSelector } from 'react-redux';
+import {
+  login, handleGoogleSignIn,
+} from '../Services/user-service';
+
 import './Login.css';
 
 const TCWLogo = require('../Assets/Images/TCW-logo.png');
@@ -58,33 +60,37 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
-  // const [user] = useAuthState(auth);
+  const user = useSelector((state) => state.auth.value);
+
   const navigate = useNavigate();
 
-  const login = async () => {
-    const loggedIn = await logInWithEmailAndPassword(email.toLowerCase(), password);
-    if (loggedIn) {
-      const approves = await getApprovalStatus(email);
-      navigate(approves ? '/home' : '/splash');
-    } else {
-      setError(true);
-    }
-  };
-  const provider = new GoogleAuthProvider();
-  function signInWithGoogle() {
-    signInWithPopup(auth, provider)
-      .then(async (result) => {
-        const { user: googleUser } = result;
-        const approves = await getApprovalStatus(googleUser.email);
-        navigate(approves ? '/home' : '/splash');
-      }).catch((e) => {
-        // Handle Errors here.
+  const onLogin = async (event) => {
+    event.preventDefault();
+    login(email.toLowerCase(), password)
+      .catch((e) => {
+        // add proper error handling
         const errorCode = e.code;
-        console.log(errorCode);
-        const googleErrorMessage = e.message;
-        console.log(googleErrorMessage);
+        const errorMessage = e.message;
+        console.log('An error occured: ', errorCode, errorMessage);
+        setError(true);
       });
+  };
+
+  function signInWithGoogle() {
+    handleGoogleSignIn().catch((e) => {
+      // add proper error handling
+      const errorCode = e.code;
+      console.log(errorCode);
+      const googleErrorMessage = e.message;
+      console.log(googleErrorMessage);
+    });
   }
+
+  useEffect(() => {
+    if (user && user.isLoggedIn && user.user !== undefined) {
+      navigate(user.user.approved ? '/home' : '/splash');
+    }
+  }, [user]);
 
   const classes = useStyles();
 
@@ -149,10 +155,8 @@ function Login() {
           <div className="loginInput">
             <CssTextField
               id="email"
-              focusColor="#0c0ca4"
               label="Email Address"
               variant="outlined"
-              autoComplete={rememberMe}
               focused
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -169,9 +173,7 @@ function Login() {
               label="Password"
               variant="outlined"
               value={password}
-              autoComplete={rememberMe}
               focused
-              focusColor="#0c0ca4"
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
               type={showPassword ? 'text' : 'password'}
@@ -223,7 +225,7 @@ function Login() {
               type="button"
               variant="contained"
               color="primary"
-              onClick={() => login()}
+              onClick={onLogin}
               style={buttonStyle}
             >
               Login
@@ -251,7 +253,6 @@ function Login() {
             </div>
             <Link to="/register">Create Account</Link>
           </div>
-
         </div>
       </div>
     </>

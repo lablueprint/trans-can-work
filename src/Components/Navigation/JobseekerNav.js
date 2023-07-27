@@ -86,7 +86,9 @@ function JobseekerNav() {
   const prevOpen1 = React.useRef(open1);
   React.useEffect(() => {
     if (prevOpen1.current === true && open1 === false) {
-      anchorRef1.current?.focus();
+      if (anchorRef1.current) {
+        anchorRef1.current.focus();
+      }
     }
 
     prevOpen1.current = open1;
@@ -95,7 +97,9 @@ function JobseekerNav() {
   const prevOpen2 = React.useRef(open2);
   React.useEffect(() => {
     if (prevOpen2.current === true && open2 === false) {
-      anchorRef2.current?.focus();
+      if (anchorRef2.current) {
+        anchorRef2.current.focus();
+      }
     }
 
     prevOpen2.current = open1;
