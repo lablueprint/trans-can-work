@@ -19,9 +19,12 @@
     font-size: 16px;
     line-height: 24px;
     text-align: center;
-    text-transform: none;
     letter-spacing: 0.15px;
     color: #484649;
+    margin: 2em auto;
+    left: 50%;
+    transform: translateX(-50%); 
+    text-transform: none;
 }
 
 #jobPortalButton:hover {

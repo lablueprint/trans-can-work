@@ -113,7 +113,3 @@ MilestoneChecklist.defaultProps = {
   checkboxes: [],
   columns: 1,
 };
-
-/*
-
-*/

@@ -3,14 +3,14 @@
     justify-content: center;
 }
 
-.skillsChecklist{
+.contentTitle{
     font-family: 'Pirate';
     font-size: 56px;
     color: rgba(72, 70, 73, 1);
     font-weight: 400;
     text-align: center;
     margin-top: 50px;
-    margin-bottom: 1px;
+    margin-bottom: 20px;
 }
 
 .content {
@@ -19,5 +19,21 @@
     color: rgba(72, 70, 73, 1);
     font-weight: 400;
     text-align: center;
-    margin-top: 5px;
+    margin-top: 20px;
+}
+
+.shortLine {
+    width: 101.509px;
+    height: 2px;
+    background: #939094;
+    border: none;
+    border-radius: 5px;
+}
+
+.longLine {
+    width: 190px;
+    height: 2px;
+    background: #939094;
+    border: none;
+    border-radius: 5px;
 }

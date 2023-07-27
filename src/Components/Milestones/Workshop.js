@@ -1,9 +1,8 @@
 import React from 'react';
 import './Workshop.css';
+import Button from '@mui/material/Button';
 
 function Workshop() {
-  const [isComplete, setComplete] = React.useState(false);
-  const toggleComplete = () => setComplete(!isComplete);
   return (
     <div>
       <h6 className="workshop">
@@ -14,8 +13,28 @@ function Workshop() {
         certification.
       </h6>
       <div className="workshop-row">
-        <h4 className="workshop-row-label">Tcw Internal Workshops</h4>
-        <h4 className="workshop-row-label">External Workshops</h4>
+        <h4 className="workshop-row-label">
+          Tcw Internal Workshops
+          <a href="https://example.com">
+            <Button
+              disableRipple
+              id="internalWorkshopButton"
+            >
+              Internal Workshop Link
+            </Button>
+          </a>
+        </h4>
+        <h4 className="workshop-row-label">
+          External Workshops
+          <a href="https://example.com">
+            <Button
+              disableRipple
+              id="externalWorkshopButton"
+            >
+              External Workshop Link
+            </Button>
+          </a>
+        </h4>
       </div>
       {/* <div className="checkBoxes">
         <div className="col1">
@@ -66,10 +85,10 @@ function Workshop() {
           </form> */}
       {/* </div>
       </div> */}
-      <div
+      {/* <div
         isComplete={isComplete}
         toggleComplete={toggleComplete}
-      />
+      /> */}
     </div>
   );
 }

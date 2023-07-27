@@ -49,10 +49,10 @@
     transform: translateX(-50%);
     text-transform: none;
 }
-.markAsComplete {
+/* .markAsComplete {
     border-radius: 2px, red, dotted; 
     box-sizing: border-box;
-}
+} */
 
 #completed{
     padding: 20px 28px; 

@@ -1,9 +1,8 @@
 import React from 'react';
 import './Internship.css';
+import Button from '@mui/material/Button';
 
 function Internship() {
-  const [isComplete, setComplete] = React.useState(false);
-  const toggleComplete = () => setComplete(!isComplete);
   return (
     <div>
       <h6 className="internship">
@@ -11,10 +10,14 @@ function Internship() {
         <br />
         ye have enrolled or been accepted.
       </h6>
-      <div
-        isComplete={isComplete}
-        toggleComplete={toggleComplete}
-      />
+      <a href="https://example.com">
+        <Button
+          disableRipple
+          id="internshipButton"
+        >
+          Internship Link
+        </Button>
+      </a>
     </div>
   );
 }
