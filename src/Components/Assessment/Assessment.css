@@ -2,22 +2,22 @@
     font-family: 'Montserrat';
     font-weight: normal;
     font-style: normal;
-    src: url('../Assets/Fonts/Montserrat-Regular.eot') format('embedded-opentype'), /* IE6-IE8 */
-         url('../Assets/Fonts/Montserrat-Regular.woff2') format('woff2'), /* Super Modern Browsers */
-         url('../Assets/Fonts/Montserrat-Regular.woff') format('woff'), /* Pretty Modern Browsers */
-         url('../Assets/Fonts/Montserrat-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
-         url('../Assets/Fonts/Montserrat-Regular.svg') format('svg'); /* Legacy iOS */
+    src: url('../../Assets/Fonts/Montserrat-Regular.eot') format('embedded-opentype'), /* IE6-IE8 */
+         url('../../Assets/Fonts/Montserrat-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../../Assets/Fonts/Montserrat-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+         url('../../Assets/Fonts/Montserrat-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('../../Assets/Fonts/Montserrat-Regular.svg') format('svg'); /* Legacy iOS */
 }
 
 @font-face {
     font-family: 'Montserrat';
     font-weight: bold;
     font-style: normal;
-    src: url('../Assets/Fonts/Montserrat-Bold.eot') format('embedded-opentype'), /* IE6-IE8 */
-         url('../Assets/Fonts/Montserrat-Bold.woff2') format('woff2'), /* Super Modern Browsers */
-         url('../Assets/Fonts/Montserrat-Bold.woff') format('woff'), /* Pretty Modern Browsers */
-         url('../Assets/Fonts/Montserrat-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
-         url('../Assets/Fonts/Montserrat-Bold.svg') format('svg'); /* Legacy iOS */
+    src: url('../../Assets/Fonts/Montserrat-Bold.eot') format('embedded-opentype'), /* IE6-IE8 */
+         url('../../Assets/Fonts/Montserrat-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../../Assets/Fonts/Montserrat-Bold.woff') format('woff'), /* Pretty Modern Browsers */
+         url('../../Assets/Fonts/Montserrat-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('../../Assets/Fonts/Montserrat-Bold.svg') format('svg'); /* Legacy iOS */
 }
 
 .baby-divider {
@@ -51,17 +51,6 @@
 }
 /* add to all H2 */
 
-h3 
-{
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    display: flex;
-    align-items: center;
-    margin-left: 10%;
-}
 
 input, textarea {
     font-family: 'Montserrat';
@@ -236,19 +225,11 @@ input, textarea {
     transform: translateY(-50%);
 }
 
-.checkbox-label {
-    width: 80%;
-    text-align: left;
-}
 
 .row {
     position: relative;
 }
 
-.dropit {
-    color: purple;
-    background-color: white;
-}
 
 .inputNames {
     color: #0c0ca4;

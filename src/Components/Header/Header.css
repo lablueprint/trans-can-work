@@ -1,0 +1,82 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-weight: normal;
+    font-style: normal;
+    src: url('../../Assets/Fonts/Montserrat-Regular.eot') format('embedded-opentype'), /* IE6-IE8 */
+         url('../../Assets/Fonts/Montserrat-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../../Assets/Fonts/Montserrat-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+         url('../../Assets/Fonts/Montserrat-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('../../Assets/Fonts/Montserrat-Regular.svg') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    font-weight: bold;
+    font-style: normal;
+    src: url('../../Assets/Fonts/Montserrat-Bold.eot') format('embedded-opentype'), /* IE6-IE8 */
+         url('../../Assets/Fonts/Montserrat-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../../Assets/Fonts/Montserrat-Bold.woff') format('woff'), /* Pretty Modern Browsers */
+         url('../../Assets/Fonts/Montserrat-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('../../Assets/Fonts/Montserrat-Bold.svg') format('svg'); /* Legacy iOS */
+}
+
+.all-header-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto;
+    padding-bottom: 4em;
+    padding-top: 2.5em;
+}
+
+.left-header-contents {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+}
+
+.go-back {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.go-back-arrow {
+    width: 0.6em;
+    height: 0.8em;
+    margin-right: 1.5em;
+    padding-bottom: 2px;
+}
+
+.assessment-page-back-text{
+    font-family: 'Montserrat';
+    font-size: 1em;
+    font-weight: normal;
+    text-align: left;
+    text-decoration: none;
+    color: black;
+}
+
+.username-text-roadmap {
+    font-family: 'Montserrat';
+    font-size: 2.5em;
+    font-weight: 400;
+    text-align: left;
+}
+
+.right-header-contents {
+}
+
+.align-helper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.username-text {
+    font-size: 1em;
+    font-weight: 700;
+    font-family: 'Montserrat';
+    padding-right: 1em;
+}

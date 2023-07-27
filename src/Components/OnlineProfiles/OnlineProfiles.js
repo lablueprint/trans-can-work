@@ -69,7 +69,6 @@ function OnlineProfiles() {
 
   return (
     <div>
-      <div className="temp" />
       <div className="op-title">Online Employment Profiles</div>
       <div>
         {profile.map((profileObject, index) => (
