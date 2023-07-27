@@ -51,6 +51,17 @@
 }
 /* add to all H2 */
 
+h3 
+{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    margin-left: 10%;
+}
 
 input, textarea {
     font-family: 'Montserrat';
@@ -225,48 +236,16 @@ input, textarea {
     transform: translateY(-50%);
 }
 
+.checkbox-label {
+    width: 80%;
+    text-align: left;
+}
 
 .row {
     position: relative;
 }
 
-
-.inputNames {
-    color: #0c0ca4;
-    font-size: .35em;
-    font-family: 'Montserrat';
-    position: absolute;
+.dropit {
+    color: purple;
     background-color: white;
-    left: 2%;
-    margin-bottom: 10em !important;
-}
-
-.MuiMenuItem-root {
-    color: white !important;
-    background-color: #000AA0 !important;
-    font-family: 'Montserrat' !important;
-    font-weight: 700 !important;
-    font-size: 0.9vw !important;
-}
-
-.MuiSelect-select {
-    color: #49454F !important;
-    font-family: 'Montserrat' !important;
-    font-weight: 700 !important;
-    padding-left: 1.7% !important;
-    font-size: 0.9vw !important;
-    border: 1.5px solid #0c0ca4 !important;
-    height: 2.2vw !important;
-    border-radius: 4px !important;
-    bottom: 20px !important;
-    /* fontFamily: 'Montserrat',
-    color: '#49454F',
-    fontSize: '0.9vw',
-    fontWeight: 'bold',
-    border: '1.5px solid #0c0ca4',
-    borderRadius: '4px',
-    width: '55.0vw',
-    height: '3.2vw',
-    paddingLeft: '1.7%',
-    textDecoration: 'none', */
 }

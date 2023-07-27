@@ -46,7 +46,6 @@
     width: 0.6em;
     height: 0.8em;
     margin-right: 1.5em;
-    padding-bottom: 2px;
 }
 
 .assessment-page-back-text{
@@ -63,9 +62,6 @@
     font-size: 2.5em;
     font-weight: 400;
     text-align: left;
-}
-
-.right-header-contents {
 }
 
 .align-helper {

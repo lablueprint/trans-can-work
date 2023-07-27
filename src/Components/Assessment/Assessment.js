@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './Assessment.css';
 import { useSelector } from 'react-redux';
-
 import {
   FormControl, InputLabel, NativeSelect,
 } from '@mui/material';
 import { TextField } from '@material-ui/core';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
-import { createJobseeker } from '../../Services/jobseeker-service';
 import Checkboxes from '../Checkboxes/Checkboxes';
+import { fetchJobseekerData, createJobseekerData } from '../../Services/jobseeker-data-service';
 
 const styles = {
   dropdownOptions: {
@@ -17,7 +16,7 @@ const styles = {
     color: '#49454F',
     fontSize: '0.9vw',
     fontWeight: 'bold',
-    border: '1.5px solid #0c0ca4',
+    border: '1.5px solid red',
     borderRadius: '4px',
     width: '55.0vw',
     height: '3.2vw',
@@ -200,19 +199,22 @@ function Assessment() {
 
   const [jobseeker, setJobseeker] = useState({
     name: store.user.firstName,
-    pronouns: 'Pronouns',
-    phone: 'Phone',
+    pronouns: store.user.pronouns,
+    phone: store.user.phoneNumber,
     email: store.email,
-    cityState: 'City/State',
-    ethnicity: 'Ethnicity',
-    age: 'Age',
-    genderIdentity: 'Gender Identity',
-    sexuality: 'Sexuality',
-    veteran: 'Veteran',
-    disability: 'Disability',
-    housingSituation: 'Housing Situation',
-    employmentStatus: 'Employment Status',
-    convictions: 'Convictions',
+    clientInfo:
+    {
+      'City/State': 'City/State',
+      Ethnicity: 'Ethnicity',
+      Age: 'Age',
+      'Gender Identity': 'Gender Identity',
+      Sexuality: 'Sexuality',
+      Veteran: 'Veteran',
+      Disability: 'Disability',
+      'Housing Situation': 'Housing Situation',
+      'Currently Employed': 'Employment Status',
+      'Prior Convictions': 'Convictions',
+    },
     interests: {},
     skills: {},
     previousExperience: {},
@@ -316,13 +318,12 @@ function Assessment() {
 
   const deleteEducation = (event, index) => {
     event.preventDefault();
-    console.log(index);
-    // const temp = [...jobseeker.education];
-    // temp.splice(index, 1);
-    // setJobseeker({
-    //   ...jobseeker,
-    //   education: temp,
-    // });
+    const temp = [...jobseeker.education];
+    temp.splice(index, 1);
+    setJobseeker({
+      ...jobseeker, // change this to prevJobseeker
+      education: temp,
+    });
   };
 
   const deleteOccupation = (index) => {
@@ -334,20 +335,21 @@ function Assessment() {
     console.log(jobseeker.occupation);
   };
 
-  const clientInfo = [{ title: 'Authentic Name', toChange: 'name', placeholder: jobseeker.name },
-    { title: 'Pronouns', toChange: 'pronouns', placeholder: jobseeker.pronouns },
-    { title: 'Phone', toChange: 'phone', placeholder: jobseeker.phone },
-    { title: 'Email', toChange: 'email', placeholder: jobseeker.email },
-    { title: 'City/State', toChange: 'cityState', placeholder: jobseeker.cityState },
-    { title: 'Ethnicity', toChange: 'ethnicity', placeholder: jobseeker.ethnicity },
-    { title: 'Age', toChange: 'age', placeholder: jobseeker.age },
-    { title: 'Gender Identity', toChange: 'genderIdentity', placeholder: jobseeker.genderIdentity },
-    { title: 'Sexuality', toChange: 'sexuality', placeholder: jobseeker.sexuality },
-    { title: 'Veteran?', toChange: 'veteran', placeholder: jobseeker.veteran },
-    { title: 'Disability?', toChange: 'disability', placeholder: jobseeker.disability },
-    { title: 'Housing Situation', toChange: 'housingSituation', placeholder: jobseeker.housingSituation },
-    { title: 'Currently Employed?', toChange: 'employmentStatus', placeholder: jobseeker.employmentStatus },
-    { title: 'Prior Convictions?', toChange: 'convictions', placeholder: jobseeker.convictions },
+  // change placeholders to be titles
+  const clientInfo = [{ title: 'Authentic Name', toChange: 'name', var: jobseeker.name },
+    { title: 'Pronouns', toChange: 'pronouns', var: jobseeker.pronouns },
+    { title: 'Phone', toChange: 'phone', var: jobseeker.phone },
+    { title: 'Email', toChange: 'email', var: jobseeker.email },
+    { title: 'City/State', toChange: 'City/State', var: jobseeker.clientInfo['City/State'] },
+    { title: 'Ethnicity', toChange: 'Ethnicity', var: jobseeker.clientInfo.Ethnicity },
+    { title: 'Age', toChange: 'Age', var: jobseeker.clientInfo.Age },
+    { title: 'Gender Identity', toChange: 'Gender Identity', var: jobseeker.clientInfo['Gender Identity'] },
+    { title: 'Sexuality', toChange: 'Sexuality', var: jobseeker.clientInfo.Sexuality },
+    { title: 'Veteran?', toChange: 'Veteran', var: jobseeker.clientInfo.Veteran },
+    { title: 'Disability?', toChange: 'Disability', var: jobseeker.clientInfo.Disability },
+    { title: 'Housing Situation', toChange: 'Housing Situation', var: jobseeker.clientInfo['Housing Situation'] },
+    { title: 'Currently Employed?', toChange: 'Currently Employed', var: jobseeker.clientInfo['Currently Employed'] },
+    { title: 'Prior Convictions?', toChange: 'Prior Convictions', var: jobseeker.clientInfo['Prior Convictions'] },
   ];
 
   useEffect(() => {
@@ -356,8 +358,32 @@ function Assessment() {
     checkedPrev2, checkedSkills1, checkedSkills2]);
 
   useEffect(() => {
-    createJobseeker(jobseeker.email, jobseeker);
+    createJobseekerData(jobseeker.email, jobseeker);
   }, [jobseeker]);
+
+  useEffect(() => {
+    const asyncFn = async () => {
+      const jobseekerData = await fetchJobseekerData(store.email);
+      console.log(jobseekerData.data());
+      setJobseeker((prevJobseeker) => ({
+        ...prevJobseeker,
+        ...jobseekerData.data().clientInfo,
+        interests: {},
+        skills: {},
+        previousExperience: {},
+        education: [{
+          degree: '',
+          degreeType: '',
+          certificate: '',
+          certificateType: '',
+        }],
+        occupation: [''],
+        dreamjob: 'Dream Job',
+      }));
+      console.log(jobseekerData.data().clientInfo);
+    };
+    asyncFn();
+  }, []);
 
   return (
     <div>
@@ -376,7 +402,8 @@ function Assessment() {
                       id="outlined-basic"
                       label={item.title}
                       variant="outlined"
-                      placeholder={item.placeholder}
+                      placeholder={item.title}
+                      value={item.var}
                       focused
                       onChange={(e) => {
                         setJobseeker({
@@ -420,7 +447,6 @@ function Assessment() {
         <div>
           <div className="section-divider" />
           <div className="assessment-section-title">Education Info</div>
-          <div className="baby-divider" />
           {jobseeker.education.map((educationObject, index) => (
             <div>
               <form>
@@ -444,10 +470,10 @@ function Assessment() {
                       <option value="Progress" className="dropit">Still Working On</option>
                     </NativeSelect>
                   </FormControl>
-                  <div className="op-between-inputs" />
                 </div>
                 {(jobseeker.education[index].degree === 'Progress' || jobseeker.education[index].degree === 'Yes') && (
                   <div>
+                    <div className="op-between-inputs" />
                     <TextField
                       id="outlined-basic"
                       label="Type of Degree"
@@ -475,10 +501,10 @@ function Assessment() {
                       <option value="Progress" style={styles.dropdownOptions}>Still Working On</option>
                     </NativeSelect>
                   </FormControl>
-                  <div className="op-between-inputs" />
                 </div>
                 {(jobseeker.education[index].certificate === 'Progress' || jobseeker.education[index].certificate === 'Yes') && (
                   <div>
+                    <div className="op-between-inputs" />
                     <TextField
                       id="outlined-basic"
                       label="Type of Certificate"
@@ -492,7 +518,7 @@ function Assessment() {
                   </div>
                 )}
               </form>
-              <div className="baby-divider" />
+              <div className="op-between-inputs" />
               <div className="left-button">
                 <button type="button" onClick={(e) => deleteEducation(e, index)} className="delete-buttons">
                   <img
@@ -522,12 +548,13 @@ function Assessment() {
         <div>
           <div className="section-divider" />
           <div className="assessment-section-title">List of Current/Previous Occupations</div>
-          <div className="baby-divider" />
           <form>
             <div>
               {jobseeker.occupation.map((occupationObject, index) => (
                 <div>
                   <form>
+                    <div className="baby-divider" />
+                    <div className="baby-divider" />
                     <TextField
                       id="outlined-basic"
                       label={`Occupation ${index + 1}`}
