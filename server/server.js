@@ -24,24 +24,14 @@ app.get('/', (req, res) => {
 
 const sendEmails = async () => {
   const emailList = await getEmails();
-  console.log(emailList);
-  return emailList;
+  NoProgress({ emailList: emailList[0], fullName: emailList[1] });
 };
 
 // node cron runs a function every week on Monday 12pm, LA time (0 12 * * 1)
 cron.schedule('0 12 * * 1', () => { sendEmails(); }, { timezone: 'America/Los_Angeles' });
 
-// checks if jobseeker, areMilestonesComplete, last completion date
-// everything that isn't MilestonesComplete gets an appropriate email sent
-// MilestoneComplete gets an autoemail send trigger that isn't a part of this issue
-
-// last edit date and aremilestonescomplete
-// if jobseeker or navigator makes any changes
-// check if firebase keeps track of specific record change dates
-// where would the app trigger the field?
-// NoProgress({
-//   emailList: ['arwaidev@gmail.com'], fullName: 'jackie',
-// });
+// checks if jobseeker, complete, lastCompletion, archived
+// false, (> 2 weeks), false => YES EMAIL
 
 // notifies navigator + notifies jobseeker upon approval + all milestones complete
 app.post('/send-email', (req, res) => {

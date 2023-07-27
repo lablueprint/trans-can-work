@@ -43,7 +43,7 @@ const NoProgressEmail = ({
         subject,
         template: 'index',
         context: {
-          name: fullName,
+          name: fullName[i],
           message,
         },
       };

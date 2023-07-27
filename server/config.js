@@ -28,14 +28,16 @@ const getEmails = async () => {
   try {
     const docsSnap = await getDocs(colRef);
     const emailList = [];
+    const dataList = [];
     docsSnap.forEach(async (doc) => {
       // need to add a last milestone complete date
       // archived check too
       if (doc.data().role === 'jobseeker') {
-        emailList.push(doc.data());
+        emailList.push(doc.id);
+        dataList.push(doc.data().firstName);
       }
     });
-    return emailList;
+    return [emailList, dataList];
   } catch (error) {
     console.log(error);
     return undefined;
