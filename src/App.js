@@ -82,7 +82,6 @@ function App() {
           )}
         />
         <Route path="/home" element={<NavigatorMenu />}>
-          <Route path="roadmap" element={<MilestoneMap />} />
           <Route path="assessment" element={<NavigatorDashboard />} />
         </Route>
         <Route path="/login" element={<Login />} />
@@ -91,6 +90,7 @@ function App() {
         <Route path="/landing" element={<Landing />} />
         <Route path="/onboard" element={<JobseekerData useremail="solia@goodpl.us" username="Solia Nasser" />} />
         <Route path="/adminview" element={<AdminView />} />
+        <Route path="/roadmap" element={<MilestoneMap />} />
 
         <Route
           path="/splash"
