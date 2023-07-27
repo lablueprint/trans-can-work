@@ -79,11 +79,3 @@
     color: #FFFBFE;
     border: 2px solid #939094;
 } */
-
-.jobPortal-row {
-    display: flex;
-    margin-bottom: 2em;
-    width: 50%;
-    margin: 0 auto;
-    justify-content: space-between;
-}

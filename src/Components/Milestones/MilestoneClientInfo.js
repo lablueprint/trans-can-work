@@ -21,43 +21,6 @@ const mockData = {
   phoneNumber: '987-654-3211',
 };
 
-// createUser(
-//   mockData2.uid,
-//   mockData2.email,
-//   mockData2.role,
-//   mockData2.firstName,
-//   mockData2.lastName,
-//   mockData2.pronouns,
-//   mockData2.bio,
-//   mockData2.phoneNumber,
-// );
-
-// register(mockData2) {
-//   .then(() => {
-//     console.log('User created successfully');
-//   })
-//   .catch((error) => {
-//     console.error('Error creating user:', error);
-//   })
-// }
-// ES2015 guarantees Object.keys returns insertion order and all browsers comply
-// const mockData = {
-//   'Authentic Name': 'demi lovato',
-//   Pronouns: 'they/them',
-//   Phone: '(408) 263-0181',
-//   Email: 'demilovato@urmom.com',
-//   Location: 'los angeles, ca',
-//   Ethnicity: 'new mexican',
-//   Age: '29',
-//   'Gender Identity': 'nonbinary',
-//   Sexuality: 'idk',
-//   Veteran: 'no',
-//   Disability: 'prolly',
-//   Housing: 'rehab',
-//   'Currently Employed': 'yes',
-//   'Prior Convictions': 'none',
-// };
-
 const style = {
   container: {
     width: '40vw',
@@ -113,12 +76,12 @@ function MilestoneClientInfo() {
   const infoLabels = [];
   const infoTexts = [];
   Object.keys(mockData).forEach((key) => {
-    infoLabels.push((<span style={style.infoLabel}>{key}</span>));
-    infoTexts.push((<span style={style.infoText}>{mockData[key]}</span>));
+    infoLabels.push((<span className="infoLabel">{key}</span>));
+    infoTexts.push((<span className="infoText">{mockData[key]}</span>));
   });
 
   const infos = infoLabels.map((labelSpan, i) => (
-    <div style={style.infoCell}>
+    <div className="infoCell">
       {labelSpan}
       {infoTexts[i]}
     </div>

@@ -13,27 +13,19 @@
     margin-bottom: 20px;
 }
 
+.divider {
+    border-bottom: 2px solid rgba(72, 70, 73, 1);
+    width: 128px;
+    margin: 24px auto 36px auto;
+}
+
 .content {
     font-family: 'Liesel';
     font-size: 32px;
     color: rgba(72, 70, 73, 1);
     font-weight: 400;
     text-align: center;
-    margin-top: 20px;
-}
-
-.shortLine {
-    width: 101.509px;
-    height: 2px;
-    background: #939094;
-    border: none;
-    border-radius: 5px;
-}
-
-.longLine {
-    width: 190px;
-    height: 2px;
-    background: #939094;
-    border: none;
-    border-radius: 5px;
+    max-width: 85%;
+    line-height: 1.5rem;
+    margin: 16px auto 48px auto;
 }

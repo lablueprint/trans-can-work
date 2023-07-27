@@ -24,3 +24,12 @@
     padding-top: 4em;
     padding-bottom: 2em;
 }
+
+@media only screen and (max-aspect-ratio: 1/1) {
+    #popup {
+        width: 85%;
+        max-width: 30em;
+        height: 80%;
+        max-height: 60em;
+    }
+}
