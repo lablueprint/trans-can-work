@@ -1,14 +1,14 @@
 const nodemailer = require('nodemailer');
-// const dotenv = require('dotenv').config();
+require('dotenv').config();
 const hbs = require('nodemailer-express-handlebars');
 const path = require('path');
-const image = require('../assets/trans_flag_graphic.png');
 
-// email credentials
 const senderEmail = process.env.SENDER_EMAIL;
 const senderPassword = process.env.SENDER_PASS;
 
-const MilestoneEmail = ({ emailList, subject, message }) => new Promise((resolve, reject) => {
+const SendEmail = ({
+  email, fullName, subject, message,
+}) => new Promise((resolve, reject) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -17,39 +17,38 @@ const MilestoneEmail = ({ emailList, subject, message }) => new Promise((resolve
     },
   });
 
+  const viewPath = path.resolve('./templates');
+
   const handlebarOptions = {
     viewEngine: {
-      extname: '.handlebars',
+      extName: '.handlebars',
+      layoutsDir: viewPath,
       defaultLayout: false,
-      partialsDir: path.resolve('./templates'),
+      partialsDir: viewPath,
     },
-    viewPath: path.resolve('./templates'),
+    viewPath,
     extName: '.handlebars',
   };
 
   transporter.use('compile', hbs(handlebarOptions));
 
-  const testerEmail = ['arwaidev@gmail.com'];
-
   const mailConfigs = {
     from: senderEmail,
-    to: testerEmail,
+    to: email,
     subject,
-    template: 'incompleteMilestone',
+    template: 'index',
     context: {
-      username: emailList,
+      name: fullName,
       message,
-      image,
     },
   };
 
   transporter.sendMail(mailConfigs, (error, info) => {
     if (error) {
-      console.log(error);
-      return reject({ message: 'transporter sendMail error' });
+      return reject(error);
     }
-    return resolve({ message: 'email sent successfully' });
+    return resolve({ message: 'email sent successfully', info });
   });
 });
 
-module.exports = MilestoneEmail;
+module.exports = SendEmail;

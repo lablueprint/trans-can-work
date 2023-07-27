@@ -7,7 +7,7 @@ const getEmails = require('./config');
 
 const port = 5000;
 const NoProgress = require('./email/noProgress');
-const CompleteMilestone = require('./email/completeMilestone');
+const SendEmail = require('./email/sendEmail');
 
 // cors
 app.use(cors());
@@ -39,21 +39,14 @@ cron.schedule('0 12 * * 1', () => { sendEmails(); }, { timezone: 'America/Los_An
 // if jobseeker or navigator makes any changes
 // check if firebase keeps track of specific record change dates
 // where would the app trigger the field?
+// NoProgress({
+//   emailList: ['arwaidev@gmail.com'], fullName: 'jackie',
+// });
 
-// for testing purposes
-app.post('/no-progress-email', (req, res) => {
+// notifies navigator + notifies jobseeker upon approval + all milestones complete
+app.post('/send-email', (req, res) => {
   console.log(req.body);
-  NoProgress(req.body)
-    .then((response) => res.send(response.message))
-    .catch((error) => {
-      res.status(500).send(error.message);
-    });
-});
-
-// MilestoneComplete gets an autoemail sent
-app.post('/milestone-email', (req, res) => {
-  console.log(req.body);
-  CompleteMilestone(req.body)
+  SendEmail(req.body)
     .then((response) => res.send(response.message))
     .catch((error) => {
       res.status(500).send(error.message);

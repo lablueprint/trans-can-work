@@ -3,11 +3,12 @@ require('dotenv').config();
 const hbs = require('nodemailer-express-handlebars');
 const path = require('path');
 
-// email credentials
 const senderEmail = process.env.SENDER_EMAIL;
 const senderPassword = process.env.SENDER_PASS;
 
-const NoProgressEmail = ({ emailList, subject, message }) => new Promise((resolve, reject) => {
+const NoProgressEmail = ({
+  emailList, fullName,
+}) => new Promise((resolve, reject) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -16,49 +17,42 @@ const NoProgressEmail = ({ emailList, subject, message }) => new Promise((resolv
     },
   });
 
-  const viewPath = path.resolve('./templates/views');
-  const partialsPath = path.resolve('./templates/partials');
+  const viewPath = path.resolve('./templates');
 
   const handlebarOptions = {
     viewEngine: {
       extName: '.handlebars',
       layoutsDir: viewPath,
       defaultLayout: false,
-      partialsDir: partialsPath,
-      // express,
+      partialsDir: viewPath,
     },
     viewPath,
     extName: '.handlebars',
   };
 
   transporter.use('compile', hbs(handlebarOptions));
+  const subject = 'TCW - Incomplete Milestones';
+  const message = 'It looks like you have some uncompleted milestones waiting for you over at TransCanWork. Ready to set sail and take the next step in your career?';
 
-  const testerEmail = ['arwaidev@gmail.com'];
-  const image = { filename: 'trans_flag_graphic.png', path: path.resolve(__dirname, '../assets/trans_flag_graphic.png') };
-
-  for (let i = 0; i < testerEmail.length; i++) {
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < emailList.length; i++) {
     setTimeout(() => {
       const mailConfigs = {
         from: senderEmail,
-        to: testerEmail[i],
+        to: emailList[i],
         subject,
         template: 'index',
         context: {
-          username: emailList[i],
+          name: fullName,
           message,
-          image,
         },
-        attachments: [
-          { filename: 'trans_flag_graphic.png', path: path.resolve(__dirname, '../assets/trans_flag_graphic.png') },
-        ],
       };
 
       transporter.sendMail(mailConfigs, (error, info) => {
         if (error) {
-          console.log(error);
-          return reject({ message: 'transporter sendMail error' });
+          return reject(error);
         }
-        return resolve({ message: 'email sent successfully' });
+        return resolve({ message: 'email sent successfully', info });
       });
     }, i * 1000); // 1 email per second
   }
