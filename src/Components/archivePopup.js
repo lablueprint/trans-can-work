@@ -9,12 +9,9 @@ import { Close } from '@mui/icons-material';
 import { getDocs, collection } from 'firebase/firestore';
 // import Avatar from 'react-avatar';
 import FormControlLabel from '@mui/material/FormControlLabel';
-// import MuiCheckbox from '@mui/material/Checkbox';
-// import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
-// import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 import { Button } from 'react-bootstrap';
 import firebase from '../firebase';
-// import NavigatorCard from './navigatorCard';
+import { updateUser, fetchUser } from '../Services/user-service';
 
 const dummyNavigators = [
   {
@@ -27,7 +24,8 @@ const dummyNavigators = [
     phoneNumber: '6969',
     pronouns: 'he/him',
     role: 'navigator',
-    uid: '1234567urmom',
+    bookmarked: [],
+    archived: false,
   },
   {
     id: 'v@gmail.com',
@@ -39,7 +37,8 @@ const dummyNavigators = [
     phoneNumber: '6969',
     pronouns: 'he/him',
     role: 'navigator',
-    uid: '1234567urmom',
+    bookmarked: [],
+    archived: false,
   },
   {
     id: 'jungkook@gmail.com',
@@ -51,7 +50,8 @@ const dummyNavigators = [
     phoneNumber: '6969',
     pronouns: 'he/him',
     role: 'navigator',
-    uid: '1234567urmom',
+    bookmarked: [],
+    archived: false,
   },
   {
     id: 'jimin@gmail.com',
@@ -63,7 +63,8 @@ const dummyNavigators = [
     phoneNumber: '6969',
     pronouns: 'he/him',
     role: 'navigator',
-    uid: '1234567urmom',
+    bookmarked: [],
+    archived: false,
   },
   {
     id: 'rm@gmail.com',
@@ -75,7 +76,8 @@ const dummyNavigators = [
     phoneNumber: '6969',
     pronouns: 'he/him',
     role: 'navigator',
-    uid: '1234567urmom',
+    bookmarked: [],
+    archived: false,
   },
   {
     id: 'jin@gmail.com',
@@ -87,7 +89,8 @@ const dummyNavigators = [
     phoneNumber: '6969',
     pronouns: 'he/him',
     role: 'navigator',
-    uid: '1234567urmom',
+    bookmarked: [],
+    archived: false,
   },
 ];
 
@@ -101,7 +104,9 @@ const dummyUser = {
   phoneNumber: '',
   pronouns: '',
   role: 'jobseeker',
-  uid: 'bhPDCNQ2F4Y7MGRQ9ZbEsS7nrw53',
+  lastEdit: '12/07/2002',
+  complete: true,
+  archived: false,
 };
 
 const styles = {
@@ -181,8 +186,15 @@ function ArchivePopup({
     setSelectedValue(event.target.value);
   };
 
-  const handleconfirm = () => {
+  const handleconfirm = async () => {
     console.log(selectedValue);
+    const diya = await fetchUser('dbaliga@g.ucla.edu');
+    console.log(diya.data());
+    const test = { ...dummyUser, navigator: 'jimin@gmail.com' };
+    console.log(test);
+    const test2 = { ...diya.data(), navigator: 'jimin@gmail.com' };
+    console.log(test2);
+    updateUser(dummyUser.email, test2);
   };
 
   useEffect(() => {
@@ -291,12 +303,7 @@ function ArchivePopup({
               }}
               className="form-label"
 
-              // classes={{
-              // }}
-              // take event handler id thingy
-              // then
-              // on confirm
-              // push id thingy to jobseeker navigator field
+              // push id thingy to selected jobseeker's navigator field
               // update navigator with jobseeker
                 // use real navigator objects, copy a few objects that have navigator role
                 // just copy email as id
