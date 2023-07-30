@@ -75,45 +75,56 @@ function Assessment() {
   };
 
   const previousExperience1 = [
-    'Admin',
-    'Bartender',
-    'Construction',
-    'Cosmetology',
-    'Data Entry',
-    'Education',
-    'Electrician',
-    'Entertainment Industry',
-    'Facilitation/Panelist/Moderator',
-    'Fashion',
-    'Finance',
-    'Food Service',
-    'Grant Writer',
+    'Accounting Software',
+    'Administrative',
+    'Adobe',
+    'Software Suite',
+    'Bilingual',
+    'Brand Management',
+    'Cold Calling',
+    'Computer Software and Application',
+    'CPR',
+    'Customer Service',
+    'Database Management',
+    'Excel',
     'Graphic Design',
+    'Machinery Skills',
+    'Marketing Campain Management',
+    'Mobile Development',
+    'Multiligual',
+    'Negotiation',
+    'Patient Scheduling Software',
   ];
   const previousExperience2 = [
-    'Hospitality',
-    'Management',
-    'Marketing',
-    'Patient Scheduling Software',
-    'Nonprofit',
-    'Photograher',
-    'Programming Languages (ex. Perl, Python, Java, and Ruby)',
-    'Retail',
-    'Security',
+    'Philanthropy',
+    'Photo Editing',
+    'Photography',
+    'Photoshop',
+    'Powerpoint',
+    'Programming Languages',
+    'Project Management',
+    'Public Speaking',
     'Search Engine and Keyword Optimization',
-    'Talent/Actor',
-    'Tech',
-    'Writer',
+    'Statistical Analysis',
+    'Type 60+WPM',
+    'User Interface Design',
+    'Wood Working',
+    'Word',
+    'Writing',
+    'Money handling',
+    'Customer Service',
+    'Inventory Management',
+    'ServSafe / Food Safety Certification / Food Handlers Card',
   ];
 
-  const skills1 = [
+  const generalSkills1 = [
     'Applied Academic Skills',
     'Critical Thinking Skills',
     'Interpersonal Skills',
     'Personal Qualities',
   ];
 
-  const skills2 = [
+  const generalSkills2 = [
     'Resource Management',
     'Information Use',
     'Communication Skills',
@@ -183,11 +194,13 @@ function Assessment() {
   ];
 
   let checkedInterests = [];
-  let checkedSkills = [];
+  let checkedGeneralSkills = [];
   let checkedPrev = [];
 
-  const [checkedSkills1, setCheckedSkills1] = useState(new Array(skills1.length).fill(false));
-  const [checkedSkills2, setCheckedSkills2] = useState(new Array(skills2.length).fill(false));
+  const [checkedGeneralSkills1,
+    setCheckedGeneralSkills1] = useState(new Array(generalSkills1.length).fill(false));
+  const [checkedGeneralSkills2,
+    setCheckedGeneralSkills2] = useState(new Array(generalSkills2.length).fill(false));
   const [checkedInt1, setCheckedInt1] = useState(new Array(interests1.length).fill(false));
   const [checkedInt2, setCheckedInt2] = useState(new Array(interests2.length).fill(false));
   const [checkedPrev1,
@@ -215,22 +228,18 @@ function Assessment() {
       'Currently Employed': 'Employment Status',
       'Prior Convictions': 'Convictions',
     },
-    interests: {},
-    skills: {},
-    previousExperience: {},
+    industryInterests: {},
+    generalSkills: {},
+    skillsChecklist: {},
     education: [{
-      degree: '',
-      degreeType: '',
-      certificate: '',
-      certificateType: '',
     }],
-    occupation: [''],
+    occupation: [],
     dreamjob: 'Dream Job',
   });
 
   function combineCheckboxes() {
     checkedInterests = checkedInt1.concat(checkedInt2);
-    checkedSkills = checkedSkills1.concat(checkedSkills2);
+    checkedGeneralSkills = checkedGeneralSkills1.concat(checkedGeneralSkills2);
     checkedPrev = checkedPrev1.concat(checkedPrev2);
   }
 
@@ -240,10 +249,10 @@ function Assessment() {
     tempInterests.forEach((interest, index) => {
       interestPairs[interest] = checkedInterests[index];
     });
-    const tempSkills = skills1.concat(skills2);
+    const tempSkills = generalSkills1.concat(generalSkills2);
     const skillPairs = {};
     tempSkills.forEach((skill, index) => {
-      skillPairs[skill] = checkedSkills[index];
+      skillPairs[skill] = checkedGeneralSkills[index];
     });
     const tempPrev = previousExperience1.concat(previousExperience2);
     const prevPairs = {};
@@ -252,9 +261,9 @@ function Assessment() {
     });
     await setJobseeker({
       ...jobseeker,
-      interests: interestPairs,
-      skills: skillPairs,
-      previousExperience: prevPairs,
+      industryInterests: interestPairs,
+      generalSkills: skillPairs,
+      skillsChecklist: prevPairs,
     });
   }
 
@@ -355,7 +364,7 @@ function Assessment() {
   useEffect(() => {
     saveJobseeker();
   }, [checkedInt1, checkedInt2, checkedPrev1,
-    checkedPrev2, checkedSkills1, checkedSkills2]);
+    checkedPrev2, checkedGeneralSkills1, checkedGeneralSkills2]);
 
   useEffect(() => {
     createJobseekerData(jobseeker.email, jobseeker);
@@ -368,8 +377,8 @@ function Assessment() {
       setJobseeker((prevJobseeker) => ({
         ...prevJobseeker,
         ...jobseekerData.data().clientInfo,
-        interests: {},
-        skills: {},
+        industryInterests: {},
+        generalSkills: {},
         previousExperience: {},
         education: [{
           degree: '',
@@ -478,6 +487,7 @@ function Assessment() {
                       id="outlined-basic"
                       label="Type of Degree"
                       placeholder={jobseeker.education[index].degreeType}
+                      value={jobseeker.education[index].degreeType}
                       variant="outlined"
                       focused
                       onChange={(e) => editEducation(e, 'degreeType', index)}
@@ -509,6 +519,7 @@ function Assessment() {
                       id="outlined-basic"
                       label="Type of Certificate"
                       placeholder={jobseeker.education[index].certificateType}
+                      value={jobseeker.education[index].certificateType}
                       variant="outlined"
                       focused
                       onChange={(e) => editEducation(e, 'certificateType', index)}
@@ -619,6 +630,7 @@ function Assessment() {
         </div>
 
         <div>
+          <div className="section-divider" />
           <div className="assessment-section-title">Skills Checklist</div>
           <div className="assessment-section-subtitle">
             Please check all the skill sets that apply to ye.
@@ -626,17 +638,17 @@ function Assessment() {
           <div className="columns-container">
             <div className="checkboxes-column-left">
               <Checkboxes
-                skills={skills1}
-                checkedArr={checkedSkills1}
-                setCheckedArr={setCheckedSkills1}
+                skills={generalSkills1}
+                checkedArr={checkedGeneralSkills1}
+                setCheckedArr={setCheckedGeneralSkills1}
                 subskills={subskills1}
               />
             </div>
             <div className="checkboxes-column-right">
               <Checkboxes
-                skills={skills2}
-                checkedArr={checkedSkills2}
-                setCheckedArr={setCheckedSkills2}
+                skills={generalSkills2}
+                checkedArr={checkedGeneralSkills2}
+                setCheckedArr={setCheckedGeneralSkills2}
                 subskills={subskills2}
               />
             </div>
