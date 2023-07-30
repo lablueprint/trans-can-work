@@ -61,7 +61,8 @@ function OnlineProfiles() {
   };
 
   const fieldProps = [
-    { label: 'Company/Org of Internship', value: 'website' },
+    { label: 'Company/Org of Internship', value: 'site' },
+    { label: 'Username', value: 'username' },
     { label: 'Tools This Site Provides', value: 'tools' },
     { label: 'Created an Account?', value: 'created' },
     { label: 'Notes', value: 'notes' },

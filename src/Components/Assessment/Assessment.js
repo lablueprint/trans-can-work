@@ -219,7 +219,7 @@ function Assessment() {
     {
       'City/State': 'City/State',
       Ethnicity: 'Ethnicity',
-      Age: 'Age',
+      Age: 'poop',
       'Gender Identity': 'Gender Identity',
       Sexuality: 'Sexuality',
       Veteran: 'Veteran',
@@ -345,7 +345,8 @@ function Assessment() {
   };
 
   // change placeholders to be titles
-  const clientInfo = [{ title: 'Authentic Name', toChange: 'name', var: jobseeker.name },
+  const clientInfoFields = [
+    { title: 'Authentic Name', toChange: 'name', var: jobseeker.name },
     { title: 'Pronouns', toChange: 'pronouns', var: jobseeker.pronouns },
     { title: 'Phone', toChange: 'phone', var: jobseeker.phone },
     { title: 'Email', toChange: 'email', var: jobseeker.email },
@@ -405,7 +406,7 @@ function Assessment() {
           <form>
             <div className="inputWrapper">
               <div>
-                {clientInfo.map((item) => (
+                {clientInfoFields.map((item) => (
                   <div>
                     <TextField
                       id="outlined-basic"
@@ -414,11 +415,29 @@ function Assessment() {
                       placeholder={item.title}
                       value={item.var}
                       focused
+                      // onChange={(e) => {
+                      //   setJobseeker({
+                      //     ...jobseeker,
+                      //     [item.toChange]: e.target.value,
+                      //   });
+                      // }}
                       onChange={(e) => {
-                        setJobseeker({
-                          ...jobseeker,
-                          [item.toChange]: e.target.value,
-                        });
+                        if ('clientInfo' in jobseeker && item.toChange in jobseeker.clientInfo) {
+                          // Field is stored in clientInfo
+                          setJobseeker((prevJobseeker) => ({
+                            ...prevJobseeker,
+                            clientInfo: {
+                              ...prevJobseeker.clientInfo,
+                              [item.toChange]: e.target.value,
+                            },
+                          }));
+                        } else {
+                          // Field is not stored in clientInfo
+                          setJobseeker((prevJobseeker) => ({
+                            ...prevJobseeker,
+                            [item.toChange]: e.target.value,
+                          }));
+                        }
                       }}
                       InputProps={textFieldStyles.inputProps}
                       InputLabelProps={textFieldStyles.labelProps}
