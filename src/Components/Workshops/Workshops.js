@@ -70,7 +70,6 @@ function Workshops() {
 
   return (
     <div>
-      <div className="temp" />
       <div className="tp-title">Workshops</div>
       <div className="between-inputs" />
       <div>

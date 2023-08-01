@@ -219,7 +219,7 @@ function Assessment() {
     {
       'City/State': 'City/State',
       Ethnicity: 'Ethnicity',
-      Age: 'poop',
+      Age: 'Age',
       'Gender Identity': 'Gender Identity',
       Sexuality: 'Sexuality',
       Veteran: 'Veteran',
@@ -398,8 +398,6 @@ function Assessment() {
   return (
     <div>
       <div className="content">
-        <div className="op-between-inputs" />
-        <div className="op-between-inputs" />
         <div>
           <div className="assessment-section-title">Client Info</div>
           <div className="baby-divider" />

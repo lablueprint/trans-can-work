@@ -100,7 +100,6 @@ function Resources() {
 
   return (
     <div>
-      <div className="temp" />
       <div className="resources-tracker-title">Resources Tracker</div>
       <div className="resources-columns-container">
         <div className="checkboxes-column-left">

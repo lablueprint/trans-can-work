@@ -71,7 +71,6 @@ function JobFairs() {
 
   return (
     <div>
-      <div className="temp" />
       <div className="tp-title">Job Fairs</div>
       <div className="between-inputs" />
       <div>

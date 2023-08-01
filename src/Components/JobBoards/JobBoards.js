@@ -71,7 +71,6 @@ function JobBoards() {
 
   return (
     <div>
-      <div className="temp" />
       <div className="tp-title">Job Boards</div>
       <div className="between-inputs" />
       <div>

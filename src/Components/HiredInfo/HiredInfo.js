@@ -87,7 +87,6 @@ function HiredInfo() {
 
   return (
     <div>
-      <div className="temp" />
       <div className="i-title">Hired Info</div>
       <div>
         {allHiredInfo.map((internshipObject, index) => (

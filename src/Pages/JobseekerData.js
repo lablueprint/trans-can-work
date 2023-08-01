@@ -7,6 +7,7 @@ function JobseekerData() {
   return (
     <div>
       <Header />
+      <div className="assessment-top-padding" />
       <Assessment />
     </div>
 

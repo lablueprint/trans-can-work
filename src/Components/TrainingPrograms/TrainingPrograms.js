@@ -79,7 +79,6 @@ function TrainingPrograms() {
 
   return (
     <div>
-      <div className="temp" />
       <div className="tp-title">Training Programs</div>
       <div className="between-inputs" />
       <div>
