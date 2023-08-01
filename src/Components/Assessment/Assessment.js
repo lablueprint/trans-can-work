@@ -341,10 +341,8 @@ function Assessment() {
       temp.occupation.splice(index, 1);
       return { ...temp };
     });
-    console.log(jobseeker.occupation);
   };
 
-  // change placeholders to be titles
   const clientInfoFields = [
     { title: 'Authentic Name', toChange: 'name', var: jobseeker.name },
     { title: 'Pronouns', toChange: 'pronouns', var: jobseeker.pronouns },
@@ -362,34 +360,64 @@ function Assessment() {
     { title: 'Prior Convictions?', toChange: 'Prior Convictions', var: jobseeker.clientInfo['Prior Convictions'] },
   ];
 
+  const [temp, setTemp] = useState(false);
+
   useEffect(() => {
-    saveJobseeker();
+    if (temp) {
+      saveJobseeker();
+    }
   }, [checkedInt1, checkedInt2, checkedPrev1,
     checkedPrev2, checkedGeneralSkills1, checkedGeneralSkills2]);
 
   useEffect(() => {
-    createJobseekerData(jobseeker.email, jobseeker);
+    if (temp) {
+      createJobseekerData(jobseeker.email, jobseeker);
+    }
   }, [jobseeker]);
 
   useEffect(() => {
     const asyncFn = async () => {
       const jobseekerData = await fetchJobseekerData(store.email);
       setJobseeker(jobseekerData.data());
-      // setJobseeker((prevJobseeker) => ({
-      //   ...prevJobseeker,
-      //   // ...jobseekerData.data().clientInfo,
-      //   industryInterests: {},
-      //   generalSkills: {},
-      //   previousExperience: {},
-      //   education: [{
-      //     degree: '',
-      //     degreeType: '',
-      //     certificate: '',
-      //     certificateType: '',
-      //   }],
-      //   occupation: [''],
-      //   dreamjob: 'Dream Job',
-      // }));
+      const sortedInterestKeys = Object.keys(jobseekerData.data().industryInterests).sort();
+      const pulledInt1 = [];
+      const pulledInt2 = [];
+      for (let i = 0; i < sortedInterestKeys.length; i += 1) {
+        if (i <= 21) {
+          pulledInt1.push(jobseekerData.data().industryInterests[sortedInterestKeys[i]]);
+        } else {
+          pulledInt2.push(jobseekerData.data().industryInterests[sortedInterestKeys[i]]);
+        }
+      }
+      setCheckedInt1(pulledInt1);
+      setCheckedInt2(pulledInt2);
+      // const sortedSkillKeys = Object.keys(jobseekerData.data().skillsChecklist).sort();
+      // const pulledSkills1 = [];
+      // const pulledSkills2 = [];
+      // for (let i = 0; i < sortedSkillKeys.length; i += 1) {
+      //   if (i <= 18) {
+      //     pulledSkills1.push(jobseekerData.data().skillsChecklist[sortedSkillKeys[i]]);
+      //   } else {
+      //     pulledSkills2.push(jobseekerData.data().skillsChecklist[sortedSkillKeys[i]]);
+      //   }
+      // }
+      // console.log(checkedPrev1);
+      // console.log(pulledSkills1);
+      // setCheckedPrev1(pulledSkills1);
+      // setCheckedPrev2(pulledSkills2);
+      // const sortedGenSkillsKeys = Object.keys(jobseekerData.data().generalSkills).sort();
+      // const pulledGenSkills1 = [];
+      // const pulledGenSkills2 = [];
+      // for (let i = 0; i < sortedGenSkillsKeys.length; i += 1) {
+      //   if (i <= 3) {
+      //     pulledGenSkills1.push(jobseekerData.data().generalSkills[sortedGenSkillsKeys[i]]);
+      //   } else {
+      //     pulledGenSkills2.push(jobseekerData.data().generalSkills[sortedGenSkillsKeys[i]]);
+      //   }
+      // }
+      // setCheckedGeneralSkills1(pulledGenSkills1);
+      // setCheckedGeneralSkills2(pulledGenSkills2);
+      setTemp(true);
       console.log(jobseekerData.data());
     };
     asyncFn();
@@ -413,15 +441,8 @@ function Assessment() {
                       placeholder={item.title}
                       value={item.var}
                       focused
-                      // onChange={(e) => {
-                      //   setJobseeker({
-                      //     ...jobseeker,
-                      //     [item.toChange]: e.target.value,
-                      //   });
-                      // }}
                       onChange={(e) => {
                         if ('clientInfo' in jobseeker && item.toChange in jobseeker.clientInfo) {
-                          // Field is stored in clientInfo
                           setJobseeker((prevJobseeker) => ({
                             ...prevJobseeker,
                             clientInfo: {
@@ -430,7 +451,6 @@ function Assessment() {
                             },
                           }));
                         } else {
-                          // Field is not stored in clientInfo
                           setJobseeker((prevJobseeker) => ({
                             ...prevJobseeker,
                             [item.toChange]: e.target.value,
@@ -439,6 +459,7 @@ function Assessment() {
                       }}
                       InputProps={textFieldStyles.inputProps}
                       InputLabelProps={textFieldStyles.labelProps}
+                      className="input-field"
                     />
                     <div className="op-between-inputs" />
                   </div>
