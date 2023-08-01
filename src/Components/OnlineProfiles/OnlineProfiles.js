@@ -88,6 +88,7 @@ function OnlineProfiles() {
                         onChange={(e) => editOnlineProfile(e, field.value, index)}
                         InputProps={textFieldStyles.inputProps}
                         InputLabelProps={textFieldStyles.labelProps}
+                        className="input-field"
                       />
                       <div className="op-between-inputs" />
                     </div>

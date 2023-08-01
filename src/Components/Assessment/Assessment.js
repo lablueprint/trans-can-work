@@ -218,15 +218,15 @@ function Assessment() {
     clientInfo:
     {
       'City/State': 'City/State',
-      Ethnicity: 'Ethnicity',
+      Ethnicity: 'hhiiii',
       Age: 'Age',
       'Gender Identity': 'Gender Identity',
       Sexuality: 'Sexuality',
-      Veteran: 'Veteran',
+      Veteran: 'nooooo',
       Disability: 'Disability',
       'Housing Situation': 'Housing Situation',
       'Currently Employed': 'Employment Status',
-      'Prior Convictions': 'Convictions',
+      'Prior Convictions': 'arghhhhh',
     },
     industryInterests: {},
     generalSkills: {},
@@ -374,23 +374,23 @@ function Assessment() {
   useEffect(() => {
     const asyncFn = async () => {
       const jobseekerData = await fetchJobseekerData(store.email);
+      setJobseeker(jobseekerData.data());
+      // setJobseeker((prevJobseeker) => ({
+      //   ...prevJobseeker,
+      //   // ...jobseekerData.data().clientInfo,
+      //   industryInterests: {},
+      //   generalSkills: {},
+      //   previousExperience: {},
+      //   education: [{
+      //     degree: '',
+      //     degreeType: '',
+      //     certificate: '',
+      //     certificateType: '',
+      //   }],
+      //   occupation: [''],
+      //   dreamjob: 'Dream Job',
+      // }));
       console.log(jobseekerData.data());
-      setJobseeker((prevJobseeker) => ({
-        ...prevJobseeker,
-        ...jobseekerData.data().clientInfo,
-        industryInterests: {},
-        generalSkills: {},
-        previousExperience: {},
-        education: [{
-          degree: '',
-          degreeType: '',
-          certificate: '',
-          certificateType: '',
-        }],
-        occupation: [''],
-        dreamjob: 'Dream Job',
-      }));
-      console.log(jobseekerData.data().clientInfo);
     };
     asyncFn();
   }, []);

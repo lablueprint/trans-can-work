@@ -91,3 +91,7 @@
 .PrivateNotchedOutline-legendLabelled-19 {
     width: auto !important;
 }
+
+.input-field * {
+    border-width: 1px !important;
+}
