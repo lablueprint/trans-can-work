@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Dialog, RadioGroup, Slide, Radio,
+  Dialog, RadioGroup, Slide, Radio, Typography,
 } from '@mui/material';
 import './archivePopup.css';
 import IconButton from '@material-ui/core/IconButton';
@@ -11,7 +11,7 @@ import { getDocs, collection } from 'firebase/firestore';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { Button } from 'react-bootstrap';
 import firebase from '../firebase';
-import { updateUser, fetchUser } from '../Services/user-service';
+import { updateUser, fetchUser, createUser } from '../Services/user-service';
 
 const dummyNavigators = [
   {
@@ -44,7 +44,7 @@ const dummyNavigators = [
     id: 'jungkook@gmail.com',
     approved: true,
     bio: 'i love tcq',
-    firstName: 'Junglecock',
+    firstName: 'Jungkook',
     lastName: 'Jeon',
     jobseekers: [],
     phoneNumber: '6969',
@@ -188,13 +188,11 @@ function ArchivePopup({
 
   const handleconfirm = async () => {
     console.log(selectedValue);
-    const diya = await fetchUser('dbaliga@g.ucla.edu');
+    const diya = await fetchUser(dummyUser.id);
     console.log(diya.data());
-    const test = { ...dummyUser, navigator: 'jimin@gmail.com' };
-    console.log(test);
-    const test2 = { ...diya.data(), navigator: 'jimin@gmail.com' };
-    console.log(test2);
-    updateUser(dummyUser.email, test2);
+    const changedData = { ...diya.data(), navigator: 'jimin@gmail.com' };
+    console.log(changedData);
+    await updateUser(dummyUser.id, changedData);
   };
 
   useEffect(() => {
@@ -279,21 +277,36 @@ function ArchivePopup({
         </div>
         <RadioGroup
           style={{
-            width: '100%',
+            width: '95%',
+            margin: 'auto',
+            marginBottom: '',
           }}
         >
           {navigators.map((element) => (
             <FormControlLabel
               value={element.id}
-              control={<Radio />}
+              control={(
+                <Radio />
+)}
               labelPlacement="end"
-              label={element.firstName}
+              label={(
+                <Typography
+                  style={{
+                    fontFamily: 'Montserrat',
+                    fontWeight: 400,
+                  }}
+                >
+                  {element.firstName}
+                </Typography>
+)}
               style={{
                 display: 'flex',
-                marginTop: '1.5em',
+                marginTop: '1em',
                 borderBottom: '1px solid #CAC4D0',
-                width: '100%',
-                marginRight: '4em',
+                marginLeft: 0,
+                marginRight: '0.5em',
+                padding: '0.5em',
+                paddingLeft: 0,
               }}
               onChange={(e) => handleChange(e)}
               sx={{
@@ -313,7 +326,11 @@ function ArchivePopup({
         <Button
           variant="outlined"
           onClick={handleconfirm}
-          className="button"
+          className="confirm"
+          style={{
+            marginTop: '3em',
+            alignSelf: 'center',
+          }}
         >
           {' '}
           <p style={styles.confirmText}>Confirm</p>
