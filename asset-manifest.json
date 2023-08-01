@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/trans-can-work/static/css/main.948fa3f5.css",
-    "main.js": "/trans-can-work/static/js/main.f53f9b93.js",
+    "main.js": "/trans-can-work/static/js/main.8d272363.js",
     "static/media/Montserrat-Bold.svg": "/trans-can-work/static/media/Montserrat-Bold.961512c23657dbf24d7b.svg",
     "static/media/Montserrat-Regular.svg": "/trans-can-work/static/media/Montserrat-Regular.15a9ce34fc3a5dc6bfb3.svg",
     "static/media/powell-cat.svg": "/trans-can-work/static/media/powell-cat.f86ebb7704bc52826560690be86375a8.svg",
@@ -77,10 +77,10 @@
     "static/media/back.svg": "/trans-can-work/static/media/back.130703f1df7f4bb58fe5d32d80414f70.svg",
     "static/media/add.svg": "/trans-can-work/static/media/add.782a2551d32722c57cb31e366b35112e.svg",
     "main.948fa3f5.css.map": "/trans-can-work/static/css/main.948fa3f5.css.map",
-    "main.f53f9b93.js.map": "/trans-can-work/static/js/main.f53f9b93.js.map"
+    "main.8d272363.js.map": "/trans-can-work/static/js/main.8d272363.js.map"
   },
   "entrypoints": [
     "static/css/main.948fa3f5.css",
-    "static/js/main.f53f9b93.js"
+    "static/js/main.8d272363.js"
   ]
 }
