@@ -1,6 +1,6 @@
 import React from 'react';
 import './Assessment.css';
-import MilestoneClientInfo from './MilestoneChecklist';
+import MilestoneClientInfo from './MilestoneClientInfo';
 
 function Assessment() {
   return (
