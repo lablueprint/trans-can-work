@@ -123,24 +123,35 @@ const MilestoneButtons = data.content.body.map((x) => {
 
 function MilestoneMap() {
   return (
-    <div 
-      className="grid-container" 
-      style={{ 
-        background: `url(${background})`
-      }}>
-      <div className="roadmap-contents">
-        <div className="details-desktop">
-          <img src={detailsDesktop} /> 
+    <div>
+      <div 
+        className="background-desktop" 
+        style={{ 
+          background: `url(${background})`
+        }}
+      >
+        <div 
+          className="roadmap-contents-desktop" 
+          style={{ 
+            background: `url(${detailsDesktop})`
+          }}
+        >
+          {MilestoneButtons}
         </div>
-        <div className="details-mobile">
-          <img src={detailsMobile} /> 
-        </div>
-        <div className="table">
-          <div className="table-cell">
-            <div className="buttons">
-              {MilestoneButtons}
-            </div>
-          </div>
+      </div>
+      <div 
+        className="background-mobile" 
+        style={{ 
+          background: `url(${background})`
+        }}
+      >
+        <div 
+          className="roadmap-contents-mobile" 
+          style={{ 
+            background: `url(${detailsMobile})`
+          }}
+        >
+          {MilestoneButtons}
         </div>
       </div>
     </div>
