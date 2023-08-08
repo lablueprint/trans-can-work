@@ -1,5 +1,7 @@
 /*eslint-disable*/
 import React, { useEffect } from "react";
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { Route, Routes } from "react-router-dom";
 import {
   Login,
@@ -68,6 +70,7 @@ function App() {
   }, []);
 
   return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
     <div className="App">
       <Routes>
         <Route
@@ -129,6 +132,7 @@ function App() {
       </Routes>
       <Footer />
     </div>
+    </LocalizationProvider>
   );
 }
 export default App;

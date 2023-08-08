@@ -105,6 +105,7 @@ function HiredInfo() {
                         onChange={(e) => editHiredInfo(e, field.changeParameter, index)}
                         InputProps={textFieldStyles.inputProps}
                         InputLabelProps={textFieldStyles.labelProps}
+                        className="input-field"
                       />
                       <div className="op-between-inputs" />
                     </div>

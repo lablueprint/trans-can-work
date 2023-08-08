@@ -16,12 +16,13 @@ const styles = {
     color: '#49454F',
     fontSize: '0.9vw',
     fontWeight: 'bold',
-    border: '1.5px solid red',
+    border: '1px solid #000AA0',
     borderRadius: '4px',
     width: '55.0vw',
     height: '3.2vw',
     paddingLeft: '1.7%',
     textDecoration: 'none',
+    backgroundColor: '#F7F8FE',
   },
   inputLabel: {
     borderBottom: 'none',
@@ -36,17 +37,10 @@ const styles = {
     paddingRight: '1%',
     textDecoration: 'none',
   },
-  inputLabelNew: {
-    color: '#0c0ca4',
-    fontSize: '0.9vw',
-  },
   formControl: {
     width: '55.0vw',
     textAlign: 'left',
     textDecoration: 'none',
-  },
-  purpleBackground: {
-    backgroundColor: 'purple',
   },
 };
 
@@ -280,9 +274,9 @@ function Assessment() {
     } else {
       temp.push({
         degree: 'No',
-        degreeType: 'None',
+        degreeType: '',
         certificate: 'No',
-        certificateType: 'None',
+        certificateType: '',
       });
       setJobseeker({
         ...jobseeker,
@@ -383,7 +377,7 @@ function Assessment() {
       const pulledInt1 = [];
       const pulledInt2 = [];
       for (let i = 0; i < sortedInterestKeys.length; i += 1) {
-        if (i <= 21) {
+        if (i < 21) {
           pulledInt1.push(jobseekerData.data().industryInterests[sortedInterestKeys[i]]);
         } else {
           pulledInt2.push(jobseekerData.data().industryInterests[sortedInterestKeys[i]]);
@@ -391,6 +385,7 @@ function Assessment() {
       }
       setCheckedInt1(pulledInt1);
       setCheckedInt2(pulledInt2);
+      console.log(jobseeker.industryInterests);
       // const sortedSkillKeys = Object.keys(jobseekerData.data().skillsChecklist).sort();
       // const pulledSkills1 = [];
       // const pulledSkills2 = [];
@@ -524,13 +519,14 @@ function Assessment() {
                     <TextField
                       id="outlined-basic"
                       label="Type of Degree"
-                      placeholder={jobseeker.education[index].degreeType}
+                      placeholder="Type of Degree"
                       value={jobseeker.education[index].degreeType}
                       variant="outlined"
                       focused
                       onChange={(e) => editEducation(e, 'degreeType', index)}
                       InputProps={textFieldStyles.inputProps}
                       InputLabelProps={textFieldStyles.labelProps}
+                      className="input-field"
                     />
                   </div>
                 )}
@@ -556,13 +552,14 @@ function Assessment() {
                     <TextField
                       id="outlined-basic"
                       label="Type of Certificate"
-                      placeholder={jobseeker.education[index].certificateType}
+                      placeholder="Type of Certificate"
                       value={jobseeker.education[index].certificateType}
                       variant="outlined"
                       focused
                       onChange={(e) => editEducation(e, 'certificateType', index)}
                       InputProps={textFieldStyles.inputProps}
                       InputLabelProps={textFieldStyles.labelProps}
+                      className="input-field"
                     />
                   </div>
                 )}
@@ -603,17 +600,17 @@ function Assessment() {
                 <div>
                   <form>
                     <div className="baby-divider" />
-                    <div className="baby-divider" />
                     <TextField
                       id="outlined-basic"
                       label={`Occupation ${index + 1}`}
                       value={occupationObject}
-                      placeholder={occupationObject}
+                      placeholder={`Occupation ${index + 1}`}
                       variant="outlined"
                       focused
                       onChange={(e) => editOccupation(e, index)}
                       InputProps={textFieldStyles.inputProps}
                       InputLabelProps={textFieldStyles.labelProps}
+                      className="input-field"
                     />
                     <div className="op-between-inputs" />
                   </form>
@@ -702,7 +699,8 @@ function Assessment() {
               <TextField
                 id="outlined-basic"
                 label="Dream Job"
-                placeholder={jobseeker.dreamjob}
+                placeholder="Dream Job"
+                value={jobseeker.dreamjob}
                 variant="outlined"
                 focused
                 onChange={(e) => {
@@ -713,6 +711,7 @@ function Assessment() {
                 }}
                 InputProps={textFieldStyles.inputProps}
                 InputLabelProps={textFieldStyles.labelProps}
+                className="input-field"
               />
             </div>
           </form>
