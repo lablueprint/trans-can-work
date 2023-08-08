@@ -5,6 +5,7 @@ import Reset from './Reset';
 import NavigatorDashboard from './NavigatorDashboard';
 import JobseekerData from './JobseekerData';
 import Landing from './Landing';
+import Dashboard from './Dashboard';
 import ProfileTemp from './ProfileTemp';
 
 export {
@@ -15,5 +16,6 @@ export {
   NavigatorDashboard,
   JobseekerData,
   Landing,
+  Dashboard,
   ProfileTemp,
 };

@@ -6,8 +6,8 @@ import {
   sendPasswordResetEmail, signOut, signInWithEmailAndPassword,
 } from 'firebase/auth';
 import {
-  jobseekerUserInit, navigatorUserInit, jobseekerDataObject,
-} from './user-objects';
+  jobseekerUserInit, navigatorUserInit, adminUserInit, jobseekerDataObject,
+} from './objects-service';
 import { db, auth } from '../firebase';
 
 const provider = new GoogleAuthProvider();
@@ -15,17 +15,19 @@ const provider = new GoogleAuthProvider();
 /** *********** CRUD FUNCTIONS ************ */
 export const createUser = async (uid, email, role, firstName = '', lastName = '', pronouns = '', bio = '', phoneNumber = '') => {
   let userObject = {
-    approved: false,
     uid,
     firstName,
     lastName,
     pronouns,
+    approved: false,
+    archived: false,
     role,
     bio,
     phoneNumber,
   };
   if (role === 'jobseeker') userObject = { ...userObject, ...jobseekerUserInit };
   else if (role === 'navigator') userObject = { ...userObject, ...navigatorUserInit };
+  else if (role === 'admin') userObject = { ...userObject, ...adminUserInit };
 
   console.log(userObject);
   await setDoc(doc(db, 'users', email), userObject).then(async () => {
