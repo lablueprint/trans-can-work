@@ -12,11 +12,11 @@ import Resources from './Resources';
 import Assessment from './Assessment';
 import Training from './Training';
 import Internship from './Internship';
+import Hiring from './Hiring';
 import './IslandPopup.css';
 
 function IslandPopup({
   title, isOpen, handleClose, id, isComplete, toggleComplete,
-  // jobLink, resourceLink,
 }) {
   let toBeRendered;
   let markAsComplete = true;
@@ -40,7 +40,7 @@ function IslandPopup({
     toBeRendered = <Internship />;
   } else if (id === 'hiring-info') {
     markAsComplete = false;
-    toBeRendered = <div />;
+    toBeRendered = <Hiring />;
   }
   return (
     <div>
@@ -82,8 +82,6 @@ IslandPopup.propTypes = {
   id: PropTypes.string.isRequired,
   isComplete: PropTypes.bool,
   toggleComplete: PropTypes.func,
-  // jobLink: PropTypes.string.isRequired,
-  // resourceLink: PropTypes.string.isRequired,
 };
 
 IslandPopup.defaultProps = {

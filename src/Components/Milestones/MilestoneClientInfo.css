@@ -17,6 +17,16 @@
   background-color: #FFFBFE;
 }
 
+.hiringInfoWrapper {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-auto-rows: minmax(auto, auto);
+  column-gap: 4rem;
+  row-gap: 1.5rem;
+  background-color: #FFFBFE;
+  border: red 2px dotted;
+}
+
 .infoCell {
   font-size: 0.9rem;
   color: #484649;
@@ -36,6 +46,9 @@
 
 @media only screen and (max-aspect-ratio: 1/1) {
   .infoWrapper {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .hiringInfoWrapper {
     grid-template-columns: repeat(1, 1fr);
   }
 }

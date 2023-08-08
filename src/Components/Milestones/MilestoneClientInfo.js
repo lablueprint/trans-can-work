@@ -1,30 +1,17 @@
 import React from 'react';
 import './MilestoneClientInfo.css';
+import PropTypes from 'prop-types';
 
-// ES2015 guarantees Object.keys returns insertion order and all browsers comply
-const mockData = {
-  'Authentic Name': 'demi lovato',
-  Pronouns: 'they/them',
-  Phone: '(408) 263-0181',
-  Email: 'demilovato@urmom.com',
-  Location: 'los angeles, ca',
-  Ethnicity: 'new mexican',
-  Age: '29',
-  'Gender Identity': 'nonbinary',
-  Sexuality: 'idk',
-  Veteran: 'no',
-  Disability: 'prolly',
-  Housing: 'rehab',
-  'Currently Employed': 'yes',
-  'Prior Convictions': 'none',
-};
+function MilestoneClientInfo(props) {
+  const {
+    data,
+  } = props;
 
-function MilestoneClientInfo() {
   const infoLabels = [];
   const infoTexts = [];
-  Object.keys(mockData).forEach((key) => {
+  Object.keys(data).forEach((key) => {
     infoLabels.push((<span className="infoLabel">{key}</span>));
-    infoTexts.push((<span className="infoText">{mockData[key]}</span>));
+    infoTexts.push((<span className="infoText">{data[key]}</span>));
   });
 
   const infos = infoLabels.map((labelSpan, i) => (
@@ -42,5 +29,9 @@ function MilestoneClientInfo() {
     </div>
   );
 }
+
+MilestoneClientInfo.propTypes = {
+  data: PropTypes.objectOf(PropTypes.string).isRequired,
+};
 
 export default MilestoneClientInfo;
