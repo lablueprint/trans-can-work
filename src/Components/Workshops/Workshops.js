@@ -64,7 +64,6 @@ function Workshops() {
       },
     },
   };
-  const holder = {};
   const [allWorkshops, setAllWorkshops] = useState([{
     name: '',
     date: '',
@@ -181,15 +180,18 @@ function Workshops() {
                       )}
                       {(field.label === 'Date of Workshop')
                       && (
-                        <DateField
-                          label={field.label}
-                          focused
-                          value={workshopObject.date}
-                          onChange={(newValue) => editDate(newValue, index)}
-                          InputProps={textFieldStyles.inputProps}
-                          InputLabelProps={textFieldStyles.labelProps}
-                          className="input-field"
-                        />
+                        <>
+                          <DateField
+                            label={field.label}
+                            focused
+                            value={workshopObject.date}
+                            onChange={(newValue) => editDate(newValue, index)}
+                            InputProps={textFieldStyles.inputProps}
+                            InputLabelProps={textFieldStyles.labelProps}
+                            className="input-field"
+                          />
+                          <div className="op-between-inputs" />
+                        </>
                       )}
                     </div>
                   ))}

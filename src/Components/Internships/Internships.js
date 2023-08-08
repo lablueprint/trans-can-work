@@ -1,10 +1,47 @@
 import React, { useState } from 'react';
 import './Internships.css';
 import { TextField } from '@material-ui/core';
+import { DateField } from '@mui/x-date-pickers/DateField';
+import {
+  FormControl, InputLabel, NativeSelect,
+} from '@mui/material';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
 
 function Internships() {
+  const styles = {
+    dropdownOptions: {
+      fontFamily: 'Montserrat',
+      color: '#49454F',
+      fontSize: '0.9vw',
+      fontWeight: 'bold',
+      border: '1px solid #000AA0',
+      borderRadius: '4px',
+      width: '55.0vw',
+      height: '3.2vw',
+      paddingLeft: '1.7%',
+      textDecoration: 'none',
+      backgroundColor: '#F7F8FE',
+    },
+    inputLabel: {
+      borderBottom: 'none',
+      color: '#0c0ca4',
+      fontFamily: 'Montserrat',
+      fontWeight: 'normal',
+      fontSize: '0.9vw',
+      marginTop: '2%',
+      textAlign: 'left',
+      backgroundColor: 'white',
+      paddingLeft: '1%',
+      paddingRight: '1%',
+      textDecoration: 'none',
+    },
+    formControl: {
+      width: '55.0vw',
+      textAlign: 'left',
+      textDecoration: 'none',
+    },
+  };
   const textFieldStyles = {
     inputProps: {
       style: {
@@ -35,9 +72,9 @@ function Internships() {
     start: '',
     end: '',
     referralDate: '',
-    applied: '',
-    accepted: '',
-    completed: '',
+    applied: false,
+    accepted: false,
+    completed: false,
     notes: '',
   }]);
 
@@ -50,9 +87,9 @@ function Internships() {
       start: '',
       end: '',
       referralDate: '',
-      applied: '',
-      accepted: '',
-      completed: '',
+      applied: false,
+      accepted: false,
+      completed: false,
       notes: '',
     };
     await setAllInternships([...allInternships, temp]);
@@ -69,6 +106,25 @@ function Internships() {
     event.preventDefault();
     const temp = [...allInternships];
     temp[index][element] = event.target.value;
+    setAllInternships(temp);
+    console.log(allInternships);
+  };
+
+  const editDropdown = (event, label, index) => {
+    event.preventDefault();
+    let val = true;
+    if (event.target.value === 'No') {
+      val = false;
+    }
+    const temp = [...allInternships];
+    temp[index][label] = val;
+    setAllInternships(temp);
+  };
+
+  const editDate = (newValue, label, index) => {
+    console.log(newValue);
+    const temp = [...allInternships];
+    temp[index][label] = newValue;
     setAllInternships(temp);
     console.log(allInternships);
   };
@@ -97,18 +153,68 @@ function Internships() {
                 <div>
                   {fieldProps.map((field) => (
                     <div>
-                      <TextField
-                        id="outlined-basic"
-                        label={field.label}
-                        variant="outlined"
-                        value={internshipObject[field.value]}
-                        focused
-                        onChange={(e) => editInternship(e, field.value, index)}
-                        InputProps={textFieldStyles.inputProps}
-                        InputLabelProps={textFieldStyles.labelProps}
-                        className="input-field"
-                      />
+                      {(field.label === 'Company/Org of Internship' || field.label === 'Program Name'
+                      || field.label === 'Position' || field.label === 'Notes')
+                      && (
+                        <>
+                          <TextField
+                            id="outlined-basic"
+                            label={field.label}
+                            variant="outlined"
+                            value={internshipObject[field.value]}
+                            focused
+                            onChange={(e) => editInternship(e, field.value, index)}
+                            InputProps={textFieldStyles.inputProps}
+                            InputLabelProps={textFieldStyles.labelProps}
+                            className="input-field"
+                          />
+                          <div className="op-between-inputs" />
+                        </>
+                      )}
+                      {(field.label === 'Did Client Apply for position? (If Applicable)' || field.label === 'Client Officially Accepted into internship?'
+                      || field.label === 'Client Successfully Completed Internship?')
+                      && (
+                        <>
+                          <FormControl style={styles.formControl}>
+                            <InputLabel style={styles.inputLabel}>
+                              {field.label}
+                            </InputLabel>
+                            <NativeSelect
+                              defaultValue="No"
+                              style={styles.dropdownOptions}
+                              onChange={(e) => editDropdown(e, field.value, index)}
+                              menuprops={{
+                                PaperProps: {
+                                  style: styles.purpleBackground,
+                                },
+                              }}
+                            >
+                              <option value="Yes" className="dropit">Yes</option>
+                              <option value="No" className="dropit">No</option>
+                            </NativeSelect>
+                          </FormControl>
+                          {(field.label === 'Client Successfully Completed Internship?')
+                      && (
                       <div className="op-between-inputs" />
+                      )}
+                        </>
+                      )}
+                      {(field.label === 'Start Date' || field.label === 'End Date'
+                      || field.label === 'Date Referral Sent (If Applicable)')
+                      && (
+                        <>
+                          <DateField
+                            label={field.label}
+                            focused
+                            value={internshipObject[field.value]}
+                            onChange={(newValue) => editDate(newValue, field.value, index)}
+                            InputProps={textFieldStyles.inputProps}
+                            InputLabelProps={textFieldStyles.labelProps}
+                            className="input-field"
+                          />
+                          <div className="op-between-inputs" />
+                        </>
+                      )}
                     </div>
                   ))}
                 </div>
