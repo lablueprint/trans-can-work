@@ -4,6 +4,9 @@ import { useSelector } from 'react-redux';
 import MilestoneClientInfo from './MilestoneClientInfo';
 import MilestoneChecklist from './MilestoneChecklist';
 import { fetchJobseekerData } from '../../Services/jobseeker-data-service';
+import {
+  objToArray, skillsChecklistOptions, industryInterestOptions, generalSkills,
+} from '../../Services/objects-service';
 
 const mockData = {
   'Authentic Name': 'john smith',
@@ -23,149 +26,6 @@ const mockData = {
 };
 
 const defaultExperience = [
-  {
-    label: 'Admin',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Bartender',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Construction',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Cosmetology',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Data Entry',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Education',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Education',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Electrician',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Entertainment Industry',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Faciliation/Panelist/Moderator',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Fashion',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Finance',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Food Service',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Grant Writer',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Graphic Design',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Hospitality',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Management',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Marketing',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Medical',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Nonprofit',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Photographer',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Project Management',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Retail',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Security',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Social Media',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Talent/Actor',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Tech',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Writer',
-    value: false,
-    bullets: [],
-  },
-];
-
-const defaultIndustries = [
   {
     label: 'Admin',
     value: false,
@@ -357,9 +217,9 @@ const defaultSkills = [
 ];
 
 function Assessment() {
-  const [experience, setExperience] = useState(defaultExperience);
-  const [industries, setIndustries] = useState(defaultIndustries);
-  const [skills, setSkills] = useState(defaultSkills);
+  const [experiences, setExperience] = useState([]);
+  const [industries, setIndustries] = useState([]);
+  const [skills, setSkills] = useState([]);
   const store = useSelector((state) => state.auth.value);
 
   useEffect(() => {
@@ -367,6 +227,45 @@ function Assessment() {
       console.log(store.email);
       const jobseekerData = await fetchJobseekerData('angelahao@gmail.com');
       console.log(jobseekerData.data());
+      console.log(objToArray(jobseekerData.data().industryInterest));
+
+      const updatedExperience = [];
+      industryInterestOptions.forEach((experience) => {
+        updatedExperience.push({ label: experience, value: false, bullets: [] });
+      });
+
+      updatedExperience.forEach((experience, i) => {
+        if (objToArray(jobseekerData.data().industryInterest).includes(experience.label)) {
+          updatedExperience[i].value = true;
+        }
+      });
+
+      const updatedIndustryInterests = [];
+      industryInterestOptions.forEach((industry) => {
+        updatedIndustryInterests.push({ label: industry, value: false, bullets: [] });
+      });
+
+      updatedIndustryInterests.forEach((industry, i) => {
+        if (objToArray(jobseekerData.data().industryInterest).includes(industry.label)) {
+          updatedIndustryInterests[i].value = true;
+        }
+      });
+
+      const updatedSkills = [];
+      skillsChecklistOptions.forEach((skill) => {
+        updatedSkills.push({ label: skill, value: false, bullets: [] });
+      });
+
+      updatedSkills.forEach((skill, i) => {
+        if (objToArray(jobseekerData.data().skillsChecklist).includes(skill.label)) {
+          // update.bullets
+          updatedSkills[i].value = true;
+        }
+      });
+      setExperience(updatedExperience);
+      setIndustries(updatedIndustryInterests);
+      setSkills(updatedSkills);
+      console.log(updatedIndustryInterests);
     };
     start();
   }, []);
@@ -381,7 +280,7 @@ function Assessment() {
       <h6 className="contentTitle">Previous Experience</h6>
       <p className="content">Yar, in what areas of these here industries do ye have actual work or volunteer experience?</p>
       <hr className="longLine" />
-      <MilestoneChecklist checkboxes={experience} columns={2} />
+      <MilestoneChecklist checkboxes={experiences} columns={2} />
       <h6 className="contentTitle">Industry Interests</h6>
       <p className="content">In what of the followin&apos; industries are ye open to explorin&apos; or have an interest in possible future employment?</p>
       <hr className="shortLine" />

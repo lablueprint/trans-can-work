@@ -9,7 +9,7 @@ export default function Home() {
     <div>
       <JobseekerNav />
       <MilestoneMap />
-      {/* <NavMap /> */}
+      <NavMap />
     </div>
   );
 }
