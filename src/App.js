@@ -11,6 +11,7 @@ import {
   Landing,
   JobseekerData,
   Home,
+  Dashboard,
 } from './Pages';
 import './App.css';
 import Footer from './Components/Footer/Footer';
@@ -91,7 +92,6 @@ function App() {
         <Route path="/onboard" element={<JobseekerData useremail="solia@goodpl.us" username="Solia Nasser" />} />
         <Route path="/adminview" element={<AdminView />} />
         <Route path="/roadmap" element={<MilestoneMap />} />
-
         <Route
           path="/splash"
           element={(

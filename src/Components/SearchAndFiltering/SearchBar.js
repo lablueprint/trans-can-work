@@ -1,17 +1,18 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import './SearchBar.css';
 
 function SearchBar({
-  value, setValue,
+  value, setValue, placeholder,
 }) {
   return (
     <div>
-      <p className="titleText"> Search Bar </p>
       <input
         type="text"
-        className="searchBar"
+        className="search-bar"
         onChange={(event) => setValue(event.target.value)}
         value={value}
+        placeholder={placeholder}
       />
     </div>
   );
@@ -20,6 +21,7 @@ function SearchBar({
 SearchBar.propTypes = {
   value: propTypes.string.isRequired,
   setValue: propTypes.func.isRequired,
+  placeholder: propTypes.string.isRequired,
 };
 
 export default SearchBar;
