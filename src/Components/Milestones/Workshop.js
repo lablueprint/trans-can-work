@@ -1,8 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Workshop.css';
-import Button from '@mui/material/Button';
+import { fetchJobseekerData } from '../../Services/jobseeker-data-service';
+import { objToArray, internalWorkshopOptions, externalWorkshopOptions } from '../../Services/objects-service';
+import MilestoneChecklist from './MilestoneChecklist';
 
 function Workshop() {
+  const [internalWorkshops, setInternalWorkshops] = useState([]);
+  const [externalWorkshops, setExternalWorkshops] = useState([]);
+
+  useEffect(() => {
+    const internal = async () => {
+      const jobseekerData = await fetchJobseekerData('angelahao@gmail.com');
+
+      const updatedInternalWorkshops = [];
+      internalWorkshopOptions.forEach((internalWorkshop) => {
+        updatedInternalWorkshops.push({ label: internalWorkshop, value: false, bullets: [] });
+      });
+
+      updatedInternalWorkshops.forEach((internalWorkshop, i) => {
+        if (objToArray(jobseekerData.data().InternalWorkshops).includes(internalWorkshop.label)) {
+          updatedInternalWorkshops[i].value = true;
+        }
+      });
+
+      setInternalWorkshops(updatedInternalWorkshops);
+    };
+    internal();
+  });
+
+  useEffect(() => {
+    const external = async () => {
+      const jobseekerData = await fetchJobseekerData('angelahao@gmail.com');
+
+      const updatedExternalWorkshops = [];
+      externalWorkshopOptions.forEach((externalWorkshop) => {
+        updatedExternalWorkshops.push({ label: externalWorkshop, value: false, bullets: [] });
+      });
+
+      updatedExternalWorkshops.forEach((externalWorkshop, i) => {
+        if (objToArray(jobseekerData.data().ExternalWorkshops).includes(externalWorkshop.label)) {
+          updatedExternalWorkshops[i].value = true;
+        }
+      });
+
+      setExternalWorkshops(updatedExternalWorkshops);
+    };
+    external();
+  });
   return (
     <div>
       <h6 className="workshop">
@@ -15,80 +59,17 @@ function Workshop() {
       <div className="workshop-row">
         <h4 className="workshop-row-label">
           Tcw Internal Workshops
-          <a href="https://example.com">
-            <Button
-              disableRipple
-              id="internalWorkshopButton"
-            >
-              Internal Workshop Link
-            </Button>
-          </a>
         </h4>
+        <div className="workshop-row">
+          <MilestoneChecklist checkboxes={internalWorkshops} />
+        </div>
         <h4 className="workshop-row-label">
           External Workshops
-          <a href="https://example.com">
-            <Button
-              disableRipple
-              id="externalWorkshopButton"
-            >
-              External Workshop Link
-            </Button>
-          </a>
         </h4>
+        <div className="workshop-row">
+          <MilestoneChecklist checkboxes={externalWorkshops} />
+        </div>
       </div>
-      {/* <div className="checkBoxes">
-        <div className="col1">
-          <h4>TCW Internal Workshops</h4> */}
-      {/* <hr className="line1" /> */}
-      {/* <form>
-            <label htmlFor="empower">
-              Empowered for Empower!
-              <input type="checkbox" />
-            </label>
-            <br />
-            <label htmlFor="glassDoor">
-              Glassdoor Workshop
-              <input type="checkbox" />
-            </label>
-            <br />
-            <label htmlFor="q&a">
-              Q&A
-              <input type="checkbox" />
-            </label>
-          </form> */}
-      {/* </div>
-        <div className="col2">
-          <h4>External Workshops</h4> */}
-      {/* <form>
-            <label htmlFor="transition">
-              Transition Workshops
-              <input type="checkbox" />
-              <ul>
-                <li>Vocal training</li>
-                <li>Legal process</li>
-                <ul>
-                  <li>Gener marker</li>
-                  <li>Name change</li>
-                </ul>
-              </ul>
-            </label>
-            <br />
-            <label htmlFor="legal">
-              Legal Workshops
-              <input type="checkbox" />
-            </label>
-            <br />
-            <label htmlFor="mentalHealth">
-              Mental Health
-              <input type="checkbox" />
-            </label>
-          </form> */}
-      {/* </div>
-      </div> */}
-      {/* <div
-        isComplete={isComplete}
-        toggleComplete={toggleComplete}
-      /> */}
     </div>
   );
 }

@@ -5,7 +5,7 @@ import MilestoneClientInfo from './MilestoneClientInfo';
 import MilestoneChecklist from './MilestoneChecklist';
 import { fetchJobseekerData } from '../../Services/jobseeker-data-service';
 import {
-  objToArray, skillsChecklistOptions, industryInterestOptions, generalSkills,
+  objToArray, skillsChecklistOptions, industryInterestOptions,
 } from '../../Services/objects-service';
 
 const mockData = {
@@ -25,196 +25,203 @@ const mockData = {
   'Prior Convictions': 'none',
 };
 
-const defaultExperience = [
-  {
-    label: 'Admin',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Bartender',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Construction',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Cosmetology',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Data Entry',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Education',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Education',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Electrician',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Entertainment Industry',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Faciliation/Panelist/Moderator',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Fashion',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Finance',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Food Service',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Grant Writer',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Graphic Design',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Hospitality',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Management',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Marketing',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Medical',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Nonprofit',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Photographer',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Project Management',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Retail',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Security',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Social Media',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Talent/Actor',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Tech',
-    value: false,
-    bullets: [],
-  },
-  {
-    label: 'Writer',
-    value: false,
-    bullets: [],
-  },
-];
+// const defaultExperience = [
+//   {
+//     label: 'Admin',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Bartender',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Construction',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Cosmetology',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Data Entry',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Education',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Education',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Electrician',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Entertainment Industry',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Faciliation/Panelist/Moderator',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Fashion',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Finance',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Food Service',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Grant Writer',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Graphic Design',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Hospitality',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Management',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Marketing',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Medical',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Nonprofit',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Photographer',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Project Management',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Retail',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Security',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Social Media',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Talent/Actor',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Tech',
+//     value: false,
+//     bullets: [],
+//   },
+//   {
+//     label: 'Writer',
+//     value: false,
+//     bullets: [],
+//   },
+// ];
 
-const defaultSkills = [
-  {
-    label: 'Applied Academic Skills',
-    value: false,
-    bullets: ['Math strategies/procedures', 'Reading', 'Scientific principles/procedures', 'Writing'],
-  },
-  {
-    label: 'Critical Thinking Skills',
-    value: false,
-    bullets: ['Thinks creatively', 'Thinks critically', 'Makes sound decisions', 'Plans/organizes', 'Reasons', 'Solves problems'],
-  },
-  {
-    label: 'Interpersonal Skills',
-    value: false,
-    bullets: ['Exercises leadership', 'Negotiates to resolve conflict', 'Responds to customer needs', 'Respects individual differences'],
-  },
-  {
-    label: 'Personal Qualities',
-    value: false,
-    bullets: ['Adapts and shows flexibility', 'Demonstrates integrity', 'Demonstrates professionalism', 'Demonstrates responsibility and self-dicipline', 'Displays a positive attitude and sense of self-worth', 'Takes initiative', 'Takes responsibility for professional growth', 'Works independently'],
-  },
-  {
-    label: 'Resource Management',
-    value: false,
-    bullets: ['Manages money', 'Manages personnel', 'Manages resources', 'Manages time'],
-  },
-  {
-    label: 'Information Use',
-    value: false,
-    bullets: ['Analyzes', 'Communicates', 'Locates', 'Organizes', 'Uses'],
-  },
-  {
-    label: 'Communcation Skills',
-    value: false,
-    bullets: ['Communicates verbally', 'Comprehends written material', 'Conveys information in writing', 'Listens actively', 'Observes carefully'],
-  },
-  {
-    label: 'Systems Thinking',
-    value: false,
-    bullets: ['Understands and uses systems', 'Monitors systems', 'Improves systems'],
-  },
-  {
-    label: 'Technology Use',
-    value: false,
-    bullets: ['Understands and uses technology'],
-  },
-];
+// const defaultSkills = [
+//   {
+//     label: 'Applied Academic Skills',
+//     value: false,
+//     bullets: ['Math strategies/procedures', 'Reading',
+// 'Scientific principles/procedures', 'Writing'],
+//   },
+//   {
+//     label: 'Critical Thinking Skills',
+//     value: false,
+//     bullets: ['Thinks creatively', 'Thinks critically', 'Makes sound decisions',
+// 'Plans/organizes', 'Reasons', 'Solves problems'],
+//   },
+//   {
+//     label: 'Interpersonal Skills',
+//     value: false,
+//     bullets: ['Exercises leadership', 'Negotiates to resolve conflict',
+// 'Responds to customer needs', 'Respects individual differences'],
+//   },
+//   {
+//     label: 'Personal Qualities',
+//     value: false,
+//     bullets: ['Adapts and shows flexibility', 'Demonstrates integrity',
+// 'Demonstrates professionalism', 'Demonstrates responsibility and self-dicipline',
+// 'Displays a positive attitude and sense of self-worth', 'Takes initiative',
+// 'Takes responsibility for professional growth', 'Works independently'],
+//   },
+//   {
+//     label: 'Resource Management',
+//     value: false,
+//     bullets: ['Manages money', 'Manages personnel', 'Manages resources', 'Manages time'],
+//   },
+//   {
+//     label: 'Information Use',
+//     value: false,
+//     bullets: ['Analyzes', 'Communicates', 'Locates', 'Organizes', 'Uses'],
+//   },
+//   {
+//     label: 'Communcation Skills',
+//     value: false,
+//     bullets: ['Communicates verbally', 'Comprehends written material',
+// 'Conveys information in writing', 'Listens actively', 'Observes carefully'],
+//   },
+//   {
+//     label: 'Systems Thinking',
+//     value: false,
+//     bullets: ['Understands and uses systems', 'Monitors systems', 'Improves systems'],
+//   },
+//   {
+//     label: 'Technology Use',
+//     value: false,
+//     bullets: ['Understands and uses technology'],
+//   },
+// ];
 
 function Assessment() {
   const [experiences, setExperience] = useState([]);
@@ -268,7 +275,7 @@ function Assessment() {
       console.log(updatedIndustryInterests);
     };
     start();
-  }, []);
+  });
 
   return (
     <div className="assessment">

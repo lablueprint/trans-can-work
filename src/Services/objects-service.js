@@ -169,6 +169,56 @@ export const generalSkills = [
   'Technology Use',
 ];
 
+export const internshipsOptions = [
+  'Innovation Internship',
+  'Emerging Leaders Internship',
+  'Marketing and Communications Internship',
+  'Social Media Management Internship',
+  'Data Science Internship',
+  'Sustainability and Environment Studies Internship',
+];
+
+export const trainingOptions = [
+  'Digital Marketing Bootcamp',
+  'Project Management Fundamentals',
+  'Accounting Principles for Beginners',
+  'Sales Technique Training',
+  'Content Creation Workshop',
+  'Human Resources Management',
+  'Social Media Management 101',
+  'Graphic Design Basics',
+  'Web Development Essentials',
+  'Data Analytics Master',
+  'Customer Service Excellence',
+  'Business Writing for Success',
+  'Cybersecurity Essentials',
+  'Public Speaking for Professionals',
+  'Leadership Skills for Managers',
+];
+
+export const internalWorkshopOptions = [
+  'Empowered for Empower!',
+  'Glassdoor Workshop',
+  'Q&A',
+];
+
+export const externalWorkshopOptions = [
+  'Transition Workshops',
+  'Legal Workshops',
+  'Mental Health',
+];
+
+export const jobFairOptions = [
+  'CareerCon',
+  'FutureWorks',
+  'Career Fusion',
+  'Jobapalooza',
+  'JobQuest',
+  'HireMeNow',
+  'Opportunity Expo',
+  'CareerLaunch',
+];
+
 export const arrayToObj = (array, options) => options.map(
   (item) => ({ item: array.includes(item) }),
 );
