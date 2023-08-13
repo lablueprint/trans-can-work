@@ -20,7 +20,7 @@ import { DisabledByDefaultRounded } from '@mui/icons-material';
 
 const style = {
   container: {
-    border: '2px dotted red',
+    // border: '2px dotted red',
     width: '40vw',
     alignSelf: 'center',
   },

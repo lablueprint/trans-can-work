@@ -66,8 +66,6 @@ function TrainingPrograms() {
     },
   };
 
-  const [date, setDate] = useState();
-
   const fieldProps = [
     { label: 'Training Program', value: 'program' },
     { label: 'Date Referral Sent', value: 'referral' },
@@ -116,18 +114,15 @@ function TrainingPrograms() {
     temp[index][element] = event.target.value;
     setAllPrograms(temp);
     console.log(allPrograms);
-    console.log(date);
   };
 
-  // useEffect(() => {
-  //   const temp = date;
-  //   setAllPrograms(
-  //     {
-  //       ...allPrograms,
-  //       referral: temp,
-  //     },
-  //   );
-  // }, [date]);
+  const editDate = (newValue, label, index) => {
+    console.log(newValue);
+    const temp = [...allPrograms];
+    temp[index][label] = newValue;
+    setAllPrograms(temp);
+    console.log(allPrograms);
+  };
 
   return (
     <div>
@@ -193,8 +188,8 @@ function TrainingPrograms() {
                           <DateField
                             label={field.label}
                             focused
-                            value={date}
-                            onChange={(newValue) => setDate(newValue)}
+                            value={programObject[field.value]}
+                            onChange={(newValue) => editDate(newValue, field.value, index)}
                             InputProps={textFieldStyles.inputProps}
                             InputLabelProps={textFieldStyles.labelProps}
                             className="input-field"
