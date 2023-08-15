@@ -1,0 +1,17 @@
+.resources-columns-container {
+    display: flex;
+    justify-content: space-between;
+    width: 55vw;
+    margin: 0 auto;
+    gap: 5em;
+    color: #414141;
+}
+
+.resources-tracker-title {
+    width: 56.3vw;
+    /* padding-bottom: 1.2em; */
+    margin: 0 auto;
+    text-align: left;
+    font-family: 'Montserrat';
+    font-size: 1.3em;
+}
