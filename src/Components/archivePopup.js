@@ -12,6 +12,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import { Button } from 'react-bootstrap';
 import firebase from '../firebase';
 import { updateUser, fetchUser, createUser } from '../Services/user-service';
+import SearchBar from "./SearchBar"; 
 
 const dummyNavigators = [
   {
@@ -181,61 +182,44 @@ function ArchivePopup({
   //   const [bg, setBg] = useState('');
 
   const [selectedValue, setSelectedValue] = React.useState('if you see this first its wrong');
+  const [searchTerms, setSearchTerms] = useState('');
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
 
   const handleconfirm = async () => {
+    //update the jobseeker with their new navigator
     console.log(selectedValue);
     const diya = await fetchUser(dummyUser.id);
     console.log(diya.data());
-    const changedData = { ...diya.data(), navigator: 'jimin@gmail.com' };
+    const changedData = { ...diya.data(), navigator: `${selectedValue}` };
     console.log(changedData);
     await updateUser(dummyUser.id, changedData);
+
+    //add jobseeker to navigator's list 
+    const newNavigator = await fetchUser(selectedValue); 
+    console.log(newNavigator.data());
+    const navigatorsArray = [...newNavigator.data().jobseekers]; 
+    console.log(navigatorsArray);
+    navigatorsArray.push(dummyUser.id); 
+    const newNavigatorData = { ...newNavigator.data(),jobseekers: navigatorsArray };
+    console.log(newNavigatorData);
+    await updateUser(selectedValue, newNavigatorData); 
   };
+
+
+const search = (items) => {
+  if (searchTerms.length > 0) {
+    const searchQuery = searchTerms.toLowerCase();
+    return items.filter((element) => element.name.toLowerCase().includes(searchQuery));
+  }
+  return items;
+};
 
   useEffect(() => {
   }, [selectedValue]);
 
-  // const fetchNavigators = async () => {
-  //   const colRef = collection(db, 'navigators');
-  //   try {
-  //     const docsSnap = await getDocs(colRef);
-  //     // use docsSnap.docs.map(doc => doc.data());
-  //     return docsSnap;
-  //   } catch (error) {
-  //     console.log(error);
-  //     return undefined;
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   const logquery = async () => {
-  //     const query = await fetchNavigators();
-  //     console.log(query);
-  //     const nvgtrs = [];
-  //     query.forEach((element) => {
-  //       const elem = {
-  //         name: element.data().name,
-  //         id: `${element.data().name}id`,
-  //       };
-  //       nvgtrs.push(elem);
-  //       console.log(elem);
-  //     });
-  //     setNagivators(nvgtrs);
-  //   };
-
-  /*
-    .then((docs) => {
-      docs.forEach(async (doc) => {
-        await setEmailList((e) => [...e, doc.id]);
-      });
-    });
-    */
-  //   console.log('i fire once');
-  //   logquery();
-  // }, []);
 
   return (
     <div className="containerSection" style={styles.containerSection}>
@@ -275,11 +259,18 @@ function ArchivePopup({
         <div className="title">
           Navigators
         </div>
+        <div className="search-bar-container">
+        <SearchBar
+          value={searchTerms}
+          setValue={setSearchTerms}
+          placeholder="Search here!"
+        />
+      </div>
         <RadioGroup
           style={{
             width: '95%',
             margin: 'auto',
-            marginBottom: '',
+            marginBottom: '', 
           }}
         >
           {navigators.map((element) => (

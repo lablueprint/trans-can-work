@@ -76,7 +76,7 @@ export const fetchUsersByNavigator = async (email) => {
 
 // update this method to accomodate changes into store!
 export const updateUser = async (email, data) => {
-  await updateDoc(doc(db, 'users', email), data)
+  await setDoc(doc(db, 'users', email), data)
     .then(() => {
       console.log('updated user ', email);
     }).catch((err) => {
