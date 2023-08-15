@@ -196,16 +196,43 @@ export const trainingOptions = [
   'Leadership Skills for Managers',
 ];
 
-export const internalWorkshopOptions = [
-  'Empowered for Empower!',
-  'Glassdoor Workshop',
-  'Q&A',
-];
-
-export const externalWorkshopOptions = [
-  'Transition Workshops',
-  'Legal Workshops',
-  'Mental Health',
+export const workshopOptions = [
+  {
+    name: 'Empowered for Empower!',
+    date: '',
+    attended: true,
+    notes: '',
+  },
+  {
+    name: 'Glassdoor Workshop',
+    date: '',
+    attended: false,
+    notes: '',
+  },
+  {
+    name: 'Q&A',
+    date: '',
+    attended: false,
+    notes: '',
+  },
+  {
+    name: 'Transiton Workshops',
+    date: '',
+    attended: true,
+    notes: 'Vocal training, Legal process, Gender marker, Name change',
+  },
+  {
+    name: 'Legal Workshops',
+    date: '',
+    attended: false,
+    notes: '',
+  },
+  {
+    name: 'Mental Health',
+    date: '',
+    attended: false,
+    notes: '',
+  },
 ];
 
 export const jobFairOptions = [
