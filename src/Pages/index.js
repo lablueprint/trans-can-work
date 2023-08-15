@@ -4,7 +4,8 @@ import Register from './Register';
 import Reset from './Reset';
 import NavigatorDashboard from './NavigatorDashboard';
 import JobseekerData from './JobseekerData';
-// import Profile from './Profile';
+import Landing from './Landing';
+import Dashboard from './Dashboard';
 import ProfileTemp from './ProfileTemp';
 import ArchiveTemp from './ArchiveTemp';
 import Landing from './Landing';
@@ -20,4 +21,5 @@ export {
   ArchiveTemp,
   JobseekerData,
   Landing,
+  Dashboard,
 };
