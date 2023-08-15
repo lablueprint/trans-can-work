@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import './TrainingPrograms.css';
 import { TextField } from '@material-ui/core';
 import { DateField } from '@mui/x-date-pickers/DateField';
-import {
-  FormControl, InputLabel, NativeSelect,
-} from '@mui/material';
+import { FormControl, InputLabel } from '@mui/material';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
 
@@ -14,26 +14,17 @@ const styles = {
     color: '#49454F',
     fontSize: '0.9vw',
     fontWeight: 'bold',
-    border: '1px solid #000AA0',
-    borderRadius: '4px',
-    width: '55.0vw',
-    height: '3.2vw',
     paddingLeft: '1.7%',
     textDecoration: 'none',
-    backgroundColor: '#F7F8FE',
   },
   inputLabel: {
-    borderBottom: 'none',
-    color: '#0c0ca4',
     fontFamily: 'Montserrat',
-    fontWeight: 'normal',
+    color: '#49454F',
+    width: '55.0vw',
+    height: '3.2vw',
     fontSize: '0.9vw',
-    marginTop: '2%',
-    textAlign: 'left',
-    backgroundColor: 'white',
-    paddingLeft: '1%',
-    paddingRight: '1%',
-    textDecoration: 'none',
+    fontWeight: 'bold',
+    backgroundColor: '#F7F8FE',
   },
   formControl: {
     width: '55.0vw',
@@ -72,7 +63,7 @@ function TrainingPrograms() {
     { label: 'Start Date', value: 'start' },
     { label: 'Date Officially Enrolled', value: 'enrolled' },
     { label: 'End Date', value: 'end' },
-    { label: 'Date Completed Training', value: 'completed' },
+    { label: 'Completed Training?', value: 'completed' },
     { label: 'Notes', value: 'notes' },
   ];
 
@@ -82,7 +73,7 @@ function TrainingPrograms() {
     start: '',
     enrolled: '',
     end: '',
-    completed: '',
+    completed: false,
     notes: '',
   }]);
 
@@ -94,7 +85,7 @@ function TrainingPrograms() {
       start: '',
       enrolled: '',
       end: '',
-      completed: '',
+      completed: false,
       notes: '',
     };
     await setAllPrograms([...allPrograms, temp]);
@@ -122,6 +113,18 @@ function TrainingPrograms() {
     temp[index][label] = newValue;
     setAllPrograms(temp);
     console.log(allPrograms);
+  };
+
+  const editDropdown = (event, label, index) => {
+    event.preventDefault();
+    console.log(event.target.value);
+    let val = true;
+    if (event.target.value === 'No') {
+      val = false;
+    }
+    const temp = [...allPrograms];
+    temp[index][label] = val;
+    setAllPrograms(temp);
   };
 
   return (
@@ -154,35 +157,8 @@ function TrainingPrograms() {
                           <div className="op-between-inputs" />
                         </>
                       )}
-                      {(field.label === 'Completed?')
-                      && (
-                        <>
-                          <div>
-                            <FormControl style={styles.formControl}>
-                              <InputLabel style={styles.inputLabel}>
-                                Degree?
-                              </InputLabel>
-                              <NativeSelect
-                                defaultValue="No"
-                                style={styles.dropdownOptions}
-                        // onChange={(e) => editEducation(e, 'degree', index)}
-                                menuprops={{
-                                  PaperProps: {
-                                    style: styles.purpleBackground,
-                                  },
-                                }}
-                              >
-                                <option value="Yes" className="dropit">Yes</option>
-                                <option value="No" className="dropit">No</option>
-                              </NativeSelect>
-                            </FormControl>
-                          </div>
-                          <div className="op-between-inputs" />
-                        </>
-                      )}
                       {(field.label === 'Date Referral Sent' || field.label === 'Start Date'
-                      || field.label === 'Date Officially Enrolled' || field.label === 'End Date'
-                      || field.label === 'Date Completed Training')
+                      || field.label === 'Date Officially Enrolled' || field.label === 'End Date')
                       && (
                         <>
                           <DateField
@@ -194,6 +170,30 @@ function TrainingPrograms() {
                             InputLabelProps={textFieldStyles.labelProps}
                             className="input-field"
                           />
+                          <div className="op-between-inputs" />
+                        </>
+                      )}
+                      {(field.value === 'completed')
+                      && (
+                        <>
+                          <FormControl
+                            fullWidth
+                            focused
+                            style={styles.formControl}
+                          >
+                            <InputLabel id="demo-simple-select-label">{field.label}</InputLabel>
+                            <Select
+                              defaultValue="No"
+                              labelId="demo-simple-select-label"
+                              id="demo-simple-select"
+                              label={field.label}
+                              onChange={(e) => editDropdown(e, field.value, index)}
+                              style={styles.inputLabel}
+                            >
+                              <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
+                              <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
+                            </Select>
+                          </FormControl>
                           <div className="op-between-inputs" />
                         </>
                       )}
