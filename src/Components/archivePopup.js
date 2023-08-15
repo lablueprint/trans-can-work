@@ -12,7 +12,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import { Button } from 'react-bootstrap';
 import firebase from '../firebase';
 import { updateUser, fetchUser, createUser } from '../Services/user-service';
-import SearchBar from "./SearchBar"; 
+import SearchBar from "./SearchAndFiltering/SearchBar"; 
 
 const dummyNavigators = [
   {
@@ -177,6 +177,7 @@ function ArchivePopup({
 }) {
   const db = firebase;
   const [navigators, setNagivators] = useState(dummyNavigators);
+  const [filteredNavigators, setFilteredNavigators] = useState(dummyNavigators);
 
   // const [profilePic, setProfilePic] = useState('');
   //   const [bg, setBg] = useState('');
@@ -210,15 +211,25 @@ function ArchivePopup({
 
 
 const search = (items) => {
+  console.log("woo");
   if (searchTerms.length > 0) {
+    console.log(searchTerms);
     const searchQuery = searchTerms.toLowerCase();
-    return items.filter((element) => element.name.toLowerCase().includes(searchQuery));
+    console.log(searchQuery);
+    return items.filter((element) => element.firstName.toLowerCase().startsWith(searchQuery));
   }
   return items;
-};
+}
+
 
   useEffect(() => {
   }, [selectedValue]);
+
+
+  useEffect(() => {
+    console.log(searchTerms);
+    setFilteredNavigators(search(navigators));
+  }, [searchTerms]);
 
 
   return (
@@ -273,7 +284,7 @@ const search = (items) => {
             marginBottom: '', 
           }}
         >
-          {navigators.map((element) => (
+          {filteredNavigators.map((element) => (
             <FormControlLabel
               value={element.id}
               control={(

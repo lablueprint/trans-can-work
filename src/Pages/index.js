@@ -8,7 +8,7 @@ import Landing from './Landing';
 import Dashboard from './Dashboard';
 import ProfileTemp from './ProfileTemp';
 import ArchiveTemp from './ArchiveTemp';
-import Landing from './Landing';
+import AdminView from '../Components/Dashboard/AdminView';
 
 export {
   Home,
@@ -22,4 +22,5 @@ export {
   JobseekerData,
   Landing,
   Dashboard,
+  AdminView,
 };

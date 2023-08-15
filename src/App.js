@@ -15,6 +15,7 @@ import {
   JobseekerData,
   Home,
   Dashboard,
+  AdminView,
 } from './Pages';
 import './App.css';
 import Footer from './Components/Footer/Footer';
