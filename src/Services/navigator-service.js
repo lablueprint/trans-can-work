@@ -1,5 +1,5 @@
 import {
-  doc, setDoc, getDoc, updateDoc, deleteDoc, collection, getDocs,
+  doc, setDoc, getDoc, deleteDoc, collection, getDocs,
 } from 'firebase/firestore';
 import { db } from '../firebase';
 
@@ -30,7 +30,7 @@ export const fetchNavigator = async (email) => {
 };
 
 export const updateNavigator = async (email, data) => {
-  await updateDoc(doc(db, 'navigators', email), data)
+  await setDoc(doc(db, 'navigators', email), data, { merge: true })
     .then(() => {
       console.log('updated navigator ', email);
     }).catch((err) => {

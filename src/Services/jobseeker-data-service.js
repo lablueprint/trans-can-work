@@ -1,5 +1,5 @@
 import {
-  doc, setDoc, getDoc, getDocs, updateDoc, deleteDoc, collection,
+  doc, setDoc, getDoc, getDocs, deleteDoc, collection,
 } from 'firebase/firestore';
 import { db } from '../firebase';
 
@@ -43,7 +43,7 @@ export const fetchAllJobseekerData = async () => {
 };
 
 export const updateJobseekerData = async (email, data) => {
-  await updateDoc(doc(db, 'jobseekerData', email), data)
+  await setDoc(doc(db, 'jobseekerData', email), data, { merge: true })
     .then(() => {
       console.log('updated jobseeker ', email);
     }).catch((err) => {
