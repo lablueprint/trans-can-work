@@ -9,6 +9,7 @@ import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
 import Checkboxes from '../Checkboxes/Checkboxes';
 import { fetchJobseekerData, createJobseekerData } from '../../Services/jobseeker-data-service';
+import { skillsChecklistOptions } from '../../Services/objects-service';
 
 const styles = {
   dropdownOptions: {
@@ -307,6 +308,7 @@ function Assessment() {
       ...jobseeker,
       education: temp,
     });
+    console.log(skillsChecklistOptions);
   };
 
   const editOccupation = (event, index) => {

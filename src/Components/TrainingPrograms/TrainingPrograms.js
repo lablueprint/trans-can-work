@@ -5,6 +5,7 @@ import { DateField } from '@mui/x-date-pickers/DateField';
 import { FormControl, InputLabel } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import dayjs from 'dayjs';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
 
@@ -69,10 +70,10 @@ function TrainingPrograms() {
 
   const [allPrograms, setAllPrograms] = useState([{
     program: '',
-    referral: '',
-    start: '',
-    enrolled: '',
-    end: '',
+    referral: dayjs(),
+    start: dayjs(),
+    enrolled: dayjs(),
+    end: dayjs(),
     completed: false,
     notes: '',
   }]);
@@ -81,10 +82,10 @@ function TrainingPrograms() {
     event.preventDefault();
     const temp = {
       program: '',
-      referral: '',
-      start: '',
-      enrolled: '',
-      end: '',
+      referral: dayjs(),
+      start: dayjs(),
+      enrolled: dayjs(),
+      end: dayjs(),
       completed: false,
       notes: '',
     };
