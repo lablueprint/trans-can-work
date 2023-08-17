@@ -361,14 +361,21 @@ function Register() {
               &nbsp;Sign up with Google
             </Button>
           </div>
-          <img src={TCWLogo2} className="TcwLogo2" alt="TCWLogo2" />
-          <div className="login">
-            <div style={{ paddingBottom: '3%' }}>
-              {' '}
-              Have An Account?
-            </div>
-            <Link to="/">Login</Link>
+          <div className="loginInput">
+            <Link to="/" className="link">
+              <Button
+                type="button"
+                color="primary"
+                variant="outlined"
+                className={classes.button}
+                style={buttonStyle}
+              >
+                Have an account? Log In
+              </Button>
+            </Link>
+
           </div>
+          <img src={TCWLogo2} className="TcwLogo2" alt="TCWLogo2" />
         </div>
       </div>
     </>

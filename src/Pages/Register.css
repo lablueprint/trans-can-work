@@ -103,15 +103,6 @@
   padding-bottom: 1%;
   text-align: left;
 }
-.login{
-  display: flex;
-  flex-direction: column;
-  align-self: center;
-  justify-self: center;
-  padding-right: 17.7%;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.0vw;
-}
 .TCWlogo{
   display: flex;
   align-self: center;
@@ -160,4 +151,7 @@
   max-height: 35%;
 }
 
+.link {
+  text-decoration: none;
+}
 
