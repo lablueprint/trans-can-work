@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { IconButton, Avatar, StylesProvider } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
+// eslint-disable-next-line import/no-unresolved
 import './ProfileButton.css';
 import {
   Menu, MenuItem, ListItemIcon, ListItemText,
