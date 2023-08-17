@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './Workshop.css';
-// import { fetchJobseekerData } from '../../Services/jobseeker-data-service';
 import { workshopOptions } from '../../Services/objects-service';
 import MilestoneChecklist from './MilestoneChecklist';
 
@@ -9,8 +8,6 @@ function Workshop() {
 
   useEffect(() => {
     const start = async () => {
-      // const jobseekerData = await fetchJobseekerData('angelahao@gmail.com');
-
       const updatedWorkshops = [];
       workshopOptions.forEach((workshop) => {
         updatedWorkshops.push({
@@ -19,17 +16,10 @@ function Workshop() {
           bullets: workshop.notes === '' ? [] : [workshop.notes],
         });
       });
-
-      // updatedWorkshops.forEach((workshop, i) => {
-      //   if (objToArray(jobseekerData.data().workshops).includes(workshop.label)) {
-      //     updatedWorkshops[i].value = true;
-      //   }
-      // });
-
       setWorkshops(updatedWorkshops);
     };
     start();
-  });
+  }, []);
   return (
     <div>
       <h6 className="workshop">

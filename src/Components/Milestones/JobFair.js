@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './JobFair.css';
-// import { fetchJobseekerData } from '../../Services/jobseeker-data-service';
 import { jobFairOptions } from '../../Services/objects-service';
 import MilestoneChecklist from './MilestoneChecklist';
 
@@ -9,8 +8,6 @@ function JobFair() {
 
   useEffect(() => {
     const start = async () => {
-      // const jobseekerData = await fetchJobseekerData('angelahao@gmail.com');
-
       const updatedJobFairs = [];
       jobFairOptions.forEach((jobFair) => {
         updatedJobFairs.push({
@@ -19,17 +16,10 @@ function JobFair() {
           bullets: jobFair.notes === '' ? [] : [jobFair.notes],
         });
       });
-
-      // updatedJobFairs.forEach((jobFair, i) => {
-      //   if (objToArray(jobseekerData.data().jobFairs).includes(jobFair.label)) {
-      //     updatedJobFairs[i].value = true;
-      //   }
-      // });
-
       setJobFairs(updatedJobFairs);
     };
     start();
-  });
+  }, []);
   return (
     <div className="jobContainer">
       <h6 className="jobFair">

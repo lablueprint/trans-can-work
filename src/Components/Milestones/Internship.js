@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './Internship.css';
-// import { fetchJobseekerData } from '../../Services/jobseeker-data-service';
 import { internshipsOptions } from '../../Services/objects-service';
 import MilestoneChecklist from './MilestoneChecklist';
 
@@ -9,8 +8,6 @@ function Internship() {
 
   useEffect(() => {
     const start = async () => {
-      // const jobseekerData = await fetchJobseekerData('angelahao@gmail.com');
-
       const updatedInternships = [];
       internshipsOptions.forEach((internship) => {
         updatedInternships.push({
@@ -19,17 +16,10 @@ function Internship() {
           bullets: internship.notes === '' ? [] : [internship.notes],
         });
       });
-
-      // updatedInternships.forEach((internship, i) => {
-      //   if (objToArray(jobseekerData.data().Internships).includes(internship.label)) {
-      //     updatedInternships[i].value = true;
-      //   }
-      // });
-
       setInternships(updatedInternships);
     };
     start();
-  });
+  }, []);
   return (
     <div>
       <h6 className="internship">
