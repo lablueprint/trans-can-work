@@ -55,6 +55,7 @@
 #img {
   max-width: 20vw;
   width: min(26vh, 18vw);
+  filter: saturate(1.25);
 }
 
 #assessment {
