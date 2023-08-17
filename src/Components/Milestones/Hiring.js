@@ -5,9 +5,8 @@ import { hiringInfo } from '../../Services/objects-service';
 function Hiring() {
   return (
     <div>
-      <MilestoneClientInfo data={hiringInfo} />
+      {hiringInfo.map((singleInfo) => <MilestoneClientInfo data={singleInfo} />)}
     </div>
-
   );
 }
 
