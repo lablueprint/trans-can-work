@@ -8,7 +8,7 @@ function Workshop() {
   const [workshops, setWorkshops] = useState([]);
 
   useEffect(() => {
-    const internal = async () => {
+    const start = async () => {
       // const jobseekerData = await fetchJobseekerData('angelahao@gmail.com');
 
       const updatedWorkshops = [];
@@ -28,7 +28,7 @@ function Workshop() {
 
       setWorkshops(updatedWorkshops);
     };
-    internal();
+    start();
   });
   return (
     <div>
@@ -39,7 +39,7 @@ function Workshop() {
         Also, please make a note if the trainin&apos; ye attended offered any type o&apos;
         certification.
       </h6>
-      <MilestoneChecklist checkboxes={workshops} />
+      <MilestoneChecklist checkboxes={workshops} columns={2} />
     </div>
   );
 }

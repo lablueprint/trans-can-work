@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './JobFair.css';
-import { fetchJobseekerData } from '../../Services/jobseeker-data-service';
-import { objToArray, jobFairOptions } from '../../Services/objects-service';
+// import { fetchJobseekerData } from '../../Services/jobseeker-data-service';
+import { jobFairOptions } from '../../Services/objects-service';
 import MilestoneChecklist from './MilestoneChecklist';
 
 function JobFair() {
@@ -9,18 +9,22 @@ function JobFair() {
 
   useEffect(() => {
     const start = async () => {
-      const jobseekerData = await fetchJobseekerData('angelahao@gmail.com');
+      // const jobseekerData = await fetchJobseekerData('angelahao@gmail.com');
 
       const updatedJobFairs = [];
       jobFairOptions.forEach((jobFair) => {
-        updatedJobFairs.push({ label: jobFair, value: false, bullets: [] });
+        updatedJobFairs.push({
+          label: jobFair.name,
+          value: jobFair.attended,
+          bullets: jobFair.notes === '' ? [] : [jobFair.notes],
+        });
       });
 
-      updatedJobFairs.forEach((jobFair, i) => {
-        if (objToArray(jobseekerData.data().jobFairs).includes(jobFair.label)) {
-          updatedJobFairs[i].value = true;
-        }
-      });
+      // updatedJobFairs.forEach((jobFair, i) => {
+      //   if (objToArray(jobseekerData.data().jobFairs).includes(jobFair.label)) {
+      //     updatedJobFairs[i].value = true;
+      //   }
+      // });
 
       setJobFairs(updatedJobFairs);
     };

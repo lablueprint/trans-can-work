@@ -6,7 +6,7 @@ function JobPortal() {
   return (
     <div>
       <h6 className="jobPortal">Enter here for access to our Trans Can Work Job Portal.</h6>
-      <a href="https://example.com">
+      <a href="https://www.facebook.com/groups/tcwjobsboard">
         <Button
           disableRipple
           id="jobPortalButton"

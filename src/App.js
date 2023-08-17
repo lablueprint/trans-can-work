@@ -23,7 +23,6 @@ import AdminView from './Components/Dashboard/AdminView';
 import ScrollToTop from './Pages/scrollToTop';
 import NavigatorMenu from './Components/Navigation/NavigatorMenu';
 import MilestoneMap from './Components/Milestones/MilestoneMap';
-
 import Internships from './Components/Internships/Internships';
 import Assessment from './Components/Assessment/Assessment';
 import Workshops from './Components/Workshops/Workshops';
@@ -118,6 +117,7 @@ function App() {
           <Route path="/landing" element={<Landing />} />
           <Route path="/adminview" element={<AdminView />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/roadmap" element={<MilestoneMap />} />
           <Route
             path="/splash"
             element={
