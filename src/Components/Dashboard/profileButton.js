@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';

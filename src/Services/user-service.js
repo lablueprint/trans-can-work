@@ -1,5 +1,5 @@
 import {
-  doc, setDoc, getDoc, updateDoc, collection, getDocs, query, where, deleteDoc,
+  doc, setDoc, getDoc, collection, getDocs, query, where, deleteDoc,
 } from 'firebase/firestore';
 import {
   GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword,
