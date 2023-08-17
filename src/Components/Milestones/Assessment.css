@@ -3,6 +3,10 @@
     justify-content: center;
 }
 
+.assessment > div {
+    margin: 0 auto;
+}
+
 .contentTitle{
     font-family: 'Pirate';
     font-size: 56px;
