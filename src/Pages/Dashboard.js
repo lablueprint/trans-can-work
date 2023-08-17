@@ -10,7 +10,7 @@ import SearchAndFilter from '../Components/SearchAndFiltering/searchAndFilter';
 import FilterChips from '../Components/SearchAndFiltering/FilterChips';
 import './Home.css';
 import './Dashboard.css';
-import ProfileButton from '../Components/Dashboard/profileButton';
+import ProfileButton from '../Components/Dashboard/ProfileButton';
 import { fetchAllJobseekers } from '../Services/jobseeker-service';
 import { fetchAllNavigators } from '../Services/navigator-service';
 import DashError from '../Components/Dashboard/DashError';
