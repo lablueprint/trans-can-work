@@ -33,8 +33,6 @@ import HiredInfo from './Components/HiredInfo/HiredInfo';
 import Resources from './Components/Resources/Resources';
 import OnlineProfiles from './Components/OnlineProfiles/OnlineProfiles';
 import TrainingPrograms from './Components/TrainingPrograms/TrainingPrograms';
-import { onAuthStateChanged } from "firebase/auth";
-import { useSelector, useDispatch } from "react-redux";
 import { login, logout } from "./Redux/Slice/authSlices";
 import { fetchUser, addUser } from './Services/user-service';
 import { auth } from './firebase';
