@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './OnlineProfiles.css';
 import { TextField } from '@material-ui/core';
 import Add from '../../Assets/add.svg';
+import Check from '../../Assets/Images/check.png';
+import Cancel from '../../Assets/Images/cancel.png';
 import Delete from '../../Assets/delete.svg';
 
 function OnlineProfiles() {
@@ -71,6 +73,27 @@ function OnlineProfiles() {
   return (
     <div>
       <div className="op-title">Online Employment Profiles</div>
+      <div className="alert-modal">
+        <p>Jobseeker-Name has marked Online Profiles as complete! Approve changes?</p>
+        <div className="actions">
+          <button type="button" className="approve-button">
+            <img
+              src={Check}
+              alt="check icon"
+              style={{ marginRight: '12px' }}
+            />
+            Approve
+          </button>
+          <button type="button" className="deny-button">
+            <img
+              src={Cancel}
+              alt="cancel icon"
+              style={{ marginRight: '12px' }}
+            />
+            Deny
+          </button>
+        </div>
+      </div>
       <div>
         {profile.map((profileObject, index) => (
           <div>

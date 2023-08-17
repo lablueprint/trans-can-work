@@ -132,6 +132,16 @@ function TrainingPrograms() {
   return (
     <div>
       <div className="tp-title">Training Programs</div>
+      <div className="alert-modal">
+        <p>
+          You've marked this milestone as complete for Jobseeker-Name. Click
+          {' '}
+          <a href="#">here</a>
+          {' '}
+          to undo.
+        </p>
+        <div className="actions" />
+      </div>
       <div className="between-inputs" />
       <div>
         {allPrograms.map((programObject, index) => (
