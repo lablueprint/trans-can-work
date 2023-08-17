@@ -1,0 +1,60 @@
+.jobFair {
+    font-family: 'Liesel';
+    font-size: 32px;
+    color: #484649;
+    font-weight: 400;
+    text-align: center;
+    margin: 1.5em auto;
+    width: 80%; 
+    margin-bottom: 15px;
+}
+
+.checkBoxesJob {
+    position: fixed;
+    margin-top: 350px;
+    width: 50%;
+}
+
+.labelJob {
+    margin-bottom: 10px;
+}
+
+.col1Job {
+    float: left;
+    margin-left: 150px;
+}
+
+.col2Job {
+    float: right;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+#jobFairButton {
+    padding: 20px 28px; 
+    border: 2px solid #484649; 
+    box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
+    border-radius: 12px; 
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: 0.15px;
+    color: #484649;
+    margin: 2em auto;
+    left: 50%;
+    transform: translateX(-50%);
+    text-transform: none;
+}
+
+#jobFairButton:hover {
+    background: #939094;
+    box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
+    color: #FFFBFE;
+    border: 2px solid #939094;
+}
