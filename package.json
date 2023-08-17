@@ -10,7 +10,7 @@
     "@material-ui/lab": "^4.0.0-alpha.61",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.11.7",
-    "@mui/x-date-pickers": "^6.11.0",
+    "@mui/x-date-pickers": "^6.11.2",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
