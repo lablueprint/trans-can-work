@@ -1,0 +1,44 @@
+.workshop {
+    font-family: 'Liesel';
+    font-size: 32px;
+    color: #484649;
+    font-weight: 400;
+    text-align: center;
+    margin: 1.5em auto;
+    width: 80%;
+}
+
+.line1 {
+    border: 1px solid rgba(147, 144, 148, 1); 
+    width: 50%;
+    top: 90%;
+}
+
+.workshop-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2em;
+}
+  
+.workshop-row-label {
+    font-family: 'Pirate';
+    font-size: 2.5rem;
+    display: block;
+    font-weight: 400;
+    color: #484649;
+    text-align: center;
+}
+
+@media only screen and (max-aspect-ratio: 1/1) {
+    .workshop-row {
+        display: block;
+    }
+
+    .workshop-row {
+     margin-bottom: 0;
+    }
+
+    .workshop-row-label {
+        margin-bottom: 0.5em;
+    }
+  }

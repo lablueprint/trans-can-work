@@ -1,4 +1,5 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable */
+/* no-unused-vars */
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
@@ -13,7 +14,8 @@ const TCWLogo2 = require('../Assets/Images/TCW-banner-black.png');
 
 const styles = {
   link: {
-    textDecoration: 'none', color: '#111111', fontFamily: 'Montserrat', display: 'flex', alignItems: 'center',
+    textDecoration: 'none', color: '#111111', fontFamily:
+'Montserrat', display: 'flex', alignItems: 'center',
   },
   arrow: { marginRight: '0.5em' },
   separator: { paddingBottom: '3%' },
@@ -100,7 +102,8 @@ function Login() {
       {sentReset ? (
         <div style={styles.confirm}>
           <p className="forgot">Forgot Password</p>
-          <p className="enterEmail">A password reset email has been sent. Check your email within the next 10 minutes to reset your password.</p>
+          <p className="enterEmail">A password reset email has been sent.
+Check your email within the next 10 minutes to reset your password.</p>
         </div>
       )
         : (

@@ -1,0 +1,57 @@
+.onlineProfile {
+    margin: 1.5em auto;
+    font-family: 'Liesel';
+    font-size: 1.75rem;
+    font-weight: 400;
+    width: 80%;
+    text-align: center;
+    line-height: 2rem;
+    color: #484649;
+} 
+
+.profileInput {
+    padding: 16px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #484649;
+    border-radius: 8px;
+    background-color: #FFFBFE;
+    width: 100%;
+}
+
+.textFields {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.onlineProfile-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2em;
+}
+  
+.onlineProfile-row-label {
+    flex-basis: 48%;
+    font-family: 'Pirate';
+    font-size: 2.5rem;
+    display: block;
+}
+
+.form-item {
+    display: flex;
+    flex-direction: column;
+}
+
+@media only screen and (max-aspect-ratio: 1/1) {
+    .onlineProfile-row {
+        display: block;
+    }
+
+    .onlineProfile-row {
+     margin-bottom: 0;
+    }
+
+    .onlineProfile-row-label {
+        margin-bottom: 0.5em;
+       }
+  }

@@ -1,8 +1,10 @@
-/*eslint-disable*/
-import React, { useEffect } from "react";
+/* eslint-disable */
+import React, { useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { onAuthStateChanged } from 'firebase/auth';
+import { useSelector, useDispatch } from 'react-redux';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { Route, Routes } from "react-router-dom";
 import {
   Login,
   NavigatorDashboard,
@@ -13,9 +15,9 @@ import {
   Home,
   Dashboard,
 } from './Pages';
-import "./App.css";
-import Footer from "./Components/Footer/Footer";
-import Splash from "./Components/Splash/Splash";
+import './App.css';
+import Footer from './Components/Footer/Footer';
+import Splash from './Components/Splash/Splash';
 import approvalIcon from './Assets/Images/trans-flag-graphic.svg';
 import AdminView from './Components/Dashboard/AdminView';
 import ScrollToTop from './Pages/scrollToTop';
@@ -30,19 +32,16 @@ import HiredInfo from './Components/HiredInfo/HiredInfo';
 import Resources from './Components/Resources/Resources';
 import OnlineProfiles from './Components/OnlineProfiles/OnlineProfiles';
 import TrainingPrograms from './Components/TrainingPrograms/TrainingPrograms';
-import { onAuthStateChanged } from "firebase/auth";
-import { useSelector, useDispatch } from "react-redux";
 import { login, logout } from "./Redux/Slice/authSlices";
 import { fetchUser, addUser } from './Services/user-service';
-import { auth } from "./firebase";
-
+import { auth } from './firebase';
 
 function App() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.value);
 
   useEffect(() => {
-    // on any firebase auth change 
+    // on any firebase auth change
     const unsubscribe = onAuthStateChanged(auth, async (state) => {
       // if logged in
       if (state != null) {
@@ -52,8 +51,8 @@ function App() {
             email: state.email,
             accessToken: state.accessToken,
             refreshToken: state.refreshToken,
-            user: doc !== undefined ? doc.data(): undefined,
-          }
+            user: doc !== undefined ? doc.data() : undefined,
+          };
           dispatch(login(userState));
         }).catch((error) => {
         });
@@ -63,9 +62,9 @@ function App() {
         dispatch(logout());
       }
     });
-    return()=>{
+    return () => {
       unsubscribe();
-    }
+    };
   }, []);
 
   return (
@@ -118,6 +117,7 @@ function App() {
           <Route path="/landing" element={<Landing />} />
           <Route path="/adminview" element={<AdminView />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/roadmap" element={<MilestoneMap />} />
           <Route
             path="/splash"
             element={
