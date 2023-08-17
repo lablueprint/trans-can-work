@@ -1,6 +1,5 @@
 .container {
   width: 85%;
-  align-self: center;
   margin: 0 auto;  
 };
 
@@ -51,4 +50,8 @@
   .hiringInfoWrapper {
     grid-template-columns: repeat(1, 1fr);
   }
+}
+
+.container {
+  margin: 0 auto;
 }
