@@ -1,5 +1,7 @@
 /*eslint-disable*/
 import React, { useEffect } from "react";
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { Route, Routes } from "react-router-dom";
 import {
   Login,
@@ -23,6 +25,7 @@ import ScrollToTop from './Pages/scrollToTop';
 import NavigatorMenu from './Components/Navigation/NavigatorMenu';
 import MilestoneMap from './Components/Milestones/MilestoneMap';
 import Internships from './Components/Internships/Internships';
+import Assessment from './Components/Assessment/Assessment';
 import Workshops from './Components/Workshops/Workshops';
 import JobFairs from './Components/JobFairs/JobFairs';
 import JobBoards from './Components/JobBoards/JobBoards';
@@ -67,6 +70,7 @@ function App() {
   }, []);
 
   return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
     <div className="App">
       <Routes>
         <Route
@@ -91,9 +95,12 @@ function App() {
             </>
           )}
         />
+        {user != undefined && 
+        (
+        <>
         <Route path="/home" element={<NavigatorMenu />}>
           <Route path="roadmap" element={<MilestoneMap />} />
-          <Route path="assessment" element={<JobseekerData />} />
+          <Route path="assessment" element={<Assessment />} />
           <Route path="onlineprofiles" element={<OnlineProfiles />} />
           <Route path="training" element={<TrainingPrograms />} />
           <Route path="internships" element={<Internships />} />
@@ -103,11 +110,13 @@ function App() {
           <Route path="resources" element={<Resources />} />
           <Route path="hiredinfo" element={<HiredInfo />} />
         </Route>
+        <Route path="/onboard" element={<JobseekerData />} />
+      </>)
+}
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/landing" element={<Landing />} />
-        <Route path="/onboard" element={<JobseekerData useremail="solia@goodpl.us" username="Solia Nasser" />} />
         <Route path="/adminview" element={<AdminView />} />
 
         <Route
@@ -123,6 +132,7 @@ function App() {
       </Routes>
       <Footer />
     </div>
+    </LocalizationProvider>
   );
 }
 export default App;

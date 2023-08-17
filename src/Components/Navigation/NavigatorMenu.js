@@ -4,6 +4,7 @@ import {
 } from '@mui/material';
 import { Link, Outlet } from 'react-router-dom';
 import './NavMenu.css';
+import Header from '../Header/Header';
 
 const style = {
   tabStyle: {
@@ -55,31 +56,60 @@ function NavigatorMenu() {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <Tabs
-        orientation="vertical"
-        variant="scrollable"
-        value={value}
-        onChange={handleChange}
-        aria-label="Vertical tabs example"
-        sx={style.tabsStyle}
-        TabIndicatorProps={{
-          sx: style.tabIndicatorStyle,
-        }}
-      >
-        {tabs.map((x) => (
-          <Tab
-            sx={style.tabStyle}
-            key={x.link}
-            label={x.title}
-            component={Link}
-            to={x.link}
-          />
-        ))}
-      </Tabs>
-      <Box sx={style.panelStyle}><Outlet /></Box>
+    <>
+      <Header />
+      <Box sx={{ display: 'flex' }}>
+        <Tabs
+          orientation="vertical"
+          variant="scrollable"
+          value={value}
+          onChange={handleChange}
+          aria-label="Vertical tabs example"
+          sx={style.tabsStyle}
+          TabIndicatorProps={{
+            sx: style.tabIndicatorStyle,
+          }}
+        >
+          {tabs.map((x) => (
+            <Tab
+              sx={style.tabStyle}
+              key={x.link}
+              label={x.title}
+              component={Link}
+              to={x.link}
+            />
+          ))}
+        </Tabs>
+        <Box sx={style.panelStyle}><Outlet /></Box>
 
-    </Box>
+      </Box>
+
+    </>
+    // <Box sx={{ display: 'flex' }}>
+    //   <Tabs
+    //     orientation="vertical"
+    //     variant="scrollable"
+    //     value={value}
+    //     onChange={handleChange}
+    //     aria-label="Vertical tabs example"
+    //     sx={style.tabsStyle}
+    //     TabIndicatorProps={{
+    //       sx: style.tabIndicatorStyle,
+    //     }}
+    //   >
+    //     {tabs.map((x) => (
+    //       <Tab
+    //         sx={style.tabStyle}
+    //         key={x.link}
+    //         label={x.title}
+    //         component={Link}
+    //         to={x.link}
+    //       />
+    //     ))}
+    //   </Tabs>
+    //   <Box sx={style.panelStyle}><Outlet /></Box>
+
+  // </Box>
   );
 }
 

@@ -100,7 +100,6 @@ function Resources() {
 
   return (
     <div>
-      <div className="temp" />
       <div className="resources-tracker-title">Resources Tracker</div>
       <div className="resources-columns-container">
         <div className="checkboxes-column-left">
@@ -137,6 +136,7 @@ function Resources() {
                         onChange={(e) => editTrackedResource(e, field.value, index)}
                         InputProps={textFieldStyles.inputProps}
                         InputLabelProps={textFieldStyles.labelProps}
+                        className="input-field"
                       />
                       <div className="op-between-inputs" />
                     </div>

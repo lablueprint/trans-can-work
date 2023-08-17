@@ -1,8 +1,46 @@
 import React, { useState } from 'react';
 import './TrainingPrograms.css';
 import { TextField } from '@material-ui/core';
+import { DateField } from '@mui/x-date-pickers/DateField';
+import {
+  FormControl, InputLabel, NativeSelect,
+} from '@mui/material';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
+
+const styles = {
+  dropdownOptions: {
+    fontFamily: 'Montserrat',
+    color: '#49454F',
+    fontSize: '0.9vw',
+    fontWeight: 'bold',
+    border: '1px solid #000AA0',
+    borderRadius: '4px',
+    width: '55.0vw',
+    height: '3.2vw',
+    paddingLeft: '1.7%',
+    textDecoration: 'none',
+    backgroundColor: '#F7F8FE',
+  },
+  inputLabel: {
+    borderBottom: 'none',
+    color: '#0c0ca4',
+    fontFamily: 'Montserrat',
+    fontWeight: 'normal',
+    fontSize: '0.9vw',
+    marginTop: '2%',
+    textAlign: 'left',
+    backgroundColor: 'white',
+    paddingLeft: '1%',
+    paddingRight: '1%',
+    textDecoration: 'none',
+  },
+  formControl: {
+    width: '55.0vw',
+    textAlign: 'left',
+    textDecoration: 'none',
+  },
+};
 
 function TrainingPrograms() {
   const textFieldStyles = {
@@ -27,6 +65,19 @@ function TrainingPrograms() {
       },
     },
   };
+
+  const [date, setDate] = useState();
+
+  const fieldProps = [
+    { label: 'Training Program', value: 'program' },
+    { label: 'Date Referral Sent', value: 'referral' },
+    { label: 'Start Date', value: 'start' },
+    { label: 'Date Officially Enrolled', value: 'enrolled' },
+    { label: 'End Date', value: 'end' },
+    { label: 'Date Completed Training', value: 'completed' },
+    { label: 'Notes', value: 'notes' },
+  ];
+
   const [allPrograms, setAllPrograms] = useState([{
     program: '',
     referral: '',
@@ -65,21 +116,21 @@ function TrainingPrograms() {
     temp[index][element] = event.target.value;
     setAllPrograms(temp);
     console.log(allPrograms);
+    console.log(date);
   };
 
-  const fieldProps = [
-    { label: 'Company/Org of Internship', value: 'program' },
-    { label: 'Date Referral Sent', value: 'referral' },
-    { label: 'Start Date', value: 'start' },
-    { label: 'Date Officially Enrolled', value: 'enrolled' },
-    { label: 'End Date', value: 'end' },
-    { label: 'Date Completed Training', value: 'completed' },
-    { label: 'Notes', value: 'notes' },
-  ];
+  // useEffect(() => {
+  //   const temp = date;
+  //   setAllPrograms(
+  //     {
+  //       ...allPrograms,
+  //       referral: temp,
+  //     },
+  //   );
+  // }, [date]);
 
   return (
     <div>
-      <div className="temp" />
       <div className="tp-title">Training Programs</div>
       <div className="between-inputs" />
       <div>
@@ -90,17 +141,67 @@ function TrainingPrograms() {
                 <div>
                   {fieldProps.map((field) => (
                     <div>
-                      <TextField
-                        id="outlined-basic"
-                        label={field.label}
-                        variant="outlined"
-                        value={programObject[field.value]}
-                        focused
-                        onChange={(e) => editProgram(e, field.value, index)}
-                        InputProps={textFieldStyles.inputProps}
-                        InputLabelProps={textFieldStyles.labelProps}
-                      />
-                      <div className="op-between-inputs" />
+                      {(field.label === 'Training Program' || field.label === 'Notes')
+                      && (
+                        <>
+                          <TextField
+                            id="outlined-basic"
+                            label={field.label}
+                            placeholder={field.label}
+                            variant="outlined"
+                            value={programObject[field.value]}
+                            focused
+                            onChange={(e) => editProgram(e, field.value, index)}
+                            InputProps={textFieldStyles.inputProps}
+                            InputLabelProps={textFieldStyles.labelProps}
+                            className="input-field"
+                          />
+                          <div className="op-between-inputs" />
+                        </>
+                      )}
+                      {(field.label === 'Completed?')
+                      && (
+                        <>
+                          <div>
+                            <FormControl style={styles.formControl}>
+                              <InputLabel style={styles.inputLabel}>
+                                Degree?
+                              </InputLabel>
+                              <NativeSelect
+                                defaultValue="No"
+                                style={styles.dropdownOptions}
+                        // onChange={(e) => editEducation(e, 'degree', index)}
+                                menuprops={{
+                                  PaperProps: {
+                                    style: styles.purpleBackground,
+                                  },
+                                }}
+                              >
+                                <option value="Yes" className="dropit">Yes</option>
+                                <option value="No" className="dropit">No</option>
+                              </NativeSelect>
+                            </FormControl>
+                          </div>
+                          <div className="op-between-inputs" />
+                        </>
+                      )}
+                      {(field.label === 'Date Referral Sent' || field.label === 'Start Date'
+                      || field.label === 'Date Officially Enrolled' || field.label === 'End Date'
+                      || field.label === 'Date Completed Training')
+                      && (
+                        <>
+                          <DateField
+                            label={field.label}
+                            focused
+                            value={date}
+                            onChange={(newValue) => setDate(newValue)}
+                            InputProps={textFieldStyles.inputProps}
+                            InputLabelProps={textFieldStyles.labelProps}
+                            className="input-field"
+                          />
+                          <div className="op-between-inputs" />
+                        </>
+                      )}
                     </div>
                   ))}
                 </div>

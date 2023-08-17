@@ -61,7 +61,8 @@ function OnlineProfiles() {
   };
 
   const fieldProps = [
-    { label: 'Company/Org of Internship', value: 'website' },
+    { label: 'Company/Org of Internship', value: 'site' },
+    { label: 'Username', value: 'username' },
     { label: 'Tools This Site Provides', value: 'tools' },
     { label: 'Created an Account?', value: 'created' },
     { label: 'Notes', value: 'notes' },
@@ -69,7 +70,6 @@ function OnlineProfiles() {
 
   return (
     <div>
-      <div className="temp" />
       <div className="op-title">Online Employment Profiles</div>
       <div>
         {profile.map((profileObject, index) => (
@@ -77,54 +77,22 @@ function OnlineProfiles() {
             <div>
               <form>
                 <div>
-                  <TextField
-                    id="outlined-basic"
-                    label="Website"
-                    variant="outlined"
-                    value={profileObject.website}
-                    focused
-                    onChange={(e) => editOnlineProfile(e, 'website', index)}
-                    InputProps={textFieldStyles.inputProps}
-                    InputLabelProps={textFieldStyles.labelProps}
-                    className="input-field"
-                  />
-                  <div className="op-between-inputs" />
-                  <TextField
-                    id="outlined-basic"
-                    label="Tools This Site Provides"
-                    variant="outlined"
-                    value={profileObject.tools}
-                    focused
-                    onChange={(e) => editOnlineProfile(e, 'tools', index)}
-                    InputProps={textFieldStyles.inputProps}
-                    InputLabelProps={textFieldStyles.labelProps}
-                    className="input-field"
-                  />
-                  <div className="op-between-inputs" />
-                  <TextField
-                    id="outlined-basic"
-                    label="Created an Account?"
-                    variant="outlined"
-                    value={profileObject.created}
-                    focused
-                    onChange={(e) => editOnlineProfile(e, 'created', index)}
-                    InputProps={textFieldStyles.inputProps}
-                    InputLabelProps={textFieldStyles.labelProps}
-                    className="input-field"
-                  />
-                  <div className="op-between-inputs" />
-                  <TextField
-                    id="outlined-basic"
-                    label="Notes"
-                    variant="outlined"
-                    value={profileObject.notes}
-                    focused
-                    onChange={(e) => editOnlineProfile(e, 'notes', index)}
-                    InputProps={textFieldStyles.inputProps}
-                    InputLabelProps={textFieldStyles.labelProps}
-                    className="input-field"
-                  />
-                  <div className="op-between-inputs" />
+                  {fieldProps.map((field) => (
+                    <div>
+                      <TextField
+                        id="outlined-basic"
+                        label={field.label}
+                        variant="outlined"
+                        value={profileObject[field.value]}
+                        focused
+                        onChange={(e) => editOnlineProfile(e, field.value, index)}
+                        InputProps={textFieldStyles.inputProps}
+                        InputLabelProps={textFieldStyles.labelProps}
+                        className="input-field"
+                      />
+                      <div className="op-between-inputs" />
+                    </div>
+                  ))}
                 </div>
               </form>
             </div>

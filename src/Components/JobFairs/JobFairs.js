@@ -71,7 +71,6 @@ function JobFairs() {
 
   return (
     <div>
-      <div className="temp" />
       <div className="tp-title">Job Fairs</div>
       <div className="between-inputs" />
       <div>
@@ -91,6 +90,7 @@ function JobFairs() {
                         onChange={(e) => editJobFair(e, field.value, index)}
                         InputProps={textFieldStyles.inputProps}
                         InputLabelProps={textFieldStyles.labelProps}
+                        className="input-field"
                       />
                       <div className="op-between-inputs" />
                     </div>
