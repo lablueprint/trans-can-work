@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -12,7 +13,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import { Button } from 'react-bootstrap';
 import firebase from '../firebase';
 import { updateUser, fetchUser, createUser } from '../Services/user-service';
-import SearchBar from "./SearchAndFiltering/SearchBar"; 
+import SearchBar from './SearchAndFiltering/SearchBar';
 
 const dummyNavigators = [
   {
@@ -155,10 +156,12 @@ const styles = {
     borderColor: '#000DC8',
     borderRadius: '5px',
     backgroundColor: '#FFFBFE',
+    borderWidth: '3px',
   },
   confirmText: {
     fontSize: '16px',
     fontWeight: 'bold',
+    fontFamily: 'Montserrat',
   },
 };
 const Transition = React.forwardRef((props, ref) => (
@@ -189,8 +192,8 @@ function ArchivePopup({
     setSelectedValue(event.target.value);
   };
 
-  const handleconfirm = async () => {
-    //update the jobseeker with their new navigator
+  const handleConfirm = async () => {
+    // update the jobseeker with their new navigator
     console.log(selectedValue);
     const diya = await fetchUser(dummyUser.id);
     console.log(diya.data());
@@ -198,39 +201,40 @@ function ArchivePopup({
     console.log(changedData);
     await updateUser(dummyUser.id, changedData);
 
-    //add jobseeker to navigator's list 
-    const newNavigator = await fetchUser(selectedValue); 
+    // add jobseeker to navigator's list
+    const newNavigator = await fetchUser(selectedValue);
     console.log(newNavigator.data());
-    const navigatorsArray = [...newNavigator.data().jobseekers]; 
+    const navigatorsArray = [...newNavigator.data().jobseekers];
     console.log(navigatorsArray);
-    navigatorsArray.push(dummyUser.id); 
-    const newNavigatorData = { ...newNavigator.data(),jobseekers: navigatorsArray };
+    navigatorsArray.push(dummyUser.id);
+    const newNavigatorData = { ...newNavigator.data(), jobseekers: navigatorsArray };
     console.log(newNavigatorData);
-    await updateUser(selectedValue, newNavigatorData); 
+    await updateUser(selectedValue, newNavigatorData);
   };
 
+  const handleConfirmAndClose = (event) => {
+    handleConfirm();
+    handleClose(event);
+  };
 
-const search = (items) => {
-  console.log("woo");
-  if (searchTerms.length > 0) {
-    console.log(searchTerms);
-    const searchQuery = searchTerms.toLowerCase();
-    console.log(searchQuery);
-    return items.filter((element) => element.firstName.toLowerCase().startsWith(searchQuery));
-  }
-  return items;
-}
-
+  const search = (items) => {
+    console.log('woo');
+    if (searchTerms.length > 0) {
+      console.log(searchTerms);
+      const searchQuery = searchTerms.toLowerCase();
+      console.log(searchQuery);
+      return items.filter((element) => element.firstName.toLowerCase().startsWith(searchQuery));
+    }
+    return items;
+  };
 
   useEffect(() => {
   }, [selectedValue]);
-
 
   useEffect(() => {
     console.log(searchTerms);
     setFilteredNavigators(search(navigators));
   }, [searchTerms]);
-
 
   return (
     <div className="containerSection" style={styles.containerSection}>
@@ -245,7 +249,7 @@ const search = (items) => {
         PaperProps={{
           style: {
             borderRadius: 30,
-            maxHeight: '679px',
+            height: '679px',
             maxWidth: '471px',
             minWidth: '471px',
             backgroundColor: '#FFFBFE',
@@ -271,17 +275,18 @@ const search = (items) => {
           Navigators
         </div>
         <div className="search-bar-container">
-        <SearchBar
-          value={searchTerms}
-          setValue={setSearchTerms}
-          placeholder="Search here!"
-        />
-      </div>
+          <SearchBar
+            value={searchTerms}
+            setValue={setSearchTerms}
+            className="search-bar"
+            placeholder="Search jobseekers..."
+          />
+        </div>
         <RadioGroup
           style={{
             width: '95%',
-            margin: 'auto',
-            marginBottom: '', 
+            marginBottom: '',
+            marginTop: '0',
           }}
         >
           {filteredNavigators.map((element) => (
@@ -327,11 +332,12 @@ const search = (items) => {
         </RadioGroup>
         <Button
           variant="outlined"
-          onClick={handleconfirm}
+          onClick={handleConfirmAndClose}
           className="confirm"
           style={{
-            marginTop: '3em',
+            marginTop: '9em',
             alignSelf: 'center',
+            borderWidth: '3px',
           }}
         >
           {' '}

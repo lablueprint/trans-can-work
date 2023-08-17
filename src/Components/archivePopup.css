@@ -28,7 +28,7 @@
     justify-content: flex-start;
     position: absolute;
     top: 1em; 
-    left: 1em; 
+    right: 1em; 
   }
   
   .profilePic {
@@ -172,6 +172,7 @@
     justify-content: center;
     font-family: "Montserrat";
     font-weight: 500;
+    font-size: 1.25rem;
   }
 
   .form-label .MuiRadio-root {
@@ -187,4 +188,41 @@
     background-color: #FFFBFE;
     border-style: solid !important;
     justify-content: center;
+  }
+
+  .confirm:hover,
+  .confirm:focus {
+    background-color: #000DC8;
+    color: #FFFBFE;
+  }
+
+  .confirm:active {
+    border-color: #00087c !important;
+    background-color: #00087c;
+  }
+
+  .search-bar-container {
+    padding: 0;
+    margin: 0;
+    width: 95%;
+    border: none;
+    border: 2px solid #D9D9D9;
+    border-radius: 1.5em;
+  }
+
+  .search-bar-container div {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .search-bar {
+    height: 3em;
+    color: black !important;
+    font-size: 1rem;
+    background-color: rgba(255, 251, 254, 0) !important;
+    margin: 0;
+    padding-left: 2em;
+    width: 100%;
+    z-index:
   }
