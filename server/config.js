@@ -4,12 +4,14 @@ const {
   getFirestore, getDocs, collection,
 } = require('firebase/firestore');
 require('dotenv').config();
+// eslint-disable-next-line import/no-extraneous-dependencies
+const moment = require('moment');
 
 const adminEmail = process.env.ADMIN_EMAIL;
 const password = process.env.ADMIN_PASS;
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyC84QEm_BT77ocIwq1FrmeOOkX1yuikJaU',
+  apiKey: process.env.FIREBASE_API,
   authDomain: 'trans-can-work.firebaseapp.com',
   projectId: 'trans-can-work',
   storageBucket: 'trans-can-work.appspot.com',
@@ -29,10 +31,10 @@ const getEmails = async () => {
     const docsSnap = await getDocs(colRef);
     const emailList = [];
     const dataList = [];
+    const today = moment();
     docsSnap.forEach(async (doc) => {
       // need to add a last milestone complete date
-      // archived check too
-      if (doc.data().role === 'jobseeker') {
+      if (doc.data().role === 'jobseeker' && doc.data().approved && !doc.data().complete && !doc.data().archived && today.diff(moment(new Date(doc.data().lastCompletion)), 'days') > 14) {
         emailList.push(doc.id);
         dataList.push(doc.data().firstName);
       }
@@ -43,5 +45,4 @@ const getEmails = async () => {
     return undefined;
   }
 };
-
 module.exports = getEmails;
