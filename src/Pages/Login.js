@@ -181,7 +181,7 @@ function Login() {
                 ...inputProps,
                 endAdornment: (
                   <InputAdornment position="start" onClick={() => setShowPassword(!showPassword)}>
-                    <VisibilityIcon fontSize="large" />
+                    <VisibilityIcon fontSize="large" style={{ width: '0.75em', right: '0' }} />
                   </InputAdornment>
                 ),
               }}
@@ -202,10 +202,7 @@ function Login() {
                 }}
                 onChange={() => setRememberMe(!rememberMe)}
               />
-              <div style={{
-                paddingTop: '2%',
-              }}
-              >
+              <div>
                 {' '}
                 Remember Me
               </div>

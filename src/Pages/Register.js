@@ -214,8 +214,8 @@ function Register() {
                 id="demo-radio-buttons-group-label"
                 style={{
                   fontFamily: 'Montserrat',
-                  fontSize: '0.9vw',
-                  color: 'blue',
+                  fontSize: '1rem',
+                  color: '#000AA0',
                   fontWeight: 'bold',
                 }}
               >
@@ -226,14 +226,13 @@ function Register() {
                 aria-labelledby="demo-radio-buttons-group-label"
                 defaultValue="jobseeker"
                 name="radio-buttons-group"
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  width: '54.0vw',
-                  color: 'blue',
-                  paddingTop: '4%',
-                }}
+                className="radio-buttons"
+                // style={{
+                //   display: 'flex',
+                //   flexDirection: 'row',
+                //   justifyContent: 'space-between',
+                //   color: '#000AA0',
+                // }}
               >
                 <FormControlLabel
                   value="jobseeker"
@@ -330,7 +329,7 @@ function Register() {
                 ...inputProps,
                 endAdornment: (
                   <InputAdornment position="start" onClick={() => setShowPassword(!showPassword)}>
-                    <VisibilityIcon fontSize="large" />
+                    <VisibilityIcon fontSize="large" style={{ width: '0.75em' }} />
                   </InputAdornment>
                 ),
               }}

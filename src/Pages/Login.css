@@ -10,30 +10,69 @@
   flex-direction: column;
   padding-bottom: 10%;
   padding-top: 15%;
-  padding-left: 15%;
+  width: 85%;
+  margin: 0 auto;
 }
 .loginInput{
   padding-top: 0.75%;
   padding-bottom: 0.75%;
   padding-left: 1%;
+  width: 100%;
+  height: 3em;
+  margin-bottom: 1em;
 }
+
+.loginInput div {
+  width: 100% !important;
+  height: 3em !important;
+}
+
+.loginInput div div {
+  font-size: 1rem !important;
+}
+
+.loginInput div div div {
+  width: 2.5% !important;
+}
+
+.makeStyles-labelInput-1 {
+  font-size: 1rem !important;
+}
+
+.loginInput button {
+  width: 100% !important;
+  font-size: 1rem !important;
+  height: 3em !important;
+}
+
+.loginInput button span span svg {
+  font-size: 1rem !important;
+}
+
 .checkbox{
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   justify-self: flex-start;
-  width: 25%;
+  width: 50% !important;
 }
+
+.checkbox span {
+  padding: 0 !important;
+}
+
 .rememberMeForgotPassword{
   display: flex;
   flex-direction: row;
-  font-size: 0.8vw;
+  font-size: 0.8rem !important;
   justify-content: space-between;
   font-family: 'Montserrat';
   padding-bottom: 3%;
   padding-left: 0.5%;
-  width: 65%;
+  align-items: center;
+  width: 100% !important;
 }
+
 .landingSplash{
   background-color: #F6F2F6;
   display: flex;
@@ -49,7 +88,7 @@
   padding-bottom: 5%;
   padding-top: 10%;
   padding-right: 2%;
-  width: 32%;
+  width: 80%;
 }
 .headerTitle{
   padding-left: 5%;
@@ -63,7 +102,7 @@
   justify-content: flex-start;
   flex-direction: row;
   font-family: 'Montserrat', sans-serif;  
-  font-size: 45px;
+  font-size: 20px;
   font-weight: 450;
 }
 .body{
@@ -92,15 +131,13 @@
 .TCWlogo{
   display: flex;
   align-self: center;
-  min-width: 28%;
-  max-width: 30%;
-  min-height: 28%;
-  max-height: 30%;
+  width: 10em;
 }
 .TCWimage{
   display: flex;
   align-self: flex-start;
-  
+  width: 20em;
+  max-width: 90%;
 }
 .arrowImage{
   display: flex;
@@ -141,4 +178,15 @@
 
 .link {
   text-decoration: none;
+}
+
+@media (max-width: 768px){
+  .body,
+  .footerBody {
+    font-size: 24px;
+  }
+}
+
+.eye-icon {
+  width: 0.75em;
 }
