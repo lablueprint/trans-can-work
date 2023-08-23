@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { IconButton, Avatar, StylesProvider } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
+// eslint-disable-next-line import/no-unresolved
 import './ProfileButton.css';
 import {
   Menu, MenuItem, ListItemIcon, ListItemText,
@@ -16,7 +17,8 @@ import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import CheckIcon from '@mui/icons-material/Check';
 import DownloadIcon from '@mui/icons-material/Download';
-import { fetchJobseeker, updateJobseeker, deleteJobseeker } from '../../Services/jobseeker-service';
+import { arrayRemove, arrayUnion } from 'firebase/firestore';
+import { updateUser, deleteUser } from '../../Services/user-service';
 
 const styles = {
   avatar: {
@@ -35,8 +37,8 @@ const styles = {
 };
 
 function ProfileButton({
-  id, profileName, workField, jobseekerEmail, icon, accountType, isArchived, isApproved, isAdmin,
-  editField, bookmarked, deleteAccount,
+  id, profileName, workField, email, icon, accountType, isArchived, isApproved, isAdmin,
+  editField, bookmarked, deleteAccount, userEmail,
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [menuItems, setMenuItems] = useState([]);
@@ -51,28 +53,41 @@ function ProfileButton({
 
   // change frontend ver too!
   // handlers for drop down menu actions
-  const archiveJobseeker = () => {
+  const archive = () => {
     editField(id, 'archived', !isArchived);
+    updateUser(email, { archived: !isArchived });
   };
 
-  const bookmarkJobseeker = () => {
+  const approve = () => {
+    editField(id, 'approved', !isApproved);
+    updateUser(email, { approved: !isApproved });
+  };
+
+  const bookmark = () => {
+    console.log(bookmarked);
     editField(id, 'bookmarked', !bookmarked);
+    if (!bookmarked) {
+      updateUser(userEmail, { bookmarked: arrayUnion(email) });
+    } else {
+      updateUser(userEmail, { bookmarked: arrayRemove(email) });
+    }
   };
 
   const deleteSeeker = () => {
     deleteAccount(id);
+    deleteUser(email, accountType);
   };
 
   // items for the drop down menu
   const menuOptions = [
     {
       label: 'Archive',
-      fx: archiveJobseeker,
+      fx: archive,
       icon: <FolderOutlinedIcon fontSize="small" />,
     },
     {
       label: 'Unarchive',
-      fx: archiveJobseeker,
+      fx: archive,
       icon: <FolderOutlinedIcon fontSize="small" />,
     },
     {
@@ -82,7 +97,7 @@ function ProfileButton({
     },
     {
       label: 'Approve',
-      fx: () => { console.log('approve'); },
+      fx: approve,
       icon: <CheckIcon fontSize="small" />,
     },
     {
@@ -99,14 +114,18 @@ function ProfileButton({
 
   // different set of menu items dependent on the tab
   const reduceMenuItems = () => {
-    let items = [];
+    const items = [];
+    if (isAdmin) {
+      items.push('Delete');
+    }
+
     if (!isApproved) {
-      items = ['Approve', 'Delete'];
+      items.push('Approve');
     } else if (isArchived) {
-      items = ['Unarchive', 'Delete'];
+      items.push('Unarchive');
     } else {
-      items = ['Delete', 'Download'];
-      if (accountType === 'client') {
+      items.push('Download');
+      if (accountType === 'jobseeker') {
         items.push('Archive');
         if (isAdmin) {
           items.push('Re-assign');
@@ -154,7 +173,7 @@ function ProfileButton({
       <div className="profile-button-button-container">
         <IconButton
           id="bookmark"
-          onClick={bookmarkJobseeker}
+          onClick={bookmark}
           size="small"
         >
           {bookmarked ? <BookmarkIcon /> : <BookmarkBorderIcon /> }
@@ -219,7 +238,7 @@ ProfileButton.propTypes = {
   id: PropTypes.string.isRequired,
   profileName: PropTypes.string.isRequired,
   workField: PropTypes.string,
-  jobseekerEmail: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
   accountType: PropTypes.string.isRequired,
   isArchived: PropTypes.bool.isRequired,
   isAdmin: PropTypes.bool.isRequired,
@@ -228,6 +247,7 @@ ProfileButton.propTypes = {
   icon: PropTypes.string,
   editField: PropTypes.func.isRequired,
   deleteAccount: PropTypes.func.isRequired,
+  userEmail: PropTypes.string.isRequired,
 };
 
 ProfileButton.defaultProps = {

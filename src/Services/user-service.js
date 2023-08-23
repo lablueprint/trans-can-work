@@ -9,6 +9,7 @@ import {
   jobseekerUserInit, navigatorUserInit, adminUserInit, jobseekerDataObject,
 } from './objects-service';
 import { db, auth } from '../firebase';
+import { deleteJobseekerData } from './jobseeker-data-service';
 
 const provider = new GoogleAuthProvider();
 
@@ -57,7 +58,7 @@ export const fetchAllUsers = async () => {
   const colRef = collection(db, 'users');
   try {
     const docsSnap = await getDocs(colRef);
-    return docsSnap;
+    return docsSnap.docs;
   } catch (error) {
     console.log(error);
     return undefined;
@@ -66,10 +67,9 @@ export const fetchAllUsers = async () => {
 
 export const fetchUsersByNavigator = async (email) => {
   const colRef = collection(db, 'users');
-  const navRef = doc(db, 'users', email);
   try {
-    const docsSnap = await getDocs(query(colRef, where('navigator', '==', navRef)));
-    return docsSnap;
+    const docsSnap = await getDocs(query(colRef, where('navigator', '==', email)));
+    return docsSnap.docs;
   } catch (error) {
     console.log(error);
     return undefined;
@@ -78,17 +78,21 @@ export const fetchUsersByNavigator = async (email) => {
 
 // update this method to accomodate changes into store!
 export const updateUser = async (email, data) => {
-  await setDoc(doc(db, 'users', email), data)
+  await updateDoc(doc(db, 'users', email), data)
     .then(() => {
       console.log('updated user ', email);
     }).catch((err) => {
+      console.log(err);
       alert(err.stack);
     });
 };
 
 // could add check for if the user is a jobseeker + deletion of their record if necessary
-export const deleteUser = async (email) => {
+export const deleteUser = async (email, role) => {
   await deleteDoc(doc(db, 'users', email)).then(() => {
+    if (role === 'jobseeker') {
+      deleteJobseekerData(email);
+    }
     console.log('User account ', email, ' has been deleted successfully.');
   })
     .catch((error) => {

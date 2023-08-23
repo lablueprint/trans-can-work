@@ -5,20 +5,19 @@ import {
   Tab, Tabs,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { PropTypes } from 'prop-types';
+import { useSelector } from 'react-redux';
 import SearchAndFilter from '../Components/SearchAndFiltering/searchAndFilter';
 import FilterChips from '../Components/SearchAndFiltering/FilterChips';
 import './Home.css';
 import './Dashboard.css';
 import ProfileButton from '../Components/Dashboard/ProfileButton';
-import { fetchAllJobseekers } from '../Services/jobseeker-service';
-import { fetchAllNavigators } from '../Services/navigator-service';
+import { fetchUsersByNavigator } from '../Services/user-service';
 import DashError from '../Components/Dashboard/DashError';
-import { skills, interests } from '../Components/SearchAndFiltering/FilterConstants';
-
+import { skillsChecklistOptions, industryInterestOptions } from '../Services/objects-service';
 // profile image imports
 import skater from '../Assets/ProfileIcons/monogram.png';
 import dog from '../Assets/ProfileIcons/monogram-2.png';
+import { fetchJobseekerData } from '../Services/jobseeker-data-service';
 
 const icons = [
   skater,
@@ -74,18 +73,22 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
   other additions:
     - add bookmarked users to datamodel + get that data when you pull from backend
 */
-export default function Dashboard({ profileName, role }) {
+export default function NavDashboard() {
+  const store = useSelector((state) => state.auth.value);
+
   const [tabValue, setValue] = useState(0);
   const [hasAssignments, setHasAssignments] = useState(false);
 
   // states for filtering
-  const [checkedSkills, setCheckedSkills] = useState(new Array(skills.length).fill(false));
-  const [checkedInterests, setCheckedInterests] = useState(new Array(interests.length).fill(false));
+  const [checkedSkills, setCheckedSkills] = useState(
+    new Array(skillsChecklistOptions.length).fill(false),
+  );
+  const [checkedInterests, setCheckedInterests] = useState(
+    new Array(industryInterestOptions.length).fill(false),
+  );
 
   // data from firebase
   const [clients, setClients] = useState([]);
-  const [navigators, setNavigators] = useState([]);
-  const [unapprovedAccounts, setUnapprovedAccounts] = useState([]);
 
   // data for display
   const [currentTabAccounts, setCurrentTabAccounts] = useState([]);
@@ -96,7 +99,8 @@ export default function Dashboard({ profileName, role }) {
     setValue(newValue);
   };
 
-  // handle edits to different accounts - will change with new backend!
+  // handle frontend edits to different accounts
+  // - backend calls occur in the profile button component!
   const editField = (setState, id, field, value) => {
     setState((prev) => {
       const obj = { ...prev.find((el) => el.id === id) };
@@ -107,109 +111,73 @@ export default function Dashboard({ profileName, role }) {
   };
 
   const editClient = (id, field, value) => { editField(setClients, id, field, value); };
-  const editNavigator = (id, field, value) => { editField(setNavigators, id, field, value); };
 
   const deleteAccount = (setState, id) => {
     setState((prev) => prev.filter((el) => el.id !== id));
   };
 
   const deleteClient = (id) => { deleteAccount(setClients, id); };
-  const deleteNavigator = (id) => { deleteAccount(setNavigators, id); };
 
-  // set the current accounts display (depending on the role type)
+  // set the change accounts displayed depending on tab
   useEffect(() => {
-    if (role === 'Admin') {
-      // navigators
-      if (tabValue === 0) {
-        setCurrentTabAccounts(navigators);
-      // unarchived clients
-      } else if (tabValue === 1) {
-        setCurrentTabAccounts(clients.filter((element) => !element.archived));
+    // unarchived clients
+    if (tabValue === 0) {
+      setCurrentTabAccounts(clients.filter((element) => !element.archived));
 
       // archived clients
-      } else if (tabValue === 2) {
-        setCurrentTabAccounts(clients.filter((element) => element.archived));
-
-      // unapproved accounts
-      } else if (tabValue === 3) {
-        setCurrentTabAccounts(unapprovedAccounts);
-      }
-    } else if (role === 'Navigator') {
-      // unarchived clients
-      if (tabValue === 0) {
-        setCurrentTabAccounts(clients.filter((element) => !element.archived));
-
-      // archived clients
-      } else if (tabValue === 1) {
-        setCurrentTabAccounts(clients.filter((element) => element.archived));
-      }
+    } else if (tabValue === 1) {
+      setCurrentTabAccounts(clients.filter((element) => element.archived));
     }
-  }, [tabValue, navigators, clients, unapprovedAccounts, role]);
+  }, [tabValue, clients]);
 
+  // pull navigators clients upon page launch
   useEffect(() => {
-    // eventually change this to just get each record listed in the user record
     const clientsTemp = [];
-    const navTemp = [];
     async function loadData() {
-      const docs = await fetchAllJobseekers();
-      const navProfiles = await fetchAllNavigators();
+      const docs = await fetchUsersByNavigator(store.email);
 
-      docs.forEach((element) => {
-        const elem = {
-          id: element.id,
-          name: element.data().name,
-          archived: element.data().archived,
-          approval: element.data().approval,
-          field: element.data()['field of work'],
-          email: element.id,
-          interests: element.data().interests,
-          skills: element.data().skills,
-          // get bookmarked and iconNumber from data somehow! eventually!
-          bookmarked: false,
-          iconNumber: 0,
-          accountType: 'client',
-        };
-        clientsTemp.push(elem);
-      });
+      await Promise.all(docs.map(async (doc) => {
+        if (doc.data().approved) {
+          const seeker = await fetchJobseekerData(doc.id);
+          const seekerData = seeker.data();
+          const data = doc.data();
+          const elem = {
+            email: doc.id,
+            id: data.uid,
+            name: `${data.firstName} ${data.lastName}`,
+            archived: data.archived,
+            approved: data.approved,
+            accountType: data.role,
+            field: seekerData.clientInfo['Dream Job'],
+            skills: seekerData.skillsChecklist,
+            interests: seekerData.industryInterest,
+            // get bookmarked and iconNumber from data somehow! eventually!
+            bookmarked: store.user.bookmarked.includes(doc.id),
+            iconNumber: 0,
+          };
+          clientsTemp.push(elem);
+        }
+      }));
 
-      navProfiles.forEach((element) => {
-        const elem = {
-          id: element.id,
-          name: element.data().name,
-          archived: false,
-          approval: element.data().approval,
-          field: 'Navigator',
-          email: element.id,
-          interests: element.data().interests,
-          skills: element.data().skills,
-          // get bookmarked and iconNumber from data somehow! eventually!
-          bookmarked: false,
-          iconNumber: 1,
-          accountType: 'navigator',
-        };
-        navTemp.push(elem);
-      });
-      setHasAssignments(role === 'Admin' || clientsTemp.length !== 0);
-
-      const approvedClients = clientsTemp.filter((element) => element.approval === true);
-      // unnapproved acts should include admin + navigators eventually
-      const unapprovedClients = clientsTemp.filter((element) => !element.approval);
-
-      const approvedNavigators = navTemp.filter((element) => element.approval === true);
-      const unapprovedNavigators = navTemp.filter((element) => !element.approval);
-
-      setClients(approvedClients);
-      setNavigators(approvedNavigators);
-      setUnapprovedAccounts([...unapprovedClients, ...unapprovedNavigators]);
+      setHasAssignments(clientsTemp.length !== 0);
+      setClients(clientsTemp.filter((element) => element.approved === true));
     }
-    loadData();
-  }, []);
+    if (store !== undefined) {
+      loadData();
+    }
+  }, [store]);
+
+  // if the user's information is loading, diplay loading component
+  if (store === undefined) {
+    // eventually replace with appropriate loading component
+    return (<div>loading</div>);
+  }
 
   return (
     <div className="dashboard-page-container">
       <div className="dashboard-page-headers-container">
         <div className="dashboard-page-header-name-and-icon-container">
-          <p className="dashboard-page-header-profile-text">{profileName}</p>
+          <p className="dashboard-page-header-profile-text">{`${store.user.firstName} ${store.user.lastName}`}</p>
           <Avatar
             facebookId="100008343750912"
             className="profile-button-avatar"
@@ -219,13 +187,13 @@ export default function Dashboard({ profileName, role }) {
           <p className="dashboard-page-title">
             Welcome,
             {' '}
-            {profileName.split(' ')[0]}
+            {store.user.firstName}
           </p>
           <div className="dashboard-page-search-bar-container">
             <SearchAndFilter
               accounts={currentTabAccounts}
-              checkedArr={checkedSkills}
-              setCheckedArr={setCheckedSkills}
+              checkedSkills={checkedSkills}
+              setCheckedSkills={setCheckedSkills}
               checkedInterests={checkedInterests}
               setCheckedInterests={setCheckedInterests}
               setOutput={setFilteredAccounts}
@@ -238,10 +206,8 @@ export default function Dashboard({ profileName, role }) {
           onChange={handleChange}
           aria-label="Account type tabs"
         >
-          {role === 'Admin' && <StyledTab label="Navigators" {...a11yProps(0)} />}
           <StyledTab label="Clients" {...a11yProps(1)} />
           <StyledTab label="Archive" {...a11yProps(2)} />
-          {role === 'Admin' && <StyledTab label="Unapproved Accounts" {...a11yProps(3)} />}
         </StyledTabs>
       </div>
       {hasAssignments
@@ -253,8 +219,8 @@ export default function Dashboard({ profileName, role }) {
                 setCheckedSkills={setCheckedSkills}
                 checkedInterests={checkedInterests}
                 setCheckedInterests={setCheckedInterests}
-                skills={skills}
-                interests={interests}
+                skills={skillsChecklistOptions}
+                interests={industryInterestOptions}
               />
             </div>
             {filteredAccounts && filteredAccounts.length !== 0
@@ -269,15 +235,16 @@ export default function Dashboard({ profileName, role }) {
                     id={element.id}
                     profileName={element.name}
                     workField={element.field}
-                    jobseekerEmail={element.email}
+                    email={element.email}
                     icon={icons[element.iconNumber]}
                     accountType={element.accountType}
                     bookmarked={element.bookmarked}
                     isArchived={element.archived}
-                    isApproved={element.approval}
-                    isAdmin={role === 'Admin'}
-                    editField={element.accountType === 'client' ? editClient : editNavigator}
-                    deleteAccount={element.accountType === 'client' ? deleteClient : deleteNavigator}
+                    isApproved={element.approved}
+                    isAdmin={false}
+                    editField={editClient}
+                    deleteAccount={deleteClient}
+                    userEmail={store.email}
                   />
                 ))
             }
@@ -297,13 +264,3 @@ export default function Dashboard({ profileName, role }) {
     </div>
   );
 }
-
-Dashboard.propTypes = {
-  profileName: PropTypes.string,
-  role: PropTypes.string,
-};
-
-Dashboard.defaultProps = {
-  profileName: 'Nasser Elhajjaoui',
-  role: 'Admin',
-};
