@@ -7,6 +7,7 @@ export const userDataObject = {
   role: '',
   bio: '',
   phoneNumber: '',
+  iconNo: 0,
 };
 
 export const jobseekerUserInit = {

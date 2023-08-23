@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox, FormControlLabel, Typography } from '@mui/material';
 import { DisabledByDefaultRounded } from '@mui/icons-material';
+
 /*
   This is a READONLY Checklist
   To use, pass in an array of objects with the following shape:
@@ -20,15 +21,17 @@ import { DisabledByDefaultRounded } from '@mui/icons-material';
 
 const style = {
   container: {
-    border: '2px dotted red',
-    width: '40vw',
+    width: '85%',
+    // width: '40vw',
     alignSelf: 'center',
+    margin: '0, auto',
   },
   checklistWrapper: {
     display: 'grid',
     // gridTemplateColumns: 'repeat(2, 1fr)',
     gridAutoRows: 'minmax(auto, auto)',
-    gridGap: '10px',
+    alignSelf: 'center',
+    margin: '0, auto',
   },
   checkboxLabel: {
     width: 'fit-content',
@@ -59,7 +62,10 @@ const style = {
     justifyContent: 'space-between',
   },
 };
-function MilestoneChecklist({ checkboxes, columns }) {
+function MilestoneChecklist(props) {
+  const {
+    checkboxes, columns,
+  } = props;
   // Configure style to specified # of columns
   // style.checklistWrapper.gridTemplateColumns = `repeat(${columns}, 1fr)`;
   style.checklistWrapper = { ...style.checklistWrapper, gridTemplateColumns: `repeat(${columns}, 1fr)` };
@@ -113,7 +119,3 @@ MilestoneChecklist.defaultProps = {
   checkboxes: [],
   columns: 1,
 };
-
-/*
-
-*/

@@ -1,0 +1,13 @@
+.search-bar-container{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #D9D9D9;
+    border-radius: 30px;
+    padding: 0 10px 0 20px;
+    place-items: center;
+}
+
+.filter-button{
+    background: none;
+    border: none;
+}

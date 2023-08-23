@@ -128,6 +128,15 @@ function TrainingPrograms() {
   //     },
   //   );
   // }, [date]);
+  
+
+  // const editDate = (newValue, label, index) => {
+  //   console.log(newValue);
+  //   const temp = [...allPrograms];
+  //   temp[index][label] = newValue;
+  //   setAllPrograms(temp);
+  //   console.log(allPrograms);
+  // };
 
   return (
     <div>

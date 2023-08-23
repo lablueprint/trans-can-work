@@ -5,6 +5,8 @@ import { DateField } from '@mui/x-date-pickers/DateField';
 import {
   FormControl, InputLabel, NativeSelect,
 } from '@mui/material';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
 

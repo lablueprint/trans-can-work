@@ -1,7 +1,8 @@
-/*eslint-disable*/
+/* eslint-disable */
 import React from 'react';
 import './MilestoneMap.css';
 import MilestoneButton from './MilestoneButton';
+import IslandPopup from './IslandPopup';
 import title from '../../Assets/Images/title.png';
 
 const data = {
@@ -68,12 +69,12 @@ const data = {
       },
       {
         uid: 7,
-        imageDefault: require('../../Assets/Images/job-board(b&w).png'),
-        imageUpdated: require('../../Assets/Images/job-board.png'),
-        imageHover: require('../../Assets/Images/job-boardH.png'),
-        imageUHover: require('../../Assets/Images/job-boardUH.png'),
-        title: require('../../Assets/Images/job-board-title.png'),
-        id: 'job-board',
+        imageDefault: require('../../Assets/Images/job-portal(b&w).png'),
+        imageUpdated: require('../../Assets/Images/job-portal.png'),
+        imageHover: require('../../Assets/Images/job-portalH.png'),
+        imageUHover: require('../../Assets/Images/job-portalUH.png'),
+        title: require('../../Assets/Images/job-portal-title.png'),
+        id: 'job-portal',
         status: false,
       },
       {
@@ -112,23 +113,20 @@ const MilestoneButtons = data.content.body.map((x) => {
       key={x.uid}
       id={x.id}
     >
-      <MilestoneButton image={imagePath} imageHover={hoveredPath} title={x.title} />
+      <MilestoneButton image={imagePath} imageHover={hoveredPath} title={x.title} id={x.id} status={x.status} />
     </div>
   );
 });
 
 function MilestoneMap() {
   return (
-    <div id="parent">
+    <div>
       <div className="grid-container">
+        <div id="roadmap-title"><img src={title} alt="roadmap title" /></div>
         {MilestoneButtons}
       </div>
-      <div id="roadmap-title"><img src={title} alt="roadmap title" /></div>
     </div>
   );
 }
 
 export default MilestoneMap;
-
-/* later: the margins are hard-coded #s so not good for all screen sizes */
-/* later: the bool variable status is hard-coded for now */

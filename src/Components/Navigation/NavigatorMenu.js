@@ -18,8 +18,8 @@ const style = {
     },
   },
   tabsStyle: {
-    borderRight: 1,
-    border: '2px dotted red',
+    // borderRight: 1,
+    // border: '2px dotted red',
     margin: '7vh  0 0 5vw',
   },
   tabIndicatorStyle: {
@@ -32,7 +32,7 @@ const style = {
     margin: '5vh 1vw',
     height: '100%',
     overflow: 'hidden',
-    border: '2px dotted blue',
+    // border: '2px dotted blue',
   },
 };
 

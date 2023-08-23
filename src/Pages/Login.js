@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
 import { TextField, Button, Checkbox } from '@material-ui/core';
 import InputAdornment from '@mui/material/InputAdornment';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -60,6 +59,7 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
+  // eslint-disable-next-line no-undef
   const user = useSelector((state) => state.auth.value);
 
   const navigate = useNavigate();

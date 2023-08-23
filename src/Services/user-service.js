@@ -6,26 +6,29 @@ import {
   sendPasswordResetEmail, signOut, signInWithEmailAndPassword,
 } from 'firebase/auth';
 import {
-  jobseekerUserInit, navigatorUserInit, jobseekerDataObject,
-} from './user-objects';
+  jobseekerUserInit, navigatorUserInit, adminUserInit, jobseekerDataObject,
+} from './objects-service';
 import { db, auth } from '../firebase';
+import { deleteJobseekerData } from './jobseeker-data-service';
 
 const provider = new GoogleAuthProvider();
 
 /** *********** CRUD FUNCTIONS ************ */
 export const createUser = async (uid, email, role, firstName = '', lastName = '', pronouns = '', bio = '', phoneNumber = '') => {
   let userObject = {
-    approved: false,
     uid,
     firstName,
     lastName,
     pronouns,
+    approved: false,
+    archived: false,
     role,
     bio,
     phoneNumber,
   };
   if (role === 'jobseeker') userObject = { ...userObject, ...jobseekerUserInit };
   else if (role === 'navigator') userObject = { ...userObject, ...navigatorUserInit };
+  else if (role === 'admin') userObject = { ...userObject, ...adminUserInit };
 
   console.log(userObject);
   await setDoc(doc(db, 'users', email), userObject).then(async () => {
@@ -55,7 +58,7 @@ export const fetchAllUsers = async () => {
   const colRef = collection(db, 'users');
   try {
     const docsSnap = await getDocs(colRef);
-    return docsSnap;
+    return docsSnap.docs;
   } catch (error) {
     console.log(error);
     return undefined;
@@ -64,10 +67,9 @@ export const fetchAllUsers = async () => {
 
 export const fetchUsersByNavigator = async (email) => {
   const colRef = collection(db, 'users');
-  const navRef = doc(db, 'users', email);
   try {
-    const docsSnap = await getDocs(query(colRef, where('navigator', '==', navRef)));
-    return docsSnap;
+    const docsSnap = await getDocs(query(colRef, where('navigator', '==', email)));
+    return docsSnap.docs;
   } catch (error) {
     console.log(error);
     return undefined;
@@ -80,13 +82,17 @@ export const updateUser = async (email, data) => {
     .then(() => {
       console.log('updated user ', email);
     }).catch((err) => {
+      console.log(err);
       alert(err.stack);
     });
 };
 
 // could add check for if the user is a jobseeker + deletion of their record if necessary
-export const deleteUser = async (email) => {
+export const deleteUser = async (email, role) => {
   await deleteDoc(doc(db, 'users', email)).then(() => {
+    if (role === 'jobseeker') {
+      deleteJobseekerData(email);
+    }
     console.log('User account ', email, ' has been deleted successfully.');
   })
     .catch((error) => {
