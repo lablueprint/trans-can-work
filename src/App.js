@@ -10,17 +10,19 @@ import {
   NavigatorDashboard,
   Register,
   Reset,
+  ProfileTemp,
+  ArchiveTemp,
   Landing,
   JobseekerData,
   Home,
   NavDashboard,
-  AdminDashboard
+  AdminDashboard,
+  AdminView
 } from './Pages';
 import './App.css';
 import Footer from './Components/Footer/Footer';
 import Splash from './Components/Splash/Splash';
 import approvalIcon from './Assets/Images/trans-flag-graphic.svg';
-import AdminView from './Components/Dashboard/AdminView';
 import ScrollToTop from './Pages/scrollToTop';
 import NavigatorMenu from './Components/Navigation/NavigatorMenu';
 import MilestoneMap from './Components/Milestones/MilestoneMap';
@@ -117,6 +119,8 @@ function App() {
           <Route path="/reset" element={<Reset />} />
           <Route path="/landing" element={<Landing />} />
           <Route path="/adminview" element={<AdminView />} />
+
+          <Route path="/archivepopuptesting" element={<ArchiveTemp />} />
           <Route path="/admindashboard" element={<AdminDashboard />} />
           <Route path="/navdashboard" element={<NavDashboard />} />
 
