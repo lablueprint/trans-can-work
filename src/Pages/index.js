@@ -5,8 +5,9 @@ import Reset from './Reset';
 import NavigatorDashboard from './NavigatorDashboard';
 import JobseekerData from './JobseekerData';
 import Landing from './Landing';
-import Dashboard from './Dashboard';
 import ProfileTemp from './ProfileTemp';
+import NavDashboard from './NavDashboard';
+import AdminDashboard from './AdminDashboard';
 
 export {
   Home,
@@ -16,6 +17,7 @@ export {
   NavigatorDashboard,
   JobseekerData,
   Landing,
-  Dashboard,
   ProfileTemp,
+  NavDashboard,
+  AdminDashboard,
 };

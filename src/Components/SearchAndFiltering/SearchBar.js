@@ -6,15 +6,13 @@ function SearchBar({
   value, setValue, placeholder,
 }) {
   return (
-    <div>
-      <input
-        type="text"
-        className="search-bar"
-        onChange={(event) => setValue(event.target.value)}
-        value={value}
-        placeholder={placeholder}
-      />
-    </div>
+    <input
+      type="text"
+      className="search-bar"
+      onChange={(event) => setValue(event.target.value)}
+      value={value}
+      placeholder={placeholder}
+    />
   );
 }
 

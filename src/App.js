@@ -13,7 +13,8 @@ import {
   Landing,
   JobseekerData,
   Home,
-  Dashboard,
+  NavDashboard,
+  AdminDashboard
 } from './Pages';
 import './App.css';
 import Footer from './Components/Footer/Footer';
@@ -116,7 +117,9 @@ function App() {
           <Route path="/reset" element={<Reset />} />
           <Route path="/landing" element={<Landing />} />
           <Route path="/adminview" element={<AdminView />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/admindashboard" element={<AdminDashboard />} />
+          <Route path="/navdashboard" element={<NavDashboard />} />
+
           <Route path="/roadmap" element={<MilestoneMap />} />
           <Route
             path="/splash"

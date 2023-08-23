@@ -4,7 +4,7 @@ import TuneIcon from '@mui/icons-material/Tune';
 import { Dialog, Slide } from '@mui/material';
 import Filtering from './Filtering';
 import SearchBar from './SearchBar';
-import { skills, interests } from './FilterConstants';
+import { skillsChecklistOptions, industryInterestOptions } from '../../Services/objects-service';
 import './searchAndFilter.css';
 
 const Transition = React.forwardRef((props, ref) => (
@@ -12,7 +12,7 @@ const Transition = React.forwardRef((props, ref) => (
 ));
 
 function SearchAndFilter({
-  accounts, setOutput, checkedArr, setCheckedArr, checkedInterests, setCheckedInterests,
+  accounts, setOutput, checkedSkills, setCheckedSkills, checkedInterests, setCheckedInterests,
 }) {
   const [searchTerms, setSearchTerms] = useState('');
 
@@ -56,37 +56,37 @@ function SearchAndFilter({
 
   // filtering methods
   const getCheckedSkills = () => {
-    const checkedSkills = [];
-    checkedArr.forEach((item, index) => {
-      if (item === true) { checkedSkills.push(skills[index]); }
+    const checkedSkill = [];
+    checkedSkills.forEach((item, index) => {
+      if (item === true) { checkedSkill.push(skillsChecklistOptions[index]); }
     });
-    return checkedSkills;
+    return checkedSkill;
   };
 
   const getCheckedInterests = () => {
     const checkedInterest = [];
     checkedInterests.forEach((item, index) => {
-      if (item === true) { checkedInterest.push(interests[index]); }
+      if (item === true) { checkedInterest.push(industryInterestOptions[index]); }
     });
     return checkedInterest;
   };
 
   const filter = (items) => {
-    const checkedSkills = getCheckedSkills();
+    const checkedSkill = getCheckedSkills();
     const checkedInterest = getCheckedInterests();
 
-    if (checkedSkills.length || checkedInterest.length) {
+    if (checkedSkill.length || checkedInterest.length) {
       const filteredChecks = items.filter((item) => {
         let foundInterests = true;
         let foundSkills = true;
         checkedInterest.forEach((interest) => {
           // this level of error-checking only necessary due to flawed backend - change in future
-          if (!('interests' in item) || item.interests === undefined || !(interest in item.interests) || !item.interests[interest]) {
+          if (!('interests' in item) || item.interests === undefined || !(item.interests.includes(interest))) {
             foundInterests = false;
           }
         });
-        checkedSkills.forEach((skill) => {
-          if (!('skills' in item) || item.skills === undefined || !(skill in item.skills) || !item.skills[skill]) {
+        checkedSkill.forEach((skill) => {
+          if (!('skills' in item) || item.skills === undefined || !(item.skills.includes(skill))) {
             foundSkills = false;
           }
         });
@@ -99,7 +99,7 @@ function SearchAndFilter({
 
   useEffect(() => {
     setOutput(filter(search(accounts)));
-  }, [searchTerms, checkedInterests, checkedArr, accounts]);
+  }, [searchTerms, checkedInterests, checkedSkills, accounts]);
 
   return (
     <div className="App">
@@ -123,12 +123,12 @@ function SearchAndFilter({
         PaperProps={{ style: { borderRadius: 30, maxHeight: '750px', maxWidth: '356px' } }}
       >
         <Filtering
-          checkedArr={checkedArr}
-          setCheckedArr={setCheckedArr}
+          checkedSkills={checkedSkills}
+          setCheckedSkills={setCheckedSkills}
           checkedInterests={checkedInterests}
           setCheckedInterests={setCheckedInterests}
-          skills={skills}
-          interests={interests}
+          skills={skillsChecklistOptions}
+          interests={industryInterestOptions}
           handleClose={handleClose}
         />
       </Dialog>
@@ -144,8 +144,8 @@ SearchAndFilter.propTypes = {
     email: PropTypes.string.isRequired,
   })).isRequired,
   setOutput: PropTypes.func.isRequired,
-  checkedArr: PropTypes.arrayOf(PropTypes.bool).isRequired, // i think this is
-  setCheckedArr: PropTypes.func.isRequired,
+  checkedSkills: PropTypes.arrayOf(PropTypes.bool).isRequired, // i think this is
+  setCheckedSkills: PropTypes.func.isRequired,
   checkedInterests: PropTypes.arrayOf(PropTypes.bool).isRequired, // i think this is
   setCheckedInterests: PropTypes.func.isRequired,
 };
