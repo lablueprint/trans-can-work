@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
 import { TextField, Button, Checkbox } from '@material-ui/core';
 import InputAdornment from '@mui/material/InputAdornment';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import GoogleIcon from '@mui/icons-material/Google';
 import { styled, makeStyles } from '@material-ui/core/styles';
 
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   login, handleGoogleSignIn,
 } from '../Services/user-service';
