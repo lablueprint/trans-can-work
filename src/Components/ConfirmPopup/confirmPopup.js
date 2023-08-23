@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Dialog, Slide, IconButton } from '@mui/material';
 import { CloseRounded } from '@mui/icons-material';
-import './deletePopup.css';
+import './confirmPopup.css';
 import Button from '@mui/material/Button';
 
 const style = {
@@ -21,12 +21,12 @@ const style = {
 };
 const Transition = React.forwardRef((props, ref) => <Slide direction="right" ref={ref} {...props} />);
 
-function DeletePopup({
+function ConfirmPopup({
   open,
   handleClose,
-//   title,
-//   subtitle,
-//   handleConfirm
+  title,
+  subtitle,
+  handleConfirm,
 }) {
   return (
     <div className="delete-popup">
@@ -56,12 +56,10 @@ function DeletePopup({
         <div style={style.header}>
           <div id="caption">
             <h3 id="delete">
-              Delete Jobseeker?
-              {/* {title} */}
+              {title}
             </h3>
             <p id="confirmation">
-              Are you sure you want to delete this jobseeker?
-              {/* {subtitle}  */}
+              {subtitle}
             </p>
           </div>
           <Button
@@ -73,7 +71,7 @@ function DeletePopup({
           </Button>
           <Button
             disableRipple
-            // onClick={handleConfirm}
+            onClick={handleConfirm}
             id="confirm"
           >
             Confirm
@@ -85,12 +83,12 @@ function DeletePopup({
   );
 }
 
-export default DeletePopup;
+export default ConfirmPopup;
 
-DeletePopup.propTypes = {
+ConfirmPopup.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
-//   title: PropTypes.string.isRequired,
-//   subtitle: PropTypes.string.isRequired,
-//   handleConfirm: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string.isRequired,
+  handleConfirm: PropTypes.func.isRequired,
 };
