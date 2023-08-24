@@ -2,7 +2,6 @@
 import React from 'react';
 import './MilestoneMap.css';
 import MilestoneButton from './MilestoneButton';
-import IslandPopup from './IslandPopup';
 import title from '../../Assets/Images/title.png';
 
 const data = {
@@ -84,7 +83,7 @@ const data = {
         imageHover: require('../../Assets/Images/resourceH.png'),
         imageUHover: require('../../Assets/Images/resourceUH.png'),
         title: require('../../Assets/Images/resource-title.png'),
-        id: 'resource',
+        id: 'resources',
         status: false,
       },
       {
@@ -95,7 +94,7 @@ const data = {
         imageUHover: require('../../Assets/Images/hiring-infoUH.png'),
         title: require('../../Assets/Images/hiring-info-title.png'),
         id: 'hiring-info',
-        status: false,
+        status: true,
       },
     ],
   },
@@ -108,6 +107,10 @@ const MilestoneButtons = data.content.body.map((x) => {
     imagePath = x.imageUpdated;
     hoveredPath = x.imageUHover;
   }
+  //const originalStatus = milestones[x.id]  -determines whether map's status is true or false
+  const originalStatus = milestones[x.id]
+  // add a new prop to milestone button 
+  // build firebase call to getting milestones from user (id or email) (do this in useEffect&useState like islandPopup commented one)
   return (
     <div
       key={x.uid}
@@ -117,6 +120,7 @@ const MilestoneButtons = data.content.body.map((x) => {
     </div>
   );
 });
+
 
 function MilestoneMap() {
   return (

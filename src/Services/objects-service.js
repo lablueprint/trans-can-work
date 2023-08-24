@@ -489,6 +489,19 @@ export const hiringInfo = [
   },
 ];
 
+export const completeButtonStatus = [
+  'assessment',
+  'coenroll',
+  'hiring info',
+  'internship',
+  'job board',
+  'job fair',
+  'online profile',
+  'resources',
+  'training program',
+  'workshop',
+];
+
 export const arrayToObj = (array, options) => options.map(
   (item) => ({ item: array.includes(item) }),
 );

@@ -4,6 +4,11 @@ import Button from '@mui/material/Button';
 import IslandPopup from './IslandPopup';
 import './MilestoneButton.css';
 
+// map status like how we did in milestone map
+// have useState & useEffect (similar to islandPopup)
+
+// set originalStatus value in milestoneMap from the database
+
 function MilestoneButton({
   title, image, imageHover, id,
 }) {
@@ -13,8 +18,15 @@ function MilestoneButton({
   const [isHover, setIsHover] = React.useState(false);
   const handleOnMouseEnter = () => setIsHover(true);
   const handleOnMouseLeave = () => setIsHover(false);
-  const [isComplete, setComplete] = React.useState(false);
-  const toggleComplete = () => setComplete(!isComplete);
+  const [status, setStatus] = React.useState('incomplete');
+  const togglePending = () => {
+    if (status === 'incomplete') {
+      setStatus('pending');
+      // match the database to display pending
+    }
+  };
+  // change the status in the database
+  // if status == 'incomplete'
 
   return (
     <div>
@@ -31,8 +43,8 @@ function MilestoneButton({
         title={title}
         isOpen={open}
         handleClose={handleClose}
-        isComplete={isComplete}
-        toggleComplete={toggleComplete}
+        status={status}
+        togglePending={togglePending}
         id={id}
       />
     </div>
@@ -48,3 +60,5 @@ MilestoneButton.propTypes = {
 };
 
 export default MilestoneButton;
+
+// TODO: have a lot of if statements w/ isGray, etc & pass in props
