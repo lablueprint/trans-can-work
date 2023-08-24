@@ -490,8 +490,8 @@ export const hiringInfo = [
   },
 ];
 
-export const arrayToObj = (array, options) => options.map(
-  (item) => ({ [item]: array.includes(item) }),
-);
+export const arrayToObj = (array, options) => options.reduce((obj, item) => ({
+  ...obj, [item]: array.includes(item),
+}), {});
 
 export const objToArray = (obj) => Object.keys(obj).filter((key) => obj[key]);
