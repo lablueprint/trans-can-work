@@ -12,6 +12,8 @@ export const userDataObject = {
 
 export const jobseekerUserInit = {
   navigator: '',
+  lastCompletion: Date(),
+  complete: false,
 };
 
 export const navigatorUserInit = {

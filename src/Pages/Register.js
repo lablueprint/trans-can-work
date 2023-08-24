@@ -78,13 +78,13 @@ function Register() {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [role, setRole] = useState('jobseeker');
-  const user = useSelector((state) => state.auth.value);
+  const store = useSelector((state) => state.auth.value);
 
   useEffect(() => {
-    if (user && user.isLoggedIn && user.user !== undefined) {
-      navigate(user.user.approved ? '/home' : '/splash');
+    if (store && store.isLoggedIn && store.user !== undefined) {
+      navigate(store.user.role === 'jobseeker' ? '/onboard' : '/');
     }
-  }, [user]);
+  }, [store]);
 
   const data = {
     email,

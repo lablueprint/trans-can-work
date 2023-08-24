@@ -7,10 +7,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import {
   Login,
-  NavigatorDashboard,
   Register,
   Reset,
-  Landing,
   JobseekerData,
   Home,
   NavDashboard,
@@ -20,7 +18,6 @@ import './App.css';
 import Footer from './Components/Footer/Footer';
 import Splash from './Components/Splash/Splash';
 import approvalIcon from './Assets/Images/trans-flag-graphic.svg';
-import AdminView from './Components/Dashboard/AdminView';
 import ScrollToTop from './Pages/scrollToTop';
 import NavigatorMenu from './Components/Navigation/NavigatorMenu';
 import MilestoneMap from './Components/Milestones/MilestoneMap';
@@ -39,7 +36,33 @@ import { auth } from './firebase';
 
 function App() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.value);
+  const store = useSelector((state) => state.auth.value);
+
+  // change displayed home page depending on the authentication stage/user role
+  const getHomeComponent = () => {
+    if(!store.isLoggedIn) {
+      return <>
+              <ScrollToTop />
+              <Login />
+            </>
+    } else if (store.user == undefined) {
+      // replace with real loading graphic eventually
+      return <div>loading</div> 
+    } else if (!store.user.approved) {
+        return <Splash
+                header="Awaiting Approval"
+                description="You have successfully signed up for an account. Please await approval from a TransCanWork Administator."
+                graphic={<img alt="" src={approvalIcon} />}
+               />
+    } else if (store.user.role == "jobseeker") {
+      return <MilestoneMap />
+    } else if (store.user.role == "navigator") {
+      return <NavDashboard />
+    } else if (store.user.role == "admin") {
+      return <AdminDashboard />
+    }
+
+  }
 
   useEffect(() => {
     // on any firebase auth change
@@ -52,13 +75,13 @@ function App() {
             email: state.email,
             accessToken: state.accessToken,
             refreshToken: state.refreshToken,
-            user: doc !== undefined ? doc.data() : undefined,
+            store: doc !== undefined ? doc.data() : undefined,
           };
           dispatch(login(userState));
         }).catch((error) => {
         });
       // if logged out
-      } else if (user != undefined) {
+      } else if (store != undefined) {
         // clear redux state
         dispatch(logout());
       }
@@ -72,19 +95,13 @@ function App() {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <div className="App">
         <Routes>
+          {/* Home Page - dependent on auth/role */}
           <Route
             exact path="/"
-            element={(
-              <>
-                <ScrollToTop />
-                <Login />
-              </>
-            )}
+            element={getHomeComponent()}
           />
-          <Route
-            path="/"
-            element={<Home />}
-          />
+
+          {/* Account Creation / Edits */}
           <Route
             path="/register"
             element={(
@@ -94,10 +111,14 @@ function App() {
               </>
             )}
           />
-          {user != undefined && 
-          (
-          <>
-          <Route path="/home" element={<NavigatorMenu />}>
+          <Route path="/reset" element={<Reset />} />
+
+          {store != undefined && ( <>
+          {/* Client Views */}
+          <Route path="/onboard" element={<JobseekerData />} />
+
+          {/* Nav/Admin Views */}
+          <Route path="/clientRoadmap" element={<NavigatorMenu />}>
             <Route path="roadmap" element={<MilestoneMap />} />
             <Route path="assessment" element={<Assessment />} />
             <Route path="onlineprofiles" element={<OnlineProfiles />} />
@@ -109,28 +130,7 @@ function App() {
             <Route path="resources" element={<Resources />} />
             <Route path="hiredinfo" element={<HiredInfo />} />
           </Route>
-          <Route path="/onboard" element={<JobseekerData />} />
-          </>)
-  }
-          <Route path="/login" element={<Login />} />
-          <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />
-          <Route path="/reset" element={<Reset />} />
-          <Route path="/landing" element={<Landing />} />
-          <Route path="/adminview" element={<AdminView />} />
-          <Route path="/admindashboard" element={<AdminDashboard />} />
-          <Route path="/navdashboard" element={<NavDashboard />} />
-
-          <Route path="/roadmap" element={<MilestoneMap />} />
-          <Route
-            path="/splash"
-            element={
-              <Splash
-                header="Awaiting Approval"
-                description="You have successfully signed up for an account. Please await approval from a TransCanWork Administator."
-                graphic={<img alt="" src={approvalIcon} />}
-              />
-            }
-          />
+          </>)}
         </Routes>
         <Footer />
       </div>
