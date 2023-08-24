@@ -102,7 +102,7 @@ function JobseekerNav() {
       }
     }
 
-    prevOpen2.current = open1;
+    prevOpen2.current = open2;
   }, [open2]);
 
   return (

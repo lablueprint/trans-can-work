@@ -84,7 +84,7 @@ function App() {
             )}
           />
           <Route
-            path="/"
+            path="/jobseekerView"
             element={<Home />}
           />
           <Route
