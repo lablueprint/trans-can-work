@@ -16,7 +16,7 @@ const firebaseConfig = {
   projectId: 'trans-can-work',
   storageBucket: 'trans-can-work.appspot.com',
   messagingSenderId: '454640569499',
-  appId: '1:454640569499:web:58a2ba7beb0e8f412f4a3e',
+  appId: process.env.FIREBASE_APPID,
   measurementId: 'G-K3V885RFK0',
 };
 
