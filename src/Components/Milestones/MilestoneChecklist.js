@@ -24,7 +24,7 @@ const style = {
     width: '85%',
     // width: '40vw',
     alignSelf: 'center',
-    margin: '0, auto',
+    marginHorizontal: 'auto',
   },
   checklistWrapper: {
     display: 'grid',

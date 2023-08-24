@@ -59,3 +59,8 @@
 .tp-between-buttons {
     height: 1em;
 }
+
+.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-error,
+.MuiOutlinedInput-notchedOutline {
+    border-color: #000AA0 !important;
+}

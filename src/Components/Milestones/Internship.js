@@ -21,7 +21,7 @@ function Internship() {
     start();
   }, []);
   return (
-    <div>
+    <div className="internship-wrapper">
       <h6 className="internship">
         Share with us any Internships in which
         <br />

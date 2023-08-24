@@ -8,6 +8,7 @@ export const userDataObject = {
   role: '',
   bio: '',
   phoneNumber: '',
+  iconNo: 0,
 };
 
 export const jobseekerUserInit = {
@@ -49,15 +50,15 @@ export const jobseekerDataObject = {
 
   // milestone progress
   milestones: {
-    'job fair': 'incomplete',
+    'job-fair': 'incomplete',
     coenroll: 'incomplete',
-    'training program': 'incomplete',
+    'training-program': 'incomplete',
     assessment: 'incomplete',
-    'hiring info': 'incomplete',
+    'hiring-info': 'incomplete',
     internship: 'incomplete',
     workshop: 'incomplete',
-    'job board': 'incomplete',
-    'online profile': 'incomplete',
+    'job-portal': 'incomplete',
+    'online-profile': 'incomplete',
     resources: 'incomplete',
   },
 
@@ -105,7 +106,7 @@ export const skillsChecklistOptions = [
   'User Interface Design',
   'Wood Working',
   'Word',
-  'Writing ',
+  'Writing',
   'Money Handling',
   'Customer Service',
   'Inventory Management',
@@ -489,8 +490,8 @@ export const hiringInfo = [
   },
 ];
 
-export const arrayToObj = (array, options) => options.map(
-  (item) => ({ item: array.includes(item) }),
-);
+export const arrayToObj = (array, options) => options.reduce((obj, item) => ({
+  ...obj, [item]: array.includes(item),
+}), {});
 
 export const objToArray = (obj) => Object.keys(obj).filter((key) => obj[key]);
