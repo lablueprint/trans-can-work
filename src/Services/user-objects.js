@@ -4,6 +4,7 @@ export const userDataObject = {
   lastName: '',
   pronouns: '',
   approved: false,
+  archived: false,
   role: '',
   bio: '',
   phoneNumber: '',
@@ -12,6 +13,8 @@ export const userDataObject = {
 
 export const jobseekerUserInit = {
   navigator: '',
+  lastCompletion: '',
+  complete: false,
 };
 
 export const navigatorUserInit = {
