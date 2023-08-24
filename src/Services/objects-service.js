@@ -50,15 +50,15 @@ export const jobseekerDataObject = {
 
   // milestone progress
   milestones: {
-    'job fair': 'incomplete',
+    'job-fair': 'incomplete',
     coenroll: 'incomplete',
-    'training program': 'incomplete',
+    'training-program': 'incomplete',
     assessment: 'incomplete',
-    'hiring info': 'incomplete',
+    'hiring-info': 'incomplete',
     internship: 'incomplete',
     workshop: 'incomplete',
-    'job board': 'incomplete',
-    'online profile': 'incomplete',
+    'job-portal': 'incomplete',
+    'online-profile': 'incomplete',
     resources: 'incomplete',
   },
 
