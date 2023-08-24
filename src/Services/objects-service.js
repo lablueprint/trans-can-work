@@ -105,7 +105,7 @@ export const skillsChecklistOptions = [
   'User Interface Design',
   'Wood Working',
   'Word',
-  'Writing ',
+  'Writing',
   'Money Handling',
   'Customer Service',
   'Inventory Management',
@@ -490,7 +490,7 @@ export const hiringInfo = [
 ];
 
 export const arrayToObj = (array, options) => options.map(
-  (item) => ({ item: array.includes(item) }),
+  (item) => ({ [item]: array.includes(item) }),
 );
 
 export const objToArray = (obj) => Object.keys(obj).filter((key) => obj[key]);
