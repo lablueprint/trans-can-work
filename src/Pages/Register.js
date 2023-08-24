@@ -263,7 +263,7 @@ function Register() {
                   control={(
                     <CssRadio />
                   )}
-                  label="Adminstrator"
+                  label="Administrator"
                   onChange={() => setAccount('admin')}
                 />
               </RadioGroup>
