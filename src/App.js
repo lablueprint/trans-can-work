@@ -22,7 +22,7 @@ import {
 import './App.css';
 import Footer from './Components/Footer/Footer';
 import Splash from './Components/Splash/Splash';
-import approvalIcon from './Assets/Images/trans-flag-graphic.svg';
+import approvalIcon from './Assets/Images/trans-flag-graphic.png';
 import ScrollToTop from './Pages/scrollToTop';
 import NavigatorMenu from './Components/Navigation/NavigatorMenu';
 import MilestoneMap from './Components/Milestones/MilestoneMap';

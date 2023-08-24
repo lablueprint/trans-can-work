@@ -8,6 +8,10 @@
     width: 80%;
 }
 
+.internship-wrapper > div {
+    margin: 0 auto;
+}
+
 #internshipButton {
     padding: 20px 28px; 
     border: 2px solid #484649; 

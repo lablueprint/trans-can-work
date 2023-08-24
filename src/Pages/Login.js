@@ -181,7 +181,7 @@ function Login() {
                 ...inputProps,
                 endAdornment: (
                   <InputAdornment position="start" onClick={() => setShowPassword(!showPassword)}>
-                    <VisibilityIcon fontSize="large" />
+                    <VisibilityIcon fontSize="large" style={{ width: '0.75em', right: '0' }} />
                   </InputAdornment>
                 ),
               }}
@@ -202,10 +202,7 @@ function Login() {
                 }}
                 onChange={() => setRememberMe(!rememberMe)}
               />
-              <div style={{
-                paddingTop: '2%',
-              }}
-              >
+              <div>
                 {' '}
                 Remember Me
               </div>
@@ -245,14 +242,21 @@ function Login() {
             </Button>
 
           </div>
-          <img src={TCWLogo2} className="TcwLogo2" alt="TCWLogo2" />
+          <div className="loginInput">
+            <Link to="/register" className="link">
+              <Button
+                type="button"
+                color="primary"
+                variant="outlined"
+                className={classes.button}
+                style={buttonStyle}
+              >
+                Create an Account
+              </Button>
+            </Link>
 
-          <div className="register">
-            <div style={{ paddingBottom: '3%' }}>
-              Don&apos;t Have An Account?
-            </div>
-            <Link to="/register">Create Account</Link>
           </div>
+          <img src={TCWLogo2} className="TcwLogo2" alt="TCWLogo2" />
         </div>
       </div>
     </>

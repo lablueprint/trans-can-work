@@ -9,6 +9,10 @@
     margin-bottom: 15px;
 }
 
+.jobContainer > div {
+    margin: 0 auto;
+}
+
 .checkBoxesJob {
     position: fixed;
     margin-top: 350px;

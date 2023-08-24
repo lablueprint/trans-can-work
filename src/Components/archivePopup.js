@@ -174,6 +174,7 @@ function ArchivePopup({
   open,
   handleClose,
 }) {
+  // eslint-disable-next-line no-unused-vars
   const [navigators, setNagivators] = useState(dummyNavigators);
   const [filteredNavigators, setFilteredNavigators] = useState(dummyNavigators);
 
