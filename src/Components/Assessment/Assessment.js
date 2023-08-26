@@ -8,7 +8,11 @@ import { TextField } from '@material-ui/core';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
 import Checkboxes from '../Checkboxes/Checkboxes';
-import { fetchJobseekerData, createJobseekerData } from '../../Services/jobseeker-data-service';
+import {
+  skillsChecklistOptions, industryInterestOptions, generalSkills,
+  arrayToObj, checkedSkills, checkedInterests, checkedGeneralSkills, generalSubskills,
+} from '../../Services/objects-service';
+// import { fetchJobseekerData, createJobseekerData } from '../../Services/jobseeker-data-service';
 
 const styles = {
   dropdownOptions: {
@@ -68,139 +72,113 @@ function Assessment() {
     },
   };
 
-  const previousExperience1 = [
-    'Accounting Software',
-    'Administrative',
-    'Adobe',
-    'Software Suite',
-    'Bilingual',
-    'Brand Management',
-    'Cold Calling',
-    'Computer Software and Application',
-    'CPR',
-    'Customer Service',
-    'Database Management',
-    'Excel',
-    'Graphic Design',
-    'Machinery Skills',
-    'Marketing Campain Management',
-    'Mobile Development',
-    'Multiligual',
-    'Negotiation',
-    'Patient Scheduling Software',
-  ];
-  const previousExperience2 = [
-    'Philanthropy',
-    'Photo Editing',
-    'Photography',
-    'Photoshop',
-    'Powerpoint',
-    'Programming Languages',
-    'Project Management',
-    'Public Speaking',
-    'Search Engine and Keyword Optimization',
-    'Statistical Analysis',
-    'Type 60+WPM',
-    'User Interface Design',
-    'Wood Working',
-    'Word',
-    'Writing',
-    'Money handling',
-    'Customer Service',
-    'Inventory Management',
-    'ServSafe / Food Safety Certification / Food Handlers Card',
-  ];
+  const [skillsObj, setSkillsObj] = useState(arrayToObj(checkedSkills, skillsChecklistOptions));
+  const [skillBool, setSkillBool] = useState([]);
+  const [skillBool1, setSkillBool1] = useState([]);
+  const [skillBool2, setSkillBool2] = useState([]);
+  const splitObjects = () => {
+    if (Object.keys(skillsObj).length !== skillsChecklistOptions.length) {
+      console.log(Object.keys(skillsObj).length);
+      console.log(skillsChecklistOptions.length);
+      skillsChecklistOptions.forEach((key) => {
+        if (!(Object.keys(skillsObj).includes(key))) {
+          console.log(key);
+        }
+      });
+    }
+    const temp1 = Object.keys(skillsObj).sort();
+    if (skillBool.length === 0) {
+      temp1.forEach((key) => {
+        const tempSkill = skillBool;
+        tempSkill.push(skillsObj[key]);
+        setSkillBool(tempSkill);
+      });
+    }
+    const tempSkillBool1 = skillBool.slice(0, Math.ceil(skillBool.length / 2));
+    setSkillBool1(tempSkillBool1);
+    const tempSkillBool2 = skillBool.slice(Math.ceil(skillBool.length / 2));
+    setSkillBool2(tempSkillBool2);
+  };
 
-  const generalSkills1 = [
-    'Applied Academic Skills',
-    'Critical Thinking Skills',
-    'Interpersonal Skills',
-    'Personal Qualities',
-  ];
+  useEffect(() => {
+    splitObjects();
+  }, []);
 
-  const generalSkills2 = [
-    'Resource Management',
-    'Information Use',
-    'Communication Skills',
-    'Systems Thinking',
-    'Technology Use',
-  ];
+  useEffect(() => {
+    setSkillBool(skillBool1.concat(skillBool2));
+  }, [skillBool1, skillBool2]);
 
-  const subskills1 = [
-    ['Math Strategies/Procedures', 'Reading', 'Scientific Principles/Procedures', 'Writing'],
-    ['Thinks Creatively', 'Thinks Critically', 'Makes Sound Decisions', 'Plans/Organizes', 'Reasons', 'Solves Problems'],
-    ['Exercises leadership', 'Negotiates to resolve conflict', 'Responds to customer needs', 'Respects Individual Differences', 'Understands Teamwork and works with others'],
-    ['Adapts and Shows Flexibility', 'Demonstrates Integrity', 'Demonstrates Professionalism', 'Demonstrates Responsibility and Self-Discipline', 'Displays a Positive Attitude and Sense of Self-Worth', 'Takes Initiative', 'Takes Responsibility for Professional Growth', 'Works Independently'],
-  ];
-  const subskills2 = [
-    ['Manages Money', 'Manages Personnel', 'Manages Resources', 'Manages Time'],
-    ['Analyzes', 'Communicates', 'Locates', 'Organizes', 'Uses'],
-    ['Communicates Verbally', 'Comprehends Written Material', 'Conveys Information in Writing', 'Listens Actively', 'Observes Carefully'],
-    ['Understands and Uses Systems', 'Monitors Systems', 'Improves Systems'],
-    ['Understands and Uses Technology'],
-  ];
+  useEffect(() => {
+    console.log(skillBool);
+  }, [skillBool]);
 
-  const interests1 = [
-    'Accounting/Bookkeeping',
-    'App Type Jobs',
-    'Architecture/Construction',
-    'Audio/Video Technology & Communication',
-    'Barista',
-    'Bartender',
-    'Bookeeping',
-    'Business Management and Administration',
-    'Call Center',
-    'Caregiver',
-    'Carpenter',
-    'Cashier',
-    'Data Entry',
-    'Delivery Driver',
-    'Education & Training',
-    'Engineering',
-    'Finance',
-    'Fundraising',
-    'Graphic Design',
-    'Health/Medical',
-    'Hospitality',
-  ];
-  const interests2 = [
-    'Human Resources',
-    'IT (Information Technology)',
-    'Janitorial',
-    'Legal',
-    'Marketing/Sales',
-    'Massage Therapy',
-    'Non Profit',
-    'Personal Assistant',
-    'Pharmasist',
-    'Philantropy',
-    'Photographer',
-    'Production',
-    'Public Relations',
-    'Real Estate',
-    'Remote',
-    'Retail',
-    'Sales',
-    'Security',
-    'Server/Host',
-    'Social Media Management',
-    'Web Design',
-  ];
+  // const [skillsObj, setSkillsObj] = useState(arrayToObj(checkedSkills, skillsChecklistOptions));
+  // const [interestsObj, setInterestsObj] = useState(arrayToObj(
+  //   checkedInterests,
+  //   industryInterestOptions,
+  // ));
+  // const [generalSkillsObj, setGeneralSkillsObj] = useState(arrayToObj(
+  //   checkedGeneralSkills,
+  //   generalSkills,
+  // ));
 
-  let checkedInterests = [];
-  let checkedGeneralSkills = [];
-  let checkedPrev = [];
+  // const skillLabel = [];
+  // const [skillBool, setSkillBool] = useState([]);
+  // const interestLabel = [];
+  // const interestBool = [];
+  // const genSkillLabel = [];
+  // const genSkillBool = [];
+  // const [skillBool1, setSkillBool1] = useState([]);
+  // const splitObjects = () => {
+  //   const temp1 = Object.keys(skillsObj);
+  //   if (skillLabel.length === 0) {
+  //     temp1.forEach((key) => {
+  //       skillLabel.push(key);
+  //       const tempSkill = skillBool;
+  //       tempSkill.push(skillsObj[key]);
+  //       setSkillBool(tempSkill);
+  //     });
+  //   }
+  //   const temp2 = Object.keys(interestsObj);
+  //   temp2.forEach((key) => {
+  //     interestLabel.push(key);
+  //     interestBool.push(interestsObj[key]);
+  //   });
+  //   Object.keys(generalSkillsObj).forEach((key) => {
+  //     genSkillLabel.push(key);
+  //     genSkillBool.push(generalSkillsObj[key]);
+  //   });
+  //   console.log(skillBool);
+  //   console.log(skillLabel);
+  //   console.log(skillBool.slice(0, Math.ceil(skillBool.length / 2)));
+  //   const tempSkillBool1 = skillBool.slice(0, Math.ceil(skillBool.length / 2));
+  //   setSkillBool1(tempSkillBool1);
+  // };
+  // const [skillLabel1, setSkillLabel1] = useState([]);
 
-  const [checkedGeneralSkills1,
-    setCheckedGeneralSkills1] = useState(new Array(generalSkills1.length).fill(false));
-  const [checkedGeneralSkills2,
-    setCheckedGeneralSkills2] = useState(new Array(generalSkills2.length).fill(false));
-  const [checkedInt1, setCheckedInt1] = useState(new Array(interests1.length).fill(false));
-  const [checkedInt2, setCheckedInt2] = useState(new Array(interests2.length).fill(false));
-  const [checkedPrev1,
-    setCheckedPrev1] = useState(new Array(previousExperience1.length).fill(false));
-  const [checkedPrev2,
-    setCheckedPrev2] = useState(new Array(previousExperience2.length).fill(false));
+  // useEffect(() => {
+  //   splitObjects();
+  //   setSkillLabel1(skillLabel.slice(0, Math.ceil(skillBool.length / 2)));
+  //   console.log(skillLabel1);
+  // }, []);
+
+  // const [genSkillBool1,
+  //   setgenSkillBool1] = useState(genSkillBool.slice(0, Math.ceil(genSkillBool.length / 2)));
+
+  // let checkedInterests = [];
+  // let checkedGeneralSkills = [];
+  // let checkedPrev = [];
+
+  // const [checkedGeneralSkills1,
+  //   setCheckedGeneralSkills1] = useState(new Array(generalSkills1.length).fill(false));
+  // const [checkedGeneralSkills2,
+  //   setCheckedGeneralSkills2] = useState(new Array(generalSkills2.length).fill(false));
+  // const [checkedInt1, setCheckedInt1] = useState(new Array(interests1.length).fill(false));
+  // const [checkedInt2, setCheckedInt2] = useState(new Array(interests2.length).fill(false));
+  // const [checkedPrev1,
+  //   setCheckedPrev1] = useState(new Array(previousExperience1.length).fill(false));
+  // const [checkedPrev2,
+  //   setCheckedPrev2] = useState(new Array(previousExperience2.length).fill(false));
 
   const store = useSelector((state) => state.auth.value);
 
@@ -212,59 +190,59 @@ function Assessment() {
     clientInfo:
     {
       'City/State': 'City/State',
-      Ethnicity: 'hhiiii',
+      Ethnicity: 'Ethnicity',
       Age: 'Age',
       'Gender Identity': 'Gender Identity',
       Sexuality: 'Sexuality',
-      Veteran: 'nooooo',
+      Veteran: 'Veteran',
       Disability: 'Disability',
       'Housing Situation': 'Housing Situation',
       'Currently Employed': 'Employment Status',
-      'Prior Convictions': 'arghhhhh',
+      'Prior Convictions': 'Prior Convictions',
     },
-    industryInterests: {},
-    generalSkills: {},
-    skillsChecklist: {},
+    industryInterests: [],
+    generalSkills: [],
+    skillsChecklist: [],
     education: [{
     }],
     occupation: [],
     dreamjob: 'Dream Job',
   });
 
-  function combineCheckboxes() {
-    checkedInterests = checkedInt1.concat(checkedInt2);
-    checkedGeneralSkills = checkedGeneralSkills1.concat(checkedGeneralSkills2);
-    checkedPrev = checkedPrev1.concat(checkedPrev2);
-  }
+  // function combineCheckboxes() {
+  //   checkedInterests = checkedInt1.concat(checkedInt2);
+  //   checkedGeneralSkills = checkedGeneralSkills1.concat(checkedGeneralSkills2);
+  //   checkedPrev = checkedPrev1.concat(checkedPrev2);
+  // }
 
-  async function populateInterests() {
-    const tempInterests = interests1.concat(interests2);
-    const interestPairs = {};
-    tempInterests.forEach((interest, index) => {
-      interestPairs[interest] = checkedInterests[index];
-    });
-    const tempSkills = generalSkills1.concat(generalSkills2);
-    const skillPairs = {};
-    tempSkills.forEach((skill, index) => {
-      skillPairs[skill] = checkedGeneralSkills[index];
-    });
-    const tempPrev = previousExperience1.concat(previousExperience2);
-    const prevPairs = {};
-    tempPrev.forEach((prev, index) => {
-      prevPairs[prev] = checkedPrev[index];
-    });
-    await setJobseeker({
-      ...jobseeker,
-      industryInterests: interestPairs,
-      generalSkills: skillPairs,
-      skillsChecklist: prevPairs,
-    });
-  }
+  // async function populateInterests() {
+  //   const tempInterests = interests1.concat(interests2);
+  //   const interestPairs = {};
+  //   tempInterests.forEach((interest, index) => {
+  //     interestPairs[interest] = checkedInterests[index];
+  //   });
+  //   const tempSkills = generalSkills1.concat(generalSkills2);
+  //   const skillPairs = {};
+  //   tempSkills.forEach((skill, index) => {
+  //     skillPairs[skill] = checkedGeneralSkills[index];
+  //   });
+  //   const tempPrev = previousExperience1.concat(previousExperience2);
+  //   const prevPairs = {};
+  //   tempPrev.forEach((prev, index) => {
+  //     prevPairs[prev] = checkedPrev[index];
+  //   });
+  //   await setJobseeker({
+  //     ...jobseeker,
+  //     industryInterests: interestPairs,
+  //     generalSkills: skillPairs,
+  //     skillsChecklist: prevPairs,
+  //   });
+  // }
 
-  const saveJobseeker = async () => {
-    combineCheckboxes();
-    populateInterests();
-  };
+  // const saveJobseeker = async () => {
+  //   combineCheckboxes();
+  //   populateInterests();
+  // };
 
   const addEducation = (event) => {
     event.preventDefault();
@@ -354,69 +332,69 @@ function Assessment() {
     { title: 'Prior Convictions?', toChange: 'Prior Convictions', var: jobseeker.clientInfo['Prior Convictions'] },
   ];
 
-  const [temp, setTemp] = useState(false);
+  // const [temp, setTemp] = useState(false);
 
-  useEffect(() => {
-    if (temp) {
-      saveJobseeker();
-    }
-  }, [checkedInt1, checkedInt2, checkedPrev1,
-    checkedPrev2, checkedGeneralSkills1, checkedGeneralSkills2]);
+  // useEffect(() => {
+  //   if (temp) {
+  //     saveJobseeker();
+  //   }
+  // }, [checkedInt1, checkedInt2, checkedPrev1,
+  //   checkedPrev2, checkedGeneralSkills1, checkedGeneralSkills2]);
 
-  useEffect(() => {
-    if (temp) {
-      createJobseekerData(jobseeker.email, jobseeker);
-    }
-  }, [jobseeker]);
+  // useEffect(() => {
+  //   if (temp) {
+  //     createJobseekerData(jobseeker.email, jobseeker);
+  //   }
+  // }, [jobseeker]);
 
-  useEffect(() => {
-    const asyncFn = async () => {
-      const jobseekerData = await fetchJobseekerData(store.email);
-      setJobseeker(jobseekerData.data());
-      const sortedInterestKeys = Object.keys(jobseekerData.data().industryInterests).sort();
-      const pulledInt1 = [];
-      const pulledInt2 = [];
-      for (let i = 0; i < sortedInterestKeys.length; i += 1) {
-        if (i < 21) {
-          pulledInt1.push(jobseekerData.data().industryInterests[sortedInterestKeys[i]]);
-        } else {
-          pulledInt2.push(jobseekerData.data().industryInterests[sortedInterestKeys[i]]);
-        }
-      }
-      setCheckedInt1(pulledInt1);
-      setCheckedInt2(pulledInt2);
-      console.log(jobseeker.industryInterests);
-      // const sortedSkillKeys = Object.keys(jobseekerData.data().skillsChecklist).sort();
-      // const pulledSkills1 = [];
-      // const pulledSkills2 = [];
-      // for (let i = 0; i < sortedSkillKeys.length; i += 1) {
-      //   if (i <= 18) {
-      //     pulledSkills1.push(jobseekerData.data().skillsChecklist[sortedSkillKeys[i]]);
-      //   } else {
-      //     pulledSkills2.push(jobseekerData.data().skillsChecklist[sortedSkillKeys[i]]);
-      //   }
-      // }
-      // console.log(checkedPrev1);
-      // console.log(pulledSkills1);
-      // setCheckedPrev1(pulledSkills1);
-      // setCheckedPrev2(pulledSkills2);
-      // const sortedGenSkillsKeys = Object.keys(jobseekerData.data().generalSkills).sort();
-      // const pulledGenSkills1 = [];
-      // const pulledGenSkills2 = [];
-      // for (let i = 0; i < sortedGenSkillsKeys.length; i += 1) {
-      //   if (i <= 3) {
-      //     pulledGenSkills1.push(jobseekerData.data().generalSkills[sortedGenSkillsKeys[i]]);
-      //   } else {
-      //     pulledGenSkills2.push(jobseekerData.data().generalSkills[sortedGenSkillsKeys[i]]);
-      //   }
-      // }
-      // setCheckedGeneralSkills1(pulledGenSkills1);
-      // setCheckedGeneralSkills2(pulledGenSkills2);
-      setTemp(true);
-      console.log(jobseekerData.data());
-    };
-    asyncFn();
-  }, []);
+  // useEffect(() => {
+  //   const asyncFn = async () => {
+  //     const jobseekerData = await fetchJobseekerData(store.email);
+  //     setJobseeker(jobseekerData.data());
+  //     const sortedInterestKeys = Object.keys(jobseekerData.data().industryInterests).sort();
+  //     const pulledInt1 = [];
+  //     const pulledInt2 = [];
+  //     for (let i = 0; i < sortedInterestKeys.length; i += 1) {
+  //       if (i < 21) {
+  //         pulledInt1.push(jobseekerData.data().industryInterests[sortedInterestKeys[i]]);
+  //       } else {
+  //         pulledInt2.push(jobseekerData.data().industryInterests[sortedInterestKeys[i]]);
+  //       }
+  //     }
+  //     setCheckedInt1(pulledInt1);
+  //     setCheckedInt2(pulledInt2);
+  //     console.log(jobseeker.industryInterests);
+  // const sortedSkillKeys = Object.keys(jobseekerData.data().skillsChecklist).sort();
+  // const pulledSkills1 = [];
+  // const pulledSkills2 = [];
+  // for (let i = 0; i < sortedSkillKeys.length; i += 1) {
+  //   if (i <= 18) {
+  //     pulledSkills1.push(jobseekerData.data().skillsChecklist[sortedSkillKeys[i]]);
+  //   } else {
+  //     pulledSkills2.push(jobseekerData.data().skillsChecklist[sortedSkillKeys[i]]);
+  //   }
+  // }
+  // console.log(checkedPrev1);
+  // console.log(pulledSkills1);
+  // setCheckedPrev1(pulledSkills1);
+  // setCheckedPrev2(pulledSkills2);
+  // const sortedGenSkillsKeys = Object.keys(jobseekerData.data().generalSkills).sort();
+  // const pulledGenSkills1 = [];
+  // const pulledGenSkills2 = [];
+  // for (let i = 0; i < sortedGenSkillsKeys.length; i += 1) {
+  //   if (i <= 3) {
+  //     pulledGenSkills1.push(jobseekerData.data().generalSkills[sortedGenSkillsKeys[i]]);
+  //   } else {
+  //     pulledGenSkills2.push(jobseekerData.data().generalSkills[sortedGenSkillsKeys[i]]);
+  //   }
+  // }
+  // setCheckedGeneralSkills1(pulledGenSkills1);
+  // setCheckedGeneralSkills2(pulledGenSkills2);
+  //     setTemp(true);
+  //     console.log(jobseekerData.data());
+  //   };
+  //   asyncFn();
+  // }, []);
 
   return (
     <div>
@@ -472,16 +450,18 @@ function Assessment() {
         <div className="columns-container">
           <div className="checkboxes-column-left">
             <Checkboxes
-              skills={previousExperience1}
-              checkedArr={checkedPrev1}
-              setCheckedArr={setCheckedPrev1}
+              skills={Object.keys(skillsObj).sort()
+                .slice(0, Math.ceil(skillsChecklistOptions.length / 2))}
+              checkedArr={skillBool1}
+              setCheckedArr={setSkillBool1}
             />
           </div>
           <div className="checkboxes-column-right">
             <Checkboxes
-              skills={previousExperience2}
-              checkedArr={checkedPrev2}
-              setCheckedArr={setCheckedPrev2}
+              skills={Object.keys(skillsObj).sort()
+                .slice(Math.ceil(skillsChecklistOptions.length / 2))}
+              checkedArr={skillBool2}
+              setCheckedArr={setSkillBool2}
             />
           </div>
         </div>
@@ -646,7 +626,7 @@ function Assessment() {
             In what areas of the followin&apos; industries are
             ye open to explorin&apos; or have an interest in possible future employment?
           </div>
-          <div className="columns-container">
+          {/* <div className="columns-container">
             <div className="checkboxes-column-left">
               <Checkboxes
                 skills={interests1}
@@ -661,7 +641,7 @@ function Assessment() {
                 setCheckedArr={setCheckedInt2}
               />
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div>
@@ -670,7 +650,7 @@ function Assessment() {
           <div className="assessment-section-subtitle">
             Please check all the skill sets that apply to ye.
           </div>
-          <div className="columns-container">
+          {/* <div className="columns-container">
             <div className="checkboxes-column-left">
               <Checkboxes
                 skills={generalSkills1}
@@ -687,7 +667,7 @@ function Assessment() {
                 subskills={subskills2}
               />
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div>

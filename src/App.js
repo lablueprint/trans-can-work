@@ -99,7 +99,7 @@ function App() {
           {user != undefined && 
           (
           <>
-          <Route path="/home" element={<NavigatorMenu />}>
+          <Route path="/clientRoadmap" element={<NavigatorMenu />}>
             <Route path="roadmap" element={<MilestoneMap />} />
             <Route path="assessment" element={<Assessment />} />
             <Route path="onlineprofiles" element={<OnlineProfiles />} />

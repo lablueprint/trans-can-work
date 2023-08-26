@@ -105,9 +105,8 @@ export const skillsChecklistOptions = [
   'User Interface Design',
   'Wood Working',
   'Word',
-  'Writing ',
+  'Writing',
   'Money Handling',
-  'Customer Service',
   'Inventory Management',
   'ServSafe / Food Safety Certification / Food Handlers Card',
 ];
@@ -167,6 +166,18 @@ export const generalSkills = [
   'Communication Skills',
   'Systems Thinking',
   'Technology Use',
+];
+
+export const generalSubskills = [
+  ['Math Strategies/Procedures', 'Reading', 'Scientific Principles/Procedures', 'Writing'],
+  ['Thinks Creatively', 'Thinks Critically', 'Makes Sound Decisions', 'Plans/Organizes', 'Reasons', 'Solves Problems'],
+  ['Exercises leadership', 'Negotiates to resolve conflict', 'Responds to customer needs', 'Respects Individual Differences', 'Understands Teamwork and works with others'],
+  ['Adapts and Shows Flexibility', 'Demonstrates Integrity', 'Demonstrates Professionalism', 'Demonstrates Responsibility and Self-Discipline', 'Displays a Positive Attitude and Sense of Self-Worth', 'Takes Initiative', 'Takes Responsibility for Professional Growth', 'Works Independently'],
+  ['Manages Money', 'Manages Personnel', 'Manages Resources', 'Manages Time'],
+  ['Analyzes', 'Communicates', 'Locates', 'Organizes', 'Uses'],
+  ['Communicates Verbally', 'Comprehends Written Material', 'Conveys Information in Writing', 'Listens Actively', 'Observes Carefully'],
+  ['Understands and Uses Systems', 'Monitors Systems', 'Improves Systems'],
+  ['Understands and Uses Technology'],
 ];
 
 export const internshipsOptions = [
@@ -489,8 +500,34 @@ export const hiringInfo = [
   },
 ];
 
-export const arrayToObj = (array, options) => options.map(
-  (item) => ({ item: array.includes(item) }),
-);
+export const checkedSkills = [
+  'Accounting Software',
+  'Administrative',
+  'Adobe',
+  'Negotiation',
+  'Patient Scheduling Software',
+  'Philanthropy',
+  'Photo Editing',
+  'Inventory Management',
+  'ServSafe / Food Safety Certification / Food Handlers Card',
+];
+
+export const checkedInterests = [
+  'Accounting',
+  'Bookkeeping',
+  'Finance',
+  'Personal Assistant',
+  'Philanthropy',
+];
+
+export const checkedGeneralSkills = [
+  'Personal Qualities',
+  'Communication Skills',
+  'Systems Thinking',
+];
+
+export const arrayToObj = (array, options) => options.reduce((obj, item) => ({
+  ...obj, [item]: array.includes(item),
+}), {});
 
 export const objToArray = (obj) => Object.keys(obj).filter((key) => obj[key]);

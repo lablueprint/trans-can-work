@@ -82,7 +82,7 @@ function Register() {
 
   useEffect(() => {
     if (user && user.isLoggedIn && user.user !== undefined) {
-      navigate(user.user.approved ? '/home' : '/splash');
+      navigate(user.user.approved ? '/clientRoadmap' : '/splash');
     }
   }, [user]);
 
