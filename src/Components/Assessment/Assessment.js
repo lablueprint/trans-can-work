@@ -76,16 +76,25 @@ function Assessment() {
   const [skillBool, setSkillBool] = useState([]);
   const [skillBool1, setSkillBool1] = useState([]);
   const [skillBool2, setSkillBool2] = useState([]);
+  const [intObj, setIntObj] = useState(arrayToObj(checkedInterests, industryInterestOptions));
+  const [intBool, setIntBool] = useState([]);
+  const [intBool1, setIntBool1] = useState([]);
+  const [intBool2, setIntBool2] = useState([]);
+  const [genObj, setGenObj] = useState(arrayToObj(checkedGeneralSkills, generalSkills));
+  const [genBool, setGenBool] = useState([]);
+  const [genBool1, setGenBool1] = useState([]);
+  const [genBool2, setGenBool2] = useState([]);
   const splitObjects = () => {
     if (Object.keys(skillsObj).length !== skillsChecklistOptions.length) {
-      console.log(Object.keys(skillsObj).length);
-      console.log(skillsChecklistOptions.length);
+      // console.log(Object.keys(skillsObj).length);
+      // console.log(skillsChecklistOptions.length);
       skillsChecklistOptions.forEach((key) => {
         if (!(Object.keys(skillsObj).includes(key))) {
           console.log(key);
         }
       });
     }
+    // filling bool array up - SKILLS
     const temp1 = Object.keys(skillsObj).sort();
     if (skillBool.length === 0) {
       temp1.forEach((key) => {
@@ -98,6 +107,34 @@ function Assessment() {
     setSkillBool1(tempSkillBool1);
     const tempSkillBool2 = skillBool.slice(Math.ceil(skillBool.length / 2));
     setSkillBool2(tempSkillBool2);
+    // filling bool array up - INTERESTS
+    const temp2 = Object.keys(intObj).sort();
+    if (intBool.length === 0) {
+      temp2.forEach((key) => {
+        const tempInt = intBool;
+        tempInt.push(intObj[key]);
+        setIntBool(tempInt);
+      });
+    }
+    const tempIntBool1 = intBool.slice(0, Math.ceil(intBool.length / 2));
+    setIntBool1(tempIntBool1);
+    const tempIntBool2 = intBool.slice(Math.ceil(intBool.length / 2));
+    setIntBool2(tempIntBool2);
+    // filling bool array up - GEN SKILLS
+    const temp3 = Object.keys(genObj).sort();
+    console.log(genObj);
+    if (genBool.length === 0) {
+      temp3.forEach((key) => {
+        const tempGen = genBool;
+        tempGen.push(genObj[key]);
+        setGenBool(tempGen);
+      });
+    }
+    const tempGenBool1 = genBool.slice(0, Math.ceil(genBool.length / 2));
+    setGenBool1(tempGenBool1);
+    const tempGenBool2 = genBool.slice(Math.ceil(genBool.length / 2));
+    setGenBool2(tempGenBool2);
+    console.log(genBool);
   };
 
   useEffect(() => {
@@ -106,11 +143,11 @@ function Assessment() {
 
   useEffect(() => {
     setSkillBool(skillBool1.concat(skillBool2));
-  }, [skillBool1, skillBool2]);
-
-  useEffect(() => {
-    console.log(skillBool);
-  }, [skillBool]);
+    setIntBool(intBool1.concat(intBool2));
+    console.log(genBool1);
+    console.log(genBool2);
+    setGenBool(genBool1.concat(genBool2));
+  }, [skillBool1, skillBool2, intBool1, intBool2, genBool1, genBool2]);
 
   // const [skillsObj, setSkillsObj] = useState(arrayToObj(checkedSkills, skillsChecklistOptions));
   // const [interestsObj, setInterestsObj] = useState(arrayToObj(
@@ -626,22 +663,24 @@ function Assessment() {
             In what areas of the followin&apos; industries are
             ye open to explorin&apos; or have an interest in possible future employment?
           </div>
-          {/* <div className="columns-container">
+          <div className="columns-container">
             <div className="checkboxes-column-left">
               <Checkboxes
-                skills={interests1}
-                checkedArr={checkedInt1}
-                setCheckedArr={setCheckedInt1}
+                skills={Object.keys(intObj).sort()
+                  .slice(0, Math.ceil(industryInterestOptions.length / 2))}
+                checkedArr={intBool1}
+                setCheckedArr={setIntBool1}
               />
             </div>
             <div className="checkboxes-column-right">
               <Checkboxes
-                skills={interests2}
-                checkedArr={checkedInt2}
-                setCheckedArr={setCheckedInt2}
+                skills={Object.keys(intObj).sort()
+                  .slice(Math.ceil(industryInterestOptions.length / 2))}
+                checkedArr={intBool2}
+                setCheckedArr={setIntBool2}
               />
             </div>
-          </div> */}
+          </div>
         </div>
 
         <div>
@@ -650,24 +689,26 @@ function Assessment() {
           <div className="assessment-section-subtitle">
             Please check all the skill sets that apply to ye.
           </div>
-          {/* <div className="columns-container">
+          <div className="columns-container">
             <div className="checkboxes-column-left">
               <Checkboxes
-                skills={generalSkills1}
-                checkedArr={checkedGeneralSkills1}
-                setCheckedArr={setCheckedGeneralSkills1}
-                subskills={subskills1}
+                skills={Object.keys(genObj).sort()
+                  .slice(0, Math.ceil(generalSkills.length / 2))}
+                checkedArr={genBool1}
+                setCheckedArr={setGenBool1}
+                subskills={generalSubskills.slice(Math.ceil(0, generalSkills.length / 2))}
               />
             </div>
             <div className="checkboxes-column-right">
               <Checkboxes
-                skills={generalSkills2}
-                checkedArr={checkedGeneralSkills2}
-                setCheckedArr={setCheckedGeneralSkills2}
-                subskills={subskills2}
+                skills={Object.keys(genObj).sort()
+                  .slice(Math.ceil(generalSkills.length / 2))}
+                checkedArr={genBool2}
+                setCheckedArr={setGenBool2}
+                subskills={generalSubskills.slice(Math.ceil(generalSkills.length / 2))}
               />
             </div>
-          </div> */}
+          </div>
         </div>
 
         <div>

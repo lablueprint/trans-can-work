@@ -521,9 +521,15 @@ export const checkedInterests = [
 ];
 
 export const checkedGeneralSkills = [
-  'Personal Qualities',
+  'Applied Academic Skills',
+  'Critical Thinking Skills',
+  // 'Interpersonal Skills',
+  // 'Personal Qualities',
+  // 'Resource Management',
+  'Information Use',
   'Communication Skills',
-  'Systems Thinking',
+  // 'Systems Thinking',
+  // 'Technology Use',
 ];
 
 export const arrayToObj = (array, options) => options.reduce((obj, item) => ({
