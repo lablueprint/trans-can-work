@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import Back from '../../Assets/back.svg';
 import './Header.css';
 import hamburgerIcon from '../../Assets/Images/hamburger-icon.png';
+import closeButton from '../../Assets/Images/close-button.png';
 import '../Navigation/NavMenu.css';
 
 const style = {
@@ -85,6 +86,9 @@ function Header() {
           sx: style.tabIndicatorStyle,
         }}
       >
+        <button type="button" onClick={handleClick}>
+          <img className="close-button" src={closeButton} alt="Close button" />
+        </button>
         {tabs.map((x) => (
           <Tab
             sx={style.tabStyle}

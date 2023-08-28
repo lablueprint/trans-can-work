@@ -140,6 +140,22 @@
     display: block !important;
 }
 
+.mobileMenuOn .MuiTabs-scroller {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 2em;
+    overflow:visible;
+}
+
+.close-button {
+    position: absolute;
+    top: -14em;
+    right: -1em;
+    cursor: pointer;
+    z-index: 99999;
+}
+
 @media (max-width: 768px) {
     .menu-button-wrapper,
     .menu-button {
