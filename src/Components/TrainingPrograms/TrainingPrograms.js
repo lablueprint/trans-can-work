@@ -125,7 +125,7 @@ function TrainingPrograms() {
   };
 
   return (
-    <div>
+    <div className="content">
       <div className="tp-title">Training Programs</div>
       <div className="between-inputs" />
       <div>
@@ -202,7 +202,7 @@ function TrainingPrograms() {
                 </div>
               </form>
             </div>
-            <div className="width-55vw">
+            <div>
               <button type="button" onClick={(e) => deleteProgram(e, index)} className="op-delete-button">
                 <img
                   src={Delete}
@@ -216,7 +216,7 @@ function TrainingPrograms() {
           </div>
         ))}
       </div>
-      <div className="width-55vw">
+      <div>
         <button type="button" onClick={addProgram} className="op-add-button">
           <img
             src={Add}
