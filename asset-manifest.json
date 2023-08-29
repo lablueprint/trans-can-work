@@ -1,14 +1,17 @@
 {
   "files": {
-    "main.css": "/trans-can-work/static/css/main.08cd80d3.css",
-    "main.js": "/trans-can-work/static/js/main.10063d13.js",
+    "main.css": "/trans-can-work/static/css/main.56f2cd08.css",
+    "main.js": "/trans-can-work/static/js/main.7ab7f220.js",
     "static/media/Montserrat-Bold.svg": "/trans-can-work/static/media/Montserrat-Bold.80f5501d03aa3cbbeaec.svg",
     "static/media/Montserrat-Regular.svg": "/trans-can-work/static/media/Montserrat-Regular.731eb9ca94caa85186cb.svg",
     "static/media/Liesel-Printed-Regular.otf": "/trans-can-work/static/media/Liesel-Printed-Regular.2e6e0db301fb432fabe9.otf",
     "static/media/powell-cat.svg": "/trans-can-work/static/media/powell-cat.bc7b8bf1275f76293bc5373a88a3f9fc.svg",
+    "static/media/roadmap-details-desktop.png": "/trans-can-work/static/media/roadmap-details-desktop.760ee2253371e92bcb84.png",
+    "static/media/roadmap-background.png": "/trans-can-work/static/media/roadmap-background.872b3143e6044e5f7cf6.png",
     "static/media/Pirates.ttf": "/trans-can-work/static/media/Pirates.309c8bf5fa1d9d7303c7.ttf",
     "static/media/Montserrat-Bold.eot": "/trans-can-work/static/media/Montserrat-Bold.0026ff971c29919cf00e.eot",
     "static/media/Montserrat-Regular.eot": "/trans-can-work/static/media/Montserrat-Regular.7ed569f263a54c02ddeb.eot",
+    "static/media/roadmap-details-mobile.png": "/trans-can-work/static/media/roadmap-details-mobile.661541634aed555daad5.png",
     "static/media/Montserrat-Bold.ttf": "/trans-can-work/static/media/Montserrat-Bold.d0ca82d8ca07ba209aee.ttf",
     "static/media/Montserrat-Regular.ttf": "/trans-can-work/static/media/Montserrat-Regular.94bb495fba6077f669ed.ttf",
     "static/media/Montserrat-Bold.woff": "/trans-can-work/static/media/Montserrat-Bold.87be09dc15290961c6f0.woff",
@@ -82,11 +85,11 @@
     "static/media/delete.svg": "/trans-can-work/static/media/delete.f2de7cf78d8b8328988322323d53d3be.svg",
     "static/media/back.svg": "/trans-can-work/static/media/back.130703f1df7f4bb58fe5d32d80414f70.svg",
     "static/media/add.svg": "/trans-can-work/static/media/add.782a2551d32722c57cb31e366b35112e.svg",
-    "main.08cd80d3.css.map": "/trans-can-work/static/css/main.08cd80d3.css.map",
-    "main.10063d13.js.map": "/trans-can-work/static/js/main.10063d13.js.map"
+    "main.56f2cd08.css.map": "/trans-can-work/static/css/main.56f2cd08.css.map",
+    "main.7ab7f220.js.map": "/trans-can-work/static/js/main.7ab7f220.js.map"
   },
   "entrypoints": [
-    "static/css/main.08cd80d3.css",
-    "static/js/main.10063d13.js"
+    "static/css/main.56f2cd08.css",
+    "static/js/main.7ab7f220.js"
   ]
 }
