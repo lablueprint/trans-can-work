@@ -41,35 +41,35 @@ import { auth } from "./firebase";
 
 
 function App() {
-  // const dispatch = useDispatch();
-  // const user = useSelector((state) => state.auth.value);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.value);
 
-  // useEffect(() => {
-  //   // on any firebase auth change 
-  //   const unsubscribe = onAuthStateChanged(auth, async (state) => {
-  //     // if logged in
-  //     if (state != null) {
-  //       // refresh the user data and redux state
-  //       fetchUser(state.email).then((doc) => {
-  //         const userState = {
-  //           email: state.email,
-  //           accessToken: state.accessToken,
-  //           refreshToken: state.refreshToken,
-  //           user: doc !== undefined ? doc.data(): undefined,
-  //         }
-  //         dispatch(login(userState));
-  //       }).catch((error) => {
-  //       });
-  //     // if logged out
-  //     } else if (user != undefined) {
-  //       // clear redux state
-  //       dispatch(logout());
-  //     }
-  //   });
-  //   return()=>{
-  //     unsubscribe();
-  //   }
-  // }, []);
+  useEffect(() => {
+    // on any firebase auth change 
+    const unsubscribe = onAuthStateChanged(auth, async (state) => {
+      // if logged in
+      if (state != null) {
+        // refresh the user data and redux state
+        fetchUser(state.email).then((doc) => {
+          const userState = {
+            email: state.email,
+            accessToken: state.accessToken,
+            refreshToken: state.refreshToken,
+            user: doc !== undefined ? doc.data(): undefined,
+          }
+          dispatch(login(userState));
+        }).catch((error) => {
+        });
+      // if logged out
+      } else if (user != undefined) {
+        // clear redux state
+        dispatch(logout());
+      }
+    });
+    return()=>{
+      unsubscribe();
+    }
+  }, []);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
