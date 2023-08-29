@@ -108,3 +108,10 @@
   src: url("./Assets/Fonts/Pirates.otf") format("opentype"),
     url("./Assets/Fonts/Pirates.ttf") format("truetype");
 }
+
+@font-face {
+  font-family: 'Liesel';
+  font-weight: normal;
+  font-style: normal;
+  src: url('./Assets/Fonts/Liesel-Printed-Regular.otf') format('opentype');
+}

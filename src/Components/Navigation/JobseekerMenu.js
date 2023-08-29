@@ -11,14 +11,14 @@ import './NavMenu.css';
 const options = [
   { name: 'Assessment', link: '/assessment' },
   { name: 'Online Profiles', link: '/onlineprofiles' },
-  { name: 'Training Programs', link: '/assessment' },
+  { name: 'Training Programs', link: '/training' },
   { name: 'Co-Enroll', link: '/assessment' },
-  { name: 'Workshops', link: '/assessment' },
-  { name: 'Internships', link: '/assessment' },
-  { name: 'Job Fairs', link: '/assessment' },
-  { name: 'Job Boards', link: '/assessment' },
-  { name: 'Resources', link: '/assessment' },
-  { name: 'Hiring Info', link: '/assessment' },
+  { name: 'Workshops', link: '/workshops' },
+  { name: 'Internships', link: '/internships' },
+  { name: 'Job Fairs', link: '/jobfairs' },
+  { name: 'Job Boards', link: '/jobboards' },
+  { name: 'Resources', link: '/resources' },
+  { name: 'Hiring Info', link: '/hiredinfo' },
 ];
 
 const style = {
