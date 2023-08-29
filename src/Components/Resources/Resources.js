@@ -99,7 +99,7 @@ function Resources() {
   ];
 
   return (
-    <div>
+    <div className="content">
       <div className="resources-tracker-title">Resources Tracker</div>
       <div className="resources-columns-container">
         <div className="checkboxes-column-left">
@@ -144,7 +144,7 @@ function Resources() {
                 </div>
               </form>
             </div>
-            <div className="width-55vw">
+            <div>
               <button type="button" onClick={(e) => deleteTrackedResource(e, index)} className="i-delete-button">
                 <img
                   src={Delete}
@@ -157,7 +157,7 @@ function Resources() {
             <div className="i-between-buttons" />
           </div>
         ))}
-        <div className="width-55vw">
+        <div>
           <button type="button" onClick={addTrackedResource} className="i-add-button">
             <img
               src={Add}

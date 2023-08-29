@@ -1,2 +1,9 @@
 /* Remove this file once font is added to repo locally */
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans&family=Montserrat&display=swap');
+
+@media (max-width: 768px) {
+  .MuiTabs-scroller div,
+  .MuiTabs-root {
+    display: none;
+  }
+}

@@ -25,7 +25,7 @@
 }
 
 .op-title {
-    width: 56.3vw;
+    width: 100%;
     padding-bottom: 1.2em;
     margin: 0 auto;
     text-align: left;
@@ -34,7 +34,7 @@
 }
 
 .width-55vw {
-    width: 56.3vw;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -51,6 +51,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .op-add-button:hover {
@@ -69,6 +70,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 .op-delete-button:hover {
     background-color: #D9D9D9;
@@ -85,4 +87,35 @@
 
 .input-field * {
     border-width: 1px !important;
+}
+
+/* outer container */
+.MuiBox-root {
+    width: 100% !important;
+}
+
+.content {
+    width: 100% !important;
+}
+
+/* field boxes */
+.MuiInputBase-root {
+    height: 3rem !important;
+    width: 100% !important;
+    /* max-width: 10em; */
+}
+
+/* field label text */
+.inputWrapper div div div label,
+.inputWrapper div label,
+.MuiFormControl-root label {
+    font-size: 1rem !important;
+}
+
+/* field inner text */
+.inputWrapper div div div div,
+.inputWrapper div,
+.MuiFormControl-root div {
+    font-size: 1rem !important;
+    width: 100% !important;
 }

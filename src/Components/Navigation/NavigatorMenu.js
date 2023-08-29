@@ -21,6 +21,7 @@ const style = {
     // borderRight: 1,
     // border: '2px dotted red',
     margin: '7vh  0 0 5vw',
+
   },
   tabIndicatorStyle: {
     left: 0,
@@ -54,6 +55,8 @@ function NavigatorMenu() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  // const [navbar, toggleNavbar] = useState(false);
 
   return (
     <>

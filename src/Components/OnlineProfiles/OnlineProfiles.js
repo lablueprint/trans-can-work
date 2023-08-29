@@ -69,12 +69,12 @@ function OnlineProfiles() {
   ];
 
   return (
-    <div>
+    <div className="content">
       <div className="op-title">Online Employment Profiles</div>
       <div>
         {profile.map((profileObject, index) => (
           <div>
-            <div>
+            <div className="inputWrapper">
               <form>
                 <div>
                   {fieldProps.map((field) => (
@@ -96,7 +96,7 @@ function OnlineProfiles() {
                 </div>
               </form>
             </div>
-            <div className="width-55vw">
+            <div>
               <button type="button" onClick={(e) => deleteOnlineProfile(e, index)} className="op-delete-button">
                 <img
                   src={Delete}
@@ -109,7 +109,7 @@ function OnlineProfiles() {
             <div className="op-between-buttons" />
           </div>
         ))}
-        <div className="width-55vw">
+        <div>
           <button type="button" onClick={addOnlineProfile} className="op-add-button">
             <img
               src={Add}

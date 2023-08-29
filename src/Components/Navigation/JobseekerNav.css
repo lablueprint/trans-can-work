@@ -1,3 +1,22 @@
-.child {
-    position: absolute; 
+#child {
+    position: relative; 
+    z-index: 2;
+}
+
+#composition-button-one,
+#composition-button-two {
+    background-color: #FFFBFE;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+}
+
+#composition-button-one {
+    left: 1.5em;
+    top: 1.5em;
+}
+
+#composition-button-two {
+    right: 1.5em;
+    top: 1.5em;
 }
