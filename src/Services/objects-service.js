@@ -170,12 +170,12 @@ export const generalSkills = [
 
 export const generalSubskills = [
   ['Math Strategies/Procedures', 'Reading', 'Scientific Principles/Procedures', 'Writing'],
+  ['Communicates Verbally', 'Comprehends Written Material', 'Conveys Information in Writing', 'Listens Actively', 'Observes Carefully'],
   ['Thinks Creatively', 'Thinks Critically', 'Makes Sound Decisions', 'Plans/Organizes', 'Reasons', 'Solves Problems'],
+  ['Analyzes', 'Communicates', 'Locates', 'Organizes', 'Uses'],
   ['Exercises leadership', 'Negotiates to resolve conflict', 'Responds to customer needs', 'Respects Individual Differences', 'Understands Teamwork and works with others'],
   ['Adapts and Shows Flexibility', 'Demonstrates Integrity', 'Demonstrates Professionalism', 'Demonstrates Responsibility and Self-Discipline', 'Displays a Positive Attitude and Sense of Self-Worth', 'Takes Initiative', 'Takes Responsibility for Professional Growth', 'Works Independently'],
   ['Manages Money', 'Manages Personnel', 'Manages Resources', 'Manages Time'],
-  ['Analyzes', 'Communicates', 'Locates', 'Organizes', 'Uses'],
-  ['Communicates Verbally', 'Comprehends Written Material', 'Conveys Information in Writing', 'Listens Actively', 'Observes Carefully'],
   ['Understands and Uses Systems', 'Monitors Systems', 'Improves Systems'],
   ['Understands and Uses Technology'],
 ];

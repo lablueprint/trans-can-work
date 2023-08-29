@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import propTypes from 'prop-types';
 import './Assessment.css';
-import { useSelector } from 'react-redux';
 import {
   FormControl, InputLabel, NativeSelect,
 } from '@mui/material';
@@ -12,7 +12,6 @@ import {
   skillsChecklistOptions, industryInterestOptions, generalSkills,
   arrayToObj, checkedSkills, checkedInterests, checkedGeneralSkills, generalSubskills,
 } from '../../Services/objects-service';
-// import { fetchJobseekerData, createJobseekerData } from '../../Services/jobseeker-data-service';
 
 const styles = {
   dropdownOptions: {
@@ -48,7 +47,11 @@ const styles = {
   },
 };
 
-function Assessment() {
+function Assessment(userData, jobseeker, setJobseeker) {
+  useEffect(() => {
+    console.log(userData);
+    console.log(jobseeker);
+  }, [userData, jobseeker]);
   const textFieldStyles = {
     inputProps: {
       style: {
@@ -86,15 +89,12 @@ function Assessment() {
   const [genBool2, setGenBool2] = useState([]);
   const splitObjects = () => {
     if (Object.keys(skillsObj).length !== skillsChecklistOptions.length) {
-      // console.log(Object.keys(skillsObj).length);
-      // console.log(skillsChecklistOptions.length);
       skillsChecklistOptions.forEach((key) => {
         if (!(Object.keys(skillsObj).includes(key))) {
           console.log(key);
         }
       });
     }
-    // filling bool array up - SKILLS
     const temp1 = Object.keys(skillsObj).sort();
     if (skillBool.length === 0) {
       temp1.forEach((key) => {
@@ -107,7 +107,6 @@ function Assessment() {
     setSkillBool1(tempSkillBool1);
     const tempSkillBool2 = skillBool.slice(Math.ceil(skillBool.length / 2));
     setSkillBool2(tempSkillBool2);
-    // filling bool array up - INTERESTS
     const temp2 = Object.keys(intObj).sort();
     if (intBool.length === 0) {
       temp2.forEach((key) => {
@@ -120,9 +119,7 @@ function Assessment() {
     setIntBool1(tempIntBool1);
     const tempIntBool2 = intBool.slice(Math.ceil(intBool.length / 2));
     setIntBool2(tempIntBool2);
-    // filling bool array up - GEN SKILLS
     const temp3 = Object.keys(genObj).sort();
-    console.log(genObj);
     if (genBool.length === 0) {
       temp3.forEach((key) => {
         const tempGen = genBool;
@@ -134,20 +131,60 @@ function Assessment() {
     setGenBool1(tempGenBool1);
     const tempGenBool2 = genBool.slice(Math.ceil(genBool.length / 2));
     setGenBool2(tempGenBool2);
-    console.log(genBool);
   };
 
   useEffect(() => {
     splitObjects();
   }, []);
 
+  // function that updates the object
+  const repopulateSkills = () => {
+    const tempSkillObj = {};
+    skillsChecklistOptions.sort().forEach((option, index) => {
+      tempSkillObj[option] = skillBool[index];
+    });
+    setSkillsObj(tempSkillObj);
+  };
+
+  const repopulateInts = () => {
+    const tempIntObj = {};
+    industryInterestOptions.sort().forEach((option, index) => {
+      tempIntObj[option] = intBool[index];
+    });
+    setIntObj(tempIntObj);
+  };
+
+  const repopulateGen = () => {
+    const tempGenObj = {};
+    generalSkills.sort().forEach((option, index) => {
+      tempGenObj[option] = genBool[index];
+    });
+    setGenObj(tempGenObj);
+  };
+
   useEffect(() => {
     setSkillBool(skillBool1.concat(skillBool2));
+  }, [skillBool1, skillBool2]);
+
+  useEffect(() => {
     setIntBool(intBool1.concat(intBool2));
-    console.log(genBool1);
-    console.log(genBool2);
+  }, [intBool1, intBool2]);
+
+  useEffect(() => {
     setGenBool(genBool1.concat(genBool2));
-  }, [skillBool1, skillBool2, intBool1, intBool2, genBool1, genBool2]);
+  }, [genBool1, genBool2]);
+
+  useEffect(() => {
+    repopulateSkills();
+  }, [skillBool]);
+
+  useEffect(() => {
+    repopulateInts();
+  }, [intBool]);
+
+  useEffect(() => {
+    repopulateGen();
+  }, [genBool]);
 
   // const [skillsObj, setSkillsObj] = useState(arrayToObj(checkedSkills, skillsChecklistOptions));
   // const [interestsObj, setInterestsObj] = useState(arrayToObj(
@@ -217,34 +254,32 @@ function Assessment() {
   // const [checkedPrev2,
   //   setCheckedPrev2] = useState(new Array(previousExperience2.length).fill(false));
 
-  const store = useSelector((state) => state.auth.value);
-
-  const [jobseeker, setJobseeker] = useState({
-    name: store.user.firstName,
-    pronouns: store.user.pronouns,
-    phone: store.user.phoneNumber,
-    email: store.email,
-    clientInfo:
-    {
-      'City/State': 'City/State',
-      Ethnicity: 'Ethnicity',
-      Age: 'Age',
-      'Gender Identity': 'Gender Identity',
-      Sexuality: 'Sexuality',
-      Veteran: 'Veteran',
-      Disability: 'Disability',
-      'Housing Situation': 'Housing Situation',
-      'Currently Employed': 'Employment Status',
-      'Prior Convictions': 'Prior Convictions',
-    },
-    industryInterests: [],
-    generalSkills: [],
-    skillsChecklist: [],
-    education: [{
-    }],
-    occupation: [],
-    dreamjob: 'Dream Job',
-  });
+  // const [jobseeker, setJobseeker] = useState({
+  //   name: store.user.firstName,
+  //   pronouns: store.user.pronouns,
+  //   phone: store.user.phoneNumber,
+  //   email: store.email,
+  //   clientInfo:
+  //   {
+  //     'City/State': 'City/State',
+  //     Ethnicity: 'Ethnicity',
+  //     Age: 'Age',
+  //     'Gender Identity': 'Gender Identity',
+  //     Sexuality: 'Sexuality',
+  //     Veteran: 'Veteran',
+  //     Disability: 'Disability',
+  //     'Housing Situation': 'Housing Situation',
+  //     'Currently Employed': 'Employment Status',
+  //     'Prior Convictions': 'Prior Convictions',
+  //   },
+  //   industryInterests: [],
+  //   generalSkills: [],
+  //   skillsChecklist: [],
+  //   education: [{
+  //   }],
+  //   occupation: [],
+  //   dreamjob: 'Dream Job',
+  // });
 
   // function combineCheckboxes() {
   //   checkedInterests = checkedInt1.concat(checkedInt2);
@@ -743,3 +778,8 @@ function Assessment() {
   );
 }
 export default Assessment;
+
+// Assessment.propTypes = {
+//   userData: propTypes.object.isRequired,
+//   jobseeker: propTypes.object.isRequired,
+// };
