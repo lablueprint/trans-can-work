@@ -1,0 +1,70 @@
+.profile-button-outer-container{
+    display: flex;  
+    flex-direction: row;
+    align-items: center;
+    height: 5em;
+    width: 16em; 
+    border-radius: 10px;
+}
+
+.profile-button-unarchived-bg {
+    background-color: #FFFBFE;
+    border: 1px solid #CAC4D0;
+}
+
+.profile-button-archived-bg {
+  background-color: #CAC4D0; 
+  border: 1px solid #C9C5CA;
+}
+
+.profile-button-navigator-bg {
+  background: linear-gradient(180deg, #EFFBFF 0%, #F5F1FF 69.61%, #FFF2F5 100%);
+  border: 1px solid #D0C4CD;
+}
+
+.profile-button-text-container {
+    display:flex ;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    flex-grow: 1;
+    max-height: 100%;
+}
+
+.profile-button-name-text {
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-size: 16px;
+    color: #1C1B1F;
+    margin: 0;
+}
+
+.profile-button-job-text {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    color: #1C1B1F;
+    margin: 0;
+}
+
+.profile-button-view-link {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    /* identical to box height, or 133% */
+    text-decoration-line: underline;
+    
+    /* Blue/50 */
+    color: #000FF0;
+    margin-top: .5em;
+}
+
+.profile-button-button-container {
+    display:flex ;
+    flex-direction: row;
+    margin: .5em;
+    position: relative;
+    top: -1.25em;
+}

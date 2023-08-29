@@ -1,0 +1,157 @@
+import React, { useState } from 'react';
+import Box from '@mui/material/Box';
+import {
+  Tabs, Tab,
+} from '@mui/material';
+import Avatar from 'react-avatar';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import Back from '../../Assets/back.svg';
+import './Header.css';
+import hamburgerIcon from '../../Assets/Images/hamburger-icon.png';
+import closeButton from '../../Assets/Images/close-button.png';
+import '../Navigation/NavMenu.css';
+
+const style = {
+  tabStyle: {
+    fontFamily: 'Montserrat',
+    textTransform: 'none',
+    borderBottom: '1px solid #E7E0EC',
+    height: '6px',
+    color: '#000000',
+    '&.Mui-selected': {
+      color: '#000000',
+    },
+  },
+  tabsStyle: {
+    // borderRight: 1,
+    // border: '2px dotted red',
+    margin: '7vh  0 0 5vw',
+
+  },
+  tabIndicatorStyle: {
+    left: 0,
+    backgroundColor: '#F83DA6',
+  },
+  panelStyle: {
+    alignSelf: 'start',
+    width: '78vw',
+    margin: '5vh 1vw',
+    height: '100%',
+    overflow: 'hidden',
+    // border: '2px dotted blue',
+  },
+};
+
+const tabs = [
+  { title: 'Roadmap', link: 'roadmap' },
+  { title: 'Assessment', link: 'assessment' },
+  { title: 'Online Profiles', link: 'onlineprofiles' },
+  { title: 'Training Programs', link: 'training' },
+  { title: 'Workshops', link: 'workshops' },
+  { title: 'Internships', link: 'internships' },
+  { title: 'Job Fairs', link: 'jobfairs' },
+  { title: 'Job Boards', link: 'jobboards' },
+  { title: 'Resources', link: 'resources' },
+  { title: 'Hired Info', link: 'hiredinfo' },
+];
+
+function Header() {
+  const store = useSelector((state) => state.auth.value);
+
+  const [navbar, toggleNavbar] = useState(false);
+
+  const handleClick = () => {
+    toggleNavbar(!navbar);
+    console.log('testing!');
+  };
+
+  const [value, setValue] = useState(0);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <div>
+
+      <Tabs
+        className={navbar ? 'mobileMenuOn' : 'mobileMenuOff'}
+        orientation="vertical"
+        variant="scrollable"
+        value={value}
+        onChange={handleChange}
+        aria-label="Vertical tabs example"
+        sx={style.tabsStyle}
+        TabIndicatorProps={{
+          sx: style.tabIndicatorStyle,
+        }}
+      >
+        <button type="button" onClick={handleClick}>
+          <img className="close-button" src={closeButton} alt="Close button" />
+        </button>
+        {tabs.map((x) => (
+          <Tab
+            sx={style.tabStyle}
+            key={x.link}
+            label={x.title}
+            component={Link}
+            to={x.link}
+            onClick={handleClick}
+          />
+        ))}
+      </Tabs>
+
+      <div className="headers">
+        <Box sx={{ borderBottom: 1, borderColor: 'divider', boxShadow: '0 4px 4px #c9c9c9' }}>
+          <div className="all-header-items">
+            <div className="left-header-contents">
+              <div className="go-back">
+                <Link
+                  to="/dashboard"
+                  className="assessment-page-back-text"
+                >
+                  <img
+                    src={Back}
+                    alt="back-pointing arrow"
+                    className="go-back-arrow"
+                  />
+                  Return to Clients List
+                </Link>
+              </div>
+
+              <div className="username-text-roadmap">
+                {store.user.firstName + store.user.lastName}
+                &apos;s Roadmap
+              </div>
+
+            </div>
+            <div className="right-header-contents">
+              <div className="align-helper">
+                <div className="username-text">
+                  {store.user.firstName + store.user.lastName}
+                </div>
+                <Avatar
+                  facebookId="100008343750912"
+                  size="40"
+                  styles={{
+                    height: '2em',
+                    width: '2em',
+                    marginTop: '6px',
+                    marginBottom: '6px',
+                    marginLeft: '6px',
+                  }}
+                  round
+                />
+              </div>
+
+              <button type="button" onClick={handleClick} className="menu-button-wrapper">
+                <img className="menu-button" src={hamburgerIcon} alt="Hamburger menu icon" />
+              </button>
+            </div>
+          </div>
+        </Box>
+      </div>
+    </div>
+  );
+}
+export default Header;

@@ -1,0 +1,121 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-weight: normal;
+    font-style: normal;
+    src: url('../../Assets/Fonts/Montserrat-Regular.eot') format('embedded-opentype'), /* IE6-IE8 */
+         url('../../Assets/Fonts/Montserrat-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../../Assets/Fonts/Montserrat-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+         url('../../Assets/Fonts/Montserrat-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('../../Assets/Fonts/Montserrat-Regular.svg') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    font-weight: bold;
+    font-style: normal;
+    src: url('../../Assets/Fonts/Montserrat-Bold.eot') format('embedded-opentype'), /* IE6-IE8 */
+         url('../../Assets/Fonts/Montserrat-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../../Assets/Fonts/Montserrat-Bold.woff') format('woff'), /* Pretty Modern Browsers */
+         url('../../Assets/Fonts/Montserrat-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('../../Assets/Fonts/Montserrat-Bold.svg') format('svg'); /* Legacy iOS */
+}
+
+.temp {
+    height: 5em;
+}
+
+.op-title {
+    width: 100%;
+    padding-bottom: 1.2em;
+    margin: 0 auto;
+    text-align: left;
+    font-family: 'Montserrat';
+    font-size: 1.3em;
+}
+
+.width-55vw {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.op-add-button {
+    margin-top: -1em;
+    width: 14em;
+    height: 4em;
+    margin-bottom: 1%;
+    background-color: #000AA0;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    font-family: 'Montserrat';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.op-add-button:hover {
+    background-color: #AAAFFA;
+}
+
+.op-delete-button {
+    width: 14em;
+    height: 4em;
+    margin-bottom: 1%;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    border-color: black;
+    font-family: 'Montserrat';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.op-delete-button:hover {
+    background-color: #D9D9D9;
+    border: 0px;
+}
+
+.op-between-inputs {
+    height: 1.4em;
+}
+
+.op-between-buttons {
+    height: 1em;
+}
+
+.input-field * {
+    border-width: 1px !important;
+}
+
+/* outer container */
+.MuiBox-root {
+    width: 100% !important;
+}
+
+.content {
+    width: 100% !important;
+}
+
+/* field boxes */
+.MuiInputBase-root {
+    height: 3rem !important;
+    width: 100% !important;
+    /* max-width: 10em; */
+}
+
+/* field label text */
+.inputWrapper div div div label,
+.inputWrapper div label,
+.MuiFormControl-root label {
+    font-size: 1rem !important;
+}
+
+/* field inner text */
+.inputWrapper div div div div,
+.inputWrapper div,
+.MuiFormControl-root div {
+    font-size: 1rem !important;
+    width: 100% !important;
+}

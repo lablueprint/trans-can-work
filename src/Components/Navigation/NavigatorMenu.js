@@ -4,6 +4,7 @@ import {
 } from '@mui/material';
 import { Link, Outlet } from 'react-router-dom';
 import './NavMenu.css';
+import Header from '../Header/Header';
 
 const style = {
   tabStyle: {
@@ -17,9 +18,10 @@ const style = {
     },
   },
   tabsStyle: {
-    borderRight: 1,
-    border: '2px dotted red',
+    // borderRight: 1,
+    // border: '2px dotted red',
     margin: '7vh  0 0 5vw',
+
   },
   tabIndicatorStyle: {
     left: 0,
@@ -31,21 +33,21 @@ const style = {
     margin: '5vh 1vw',
     height: '100%',
     overflow: 'hidden',
-    border: '2px dotted blue',
+    // border: '2px dotted blue',
   },
 };
 
 const tabs = [
   { title: 'Roadmap', link: 'roadmap' },
   { title: 'Assessment', link: 'assessment' },
-  { title: 'Online Profiles', link: 'assessment' },
-  { title: 'Training Programs', link: 'assessment' },
-  { title: 'Workshops', link: 'assessment' },
-  { title: 'Internships', link: 'assessment' },
-  { title: 'Job Fairs', link: 'assessment' },
-  { title: 'Job Boards', link: 'assessment' },
-  { title: 'Resources', link: 'assessment' },
-  { title: 'Hired Info', link: 'assessment' },
+  { title: 'Online Profiles', link: 'onlineprofiles' },
+  { title: 'Training Programs', link: 'training' },
+  { title: 'Workshops', link: 'workshops' },
+  { title: 'Internships', link: 'internships' },
+  { title: 'Job Fairs', link: 'jobfairs' },
+  { title: 'Job Boards', link: 'jobboards' },
+  { title: 'Resources', link: 'resources' },
+  { title: 'Hired Info', link: 'hiredinfo' },
 ];
 
 function NavigatorMenu() {
@@ -54,32 +56,63 @@ function NavigatorMenu() {
     setValue(newValue);
   };
 
-  return (
-    <Box sx={{ display: 'flex' }}>
-      <Tabs
-        orientation="vertical"
-        variant="scrollable"
-        value={value}
-        onChange={handleChange}
-        aria-label="Vertical tabs example"
-        sx={style.tabsStyle}
-        TabIndicatorProps={{
-          sx: style.tabIndicatorStyle,
-        }}
-      >
-        {tabs.map((x) => (
-          <Tab
-            sx={style.tabStyle}
-            key={x.link}
-            label={x.title}
-            component={Link}
-            to={x.link}
-          />
-        ))}
-      </Tabs>
-      <Box sx={style.panelStyle}><Outlet /></Box>
+  // const [navbar, toggleNavbar] = useState(false);
 
-    </Box>
+  return (
+    <>
+      <Header />
+      <Box sx={{ display: 'flex' }}>
+        <Tabs
+          orientation="vertical"
+          variant="scrollable"
+          value={value}
+          onChange={handleChange}
+          aria-label="Vertical tabs example"
+          sx={style.tabsStyle}
+          TabIndicatorProps={{
+            sx: style.tabIndicatorStyle,
+          }}
+        >
+          {tabs.map((x) => (
+            <Tab
+              sx={style.tabStyle}
+              key={x.link}
+              label={x.title}
+              component={Link}
+              to={x.link}
+            />
+          ))}
+        </Tabs>
+        <Box sx={style.panelStyle}><Outlet /></Box>
+
+      </Box>
+
+    </>
+    // <Box sx={{ display: 'flex' }}>
+    //   <Tabs
+    //     orientation="vertical"
+    //     variant="scrollable"
+    //     value={value}
+    //     onChange={handleChange}
+    //     aria-label="Vertical tabs example"
+    //     sx={style.tabsStyle}
+    //     TabIndicatorProps={{
+    //       sx: style.tabIndicatorStyle,
+    //     }}
+    //   >
+    //     {tabs.map((x) => (
+    //       <Tab
+    //         sx={style.tabStyle}
+    //         key={x.link}
+    //         label={x.title}
+    //         component={Link}
+    //         to={x.link}
+    //       />
+    //     ))}
+    //   </Tabs>
+    //   <Box sx={style.panelStyle}><Outlet /></Box>
+
+  // </Box>
   );
 }
 

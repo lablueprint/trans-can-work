@@ -8,6 +8,10 @@
     width: 80%;
 }
 
+.workshop-wrapper > div {
+    margin: 0 auto;
+}
+
 .line1 {
     border: 1px solid rgba(147, 144, 148, 1); 
     width: 50%;
@@ -29,74 +33,6 @@
     text-align: center;
 }
 
-#internalWorkshopButton {
-    padding: 20px 28px; 
-    border: 2px solid #484649; 
-    box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
-    border-radius: 12px; 
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 24px;
-    text-align: center;
-    letter-spacing: 0.15px;
-    color: #484649;
-    margin: 2em auto;
-    text-transform: none;
-}
-
-#internalWorkshopButton:hover {
-    background: #939094;
-    box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
-    color: #FFFBFE;
-    border: 2px solid #939094;
-}
-
-#externalWorkshopButton {
-    padding: 20px 28px; 
-    border: 2px solid #484649; 
-    box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
-    border-radius: 12px; 
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 24px;
-    text-align: center;
-    letter-spacing: 0.15px;
-    color: #484649;
-    margin: 2em auto;
-    text-transform: none;
-}
-
-#externalWorkshopButton:hover {
-    background: #939094;
-    box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
-    color: #FFFBFE;
-    border: 2px solid #939094;
-}
-
-/* form {
-    display: flex;
-    flex-direction: column;
-}
-
-.checkBoxes {
-    position: fixed;
-    margin-top: 275px;
-    width: 50%;
-}
-
-.col1 {
-    float: left;
-    margin-left: 150px;
-}
-
-.col2 {
-    float: right;
-} */
-
 @media only screen and (max-aspect-ratio: 1/1) {
     .workshop-row {
         display: block;
@@ -110,3 +46,8 @@
         margin-bottom: 0.5em;
     }
   }
+
+.MuiOutlinedInput-root.Mui-focused,
+.MuiOutlinedInput-notchedOutline {
+    border-width: 1px !important;
+}

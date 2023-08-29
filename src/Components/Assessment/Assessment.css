@@ -1,0 +1,297 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-weight: normal;
+    font-style: normal;
+    src: url('../../Assets/Fonts/Montserrat-Regular.eot') format('embedded-opentype'), /* IE6-IE8 */
+         url('../../Assets/Fonts/Montserrat-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../../Assets/Fonts/Montserrat-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+         url('../../Assets/Fonts/Montserrat-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('../../Assets/Fonts/Montserrat-Regular.svg') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    font-weight: bold;
+    font-style: normal;
+    src: url('../../Assets/Fonts/Montserrat-Bold.eot') format('embedded-opentype'), /* IE6-IE8 */
+         url('../../Assets/Fonts/Montserrat-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../../Assets/Fonts/Montserrat-Bold.woff') format('woff'), /* Pretty Modern Browsers */
+         url('../../Assets/Fonts/Montserrat-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('../../Assets/Fonts/Montserrat-Bold.svg') format('svg'); /* Legacy iOS */
+}
+
+.baby-divider {
+    height: 0.8em;
+}
+
+.section-divider {
+    height: 3em;
+}
+
+.assessment-section-title {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.25em;
+    line-height: 1em;
+    text-align: left;
+    width: 100%;
+    margin: 0 auto;
+    padding-bottom: 0.5em;
+}
+
+.assessment-section-subtitle { 
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-size: 1.1em;
+    text-align: left;
+    width: 100%;
+    margin: 0 auto;
+    padding-bottom: 0.5em;
+}
+/* add to all H2 */
+
+h3 
+{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    margin-left: 10%;
+}
+
+input, textarea {
+    font-family: 'Montserrat';
+    margin-left: 10%;
+}
+
+.outer-container {
+    display:flex; 
+    flex-direction: row;
+    margin-top: 8%;
+    gap: 200px;
+    padding: 0;
+    margin: 0;
+    width: 80%;
+    margin: 0 auto;
+}
+.profile-photo-container {
+    display: flex;
+    margin-left: 10%;
+    margin-top: 10%;
+    width: 500px;
+}
+.top-container{
+    display:flex; 
+    flex-direction: row;
+}
+
+.assessment-page-headers-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-bottom: 3em;
+}
+
+.assessment-page-title{
+    font-family: 'Montserrat';
+    font-size: 3em;
+    font-weight: normal;
+    margin: 0;
+    text-align: left;
+    display: flex;
+}
+
+.assessment-page-header-profile-text{
+    font-family: 'Montserrat';
+    font-size: 1em;
+    font-weight: bold;
+    text-align: left;
+    display: flex;
+    margin-right: 1em;
+}
+
+.header-image-container {
+    display: flex;
+    justify-content: center; /* center the child element horizontally */
+    align-items: center; /* center the child element vertically */
+  }
+
+.assessment-page-header-name-and-icon-container{
+    display: flex;
+    flex-direction: row;
+    margin-top: 2.5em;
+}
+
+.assessment-page-header-empty-block{
+    flex: 0 0 60%;
+}
+
+.assessment-page-back-empty-block{
+    flex: 0 0 0%;
+}
+
+.assessment-page-welcome-block-header{
+    display: flex; 
+    flex-direction: row;
+    height: 3em;
+    margin-bottom: 2.5em;
+}
+
+.add-buttons {
+    width: 14em;
+    height: 4em;
+    margin-bottom: 1%;
+    background-color: #000AA0;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    font-family: 'Montserrat';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.add-buttons:hover {
+    background-color: #AAAFFA;
+}
+
+.delete-buttons {
+    width: 14em;
+    height: 4em;
+    margin-bottom: 1%;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    border-color: black;
+    font-family: 'Montserrat';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.delete-buttons:hover {
+    background-color: #D9D9D9;
+    border: 0px;
+}
+
+.left-button {
+    text-align: left;
+    margin-bottom: .3em;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.columns-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 auto;
+    gap: 5em;
+  }
+  
+  .checkboxes-column-left,
+  .checkboxes-column-right {
+    flex: 1;
+  }
+
+  .MuiNativeSelect-root::before,
+  .MuiNativeSelect-select::before,
+  .MuiNativeSelect-multiple::before,
+  .MuiNativeSelect-filled::before,
+  .MuiNativeSelect-outlined::before,
+  .MuiNativeSelect-standard::before,
+  .MuiNativeSelect-root::after,
+  .MuiNativeSelect-select::after,
+  .MuiNativeSelect-multiple::after,
+  .MuiNativeSelect-filled::after,
+  .MuiNativeSelect-outlined::after,
+  .MuiNativeSelect-standard::after,
+  .muiInput-root::after {
+    display: none;
+}
+
+.MuiSelect-root::before,
+  .MuiSelect-select::before,
+  .MuiSelect-multiple::before,
+  .MuiSelect-filled::before,
+  .MuiSelect-outlined::before,
+  .MuiNativeSelect-standard::before,
+  .MuiSelect-root::after,
+  .MuiSelect-select::after,
+  .MuiSelect-multiple::after,
+  .MuiSelect-filled::after,
+  .MuiSelect-outlined::after,
+  .MuiSelect-standard::after,
+  .muiInput-root::after {
+    display: none;
+}
+
+.clickable {
+    right: 0;
+    float: right;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.checkbox-label {
+    width: 80%;
+    text-align: left;
+}
+
+.row {
+    position: relative;
+}
+
+.dropit {
+    color: purple;
+    background-color: white;
+}
+
+/* outer container */
+.MuiBox-root {
+    width: 100% !important;
+}
+
+.content {
+    width: 100% !important;
+}
+
+.MuiBox-root div div div div form {
+    width: 100% !important;
+    margin: 0 auto;
+}
+
+/* field boxes */
+.MuiInputBase-root,
+.MuiFormControl-root {
+    height: 3rem !important;
+    width: 100% !important;
+    /* max-width: 10em; */
+}
+
+/* field label text */
+.inputWrapper div div div label,
+.inputWrapper div label,
+.MuiFormControl-root label {
+    font-size: 1rem !important;
+}
+
+/* field inner text */
+.inputWrapper div div div div,
+.inputWrapper div,
+.MuiFormControl-root div {
+    font-size: 1rem !important;
+    width: 100% !important;
+}
+
+/* mobile breakpoint */
+@media (max-width: 768px) {
+    .columns-container {
+        display: block;
+    }
+}
