@@ -132,7 +132,7 @@ function Internships() {
   ];
 
   return (
-    <div>
+    <div className="content">
       <div className="i-title">Internships</div>
       <div>
         {allInternships.map((internshipObject, index) => (
@@ -206,7 +206,7 @@ function Internships() {
                 </div>
               </form>
             </div>
-            <div className="width-55vw">
+            <div>
               <button type="button" onClick={(e) => deleteInternship(e, index)} className="i-delete-button">
                 <img
                   src={Delete}
@@ -219,7 +219,7 @@ function Internships() {
             <div className="i-between-buttons" />
           </div>
         ))}
-        <div className="width-55vw">
+        <div>
           <button type="button" onClick={addInternship} className="i-add-button">
             <img
               src={Add}
