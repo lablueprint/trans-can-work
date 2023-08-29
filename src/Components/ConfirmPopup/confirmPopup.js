@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 const style = {
   dialog: {
     borderRadius: '5em',
+    minWidth: '80%',
   },
   button: {
     margin: '2vh 1.5vw 0 0',
