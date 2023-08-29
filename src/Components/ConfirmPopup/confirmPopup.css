@@ -1,6 +1,11 @@
 #caption {
     padding: 0 4em; 
 }
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+}
 #confirmation {
     padding: 0;
     border-radius: 12px;
@@ -45,8 +50,6 @@
     letter-spacing: 0.15px;
     color: #484649;
     margin: 2em 1em 2em auto; 
-    left: 50%;
-    transform: translateX(-50%);
     text-transform: none;
 }
 #confirm {
@@ -62,8 +65,6 @@
     letter-spacing: 0.15px;
     color: #484649;
     margin: 2em auto 2em 1em; 
-    left: 50%;
-    transform: translateX(-50%);
     text-transform: none;
 }
 #cancel:hover {
