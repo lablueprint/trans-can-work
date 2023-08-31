@@ -5,6 +5,7 @@ import {
 import { Link, Outlet } from 'react-router-dom';
 import './NavMenu.css';
 import Header from '../Header/Header';
+import notepadIcon from '../../Assets/Images/notepad.png';
 
 const style = {
   tabStyle: {
@@ -56,33 +57,60 @@ function NavigatorMenu() {
     setValue(newValue);
   };
 
+  const [notes, toggleNotes] = useState(false);
+
+  const handleNotepadClick = () => {
+    toggleNotes(!notes);
+  };
+
   // const [navbar, toggleNavbar] = useState(false);
 
   return (
     <>
       <Header />
+
+      <div className={notes ? 'notesPopupOn' : 'notesPopupOff'}>
+        <div className="notes-text">
+          <h1 className="notes-title">Notes</h1>
+          <p className="notes-body">These are some notes that JobseekerJeff&#39;s navigator has written for him. We need to integrate this into the backend!</p>
+        </div>
+        <div className="notes-buttons">
+          <button type="button" onClick={handleNotepadClick} className="notes-button-cancel">
+            Cancel
+          </button>
+          <button type="button" onClick={handleNotepadClick} className="notes-button-save">
+            Save
+          </button>
+        </div>
+      </div>
+
       <Box sx={{ display: 'flex' }}>
-        <Tabs
-          orientation="vertical"
-          variant="scrollable"
-          value={value}
-          onChange={handleChange}
-          aria-label="Vertical tabs example"
-          sx={style.tabsStyle}
-          TabIndicatorProps={{
-            sx: style.tabIndicatorStyle,
-          }}
-        >
-          {tabs.map((x) => (
-            <Tab
-              sx={style.tabStyle}
-              key={x.link}
-              label={x.title}
-              component={Link}
-              to={x.link}
-            />
-          ))}
-        </Tabs>
+        <div className="navigation">
+          <Tabs
+            orientation="vertical"
+            variant="scrollable"
+            value={value}
+            onChange={handleChange}
+            aria-label="Vertical tabs example"
+            sx={style.tabsStyle}
+            TabIndicatorProps={{
+              sx: style.tabIndicatorStyle,
+            }}
+          >
+            {tabs.map((x) => (
+              <Tab
+                sx={style.tabStyle}
+                key={x.link}
+                label={x.title}
+                component={Link}
+                to={x.link}
+              />
+            ))}
+          </Tabs>
+          <button type="button" onClick={handleNotepadClick} className="button-wrapper">
+            <img className="notepad-button" src={notepadIcon} alt="Notepad icon" />
+          </button>
+        </div>
         <Box sx={style.panelStyle}><Outlet /></Box>
 
       </Box>
