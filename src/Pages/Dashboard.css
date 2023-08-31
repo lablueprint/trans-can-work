@@ -9,13 +9,12 @@
     box-shadow: 0 4px 4px #c9c9c9;
 }
 
-.dashboard-page-title{
-    font-family: 'Montserrat';
-    font-size: 3em;
-    font-weight: bold;
-    margin: 0;
-    text-align: left;
-    display:flex;
+.dashboard-page-headers-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 1em 0 2em 0;
 }
 
 .dashboard-page-title{
@@ -25,6 +24,16 @@
     margin: 0;
     text-align: left;
     display:flex;
+}
+
+.dashboard-page-headers-middle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 0.5em;
+    flex-wrap: wrap;
+    gap: 1em;
 }
 
 .dashboard-page-header-profile-text{
@@ -39,6 +48,7 @@
     flex-direction: row;
     justify-content: right;
     column-gap: 1em;
+    width: 100%;
 }
 
 .dashboard-page-welcome-block-header{
@@ -53,6 +63,7 @@
 .dashboard-page-search-bar-container{
     display: flex;
     align-items: end;
+    margin-bottom: 1em;
 }
 
 .dashboard-page-profile-grid {
@@ -78,6 +89,33 @@
 .dash-admin-searchbar {
     border: 1px solid #D9D9D9;
     border-radius: 30px;
-    width: 300px;
-    padding: 5px 15px;
+    width: 20em;
+    padding: 0.75em 1em;
+    font-size: 1rem;
+    align-self: flex-end;
+}
+
+.dash-admin-searchbar * {
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .dashboard-page-title{
+        font-size: 2em;
+    }
+
+    .dashboard-page-headers-main {
+        flex-wrap: wrap;
+    }
+
+    .dashboard-page-headers-container{
+        padding: 0 2em;
+    }
+
+    .MuiTab-root {
+        margin: 0 !important;
+        padding: 0 0.8em !important;
+        font-size: 0.8rem !important;
+        min-width: fit-content !important;
+    }
 }
