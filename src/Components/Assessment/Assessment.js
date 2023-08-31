@@ -77,10 +77,7 @@ function Assessment({
     },
   };
 
-  const [skillsObj, setSkillsObj] = useState(arrayToObj(
-    jobseeker.generalSkills,
-    skillsChecklistOptions,
-  ));
+  const [skillsObj, setSkillsObj] = useState();
 
   // useEffect(() => {
   //   const temp = arrayToObj(
@@ -93,8 +90,8 @@ function Assessment({
   // }, [jobseeker, skillsObj]);
 
   const [skillBool, setSkillBool] = useState([]);
-  const [skillBool1, setSkillBool1] = useState([]);
-  const [skillBool2, setSkillBool2] = useState([]);
+  const [skillBool1, setSkillBool1] = useState();
+  const [skillBool2, setSkillBool2] = useState();
   const [intObj, setIntObj] = useState(arrayToObj(checkedInterests, industryInterestOptions));
   const [intBool, setIntBool] = useState([]);
   const [intBool1, setIntBool1] = useState([]);
@@ -103,6 +100,7 @@ function Assessment({
   const [genBool, setGenBool] = useState([]);
   const [genBool1, setGenBool1] = useState([]);
   const [genBool2, setGenBool2] = useState([]);
+
   const splitObjects = () => {
     // if (Object.keys(skillsObj).length !== skillsChecklistOptions.length) {
     //   skillsChecklistOptions.forEach((key) => {
@@ -172,9 +170,30 @@ function Assessment({
   //   }
   // }, [jobseeker]);
 
+  const [loaded, setLoaded] = useState(false);
+
   useEffect(() => {
-    console.log(jobseeker.clientInfo);
+    if (jobseeker !== undefined) {
+      setLoaded(true);
+    }
   }, [jobseeker]);
+
+  useEffect(() => {
+    console.log(jobseeker.skillsChecklist);
+    if (loaded) {
+      console.log(jobseeker.skillsChecklist);
+      console.log(arrayToObj(jobseeker.skillsChecklist, skillsChecklistOptions));
+      setSkillsObj(arrayToObj(jobseeker.skillsChecklist, skillsChecklistOptions));
+    }
+  }, [loaded]);
+
+  useEffect(() => {
+    console.log(skillsObj);
+    if (skillBool1 === undefined && skillsObj !== undefined) {
+      console.log('hey');
+      splitObjects();
+    }
+  }, [skillsObj]);
 
   // function that updates the object
   const repopulateSkills = () => {
@@ -202,7 +221,9 @@ function Assessment({
   };
 
   useEffect(() => {
-    setSkillBool(skillBool1.concat(skillBool2));
+    if (skillBool1 !== undefined && skillBool2 !== undefined) {
+      setSkillBool(skillBool1.concat(skillBool2));
+    }
   }, [skillBool1, skillBool2]);
 
   useEffect(() => {
@@ -214,7 +235,9 @@ function Assessment({
   }, [genBool1, genBool2]);
 
   useEffect(() => {
-    repopulateSkills();
+    if (skillBool.length !== 0) {
+      repopulateSkills();
+    }
   }, [skillBool]);
 
   useEffect(() => {
@@ -507,6 +530,11 @@ function Assessment({
   //   };
   //   asyncFn();
   // }, []);
+
+  if (skillBool1 === undefined) {
+    // eventually replace with appropriate loading component
+    return (<div>loading</div>);
+  }
 
   return (
     <div>
