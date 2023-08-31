@@ -22,29 +22,29 @@
 
 .all-header-items {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     width: 80%;
     margin: 2em auto;
     height: 100%;
+    gap: 2em;
 }
 
-.left-header-contents {
+.top-header-contents {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
     gap: 26px;
     width: 100%;
-    height: 8em;
 }
 
-.right-header-contents {
+.bottom-header-contents {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-bottom: 2em;
     justify-content: space-between;
-    height: 8em;
 }
 
 .go-back {
@@ -74,6 +74,10 @@
     font-size: 2.5em;
     font-weight: 400;
     text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90%;
 }
 
 .align-helper {
@@ -87,6 +91,11 @@
     font-weight: 700;
     font-family: 'Montserrat';
     padding-right: 1em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 20ch;
+
 }
 
 .nav-bar {
@@ -128,7 +137,7 @@
     position: absolute;
     height: 100%;
     width: 100%;
-    z-index: 9999;
+    z-index: 999999;
     top: 0;
     left: 0;
     margin: 0 !important;

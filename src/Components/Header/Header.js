@@ -62,16 +62,16 @@ function Header() {
 
   const [navbar, toggleNavbar] = useState(false);
 
-  const handleClick = () => {
-    toggleNavbar(!navbar);
-  };
-
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   const [notes, toggleNotes] = useState(false);
+
+  const handleClick = () => {
+    toggleNavbar(!navbar);
+  };
 
   const handleNotepadClick = () => {
     handleClick();
@@ -134,7 +134,7 @@ function Header() {
       <div className="headers">
         <Box sx={{ borderBottom: 1, borderColor: 'divider', boxShadow: '0 4px 4px #c9c9c9' }}>
           <div className="all-header-items">
-            <div className="left-header-contents">
+            <div className="top-header-contents">
               <div className="go-back">
                 <Link
                   to="/dashboard"
@@ -149,13 +149,6 @@ function Header() {
                 </Link>
               </div>
 
-              <div className="username-text-roadmap">
-                {store.user.firstName + store.user.lastName}
-                &apos;s Roadmap
-              </div>
-
-            </div>
-            <div className="right-header-contents">
               <div className="align-helper">
                 <div className="username-text">
                   {store.user.firstName + store.user.lastName}
@@ -172,6 +165,13 @@ function Header() {
                   }}
                   round
                 />
+              </div>
+
+            </div>
+            <div className="bottom-header-contents">
+              <div className="username-text-roadmap">
+                {store.user.firstName + store.user.lastName}
+                &apos;s Roadmap
               </div>
 
               <button type="button" onClick={handleClick} className="menu-button-wrapper">
