@@ -63,20 +63,22 @@ function ConfirmPopup({
               {subtitle}
             </p>
           </div>
-          <Button
-            disableRipple
-            onClick={handleClose}
-            id="cancel"
-          >
-            Cancel
-          </Button>
-          <Button
-            disableRipple
-            onClick={handleConfirm}
-            id="confirm"
-          >
-            Confirm
-          </Button>
+          <div className="buttonContainer">
+            <Button
+              disableRipple
+              onClick={handleClose}
+              id="cancel"
+            >
+              Cancel
+            </Button>
+            <Button
+              disableRipple
+              onClick={handleConfirm}
+              id="confirm"
+            >
+              Confirm
+            </Button>
+          </div>
         </div>
         <div className="popup-content" />
       </Dialog>
