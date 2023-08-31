@@ -7,11 +7,12 @@ import Button from '@mui/material/Button';
 
 const style = {
   dialog: {
-    borderRadius: '5em',
-    minWidth: '80%',
+    borderRadius: '2em',
+    backgroundColor: '#FFFBFE',
+    width: '80%',
+    maxWidth: '40em',
   },
   button: {
-    margin: '2vh 1.5vw 0 0',
     display: 'flex',
     flexDirection: 'row-reverse',
   },
@@ -40,6 +41,7 @@ function ConfirmPopup({
         PaperProps={{
           style: style.dialog,
         }}
+        className="modal"
       >
         <div className="close-btn" style={style.button}>
           <IconButton

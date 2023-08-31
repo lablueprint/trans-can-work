@@ -34,6 +34,7 @@ import OnlineProfiles from './Components/OnlineProfiles/OnlineProfiles';
 import TrainingPrograms from './Components/TrainingPrograms/TrainingPrograms';
 import { login, logout } from "./Redux/Slice/authSlices";
 import { fetchUser, addUser } from './Services/user-service';
+import ConfirmPopup from './Components/ConfirmPopup/confirmPopup';
 import { auth } from './firebase';
 
 function App() {
@@ -127,6 +128,9 @@ function App() {
                 graphic={<img alt="" src={approvalIcon} />}
               />
             }
+          />
+          <Route
+            path = "/testConfirm" element = {<ConfirmPopup open handleClose = {()=> {}} handleConfirm = {()=> {}} title="DeleteConfirm" subtitle="subtitle goes here"/>}
           />
         </Routes>
         <Footer />

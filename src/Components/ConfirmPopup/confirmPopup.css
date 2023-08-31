@@ -5,19 +5,21 @@
 .buttonContainer {
     display: flex;
     justify-content: center;
+    margin: 0 3em 2em 0;
+    justify-content: flex-end;
+    gap: 0.5em;
 }
 #confirmation {
     padding: 0;
     border-radius: 12px;
     font-family: 'Montserrat';
     font-style: normal;
-    font-weight: 700;
     font-size: 1em;
     line-height: 24px;
     text-align: left;
     letter-spacing: 0.15px;
     color: #484649;
-    margin: 1em 0 2em 0;  
+    margin: 1em 0 3em 0;  
     text-transform: none;
 }
 
@@ -32,15 +34,15 @@
     text-align: left;
     letter-spacing: 0.15px;
     color: #484649;
-    margin: 2em 0; 
+    margin: 1em 0 0.5em 0; 
     text-transform: none;
 }
 
 
 #cancel {
     padding: 10px 28px; 
-    border: 2px solid #484649; 
-    border-radius: 12px; 
+    border: 3px solid #484649; 
+    border-radius: 8px; 
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 700;
@@ -49,13 +51,12 @@
     text-align: center;
     letter-spacing: 0.15px;
     color: #484649;
-    margin: 2em 1em 2em auto; 
     text-transform: none;
 }
 #confirm {
     padding: 10px 28px; 
-    border: 2px solid #000FF0; 
-    border-radius: 12px; 
+    border: 3px solid #000FF0; 
+    border-radius: 8px; 
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 700;
@@ -64,16 +65,15 @@
     text-align: center;
     letter-spacing: 0.15px;
     color: #484649;
-    margin: 2em auto 2em 1em; 
     text-transform: none;
 }
 #cancel:hover {
     background: #939094;
     color: #FFFBFE;
-    border: 2px solid #939094;
+    border: 3px solid #939094;
 }
 #confirm:hover {
     background: #000FF0;
     color: #FFFBFE;
-    border: 2px solid #000FF0;
+    border: 3px solid #000FF0;
 }
