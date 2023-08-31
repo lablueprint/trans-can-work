@@ -1,8 +1,10 @@
 /* eslint-disable */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import './MilestoneMap.css';
 import MilestoneButton from './MilestoneButton';
 import title from '../../Assets/Images/title.png';
+import { fetchJobseekerData } from '../../Services/jobseeker-data-service';
 
 const data = {
   content: {
@@ -15,6 +17,7 @@ const data = {
         title: require('../../Assets/Images/assessment-title.png'),
         id: 'assessment',
         status: true,
+        originalStatus: 'incomplete',
       },
       {
         uid: 2,
@@ -25,6 +28,7 @@ const data = {
         title: require('../../Assets/Images/online-profile-title.png'),
         id: 'online-profile',
         status: false,
+        originalStatus: 'incomplete',
       },
       {
         uid: 3,
@@ -35,6 +39,7 @@ const data = {
         title: require('../../Assets/Images/training-program-title.png'),
         id: 'training-program',
         status: false,
+        originalStatus: 'incomplete',
       },
       {
         uid: 4,
@@ -45,6 +50,7 @@ const data = {
         title: require('../../Assets/Images/workshop-title.png'),
         id: 'workshop',
         status: false,
+        originalStatus: 'incomplete',
       },
       {
         uid: 5,
@@ -55,6 +61,7 @@ const data = {
         title: require('../../Assets/Images/internship-title.png'),
         id: 'internship',
         status: false,
+        originalStatus: 'incomplete',
       },
       {
         uid: 6,
@@ -65,6 +72,7 @@ const data = {
         title: require('../../Assets/Images/job-fair-title.png'),
         id: 'job-fair',
         status: false,
+        originalStatus: 'incomplete',
       },
       {
         uid: 7,
@@ -75,6 +83,7 @@ const data = {
         title: require('../../Assets/Images/job-portal-title.png'),
         id: 'job-portal',
         status: false,
+        originalStatus: 'incomplete',
       },
       {
         uid: 8,
@@ -85,6 +94,7 @@ const data = {
         title: require('../../Assets/Images/resource-title.png'),
         id: 'resources',
         status: false,
+        originalStatus: 'incomplete',
       },
       {
         uid: 9,
@@ -95,39 +105,52 @@ const data = {
         title: require('../../Assets/Images/hiring-info-title.png'),
         id: 'hiring-info',
         status: true,
+        originalStatus: 'incomplete',
       },
     ],
   },
 };
 
-const MilestoneButtons = data.content.body.map((x) => {
-  let imagePath = x.imageDefault;
-  let hoveredPath = x.imageHover;
-  if (x.status === true) {
-    imagePath = x.imageUpdated;
-    hoveredPath = x.imageUHover;
-  }
-  //const originalStatus = milestones[x.id]  -determines whether map's status is true or false
-  const originalStatus = milestones[x.id]
-  // add a new prop to milestone button 
-  // build firebase call to getting milestones from user (id or email) (do this in useEffect&useState like islandPopup commented one)
-  return (
-    <div
-      key={x.uid}
-      id={x.id}
-    >
-      <MilestoneButton image={imagePath} imageHover={hoveredPath} title={x.title} id={x.id} status={x.status} />
-    </div>
-  );
-});
-
-
 function MilestoneMap() {
+  const store = useSelector((state) => state.auth.value);
+  const [buttonData, setButtonData] = useState(data);
+  console.log(buttonData)
+  useEffect(() => {
+    fetchJobseekerData('js_angela@gmail.com').then((jobseekerData) => {
+      // setButtonData((data) => {
+      //   const updatedButton = data.content.body.map((object) => ({
+      //     ...object,
+      //     originalStatus: jobseekerData.data().milestones[object.id],
+      //   }));
+      //   return {
+      //     content: {
+      //       body: updatedButton,
+      //     },
+      //   };
+      // });
+      setButtonData(buttonData[content][body].forEach((object) => { // LEFT OFF HERE (line 120 is not printing)
+        console.log(object);
+        object.originalStatus = jobseekerData.data().milestones[object.id];
+      }));
+    });
+  }, [store]);
+  useEffect(() => {
+    console.log(buttonData);
+  }, [buttonData]);
   return (
     <div>
       <div className="grid-container">
         <div id="roadmap-title"><img src={title} alt="roadmap title" /></div>
-        {MilestoneButtons}
+        {buttonData.content.body.map((x) => {
+        return (
+          <div
+            key={x.uid}
+            id={x.id}
+          >
+            <MilestoneButton image={x.originalStatus === 'complete' ? x.imageUpdated : x.imageDefault} imageHover={x.originalStatus === 'complete' ? x.imageUHover : x.imageHover} title={x.title} id={x.id} originalStatus={x.originalStatus}/>
+          </div>
+        );
+        })}
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ import './MilestoneButton.css';
 // set originalStatus value in milestoneMap from the database
 
 function MilestoneButton({
-  title, image, imageHover, id,
+  title, image, imageHover, id, originalStatus,
 }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -18,7 +18,7 @@ function MilestoneButton({
   const [isHover, setIsHover] = React.useState(false);
   const handleOnMouseEnter = () => setIsHover(true);
   const handleOnMouseLeave = () => setIsHover(false);
-  const [status, setStatus] = React.useState('incomplete');
+  const [status, setStatus] = React.useState(originalStatus);
   const togglePending = () => {
     if (status === 'incomplete') {
       setStatus('pending');
@@ -43,7 +43,7 @@ function MilestoneButton({
         title={title}
         isOpen={open}
         handleClose={handleClose}
-        status={status}
+        status={originalStatus}
         togglePending={togglePending}
         id={id}
       />
@@ -57,6 +57,7 @@ MilestoneButton.propTypes = {
   image: PropTypes.string.isRequired,
   imageHover: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  originalStatus: PropTypes.string.isRequired,
 };
 
 export default MilestoneButton;

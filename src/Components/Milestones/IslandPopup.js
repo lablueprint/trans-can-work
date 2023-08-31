@@ -22,6 +22,7 @@ function IslandPopup({
 }) {
   const [message, setMessage] = useState('Mark as Complete');
   useEffect(() => {
+    console.log(status);
     if (status === 'pending') {
       setMessage('Pending Approval');
     } else if (status === 'complete') {

@@ -109,6 +109,7 @@ function App() {
             <Route path="hiredinfo" element={<HiredInfo />} />
           </Route>
           <Route path="/onboard" element={<JobseekerData />} />
+          <Route path="/roadmap" element={<MilestoneMap />} />
           </>)
   }
           <Route path="/login" element={<Login />} />
