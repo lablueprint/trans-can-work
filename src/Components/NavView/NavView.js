@@ -6,8 +6,9 @@ import { fetchUser } from '../../Services/user-service';
 import { fetchJobseekerData } from '../../Services/jobseeker-data-service';
 
 function NavView() {
-  const [userData, setUserData] = useState({});
-  const [jobseekerData, setJobseekerData] = useState({});
+  const [userData, setUserData] = useState();
+  const [jobseekerData, setJobseekerData] = useState();
+  const [email, setEmail] = useState();
 
   useEffect(() => {
     const asyncFn = async () => {
@@ -15,22 +16,30 @@ function NavView() {
       const tempJobseekerData = await fetchJobseekerData('alannguyen711@gmail.com');
       setUserData(tempUserData.data());
       setJobseekerData(tempJobseekerData.data());
-      console.log(tempUserData.data());
-      console.log(tempJobseekerData.data());
-      console.log(tempJobseekerData.data().clientInfo['City/State']);
+      setEmail(tempUserData.id);
     };
     asyncFn();
   }, []);
 
+  if (jobseekerData === undefined) {
+    // eventually replace with appropriate loading component
+    return (<div>loading</div>);
+  }
+
   return (
     <div>
-      <Header />
-      <div className="assessment-top-padding" />
-      <Assessment
-        userData={userData}
-        jobseeker={jobseekerData}
-        setJobseeker={setJobseekerData}
-      />
+      {jobseekerData && (
+      <div>
+        <Header />
+        <div className="assessment-top-padding" />
+        <Assessment
+          userData={userData}
+          jobseeker={jobseekerData}
+          setJobseeker={setJobseekerData}
+          email={email}
+        />
+      </div>
+      )}
     </div>
 
   );

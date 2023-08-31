@@ -47,7 +47,9 @@ const styles = {
   },
 };
 
-function Assessment(userData, jobseeker, setJobseeker) {
+function Assessment({
+  userData, jobseeker, setJobseeker, email,
+}) {
   useEffect(() => {
     console.log(userData);
     console.log(jobseeker);
@@ -75,7 +77,21 @@ function Assessment(userData, jobseeker, setJobseeker) {
     },
   };
 
-  const [skillsObj, setSkillsObj] = useState(arrayToObj(checkedSkills, skillsChecklistOptions));
+  const [skillsObj, setSkillsObj] = useState(arrayToObj(
+    jobseeker.generalSkills,
+    skillsChecklistOptions,
+  ));
+
+  // useEffect(() => {
+  //   const temp = arrayToObj(
+  //     jobseeker.generalSkills,
+  //     skillsChecklistOptions,
+  //   );
+  //   if (temp !== skillsObj) {
+  //     setSkillsObj(temp);
+  //   }
+  // }, [jobseeker, skillsObj]);
+
   const [skillBool, setSkillBool] = useState([]);
   const [skillBool1, setSkillBool1] = useState([]);
   const [skillBool2, setSkillBool2] = useState([]);
@@ -88,13 +104,13 @@ function Assessment(userData, jobseeker, setJobseeker) {
   const [genBool1, setGenBool1] = useState([]);
   const [genBool2, setGenBool2] = useState([]);
   const splitObjects = () => {
-    if (Object.keys(skillsObj).length !== skillsChecklistOptions.length) {
-      skillsChecklistOptions.forEach((key) => {
-        if (!(Object.keys(skillsObj).includes(key))) {
-          console.log(key);
-        }
-      });
-    }
+    // if (Object.keys(skillsObj).length !== skillsChecklistOptions.length) {
+    //   skillsChecklistOptions.forEach((key) => {
+    //     if (!(Object.keys(skillsObj).includes(key))) {
+    //       console.log(key);
+    //     }
+    //   });
+    // }
     const temp1 = Object.keys(skillsObj).sort();
     if (skillBool.length === 0) {
       temp1.forEach((key) => {
@@ -133,9 +149,32 @@ function Assessment(userData, jobseeker, setJobseeker) {
     setGenBool2(tempGenBool2);
   };
 
+  // const [ran, setRan] = useState(false);
+  // useEffect(() => {
+  //   if (!ran && jobseeker !== undefined) {
+  //     setRan(true);
+  //     splitObjects();
+  //   }
+  //   console.log(skillsObj);
+  // }, [skillsObj]);
+
+  // useEffect(() => {
+  //   if (jobseeker !== undefined) {
+  //     // on first effective render of jobseeker
+  //     if (isLoading) {
+  //       setSkillsObj(arrayToObj(jobseeker.generalSkills, skillsChecklistOptions));
+  //       console.log(skillsObj);
+  //       console.log(jobseeker);
+  //     }
+  //   }
+  //   if (!isLoading) {
+  //     // push jobseeker to backend
+  //   }
+  // }, [jobseeker]);
+
   useEffect(() => {
-    splitObjects();
-  }, []);
+    console.log(jobseeker.clientInfo);
+  }, [jobseeker]);
 
   // function that updates the object
   const repopulateSkills = () => {
@@ -388,10 +427,11 @@ function Assessment(userData, jobseeker, setJobseeker) {
   };
 
   const clientInfoFields = [
-    { title: 'Authentic Name', toChange: 'name', var: jobseeker.name },
-    { title: 'Pronouns', toChange: 'pronouns', var: jobseeker.pronouns },
-    { title: 'Phone', toChange: 'phone', var: jobseeker.phone },
-    { title: 'Email', toChange: 'email', var: jobseeker.email },
+    { title: 'First Name', toChange: 'name', var: userData.firstName },
+    { title: 'Last Name', toChange: 'name', var: userData.lastName },
+    { title: 'Pronouns', toChange: 'pronouns', var: userData.pronouns },
+    { title: 'Phone', toChange: 'phone', var: userData.phoneNumber },
+    { title: 'Email', toChange: 'email', var: email },
     { title: 'City/State', toChange: 'City/State', var: jobseeker.clientInfo['City/State'] },
     { title: 'Ethnicity', toChange: 'Ethnicity', var: jobseeker.clientInfo.Ethnicity },
     { title: 'Age', toChange: 'Age', var: jobseeker.clientInfo.Age },
@@ -667,7 +707,7 @@ function Assessment(userData, jobseeker, setJobseeker) {
                     <div className="op-between-inputs" />
                   </form>
                   <div className="left-button">
-                    <button type="button" className="delete-buttons" onClick={(e) => { e.preventDefault(); deleteOccupation(index).then(console.log(jobseeker.occupation)); }}>
+                    <button type="button" className="delete-buttons" onClick={(e) => { e.preventDefault(); deleteOccupation(index); }}>
                       <img
                         src={Delete}
                         alt="delete icon"
@@ -756,14 +796,17 @@ function Assessment(userData, jobseeker, setJobseeker) {
                 id="outlined-basic"
                 label="Dream Job"
                 placeholder="Dream Job"
-                value={jobseeker.dreamjob}
+                value={jobseeker.clientInfo['Dream Job']}
                 variant="outlined"
                 focused
                 onChange={(e) => {
-                  setJobseeker({
-                    ...jobseeker,
-                    dreamjob: e.target.value,
-                  });
+                  setJobseeker((prevJobseeker) => ({
+                    ...prevJobseeker,
+                    clientInfo: {
+                      ...prevJobseeker.clientInfo,
+                      'Dream Job': e.target.value,
+                    },
+                  }));
                 }}
                 InputProps={textFieldStyles.inputProps}
                 InputLabelProps={textFieldStyles.labelProps}
@@ -779,7 +822,41 @@ function Assessment(userData, jobseeker, setJobseeker) {
 }
 export default Assessment;
 
-// Assessment.propTypes = {
-//   userData: propTypes.object.isRequired,
-//   jobseeker: propTypes.object.isRequired,
-// };
+Assessment.propTypes = {
+  email: propTypes.string.isRequired,
+  userData: propTypes.shape({
+    firstName: propTypes.string.isRequired,
+    lastName: propTypes.string.isRequired,
+    phoneNumber: propTypes.string.isRequired,
+    pronouns: propTypes.string.isRequired,
+  }).isRequired,
+  jobseeker: propTypes.shape({
+    clientInfo:
+    {
+      'City/State': propTypes.string.isRequired,
+      Ethnicity: propTypes.string.isRequired,
+      Age: propTypes.string.isRequired,
+      'Gender Identity': propTypes.string.isRequired,
+      Sexuality: propTypes.string.isRequired,
+      Veteran: propTypes.string.isRequired,
+      Disability: propTypes.string.isRequired,
+      'Housing Situation': propTypes.string.isRequired,
+      'Currently Employed': propTypes.string.isRequired,
+      'Prior Convictions': propTypes.string.isRequired,
+    },
+    industryInterests: propTypes.arrayOf(
+      propTypes.string.isRequired,
+    ),
+    generalSkills: propTypes.arrayOf(
+      propTypes.string.isRequired,
+    ),
+    skillsChecklist: propTypes.arrayOf(
+      propTypes.string.isRequired,
+    ),
+    education: [{
+    }],
+    occupation: [],
+    dreamjob: propTypes.string.isRequired,
+  }).isRequired,
+  setJobseeker: propTypes.func.isRequired,
+};
