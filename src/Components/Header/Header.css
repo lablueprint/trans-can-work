@@ -25,15 +25,26 @@
     flex-direction: row;
     justify-content: space-between;
     width: 80%;
-    margin: 0 auto;
-    padding-bottom: 4em;
-    padding-top: 2.5em;
+    margin: 2em auto;
+    height: 100%;
 }
 
 .left-header-contents {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
     gap: 26px;
+    width: 100%;
+    height: 8em;
+}
+
+.right-header-contents {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 8em;
 }
 
 .go-back {
@@ -55,6 +66,7 @@
     text-align: left;
     text-decoration: none;
     color: black;
+    padding-top: 0.55em;
 }
 
 .username-text-roadmap {
@@ -75,4 +87,88 @@
     font-weight: 700;
     font-family: 'Montserrat';
     padding-right: 1em;
+}
+
+.nav-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.menu-button-wrapper {
+    height: 4em;
+    width: 4em;
+    color: white;
+    background-color: white;
+    box-shadow: none;
+    border: none;
+    display: none;
+}
+
+.menu-button {
+    width: 3em;
+    height: 2em;
+    background-color: white;
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+    cursor: pointer;
+}
+
+.mobileMenuOff {
+    display: none !important;
+}
+
+.mobileMenuOn {
+    display: block !important;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    margin: 0 !important;
+    min-height: 100vh !important;
+    background-color: white;
+}
+
+.mobileMenuOn * {
+    display: block !important;
+}
+
+.mobileMenuOn .MuiTabs-scroller {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 2em;
+    overflow:visible;
+}
+
+.close-button {
+    position: absolute;
+    top: -14em;
+    right: -1em;
+    cursor: pointer;
+    z-index: 99999;
+}
+
+@media (max-width: 768px) {
+    .menu-button-wrapper,
+    .menu-button {
+        display: block;
+    }
+
+    .username-text-roadmap {
+        font-size: 2em;
+    }
+}
+
+@media (min-width: 768px) {
+    .mobileMenuOn {
+        display: none !important;
+    }
 }

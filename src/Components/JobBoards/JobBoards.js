@@ -109,7 +109,7 @@ function JobBoards() {
   ];
 
   return (
-    <div>
+    <div className="content">
       <div className="tp-title">Job Boards</div>
       <div className="between-inputs" />
       <div>
@@ -166,7 +166,7 @@ function JobBoards() {
                 </div>
               </form>
             </div>
-            <div className="width-55vw">
+            <div>
               <button type="button" onClick={(e) => deleteJobBoard(e, index)} className="op-delete-button">
                 <img
                   src={Delete}
@@ -180,7 +180,7 @@ function JobBoards() {
           </div>
         ))}
       </div>
-      <div className="width-55vw">
+      <div>
         <button type="button" onClick={addJobBoard} className="op-add-button">
           <img
             src={Add}

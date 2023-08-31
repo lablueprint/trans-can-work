@@ -86,7 +86,7 @@ function HiredInfo() {
   ];
 
   return (
-    <div>
+    <div className="content">
       <div className="i-title">Hired Info</div>
       <div>
         {allHiredInfo.map((internshipObject, index) => (
@@ -113,7 +113,7 @@ function HiredInfo() {
                 </div>
               </form>
             </div>
-            <div className="width-55vw">
+            <div>
               <button type="button" onClick={(e) => deleteHiredInfo(e, index)} className="i-delete-button">
                 <img
                   src={Delete}
@@ -126,7 +126,7 @@ function HiredInfo() {
             <div className="i-between-buttons" />
           </div>
         ))}
-        <div className="width-55vw">
+        <div>
           <button type="button" onClick={addHiredInfo} className="i-add-button">
             <img
               src={Add}
