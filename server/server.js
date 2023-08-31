@@ -25,11 +25,12 @@ app.get('/', (req, res) => {
 const sendEmails = async () => {
   const emailList = await getEmails();
   console.log(emailList);
-  NoProgress({ emailList: emailList[0], fullName: emailList[1] });
+  // NoProgress({ emailList: emailList[0], fullName: emailList[1] });
 };
 
 // node cron runs a function every week on Monday 12pm, LA time (0 12 * * 1)
-cron.schedule('0 12 * * 1', () => { sendEmails(); }, { timezone: 'America/Los_Angeles' });
+// cron.schedule('0 12 * * 1', () => { sendEmails(); }, { timezone: 'America/Los_Angeles' });
+sendEmails();
 
 // notifies navigator + notifies jobseeker upon approval + all milestones complete
 app.post('/send-email', (req, res) => {
