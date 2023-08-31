@@ -66,6 +66,8 @@ function TrainingPrograms() {
     },
   };
 
+  const [date, setDate] = useState();
+
   const fieldProps = [
     { label: 'Training Program', value: 'program' },
     { label: 'Date Referral Sent', value: 'referral' },
@@ -114,19 +116,41 @@ function TrainingPrograms() {
     temp[index][element] = event.target.value;
     setAllPrograms(temp);
     console.log(allPrograms);
+    console.log(date);
   };
 
-  const editDate = (newValue, label, index) => {
-    console.log(newValue);
-    const temp = [...allPrograms];
-    temp[index][label] = newValue;
-    setAllPrograms(temp);
-    console.log(allPrograms);
-  };
+  // useEffect(() => {
+  //   const temp = date;
+  //   setAllPrograms(
+  //     {
+  //       ...allPrograms,
+  //       referral: temp,
+  //     },
+  //   );
+  // }, [date]);
+  
+
+  // const editDate = (newValue, label, index) => {
+  //   console.log(newValue);
+  //   const temp = [...allPrograms];
+  //   temp[index][label] = newValue;
+  //   setAllPrograms(temp);
+  //   console.log(allPrograms);
+  // };
 
   return (
     <div>
       <div className="tp-title">Training Programs</div>
+      <div className="alert-modal">
+        <p>
+          You've marked this milestone as complete for Jobseeker-Name. Click
+          {' '}
+          <a href="#">here</a>
+          {' '}
+          to undo.
+        </p>
+        <div className="actions" />
+      </div>
       <div className="between-inputs" />
       <div>
         {allPrograms.map((programObject, index) => (
@@ -188,8 +212,8 @@ function TrainingPrograms() {
                           <DateField
                             label={field.label}
                             focused
-                            value={programObject[field.value]}
-                            onChange={(newValue) => editDate(newValue, field.value, index)}
+                            value={date}
+                            onChange={(newValue) => setDate(newValue)}
                             InputProps={textFieldStyles.inputProps}
                             InputLabelProps={textFieldStyles.labelProps}
                             className="input-field"

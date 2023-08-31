@@ -83,6 +83,82 @@
     height: 1em;
 }
 
+.MuiOutlinedInput-root.Mui-focused, .MuiOutlinedInput-notchedOutline {
+    border-color: #000AA0 !important;
+    border-width: 1px;
+}
+
+.PrivateNotchedOutline-legendLabelled-19 {
+    width: auto !important;
+}
+
 .input-field * {
     border-width: 1px !important;
+}
+
+.alert-modal {
+    background-color: #FED8ED;
+    border: 1px solid #A5296F;
+    border-radius: 4px;
+    margin: 0 auto;
+    margin-bottom: 2em;
+    width: 55vw;
+}
+
+.alert-modal p {
+    text-align: left;
+    margin: 1.5em auto 0 auto;
+    width: 90%;
+    font-family: 'Montserrat';
+    font-size: 16px;
+}
+
+.alert-modal p a {
+    font-weight: bold;
+    color: #CF338A;
+    text-decoration: none;
+}
+
+.actions {
+    width: 90%;
+    margin: 1em auto 1.5em auto;
+    display: flex;
+    flex-direction: horizontal;
+    gap: 1em;
+}
+
+.approve-button {
+    width: 14em;
+    height: 4em;
+    color: white;
+    font-family: 'Montserrat';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    border: 1px solid #000;
+    background: #F95DB5;
+}
+
+.approve-button:hover,
+.approve-button:focus {
+    background-color: #c53888;
+}
+
+.deny-button {
+    width: 14em;
+    height: 4em;
+    color: black;
+    font-family: 'Montserrat';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    border: 1px solid #000;
+    background: white;
+}
+
+.deny-button:hover,
+.deny-button:focus {
+    background-color: #d8d8d8;
 }

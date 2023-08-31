@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import './Workshops.css';
 import { TextField } from '@material-ui/core';
 import { DateField } from '@mui/x-date-pickers/DateField';
-import { FormControl, InputLabel } from '@mui/material';
+import {
+  FormControl, InputLabel, NativeSelect,
+} from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Add from '../../Assets/add.svg';
@@ -15,17 +17,26 @@ function Workshops() {
       color: '#49454F',
       fontSize: '0.9vw',
       fontWeight: 'bold',
-      paddingLeft: '1.7%',
-      textDecoration: 'none',
-    },
-    inputLabel: {
-      fontFamily: 'Montserrat',
-      color: '#49454F',
+      border: '1px solid #000AA0',
+      borderRadius: '4px',
       width: '55.0vw',
       height: '3.2vw',
-      fontSize: '0.9vw',
-      fontWeight: 'bold',
+      paddingLeft: '1.7%',
+      textDecoration: 'none',
       backgroundColor: '#F7F8FE',
+    },
+    inputLabel: {
+      borderBottom: 'none',
+      color: '#0c0ca4',
+      fontFamily: 'Montserrat',
+      fontWeight: 'normal',
+      fontSize: '0.9vw',
+      marginTop: '2%',
+      textAlign: 'left',
+      backgroundColor: 'white',
+      paddingLeft: '1%',
+      paddingRight: '1%',
+      textDecoration: 'none',
     },
     formControl: {
       width: '55.0vw',
@@ -148,23 +159,23 @@ function Workshops() {
                       {(field.label === 'Attended Workshop?')
                       && (
                         <>
-                          <FormControl
-                            fullWidth
-                            focused
-                            style={styles.formControl}
-                          >
-                            <InputLabel id="demo-simple-select-label">{field.label}</InputLabel>
-                            <Select
+                          <FormControl style={styles.formControl}>
+                            <InputLabel style={styles.inputLabel}>
+                              Attended Workshop?
+                            </InputLabel>
+                            <NativeSelect
                               defaultValue="No"
-                              labelId="demo-simple-select-label"
-                              id="demo-simple-select"
-                              label={field.label}
+                              style={styles.dropdownOptions}
                               onChange={(e) => editDropdown(e, index)}
-                              style={styles.inputLabel}
+                              menuprops={{
+                                PaperProps: {
+                                  style: styles.purpleBackground,
+                                },
+                              }}
                             >
-                              <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
-                              <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
-                            </Select>
+                              <option value="Yes" className="dropit">Yes</option>
+                              <option value="No" className="dropit">No</option>
+                            </NativeSelect>
                           </FormControl>
                           <div className="op-between-inputs" />
                         </>
