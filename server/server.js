@@ -29,8 +29,7 @@ const sendEmails = async () => {
 };
 
 // node cron runs a function every week on Monday 12pm, LA time (0 12 * * 1)
-// cron.schedule('0 12 * * 1', () => { sendEmails(); }, { timezone: 'America/Los_Angeles' });
-sendEmails(0);
+cron.schedule('0 12 * * 1', () => { sendEmails(); }, { timezone: 'America/Los_Angeles' });
 
 // notifies navigator + notifies jobseeker upon approval + all milestones complete
 app.post('/send-email', (req, res) => {
