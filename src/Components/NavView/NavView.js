@@ -2,8 +2,8 @@ import './NavView.css';
 import React, { useState, useEffect } from 'react';
 import Assessment from '../Assessment/Assessment';
 import Header from '../Header/Header';
-import { fetchUser } from '../../Services/user-service';
-import { fetchJobseekerData } from '../../Services/jobseeker-data-service';
+import { fetchUser, updateUser } from '../../Services/user-service';
+import { fetchJobseekerData, updateJobseekerData } from '../../Services/jobseeker-data-service';
 
 function NavView() {
   const [userData, setUserData] = useState();
@@ -21,6 +21,19 @@ function NavView() {
     asyncFn();
   }, []);
 
+  useEffect(() => {
+    if (jobseekerData !== undefined) {
+      updateJobseekerData('alannguyen711@gmail.com', jobseekerData);
+    }
+  }, [jobseekerData]);
+
+  useEffect(() => {
+    if (userData !== undefined) {
+      updateUser('alannguyen711@gmail.com', userData);
+    }
+    console.log(userData);
+  }, [userData]);
+
   if (jobseekerData === undefined) {
     // eventually replace with appropriate loading component
     return (<div>loading</div>);
@@ -34,6 +47,7 @@ function NavView() {
         <div className="assessment-top-padding" />
         <Assessment
           userData={userData}
+          setUserData={setUserData}
           jobseeker={jobseekerData}
           setJobseeker={setJobseekerData}
           email={email}

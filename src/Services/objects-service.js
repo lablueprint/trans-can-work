@@ -501,33 +501,6 @@ export const hiringInfo = [
   },
 ];
 
-export const checkedSkills = [
-  'Accounting Software',
-  'Administrative',
-  'Adobe',
-  'Negotiation',
-  'Patient Scheduling Software',
-  'Philanthropy',
-  'Photo Editing',
-  'Inventory Management',
-  'ServSafe / Food Safety Certification / Food Handlers Card',
-];
-
-export const checkedInterests = [
-  'Accounting',
-  'Bookkeeping',
-  'Finance',
-  'Personal Assistant',
-  'Philanthropy',
-];
-
-export const checkedGeneralSkills = [
-  'Applied Academic Skills',
-  'Critical Thinking Skills',
-  'Information Use',
-  'Communication Skills',
-];
-
 export const arrayToObj = (array, options) => options.reduce((obj, item) => ({
   ...obj, [item]: array.includes(item),
 }), {});

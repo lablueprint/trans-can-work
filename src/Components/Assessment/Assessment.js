@@ -10,8 +10,11 @@ import Delete from '../../Assets/delete.svg';
 import Checkboxes from '../Checkboxes/Checkboxes';
 import {
   skillsChecklistOptions, industryInterestOptions, generalSkills,
-  arrayToObj, checkedSkills, checkedInterests, checkedGeneralSkills, generalSubskills,
+  arrayToObj, generalSubskills, objToArray,
 } from '../../Services/objects-service';
+import excludeVariablesFromRoot from '@mui/material/styles/excludeVariablesFromRoot';
+import { Checklist } from '@mui/icons-material';
+import { ViewColumn } from '@material-ui/icons';
 
 const styles = {
   dropdownOptions: {
@@ -48,12 +51,8 @@ const styles = {
 };
 
 function Assessment({
-  userData, jobseeker, setJobseeker, email,
+  userData, setUserData, jobseeker, setJobseeker, email,
 }) {
-  useEffect(() => {
-    console.log(userData);
-    console.log(jobseeker);
-  }, [userData, jobseeker]);
   const textFieldStyles = {
     inputProps: {
       style: {
@@ -77,38 +76,25 @@ function Assessment({
     },
   };
 
+  // each set of checkboxes has 4 state variables:
+  // an object with label/bool pairs
+  // an array holding just the booleans for the checklist
+  // an array holding the booleans for the left column
+  // an array holding the booleans for the right column
   const [skillsObj, setSkillsObj] = useState();
-
-  // useEffect(() => {
-  //   const temp = arrayToObj(
-  //     jobseeker.generalSkills,
-  //     skillsChecklistOptions,
-  //   );
-  //   if (temp !== skillsObj) {
-  //     setSkillsObj(temp);
-  //   }
-  // }, [jobseeker, skillsObj]);
-
   const [skillBool, setSkillBool] = useState([]);
   const [skillBool1, setSkillBool1] = useState();
   const [skillBool2, setSkillBool2] = useState();
-  const [intObj, setIntObj] = useState(arrayToObj(checkedInterests, industryInterestOptions));
+  const [intObj, setIntObj] = useState();
   const [intBool, setIntBool] = useState([]);
-  const [intBool1, setIntBool1] = useState([]);
-  const [intBool2, setIntBool2] = useState([]);
-  const [genObj, setGenObj] = useState(arrayToObj(checkedGeneralSkills, generalSkills));
+  const [intBool1, setIntBool1] = useState();
+  const [intBool2, setIntBool2] = useState();
+  const [genObj, setGenObj] = useState();
   const [genBool, setGenBool] = useState([]);
-  const [genBool1, setGenBool1] = useState([]);
-  const [genBool2, setGenBool2] = useState([]);
+  const [genBool1, setGenBool1] = useState();
+  const [genBool2, setGenBool2] = useState();
 
   const splitObjects = () => {
-    // if (Object.keys(skillsObj).length !== skillsChecklistOptions.length) {
-    //   skillsChecklistOptions.forEach((key) => {
-    //     if (!(Object.keys(skillsObj).includes(key))) {
-    //       console.log(key);
-    //     }
-    //   });
-    // }
     const temp1 = Object.keys(skillsObj).sort();
     if (skillBool.length === 0) {
       temp1.forEach((key) => {
@@ -147,29 +133,6 @@ function Assessment({
     setGenBool2(tempGenBool2);
   };
 
-  // const [ran, setRan] = useState(false);
-  // useEffect(() => {
-  //   if (!ran && jobseeker !== undefined) {
-  //     setRan(true);
-  //     splitObjects();
-  //   }
-  //   console.log(skillsObj);
-  // }, [skillsObj]);
-
-  // useEffect(() => {
-  //   if (jobseeker !== undefined) {
-  //     // on first effective render of jobseeker
-  //     if (isLoading) {
-  //       setSkillsObj(arrayToObj(jobseeker.generalSkills, skillsChecklistOptions));
-  //       console.log(skillsObj);
-  //       console.log(jobseeker);
-  //     }
-  //   }
-  //   if (!isLoading) {
-  //     // push jobseeker to backend
-  //   }
-  // }, [jobseeker]);
-
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -179,21 +142,57 @@ function Assessment({
   }, [jobseeker]);
 
   useEffect(() => {
-    console.log(jobseeker.skillsChecklist);
     if (loaded) {
-      console.log(jobseeker.skillsChecklist);
-      console.log(arrayToObj(jobseeker.skillsChecklist, skillsChecklistOptions));
       setSkillsObj(arrayToObj(jobseeker.skillsChecklist, skillsChecklistOptions));
+      setIntObj(arrayToObj(jobseeker.industryInterest, industryInterestOptions));
+      setGenObj(arrayToObj(jobseeker.generalSkills, generalSkills));
     }
   }, [loaded]);
 
   useEffect(() => {
-    console.log(skillsObj);
     if (skillBool1 === undefined && skillsObj !== undefined) {
-      console.log('hey');
       splitObjects();
+    } else if (skillsObj !== undefined) {
+      const tempSkillsArray = objToArray(skillsObj);
+      const tempJobseeker = {
+        ...jobseeker,
+        skillsChecklist: tempSkillsArray,
+      };
+      if (tempJobseeker !== jobseeker) {
+        setJobseeker(tempJobseeker);
+      }
     }
   }, [skillsObj]);
+
+  useEffect(() => {
+    if (intBool1 === undefined && intObj !== undefined) {
+      splitObjects();
+    } else if (intObj !== undefined) {
+      const tempIntArray = objToArray(intObj);
+      const tempJobseeker = {
+        ...jobseeker,
+        industryInterest: tempIntArray,
+      };
+      if (tempJobseeker !== jobseeker) {
+        setJobseeker(tempJobseeker);
+      }
+    }
+  }, [intObj]);
+
+  useEffect(() => {
+    if (genBool1 === undefined && genObj !== undefined) {
+      splitObjects();
+    } else if (genObj !== undefined) {
+      const tempGenArray = objToArray(genObj);
+      const tempJobseeker = {
+        ...jobseeker,
+        generalSkills: tempGenArray,
+      };
+      if (tempJobseeker !== jobseeker) {
+        setJobseeker(tempJobseeker);
+      }
+    }
+  }, [genObj]);
 
   // function that updates the object
   const repopulateSkills = () => {
@@ -227,11 +226,15 @@ function Assessment({
   }, [skillBool1, skillBool2]);
 
   useEffect(() => {
-    setIntBool(intBool1.concat(intBool2));
+    if (intBool1 !== undefined && intBool2 !== undefined) {
+      setIntBool(intBool1.concat(intBool2));
+    }
   }, [intBool1, intBool2]);
 
   useEffect(() => {
-    setGenBool(genBool1.concat(genBool2));
+    if (genBool1 !== undefined && genBool2 !== undefined) {
+      setGenBool(genBool1.concat(genBool2));
+    }
   }, [genBool1, genBool2]);
 
   useEffect(() => {
@@ -241,142 +244,16 @@ function Assessment({
   }, [skillBool]);
 
   useEffect(() => {
-    repopulateInts();
+    if (intBool.length !== 0) {
+      repopulateInts();
+    }
   }, [intBool]);
 
   useEffect(() => {
-    repopulateGen();
+    if (genBool.length !== 0) {
+      repopulateGen();
+    }
   }, [genBool]);
-
-  // const [skillsObj, setSkillsObj] = useState(arrayToObj(checkedSkills, skillsChecklistOptions));
-  // const [interestsObj, setInterestsObj] = useState(arrayToObj(
-  //   checkedInterests,
-  //   industryInterestOptions,
-  // ));
-  // const [generalSkillsObj, setGeneralSkillsObj] = useState(arrayToObj(
-  //   checkedGeneralSkills,
-  //   generalSkills,
-  // ));
-
-  // const skillLabel = [];
-  // const [skillBool, setSkillBool] = useState([]);
-  // const interestLabel = [];
-  // const interestBool = [];
-  // const genSkillLabel = [];
-  // const genSkillBool = [];
-  // const [skillBool1, setSkillBool1] = useState([]);
-  // const splitObjects = () => {
-  //   const temp1 = Object.keys(skillsObj);
-  //   if (skillLabel.length === 0) {
-  //     temp1.forEach((key) => {
-  //       skillLabel.push(key);
-  //       const tempSkill = skillBool;
-  //       tempSkill.push(skillsObj[key]);
-  //       setSkillBool(tempSkill);
-  //     });
-  //   }
-  //   const temp2 = Object.keys(interestsObj);
-  //   temp2.forEach((key) => {
-  //     interestLabel.push(key);
-  //     interestBool.push(interestsObj[key]);
-  //   });
-  //   Object.keys(generalSkillsObj).forEach((key) => {
-  //     genSkillLabel.push(key);
-  //     genSkillBool.push(generalSkillsObj[key]);
-  //   });
-  //   console.log(skillBool);
-  //   console.log(skillLabel);
-  //   console.log(skillBool.slice(0, Math.ceil(skillBool.length / 2)));
-  //   const tempSkillBool1 = skillBool.slice(0, Math.ceil(skillBool.length / 2));
-  //   setSkillBool1(tempSkillBool1);
-  // };
-  // const [skillLabel1, setSkillLabel1] = useState([]);
-
-  // useEffect(() => {
-  //   splitObjects();
-  //   setSkillLabel1(skillLabel.slice(0, Math.ceil(skillBool.length / 2)));
-  //   console.log(skillLabel1);
-  // }, []);
-
-  // const [genSkillBool1,
-  //   setgenSkillBool1] = useState(genSkillBool.slice(0, Math.ceil(genSkillBool.length / 2)));
-
-  // let checkedInterests = [];
-  // let checkedGeneralSkills = [];
-  // let checkedPrev = [];
-
-  // const [checkedGeneralSkills1,
-  //   setCheckedGeneralSkills1] = useState(new Array(generalSkills1.length).fill(false));
-  // const [checkedGeneralSkills2,
-  //   setCheckedGeneralSkills2] = useState(new Array(generalSkills2.length).fill(false));
-  // const [checkedInt1, setCheckedInt1] = useState(new Array(interests1.length).fill(false));
-  // const [checkedInt2, setCheckedInt2] = useState(new Array(interests2.length).fill(false));
-  // const [checkedPrev1,
-  //   setCheckedPrev1] = useState(new Array(previousExperience1.length).fill(false));
-  // const [checkedPrev2,
-  //   setCheckedPrev2] = useState(new Array(previousExperience2.length).fill(false));
-
-  // const [jobseeker, setJobseeker] = useState({
-  //   name: store.user.firstName,
-  //   pronouns: store.user.pronouns,
-  //   phone: store.user.phoneNumber,
-  //   email: store.email,
-  //   clientInfo:
-  //   {
-  //     'City/State': 'City/State',
-  //     Ethnicity: 'Ethnicity',
-  //     Age: 'Age',
-  //     'Gender Identity': 'Gender Identity',
-  //     Sexuality: 'Sexuality',
-  //     Veteran: 'Veteran',
-  //     Disability: 'Disability',
-  //     'Housing Situation': 'Housing Situation',
-  //     'Currently Employed': 'Employment Status',
-  //     'Prior Convictions': 'Prior Convictions',
-  //   },
-  //   industryInterests: [],
-  //   generalSkills: [],
-  //   skillsChecklist: [],
-  //   education: [{
-  //   }],
-  //   occupation: [],
-  //   dreamjob: 'Dream Job',
-  // });
-
-  // function combineCheckboxes() {
-  //   checkedInterests = checkedInt1.concat(checkedInt2);
-  //   checkedGeneralSkills = checkedGeneralSkills1.concat(checkedGeneralSkills2);
-  //   checkedPrev = checkedPrev1.concat(checkedPrev2);
-  // }
-
-  // async function populateInterests() {
-  //   const tempInterests = interests1.concat(interests2);
-  //   const interestPairs = {};
-  //   tempInterests.forEach((interest, index) => {
-  //     interestPairs[interest] = checkedInterests[index];
-  //   });
-  //   const tempSkills = generalSkills1.concat(generalSkills2);
-  //   const skillPairs = {};
-  //   tempSkills.forEach((skill, index) => {
-  //     skillPairs[skill] = checkedGeneralSkills[index];
-  //   });
-  //   const tempPrev = previousExperience1.concat(previousExperience2);
-  //   const prevPairs = {};
-  //   tempPrev.forEach((prev, index) => {
-  //     prevPairs[prev] = checkedPrev[index];
-  //   });
-  //   await setJobseeker({
-  //     ...jobseeker,
-  //     industryInterests: interestPairs,
-  //     generalSkills: skillPairs,
-  //     skillsChecklist: prevPairs,
-  //   });
-  // }
-
-  // const saveJobseeker = async () => {
-  //   combineCheckboxes();
-  //   populateInterests();
-  // };
 
   const addEducation = (event) => {
     event.preventDefault();
@@ -415,6 +292,12 @@ function Assessment({
     event.preventDefault();
     const temp = [...jobseeker.education];
     temp[index][element] = event.target.value;
+    if (element === 'certificate' && event.target.value === 'No') {
+      temp[index].certificateType = '';
+    }
+    if (element === 'degree' && event.target.value === 'No') {
+      temp[index].degreeType = '';
+    }
     setJobseeker({
       ...jobseeker,
       education: temp,
@@ -450,10 +333,10 @@ function Assessment({
   };
 
   const clientInfoFields = [
-    { title: 'First Name', toChange: 'name', var: userData.firstName },
-    { title: 'Last Name', toChange: 'name', var: userData.lastName },
+    { title: 'First Name', toChange: 'firstName', var: userData.firstName },
+    { title: 'Last Name', toChange: 'lastName', var: userData.lastName },
     { title: 'Pronouns', toChange: 'pronouns', var: userData.pronouns },
-    { title: 'Phone', toChange: 'phone', var: userData.phoneNumber },
+    { title: 'Phone', toChange: 'phoneNumber', var: userData.phoneNumber },
     { title: 'Email', toChange: 'email', var: email },
     { title: 'City/State', toChange: 'City/State', var: jobseeker.clientInfo['City/State'] },
     { title: 'Ethnicity', toChange: 'Ethnicity', var: jobseeker.clientInfo.Ethnicity },
@@ -466,70 +349,6 @@ function Assessment({
     { title: 'Currently Employed?', toChange: 'Currently Employed', var: jobseeker.clientInfo['Currently Employed'] },
     { title: 'Prior Convictions?', toChange: 'Prior Convictions', var: jobseeker.clientInfo['Prior Convictions'] },
   ];
-
-  // const [temp, setTemp] = useState(false);
-
-  // useEffect(() => {
-  //   if (temp) {
-  //     saveJobseeker();
-  //   }
-  // }, [checkedInt1, checkedInt2, checkedPrev1,
-  //   checkedPrev2, checkedGeneralSkills1, checkedGeneralSkills2]);
-
-  // useEffect(() => {
-  //   if (temp) {
-  //     createJobseekerData(jobseeker.email, jobseeker);
-  //   }
-  // }, [jobseeker]);
-
-  // useEffect(() => {
-  //   const asyncFn = async () => {
-  //     const jobseekerData = await fetchJobseekerData(store.email);
-  //     setJobseeker(jobseekerData.data());
-  //     const sortedInterestKeys = Object.keys(jobseekerData.data().industryInterests).sort();
-  //     const pulledInt1 = [];
-  //     const pulledInt2 = [];
-  //     for (let i = 0; i < sortedInterestKeys.length; i += 1) {
-  //       if (i < 21) {
-  //         pulledInt1.push(jobseekerData.data().industryInterests[sortedInterestKeys[i]]);
-  //       } else {
-  //         pulledInt2.push(jobseekerData.data().industryInterests[sortedInterestKeys[i]]);
-  //       }
-  //     }
-  //     setCheckedInt1(pulledInt1);
-  //     setCheckedInt2(pulledInt2);
-  //     console.log(jobseeker.industryInterests);
-  // const sortedSkillKeys = Object.keys(jobseekerData.data().skillsChecklist).sort();
-  // const pulledSkills1 = [];
-  // const pulledSkills2 = [];
-  // for (let i = 0; i < sortedSkillKeys.length; i += 1) {
-  //   if (i <= 18) {
-  //     pulledSkills1.push(jobseekerData.data().skillsChecklist[sortedSkillKeys[i]]);
-  //   } else {
-  //     pulledSkills2.push(jobseekerData.data().skillsChecklist[sortedSkillKeys[i]]);
-  //   }
-  // }
-  // console.log(checkedPrev1);
-  // console.log(pulledSkills1);
-  // setCheckedPrev1(pulledSkills1);
-  // setCheckedPrev2(pulledSkills2);
-  // const sortedGenSkillsKeys = Object.keys(jobseekerData.data().generalSkills).sort();
-  // const pulledGenSkills1 = [];
-  // const pulledGenSkills2 = [];
-  // for (let i = 0; i < sortedGenSkillsKeys.length; i += 1) {
-  //   if (i <= 3) {
-  //     pulledGenSkills1.push(jobseekerData.data().generalSkills[sortedGenSkillsKeys[i]]);
-  //   } else {
-  //     pulledGenSkills2.push(jobseekerData.data().generalSkills[sortedGenSkillsKeys[i]]);
-  //   }
-  // }
-  // setCheckedGeneralSkills1(pulledGenSkills1);
-  // setCheckedGeneralSkills2(pulledGenSkills2);
-  //     setTemp(true);
-  //     console.log(jobseekerData.data());
-  //   };
-  //   asyncFn();
-  // }, []);
 
   if (skillBool1 === undefined) {
     // eventually replace with appropriate loading component
@@ -555,7 +374,13 @@ function Assessment({
                       value={item.var}
                       focused
                       onChange={(e) => {
-                        if ('clientInfo' in jobseeker && item.toChange in jobseeker.clientInfo) {
+                        if (item.toChange === 'firstName' || item.toChange === 'lastName'
+                        || item.toChange === 'pronouns' || item.toChange === 'phoneNumber') {
+                          setUserData((prevUserData) => ({
+                            ...prevUserData,
+                            [item.toChange]: e.target.value,
+                          }));
+                        } else if ('clientInfo' in jobseeker && item.toChange in jobseeker.clientInfo) {
                           setJobseeker((prevJobseeker) => ({
                             ...prevJobseeker,
                             clientInfo: {
@@ -872,7 +697,7 @@ Assessment.propTypes = {
       'Currently Employed': propTypes.string.isRequired,
       'Prior Convictions': propTypes.string.isRequired,
     },
-    industryInterests: propTypes.arrayOf(
+    industryInterest: propTypes.arrayOf(
       propTypes.string.isRequired,
     ),
     generalSkills: propTypes.arrayOf(
@@ -887,4 +712,5 @@ Assessment.propTypes = {
     dreamjob: propTypes.string.isRequired,
   }).isRequired,
   setJobseeker: propTypes.func.isRequired,
+  setUserData: propTypes.func.isRequired,
 };

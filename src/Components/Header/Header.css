@@ -87,6 +87,7 @@
     font-weight: 700;
     font-family: 'Montserrat';
     padding-right: 1em;
+    white-space: nowrap;
 }
 
 .nav-bar {
