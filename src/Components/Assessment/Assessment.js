@@ -12,9 +12,6 @@ import {
   skillsChecklistOptions, industryInterestOptions, generalSkills,
   arrayToObj, generalSubskills, objToArray,
 } from '../../Services/objects-service';
-import excludeVariablesFromRoot from '@mui/material/styles/excludeVariablesFromRoot';
-import { Checklist } from '@mui/icons-material';
-import { ViewColumn } from '@material-ui/icons';
 
 const styles = {
   dropdownOptions: {
@@ -94,6 +91,7 @@ function Assessment({
   const [genBool1, setGenBool1] = useState();
   const [genBool2, setGenBool2] = useState();
 
+  // function to split up into left and right column booleans
   const splitObjects = () => {
     const temp1 = Object.keys(skillsObj).sort();
     if (skillBool.length === 0) {
@@ -133,14 +131,15 @@ function Assessment({
     setGenBool2(tempGenBool2);
   };
 
+  // loaded variable keeps track of once jobseeker loaded in from backend
   const [loaded, setLoaded] = useState(false);
-
   useEffect(() => {
     if (jobseeker !== undefined) {
       setLoaded(true);
     }
   }, [jobseeker]);
 
+  // only assign object once the backend calls are loaded in
   useEffect(() => {
     if (loaded) {
       setSkillsObj(arrayToObj(jobseeker.skillsChecklist, skillsChecklistOptions));
@@ -149,6 +148,7 @@ function Assessment({
     }
   }, [loaded]);
 
+  // as long as things are defined, change jobseeker to match frontend changes
   useEffect(() => {
     if (skillBool1 === undefined && skillsObj !== undefined) {
       splitObjects();
@@ -164,6 +164,7 @@ function Assessment({
     }
   }, [skillsObj]);
 
+  // as long as things are defined, change jobseeker to match frontend changes
   useEffect(() => {
     if (intBool1 === undefined && intObj !== undefined) {
       splitObjects();
@@ -179,6 +180,7 @@ function Assessment({
     }
   }, [intObj]);
 
+  // as long as things are defined, change jobseeker to match frontend changes
   useEffect(() => {
     if (genBool1 === undefined && genObj !== undefined) {
       splitObjects();
@@ -237,18 +239,21 @@ function Assessment({
     }
   }, [genBool1, genBool2]);
 
+  // when the lengthy bool is updated then call repopulateSkills to update object
   useEffect(() => {
     if (skillBool.length !== 0) {
       repopulateSkills();
     }
   }, [skillBool]);
 
+  // when the lengthy bool is updated then call repopulateInts to update object
   useEffect(() => {
     if (intBool.length !== 0) {
       repopulateInts();
     }
   }, [intBool]);
 
+  // when the lengthy bool is updated then call repopulateGen to update object
   useEffect(() => {
     if (genBool.length !== 0) {
       repopulateGen();
