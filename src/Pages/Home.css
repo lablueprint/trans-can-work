@@ -1,0 +1,89 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-weight: normal;
+    font-style: normal;
+    src: url('../Assets/Fonts/Montserrat-Regular.eot') format('embedded-opentype'), /* IE6-IE8 */
+         url('../Assets/Fonts/Montserrat-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../Assets/Fonts/Montserrat-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+         url('../Assets/Fonts/Montserrat-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('../Assets/Fonts/Montserrat-Regular.svg') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    font-weight: bold;
+    font-style: normal;
+    src: url('../Assets/Fonts/Montserrat-Bold.eot') format('embedded-opentype'), /* IE6-IE8 */
+         url('../Assets/Fonts/Montserrat-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../Assets/Fonts/Montserrat-Bold.woff') format('woff'), /* Pretty Modern Browsers */
+         url('../Assets/Fonts/Montserrat-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('../Assets/Fonts/Montserrat-Bold.svg') format('svg'); /* Legacy iOS */
+}
+
+
+.home-page-title{
+    font-family: 'Montserrat';
+    font-size: 3em;
+    font-weight: bold;
+    margin: 0;
+    text-align: left;
+    display:flex;
+}
+
+.tab-panel-grid-layout{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 15em);
+    grid-row-gap: 2em;
+    justify-content: space-evenly;
+    margin: 0 0 3rem;
+
+}
+
+.home-page-title{
+    font-family: 'Montserrat';
+    font-size: 3em;
+    font-weight: normal;
+    margin: 0;
+    text-align: left;
+    display:flex;
+}
+
+.home-page-header-profile-text{
+    font-family: 'Montserrat';
+    font-size: 1em;
+    font-weight: bold;
+    text-align: left;
+    display:flex;
+}
+
+.home-page-container{
+    margin-top: 5em;
+}
+
+.home-page-headers-container{
+    display: flex;
+    flex-direction: column;
+    margin-left: 7em;
+}
+
+.home-page-header-name-and-icon-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.home-page-header-empty-block{
+    flex: 0 0 80%;
+}
+
+.home-page-welcome-block-header{
+    display: flex; 
+    flex-direction: row;
+    height: 3em;
+    margin-bottom: 2.5em;
+}
+
+.home-page-search-bar-container{
+    display: flex;
+    align-items: end;
+    flex: 1 0 25%;
+}

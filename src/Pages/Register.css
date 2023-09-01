@@ -1,9 +1,247 @@
-.registerForm {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
 .registerFormItem{
     border: 1px solid #ccc; 
     margin-bottom: 5px
+}
+.background{
+  background-image: url('../Assets/Images/gradient.png');
+  background-repeat: 'no-repeat';
+  background-size: 100% 100%;
+  margin: 0;
+}
+.registerPage {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding-bottom: 10%;
+  padding-top: 15%;
+  width: 85%;
+  margin: 0 auto;
+}
+.registerInput{
+  padding-top: 0.75%;
+  padding-bottom: 0.75%;
+  padding-left: 1%;
+  width: 100%;
+  height: 3em;
+  margin-bottom: 1em;
+}
+
+.registerInput div {
+  width: 100% !important;
+  height: 3em !important;
+}
+
+.registerInput div div {
+  font-size: 1rem !important;
+  align-items: flex-start;
+}
+
+.registerInput div div div {
+  width: 2.5% !important;
+}
+
+.registerInput div div label span:last-child {
+  font-size: 1rem !important;
+  color: #000AA0 !important;
+  padding-left: 1.5em !important;
+  transform: translateY(-1.3em);
+}
+
+.registerInput button {
+  width: 100% !important;
+  font-size: 1rem !important;
+  height: 3em !important;
+}
+
+.registerInput button span span svg {
+  font-size: 1rem !important;
+}
+
+.registerInput .MuiFormControl-root label {
+  font-size: 1rem !important;
+}
+
+.registerInput div div label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.registerInput div div label span:first-child {
+  color: #000AA0 !important;
+}
+
+.selectRadio {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-top: 2%;
+  font-size: 1rem !important;
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+.WithStyles\(ForwardRef\(Radio\)\)-colorSecondary-4.WithStyles\(ForwardRef\(Radio\)\)-checked-5,
+.WithStyles\(ForwardRef\(Radio\)\)-colorSecondary-4 {
+  color: #000AA0 !important;
+  padding: 0 !important;
+}
+
+.MuiFormControlLabel-root {
+  align-items: center;
+  justify-content: center;
+}
+
+.radio-buttons {
+  color: #000AA0 !important;
+  font-size: 1rem !important;
+}
+
+.radio-buttons span span {
+  margin-bottom: 1em;
+}
+
+.registerInput div div label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkbox{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  justify-self: flex-start;
+  align-items: center;
+  width: 25%;
+  gap: 0.5em;
+}
+.rememberMeForgotPassword{
+  display: flex;
+  flex-direction: row;
+  font-size: 0.8vw;
+  justify-content: space-between;
+  font-family: 'Montserrat';
+  padding-bottom: 3%;
+  padding-left: 0.5%;
+  width: 65%;
+}
+.landingSplash{
+  background-color: #F6F2F6;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding-left: 10%;
+  padding-bottom: 10%;
+}
+.header{
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  padding-bottom: 5%;
+  padding-top: 10%;
+  padding-right: 2%;
+  width: 80%;
+}
+.headerTitle{
+  padding-left: 5%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding-top: 2%;
+}
+.font{
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  font-family: 'Montserrat', sans-serif;  
+  font-size: 24px;
+  font-weight: 450;
+}
+.body{
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 42px;
+  font-weight: 450;
+  padding-bottom: 5%;
+  width: 70%;
+  padding-left: 1%;
+  text-align: left;
+}
+.footer{
+  display: flex;
+}
+.footerBody{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 42px;
+  font-weight: 450;
+  width: 80%;
+  padding-left: 1%;
+  padding-bottom: 1%;
+  text-align: left;
+}
+.TCWlogo{
+  display: flex;
+  align-self: center;
+  min-width: 28%;
+  max-width: 30%;
+  min-height: 28%;
+  max-height: 30%;
+}
+.TCWimage{
+  display: flex;
+  align-self: flex-start;
+  width: 90%;
+  height: auto;
+}
+.arrowImage{
+  display: flex;
+  align-self: center;
+  padding-right: 10%;
+}
+.arrowImage2{
+  display: flex;
+  align-self: center;
+  padding-right: 17.7%;
+  padding-bottom: 2%;
+  padding-top: 1%;
+}
+.islandsImage{
+  display: flex;
+  align-self: flex-start;
+  padding-right: 5%;
+  width: 36%;
+  height: 36%;
+}
+.createAccountArt{
+  align-self: flex-start;
+  padding-bottom: 2%;
+  min-width: 20em;
+  max-width: 35%;
+  min-height: 40%;
+  max-height: 45%;
+}
+.TcwLogo2{
+  align-self: flex-end;
+  padding-right: 8%;
+  min-width: 25%;
+  max-width: 35%;
+  min-height: 25%;
+  max-height: 35%;
+}
+
+.link {
+  text-decoration: none;
+}
+
+@media (max-width: 768px){
+  .body,
+  .footerBody {
+    font-size: 24px;
+  }
+}
+
+.eye-icon {
+  width: 0.75em;
 }

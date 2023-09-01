@@ -1,15 +1,13 @@
 import {
   doc, setDoc, query, where, getDoc, getDocs, updateDoc, deleteDoc, collection,
 } from 'firebase/firestore';
-import firebase from '../firebase';
-
-const db = firebase;
+import { db } from '../firebase';
 
 // CRUD functions
 // data in form {"name": "John"} for instance; remember event.preventDefault() when using.
 export const createJobseeker = async (email, data) => {
   await setDoc(doc(db, 'jobseekers', email), data).then(() => {
-    console.log('created new jobseeker');
+    console.log('created new jobseeker', email, data);
   }).catch((err) => {
     alert(err.stack);
   });
@@ -20,11 +18,8 @@ export const fetchJobseeker = async (email) => {
   try {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      console.log('jobseeker: ', docSnap);
       return docSnap;
     }
-    console.log('jobseeker ', email, ' does not exist');
-
     console.log('jobseeker ', email, ' does not exist');
     return null;
   } catch (error) {
@@ -58,7 +53,7 @@ export const fetchByNavigator = async (email) => {
 };
 
 export const updateJobseeker = async (email, data) => {
-  await updateDoc(doc(db, 'jobseekers', email), data)
+  await setDoc(doc(db, 'jobseekers', email), data, { merge: true })
     .then(() => {
       console.log('updated jobseeker ', email);
     }).catch((err) => {

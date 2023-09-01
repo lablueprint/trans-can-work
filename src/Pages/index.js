@@ -4,8 +4,12 @@ import Register from './Register';
 import Reset from './Reset';
 import NavigatorDashboard from './NavigatorDashboard';
 import JobseekerData from './JobseekerData';
-import Profile from './Profile';
 import Landing from './Landing';
+import ProfileTemp from './ProfileTemp';
+import ArchiveTemp from './ArchiveTemp';
+import AdminView from '../Components/Dashboard/AdminView';
+import NavDashboard from './NavDashboard';
+import AdminDashboard from './AdminDashboard';
 
 export {
   Home,
@@ -13,7 +17,12 @@ export {
   Register,
   Reset,
   NavigatorDashboard,
-  Profile,
+  // Profile,
+  ProfileTemp,
+  ArchiveTemp,
   JobseekerData,
   Landing,
+  AdminView,
+  NavDashboard,
+  AdminDashboard,
 };
