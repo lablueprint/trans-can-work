@@ -36,7 +36,8 @@ import OnlineProfiles from './Components/OnlineProfiles/OnlineProfiles';
 import TrainingPrograms from './Components/TrainingPrograms/TrainingPrograms';
 import { login, logout } from "./Redux/Slice/authSlices";
 import { fetchUser, addUser } from './Services/user-service';
-import { auth } from './firebase';
+import { auth } from "./firebase";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -69,7 +70,7 @@ function App() {
   }
 
   useEffect(() => {
-    // on any firebase auth change
+    // on any firebase auth change 
     const unsubscribe = onAuthStateChanged(auth, async (state) => {
       // if logged in
       if (state != null) {
@@ -79,8 +80,8 @@ function App() {
             email: state.email,
             accessToken: state.accessToken,
             refreshToken: state.refreshToken,
-            store: doc !== undefined ? doc.data() : undefined,
-          };
+            user: doc !== undefined ? doc.data(): undefined,
+          }
           dispatch(login(userState));
         }).catch((error) => {
         });
@@ -90,9 +91,9 @@ function App() {
         dispatch(logout());
       }
     });
-    return () => {
+    return()=>{
       unsubscribe();
-    };
+    }
   }, []);
 
   return (

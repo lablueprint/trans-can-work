@@ -116,7 +116,7 @@ function Workshops() {
   ];
 
   return (
-    <div>
+    <div className="content">
       <div className="tp-title">Workshops</div>
       <div className="between-inputs" />
       <div>
@@ -189,7 +189,7 @@ function Workshops() {
                 </div>
               </form>
             </div>
-            <div className="width-55vw">
+            <div>
               <button type="button" onClick={(e) => deleteWorkshop(e, index)} className="op-delete-button">
                 <img
                   src={Delete}
@@ -203,7 +203,7 @@ function Workshops() {
           </div>
         ))}
       </div>
-      <div className="width-55vw">
+      <div>
         <button type="button" onClick={addWorkshop} className="op-add-button">
           <img
             src={Add}

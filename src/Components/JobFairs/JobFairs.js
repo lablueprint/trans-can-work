@@ -116,7 +116,7 @@ function JobFairs() {
   ];
 
   return (
-    <div>
+    <div className="content">
       <div className="tp-title">Job Fairs</div>
       <div className="between-inputs" />
       <div>
@@ -188,7 +188,7 @@ function JobFairs() {
                 </div>
               </form>
             </div>
-            <div className="width-55vw">
+            <div>
               <button type="button" onClick={(e) => deleteJobFair(e, index)} className="op-delete-button">
                 <img
                   src={Delete}
@@ -202,7 +202,7 @@ function JobFairs() {
           </div>
         ))}
       </div>
-      <div className="width-55vw">
+      <div>
         <button type="button" onClick={addJobFair} className="op-add-button">
           <img
             src={Add}
