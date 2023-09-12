@@ -12,15 +12,6 @@
 .dashboard-page-title{
     font-family: 'Montserrat';
     font-size: 3em;
-    font-weight: bold;
-    margin: 0;
-    text-align: left;
-    display:flex;
-}
-
-.dashboard-page-title{
-    font-family: 'Montserrat';
-    font-size: 3em;
     font-weight: normal;
     margin: 0;
     text-align: left;
@@ -39,6 +30,7 @@
     flex-direction: row;
     justify-content: right;
     column-gap: 1em;
+    align-items: center;
 }
 
 .dashboard-page-welcome-block-header{
@@ -71,6 +63,18 @@
     margin-left: 6px;
 }
 
+.profile-button-text-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.profile-button-name-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
 .dashboard-page-chip-container {
     margin: 2rem 4rem;
 }
@@ -79,5 +83,21 @@
     border: 1px solid #D9D9D9;
     border-radius: 30px;
     width: 300px;
-    padding: 5px 15px;
+    max-width: 80%;
+    padding: 0.5em 1em;
+}
+
+.dash-admin-searchbar input {
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .dashboard-page-title {
+        font-size: 2em;
+    }
+
+    .dashboard-page-welcome-block-header {
+        flex-direction: column;
+        gap: 1em;
+    }
 }
