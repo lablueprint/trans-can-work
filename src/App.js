@@ -36,6 +36,7 @@ import HiredInfo from './Components/HiredInfo/HiredInfo';
 import Resources from './Components/Resources/Resources';
 import OnlineProfiles from './Components/OnlineProfiles/OnlineProfiles';
 import TrainingPrograms from './Components/TrainingPrograms/TrainingPrograms';
+import ProfileOutline from './Components/profileOutline'
 import { login, logout } from "./Redux/Slice/authSlices";
 import { fetchUser, addUser } from './Services/user-service';
 import { auth } from "./firebase";
@@ -125,6 +126,8 @@ function App() {
           <Route path="/archivepopuptesting" element={<ArchiveTemp />} />
           <Route path="/admindashboard" element={<AdminDashboard />} />
           <Route path="/navdashboard" element={<NavDashboard />} />
+
+        <Route path="/navProfile" element={<ProfileOutline />} />
 
           <Route path="/roadmap" element={<MilestoneMap />} />
           <Route
