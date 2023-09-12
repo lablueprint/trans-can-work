@@ -62,6 +62,8 @@ function Header() {
 
   const [navbar, toggleNavbar] = useState(false);
 
+  const fullName = `${store.user.firstName} ${store.user.lastName}`;
+
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -151,7 +153,7 @@ function Header() {
 
               <div className="align-helper">
                 <div className="username-text">
-                  {store.user.firstName + store.user.lastName}
+                  {fullName}
                 </div>
                 <Avatar
                   facebookId="100008343750912"

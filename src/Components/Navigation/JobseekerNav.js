@@ -6,6 +6,7 @@ import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Calendar from '../Calendar/Calendar';
 import ProfilePopup from '../Profile/ProfilePopup';
+import './JobseekerNav.css';
 
 const style = {
   buttons: {
@@ -15,36 +16,17 @@ const style = {
     height: 0,
   },
   iconStyle: {
-    background: '#FFFBFE',
-    '&:hover': {
-      background: '#FFFBFE',
-    },
     boxShadow: '0px 2px 8px rgba(68, 87, 82, 0.25)',
-    position: 'absolute',
-    width: '80px',
-    height: '80px',
-    left: '44px',
-    top: '44px',
   },
   iconStyle2: {
-    background: '#FFFBFE',
-    '&:hover': {
-      background: '#FFFBFE',
-    },
     boxShadow: '0px 2px 8px rgba(68, 87, 82, 0.25)',
-    position: 'absolute',
-    width: '80px',
-    height: '80px',
-    right: '44px',
-    top: '44px',
   },
   buttonStyle: {
-    padding: 0.8,
-    background: '#FFFBFE',
     color: '#484649',
     borderRadius: '1em',
     boxSizing: 'border-box',
     fontSize: '2em',
+    width: '80%',
   },
 };
 
@@ -102,7 +84,7 @@ function JobseekerNav() {
       }
     }
 
-    prevOpen2.current = open1;
+    prevOpen2.current = open2;
   }, [open2]);
 
   return (
@@ -110,7 +92,7 @@ function JobseekerNav() {
       <div id="child">
         <Box ref={anchorRef1} onClick={handleToggle1}>
           <IconButton
-            id="composition-button"
+            id="composition-button-one"
             aria-controls={open1 ? 'composition-menu' : undefined}
             aria-expanded={open1 ? 'true' : undefined}
             aria-haspopup="true"
@@ -125,7 +107,7 @@ function JobseekerNav() {
       <div id="child">
         <Box ref={anchorRef2} onClick={handleToggle2}>
           <IconButton
-            id="composition-button"
+            id="composition-button-two"
             aria-controls={open2 ? 'composition-menu' : undefined}
             aria-expanded={open2 ? 'true' : undefined}
             aria-haspopup="true"
