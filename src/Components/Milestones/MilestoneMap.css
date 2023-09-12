@@ -1,86 +1,163 @@
-.parent {
-  position: relative; 
+.background-desktop,
+.background-mobile {
+  height: 100vh;  
+  width: 100vw;
+  background-size: cover !important;
+  position: relative;
+  overflow: hidden;
 }
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);  
-    padding: 70px;
-    height: 90vh;  
-    background: linear-gradient(180deg, #EFFBFF 0%, #F5F1FF 69.61%, #FFF2F5 100%);
+
+.background-mobile {
+  display: none;
+  height: 195em;  
+  width: 100%;
+}
+
+.roadmap-contents-desktop,
+.roadmap-contents-mobile {
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  
+  height: calc((100vw - 20em) * .75);
+  aspect-ratio: 4/3;
+
+  max-width: 90vw;
+  max-height: 90vh;
+
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.roadmap-contents-mobile {
+  height: 92%;
+  width: 100%;
+  max-height: none;
+  max-width: none;
+  aspect-ratio: none;
+}
+
+#assessment,
+#online-profile,
+#training-program,
+#workshop,
+#internship,
+#job-fair,
+#job-portal,
+#resource,
+#hiring-info {
+  position: absolute;
+}
+
+#img {
+  max-width: 20vw;
+  width: min(26vh, 18vw);
+  filter: saturate(1.25);
+}
+
+#assessment {
+  top: 4%;
+  left: 37%;
+}
+
+#online-profile {
+  top: 13%;
+  left: 67%;
+}
+
+#training-program {
+  top: 34%;
+  left: 75%;
+}
+
+#workshop {
+  top: 58%;
+  left: 84%;
+}
+
+#internship {
+  top: 70%;
+  left: 53%;
+}
+
+#job-fair {
+  top: 75%;
+  left: 21%;
+}
+
+#job-portal {
+  top: 58%;
+  left: -6%;
+}
+
+#resource {
+  top: 38%;
+  left: -10%;
+}
+
+#hiring-info {
+  top: 9%;
+  left: 3%;
+} 
+
+@media only screen and (max-aspect-ratio: 1/1) {
+  .background-desktop {
+    display: none;
   }
-  .map-title {
-    grid-area: 2 / 2 / span 1 / span 1; 
+
+  .background-mobile {
+    display: block;
   }
-  #roadmap-title {
-    width: fit-content;
-    height: fit-content;    
-    position: absolute;
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
+
+  #img {
+    min-width: calc(15em + 10vw);
   }
+
   #assessment {
-    width: fit-content; 
-    height: fit-content;
-    margin-top: -5vh;
-    margin-left: 35vw; 
-    position: absolute;
+    top: 9%;
+    left: 38%;
   }
-   #online-profile {
-    width: fit-content;
-    height: fit-content;
-    margin-top: 8vh;
-    margin-left: 60vw;
-    position: absolute;
+
+  #online-profile {
+    top: 18.5%;
+    left: 22%;
   }
+
   #training-program {
-    width: fit-content; 
-    height: fit-content;
-    margin-top: 30vh;
-    margin-left: 65vw; 
-    position: absolute;
+    top: 26.5%;
+    left: 46%;
   }
+
   #workshop {
-    width: fit-content; 
-    height: fit-content; 
-    margin-top: 53vh;
-    margin-left: 57vw;
-    position: absolute; 
+    top: 36%;
+    left: 41%;
   }
+
   #internship {
-    width: fit-content;
-    height: fit-content; 
-    margin-top: 65vh; 
-    margin-left: 42vw; 
-    position: absolute; 
+    top: 45%;
+    left: 40%;
   }
+
   #job-fair {
-    width: fit-content;
-    height: fit-content; 
-    margin-top: 70vh; 
-    margin-left: 20vw; 
-    position: absolute;
+    top: 58%;
+    left: 41%;
   }
-  #job-board {
-    width: fit-content; 
-    height: fit-content; 
-    margin-top: 50vh; 
-    margin-left: 2vw;
-    position: absolute; 
+
+  #job-portal {
+    top: 67.5%;
+    left: 37%;
   }
+
   #resource {
-    width: fit-content;
-    height: fit-content;
-    margin-top: 30vh;
-    margin-left: 3vw;
-    position: absolute;
+    top: 79%;
+    left: 42%;
   }
+
   #hiring-info {
-    width: fit-content; 
-    height: fit-content; 
-    margin-top: 1vh; 
-    margin-left: 8vw;
-    position: absolute;
-  } 
+    top: 88%;
+    left: 39%;
+  }
+}

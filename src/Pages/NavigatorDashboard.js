@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import {
   collection, query, where, getDocs, /* doc, */
 } from 'firebase/firestore';
-import { db } from '../Components/firebase';
+import { db } from '../firebase';
 import './NavigatorDashboard.css';
-import Checkboxes from './Checkboxes';
+import Checkboxes from '../Components/Dashboard/Checkboxes';
 import Notepad from '../Components/Notepad/Notepad';
 
 // later we can make each tab a different component, the individual tabs take a jobseeker as a prob
@@ -13,8 +13,8 @@ function NavigatorDashboard() {
   // eslint-disable-next-line no-unused-vars
   const [seekerID, setSeekerID] = useState('');
   const updateJobseeker = async () => {
-  // const ref = doc(db, 'jobseekers', { seekerID });
-  // await update need to update db first
+    // const ref = doc(db, 'jobseekers', { seekerID });
+    // await update need to update db first
   };
   const [jobseeker, setJobseeker] = useState({
     name: 'Name',

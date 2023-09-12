@@ -1,0 +1,92 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-weight: normal;
+    font-style: normal;
+    src: url('../../Assets/Fonts/Montserrat-Regular.eot') format('embedded-opentype'), /* IE6-IE8 */
+         url('../../Assets/Fonts/Montserrat-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../../Assets/Fonts/Montserrat-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+         url('../../Assets/Fonts/Montserrat-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('../../Assets/Fonts/Montserrat-Regular.svg') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    font-weight: bold;
+    font-style: normal;
+    src: url('../../Assets/Fonts/Montserrat-Bold.eot') format('embedded-opentype'), /* IE6-IE8 */
+         url('../../Assets/Fonts/Montserrat-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../../Assets/Fonts/Montserrat-Bold.woff') format('woff'), /* Pretty Modern Browsers */
+         url('../../Assets/Fonts/Montserrat-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('../../Assets/Fonts/Montserrat-Bold.svg') format('svg'); /* Legacy iOS */
+}
+
+.temp {
+    height: 5em;
+}
+
+.i-title {
+    width: 56.3vw;
+    padding-bottom: 1.2em;
+    margin: 0 auto;
+    text-align: left;
+    font-family: 'Montserrat';
+    font-size: 1.3em;
+}
+
+.width-55vw {
+    width: 56.3vw;
+    margin: 0 auto;
+}
+
+.i-add-button {
+    margin-top: -1em;
+    width: 14em;
+    height: 4em;
+    margin-bottom: 1%;
+    background-color: #000AA0;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    font-family: 'Montserrat';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.i-add-button:hover {
+    background-color: #AAAFFA;
+}
+
+.i-delete-button {
+    width: 14em;
+    height: 4em;
+    margin-bottom: 1%;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    border-color: black;
+    font-family: 'Montserrat';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.i-delete-button:hover {
+    background-color: #D9D9D9;
+    border: 0px;
+}
+
+.i-between-inputs {
+    height: 1.4em;
+}
+
+.i-between-buttons {
+    height: 1em;
+}
+
+#demo-simple-select-label {
+    font-family: 'Montserrat';
+    font-size: 0.95vw;
+    color: rgb(0, 10, 160);
+    background-color: white;
+    padding-right: 0.25em;
+}

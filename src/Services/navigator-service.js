@@ -1,9 +1,7 @@
 import {
-  doc, setDoc, getDoc, updateDoc, deleteDoc,
+  doc, setDoc, getDoc, deleteDoc, collection, getDocs,
 } from 'firebase/firestore';
-import firebase from '../firebase';
-
-const db = firebase;
+import { db } from '../firebase';
 
 // CRUD functions
 // data in form {"name": "John"} for instance.
@@ -32,7 +30,7 @@ export const fetchNavigator = async (email) => {
 };
 
 export const updateNavigator = async (email, data) => {
-  await updateDoc(doc(db, 'navigators', email), data)
+  await setDoc(doc(db, 'navigators', email), data, { merge: true })
     .then(() => {
       console.log('updated navigator ', email);
     }).catch((err) => {
@@ -47,4 +45,15 @@ export const deleteNavigator = async (email) => {
     .catch((error) => {
       console.log(error);
     });
+};
+
+export const fetchAllNavigators = async () => {
+  const colRef = collection(db, 'navigators');
+  try {
+    const docsSnap = await getDocs(colRef);
+    return docsSnap;
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
 };
