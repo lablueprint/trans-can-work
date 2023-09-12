@@ -19,6 +19,7 @@ import approvalIcon from './Assets/trans flag graphic.svg';
 import AdminView from './Components/AdminView';
 import NavigatorMenu from './Components/Navigation/NavigatorMenu';
 import MilestoneMap from './Components/Milestones/MilestoneMap';
+import ProfileOutline from './Components/profileOutline';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/navProfile" element={<ProfileOutline />} />
         <Route path="/landing" element={<Landing />} />
         <Route path="/onboard" element={<JobseekerData useremail="solia@goodpl.us" username="solia tennis" />} />
         <Route path="/adminview" element={<AdminView />} />
