@@ -62,6 +62,8 @@ function Header() {
 
   const [navbar, toggleNavbar] = useState(false);
 
+  const fullName = `${store.user.firstName} ${store.user.lastName}`;
+
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -149,9 +151,16 @@ function Header() {
                 </Link>
               </div>
 
+              {/* <div className="username-text-roadmap">
+                {`${store.user.firstName} ${store.user.lastName}`}
+                &apos;s Roadmap
+              </div>
+
+            </div>
+            <div className="right-header-contents"> */}
               <div className="align-helper">
                 <div className="username-text">
-                  {store.user.firstName + store.user.lastName}
+                  {fullName}
                 </div>
                 <Avatar
                   facebookId="100008343750912"
