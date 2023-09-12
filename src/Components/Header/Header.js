@@ -10,6 +10,7 @@ import Back from '../../Assets/back.svg';
 import './Header.css';
 import hamburgerIcon from '../../Assets/Images/hamburger-icon.png';
 import closeButton from '../../Assets/Images/close-button.png';
+import notepadIcon from '../../Assets/Images/notepad.png';
 import '../Navigation/NavMenu.css';
 
 const style = {
@@ -61,50 +62,81 @@ function Header() {
 
   const [navbar, toggleNavbar] = useState(false);
 
-  const handleClick = () => {
-    toggleNavbar(!navbar);
-    console.log('testing!');
-  };
+  const fullName = `${store.user.firstName} ${store.user.lastName}`;
 
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  const [notes, toggleNotes] = useState(false);
+
+  const handleClick = () => {
+    toggleNavbar(!navbar);
+  };
+
+  const handleNotepadClick = () => {
+    handleClick();
+    toggleNotes(!notes);
+  };
+
+  const handleNotepadClickOnly = () => {
+    toggleNotes(!notes);
+  };
+
   return (
     <div>
 
-      <Tabs
-        className={navbar ? 'mobileMenuOn' : 'mobileMenuOff'}
-        orientation="vertical"
-        variant="scrollable"
-        value={value}
-        onChange={handleChange}
-        aria-label="Vertical tabs example"
-        sx={style.tabsStyle}
-        TabIndicatorProps={{
-          sx: style.tabIndicatorStyle,
-        }}
-      >
-        <button type="button" onClick={handleClick}>
+      <div className={navbar ? 'mobileMenuOn' : 'mobileMenuOff'}>
+        <button type="button" onClick={handleClick} className="close-button-container">
           <img className="close-button" src={closeButton} alt="Close button" />
         </button>
-        {tabs.map((x) => (
-          <Tab
-            sx={style.tabStyle}
-            key={x.link}
-            label={x.title}
-            component={Link}
-            to={x.link}
-            onClick={handleClick}
-          />
-        ))}
-      </Tabs>
+        <Tabs
+          orientation="vertical"
+          variant="scrollable"
+          value={value}
+          onChange={handleChange}
+          aria-label="Vertical tabs example"
+          sx={style.tabsStyle}
+          TabIndicatorProps={{
+            sx: style.tabIndicatorStyle,
+          }}
+        >
+          {tabs.map((x) => (
+            <Tab
+              sx={style.tabStyle}
+              key={x.link}
+              label={x.title}
+              component={Link}
+              to={x.link}
+              onClick={handleClick}
+            />
+          ))}
+        </Tabs>
+        <button type="button" onClick={handleNotepadClick} className="notes-button-wrapper">
+          <img className="note-button" src={notepadIcon} alt="Notepad icon" />
+        </button>
+      </div>
+
+      <div className={notes ? 'notesPopupOn' : 'notesPopupOff'}>
+        <div className="notes-text">
+          <h1 className="notes-title">Notes</h1>
+          <p className="notes-body">These are some notes that JobseekerJeff&#39;s navigator has written for him. We need to integrate this into the backend!</p>
+        </div>
+        <div className="notes-buttons">
+          <button type="button" onClick={handleNotepadClickOnly} className="notes-button-cancel">
+            Cancel
+          </button>
+          <button type="button" onClick={handleNotepadClickOnly} className="notes-button-save">
+            Save
+          </button>
+        </div>
+      </div>
 
       <div className="headers">
         <Box sx={{ borderBottom: 1, borderColor: 'divider', boxShadow: '0 4px 4px #c9c9c9' }}>
           <div className="all-header-items">
-            <div className="left-header-contents">
+            <div className="top-header-contents">
               <div className="go-back">
                 <Link
                   to="/dashboard"
@@ -119,16 +151,9 @@ function Header() {
                 </Link>
               </div>
 
-              <div className="username-text-roadmap">
-                {store.user.firstName + store.user.lastName}
-                &apos;s Roadmap
-              </div>
-
-            </div>
-            <div className="right-header-contents">
               <div className="align-helper">
                 <div className="username-text">
-                  {store.user.firstName + store.user.lastName}
+                  {fullName}
                 </div>
                 <Avatar
                   facebookId="100008343750912"
@@ -142,6 +167,13 @@ function Header() {
                   }}
                   round
                 />
+              </div>
+
+            </div>
+            <div className="bottom-header-contents">
+              <div className="username-text-roadmap">
+                {store.user.firstName + store.user.lastName}
+                &apos;s Roadmap
               </div>
 
               <button type="button" onClick={handleClick} className="menu-button-wrapper">

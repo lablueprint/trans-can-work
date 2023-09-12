@@ -28,6 +28,7 @@ import NavigatorMenu from './Components/Navigation/NavigatorMenu';
 import MilestoneMap from './Components/Milestones/MilestoneMap';
 import Internships from './Components/Internships/Internships';
 import Assessment from './Components/Assessment/Assessment';
+import NavView from './Components/NavView/NavView';
 import Workshops from './Components/Workshops/Workshops';
 import JobFairs from './Components/JobFairs/JobFairs';
 import JobBoards from './Components/JobBoards/JobBoards';
@@ -85,7 +86,7 @@ function App() {
             )}
           />
           <Route
-            path="/"
+            path="/jobseekerView"
             element={<Home />}
           />
           <Route
@@ -100,7 +101,7 @@ function App() {
           {user != undefined && 
           (
           <>
-          <Route path="/home" element={<NavigatorMenu />}>
+          <Route path="/clientRoadmap" element={<NavigatorMenu />}>
             <Route path="roadmap" element={<MilestoneMap />} />
             <Route path="assessment" element={<Assessment />} />
             <Route path="onlineprofiles" element={<OnlineProfiles />} />
@@ -112,7 +113,7 @@ function App() {
             <Route path="resources" element={<Resources />} />
             <Route path="hiredinfo" element={<HiredInfo />} />
           </Route>
-          <Route path="/onboard" element={<JobseekerData />} />
+          <Route path="/onboard" element={<NavView />} />
           </>)
   }
           <Route path="/login" element={<Login />} />

@@ -21,14 +21,11 @@ function Internships() {
     inputLabel: {
       fontFamily: 'Montserrat',
       color: '#49454F',
-      width: '55.0vw',
-      height: '3.2vw',
       fontSize: '0.9vw',
       fontWeight: 'bold',
       backgroundColor: '#F7F8FE',
     },
     formControl: {
-      width: '55.0vw',
       textAlign: 'left',
       textDecoration: 'none',
     },
@@ -98,7 +95,6 @@ function Internships() {
     const temp = [...allInternships];
     temp[index][element] = event.target.value;
     setAllInternships(temp);
-    console.log(allInternships);
   };
 
   const editDropdown = (event, label, index) => {

@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import './Workshops.css';
 import { TextField } from '@material-ui/core';
 import { DateField } from '@mui/x-date-pickers/DateField';
-import { FormControl, InputLabel } from '@mui/material';
+import {
+  FormControl, InputLabel,
+} from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Add from '../../Assets/add.svg';
@@ -21,14 +23,11 @@ function Workshops() {
     inputLabel: {
       fontFamily: 'Montserrat',
       color: '#49454F',
-      width: '55.0vw',
-      height: '3.2vw',
       fontSize: '0.9vw',
       fontWeight: 'bold',
       backgroundColor: '#F7F8FE',
     },
     formControl: {
-      width: '55.0vw',
       textAlign: 'left',
       textDecoration: 'none',
     },
@@ -86,7 +85,6 @@ function Workshops() {
     const temp = [...allWorkshops];
     temp[index][element] = event.target.value;
     setAllWorkshops(temp);
-    console.log(allWorkshops);
   };
 
   const editDropdown = (event, index) => {
