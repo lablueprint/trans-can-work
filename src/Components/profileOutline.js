@@ -192,7 +192,7 @@ export default function ProfileOutline() {
           </Box>
         </div>
         <div className="top-container">
-          <div className="profile-photo-container">
+          <div className="photo-container">
             <Avatar src={ProfilePicPlaceholder} size="150" sx={{ borderRadius: '100px' }} round />
             {/* <div
               className="imageSection"
@@ -202,35 +202,30 @@ export default function ProfileOutline() {
                 height: 100,
               }}
             /> */}
-            <div
-              className="profilePicButton"
+            <button
+              type="button"
+              className="editPicButton"
+              onClick={() => setEditProfilePic(true)}
+              style={{
+                background: '#FFFFFF',
+                borderColor: 'black',
+                color: 'black',
+                borderRadius: '50%',
+                alignSelf: 'flex-end',
+                height: 41,
+                width: 41,
+                padding: 10,
+                position: 'absolute',
+                bottom: 20,
+                right: 20,
+              }}
             >
-              <button
-                type="button"
-                className="editProfilePicButton"
-                onClick={() => setEditProfilePic(true)}
-                style={{
-                  background: '#FFFFFF',
-                  borderColor: 'black',
-                  color: 'black',
-                  borderRadius: '50%',
-                  alignSelf: 'flex-end',
-                  height: 41,
-                  width: 41,
-                  padding: 10,
-                  position: 'absolute',
-                  bottom: 20,
-                  right: 20,
-                }}
-              >
-                <Edit sx={{
-                  height: 18,
-                  width: 18,
-                }}
-                />
-              </button>
-
-            </div>
+              <Edit sx={{
+                height: 18,
+                width: 18,
+              }}
+              />
+            </button>
             <Dialog open={editProfilePic} onClose={() => setEditProfilePic(false)}>
               <div>
                 <h3>Choose Profile Picture</h3>
@@ -250,10 +245,10 @@ export default function ProfileOutline() {
               </div>
               <Button onClick={() => setEditProfilePic(false)}>Save</Button>
             </Dialog>
-            <p className="name-display">
-              {demographicInfo[0].name}
-            </p>
           </div>
+          <p className="name-display">
+            {demographicInfo[0].name}
+          </p>
           <div className="edit-button">
             <Button
               variant="outlined"
