@@ -16,6 +16,9 @@
     margin: 0;
     text-align: left;
     display:flex;
+    width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .dashboard-page-header-profile-text{
@@ -23,6 +26,8 @@
     font-size: 1em;
     font-weight: bold;
     text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .dashboard-page-header-name-and-icon-container{
