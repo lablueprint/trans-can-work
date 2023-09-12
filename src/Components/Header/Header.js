@@ -61,6 +61,8 @@ function Header() {
 
   const [navbar, toggleNavbar] = useState(false);
 
+  const fullName = `${store.user.firstName} ${store.user.lastName}`;
+
   const handleClick = () => {
     toggleNavbar(!navbar);
     console.log('testing!');
@@ -120,7 +122,7 @@ function Header() {
               </div>
 
               <div className="username-text-roadmap">
-                {store.user.firstName + store.user.lastName}
+                {`${store.user.firstName} ${store.user.lastName}`}
                 &apos;s Roadmap
               </div>
 
@@ -128,7 +130,7 @@ function Header() {
             <div className="right-header-contents">
               <div className="align-helper">
                 <div className="username-text">
-                  {store.user.firstName + store.user.lastName}
+                  {fullName}
                 </div>
                 <Avatar
                   facebookId="100008343750912"
