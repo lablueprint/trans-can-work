@@ -31,7 +31,6 @@ function NavView() {
     if (userData !== undefined) {
       updateUser('alannguyen711@gmail.com', userData);
     }
-    console.log(userData);
   }, [userData]);
 
   if (jobseekerData === undefined) {
