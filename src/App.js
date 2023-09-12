@@ -5,7 +5,6 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { useSelector, useDispatch } from 'react-redux';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import ConfirmPopup from './Components/ConfirmPopup/confirmPopup.js';
 
 import {
   Login,
