@@ -3,7 +3,7 @@ import './Workshops.css';
 import { TextField } from '@material-ui/core';
 import { DateField } from '@mui/x-date-pickers/DateField';
 import {
-  FormControl, InputLabel, NativeSelect,
+  FormControl, InputLabel,
 } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
@@ -17,29 +17,17 @@ function Workshops() {
       color: '#49454F',
       fontSize: '0.9vw',
       fontWeight: 'bold',
-      border: '1px solid #000AA0',
-      borderRadius: '4px',
-      width: '55.0vw',
-      height: '3.2vw',
       paddingLeft: '1.7%',
       textDecoration: 'none',
-      backgroundColor: '#F7F8FE',
     },
     inputLabel: {
-      borderBottom: 'none',
-      color: '#0c0ca4',
       fontFamily: 'Montserrat',
-      fontWeight: 'normal',
+      color: '#49454F',
       fontSize: '0.9vw',
-      marginTop: '2%',
-      textAlign: 'left',
-      backgroundColor: 'white',
-      paddingLeft: '1%',
-      paddingRight: '1%',
-      textDecoration: 'none',
+      fontWeight: 'bold',
+      backgroundColor: '#F7F8FE',
     },
     formControl: {
-      width: '55.0vw',
       textAlign: 'left',
       textDecoration: 'none',
     },
@@ -97,7 +85,6 @@ function Workshops() {
     const temp = [...allWorkshops];
     temp[index][element] = event.target.value;
     setAllWorkshops(temp);
-    console.log(allWorkshops);
   };
 
   const editDropdown = (event, index) => {
@@ -159,23 +146,23 @@ function Workshops() {
                       {(field.label === 'Attended Workshop?')
                       && (
                         <>
-                          <FormControl style={styles.formControl}>
-                            <InputLabel style={styles.inputLabel}>
-                              Attended Workshop?
-                            </InputLabel>
-                            <NativeSelect
+                          <FormControl
+                            fullWidth
+                            focused
+                            style={styles.formControl}
+                          >
+                            <InputLabel id="demo-simple-select-label">{field.label}</InputLabel>
+                            <Select
                               defaultValue="No"
-                              style={styles.dropdownOptions}
+                              labelId="demo-simple-select-label"
+                              id="demo-simple-select"
+                              label={field.label}
                               onChange={(e) => editDropdown(e, index)}
-                              menuprops={{
-                                PaperProps: {
-                                  style: styles.purpleBackground,
-                                },
-                              }}
+                              style={styles.inputLabel}
                             >
-                              <option value="Yes" className="dropit">Yes</option>
-                              <option value="No" className="dropit">No</option>
-                            </NativeSelect>
+                              <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
+                              <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
+                            </Select>
                           </FormControl>
                           <div className="op-between-inputs" />
                         </>

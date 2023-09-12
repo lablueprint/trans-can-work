@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import propTypes from 'prop-types';
 import './Assessment.css';
 import {
-  FormControl, InputLabel, NativeSelect,
+  FormControl, InputLabel,
 } from '@mui/material';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 import { TextField } from '@material-ui/core';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
@@ -19,26 +21,17 @@ const styles = {
     color: '#49454F',
     fontSize: '0.9vw',
     fontWeight: 'bold',
-    border: '1px solid #000AA0',
-    borderRadius: '4px',
-    width: '55.0vw',
-    height: '3.2vw',
     paddingLeft: '1.7%',
     textDecoration: 'none',
-    backgroundColor: '#F7F8FE',
   },
   inputLabel: {
-    borderBottom: 'none',
-    color: '#0c0ca4',
     fontFamily: 'Montserrat',
-    fontWeight: 'normal',
+    color: '#49454F',
+    width: '55.0vw',
+    height: '3.2vw',
     fontSize: '0.9vw',
-    marginTop: '2%',
-    textAlign: 'left',
-    backgroundColor: 'white',
-    paddingLeft: '1%',
-    paddingRight: '1%',
-    textDecoration: 'none',
+    fontWeight: 'bold',
+    backgroundColor: '#F7F8FE',
   },
   formControl: {
     width: '55.0vw',
@@ -324,7 +317,7 @@ function Assessment({
     const temp = [...jobseeker.education];
     temp.splice(index, 1);
     setJobseeker({
-      ...jobseeker, // change this to prevJobseeker
+      ...jobseeker,
       education: temp,
     });
   };
@@ -443,29 +436,30 @@ function Assessment({
             <div>
               <form>
                 <div>
-                  <FormControl style={styles.formControl}>
-                    <InputLabel style={styles.inputLabel}>
-                      Degree?
-                    </InputLabel>
-                    <NativeSelect
+                  <div className="baby-divider" />
+                  <FormControl
+                    fullWidth
+                    focused
+                    style={styles.formControl}
+                  >
+                    <InputLabel id="demo-simple-select-label">Degree?</InputLabel>
+                    <Select
                       defaultValue="No"
-                      style={styles.dropdownOptions}
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      label="Degree"
                       onChange={(e) => editEducation(e, 'degree', index)}
-                      menuprops={{
-                        PaperProps: {
-                          style: styles.purpleBackground,
-                        },
-                      }}
+                      style={styles.inputLabel}
                     >
-                      <option value="Yes" className="dropit">Yes</option>
-                      <option value="No" className="dropit">No</option>
-                      <option value="Progress" className="dropit">Still Working On</option>
-                    </NativeSelect>
+                      <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
+                      <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
+                      <MenuItem value="Progress" style={styles.dropdownOptions}>Still Working On</MenuItem>
+                    </Select>
                   </FormControl>
+                  <div className="op-between-inputs" />
                 </div>
                 {(jobseeker.education[index].degree === 'Progress' || jobseeker.education[index].degree === 'Yes') && (
                   <div>
-                    <div className="op-between-inputs" />
                     <TextField
                       id="outlined-basic"
                       label="Type of Degree"
@@ -478,22 +472,28 @@ function Assessment({
                       InputLabelProps={textFieldStyles.labelProps}
                       className="input-field"
                     />
+                    <div className="op-between-inputs" />
                   </div>
                 )}
                 <div>
-                  <FormControl style={styles.formControl}>
-                    <InputLabel style={styles.inputLabel}>
-                      Certificate
-                    </InputLabel>
-                    <NativeSelect
+                  <FormControl
+                    fullWidth
+                    focused
+                    style={styles.formControl}
+                  >
+                    <InputLabel id="demo-simple-select-label">Certificate?</InputLabel>
+                    <Select
                       defaultValue="No"
-                      style={styles.dropdownOptions}
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      label="Degree"
                       onChange={(e) => editEducation(e, 'certificate', index)}
+                      style={styles.inputLabel}
                     >
-                      <option value="Yes" style={styles.dropdownOptions}>Yes</option>
-                      <option value="No" style={styles.dropdownOptions}>No</option>
-                      <option value="Progress" style={styles.dropdownOptions}>Still Working On</option>
-                    </NativeSelect>
+                      <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
+                      <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
+                      <MenuItem value="Progress" style={styles.dropdownOptions}>Still Working On</MenuItem>
+                    </Select>
                   </FormControl>
                 </div>
                 {(jobseeker.education[index].certificate === 'Progress' || jobseeker.education[index].certificate === 'Yes') && (
@@ -523,7 +523,6 @@ function Assessment({
                     style={{ marginRight: '12px' }}
                   />
                   Delete Education
-
                 </button>
               </div>
             </div>
@@ -540,7 +539,6 @@ function Assessment({
 
           </button>
         </div>
-
         <div>
           <div className="section-divider" />
           <div className="assessment-section-title">List of Current/Previous Occupations</div>
@@ -615,7 +613,6 @@ function Assessment({
             </div>
           </div>
         </div>
-
         <div>
           <div className="section-divider" />
           <div className="assessment-section-title">Skills Checklist</div>
