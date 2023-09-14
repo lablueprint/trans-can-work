@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import './OnlineProfiles.css';
+import propTypes from 'prop-types';
 import { TextField } from '@material-ui/core';
 import Add from '../../Assets/add.svg';
 import Check from '../../Assets/Images/check.png';
 import Cancel from '../../Assets/Images/cancel.png';
 import Delete from '../../Assets/delete.svg';
 
-function OnlineProfiles() {
+function OnlineProfiles({ jobseeker, setJobseeker }) {
   const textFieldStyles = {
     inputProps: {
       style: {
@@ -149,3 +150,22 @@ function OnlineProfiles() {
 }
 
 export default OnlineProfiles;
+
+OnlineProfiles.propTypes = {
+  jobseeker: propTypes.shape({
+    clientInfo:
+    {
+      'City/State': propTypes.string.isRequired,
+      Ethnicity: propTypes.string.isRequired,
+      Age: propTypes.string.isRequired,
+      'Gender Identity': propTypes.string.isRequired,
+      Sexuality: propTypes.string.isRequired,
+      Veteran: propTypes.string.isRequired,
+      Disability: propTypes.string.isRequired,
+      'Housing Situation': propTypes.string.isRequired,
+      'Currently Employed': propTypes.string.isRequired,
+      'Prior Convictions': propTypes.string.isRequired,
+    },
+  }).isRequired,
+  setJobseeker: propTypes.func.isRequired,
+};
