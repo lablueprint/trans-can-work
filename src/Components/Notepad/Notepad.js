@@ -21,7 +21,6 @@ function Notepad() {
         setNotes(data.notes);
       }
     };
-
     logquery();
   }, []);
 
