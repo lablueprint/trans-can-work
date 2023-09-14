@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
@@ -15,60 +14,45 @@ import Training from './Training';
 import Internship from './Internship';
 import Hiring from './Hiring';
 import './IslandPopup.css';
-// import { fetchJobseekerData } from '../../Services/jobseeker-data-service';
 
 function IslandPopup({
-  title, isOpen, handleClose, id, status, togglePending,
+  title, isOpen, handleClose, id, status, togglePending, jobseeker,
 }) {
   const [message, setMessage] = useState('Mark as Complete');
+
   useEffect(() => {
-    console.log(status);
-    if (status === 'pending') {
+    if (status === 'waiting for approval') {
       setMessage('Pending Approval');
     } else if (status === 'complete') {
       setMessage('Complete!');
     }
   }, [status]);
+
   let toBeRendered;
   let markAsComplete = true;
 
   if (id === 'assessment') {
     markAsComplete = false;
-    toBeRendered = <Assessment />;
-  } else if (id === 'online-profile') {
+    toBeRendered = <Assessment jobseeker={jobseeker} />;
+  } else if (id === 'online profile') {
     toBeRendered = <OnlineProfile />;
   } else if (id === 'workshop') {
     toBeRendered = <Workshop />;
-  } else if (id === 'job-fair') {
+  } else if (id === 'job fair') {
     toBeRendered = <JobFair />;
   } else if (id === 'resources') {
     toBeRendered = <Resources />;
-  } else if (id === 'job-portal') {
+  } else if (id === 'job portal') {
     toBeRendered = <JobPortal />;
-  } else if (id === 'training-program') {
+  } else if (id === 'training program') {
     toBeRendered = <Training />;
   } else if (id === 'internship') {
     toBeRendered = <Internship />;
-  } else if (id === 'hiring-info') {
+  } else if (id === 'hiring info') {
     markAsComplete = false;
     toBeRendered = <Hiring />;
   }
 
-  // const [isPending, setPending] = useState(false);
-  // // const [completeButtonText, setCompleteButtonText] = useState('Mark as Complete');
-  // const store = useSelector((state) => state.auth.value);
-
-  // useEffect(() => {
-  //   const updateButton = async () => {
-  //     const jobseekerData = await fetchJobseekerData(store.email);
-  //     console.log(jobseekerData.data().milestones);
-  //     console.log(jobseekerData.data().milestones.id);
-  //     // const isMilestoneComplete = jobseekerData.data().milestones.includes(id);
-  //     // const buttonText = isMilestoneComplete ? 'Completed!' : 'Mark as Complete';
-  //     // setCompleteButtonText(buttonText);
-  //   };
-  //   updateButton();
-  // }, []);
   return (
     <div>
       <Modal
@@ -83,7 +67,7 @@ function IslandPopup({
             <Button
               disableRipple
               onClick={() => togglePending()}
-              id={status}
+              id={status.replace(/ /g, '-')}
             >
               {message}
             </Button>
@@ -109,6 +93,7 @@ IslandPopup.propTypes = {
   id: PropTypes.string.isRequired,
   status: PropTypes.string,
   togglePending: PropTypes.func,
+  jobseeker: PropTypes.func.isRequired,
 };
 
 IslandPopup.defaultProps = {
