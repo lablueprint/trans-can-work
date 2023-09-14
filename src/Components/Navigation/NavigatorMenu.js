@@ -58,10 +58,15 @@ function NavigatorMenu() {
   const [jobseekerData, setJobseekerData] = useState();
   const [notes, toggleNotes] = useState(false);
   const [notesBody, setNotesBody] = useState('');
+  const [prev, setPrev] = useState('');
   const [loaded, setLoaded] = useState(false);
   const jobseekerEmail = 'alannguyen711@gmail.com';
 
   const handleNotepadClick = () => {
+    toggleNotes(!notes);
+  };
+
+  const handleNotepadCancel = () => {
     toggleNotes(!notes);
   };
 
@@ -89,6 +94,14 @@ function NavigatorMenu() {
   }, []);
 
   useEffect(() => {
+    if (notes) {
+      setPrev(notesBody);
+    } else {
+      setNotesBody(prev);
+    }
+  }, [notes]);
+
+  useEffect(() => {
     if (jobseekerData !== undefined) {
       setNotesBody(jobseekerData.notes);
     }
@@ -109,7 +122,7 @@ function NavigatorMenu() {
           <textarea className="notes-body" onChange={handleInputChange} value={notesBody} />
         </div>
         <div className="notes-buttons">
-          <button type="button" onClick={handleNotepadClick} className="notes-button-cancel">
+          <button type="button" onClick={handleNotepadCancel} className="notes-button-cancel">
             Cancel
           </button>
           <button type="button" onClick={handleNotepadSave} className="notes-button-save">
