@@ -257,8 +257,13 @@ input, textarea {
     width: 100% !important;
 }
 
+.MuiBox-root .MuiBox-root {
+    display: none;
+}
+
 .content {
-    width: 100% !important;
+    margin-top: 5em;
+    width: 65% !important;
 }
 
 .MuiBox-root div div div div form {
@@ -293,5 +298,10 @@ input, textarea {
 @media (max-width: 768px) {
     .columns-container {
         display: block;
+    }
+
+    .content {
+        margin-top: 3em;
+        width: 90% !important;
     }
 }
