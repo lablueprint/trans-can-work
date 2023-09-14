@@ -22,7 +22,7 @@ function Training() {
     start();
   }, []);
   return (
-    <div>
+    <div className="training-wrapper">
       <h6 className="training">Select any Trainin&apos; Programs ye have enrolled in or attended while registered as a client with Trans Can Work.</h6>
       <MilestoneChecklist checkboxes={trainings} columns={2} />
     </div>

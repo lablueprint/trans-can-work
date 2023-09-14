@@ -60,7 +60,7 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
 );
 
 function Filtering({
-  checkedArr, setCheckedArr,
+  checkedSkills, setCheckedSkills,
   checkedInterests, setCheckedInterests,
   skills, interests, handleClose,
 }) {
@@ -88,7 +88,13 @@ function Filtering({
       <div className="filter-container">
 
         {tab === '0'
-          ? <Checkboxes skills={skills} checkedArr={checkedArr} setCheckedArr={setCheckedArr} />
+          ? (
+            <Checkboxes
+              skills={skills}
+              checkedArr={checkedSkills}
+              setCheckedArr={setCheckedSkills}
+            />
+          )
           : (
             <Checkboxes
               skills={interests}
@@ -102,8 +108,8 @@ function Filtering({
 }
 
 Filtering.propTypes = {
-  checkedArr: propTypes.arrayOf(propTypes.bool).isRequired, // i think this is
-  setCheckedArr: propTypes.func.isRequired,
+  checkedSkills: propTypes.arrayOf(propTypes.bool).isRequired, // i think this is
+  setCheckedSkills: propTypes.func.isRequired,
   checkedInterests: propTypes.arrayOf(propTypes.bool).isRequired, // i think this is
   setCheckedInterests: propTypes.func.isRequired,
   skills: propTypes.arrayOf(propTypes.string).isRequired,

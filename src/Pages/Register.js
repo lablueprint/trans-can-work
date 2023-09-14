@@ -82,7 +82,7 @@ function Register() {
 
   useEffect(() => {
     if (user && user.isLoggedIn && user.user !== undefined) {
-      navigate(user.user.approved ? '/home' : '/splash');
+      navigate(user.user.approved ? '/clientRoadmap' : '/splash');
     }
   }, [user]);
 
@@ -214,8 +214,8 @@ function Register() {
                 id="demo-radio-buttons-group-label"
                 style={{
                   fontFamily: 'Montserrat',
-                  fontSize: '0.9vw',
-                  color: 'blue',
+                  fontSize: '1rem',
+                  color: '#000AA0',
                   fontWeight: 'bold',
                 }}
               >
@@ -226,14 +226,13 @@ function Register() {
                 aria-labelledby="demo-radio-buttons-group-label"
                 defaultValue="jobseeker"
                 name="radio-buttons-group"
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  width: '54.0vw',
-                  color: 'blue',
-                  paddingTop: '4%',
-                }}
+                className="radio-buttons"
+                // style={{
+                //   display: 'flex',
+                //   flexDirection: 'row',
+                //   justifyContent: 'space-between',
+                //   color: '#000AA0',
+                // }}
               >
                 <FormControlLabel
                   value="jobseeker"
@@ -264,7 +263,7 @@ function Register() {
                   control={(
                     <CssRadio />
                   )}
-                  label="Adminstrator"
+                  label="Administrator"
                   onChange={() => setAccount('admin')}
                 />
               </RadioGroup>
@@ -330,7 +329,7 @@ function Register() {
                 ...inputProps,
                 endAdornment: (
                   <InputAdornment position="start" onClick={() => setShowPassword(!showPassword)}>
-                    <VisibilityIcon fontSize="large" />
+                    <VisibilityIcon fontSize="large" style={{ width: '0.75em' }} />
                   </InputAdornment>
                 ),
               }}
@@ -361,14 +360,21 @@ function Register() {
               &nbsp;Sign up with Google
             </Button>
           </div>
-          <img src={TCWLogo2} className="TcwLogo2" alt="TCWLogo2" />
-          <div className="login">
-            <div style={{ paddingBottom: '3%' }}>
-              {' '}
-              Have An Account?
-            </div>
-            <Link to="/">Login</Link>
+          <div className="loginInput">
+            <Link to="/" className="link">
+              <Button
+                type="button"
+                color="primary"
+                variant="outlined"
+                className={classes.button}
+                style={buttonStyle}
+              >
+                Have an account? Log In
+              </Button>
+            </Link>
+
           </div>
+          <img src={TCWLogo2} className="TcwLogo2" alt="TCWLogo2" />
         </div>
       </div>
     </>

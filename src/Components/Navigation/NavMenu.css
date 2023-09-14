@@ -1,2 +1,90 @@
 /* Remove this file once font is added to repo locally */
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans&family=Montserrat&display=swap');
+
+.button-wrapper {
+  background: none;
+  border: none;
+  margin: 1em 0 8em 4vw;
+  cursor: pointer;
+}
+
+.button-wrapper:hover,
+.button-wrapper:focus {
+  transform: scale(1.1);
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.notesPopupOff {
+  display: none !important;
+}
+
+.notesPopupOn {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: absolute;
+  height: calc(min(90vh, 30em));
+  width: calc(min(60vw, 35em));
+  z-index: 9999;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  /* right: 0; */
+  margin: 0 !important;
+  background-color: #E4E6FF;
+  border-radius: 16px;
+  border: 1px solid #000AA0;
+  text-align: left;
+  padding: 3em 3em;
+  font-family: 'Montserrat';
+  line-height: 1.5rem;
+}
+
+.notesPopupOn p {
+  margin-bottom: 2em;
+}
+
+.notes-buttons {
+  display: flex;
+  gap: 1em;
+}
+
+.notes-button-cancel,
+.notes-button-save {
+  /* background: none;
+  border: none; */
+  font-size: 1rem;
+  padding: 1em 1.5em;
+  background-color: #E4E6FF; 
+  border-style: solid;
+  cursor: pointer;
+  font-family: 'Montserrat';
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.notes-button-save {
+  border: 2px solid #000AA0;
+}
+
+.notes-button-cancel {
+  border: 2px solid black;
+}
+
+.notesPopupOn .close-button {
+  display: block !important;
+  position: relative;
+  float: right;
+}
+
+@media (max-width: 768px) {
+  .navigation {
+    display: none;
+  }
+}
