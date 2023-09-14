@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import {
   Tabs, Tab,
@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Back from '../../Assets/back.svg';
 import './Header.css';
+import { fetchJobseekerData, updateJobseekerData } from '../../Services/jobseeker-data-service';
 import hamburgerIcon from '../../Assets/Images/hamburger-icon.png';
 import closeButton from '../../Assets/Images/close-button.png';
 import notepadIcon from '../../Assets/Images/notepad.png';
@@ -69,20 +70,65 @@ function Header() {
     setValue(newValue);
   };
 
-  const [notes, toggleNotes] = useState(false);
-
   const handleClick = () => {
     toggleNavbar(!navbar);
   };
+
+  const [jobseekerData, setJobseekerData] = useState();
+  const [notes, toggleNotes] = useState(false);
+  const [notesBody, setNotesBody] = useState('');
+  const [prev, setPrev] = useState('');
+  const [loaded, setLoaded] = useState(false);
+  const jobseekerEmail = 'alannguyen711@gmail.com';
 
   const handleNotepadClick = () => {
     handleClick();
     toggleNotes(!notes);
   };
 
-  const handleNotepadClickOnly = () => {
+  const handleNotepadCancel = () => {
     toggleNotes(!notes);
   };
+
+  const handleNotepadSave = () => {
+    if (loaded) {
+      setJobseekerData({
+        ...jobseekerData,
+        notes: notesBody,
+      });
+      toggleNotes(!notes);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    setNotesBody(e.target.value);
+  };
+
+  useEffect(() => {
+    const asyncFn = async () => {
+      const tempJobseekerData = await fetchJobseekerData(jobseekerEmail);
+      setJobseekerData(tempJobseekerData.data());
+      setLoaded(true);
+    };
+    asyncFn();
+  }, []);
+
+  useEffect(() => {
+    if (notes) {
+      setPrev(notesBody);
+    } else {
+      setNotesBody(prev);
+    }
+  }, [notes]);
+
+  useEffect(() => {
+    if (jobseekerData !== undefined) {
+      setNotesBody(jobseekerData.notes);
+    }
+    if (jobseekerData !== undefined) {
+      updateJobseekerData(jobseekerEmail, jobseekerData);
+    }
+  }, [jobseekerData]);
 
   return (
     <div>
@@ -121,13 +167,13 @@ function Header() {
       <div className={notes ? 'notesPopupOn' : 'notesPopupOff'}>
         <div className="notes-text">
           <h1 className="notes-title">Notes</h1>
-          <p className="notes-body">These are some notes that JobseekerJeff&#39;s navigator has written for him. We need to integrate this into the backend!</p>
+          <textarea className="notes-body" onChange={handleInputChange} value={notesBody} />
         </div>
         <div className="notes-buttons">
-          <button type="button" onClick={handleNotepadClickOnly} className="notes-button-cancel">
+          <button type="button" onClick={handleNotepadCancel} className="notes-button-cancel">
             Cancel
           </button>
-          <button type="button" onClick={handleNotepadClickOnly} className="notes-button-save">
+          <button type="button" onClick={handleNotepadSave} className="notes-button-save">
             Save
           </button>
         </div>
