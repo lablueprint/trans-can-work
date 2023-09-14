@@ -7,18 +7,18 @@ import Button from '@mui/material/Button';
 
 const style = {
   dialog: {
-    borderRadius: '2em',
+    borderRadius: '1em',
     backgroundColor: '#FFFBFE',
-    width: '80%',
-    maxWidth: '40em',
+    width: '40em',
+    maxWidth: '85%',
   },
   button: {
     display: 'flex',
     flexDirection: 'row-reverse',
   },
   iconButton: {
-    right: '1em',
-    top: '1em',
+    right: '0.5em',
+    top: '0.5em',
   },
 };
 const Transition = React.forwardRef((props, ref) => <Slide direction="right" ref={ref} {...props} />);
