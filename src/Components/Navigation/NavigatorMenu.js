@@ -110,8 +110,6 @@ function NavigatorMenu() {
     }
   }, [jobseekerData]);
 
-  // const [navbar, toggleNavbar] = useState(false);
-
   return (
     <>
       <Header />
@@ -163,40 +161,7 @@ function NavigatorMenu() {
       </Box>
 
     </>
-    // <Box sx={{ display: 'flex' }}>
-    //   <Tabs
-    //     orientation="vertical"
-    //     variant="scrollable"
-    //     value={value}
-    //     onChange={handleChange}
-    //     aria-label="Vertical tabs example"
-    //     sx={style.tabsStyle}
-    //     TabIndicatorProps={{
-    //       sx: style.tabIndicatorStyle,
-    //     }}
-    //   >
-    //     {tabs.map((x) => (
-    //       <Tab
-    //         sx={style.tabStyle}
-    //         key={x.link}
-    //         label={x.title}
-    //         component={Link}
-    //         to={x.link}
-    //       />
-    //     ))}
-    //   </Tabs>
-    //   <Box sx={style.panelStyle}><Outlet /></Box>
-
-  // </Box>
   );
 }
 
 export default NavigatorMenu;
-
-/* NOTES:
-- WIP, Debugging borders left in purposefully
-- Assessment and below tabs are part of one scrollable component
-  - TO-DO: Find a way to make tabs scroll to certain text/sections (??)
-  - STRETCH: When user scrolls, have tab indicator follow (big stretch)
-
-*/
