@@ -53,7 +53,7 @@ export const fetchByNavigator = async (email) => {
 };
 
 export const updateJobseeker = async (email, data) => {
-  await updateDoc(doc(db, 'jobseekers', email), data)
+  await setDoc(doc(db, 'jobseekers', email), data, { merge: true })
     .then(() => {
       console.log('updated jobseeker ', email);
     }).catch((err) => {

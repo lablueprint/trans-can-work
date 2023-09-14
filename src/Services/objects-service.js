@@ -8,6 +8,7 @@ export const userDataObject = {
   role: '',
   bio: '',
   phoneNumber: '',
+  iconNo: 0,
 };
 
 export const jobseekerUserInit = {
@@ -49,15 +50,15 @@ export const jobseekerDataObject = {
 
   // milestone progress
   milestones: {
-    'job fair': 'incomplete',
+    'job-fair': 'incomplete',
     coenroll: 'incomplete',
-    'training program': 'incomplete',
+    'training-program': 'incomplete',
     assessment: 'incomplete',
-    'hiring info': 'incomplete',
+    'hiring-info': 'incomplete',
     internship: 'incomplete',
     workshop: 'incomplete',
-    'job board': 'incomplete',
-    'online profile': 'incomplete',
+    'job-portal': 'incomplete',
+    'online-profile': 'incomplete',
     resources: 'incomplete',
   },
 
@@ -105,9 +106,8 @@ export const skillsChecklistOptions = [
   'User Interface Design',
   'Wood Working',
   'Word',
-  'Writing ',
+  'Writing',
   'Money Handling',
-  'Customer Service',
   'Inventory Management',
   'ServSafe / Food Safety Certification / Food Handlers Card',
 ];
@@ -167,6 +167,18 @@ export const generalSkills = [
   'Communication Skills',
   'Systems Thinking',
   'Technology Use',
+];
+
+export const generalSubskills = [
+  ['Math Strategies/Procedures', 'Reading', 'Scientific Principles/Procedures', 'Writing'],
+  ['Communicates Verbally', 'Comprehends Written Material', 'Conveys Information in Writing', 'Listens Actively', 'Observes Carefully'],
+  ['Thinks Creatively', 'Thinks Critically', 'Makes Sound Decisions', 'Plans/Organizes', 'Reasons', 'Solves Problems'],
+  ['Analyzes', 'Communicates', 'Locates', 'Organizes', 'Uses'],
+  ['Exercises leadership', 'Negotiates to resolve conflict', 'Responds to customer needs', 'Respects Individual Differences', 'Understands Teamwork and works with others'],
+  ['Adapts and Shows Flexibility', 'Demonstrates Integrity', 'Demonstrates Professionalism', 'Demonstrates Responsibility and Self-Discipline', 'Displays a Positive Attitude and Sense of Self-Worth', 'Takes Initiative', 'Takes Responsibility for Professional Growth', 'Works Independently'],
+  ['Manages Money', 'Manages Personnel', 'Manages Resources', 'Manages Time'],
+  ['Understands and Uses Systems', 'Monitors Systems', 'Improves Systems'],
+  ['Understands and Uses Technology'],
 ];
 
 export const internshipsOptions = [
@@ -489,21 +501,8 @@ export const hiringInfo = [
   },
 ];
 
-export const completeButtonStatus = [
-  'assessment',
-  'coenroll',
-  'hiring info',
-  'internship',
-  'job board',
-  'job fair',
-  'online profile',
-  'resources',
-  'training program',
-  'workshop',
-];
-
-export const arrayToObj = (array, options) => options.map(
-  (item) => ({ item: array.includes(item) }),
-);
+export const arrayToObj = (array, options) => options.reduce((obj, item) => ({
+  ...obj, [item]: array.includes(item),
+}), {});
 
 export const objToArray = (obj) => Object.keys(obj).filter((key) => obj[key]);

@@ -10,21 +10,25 @@ import {
   NavigatorDashboard,
   Register,
   Reset,
+  ProfileTemp,
+  ArchiveTemp,
   Landing,
   JobseekerData,
   Home,
-  Dashboard,
+  NavDashboard,
+  AdminDashboard,
+  AdminView
 } from './Pages';
 import './App.css';
 import Footer from './Components/Footer/Footer';
 import Splash from './Components/Splash/Splash';
-import approvalIcon from './Assets/Images/trans-flag-graphic.svg';
-import AdminView from './Components/Dashboard/AdminView';
+import approvalIcon from './Assets/Images/trans-flag-graphic.png';
 import ScrollToTop from './Pages/scrollToTop';
 import NavigatorMenu from './Components/Navigation/NavigatorMenu';
 import MilestoneMap from './Components/Milestones/MilestoneMap';
 import Internships from './Components/Internships/Internships';
 import Assessment from './Components/Assessment/Assessment';
+import NavView from './Components/NavView/NavView';
 import Workshops from './Components/Workshops/Workshops';
 import JobFairs from './Components/JobFairs/JobFairs';
 import JobBoards from './Components/JobBoards/JobBoards';
@@ -34,14 +38,15 @@ import OnlineProfiles from './Components/OnlineProfiles/OnlineProfiles';
 import TrainingPrograms from './Components/TrainingPrograms/TrainingPrograms';
 import { login, logout } from "./Redux/Slice/authSlices";
 import { fetchUser, addUser } from './Services/user-service';
-import { auth } from './firebase';
+import { auth } from "./firebase";
+
 
 function App() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.value);
 
   useEffect(() => {
-    // on any firebase auth change
+    // on any firebase auth change 
     const unsubscribe = onAuthStateChanged(auth, async (state) => {
       // if logged in
       if (state != null) {
@@ -51,8 +56,8 @@ function App() {
             email: state.email,
             accessToken: state.accessToken,
             refreshToken: state.refreshToken,
-            user: doc !== undefined ? doc.data() : undefined,
-          };
+            user: doc !== undefined ? doc.data(): undefined,
+          }
           dispatch(login(userState));
         }).catch((error) => {
         });
@@ -62,9 +67,9 @@ function App() {
         dispatch(logout());
       }
     });
-    return () => {
+    return()=>{
       unsubscribe();
-    };
+    }
   }, []);
 
   return (
@@ -81,7 +86,7 @@ function App() {
             )}
           />
           <Route
-            path="/"
+            path="/jobseekerView"
             element={<Home />}
           />
           <Route
@@ -96,7 +101,7 @@ function App() {
           {user != undefined && 
           (
           <>
-          <Route path="/home" element={<NavigatorMenu />}>
+          <Route path="/clientRoadmap" element={<NavigatorMenu />}>
             <Route path="roadmap" element={<MilestoneMap />} />
             <Route path="assessment" element={<Assessment />} />
             <Route path="onlineprofiles" element={<OnlineProfiles />} />
@@ -117,7 +122,11 @@ function App() {
           <Route path="/reset" element={<Reset />} />
           <Route path="/landing" element={<Landing />} />
           <Route path="/adminview" element={<AdminView />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+
+          <Route path="/archivepopuptesting" element={<ArchiveTemp />} />
+          <Route path="/admindashboard" element={<AdminDashboard />} />
+          <Route path="/navdashboard" element={<NavDashboard />} />
+
           <Route path="/roadmap" element={<MilestoneMap />} />
           <Route
             path="/splash"

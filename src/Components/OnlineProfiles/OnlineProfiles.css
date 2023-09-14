@@ -25,7 +25,7 @@
 }
 
 .op-title {
-    width: 56.3vw;
+    width: 100%;
     padding-bottom: 1.2em;
     margin: 0 auto;
     text-align: left;
@@ -34,7 +34,7 @@
 }
 
 .width-55vw {
-    width: 56.3vw;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -51,6 +51,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .op-add-button:hover {
@@ -69,6 +70,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 .op-delete-button:hover {
     background-color: #D9D9D9;
@@ -83,6 +85,113 @@
     height: 1em;
 }
 
+.MuiOutlinedInput-root.Mui-focused, .MuiOutlinedInput-notchedOutline {
+    border-color: #000AA0 !important;
+    border-width: 1px;
+}
+
+.PrivateNotchedOutline-legendLabelled-19 {
+    width: auto !important;
+}
+
 .input-field * {
     border-width: 1px !important;
+}
+
+.alert-modal {
+    background-color: #FED8ED;
+    border: 1px solid #A5296F;
+    border-radius: 4px;
+    margin: 0 auto;
+    margin-bottom: 2em;
+    width: 100%;
+}
+
+.alert-modal p {
+    text-align: left;
+    margin: 1.5em auto 0 auto;
+    width: 90%;
+    font-family: 'Montserrat';
+    font-size: 16px;
+}
+
+.alert-modal p a {
+    font-weight: bold;
+    color: #CF338A;
+    text-decoration: none;
+}
+
+.actions {
+    width: 90%;
+    margin: 1em auto 1.5em auto;
+    display: flex;
+    flex-direction: horizontal;
+    gap: 1em;
+}
+
+.approve-button {
+    width: 14em;
+    height: 4em;
+    color: white;
+    font-family: 'Montserrat';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    border: 1px solid #000;
+    background: #F95DB5;
+}
+
+.approve-button:hover,
+.approve-button:focus {
+    background-color: #c53888;
+}
+
+.deny-button {
+    width: 14em;
+    height: 4em;
+    color: black;
+    font-family: 'Montserrat';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    border: 1px solid #000;
+    background: white;
+}
+
+.deny-button:hover,
+.deny-button:focus {
+    background-color: #d8d8d8;
+}
+
+/* outer container */
+.MuiBox-root {
+    width: 100% !important;
+}
+
+.content {
+    width: 100% !important;
+}
+
+/* field boxes */
+.MuiInputBase-root {
+    height: 3rem !important;
+    width: 100% !important;
+    /* max-width: 10em; */
+}
+
+/* field label text */
+.inputWrapper div div div label,
+.inputWrapper div label,
+.MuiFormControl-root label {
+    font-size: 1rem !important;
+}
+
+/* field inner text */
+.inputWrapper div div div div,
+.inputWrapper div,
+.MuiFormControl-root div {
+    font-size: 1rem !important;
+    width: 100% !important;
 }

@@ -32,10 +32,10 @@
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 700;
-    font-size: 1.2em;
+    font-size: 1.25em;
     line-height: 1em;
     text-align: left;
-    width: 57.0vw;
+    width: 100%;
     margin: 0 auto;
     padding-bottom: 0.5em;
 }
@@ -45,7 +45,7 @@
     font-style: normal;
     font-size: 1.1em;
     text-align: left;
-    width: 57.0vw;
+    width: 100%;
     margin: 0 auto;
     padding-bottom: 0.5em;
 }
@@ -153,6 +153,7 @@ input, textarea {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 .add-buttons:hover {
     background-color: #AAAFFA;
@@ -170,6 +171,7 @@ input, textarea {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 .delete-buttons:hover {
     background-color: #D9D9D9;
@@ -179,14 +181,14 @@ input, textarea {
 .left-button {
     text-align: left;
     margin-bottom: .3em;
-    width: 57.0vw;
+    width: 100%;
     margin: 0 auto;
 }
 
 .columns-container {
     display: flex;
     justify-content: space-between;
-    width: 50em;
+    width: 100%;
     margin: 0 auto;
     gap: 5em;
   }
@@ -248,4 +250,48 @@ input, textarea {
 .dropit {
     color: purple;
     background-color: white;
+}
+
+/* outer container */
+.MuiBox-root {
+    width: 100% !important;
+}
+
+.content {
+    width: 100% !important;
+}
+
+.MuiBox-root div div div div form {
+    width: 100% !important;
+    margin: 0 auto;
+}
+
+/* field boxes */
+.MuiInputBase-root,
+.MuiFormControl-root {
+    height: 3rem !important;
+    width: 100% !important;
+    /* max-width: 10em; */
+}
+
+/* field label text */
+.inputWrapper div div div label,
+.inputWrapper div label,
+.MuiFormControl-root label {
+    font-size: 1rem !important;
+}
+
+/* field inner text */
+.inputWrapper div div div div,
+.inputWrapper div,
+.MuiFormControl-root div {
+    font-size: 1rem !important;
+    width: 100% !important;
+}
+
+/* mobile breakpoint */
+@media (max-width: 768px) {
+    .columns-container {
+        display: block;
+    }
 }
