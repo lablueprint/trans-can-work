@@ -101,8 +101,8 @@ function App() {
           {user != undefined && 
           (
           <>
-          <Route path="/clientRoadmap" element={<NavigatorMenu />}>
-            <Route path="roadmap" element={<MilestoneMap />} />
+          <Route path="/clientRoadmap/:emailParam" element={<NavigatorMenu />}/>
+            {/* <Route path="roadmap" element={<MilestoneMap />} />
             <Route path="assessment" element={<Assessment />} />
             <Route path="onlineprofiles" element={<OnlineProfiles />} />
             <Route path="training" element={<TrainingPrograms />} />
@@ -111,8 +111,9 @@ function App() {
             <Route path="jobfairs" element={<JobFairs />} />
             <Route path="jobboards" element={<JobBoards />} />
             <Route path="resources" element={<Resources />} />
-            <Route path="hiredinfo" element={<HiredInfo />} />
-          </Route>
+            <Route path="hiredinfo" element={<HiredInfo />} /> */}
+          {/* </Route> */}
+          
           <Route path="/onboard" element={<NavView />} />
           </>)
   }
