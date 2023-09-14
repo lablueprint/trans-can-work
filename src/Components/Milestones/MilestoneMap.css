@@ -93,9 +93,12 @@
   left: -6%;
 }
 
-#resource {
-  top: 38%;
-  left: -10%;
+#resources {
+  width: fit-content;
+  height: fit-content;
+  margin-top: 20vh;
+  margin-left: -2vw;
+  position: absolute;
 }
 
 #hiring-info {
