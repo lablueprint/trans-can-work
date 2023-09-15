@@ -45,7 +45,7 @@ function IslandPopup({
   } else if (id === 'job portal') {
     toBeRendered = <JobPortal />;
   } else if (id === 'training program') {
-    toBeRendered = <Training />;
+    toBeRendered = <Training jobseeker={jobseeker} />;
   } else if (id === 'internship') {
     toBeRendered = <Internship />;
   } else if (id === 'hiring info') {

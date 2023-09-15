@@ -123,7 +123,6 @@ function MilestoneMap() {
 
   return (
     <div>
-
       <div className="grid-container">
         <div id="roadmap-title"><img src={title} alt="roadmap title" /></div>
         {buttonData.content.body.map((x) => {
@@ -136,6 +135,7 @@ function MilestoneMap() {
           </div>
         );
         })}
+      </div>
       <div 
         className="background-desktop" 
         style={{ 
@@ -148,7 +148,7 @@ function MilestoneMap() {
             background: `url(${detailsDesktop})`
           }}
         >
-          {MilestoneButtons}
+          {MilestoneButton}
         </div>
       </div>
       <div 
@@ -163,7 +163,7 @@ function MilestoneMap() {
             background: `url(${detailsMobile})`
           }}
         >
-          {MilestoneButtons}
+          {MilestoneButton}
         </div>
       </div>
     </div>
