@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Workshops.css';
+import propTypes from 'prop-types';
 import { TextField } from '@material-ui/core';
 import { DateField } from '@mui/x-date-pickers/DateField';
 import {
@@ -10,7 +11,7 @@ import Select from '@mui/material/Select';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
 
-function Workshops() {
+function Workshops({ jobseeker, setJobseeker }) {
   const styles = {
     dropdownOptions: {
       fontFamily: 'Montserrat',
@@ -54,12 +55,23 @@ function Workshops() {
       },
     },
   };
-  const [allWorkshops, setAllWorkshops] = useState([{
-    name: '',
-    date: '',
-    attended: false,
-    notes: '',
-  }]);
+
+  const [loaded, setLoaded] = useState(false);
+  const [allWorkshops, setAllWorkshops] = useState([{}]);
+
+  useEffect(() => {
+    setAllWorkshops(jobseeker.workshops);
+    setLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (loaded) {
+      setJobseeker({
+        ...jobseeker,
+        workshops: allWorkshops,
+      });
+    }
+  }, [allWorkshops]);
 
   const addWorkshop = async (event) => {
     event.preventDefault();
@@ -70,7 +82,6 @@ function Workshops() {
       notes: '',
     };
     await setAllWorkshops([...allWorkshops, temp]);
-    console.log(allWorkshops);
   };
 
   const deleteWorkshop = async (event, index) => {
@@ -99,11 +110,9 @@ function Workshops() {
   };
 
   const editDate = (newValue, index) => {
-    console.log(newValue);
     const temp = [...allWorkshops];
     temp[index].date = newValue;
     setAllWorkshops(temp);
-    console.log(allWorkshops);
   };
 
   const fieldProps = [
@@ -217,3 +226,16 @@ function Workshops() {
 }
 
 export default Workshops;
+
+Workshops.propTypes = {
+  jobseeker: propTypes.shape({
+    workshops:
+    {
+      name: propTypes.string.isRequired,
+      date: propTypes.instanceOf(Date),
+      attended: propTypes.bool.isRequired,
+      notes: propTypes.string.isRequired,
+    },
+  }).isRequired,
+  setJobseeker: propTypes.func.isRequired,
+};
