@@ -62,7 +62,7 @@ function JobFairs({ jobseeker, setJobseeker }) {
     if (loaded) {
       setJobseeker({
         ...jobseeker,
-        jobFairs: jobFairs,
+        jobFairs,
       });
     }
   }, [jobFairs]);
