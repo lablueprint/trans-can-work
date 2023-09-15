@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './OnlineProfiles.css';
 import propTypes from 'prop-types';
 import { TextField } from '@material-ui/core';
@@ -31,17 +31,28 @@ function OnlineProfiles({ jobseeker, setJobseeker }) {
     },
   };
 
-  const [profile, setProfile] = useState([{
-    website: '',
-    tools: '',
-    created: '',
-    notes: '',
-  }]);
+  const [loaded, setLoaded] = useState(false);
+  const [profile, setProfile] = useState([{}]);
+
+  useEffect(() => {
+    setProfile(jobseeker.onlineProfiles);
+    setLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (loaded) {
+      setJobseeker({
+        ...jobseeker,
+        onlineProfiles: profile,
+      });
+    }
+  }, [profile]);
 
   const addOnlineProfile = async (event) => {
     event.preventDefault();
     const temp = {
-      website: '',
+      site: '',
+      username: '',
       tools: '',
       created: '',
       notes: '',
@@ -64,7 +75,7 @@ function OnlineProfiles({ jobseeker, setJobseeker }) {
   };
 
   const fieldProps = [
-    { label: 'Company/Org of Internship', value: 'site' },
+    { label: 'Site Name', value: 'site' },
     { label: 'Username', value: 'username' },
     { label: 'Tools This Site Provides', value: 'tools' },
     { label: 'Created an Account?', value: 'created' },
@@ -153,18 +164,13 @@ export default OnlineProfiles;
 
 OnlineProfiles.propTypes = {
   jobseeker: propTypes.shape({
-    clientInfo:
+    onlineProfiles:
     {
-      'City/State': propTypes.string.isRequired,
-      Ethnicity: propTypes.string.isRequired,
-      Age: propTypes.string.isRequired,
-      'Gender Identity': propTypes.string.isRequired,
-      Sexuality: propTypes.string.isRequired,
-      Veteran: propTypes.string.isRequired,
-      Disability: propTypes.string.isRequired,
-      'Housing Situation': propTypes.string.isRequired,
-      'Currently Employed': propTypes.string.isRequired,
-      'Prior Convictions': propTypes.string.isRequired,
+      site: propTypes.string.isRequired,
+      username: propTypes.string.isRequired,
+      tools: propTypes.string.isRequired,
+      created: propTypes.string.isRequired,
+      notes: propTypes.string.isRequired,
     },
   }).isRequired,
   setJobseeker: propTypes.func.isRequired,
