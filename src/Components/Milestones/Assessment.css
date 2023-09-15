@@ -17,13 +17,22 @@
     margin-bottom: 20px;
 }
 
-.content {
+.contentDescription {
+    font-family: 'Liesel';
+    font-size: 32px;
     color: rgba(72, 70, 73, 1);
     font-weight: 400;
     text-align: center;
     max-width: 85%;
     line-height: 1.5rem;
     margin: 16px auto 48px auto;
+}
+
+.content {
+    font-size: 20px;
+    color: #484649;
+    font-family: 'Montserrat';
+    text-align: center;
 }
 
 .shortLine {

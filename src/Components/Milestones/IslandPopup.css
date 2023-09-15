@@ -50,7 +50,26 @@
     text-transform: none;
 }
 
-#completed{
+#waiting-for-approval {
+    padding: 20px 28px; 
+    border: 2px solid #484649; 
+    box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
+    border-radius: 12px; 
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: 0.15px;
+    color: #484649;
+    margin: 2em auto;
+    left: 50%;
+    transform: translateX(-50%);
+    text-transform: none;
+}
+
+#complete{
     padding: 20px 28px; 
     border: 2px solid #484649; 
     box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
@@ -77,7 +96,7 @@
     border: 2px solid #939094;
 }
 
-#completed:hover {
+#pending:hover {
     background: #939094;
     box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
     color: #FFFBFE;

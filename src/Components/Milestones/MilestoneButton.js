@@ -5,7 +5,7 @@ import IslandPopup from './IslandPopup';
 import './MilestoneButton.css';
 
 function MilestoneButton({
-  title, image, imageHover, id,
+  title, image, imageHover, id, jobseeker, setJobseeker,
 }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -13,8 +13,15 @@ function MilestoneButton({
   const [isHover, setIsHover] = React.useState(false);
   const handleOnMouseEnter = () => setIsHover(true);
   const handleOnMouseLeave = () => setIsHover(false);
-  const [isComplete, setComplete] = React.useState(false);
-  const toggleComplete = () => setComplete(!isComplete);
+  const togglePending = () => {
+    const originalId = id;
+    const parsedId = originalId.replace(/-/g, ' ');
+    if (jobseeker.milestones[parsedId] === 'incomplete') {
+      const temp = { ...jobseeker };
+      temp.milestones[parsedId] = 'waiting for approval';
+      setJobseeker(temp);
+    }
+  };
 
   return (
     <div>
@@ -31,9 +38,11 @@ function MilestoneButton({
         title={title}
         isOpen={open}
         handleClose={handleClose}
-        isComplete={isComplete}
-        toggleComplete={toggleComplete}
+        status={jobseeker.milestones[id.replace(/-/g, ' ')]}
+        togglePending={togglePending}
         id={id}
+        jobseeker={jobseeker}
+        setJobseeker={setJobseeker}
       />
     </div>
 
@@ -45,6 +54,8 @@ MilestoneButton.propTypes = {
   image: PropTypes.string.isRequired,
   imageHover: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  jobseeker: PropTypes.func.isRequired,
+  setJobseeker: PropTypes.func.isRequired,
 };
 
 export default MilestoneButton;

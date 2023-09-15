@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './OnlineProfile.css';
+import PropTypes from 'prop-types';
 
-function OnlineProfile() {
-  const [inputs, setInputs] = useState({});
-
-  const handleChange = (event) => {
-    const { name } = event.target;
+function OnlineProfile({ jobseeker, setJobseeker }) {
+  const handleChange = (event, param) => {
     const { value } = event.target;
-    setInputs((values) => ({ ...values, [name]: value }));
+    const tempJobseeker = { ...jobseeker };
+    tempJobseeker.onlineProfile[param].username = value;
+    setJobseeker(tempJobseeker);
   };
+
+  if (jobseeker === undefined) {
+    return <div>Loading</div>;
+  }
+
   return (
     <div>
       <h6 className="onlineProfile">
@@ -24,8 +29,8 @@ function OnlineProfile() {
               className="profileInput"
               type="text"
               name="linkedin"
-              value={inputs.linkedin || ''}
-              onChange={handleChange}
+              value={jobseeker.onlineProfiles[0].username}
+              onChange={(e) => { handleChange(e, 0); }}
             />
           </label>
           <label htmlFor="facebook" className="onlineProfile-row-label">
@@ -34,20 +39,20 @@ function OnlineProfile() {
               className="profileInput"
               type="text"
               name="facebook"
-              value={inputs.facebook || ''}
-              onChange={handleChange}
+              value={jobseeker.onlineProfiles[1].username}
+              onChange={(e) => { handleChange(e, 1); }}
             />
           </label>
         </div>
         <div className="onlineProfile-row">
-          <label htmlFor="imdb" className="onlineProfile-row-label">
-            Imdb
+          <label htmlFor="glassdoor" className="onlineProfile-row-label">
+            Glassdoor
             <input
               className="profileInput"
               type="text"
-              name="imdb"
-              value={inputs.imdb || ''}
-              onChange={handleChange}
+              name="glassdoor"
+              value={jobseeker.onlineProfiles[2].username}
+              onChange={(e) => { handleChange(e, 2); }}
             />
           </label>
           <label htmlFor="other" className="onlineProfile-row-label">
@@ -56,8 +61,8 @@ function OnlineProfile() {
               className="profileInput"
               type="text"
               name="other"
-              value={inputs.other || ''}
-              onChange={handleChange}
+              value={jobseeker.onlineProfiles[3].username}
+              onChange={(e) => { handleChange(e, 3); }}
             />
           </label>
         </div>
@@ -68,5 +73,10 @@ function OnlineProfile() {
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<OnlineProfile />);
+
+OnlineProfile.propTypes = {
+  jobseeker: PropTypes.func.isRequired,
+  setJobseeker: PropTypes.func.isRequired,
+};
 
 export default OnlineProfile;

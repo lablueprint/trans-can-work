@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
@@ -16,32 +16,43 @@ import Hiring from './Hiring';
 import './IslandPopup.css';
 
 function IslandPopup({
-  title, isOpen, handleClose, id, isComplete, toggleComplete,
+  title, isOpen, handleClose, id, status, togglePending, jobseeker, setJobseeker,
 }) {
+  const [message, setMessage] = useState('Mark as Complete');
+
+  useEffect(() => {
+    if (status === 'waiting for approval') {
+      setMessage('Pending Approval');
+    } else if (status === 'complete') {
+      setMessage('Complete!');
+    }
+  }, [status]);
+
   let toBeRendered;
   let markAsComplete = true;
 
   if (id === 'assessment') {
     markAsComplete = false;
-    toBeRendered = <Assessment />;
-  } else if (id === 'online-profile') {
-    toBeRendered = <OnlineProfile />;
+    toBeRendered = <Assessment jobseeker={jobseeker} />;
+  } else if (id === 'online profile') {
+    toBeRendered = <OnlineProfile jobseeker={jobseeker} setJobseeker={setJobseeker} />;
   } else if (id === 'workshop') {
     toBeRendered = <Workshop />;
-  } else if (id === 'job-fair') {
+  } else if (id === 'job fair') {
     toBeRendered = <JobFair />;
-  } else if (id === 'resource') {
+  } else if (id === 'resources') {
     toBeRendered = <Resources />;
-  } else if (id === 'job-portal') {
+  } else if (id === 'job portal') {
     toBeRendered = <JobPortal />;
-  } else if (id === 'training-program') {
-    toBeRendered = <Training />;
+  } else if (id === 'training program') {
+    toBeRendered = <Training jobseeker={jobseeker} />;
   } else if (id === 'internship') {
     toBeRendered = <Internship />;
-  } else if (id === 'hiring-info') {
+  } else if (id === 'hiring info') {
     markAsComplete = false;
     toBeRendered = <Hiring />;
   }
+
   return (
     <div>
       <Modal
@@ -55,10 +66,10 @@ function IslandPopup({
           {(markAsComplete) ? (
             <Button
               disableRipple
-              onClick={toggleComplete}
-              id={(isComplete) ? 'completed' : 'incomplete'}
+              onClick={() => togglePending()}
+              id={status.replace(/ /g, '-')}
             >
-              {(isComplete) ? 'Marked as Completed' : 'Mark as Complete'}
+              {message}
             </Button>
           ) : null}
           <Button
@@ -80,13 +91,15 @@ IslandPopup.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
-  isComplete: PropTypes.bool,
-  toggleComplete: PropTypes.func,
+  status: PropTypes.string,
+  togglePending: PropTypes.func,
+  jobseeker: PropTypes.func.isRequired,
+  setJobseeker: PropTypes.func.isRequired,
 };
 
 IslandPopup.defaultProps = {
-  isComplete: false,
-  toggleComplete: () => {},
+  status: 'incomplete',
+  togglePending: () => {},
 };
 
 export default IslandPopup;
