@@ -14,7 +14,7 @@ function Internships({ jobseeker, setJobseeker }) {
     dropdownOptions: {
       fontFamily: 'Montserrat',
       color: '#49454F',
-      fontSize: '0.9vw',
+      fontSize: '1rem',
       fontWeight: 'bold',
       paddingLeft: '1.7%',
       textDecoration: 'none',
@@ -22,7 +22,6 @@ function Internships({ jobseeker, setJobseeker }) {
     inputLabel: {
       fontFamily: 'Montserrat',
       color: '#49454F',
-      fontSize: '0.9vw',
       fontWeight: 'bold',
       backgroundColor: '#F7F8FE',
     },
@@ -36,18 +35,15 @@ function Internships({ jobseeker, setJobseeker }) {
       style: {
         fontFamily: 'Montserrat',
         color: '#49454F',
-        width: '55.0vw',
-        height: '3.2vw',
-        fontSize: '0.9vw',
         fontWeight: 'bold',
         borderColor: '#000AA0',
+        borderWidth: '1px',
         backgroundColor: '#F7F8FE',
       },
     },
     labelProps: {
       style: {
         fontFamily: 'Montserrat',
-        fontSize: '0.95vw',
         color: '#000AA0',
         backgroundColor: '#FFFFFF',
       },

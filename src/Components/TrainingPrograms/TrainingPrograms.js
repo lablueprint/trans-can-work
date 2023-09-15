@@ -9,49 +9,41 @@ import Select from '@mui/material/Select';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
 
-const styles = {
-  dropdownOptions: {
-    fontFamily: 'Montserrat',
-    color: '#49454F',
-    fontSize: '0.9vw',
-    fontWeight: 'bold',
-    paddingLeft: '1.7%',
-    textDecoration: 'none',
-  },
-  inputLabel: {
-    fontFamily: 'Montserrat',
-    color: '#49454F',
-    width: '55.0vw',
-    height: '3.2vw',
-    fontSize: '0.9vw',
-    fontWeight: 'bold',
-    backgroundColor: '#F7F8FE',
-  },
-  formControl: {
-    width: '55.0vw',
-    textAlign: 'left',
-    textDecoration: 'none',
-  },
-};
-
 function TrainingPrograms({ jobseeker, setJobseeker }) {
+  const styles = {
+    dropdownOptions: {
+      fontFamily: 'Montserrat',
+      color: '#49454F',
+      fontSize: '1rem',
+      fontWeight: 'bold',
+      paddingLeft: '1.7%',
+      textDecoration: 'none',
+    },
+    inputLabel: {
+      fontFamily: 'Montserrat',
+      color: '#49454F',
+      fontWeight: 'bold',
+      backgroundColor: '#F7F8FE',
+    },
+    formControl: {
+      textAlign: 'left',
+      textDecoration: 'none',
+    },
+  };
   const textFieldStyles = {
     inputProps: {
       style: {
         fontFamily: 'Montserrat',
         color: '#49454F',
-        width: '55.0vw',
-        height: '3.2vw',
-        fontSize: '0.9vw',
         fontWeight: 'bold',
         borderColor: '#000AA0',
+        borderWidth: '1px',
         backgroundColor: '#F7F8FE',
       },
     },
     labelProps: {
       style: {
         fontFamily: 'Montserrat',
-        fontSize: '0.95vw',
         color: '#000AA0',
         backgroundColor: '#FFFFFF',
       },

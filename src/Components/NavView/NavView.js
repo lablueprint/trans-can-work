@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 // import Header from '../Header/Header';
 import { fetchUser, updateUser } from '../../Services/user-service';
 import { fetchJobseekerData, updateJobseekerData } from '../../Services/jobseeker-data-service';
-import Internships from '../Internships/Internships';
+import JobFairs from '../JobFairs/JobFairs';
 
 function NavView() {
   const [userData, setUserData] = useState();
@@ -56,7 +56,7 @@ function NavView() {
           setJobseeker={setJobseekerData}
           email={email}
         /> */}
-        <Internships
+        <JobFairs
           jobseeker={jobseekerData}
           setJobseeker={setJobseekerData}
         />
