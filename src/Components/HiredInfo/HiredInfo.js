@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './HiredInfo.css';
 import { TextField } from '@material-ui/core';
+import { DateField } from '@mui/x-date-pickers/DateField';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
 
@@ -30,14 +31,16 @@ function HiredInfo() {
 
   const [allHiredInfo, setAllHiredInfo] = useState([{
     company: '',
-    program: '',
-    position: '',
-    start: '',
-    end: '',
+    hiredDate: '',
+    fieldOfWork: '',
+    jobTitle: '',
+    supervisorName: '',
     referralDate: '',
-    applied: '',
-    accepted: '',
-    completed: '',
+    contactEmail: '',
+    contactPhoneNumber: '',
+    hourlyPay: 0,
+    hoursPerWeek: 0,
+    benefits: '',
     notes: '',
   }]);
 
@@ -73,20 +76,27 @@ function HiredInfo() {
     console.log(allHiredInfo);
   };
 
+  const editDate = (newValue, label, index) => {
+    const temp = [...allHiredInfo];
+    temp[index][label] = newValue;
+    setAllHiredInfo(temp);
+  };
+
   const fieldProps = [
     { label: 'Name of Company', value: 'company' },
     { label: 'Hired Date', value: 'date' },
-    { label: 'Field of Work', value: 'field' },
-    { label: 'Job Title', value: 'title' },
-    { label: 'Supervisor Name', value: 'supervisor' },
+    { label: 'Field of Work', value: 'fieldOfWork' },
+    { label: 'Job Title', value: 'jobTitle' },
+    { label: 'Supervisor Name', value: 'supervisorName' },
     { label: 'Contact Email', value: 'email' },
     { label: 'Contact Phone Number', value: 'phone' },
     { label: 'Hourly Pay', value: 'pay' },
     { label: 'Offers Benefits?', value: 'benefits' },
+    { label: 'Notes', value: 'notes' },
   ];
 
   return (
-    <div>
+    <div className="content">
       <div className="i-title">Hired Info</div>
       <div>
         {allHiredInfo.map((internshipObject, index) => (
@@ -96,24 +106,46 @@ function HiredInfo() {
                 <div>
                   {fieldProps.map((field) => (
                     <div>
-                      <TextField
-                        id="outlined-basic"
-                        label={field.label}
-                        variant="outlined"
-                        value={internshipObject[field.value]}
-                        focused
-                        onChange={(e) => editHiredInfo(e, field.changeParameter, index)}
-                        InputProps={textFieldStyles.inputProps}
-                        InputLabelProps={textFieldStyles.labelProps}
-                        className="input-field"
-                      />
-                      <div className="op-between-inputs" />
+                      {(field.value === 'company' || field.value === 'fieldOfWork'
+                      || field.value === 'jobTitle' || field.value === 'benefits' || field.value === 'notes')
+                      && (
+                        <>
+                          <TextField
+                            id="outlined-basic"
+                            label={field.label}
+                            variant="outlined"
+                            value={internshipObject[field.value]}
+                            focused
+                            onChange={(e) => editHiredInfo(e, field.changeParameter, index)}
+                            InputProps={textFieldStyles.inputProps}
+                            InputLabelProps={textFieldStyles.labelProps}
+                            className="input-field"
+                          />
+                          <div className="op-between-inputs" />
+                        </>
+                      )}
+                      {(field.label === 'Hired Date' || field.label === 'End Date'
+                      || field.label === 'Date Referral Sent (If Applicable)')
+                      && (
+                        <>
+                          <DateField
+                            label={field.label}
+                            focused
+                            value={internshipObject[field.value]}
+                            onChange={(newValue) => editDate(newValue, field.value, index)}
+                            InputProps={textFieldStyles.inputProps}
+                            InputLabelProps={textFieldStyles.labelProps}
+                            className="input-field"
+                          />
+                          <div className="op-between-inputs" />
+                        </>
+                      )}
                     </div>
                   ))}
                 </div>
               </form>
             </div>
-            <div className="width-55vw">
+            <div>
               <button type="button" onClick={(e) => deleteHiredInfo(e, index)} className="i-delete-button">
                 <img
                   src={Delete}
@@ -126,7 +158,7 @@ function HiredInfo() {
             <div className="i-between-buttons" />
           </div>
         ))}
-        <div className="width-55vw">
+        <div>
           <button type="button" onClick={addHiredInfo} className="i-add-button">
             <img
               src={Add}

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import './TrainingPrograms.css';
 import { TextField } from '@material-ui/core';
@@ -66,6 +67,8 @@ function TrainingPrograms() {
     },
   };
 
+  const [date, setDate] = useState();
+
   const fieldProps = [
     { label: 'Training Program', value: 'program' },
     { label: 'Date Referral Sent', value: 'referral' },
@@ -114,19 +117,40 @@ function TrainingPrograms() {
     temp[index][element] = event.target.value;
     setAllPrograms(temp);
     console.log(allPrograms);
+    console.log(date);
   };
 
-  const editDate = (newValue, label, index) => {
-    console.log(newValue);
-    const temp = [...allPrograms];
-    temp[index][label] = newValue;
-    setAllPrograms(temp);
-    console.log(allPrograms);
-  };
+  // useEffect(() => {
+  //   const temp = date;
+  //   setAllPrograms(
+  //     {
+  //       ...allPrograms,
+  //       referral: temp,
+  //     },
+  //   );
+  // }, [date]);
+
+  // const editDate = (newValue, label, index) => {
+  //   console.log(newValue);
+  //   const temp = [...allPrograms];
+  //   temp[index][label] = newValue;
+  //   setAllPrograms(temp);
+  //   console.log(allPrograms);
+  // };
 
   return (
-    <div>
+    <div className="content">
       <div className="tp-title">Training Programs</div>
+      <div className="alert-modal">
+        <p>
+          You&#39;ve marked this milestone as complete for Jobseeker-Name. Click
+          {' '}
+          <a href="#">here</a>
+          {' '}
+          to undo.
+        </p>
+        <div className="actions" />
+      </div>
       <div className="between-inputs" />
       <div>
         {allPrograms.map((programObject, index) => (
@@ -188,8 +212,8 @@ function TrainingPrograms() {
                           <DateField
                             label={field.label}
                             focused
-                            value={programObject[field.value]}
-                            onChange={(newValue) => editDate(newValue, field.value, index)}
+                            value={date}
+                            onChange={(newValue) => setDate(newValue)}
                             InputProps={textFieldStyles.inputProps}
                             InputLabelProps={textFieldStyles.labelProps}
                             className="input-field"
@@ -202,7 +226,7 @@ function TrainingPrograms() {
                 </div>
               </form>
             </div>
-            <div className="width-55vw">
+            <div>
               <button type="button" onClick={(e) => deleteProgram(e, index)} className="op-delete-button">
                 <img
                   src={Delete}
@@ -216,7 +240,7 @@ function TrainingPrograms() {
           </div>
         ))}
       </div>
-      <div className="width-55vw">
+      <div>
         <button type="button" onClick={addProgram} className="op-add-button">
           <img
             src={Add}

@@ -21,14 +21,11 @@ function Internships() {
     inputLabel: {
       fontFamily: 'Montserrat',
       color: '#49454F',
-      width: '55.0vw',
-      height: '3.2vw',
       fontSize: '0.9vw',
       fontWeight: 'bold',
       backgroundColor: '#F7F8FE',
     },
     formControl: {
-      width: '55.0vw',
       textAlign: 'left',
       textDecoration: 'none',
     },
@@ -98,7 +95,6 @@ function Internships() {
     const temp = [...allInternships];
     temp[index][element] = event.target.value;
     setAllInternships(temp);
-    console.log(allInternships);
   };
 
   const editDropdown = (event, label, index) => {
@@ -132,7 +128,7 @@ function Internships() {
   ];
 
   return (
-    <div>
+    <div className="content">
       <div className="i-title">Internships</div>
       <div>
         {allInternships.map((internshipObject, index) => (
@@ -206,7 +202,7 @@ function Internships() {
                 </div>
               </form>
             </div>
-            <div className="width-55vw">
+            <div>
               <button type="button" onClick={(e) => deleteInternship(e, index)} className="i-delete-button">
                 <img
                   src={Delete}
@@ -219,7 +215,7 @@ function Internships() {
             <div className="i-between-buttons" />
           </div>
         ))}
-        <div className="width-55vw">
+        <div>
           <button type="button" onClick={addInternship} className="i-add-button">
             <img
               src={Add}

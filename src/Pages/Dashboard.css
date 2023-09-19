@@ -24,6 +24,9 @@
     margin: 0;
     text-align: left;
     display:flex;
+    width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .dashboard-page-headers-middle {
@@ -41,6 +44,8 @@
     font-size: 1em;
     font-weight: bold;
     text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .dashboard-page-header-name-and-icon-container{
@@ -80,6 +85,18 @@
     margin-top: 6px;
     margin-bottom: 6px;
     margin-left: 6px;
+}
+
+.profile-button-text-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.profile-button-name-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
 }
 
 .dashboard-page-chip-container {

@@ -21,7 +21,7 @@ function Workshop() {
     start();
   }, []);
   return (
-    <div>
+    <div className="workshop-wrapper">
       <h6 className="workshop">
         Please share with us any Workshops ye may have attended with Trans Can Work or with any
         other crew.

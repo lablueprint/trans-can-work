@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import propTypes from 'prop-types';
 import './Assessment.css';
-import { useSelector } from 'react-redux';
 import {
-  FormControl, InputLabel, NativeSelect,
+  FormControl, InputLabel,
 } from '@mui/material';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 import { TextField } from '@material-ui/core';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
 import Checkboxes from '../Checkboxes/Checkboxes';
-import { fetchJobseekerData, createJobseekerData } from '../../Services/jobseeker-data-service';
+import {
+  skillsChecklistOptions, industryInterestOptions, generalSkills,
+  arrayToObj, generalSubskills, objToArray,
+} from '../../Services/objects-service';
 
 const styles = {
   dropdownOptions: {
@@ -16,26 +21,17 @@ const styles = {
     color: '#49454F',
     fontSize: '0.9vw',
     fontWeight: 'bold',
-    border: '1px solid #000AA0',
-    borderRadius: '4px',
-    width: '55.0vw',
-    height: '3.2vw',
     paddingLeft: '1.7%',
     textDecoration: 'none',
-    backgroundColor: '#F7F8FE',
   },
   inputLabel: {
-    borderBottom: 'none',
-    color: '#0c0ca4',
     fontFamily: 'Montserrat',
-    fontWeight: 'normal',
+    color: '#49454F',
+    width: '55.0vw',
+    height: '3.2vw',
     fontSize: '0.9vw',
-    marginTop: '2%',
-    textAlign: 'left',
-    backgroundColor: 'white',
-    paddingLeft: '1%',
-    paddingRight: '1%',
-    textDecoration: 'none',
+    fontWeight: 'bold',
+    backgroundColor: '#F7F8FE',
   },
   formControl: {
     width: '55.0vw',
@@ -44,7 +40,9 @@ const styles = {
   },
 };
 
-function Assessment() {
+function Assessment({
+  userData, setUserData, jobseeker, setJobseeker, email,
+}) {
   const textFieldStyles = {
     inputProps: {
       style: {
@@ -68,203 +66,192 @@ function Assessment() {
     },
   };
 
-  const previousExperience1 = [
-    'Accounting Software',
-    'Administrative',
-    'Adobe',
-    'Software Suite',
-    'Bilingual',
-    'Brand Management',
-    'Cold Calling',
-    'Computer Software and Application',
-    'CPR',
-    'Customer Service',
-    'Database Management',
-    'Excel',
-    'Graphic Design',
-    'Machinery Skills',
-    'Marketing Campain Management',
-    'Mobile Development',
-    'Multiligual',
-    'Negotiation',
-    'Patient Scheduling Software',
-  ];
-  const previousExperience2 = [
-    'Philanthropy',
-    'Photo Editing',
-    'Photography',
-    'Photoshop',
-    'Powerpoint',
-    'Programming Languages',
-    'Project Management',
-    'Public Speaking',
-    'Search Engine and Keyword Optimization',
-    'Statistical Analysis',
-    'Type 60+WPM',
-    'User Interface Design',
-    'Wood Working',
-    'Word',
-    'Writing',
-    'Money handling',
-    'Customer Service',
-    'Inventory Management',
-    'ServSafe / Food Safety Certification / Food Handlers Card',
-  ];
+  // each set of checkboxes has 4 state variables:
+  // an object with label/bool pairs
+  // an array holding just the booleans for the checklist
+  // an array holding the booleans for the left column
+  // an array holding the booleans for the right column
+  const [skillsObj, setSkillsObj] = useState();
+  const [skillBool, setSkillBool] = useState([]);
+  const [skillBool1, setSkillBool1] = useState();
+  const [skillBool2, setSkillBool2] = useState();
+  const [intObj, setIntObj] = useState();
+  const [intBool, setIntBool] = useState([]);
+  const [intBool1, setIntBool1] = useState();
+  const [intBool2, setIntBool2] = useState();
+  const [genObj, setGenObj] = useState();
+  const [genBool, setGenBool] = useState([]);
+  const [genBool1, setGenBool1] = useState();
+  const [genBool2, setGenBool2] = useState();
 
-  const generalSkills1 = [
-    'Applied Academic Skills',
-    'Critical Thinking Skills',
-    'Interpersonal Skills',
-    'Personal Qualities',
-  ];
-
-  const generalSkills2 = [
-    'Resource Management',
-    'Information Use',
-    'Communication Skills',
-    'Systems Thinking',
-    'Technology Use',
-  ];
-
-  const subskills1 = [
-    ['Math Strategies/Procedures', 'Reading', 'Scientific Principles/Procedures', 'Writing'],
-    ['Thinks Creatively', 'Thinks Critically', 'Makes Sound Decisions', 'Plans/Organizes', 'Reasons', 'Solves Problems'],
-    ['Exercises leadership', 'Negotiates to resolve conflict', 'Responds to customer needs', 'Respects Individual Differences', 'Understands Teamwork and works with others'],
-    ['Adapts and Shows Flexibility', 'Demonstrates Integrity', 'Demonstrates Professionalism', 'Demonstrates Responsibility and Self-Discipline', 'Displays a Positive Attitude and Sense of Self-Worth', 'Takes Initiative', 'Takes Responsibility for Professional Growth', 'Works Independently'],
-  ];
-  const subskills2 = [
-    ['Manages Money', 'Manages Personnel', 'Manages Resources', 'Manages Time'],
-    ['Analyzes', 'Communicates', 'Locates', 'Organizes', 'Uses'],
-    ['Communicates Verbally', 'Comprehends Written Material', 'Conveys Information in Writing', 'Listens Actively', 'Observes Carefully'],
-    ['Understands and Uses Systems', 'Monitors Systems', 'Improves Systems'],
-    ['Understands and Uses Technology'],
-  ];
-
-  const interests1 = [
-    'Accounting/Bookkeeping',
-    'App Type Jobs',
-    'Architecture/Construction',
-    'Audio/Video Technology & Communication',
-    'Barista',
-    'Bartender',
-    'Bookeeping',
-    'Business Management and Administration',
-    'Call Center',
-    'Caregiver',
-    'Carpenter',
-    'Cashier',
-    'Data Entry',
-    'Delivery Driver',
-    'Education & Training',
-    'Engineering',
-    'Finance',
-    'Fundraising',
-    'Graphic Design',
-    'Health/Medical',
-    'Hospitality',
-  ];
-  const interests2 = [
-    'Human Resources',
-    'IT (Information Technology)',
-    'Janitorial',
-    'Legal',
-    'Marketing/Sales',
-    'Massage Therapy',
-    'Non Profit',
-    'Personal Assistant',
-    'Pharmasist',
-    'Philantropy',
-    'Photographer',
-    'Production',
-    'Public Relations',
-    'Real Estate',
-    'Remote',
-    'Retail',
-    'Sales',
-    'Security',
-    'Server/Host',
-    'Social Media Management',
-    'Web Design',
-  ];
-
-  let checkedInterests = [];
-  let checkedGeneralSkills = [];
-  let checkedPrev = [];
-
-  const [checkedGeneralSkills1,
-    setCheckedGeneralSkills1] = useState(new Array(generalSkills1.length).fill(false));
-  const [checkedGeneralSkills2,
-    setCheckedGeneralSkills2] = useState(new Array(generalSkills2.length).fill(false));
-  const [checkedInt1, setCheckedInt1] = useState(new Array(interests1.length).fill(false));
-  const [checkedInt2, setCheckedInt2] = useState(new Array(interests2.length).fill(false));
-  const [checkedPrev1,
-    setCheckedPrev1] = useState(new Array(previousExperience1.length).fill(false));
-  const [checkedPrev2,
-    setCheckedPrev2] = useState(new Array(previousExperience2.length).fill(false));
-
-  const store = useSelector((state) => state.auth.value);
-
-  const [jobseeker, setJobseeker] = useState({
-    name: store.user.firstName,
-    pronouns: store.user.pronouns,
-    phone: store.user.phoneNumber,
-    email: store.email,
-    clientInfo:
-    {
-      'City/State': 'City/State',
-      Ethnicity: 'hhiiii',
-      Age: 'Age',
-      'Gender Identity': 'Gender Identity',
-      Sexuality: 'Sexuality',
-      Veteran: 'nooooo',
-      Disability: 'Disability',
-      'Housing Situation': 'Housing Situation',
-      'Currently Employed': 'Employment Status',
-      'Prior Convictions': 'arghhhhh',
-    },
-    industryInterests: {},
-    generalSkills: {},
-    skillsChecklist: {},
-    education: [{
-    }],
-    occupation: [],
-    dreamjob: 'Dream Job',
-  });
-
-  function combineCheckboxes() {
-    checkedInterests = checkedInt1.concat(checkedInt2);
-    checkedGeneralSkills = checkedGeneralSkills1.concat(checkedGeneralSkills2);
-    checkedPrev = checkedPrev1.concat(checkedPrev2);
-  }
-
-  async function populateInterests() {
-    const tempInterests = interests1.concat(interests2);
-    const interestPairs = {};
-    tempInterests.forEach((interest, index) => {
-      interestPairs[interest] = checkedInterests[index];
-    });
-    const tempSkills = generalSkills1.concat(generalSkills2);
-    const skillPairs = {};
-    tempSkills.forEach((skill, index) => {
-      skillPairs[skill] = checkedGeneralSkills[index];
-    });
-    const tempPrev = previousExperience1.concat(previousExperience2);
-    const prevPairs = {};
-    tempPrev.forEach((prev, index) => {
-      prevPairs[prev] = checkedPrev[index];
-    });
-    await setJobseeker({
-      ...jobseeker,
-      industryInterests: interestPairs,
-      generalSkills: skillPairs,
-      skillsChecklist: prevPairs,
-    });
-  }
-
-  const saveJobseeker = async () => {
-    combineCheckboxes();
-    populateInterests();
+  // function to split up into left and right column booleans
+  const splitObjects = () => {
+    const temp1 = Object.keys(skillsObj).sort();
+    if (skillBool.length === 0) {
+      temp1.forEach((key) => {
+        const tempSkill = skillBool;
+        tempSkill.push(skillsObj[key]);
+        setSkillBool(tempSkill);
+      });
+    }
+    const tempSkillBool1 = skillBool.slice(0, Math.ceil(skillBool.length / 2));
+    setSkillBool1(tempSkillBool1);
+    const tempSkillBool2 = skillBool.slice(Math.ceil(skillBool.length / 2));
+    setSkillBool2(tempSkillBool2);
+    const temp2 = Object.keys(intObj).sort();
+    if (intBool.length === 0) {
+      temp2.forEach((key) => {
+        const tempInt = intBool;
+        tempInt.push(intObj[key]);
+        setIntBool(tempInt);
+      });
+    }
+    const tempIntBool1 = intBool.slice(0, Math.ceil(intBool.length / 2));
+    setIntBool1(tempIntBool1);
+    const tempIntBool2 = intBool.slice(Math.ceil(intBool.length / 2));
+    setIntBool2(tempIntBool2);
+    const temp3 = Object.keys(genObj).sort();
+    if (genBool.length === 0) {
+      temp3.forEach((key) => {
+        const tempGen = genBool;
+        tempGen.push(genObj[key]);
+        setGenBool(tempGen);
+      });
+    }
+    const tempGenBool1 = genBool.slice(0, Math.ceil(genBool.length / 2));
+    setGenBool1(tempGenBool1);
+    const tempGenBool2 = genBool.slice(Math.ceil(genBool.length / 2));
+    setGenBool2(tempGenBool2);
   };
+
+  // loaded variable keeps track of once jobseeker loaded in from backend
+  const [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    if (jobseeker !== undefined) {
+      setLoaded(true);
+    }
+  }, [jobseeker]);
+
+  // only assign object once the backend calls are loaded in
+  useEffect(() => {
+    if (loaded) {
+      setSkillsObj(arrayToObj(jobseeker.skillsChecklist, skillsChecklistOptions));
+      setIntObj(arrayToObj(jobseeker.industryInterest, industryInterestOptions));
+      setGenObj(arrayToObj(jobseeker.generalSkills, generalSkills));
+    }
+  }, [loaded]);
+
+  // as long as things are defined, change jobseeker to match frontend changes
+  useEffect(() => {
+    if (skillBool1 === undefined && skillsObj !== undefined) {
+      splitObjects();
+    } else if (skillsObj !== undefined) {
+      const tempSkillsArray = objToArray(skillsObj);
+      const tempJobseeker = {
+        ...jobseeker,
+        skillsChecklist: tempSkillsArray,
+      };
+      if (tempJobseeker !== jobseeker) {
+        setJobseeker(tempJobseeker);
+      }
+    }
+  }, [skillsObj]);
+
+  // as long as things are defined, change jobseeker to match frontend changes
+  useEffect(() => {
+    if (intBool1 === undefined && intObj !== undefined) {
+      splitObjects();
+    } else if (intObj !== undefined) {
+      const tempIntArray = objToArray(intObj);
+      const tempJobseeker = {
+        ...jobseeker,
+        industryInterest: tempIntArray,
+      };
+      if (tempJobseeker !== jobseeker) {
+        setJobseeker(tempJobseeker);
+      }
+    }
+  }, [intObj]);
+
+  // as long as things are defined, change jobseeker to match frontend changes
+  useEffect(() => {
+    if (genBool1 === undefined && genObj !== undefined) {
+      splitObjects();
+    } else if (genObj !== undefined) {
+      const tempGenArray = objToArray(genObj);
+      const tempJobseeker = {
+        ...jobseeker,
+        generalSkills: tempGenArray,
+      };
+      if (tempJobseeker !== jobseeker) {
+        setJobseeker(tempJobseeker);
+      }
+    }
+  }, [genObj]);
+
+  // function that updates the object
+  const repopulateSkills = () => {
+    const tempSkillObj = {};
+    skillsChecklistOptions.sort().forEach((option, index) => {
+      tempSkillObj[option] = skillBool[index];
+    });
+    setSkillsObj(tempSkillObj);
+  };
+
+  const repopulateInts = () => {
+    const tempIntObj = {};
+    industryInterestOptions.sort().forEach((option, index) => {
+      tempIntObj[option] = intBool[index];
+    });
+    setIntObj(tempIntObj);
+  };
+
+  const repopulateGen = () => {
+    const tempGenObj = {};
+    generalSkills.sort().forEach((option, index) => {
+      tempGenObj[option] = genBool[index];
+    });
+    setGenObj(tempGenObj);
+  };
+
+  useEffect(() => {
+    if (skillBool1 !== undefined && skillBool2 !== undefined) {
+      setSkillBool(skillBool1.concat(skillBool2));
+    }
+  }, [skillBool1, skillBool2]);
+
+  useEffect(() => {
+    if (intBool1 !== undefined && intBool2 !== undefined) {
+      setIntBool(intBool1.concat(intBool2));
+    }
+  }, [intBool1, intBool2]);
+
+  useEffect(() => {
+    if (genBool1 !== undefined && genBool2 !== undefined) {
+      setGenBool(genBool1.concat(genBool2));
+    }
+  }, [genBool1, genBool2]);
+
+  // when the lengthy bool is updated then call repopulateSkills to update object
+  useEffect(() => {
+    if (skillBool.length !== 0) {
+      repopulateSkills();
+    }
+  }, [skillBool]);
+
+  // when the lengthy bool is updated then call repopulateInts to update object
+  useEffect(() => {
+    if (intBool.length !== 0) {
+      repopulateInts();
+    }
+  }, [intBool]);
+
+  // when the lengthy bool is updated then call repopulateGen to update object
+  useEffect(() => {
+    if (genBool.length !== 0) {
+      repopulateGen();
+    }
+  }, [genBool]);
 
   const addEducation = (event) => {
     event.preventDefault();
@@ -303,6 +290,12 @@ function Assessment() {
     event.preventDefault();
     const temp = [...jobseeker.education];
     temp[index][element] = event.target.value;
+    if (element === 'certificate' && event.target.value === 'No') {
+      temp[index].certificateType = '';
+    }
+    if (element === 'degree' && event.target.value === 'No') {
+      temp[index].degreeType = '';
+    }
     setJobseeker({
       ...jobseeker,
       education: temp,
@@ -324,7 +317,7 @@ function Assessment() {
     const temp = [...jobseeker.education];
     temp.splice(index, 1);
     setJobseeker({
-      ...jobseeker, // change this to prevJobseeker
+      ...jobseeker,
       education: temp,
     });
   };
@@ -338,10 +331,11 @@ function Assessment() {
   };
 
   const clientInfoFields = [
-    { title: 'Authentic Name', toChange: 'name', var: jobseeker.name },
-    { title: 'Pronouns', toChange: 'pronouns', var: jobseeker.pronouns },
-    { title: 'Phone', toChange: 'phone', var: jobseeker.phone },
-    { title: 'Email', toChange: 'email', var: jobseeker.email },
+    { title: 'First Name', toChange: 'firstName', var: userData.firstName },
+    { title: 'Last Name', toChange: 'lastName', var: userData.lastName },
+    { title: 'Pronouns', toChange: 'pronouns', var: userData.pronouns },
+    { title: 'Phone', toChange: 'phoneNumber', var: userData.phoneNumber },
+    { title: 'Email', toChange: 'email', var: email },
     { title: 'City/State', toChange: 'City/State', var: jobseeker.clientInfo['City/State'] },
     { title: 'Ethnicity', toChange: 'Ethnicity', var: jobseeker.clientInfo.Ethnicity },
     { title: 'Age', toChange: 'Age', var: jobseeker.clientInfo.Age },
@@ -354,371 +348,369 @@ function Assessment() {
     { title: 'Prior Convictions?', toChange: 'Prior Convictions', var: jobseeker.clientInfo['Prior Convictions'] },
   ];
 
-  const [temp, setTemp] = useState(false);
-
-  useEffect(() => {
-    if (temp) {
-      saveJobseeker();
-    }
-  }, [checkedInt1, checkedInt2, checkedPrev1,
-    checkedPrev2, checkedGeneralSkills1, checkedGeneralSkills2]);
-
-  useEffect(() => {
-    if (temp) {
-      createJobseekerData(jobseeker.email, jobseeker);
-    }
-  }, [jobseeker]);
-
-  useEffect(() => {
-    const asyncFn = async () => {
-      const jobseekerData = await fetchJobseekerData(store.email);
-      setJobseeker(jobseekerData.data());
-      const sortedInterestKeys = Object.keys(jobseekerData.data().industryInterests).sort();
-      const pulledInt1 = [];
-      const pulledInt2 = [];
-      for (let i = 0; i < sortedInterestKeys.length; i += 1) {
-        if (i < 21) {
-          pulledInt1.push(jobseekerData.data().industryInterests[sortedInterestKeys[i]]);
-        } else {
-          pulledInt2.push(jobseekerData.data().industryInterests[sortedInterestKeys[i]]);
-        }
-      }
-      setCheckedInt1(pulledInt1);
-      setCheckedInt2(pulledInt2);
-      console.log(jobseeker.industryInterests);
-      // const sortedSkillKeys = Object.keys(jobseekerData.data().skillsChecklist).sort();
-      // const pulledSkills1 = [];
-      // const pulledSkills2 = [];
-      // for (let i = 0; i < sortedSkillKeys.length; i += 1) {
-      //   if (i <= 18) {
-      //     pulledSkills1.push(jobseekerData.data().skillsChecklist[sortedSkillKeys[i]]);
-      //   } else {
-      //     pulledSkills2.push(jobseekerData.data().skillsChecklist[sortedSkillKeys[i]]);
-      //   }
-      // }
-      // console.log(checkedPrev1);
-      // console.log(pulledSkills1);
-      // setCheckedPrev1(pulledSkills1);
-      // setCheckedPrev2(pulledSkills2);
-      // const sortedGenSkillsKeys = Object.keys(jobseekerData.data().generalSkills).sort();
-      // const pulledGenSkills1 = [];
-      // const pulledGenSkills2 = [];
-      // for (let i = 0; i < sortedGenSkillsKeys.length; i += 1) {
-      //   if (i <= 3) {
-      //     pulledGenSkills1.push(jobseekerData.data().generalSkills[sortedGenSkillsKeys[i]]);
-      //   } else {
-      //     pulledGenSkills2.push(jobseekerData.data().generalSkills[sortedGenSkillsKeys[i]]);
-      //   }
-      // }
-      // setCheckedGeneralSkills1(pulledGenSkills1);
-      // setCheckedGeneralSkills2(pulledGenSkills2);
-      setTemp(true);
-      console.log(jobseekerData.data());
-    };
-    asyncFn();
-  }, []);
+  if (skillBool1 === undefined) {
+    // eventually replace with appropriate loading component
+    return (<div>loading</div>);
+  }
 
   return (
-    <div>
-      <div className="content">
-        <div>
-          <div className="assessment-section-title">Client Info</div>
-          <div className="baby-divider" />
-          <form>
-            <div className="inputWrapper">
-              <div>
-                {clientInfoFields.map((item) => (
-                  <div>
-                    <TextField
-                      id="outlined-basic"
-                      label={item.title}
-                      variant="outlined"
-                      placeholder={item.title}
-                      value={item.var}
-                      focused
-                      onChange={(e) => {
-                        if ('clientInfo' in jobseeker && item.toChange in jobseeker.clientInfo) {
-                          setJobseeker((prevJobseeker) => ({
-                            ...prevJobseeker,
-                            clientInfo: {
-                              ...prevJobseeker.clientInfo,
-                              [item.toChange]: e.target.value,
-                            },
-                          }));
-                        } else {
-                          setJobseeker((prevJobseeker) => ({
-                            ...prevJobseeker,
+    <div className="content">
+      <div>
+        <div className="assessment-section-title">Client Info</div>
+        <div className="baby-divider" />
+        <form>
+          <div className="inputWrapper">
+            <div>
+              {clientInfoFields.map((item) => (
+                <div>
+                  <TextField
+                    id="outlined-basic"
+                    label={item.title}
+                    variant="outlined"
+                    placeholder={item.title}
+                    value={item.var}
+                    focused
+                    onChange={(e) => {
+                      if (item.toChange === 'firstName' || item.toChange === 'lastName'
+                        || item.toChange === 'pronouns' || item.toChange === 'phoneNumber') {
+                        setUserData((prevUserData) => ({
+                          ...prevUserData,
+                          [item.toChange]: e.target.value,
+                        }));
+                      } else if ('clientInfo' in jobseeker && item.toChange in jobseeker.clientInfo) {
+                        setJobseeker((prevJobseeker) => ({
+                          ...prevJobseeker,
+                          clientInfo: {
+                            ...prevJobseeker.clientInfo,
                             [item.toChange]: e.target.value,
-                          }));
-                        }
-                      }}
-                      InputProps={textFieldStyles.inputProps}
-                      InputLabelProps={textFieldStyles.labelProps}
-                      className="input-field"
-                    />
-                    <div className="op-between-inputs" />
-                  </div>
-                ))}
-              </div>
+                          },
+                        }));
+                      } else {
+                        setJobseeker((prevJobseeker) => ({
+                          ...prevJobseeker,
+                          [item.toChange]: e.target.value,
+                        }));
+                      }
+                    }}
+                    InputProps={textFieldStyles.inputProps}
+                    InputLabelProps={textFieldStyles.labelProps}
+                    className="input-field"
+                  />
+                  <div className="op-between-inputs" />
+                </div>
+              ))}
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
+      </div>
 
-        <div>
-          <div className="section-divider" />
-          <div className="assessment-section-title">Previous Experience</div>
-          <div className="assessment-section-subtitle">Please check all the skill sets that apply to ye.</div>
+      <div>
+        <div className="section-divider" />
+        <div className="assessment-section-title">Previous Experience</div>
+        <div className="assessment-section-subtitle">Please check all the skill sets that apply to ye.</div>
+      </div>
+      <div className="columns-container">
+        <div className="checkboxes-column-left">
+          <Checkboxes
+            skills={Object.keys(skillsObj).sort()
+              .slice(0, Math.ceil(skillsChecklistOptions.length / 2))}
+            checkedArr={skillBool1}
+            setCheckedArr={setSkillBool1}
+          />
+        </div>
+        <div className="checkboxes-column-right">
+          <Checkboxes
+            skills={Object.keys(skillsObj).sort()
+              .slice(Math.ceil(skillsChecklistOptions.length / 2))}
+            checkedArr={skillBool2}
+            setCheckedArr={setSkillBool2}
+          />
+        </div>
+      </div>
+
+      <div>
+        <div className="section-divider" />
+        <div className="assessment-section-title">Education Info</div>
+        {jobseeker.education.map((educationObject, index) => (
+          <div>
+            <form>
+              <div>
+                <div className="baby-divider" />
+                <FormControl
+                  fullWidth
+                  focused
+                  style={styles.formControl}
+                >
+                  <InputLabel id="demo-simple-select-label">Degree?</InputLabel>
+                  <Select
+                    defaultValue="No"
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    label="Degree"
+                    onChange={(e) => editEducation(e, 'degree', index)}
+                    style={styles.inputLabel}
+                  >
+                    <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
+                    <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
+                    <MenuItem value="Progress" style={styles.dropdownOptions}>Still Working On</MenuItem>
+                  </Select>
+                </FormControl>
+                <div className="op-between-inputs" />
+              </div>
+              {(jobseeker.education[index].degree === 'Progress' || jobseeker.education[index].degree === 'Yes') && (
+              <div>
+                <TextField
+                  id="outlined-basic"
+                  label="Type of Degree"
+                  placeholder="Type of Degree"
+                  value={jobseeker.education[index].degreeType}
+                  variant="outlined"
+                  focused
+                  onChange={(e) => editEducation(e, 'degreeType', index)}
+                  InputProps={textFieldStyles.inputProps}
+                  InputLabelProps={textFieldStyles.labelProps}
+                  className="input-field"
+                />
+                <div className="op-between-inputs" />
+              </div>
+              )}
+              <div>
+                <FormControl
+                  fullWidth
+                  focused
+                  style={styles.formControl}
+                >
+                  <InputLabel id="demo-simple-select-label">Certificate?</InputLabel>
+                  <Select
+                    defaultValue="No"
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    label="Degree"
+                    onChange={(e) => editEducation(e, 'certificate', index)}
+                    style={styles.inputLabel}
+                  >
+                    <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
+                    <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
+                    <MenuItem value="Progress" style={styles.dropdownOptions}>Still Working On</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+              {(jobseeker.education[index].certificate === 'Progress' || jobseeker.education[index].certificate === 'Yes') && (
+              <div>
+                <div className="op-between-inputs" />
+                <TextField
+                  id="outlined-basic"
+                  label="Type of Certificate"
+                  placeholder="Type of Certificate"
+                  value={jobseeker.education[index].certificateType}
+                  variant="outlined"
+                  focused
+                  onChange={(e) => editEducation(e, 'certificateType', index)}
+                  InputProps={textFieldStyles.inputProps}
+                  InputLabelProps={textFieldStyles.labelProps}
+                  className="input-field"
+                />
+              </div>
+              )}
+            </form>
+            <div className="op-between-inputs" />
+            <div className="left-button">
+              <button type="button" onClick={(e) => deleteEducation(e, index)} className="delete-buttons">
+                <img
+                  src={Delete}
+                  alt="delete icon"
+                  style={{ marginRight: '12px' }}
+                />
+                Delete Education
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="left-button">
+        <button type="button" onClick={addEducation} className="add-buttons">
+          <img
+            src={Add}
+            alt="add icon"
+            style={{ marginRight: '12px' }}
+          />
+          Add Education
+
+        </button>
+      </div>
+      <div>
+        <div className="section-divider" />
+        <div className="assessment-section-title">List of Current/Previous Occupations</div>
+        <form>
+          <div>
+            {jobseeker.occupation.map((occupationObject, index) => (
+              <div>
+                <form>
+                  <div className="baby-divider" />
+                  <TextField
+                    id="outlined-basic"
+                    label={`Occupation ${index + 1}`}
+                    value={occupationObject}
+                    placeholder={`Occupation ${index + 1}`}
+                    variant="outlined"
+                    focused
+                    onChange={(e) => editOccupation(e, index)}
+                    InputProps={textFieldStyles.inputProps}
+                    InputLabelProps={textFieldStyles.labelProps}
+                    className="input-field"
+                  />
+                  <div className="op-between-inputs" />
+                </form>
+                <div className="left-button">
+                  <button type="button" className="delete-buttons" onClick={(e) => { e.preventDefault(); deleteOccupation(index); }}>
+                    <img
+                      src={Delete}
+                      alt="delete icon"
+                      style={{ marginRight: '12px' }}
+                    />
+                    Delete Occupation
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="left-button">
+            <button type="button" onClick={addOccupation} className="add-buttons">
+              <img
+                src={Add}
+                alt="add icon"
+                style={{ marginRight: '12px' }}
+              />
+              Add Occupation
+            </button>
+          </div>
+        </form>
+      </div>
+      <div>
+        <div className="section-divider" />
+        <div className="assessment-section-title">Industry Interest</div>
+        <div className="assessment-section-subtitle">
+          In what areas of the followin&apos; industries are
+          ye open to explorin&apos; or have an interest in possible future employment?
         </div>
         <div className="columns-container">
           <div className="checkboxes-column-left">
             <Checkboxes
-              skills={previousExperience1}
-              checkedArr={checkedPrev1}
-              setCheckedArr={setCheckedPrev1}
+              skills={Object.keys(intObj).sort()
+                .slice(0, Math.ceil(industryInterestOptions.length / 2))}
+              checkedArr={intBool1}
+              setCheckedArr={setIntBool1}
             />
           </div>
           <div className="checkboxes-column-right">
             <Checkboxes
-              skills={previousExperience2}
-              checkedArr={checkedPrev2}
-              setCheckedArr={setCheckedPrev2}
+              skills={Object.keys(intObj).sort()
+                .slice(Math.ceil(industryInterestOptions.length / 2))}
+              checkedArr={intBool2}
+              setCheckedArr={setIntBool2}
             />
           </div>
         </div>
-
-        <div>
-          <div className="section-divider" />
-          <div className="assessment-section-title">Education Info</div>
-          {jobseeker.education.map((educationObject, index) => (
-            <div>
-              <form>
-                <div>
-                  <FormControl style={styles.formControl}>
-                    <InputLabel style={styles.inputLabel}>
-                      Degree?
-                    </InputLabel>
-                    <NativeSelect
-                      defaultValue="No"
-                      style={styles.dropdownOptions}
-                      onChange={(e) => editEducation(e, 'degree', index)}
-                      menuprops={{
-                        PaperProps: {
-                          style: styles.purpleBackground,
-                        },
-                      }}
-                    >
-                      <option value="Yes" className="dropit">Yes</option>
-                      <option value="No" className="dropit">No</option>
-                      <option value="Progress" className="dropit">Still Working On</option>
-                    </NativeSelect>
-                  </FormControl>
-                </div>
-                {(jobseeker.education[index].degree === 'Progress' || jobseeker.education[index].degree === 'Yes') && (
-                  <div>
-                    <div className="op-between-inputs" />
-                    <TextField
-                      id="outlined-basic"
-                      label="Type of Degree"
-                      placeholder="Type of Degree"
-                      value={jobseeker.education[index].degreeType}
-                      variant="outlined"
-                      focused
-                      onChange={(e) => editEducation(e, 'degreeType', index)}
-                      InputProps={textFieldStyles.inputProps}
-                      InputLabelProps={textFieldStyles.labelProps}
-                      className="input-field"
-                    />
-                  </div>
-                )}
-                <div>
-                  <FormControl style={styles.formControl}>
-                    <InputLabel style={styles.inputLabel}>
-                      Certificate
-                    </InputLabel>
-                    <NativeSelect
-                      defaultValue="No"
-                      style={styles.dropdownOptions}
-                      onChange={(e) => editEducation(e, 'certificate', index)}
-                    >
-                      <option value="Yes" style={styles.dropdownOptions}>Yes</option>
-                      <option value="No" style={styles.dropdownOptions}>No</option>
-                      <option value="Progress" style={styles.dropdownOptions}>Still Working On</option>
-                    </NativeSelect>
-                  </FormControl>
-                </div>
-                {(jobseeker.education[index].certificate === 'Progress' || jobseeker.education[index].certificate === 'Yes') && (
-                  <div>
-                    <div className="op-between-inputs" />
-                    <TextField
-                      id="outlined-basic"
-                      label="Type of Certificate"
-                      placeholder="Type of Certificate"
-                      value={jobseeker.education[index].certificateType}
-                      variant="outlined"
-                      focused
-                      onChange={(e) => editEducation(e, 'certificateType', index)}
-                      InputProps={textFieldStyles.inputProps}
-                      InputLabelProps={textFieldStyles.labelProps}
-                      className="input-field"
-                    />
-                  </div>
-                )}
-              </form>
-              <div className="op-between-inputs" />
-              <div className="left-button">
-                <button type="button" onClick={(e) => deleteEducation(e, index)} className="delete-buttons">
-                  <img
-                    src={Delete}
-                    alt="delete icon"
-                    style={{ marginRight: '12px' }}
-                  />
-                  Delete Education
-
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="left-button">
-          <button type="button" onClick={addEducation} className="add-buttons">
-            <img
-              src={Add}
-              alt="add icon"
-              style={{ marginRight: '12px' }}
-            />
-            Add Education
-
-          </button>
-        </div>
-
-        <div>
-          <div className="section-divider" />
-          <div className="assessment-section-title">List of Current/Previous Occupations</div>
-          <form>
-            <div>
-              {jobseeker.occupation.map((occupationObject, index) => (
-                <div>
-                  <form>
-                    <div className="baby-divider" />
-                    <TextField
-                      id="outlined-basic"
-                      label={`Occupation ${index + 1}`}
-                      value={occupationObject}
-                      placeholder={`Occupation ${index + 1}`}
-                      variant="outlined"
-                      focused
-                      onChange={(e) => editOccupation(e, index)}
-                      InputProps={textFieldStyles.inputProps}
-                      InputLabelProps={textFieldStyles.labelProps}
-                      className="input-field"
-                    />
-                    <div className="op-between-inputs" />
-                  </form>
-                  <div className="left-button">
-                    <button type="button" className="delete-buttons" onClick={(e) => { e.preventDefault(); deleteOccupation(index).then(console.log(jobseeker.occupation)); }}>
-                      <img
-                        src={Delete}
-                        alt="delete icon"
-                        style={{ marginRight: '12px' }}
-                      />
-                      Delete Occupation
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="left-button">
-              <button type="button" onClick={addOccupation} className="add-buttons">
-                <img
-                  src={Add}
-                  alt="add icon"
-                  style={{ marginRight: '12px' }}
-                />
-                Add Occupation
-              </button>
-            </div>
-          </form>
-        </div>
-        <div>
-          <div className="section-divider" />
-          <div className="assessment-section-title">Industry Interest</div>
-          <div className="assessment-section-subtitle">
-            In what areas of the followin&apos; industries are
-            ye open to explorin&apos; or have an interest in possible future employment?
-          </div>
-          <div className="columns-container">
-            <div className="checkboxes-column-left">
-              <Checkboxes
-                skills={interests1}
-                checkedArr={checkedInt1}
-                setCheckedArr={setCheckedInt1}
-              />
-            </div>
-            <div className="checkboxes-column-right">
-              <Checkboxes
-                skills={interests2}
-                checkedArr={checkedInt2}
-                setCheckedArr={setCheckedInt2}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div className="section-divider" />
-          <div className="assessment-section-title">Skills Checklist</div>
-          <div className="assessment-section-subtitle">
-            Please check all the skill sets that apply to ye.
-          </div>
-          <div className="columns-container">
-            <div className="checkboxes-column-left">
-              <Checkboxes
-                skills={generalSkills1}
-                checkedArr={checkedGeneralSkills1}
-                setCheckedArr={setCheckedGeneralSkills1}
-                subskills={subskills1}
-              />
-            </div>
-            <div className="checkboxes-column-right">
-              <Checkboxes
-                skills={generalSkills2}
-                checkedArr={checkedGeneralSkills2}
-                setCheckedArr={setCheckedGeneralSkills2}
-                subskills={subskills2}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div className="section-divider" />
-          <div className="assessment-section-title">Ultimate Dream Job</div>
-          <div className="baby-divider" />
-          <form>
-            <div className="inputWrapper">
-              <TextField
-                id="outlined-basic"
-                label="Dream Job"
-                placeholder="Dream Job"
-                value={jobseeker.dreamjob}
-                variant="outlined"
-                focused
-                onChange={(e) => {
-                  setJobseeker({
-                    ...jobseeker,
-                    dreamjob: e.target.value,
-                  });
-                }}
-                InputProps={textFieldStyles.inputProps}
-                InputLabelProps={textFieldStyles.labelProps}
-                className="input-field"
-              />
-            </div>
-          </form>
-        </div>
-        <div className="section-divider" />
       </div>
+      <div>
+        <div className="section-divider" />
+        <div className="assessment-section-title">Skills Checklist</div>
+        <div className="assessment-section-subtitle">
+          Please check all the skill sets that apply to ye.
+        </div>
+        <div className="columns-container">
+          <div className="checkboxes-column-left">
+            <Checkboxes
+              skills={Object.keys(genObj).sort()
+                .slice(0, Math.ceil(generalSkills.length / 2))}
+              checkedArr={genBool1}
+              setCheckedArr={setGenBool1}
+              subskills={generalSubskills.slice(Math.ceil(0, generalSkills.length / 2))}
+            />
+          </div>
+          <div className="checkboxes-column-right">
+            <Checkboxes
+              skills={Object.keys(genObj).sort()
+                .slice(Math.ceil(generalSkills.length / 2))}
+              checkedArr={genBool2}
+              setCheckedArr={setGenBool2}
+              subskills={generalSubskills.slice(Math.ceil(generalSkills.length / 2))}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div className="section-divider" />
+        <div className="assessment-section-title">Ultimate Dream Job</div>
+        <div className="baby-divider" />
+        <form>
+          <div className="inputWrapper">
+            <TextField
+              id="outlined-basic"
+              label="Dream Job"
+              placeholder="Dream Job"
+              value={jobseeker.clientInfo['Dream Job']}
+              variant="outlined"
+              focused
+              onChange={(e) => {
+                setJobseeker((prevJobseeker) => ({
+                  ...prevJobseeker,
+                  clientInfo: {
+                    ...prevJobseeker.clientInfo,
+                    'Dream Job': e.target.value,
+                  },
+                }));
+              }}
+              InputProps={textFieldStyles.inputProps}
+              InputLabelProps={textFieldStyles.labelProps}
+              className="input-field"
+            />
+          </div>
+        </form>
+      </div>
+      <div className="section-divider" />
     </div>
   );
 }
 export default Assessment;
+
+Assessment.propTypes = {
+  email: propTypes.string.isRequired,
+  userData: propTypes.shape({
+    firstName: propTypes.string.isRequired,
+    lastName: propTypes.string.isRequired,
+    phoneNumber: propTypes.string.isRequired,
+    pronouns: propTypes.string.isRequired,
+  }).isRequired,
+  jobseeker: propTypes.shape({
+    clientInfo:
+    {
+      'City/State': propTypes.string.isRequired,
+      Ethnicity: propTypes.string.isRequired,
+      Age: propTypes.string.isRequired,
+      'Gender Identity': propTypes.string.isRequired,
+      Sexuality: propTypes.string.isRequired,
+      Veteran: propTypes.string.isRequired,
+      Disability: propTypes.string.isRequired,
+      'Housing Situation': propTypes.string.isRequired,
+      'Currently Employed': propTypes.string.isRequired,
+      'Prior Convictions': propTypes.string.isRequired,
+    },
+    industryInterest: propTypes.arrayOf(
+      propTypes.string.isRequired,
+    ),
+    generalSkills: propTypes.arrayOf(
+      propTypes.string.isRequired,
+    ),
+    skillsChecklist: propTypes.arrayOf(
+      propTypes.string.isRequired,
+    ),
+    education: [{
+    }],
+    occupation: [],
+    dreamjob: propTypes.string.isRequired,
+  }).isRequired,
+  setJobseeker: propTypes.func.isRequired,
+  setUserData: propTypes.func.isRequired,
+};

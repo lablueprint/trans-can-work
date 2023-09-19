@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
 import { TextField, Button, Checkbox } from '@material-ui/core';
 import InputAdornment from '@mui/material/InputAdornment';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -60,6 +59,7 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
+  // eslint-disable-next-line no-undef
   const user = useSelector((state) => state.auth.value);
 
   const navigate = useNavigate();
@@ -88,7 +88,7 @@ function Login() {
 
   useEffect(() => {
     if (user && user.isLoggedIn && user.user !== undefined) {
-      navigate(user.user.approved ? '/home' : '/splash');
+      navigate(user.user.approved ? '/clientRoadmap' : '/splash');
     }
   }, [user]);
 
@@ -181,7 +181,7 @@ function Login() {
                 ...inputProps,
                 endAdornment: (
                   <InputAdornment position="start" onClick={() => setShowPassword(!showPassword)}>
-                    <VisibilityIcon fontSize="large" />
+                    <VisibilityIcon fontSize="large" style={{ width: '0.75em', right: '0' }} />
                   </InputAdornment>
                 ),
               }}
@@ -202,10 +202,7 @@ function Login() {
                 }}
                 onChange={() => setRememberMe(!rememberMe)}
               />
-              <div style={{
-                paddingTop: '2%',
-              }}
-              >
+              <div>
                 {' '}
                 Remember Me
               </div>
@@ -245,14 +242,21 @@ function Login() {
             </Button>
 
           </div>
-          <img src={TCWLogo2} className="TcwLogo2" alt="TCWLogo2" />
+          <div className="loginInput">
+            <Link to="/register" className="link">
+              <Button
+                type="button"
+                color="primary"
+                variant="outlined"
+                className={classes.button}
+                style={buttonStyle}
+              >
+                Create an Account
+              </Button>
+            </Link>
 
-          <div className="register">
-            <div style={{ paddingBottom: '3%' }}>
-              Don&apos;t Have An Account?
-            </div>
-            <Link to="/register">Create Account</Link>
           </div>
+          <img src={TCWLogo2} className="TcwLogo2" alt="TCWLogo2" />
         </div>
       </div>
     </>
