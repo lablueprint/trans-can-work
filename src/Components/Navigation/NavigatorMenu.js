@@ -98,13 +98,13 @@ function NavigatorMenu() {
 
   useEffect(() => {
     if (jobseekerData !== undefined) {
-      updateJobseekerData('alannguyen711@gmail.com', jobseekerData);
+      updateJobseekerData(emailParam, jobseekerData);
     }
   }, [jobseekerData]);
 
   useEffect(() => {
     if (userData !== undefined) {
-      updateUser('alannguyen711@gmail.com', userData);
+      updateUser(emailParam, userData);
     }
   }, [userData]);
 
