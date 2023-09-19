@@ -45,7 +45,7 @@ function App() {
 
   // change displayed home page depending on the authentication stage/user role
   const getHomeComponent = () => {
-    if(!store.isLoggedIn) {
+    if(store == undefined || !store.isLoggedIn) {
       return <>
               <ScrollToTop />
               <Login />
