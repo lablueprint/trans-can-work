@@ -8,7 +8,7 @@ import './MilestoneMap.css';
 import background from '../../Assets/Images/roadmap-background.png';
 import detailsDesktop from '../../Assets/Images/roadmap-details-desktop.png';
 import detailsMobile from '../../Assets/Images/roadmap-details-mobile.png';
-// import {useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 
 const data = {
   content: {
@@ -98,13 +98,14 @@ const data = {
   },
 };
 
-function MilestoneMap({email}) {
+function MilestoneMap() {
   const [buttonData, setButtonData] = useState(data);
   const [jobseeker, setJobseeker] = useState();
   const [prevJobseeker, setPrevJobseeker] = useState();
+  const { emailParam } = useParams();
 
   useEffect(() => {
-    fetchJobseekerData(email).then((jobseekerData) => {
+    fetchJobseekerData(emailParam).then((jobseekerData) => {
       setJobseeker(jobseekerData.data());
       setPrevJobseeker(jobseekerData.data());
     });
@@ -113,7 +114,7 @@ function MilestoneMap({email}) {
   useEffect(() => {
     if (jobseeker !== undefined && prevJobseeker !== undefined && JSON.stringify(jobseeker) !== JSON.stringify(prevJobseeker)) {
       setPrevJobseeker(jobseeker)
-      updateJobseekerData(email, jobseeker);
+      updateJobseekerData(emailParam, jobseeker);
     }
   }, [jobseeker]);
 
@@ -123,19 +124,6 @@ function MilestoneMap({email}) {
 
   return (
     <div>
-      <div className="grid-container">
-        <div id="roadmap-title"><img src={title} alt="roadmap title" /></div>
-        {buttonData.content.body.map((x) => {
-        return (
-          <div
-            key={x.uid}
-            id={x.id}
-          >
-            <MilestoneButton image={jobseeker.milestones[x.id.replace(/-/g, ' ')] === 'complete' ? x.imageUpdated : x.imageDefault} imageHover={jobseeker.milestones[x.id.replace(/-/g, ' ')] === 'complete' ? x.imageUHover : x.imageHover} title={x.title} id={x.id.replace(/-/g, ' ')} jobseeker={jobseeker} setJobseeker={setJobseeker}/>
-          </div>
-        );
-        })}
-      </div>
       <div 
         className="background-desktop" 
         style={{ 
@@ -148,7 +136,18 @@ function MilestoneMap({email}) {
             background: `url(${detailsDesktop})`
           }}
         >
-          {MilestoneButton}
+          <div>
+            {buttonData.content.body.map((x) => {
+            return (
+              <div
+                key={x.uid}
+                id={x.id}
+              >
+                <MilestoneButton image={jobseeker.milestones[x.id.replace(/-/g, ' ')] === 'complete' ? x.imageUpdated : x.imageDefault} imageHover={jobseeker.milestones[x.id.replace(/-/g, ' ')] === 'complete' ? x.imageUHover : x.imageHover} title={x.title} id={x.id.replace(/-/g, ' ')} jobseeker={jobseeker} setJobseeker={setJobseeker}/>
+              </div>
+            );
+            })}
+          </div>
         </div>
       </div>
       <div 
@@ -163,7 +162,18 @@ function MilestoneMap({email}) {
             background: `url(${detailsMobile})`
           }}
         >
-          {MilestoneButton}
+          <div>
+            {buttonData.content.body.map((x) => {
+            return (
+              <div
+                key={x.uid}
+                id={x.id}
+              >
+                <MilestoneButton image={jobseeker.milestones[x.id.replace(/-/g, ' ')] === 'complete' ? x.imageUpdated : x.imageDefault} imageHover={jobseeker.milestones[x.id.replace(/-/g, ' ')] === 'complete' ? x.imageUHover : x.imageHover} title={x.title} id={x.id.replace(/-/g, ' ')} jobseeker={jobseeker} setJobseeker={setJobseeker}/>
+              </div>
+            );
+            })}
+          </div>
         </div>
       </div>
     </div>

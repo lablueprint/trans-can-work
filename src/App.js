@@ -126,7 +126,7 @@ function App() {
           <Route path="/admindashboard" element={<AdminDashboard />} />
           <Route path="/navdashboard" element={<NavDashboard />} />
 
-          <Route path="/roadmap" element={<MilestoneMap email={user.user.email}/>} />
+          <Route path="/roadmap/:emailParam" element={<MilestoneMap/>} />
           <Route
             path="/splash"
             element={
