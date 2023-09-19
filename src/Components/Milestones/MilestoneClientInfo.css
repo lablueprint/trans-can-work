@@ -14,6 +14,7 @@
   column-gap: 4rem;
   row-gap: 1.5rem;
   background-color: #FFFBFE;
+  padding-top: 40px;
 }
 
 .hiringInfoWrapper {
@@ -30,6 +31,7 @@
   font-size: 0.9rem;
   color: #484649;
   font-family: 'Montserrat';
+  padding: 5px;
 }
 
 .infoLabel {

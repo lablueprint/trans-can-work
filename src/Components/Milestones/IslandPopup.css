@@ -96,13 +96,6 @@
     border: 2px solid #939094;
 }
 
-#pending:hover {
-    background: #939094;
-    box-shadow: 0px 4px 8px rgba(60, 55, 68, 0.25);
-    color: #FFFBFE;
-    border: 2px solid #939094;
-}
-
 #close {
     border-radius: 100%;
     position: fixed;

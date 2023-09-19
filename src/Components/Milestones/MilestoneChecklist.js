@@ -22,16 +22,15 @@ import { DisabledByDefaultRounded } from '@mui/icons-material';
 const style = {
   container: {
     width: '85%',
-    // width: '40vw',
     alignSelf: 'center',
     marginHorizontal: 'auto',
   },
   checklistWrapper: {
     display: 'grid',
-    // gridTemplateColumns: 'repeat(2, 1fr)',
     gridAutoRows: 'minmax(auto, auto)',
     alignSelf: 'center',
     margin: '0, auto',
+    padding: '20px',
   },
   checkboxLabel: {
     width: 'fit-content',
