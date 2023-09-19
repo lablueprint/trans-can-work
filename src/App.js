@@ -102,7 +102,7 @@ function App() {
           (
           <>
           <Route path="/clientRoadmap" element={<NavigatorMenu />}>
-            <Route path="roadmap" element={<MilestoneMap />} />
+            <Route path="roadmap" element={<MilestoneMap email={'js_angela@gmail.com'}/>} />
             <Route path="assessment" element={<Assessment />} />
             <Route path="onlineprofiles" element={<OnlineProfiles />} />
             <Route path="training" element={<TrainingPrograms />} />
@@ -114,7 +114,6 @@ function App() {
             <Route path="hiredinfo" element={<HiredInfo />} />
           </Route>
           <Route path="/onboard" element={<JobseekerData />} />
-          <Route path="/roadmap" element={<MilestoneMap />} />
           </>)
   }
           <Route path="/login" element={<Login />} />
@@ -127,7 +126,7 @@ function App() {
           <Route path="/admindashboard" element={<AdminDashboard />} />
           <Route path="/navdashboard" element={<NavDashboard />} />
 
-          <Route path="/roadmap" element={<MilestoneMap />} />
+          <Route path="/roadmap" element={<MilestoneMap email={user.user.email}/>} />
           <Route
             path="/splash"
             element={

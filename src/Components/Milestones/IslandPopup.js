@@ -37,20 +37,20 @@ function IslandPopup({
   } else if (id === 'online profile') {
     toBeRendered = <OnlineProfile jobseeker={jobseeker} setJobseeker={setJobseeker} />;
   } else if (id === 'workshop') {
-    toBeRendered = <Workshop />;
+    toBeRendered = <Workshop jobseeker={jobseeker} />;
   } else if (id === 'job fair') {
-    toBeRendered = <JobFair />;
+    toBeRendered = <JobFair jobseeker={jobseeker} />;
   } else if (id === 'resources') {
     toBeRendered = <Resources />;
-  } else if (id === 'job portal') {
+  } else if (id === 'job board') {
     toBeRendered = <JobPortal />;
   } else if (id === 'training program') {
     toBeRendered = <Training jobseeker={jobseeker} />;
   } else if (id === 'internship') {
-    toBeRendered = <Internship />;
+    toBeRendered = <Internship jobseeker={jobseeker} />;
   } else if (id === 'hiring info') {
     markAsComplete = false;
-    toBeRendered = <Hiring />;
+    toBeRendered = <Hiring jobseeker={jobseeker} />;
   }
 
   return (

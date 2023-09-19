@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './Internship.css';
-import { internshipsOptions } from '../../Services/objects-service';
+import PropTypes from 'prop-types';
 import MilestoneChecklist from './MilestoneChecklist';
 
-function Internship() {
+function Internship({ jobseeker }) {
   const [internships, setInternships] = useState([]);
 
   useEffect(() => {
     const start = async () => {
       const updatedInternships = [];
-      internshipsOptions.forEach((internship) => {
+      jobseeker.internships.forEach((internship) => {
         updatedInternships.push({
           label: internship.program,
           value: internship.applied,
@@ -31,5 +31,9 @@ function Internship() {
     </div>
   );
 }
+
+Internship.propTypes = {
+  jobseeker: PropTypes.func.isRequired,
+};
 
 export default Internship;

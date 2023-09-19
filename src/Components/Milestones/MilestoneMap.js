@@ -8,6 +8,7 @@ import './MilestoneMap.css';
 import background from '../../Assets/Images/roadmap-background.png';
 import detailsDesktop from '../../Assets/Images/roadmap-details-desktop.png';
 import detailsMobile from '../../Assets/Images/roadmap-details-mobile.png';
+// import {useParams} from 'react-router-dom';
 
 const data = {
   content: {
@@ -73,7 +74,7 @@ const data = {
         imageHover: require('../../Assets/Images/job-portalH.png'),
         imageUHover: require('../../Assets/Images/job-portalUH.png'),
         title: require('../../Assets/Images/job-portal-title.png'),
-        id: 'job-portal',
+        id: 'job-board',
       },
       {
         uid: 8,
@@ -97,23 +98,22 @@ const data = {
   },
 };
 
-function MilestoneMap() {
-  const store = useSelector((state) => state.auth.value);
+function MilestoneMap({email}) {
   const [buttonData, setButtonData] = useState(data);
   const [jobseeker, setJobseeker] = useState();
   const [prevJobseeker, setPrevJobseeker] = useState();
 
   useEffect(() => {
-    fetchJobseekerData('js_angela@gmail.com').then((jobseekerData) => {
+    fetchJobseekerData(email).then((jobseekerData) => {
       setJobseeker(jobseekerData.data());
       setPrevJobseeker(jobseekerData.data());
     });
   }, []);
 
   useEffect(() => {
-    if (jobseeker !== undefined && prevJobseeker !== undefined && prevJobseeker !== jobseeker) {
+    if (jobseeker !== undefined && prevJobseeker !== undefined && JSON.stringify(jobseeker) !== JSON.stringify(prevJobseeker)) {
       setPrevJobseeker(jobseeker)
-      updateJobseekerData(jobseeker, 'js_angela@gmail.com');
+      updateJobseekerData(email, jobseeker);
     }
   }, [jobseeker]);
 
