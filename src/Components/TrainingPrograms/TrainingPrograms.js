@@ -104,8 +104,6 @@ function TrainingPrograms({ jobseeker, setJobseeker }) {
     const temp = [...allPrograms];
     temp[index][element] = event.target.value;
     setAllPrograms(temp);
-    console.log(allPrograms);
-    console.log(date);
   };
 
   const editDropdown = (event, label, index) => {
