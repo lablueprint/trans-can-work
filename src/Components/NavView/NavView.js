@@ -1,10 +1,10 @@
 import './NavView.css';
 import React, { useState, useEffect } from 'react';
-// import Assessment from '../Assessment/Assessment';
-// import Header from '../Header/Header';
+import Assessment from '../Assessment/Assessment';
+import Header from '../Header/Header';
 import { fetchUser, updateUser } from '../../Services/user-service';
 import { fetchJobseekerData, updateJobseekerData } from '../../Services/jobseeker-data-service';
-import JobFairs from '../JobFairs/JobFairs';
+// import OnlineProfiles from '../OnlineProfiles/OnlineProfiles';
 
 function NavView() {
   const [userData, setUserData] = useState();
@@ -43,19 +43,19 @@ function NavView() {
     <div>
       {jobseekerData && (
       <div>
-        {/* <Header />
-        <div className="assessment-top-padding" /> */}
-        {/* <Assessment
+        <Header />
+        <div className="assessment-top-padding" />
+        <Assessment
           userData={userData}
           setUserData={setUserData}
           jobseeker={jobseekerData}
           setJobseeker={setJobseekerData}
           email={email}
-        /> */}
-        <JobFairs
+        />
+        {/* <OnlineProfiles
           jobseeker={jobseekerData}
           setJobseeker={setJobseekerData}
-        />
+        /> */}
       </div>
       )}
     </div>

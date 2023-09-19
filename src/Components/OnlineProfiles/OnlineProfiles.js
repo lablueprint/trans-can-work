@@ -8,26 +8,6 @@ import Cancel from '../../Assets/Images/cancel.png';
 import Delete from '../../Assets/delete.svg';
 
 function OnlineProfiles({ jobseeker, setJobseeker }) {
-  const styles = {
-    dropdownOptions: {
-      fontFamily: 'Montserrat',
-      color: '#49454F',
-      fontSize: '1rem',
-      fontWeight: 'bold',
-      paddingLeft: '1.7%',
-      textDecoration: 'none',
-    },
-    inputLabel: {
-      fontFamily: 'Montserrat',
-      color: '#49454F',
-      fontWeight: 'bold',
-      backgroundColor: '#F7F8FE',
-    },
-    formControl: {
-      textAlign: 'left',
-      textDecoration: 'none',
-    },
-  };
   const textFieldStyles = {
     inputProps: {
       style: {
