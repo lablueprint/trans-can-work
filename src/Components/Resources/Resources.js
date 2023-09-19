@@ -1,11 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Resources.css';
+import propTypes from 'prop-types';
 import { TextField } from '@material-ui/core';
-import Checkboxes from '../Checkboxes/Checkboxes';
+import { FormControl, InputLabel } from '@mui/material';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+// import Checkboxes from '../Checkboxes/Checkboxes';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
 
-function Resources() {
+function Resources({ jobseeker, setJobseeker }) {
+  const styles = {
+    dropdownOptions: {
+      fontFamily: 'Montserrat',
+      color: '#49454F',
+      fontSize: '1rem',
+      fontWeight: 'bold',
+      paddingLeft: '1.7%',
+      textDecoration: 'none',
+    },
+    inputLabel: {
+      fontFamily: 'Montserrat',
+      color: '#49454F',
+      fontWeight: 'bold',
+      backgroundColor: '#F7F8FE',
+    },
+    formControl: {
+      textAlign: 'left',
+      textDecoration: 'none',
+    },
+  };
   const textFieldStyles = {
     inputProps: {
       style: {
@@ -29,7 +53,7 @@ function Resources() {
     },
   };
 
-  const resources1 = [
+  const resourcesList = [
     'Clothes',
     'Credit for Public Transit',
     'Eviction',
@@ -40,9 +64,6 @@ function Resources() {
     'Navigating Public Assistance',
     'Re-Entry Services',
     'Showers',
-  ];
-
-  const resources2 = [
     'COVID Supplies',
     'Domestic Violence',
     'Financial Aid Support',
@@ -55,16 +76,26 @@ function Resources() {
     'Support Groups',
   ];
 
-  const [checkedRes1,
-    setCheckedRes1] = useState(new Array(resources1.length).fill(false));
-  const [checkedRes2,
-    setCheckedRes2] = useState(new Array(resources2.length).fill(false));
+  // const [checkedRes1,
+  //   setCheckedRes1] = useState(new Array(resources1.length).fill(false));
+  // const [checkedRes2,
+  //   setCheckedRes2] = useState(new Array(resources2.length).fill(false));
+  const [loaded, setLoaded] = useState(false);
+  const [trackedResources, setTrackedResources] = useState([{}]);
 
-  const [trackedResources, setTrackedResources] = useState([{
-    type: '',
-    source: '',
-    notes: '',
-  }]);
+  useEffect(() => {
+    setTrackedResources(jobseeker.resources);
+    setLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (loaded) {
+      setJobseeker({
+        ...jobseeker,
+        resources: trackedResources,
+      });
+    }
+  }, [trackedResources]);
 
   const addTrackedResource = async (event) => {
     event.preventDefault();
@@ -88,9 +119,11 @@ function Resources() {
     const temp = [...trackedResources];
     temp[index][element] = event.target.value;
     setTrackedResources(temp);
-    console.log(checkedRes1);
-    console.log(checkedRes2);
   };
+
+  useEffect(() => {
+    console.log(trackedResources);
+  }, [trackedResources]);
 
   const fieldProps = [
     { label: 'Type of Resource', value: 'type' },
@@ -100,8 +133,8 @@ function Resources() {
 
   return (
     <div className="content">
-      <div className="resources-tracker-title">Resources Tracker</div>
-      <div className="resources-columns-container">
+      {/* <div className="resources-tracker-title">Resources Tracker</div> */}
+      {/* <div className="resources-columns-container">
         <div className="checkboxes-column-left">
           <Checkboxes
             skills={resources1}
@@ -116,8 +149,7 @@ function Resources() {
             setCheckedArr={setCheckedRes2}
           />
         </div>
-      </div>
-      <div className="temp" />
+      </div> */}
       <div className="i-title">Resources Tracker</div>
       <div>
         {trackedResources.map((resourceObject, index) => (
@@ -127,18 +159,50 @@ function Resources() {
                 <div>
                   {fieldProps.map((field) => (
                     <div>
-                      <TextField
-                        id="outlined-basic"
-                        label={field.label}
-                        variant="outlined"
-                        value={resourceObject[field.value]}
-                        focused
-                        onChange={(e) => editTrackedResource(e, field.value, index)}
-                        InputProps={textFieldStyles.inputProps}
-                        InputLabelProps={textFieldStyles.labelProps}
-                        className="input-field"
-                      />
-                      <div className="op-between-inputs" />
+                      {(field.value === 'type')
+                      && (
+                        <>
+                          <FormControl
+                            fullWidth
+                            focused
+                            style={styles.formControl}
+                          >
+                            <InputLabel id="demo-simple-select-label">{field.label}</InputLabel>
+                            <Select
+                              defaultValue="No"
+                              labelId="demo-simple-select-label"
+                              id="demo-simple-select"
+                              label={field.label}
+                              onChange={(e) => editTrackedResource(e, field.value, index)}
+                              style={styles.inputLabel}
+                            >
+                              {resourcesList.map((resource) => (
+                                <MenuItem value={resource} style={styles.dropdownOptions}>
+                                  {resource}
+                                </MenuItem>
+                              ))}
+                            </Select>
+                          </FormControl>
+                          <div className="op-between-inputs" />
+                        </>
+                      )}
+                      {(field.value === 'source' || field.value === 'notes')
+                      && (
+                        <>
+                          <TextField
+                            id="outlined-basic"
+                            label={field.label}
+                            variant="outlined"
+                            value={resourceObject[field.value]}
+                            focused
+                            onChange={(e) => editTrackedResource(e, field.value, index)}
+                            InputProps={textFieldStyles.inputProps}
+                            InputLabelProps={textFieldStyles.labelProps}
+                            className="input-field"
+                          />
+                          <div className="op-between-inputs" />
+                        </>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -174,3 +238,15 @@ function Resources() {
 }
 
 export default Resources;
+
+Resources.propTypes = {
+  jobseeker: propTypes.shape({
+    resources:
+    {
+      type: propTypes.string.isRequired,
+      source: propTypes.bool.isRequired,
+      notes: propTypes.string.isRequired,
+    },
+  }).isRequired,
+  setJobseeker: propTypes.func.isRequired,
+};
