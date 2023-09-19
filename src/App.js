@@ -27,6 +27,7 @@ import NavigatorMenu from './Components/Navigation/NavigatorMenu';
 import MilestoneMap from './Components/Milestones/MilestoneMap';
 import Internships from './Components/Internships/Internships';
 import Assessment from './Components/Assessment/Assessment';
+import NavView from './Components/NavView/NavView';
 import Workshops from './Components/Workshops/Workshops';
 import JobFairs from './Components/JobFairs/JobFairs';
 import JobBoards from './Components/JobBoards/JobBoards';

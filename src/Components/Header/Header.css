@@ -22,29 +22,29 @@
 
 .all-header-items {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     width: 80%;
     margin: 2em auto;
     height: 100%;
+    gap: 2em;
 }
 
-.left-header-contents {
+.top-header-contents {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
     gap: 26px;
     width: 100%;
-    height: 8em;
 }
 
-.right-header-contents {
+.bottom-header-contents {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-bottom: 2em;
     justify-content: space-between;
-    height: 8em;
 }
 
 .go-back {
@@ -74,6 +74,10 @@
     font-size: 2.5em;
     font-weight: 400;
     text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90%;
 }
 
 .align-helper {
@@ -87,6 +91,11 @@
     font-weight: 700;
     font-family: 'Montserrat';
     padding-right: 1em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 20ch;
+
 }
 
 .nav-bar {
@@ -96,7 +105,7 @@
     width: 100%;
 }
 
-.menu-button-wrapper {
+.menu-notes-button-wrapper {
     height: 4em;
     width: 4em;
     color: white;
@@ -124,40 +133,67 @@
 }
 
 .mobileMenuOn {
-    display: block !important;
+    display: flex !important;
     position: absolute;
     height: 100%;
     width: 100%;
-    z-index: 9999;
+    z-index: 999999;
     top: 0;
     left: 0;
     margin: 0 !important;
     min-height: 100vh !important;
     background-color: white;
-}
-
-.mobileMenuOn * {
-    display: block !important;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2em 0;
 }
 
 .mobileMenuOn .MuiTabs-scroller {
-    position: absolute;
+    /* position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 2em;
-    overflow:visible;
+    right: 2em; */
+    overflow: visible;
+}
+
+.close-button-container {
+    border: none;
+    background-color: white;
+    max-width: 5em;
+    position: absolute;
+    top: 4em;
+    right: 4em;
 }
 
 .close-button {
-    position: absolute;
-    top: -14em;
-    right: -1em;
     cursor: pointer;
     z-index: 99999;
 }
 
+.notes-button-wrapper, .note-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    max-width: 10em;
+    margin-left: 2em;
+    /* position: absolute;
+    top: 85%;
+    transform: translateY(-85%);
+    right: 2em; */
+}
+
+.notes-button-wrapper:hover,
+.notes-button-wrapper:focus {
+  transform: scale(1.1);
+}
+
+.menu-button-wrapper {
+    border: none;
+    background-color: white;
+}
+
 @media (max-width: 768px) {
-    .menu-button-wrapper,
+    .menu-notes-button-wrapper,
     .menu-button {
         display: block;
     }
