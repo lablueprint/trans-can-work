@@ -354,324 +354,322 @@ function Assessment({
   }
 
   return (
-    <div>
-      <div className="content">
-        <div>
-          <div className="assessment-section-title">Client Info</div>
-          <div className="baby-divider" />
-          <form>
-            <div className="inputWrapper">
-              <div>
-                {clientInfoFields.map((item) => (
-                  <div>
-                    <TextField
-                      id="outlined-basic"
-                      label={item.title}
-                      variant="outlined"
-                      placeholder={item.title}
-                      value={item.var}
-                      focused
-                      onChange={(e) => {
-                        if (item.toChange === 'firstName' || item.toChange === 'lastName'
+    <div className="content">
+      <div>
+        <div className="assessment-section-title">Client Info</div>
+        <div className="baby-divider" />
+        <form>
+          <div className="inputWrapper">
+            <div>
+              {clientInfoFields.map((item) => (
+                <div>
+                  <TextField
+                    id="outlined-basic"
+                    label={item.title}
+                    variant="outlined"
+                    placeholder={item.title}
+                    value={item.var}
+                    focused
+                    onChange={(e) => {
+                      if (item.toChange === 'firstName' || item.toChange === 'lastName'
                         || item.toChange === 'pronouns' || item.toChange === 'phoneNumber') {
-                          setUserData((prevUserData) => ({
-                            ...prevUserData,
+                        setUserData((prevUserData) => ({
+                          ...prevUserData,
+                          [item.toChange]: e.target.value,
+                        }));
+                      } else if ('clientInfo' in jobseeker && item.toChange in jobseeker.clientInfo) {
+                        setJobseeker((prevJobseeker) => ({
+                          ...prevJobseeker,
+                          clientInfo: {
+                            ...prevJobseeker.clientInfo,
                             [item.toChange]: e.target.value,
-                          }));
-                        } else if ('clientInfo' in jobseeker && item.toChange in jobseeker.clientInfo) {
-                          setJobseeker((prevJobseeker) => ({
-                            ...prevJobseeker,
-                            clientInfo: {
-                              ...prevJobseeker.clientInfo,
-                              [item.toChange]: e.target.value,
-                            },
-                          }));
-                        } else {
-                          setJobseeker((prevJobseeker) => ({
-                            ...prevJobseeker,
-                            [item.toChange]: e.target.value,
-                          }));
-                        }
-                      }}
-                      InputProps={textFieldStyles.inputProps}
-                      InputLabelProps={textFieldStyles.labelProps}
-                      className="input-field"
-                    />
-                    <div className="op-between-inputs" />
-                  </div>
-                ))}
-              </div>
+                          },
+                        }));
+                      } else {
+                        setJobseeker((prevJobseeker) => ({
+                          ...prevJobseeker,
+                          [item.toChange]: e.target.value,
+                        }));
+                      }
+                    }}
+                    InputProps={textFieldStyles.inputProps}
+                    InputLabelProps={textFieldStyles.labelProps}
+                    className="input-field"
+                  />
+                  <div className="op-between-inputs" />
+                </div>
+              ))}
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
+      </div>
 
-        <div>
-          <div className="section-divider" />
-          <div className="assessment-section-title">Previous Experience</div>
-          <div className="assessment-section-subtitle">Please check all the skill sets that apply to ye.</div>
+      <div>
+        <div className="section-divider" />
+        <div className="assessment-section-title">Previous Experience</div>
+        <div className="assessment-section-subtitle">Please check all the skill sets that apply to ye.</div>
+      </div>
+      <div className="columns-container">
+        <div className="checkboxes-column-left">
+          <Checkboxes
+            skills={Object.keys(skillsObj).sort()
+              .slice(0, Math.ceil(skillsChecklistOptions.length / 2))}
+            checkedArr={skillBool1}
+            setCheckedArr={setSkillBool1}
+          />
+        </div>
+        <div className="checkboxes-column-right">
+          <Checkboxes
+            skills={Object.keys(skillsObj).sort()
+              .slice(Math.ceil(skillsChecklistOptions.length / 2))}
+            checkedArr={skillBool2}
+            setCheckedArr={setSkillBool2}
+          />
+        </div>
+      </div>
+
+      <div>
+        <div className="section-divider" />
+        <div className="assessment-section-title">Education Info</div>
+        {jobseeker.education.map((educationObject, index) => (
+          <div>
+            <form>
+              <div>
+                <div className="baby-divider" />
+                <FormControl
+                  fullWidth
+                  focused
+                  style={styles.formControl}
+                >
+                  <InputLabel id="demo-simple-select-label">Degree?</InputLabel>
+                  <Select
+                    defaultValue="No"
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    label="Degree"
+                    onChange={(e) => editEducation(e, 'degree', index)}
+                    style={styles.inputLabel}
+                  >
+                    <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
+                    <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
+                    <MenuItem value="Progress" style={styles.dropdownOptions}>Still Working On</MenuItem>
+                  </Select>
+                </FormControl>
+                <div className="op-between-inputs" />
+              </div>
+              {(jobseeker.education[index].degree === 'Progress' || jobseeker.education[index].degree === 'Yes') && (
+              <div>
+                <TextField
+                  id="outlined-basic"
+                  label="Type of Degree"
+                  placeholder="Type of Degree"
+                  value={jobseeker.education[index].degreeType}
+                  variant="outlined"
+                  focused
+                  onChange={(e) => editEducation(e, 'degreeType', index)}
+                  InputProps={textFieldStyles.inputProps}
+                  InputLabelProps={textFieldStyles.labelProps}
+                  className="input-field"
+                />
+                <div className="op-between-inputs" />
+              </div>
+              )}
+              <div>
+                <FormControl
+                  fullWidth
+                  focused
+                  style={styles.formControl}
+                >
+                  <InputLabel id="demo-simple-select-label">Certificate?</InputLabel>
+                  <Select
+                    defaultValue="No"
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    label="Degree"
+                    onChange={(e) => editEducation(e, 'certificate', index)}
+                    style={styles.inputLabel}
+                  >
+                    <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
+                    <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
+                    <MenuItem value="Progress" style={styles.dropdownOptions}>Still Working On</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+              {(jobseeker.education[index].certificate === 'Progress' || jobseeker.education[index].certificate === 'Yes') && (
+              <div>
+                <div className="op-between-inputs" />
+                <TextField
+                  id="outlined-basic"
+                  label="Type of Certificate"
+                  placeholder="Type of Certificate"
+                  value={jobseeker.education[index].certificateType}
+                  variant="outlined"
+                  focused
+                  onChange={(e) => editEducation(e, 'certificateType', index)}
+                  InputProps={textFieldStyles.inputProps}
+                  InputLabelProps={textFieldStyles.labelProps}
+                  className="input-field"
+                />
+              </div>
+              )}
+            </form>
+            <div className="op-between-inputs" />
+            <div className="left-button">
+              <button type="button" onClick={(e) => deleteEducation(e, index)} className="delete-buttons">
+                <img
+                  src={Delete}
+                  alt="delete icon"
+                  style={{ marginRight: '12px' }}
+                />
+                Delete Education
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="left-button">
+        <button type="button" onClick={addEducation} className="add-buttons">
+          <img
+            src={Add}
+            alt="add icon"
+            style={{ marginRight: '12px' }}
+          />
+          Add Education
+
+        </button>
+      </div>
+      <div>
+        <div className="section-divider" />
+        <div className="assessment-section-title">List of Current/Previous Occupations</div>
+        <form>
+          <div>
+            {jobseeker.occupation.map((occupationObject, index) => (
+              <div>
+                <form>
+                  <div className="baby-divider" />
+                  <TextField
+                    id="outlined-basic"
+                    label={`Occupation ${index + 1}`}
+                    value={occupationObject}
+                    placeholder={`Occupation ${index + 1}`}
+                    variant="outlined"
+                    focused
+                    onChange={(e) => editOccupation(e, index)}
+                    InputProps={textFieldStyles.inputProps}
+                    InputLabelProps={textFieldStyles.labelProps}
+                    className="input-field"
+                  />
+                  <div className="op-between-inputs" />
+                </form>
+                <div className="left-button">
+                  <button type="button" className="delete-buttons" onClick={(e) => { e.preventDefault(); deleteOccupation(index); }}>
+                    <img
+                      src={Delete}
+                      alt="delete icon"
+                      style={{ marginRight: '12px' }}
+                    />
+                    Delete Occupation
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="left-button">
+            <button type="button" onClick={addOccupation} className="add-buttons">
+              <img
+                src={Add}
+                alt="add icon"
+                style={{ marginRight: '12px' }}
+              />
+              Add Occupation
+            </button>
+          </div>
+        </form>
+      </div>
+      <div>
+        <div className="section-divider" />
+        <div className="assessment-section-title">Industry Interest</div>
+        <div className="assessment-section-subtitle">
+          In what areas of the followin&apos; industries are
+          ye open to explorin&apos; or have an interest in possible future employment?
         </div>
         <div className="columns-container">
           <div className="checkboxes-column-left">
             <Checkboxes
-              skills={Object.keys(skillsObj).sort()
-                .slice(0, Math.ceil(skillsChecklistOptions.length / 2))}
-              checkedArr={skillBool1}
-              setCheckedArr={setSkillBool1}
+              skills={Object.keys(intObj).sort()
+                .slice(0, Math.ceil(industryInterestOptions.length / 2))}
+              checkedArr={intBool1}
+              setCheckedArr={setIntBool1}
             />
           </div>
           <div className="checkboxes-column-right">
             <Checkboxes
-              skills={Object.keys(skillsObj).sort()
-                .slice(Math.ceil(skillsChecklistOptions.length / 2))}
-              checkedArr={skillBool2}
-              setCheckedArr={setSkillBool2}
+              skills={Object.keys(intObj).sort()
+                .slice(Math.ceil(industryInterestOptions.length / 2))}
+              checkedArr={intBool2}
+              setCheckedArr={setIntBool2}
             />
           </div>
         </div>
-
-        <div>
-          <div className="section-divider" />
-          <div className="assessment-section-title">Education Info</div>
-          {jobseeker.education.map((educationObject, index) => (
-            <div>
-              <form>
-                <div>
-                  <div className="baby-divider" />
-                  <FormControl
-                    fullWidth
-                    focused
-                    style={styles.formControl}
-                  >
-                    <InputLabel id="demo-simple-select-label">Degree?</InputLabel>
-                    <Select
-                      defaultValue="No"
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      label="Degree"
-                      onChange={(e) => editEducation(e, 'degree', index)}
-                      style={styles.inputLabel}
-                    >
-                      <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
-                      <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
-                      <MenuItem value="Progress" style={styles.dropdownOptions}>Still Working On</MenuItem>
-                    </Select>
-                  </FormControl>
-                  <div className="op-between-inputs" />
-                </div>
-                {(jobseeker.education[index].degree === 'Progress' || jobseeker.education[index].degree === 'Yes') && (
-                  <div>
-                    <TextField
-                      id="outlined-basic"
-                      label="Type of Degree"
-                      placeholder="Type of Degree"
-                      value={jobseeker.education[index].degreeType}
-                      variant="outlined"
-                      focused
-                      onChange={(e) => editEducation(e, 'degreeType', index)}
-                      InputProps={textFieldStyles.inputProps}
-                      InputLabelProps={textFieldStyles.labelProps}
-                      className="input-field"
-                    />
-                    <div className="op-between-inputs" />
-                  </div>
-                )}
-                <div>
-                  <FormControl
-                    fullWidth
-                    focused
-                    style={styles.formControl}
-                  >
-                    <InputLabel id="demo-simple-select-label">Certificate?</InputLabel>
-                    <Select
-                      defaultValue="No"
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      label="Degree"
-                      onChange={(e) => editEducation(e, 'certificate', index)}
-                      style={styles.inputLabel}
-                    >
-                      <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
-                      <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
-                      <MenuItem value="Progress" style={styles.dropdownOptions}>Still Working On</MenuItem>
-                    </Select>
-                  </FormControl>
-                </div>
-                {(jobseeker.education[index].certificate === 'Progress' || jobseeker.education[index].certificate === 'Yes') && (
-                  <div>
-                    <div className="op-between-inputs" />
-                    <TextField
-                      id="outlined-basic"
-                      label="Type of Certificate"
-                      placeholder="Type of Certificate"
-                      value={jobseeker.education[index].certificateType}
-                      variant="outlined"
-                      focused
-                      onChange={(e) => editEducation(e, 'certificateType', index)}
-                      InputProps={textFieldStyles.inputProps}
-                      InputLabelProps={textFieldStyles.labelProps}
-                      className="input-field"
-                    />
-                  </div>
-                )}
-              </form>
-              <div className="op-between-inputs" />
-              <div className="left-button">
-                <button type="button" onClick={(e) => deleteEducation(e, index)} className="delete-buttons">
-                  <img
-                    src={Delete}
-                    alt="delete icon"
-                    style={{ marginRight: '12px' }}
-                  />
-                  Delete Education
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="left-button">
-          <button type="button" onClick={addEducation} className="add-buttons">
-            <img
-              src={Add}
-              alt="add icon"
-              style={{ marginRight: '12px' }}
-            />
-            Add Education
-
-          </button>
-        </div>
-        <div>
-          <div className="section-divider" />
-          <div className="assessment-section-title">List of Current/Previous Occupations</div>
-          <form>
-            <div>
-              {jobseeker.occupation.map((occupationObject, index) => (
-                <div>
-                  <form>
-                    <div className="baby-divider" />
-                    <TextField
-                      id="outlined-basic"
-                      label={`Occupation ${index + 1}`}
-                      value={occupationObject}
-                      placeholder={`Occupation ${index + 1}`}
-                      variant="outlined"
-                      focused
-                      onChange={(e) => editOccupation(e, index)}
-                      InputProps={textFieldStyles.inputProps}
-                      InputLabelProps={textFieldStyles.labelProps}
-                      className="input-field"
-                    />
-                    <div className="op-between-inputs" />
-                  </form>
-                  <div className="left-button">
-                    <button type="button" className="delete-buttons" onClick={(e) => { e.preventDefault(); deleteOccupation(index); }}>
-                      <img
-                        src={Delete}
-                        alt="delete icon"
-                        style={{ marginRight: '12px' }}
-                      />
-                      Delete Occupation
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="left-button">
-              <button type="button" onClick={addOccupation} className="add-buttons">
-                <img
-                  src={Add}
-                  alt="add icon"
-                  style={{ marginRight: '12px' }}
-                />
-                Add Occupation
-              </button>
-            </div>
-          </form>
-        </div>
-        <div>
-          <div className="section-divider" />
-          <div className="assessment-section-title">Industry Interest</div>
-          <div className="assessment-section-subtitle">
-            In what areas of the followin&apos; industries are
-            ye open to explorin&apos; or have an interest in possible future employment?
-          </div>
-          <div className="columns-container">
-            <div className="checkboxes-column-left">
-              <Checkboxes
-                skills={Object.keys(intObj).sort()
-                  .slice(0, Math.ceil(industryInterestOptions.length / 2))}
-                checkedArr={intBool1}
-                setCheckedArr={setIntBool1}
-              />
-            </div>
-            <div className="checkboxes-column-right">
-              <Checkboxes
-                skills={Object.keys(intObj).sort()
-                  .slice(Math.ceil(industryInterestOptions.length / 2))}
-                checkedArr={intBool2}
-                setCheckedArr={setIntBool2}
-              />
-            </div>
-          </div>
-        </div>
-        <div>
-          <div className="section-divider" />
-          <div className="assessment-section-title">Skills Checklist</div>
-          <div className="assessment-section-subtitle">
-            Please check all the skill sets that apply to ye.
-          </div>
-          <div className="columns-container">
-            <div className="checkboxes-column-left">
-              <Checkboxes
-                skills={Object.keys(genObj).sort()
-                  .slice(0, Math.ceil(generalSkills.length / 2))}
-                checkedArr={genBool1}
-                setCheckedArr={setGenBool1}
-                subskills={generalSubskills.slice(Math.ceil(0, generalSkills.length / 2))}
-              />
-            </div>
-            <div className="checkboxes-column-right">
-              <Checkboxes
-                skills={Object.keys(genObj).sort()
-                  .slice(Math.ceil(generalSkills.length / 2))}
-                checkedArr={genBool2}
-                setCheckedArr={setGenBool2}
-                subskills={generalSubskills.slice(Math.ceil(generalSkills.length / 2))}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div className="section-divider" />
-          <div className="assessment-section-title">Ultimate Dream Job</div>
-          <div className="baby-divider" />
-          <form>
-            <div className="inputWrapper">
-              <TextField
-                id="outlined-basic"
-                label="Dream Job"
-                placeholder="Dream Job"
-                value={jobseeker.clientInfo['Dream Job']}
-                variant="outlined"
-                focused
-                onChange={(e) => {
-                  setJobseeker((prevJobseeker) => ({
-                    ...prevJobseeker,
-                    clientInfo: {
-                      ...prevJobseeker.clientInfo,
-                      'Dream Job': e.target.value,
-                    },
-                  }));
-                }}
-                InputProps={textFieldStyles.inputProps}
-                InputLabelProps={textFieldStyles.labelProps}
-                className="input-field"
-              />
-            </div>
-          </form>
-        </div>
-        <div className="section-divider" />
       </div>
+      <div>
+        <div className="section-divider" />
+        <div className="assessment-section-title">Skills Checklist</div>
+        <div className="assessment-section-subtitle">
+          Please check all the skill sets that apply to ye.
+        </div>
+        <div className="columns-container">
+          <div className="checkboxes-column-left">
+            <Checkboxes
+              skills={Object.keys(genObj).sort()
+                .slice(0, Math.ceil(generalSkills.length / 2))}
+              checkedArr={genBool1}
+              setCheckedArr={setGenBool1}
+              subskills={generalSubskills.slice(Math.ceil(0, generalSkills.length / 2))}
+            />
+          </div>
+          <div className="checkboxes-column-right">
+            <Checkboxes
+              skills={Object.keys(genObj).sort()
+                .slice(Math.ceil(generalSkills.length / 2))}
+              checkedArr={genBool2}
+              setCheckedArr={setGenBool2}
+              subskills={generalSubskills.slice(Math.ceil(generalSkills.length / 2))}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div className="section-divider" />
+        <div className="assessment-section-title">Ultimate Dream Job</div>
+        <div className="baby-divider" />
+        <form>
+          <div className="inputWrapper">
+            <TextField
+              id="outlined-basic"
+              label="Dream Job"
+              placeholder="Dream Job"
+              value={jobseeker.clientInfo['Dream Job']}
+              variant="outlined"
+              focused
+              onChange={(e) => {
+                setJobseeker((prevJobseeker) => ({
+                  ...prevJobseeker,
+                  clientInfo: {
+                    ...prevJobseeker.clientInfo,
+                    'Dream Job': e.target.value,
+                  },
+                }));
+              }}
+              InputProps={textFieldStyles.inputProps}
+              InputLabelProps={textFieldStyles.labelProps}
+              className="input-field"
+            />
+          </div>
+        </form>
+      </div>
+      <div className="section-divider" />
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { useSelector, useDispatch } from 'react-redux';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+
 import {
   Login,
   Register,
@@ -37,8 +38,8 @@ import OnlineProfiles from './Components/OnlineProfiles/OnlineProfiles';
 import TrainingPrograms from './Components/TrainingPrograms/TrainingPrograms';
 import { login, logout } from "./Redux/Slice/authSlices";
 import { fetchUser, addUser } from './Services/user-service';
-import { auth } from "./firebase";
-
+import ConfirmPopup from './Components/ConfirmPopup/confirmPopup';
+import { auth } from './firebase';
 
 function App() {
   const dispatch = useDispatch();
@@ -119,29 +120,45 @@ function App() {
           />
           <Route path="/reset" element={<Reset />} />
 
-          {store != undefined && ( <>
           {/* Client Views */}
-          <Route path="/onboard" element={<JobseekerData />} />
+          {/* <Route path="/onboard" element={<JobseekerData />} /> */}
 
           {/* Nav/Admin Views */}
-          <Route path="/clientRoadmap" element={<NavigatorMenu />}>
-            <Route path="roadmap" element={<MilestoneMap />} />
-            <Route path="assessment" element={<Assessment />} />
-            <Route path="onlineprofiles" element={<OnlineProfiles />} />
-            <Route path="training" element={<TrainingPrograms />} />
-            <Route path="internships" element={<Internships />} />
-            <Route path="workshops" element={<Workshops />} />
-            <Route path="jobfairs" element={<JobFairs />} />
-            <Route path="jobboards" element={<JobBoards />} />
-            <Route path="resources" element={<Resources />} />
-            <Route path="hiredinfo" element={<HiredInfo />} />
-          </Route>
+
+          {store != undefined && ( <>
+            <Route path="/onboard" element={<div>Onboard Goes Here</div>} />
+            <Route path="/clientRoadmap/:emailParam" element={<NavigatorMenu />}/>
           </>)}
 
-          {/* Assorted Views, cleanup in the future*/}
+          {store != undefined && 
+          (
+          <>
+          <Route path="/clientRoadmap/:emailParam" element={<NavigatorMenu />}/>          
+          <Route path="/onboardv2" element={<NavView />} />
+          </>)
+  }
+
           <Route path="/landing" element={<Landing />} />
           <Route path="/adminview" element={<AdminView />} />
           <Route path="/archivepopuptesting" element={<ArchiveTemp />} />
+          
+          <Route path="/admindashboard" element={<AdminDashboard />} />
+          <Route path="/navdashboard" element={<NavDashboard />} />
+
+          <Route path="/roadmap" element={<MilestoneMap />} />
+          <Route
+            path="/splash"
+            element={
+              <Splash
+                header="Awaiting Approval"
+                description="You have successfully signed up for an account. Please await approval from a TransCanWork Administator."
+                graphic={<img alt="" src={approvalIcon} />}
+              />
+            }
+          />
+          <Route
+            path = "/testConfirm" element = {<ConfirmPopup open handleClose = {()=> {}} handleConfirm = {()=> {}} title="DeleteConfirm" subtitle="subtitle goes here"/>}
+          />
         </Routes>
         <Footer />
       </div>
