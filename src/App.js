@@ -5,6 +5,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { useSelector, useDispatch } from 'react-redux';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+
 import {
   Login,
   NavigatorDashboard,
@@ -38,8 +39,8 @@ import OnlineProfiles from './Components/OnlineProfiles/OnlineProfiles';
 import TrainingPrograms from './Components/TrainingPrograms/TrainingPrograms';
 import { login, logout } from "./Redux/Slice/authSlices";
 import { fetchUser, addUser } from './Services/user-service';
-import { auth } from "./firebase";
-
+import ConfirmPopup from './Components/ConfirmPopup/confirmPopup';
+import { auth } from './firebase';
 
 function App() {
   const dispatch = useDispatch();
@@ -101,8 +102,8 @@ function App() {
           {user != undefined && 
           (
           <>
-          <Route path="/clientRoadmap" element={<NavigatorMenu />}>
-            <Route path="roadmap" element={<MilestoneMap />} />
+          <Route path="/clientRoadmap/:emailParam" element={<NavigatorMenu />}/>
+            {/* <Route path="roadmap" element={<MilestoneMap />} />
             <Route path="assessment" element={<Assessment />} />
             <Route path="onlineprofiles" element={<OnlineProfiles />} />
             <Route path="training" element={<TrainingPrograms />} />
@@ -111,8 +112,9 @@ function App() {
             <Route path="jobfairs" element={<JobFairs />} />
             <Route path="jobboards" element={<JobBoards />} />
             <Route path="resources" element={<Resources />} />
-            <Route path="hiredinfo" element={<HiredInfo />} />
-          </Route>
+            <Route path="hiredinfo" element={<HiredInfo />} /> */}
+          {/* </Route> */}
+          
           <Route path="/onboard" element={<NavView />} />
           </>)
   }
@@ -136,6 +138,9 @@ function App() {
                 graphic={<img alt="" src={approvalIcon} />}
               />
             }
+          />
+          <Route
+            path = "/testConfirm" element = {<ConfirmPopup open handleClose = {()=> {}} handleConfirm = {()=> {}} title="DeleteConfirm" subtitle="subtitle goes here"/>}
           />
         </Routes>
         <Footer />

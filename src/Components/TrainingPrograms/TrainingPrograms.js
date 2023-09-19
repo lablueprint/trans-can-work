@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import './TrainingPrograms.css';
 import { TextField } from '@material-ui/core';
@@ -128,7 +129,6 @@ function TrainingPrograms() {
   //     },
   //   );
   // }, [date]);
-  
 
   // const editDate = (newValue, label, index) => {
   //   console.log(newValue);
@@ -143,7 +143,7 @@ function TrainingPrograms() {
       <div className="tp-title">Training Programs</div>
       <div className="alert-modal">
         <p>
-          You've marked this milestone as complete for Jobseeker-Name. Click
+          You&#39;ve marked this milestone as complete for Jobseeker-Name. Click
           {' '}
           <a href="#">here</a>
           {' '}
