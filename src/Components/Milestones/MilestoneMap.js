@@ -4,6 +4,9 @@ import './MilestoneMap.css';
 import MilestoneButton from './MilestoneButton';
 import IslandPopup from './IslandPopup';
 import title from '../../Assets/Images/title.png';
+import background from '../../Assets/Images/roadmap-background.png';
+import detailsDesktop from '../../Assets/Images/roadmap-details-desktop.png';
+import detailsMobile from '../../Assets/Images/roadmap-details-mobile.png';
 
 const data = {
   content: {
@@ -121,9 +124,35 @@ const MilestoneButtons = data.content.body.map((x) => {
 function MilestoneMap() {
   return (
     <div>
-      <div className="grid-container">
-        <div id="roadmap-title"><img src={title} alt="roadmap title" /></div>
-        {MilestoneButtons}
+      <div 
+        className="background-desktop" 
+        style={{ 
+          background: `url(${background})`
+        }}
+      >
+        <div 
+          className="roadmap-contents-desktop" 
+          style={{ 
+            background: `url(${detailsDesktop})`
+          }}
+        >
+          {MilestoneButtons}
+        </div>
+      </div>
+      <div 
+        className="background-mobile" 
+        style={{ 
+          background: `url(${background})`
+        }}
+      >
+        <div 
+          className="roadmap-contents-mobile" 
+          style={{ 
+            background: `url(${detailsMobile})`
+          }}
+        >
+          {MilestoneButtons}
+        </div>
       </div>
     </div>
   );

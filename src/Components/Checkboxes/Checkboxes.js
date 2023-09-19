@@ -46,7 +46,7 @@ const styles = {
     textAlign: 'left',
     fontFamily: 'Montserrat',
     fontWeight: 400,
-    fontSize: '0.772em',
+    fontSize: '0.85em',
   },
   bulletList: {
     marginTop: 0,

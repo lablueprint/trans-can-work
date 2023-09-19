@@ -28,6 +28,7 @@
     justify-content: center;
     text-align: left;
     flex-grow: 1;
+    max-height: 100%;
 }
 
 .profile-button-name-text {
@@ -61,7 +62,9 @@
 }
 
 .profile-button-button-container {
-    margin-right: .5em;
+    display:flex ;
+    flex-direction: row;
+    margin: .5em;
     position: relative;
     top: -1.25em;
 }

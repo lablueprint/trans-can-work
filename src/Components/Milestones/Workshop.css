@@ -8,6 +8,10 @@
     width: 80%;
 }
 
+.workshop-wrapper > div {
+    margin: 0 auto;
+}
+
 .line1 {
     border: 1px solid rgba(147, 144, 148, 1); 
     width: 50%;
@@ -42,3 +46,8 @@
         margin-bottom: 0.5em;
     }
   }
+
+.MuiOutlinedInput-root.Mui-focused,
+.MuiOutlinedInput-notchedOutline {
+    border-width: 1px !important;
+}
