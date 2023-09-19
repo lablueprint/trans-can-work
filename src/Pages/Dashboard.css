@@ -52,6 +52,7 @@
     display: flex;
     flex-direction: row;
     justify-content: right;
+    align-items: center;
     column-gap: 1em;
     width: 100%;
 }
@@ -63,12 +64,6 @@
     margin-bottom: 2.5em;
     justify-content: space-between;
     align-items: baseline;
-}
-
-.dashboard-page-search-bar-container{
-    display: flex;
-    align-items: end;
-    margin-bottom: 1em;
 }
 
 .dashboard-page-profile-grid {
@@ -101,6 +96,18 @@
 
 .dashboard-page-chip-container {
     margin: 2rem 4rem;
+}
+
+.dash-nav-searchbar{
+    display: flex;
+    align-items: end;
+    margin-bottom: 1em;
+    width: 20em;
+    font-size: 1rem;
+}
+
+.dash-nav-searchbar * {
+    font-size: 1rem;
 }
 
 .dash-admin-searchbar {

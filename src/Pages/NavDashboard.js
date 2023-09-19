@@ -176,29 +176,32 @@ export default function NavDashboard() {
   return (
     <div className="dashboard-page-container">
       <div className="dashboard-page-headers-container">
-        <div className="dashboard-page-header-name-and-icon-container">
-          <p className="dashboard-page-header-profile-text">{`${store.user.firstName} ${store.user.lastName}`}</p>
-          <Avatar
-            facebookId="100008343750912"
-            className="profile-button-avatar"
-          />
-        </div>
-        <div className="dashboard-page-welcome-block-header">
-          <p className="dashboard-page-title">
-            Welcome,
-            {' '}
-            {store.user.firstName}
-          </p>
-          <div className="dashboard-page-search-bar-container">
-            <SearchAndFilter
-              accounts={currentTabAccounts}
-              checkedSkills={checkedSkills}
-              setCheckedSkills={setCheckedSkills}
-              checkedInterests={checkedInterests}
-              setCheckedInterests={setCheckedInterests}
-              setOutput={setFilteredAccounts}
-              placeholder="Search Accounts"
+        <div className="dashboard-page-headers-main">
+
+          <div className="dashboard-page-header-name-and-icon-container">
+            <p className="dashboard-page-header-profile-text">{`${store.user.firstName} ${store.user.lastName}`}</p>
+            <Avatar
+              facebookId="100008343750912"
+              className="profile-button-avatar"
             />
+          </div>
+          <div className="dashboard-page-headers-middle">
+            <p className="dashboard-page-title">
+              Welcome,
+              {' '}
+              {store.user.firstName}
+            </p>
+            <div className="dash-nav-searchbar">
+              <SearchAndFilter
+                accounts={currentTabAccounts}
+                checkedSkills={checkedSkills}
+                setCheckedSkills={setCheckedSkills}
+                checkedInterests={checkedInterests}
+                setCheckedInterests={setCheckedInterests}
+                setOutput={setFilteredAccounts}
+                placeholder="Search Accounts"
+              />
+            </div>
           </div>
         </div>
         <StyledTabs

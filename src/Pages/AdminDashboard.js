@@ -152,7 +152,7 @@ export default function AdminDashboard() {
           role: data.role,
 
           // get bookmarked and iconNumber from data somehow! eventually!
-          bookmarked: store.user.bookmarked.includes(doc.id),
+          bookmarked: store.user.bookmarked && store.user.bookmarked.includes(doc.id),
           iconNumber: 0,
         };
         usersTemp.push(elem);
