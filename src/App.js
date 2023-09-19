@@ -130,13 +130,10 @@ function App() {
             <Route path="/clientRoadmap/:emailParam" element={<NavigatorMenu />}/>
           </>)}
 
-          {store != undefined && 
-          (
-          <>
-          <Route path="/clientRoadmap/:emailParam" element={<NavigatorMenu />}/>          
+          
+          <Route path="/clientRoadmap2/:emailParam" element={<NavigatorMenu />}/>          
           <Route path="/onboardv2" element={<NavView />} />
-          </>)
-  }
+          
 
           <Route path="/landing" element={<Landing />} />
           <Route path="/adminview" element={<AdminView />} />
