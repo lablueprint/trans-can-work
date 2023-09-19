@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './JobFairs.css';
 import propTypes from 'prop-types';
 import { TextField } from '@material-ui/core';
-import { DateField } from '@mui/x-date-pickers/DateField';
 import { FormControl, InputLabel } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
@@ -103,12 +102,6 @@ function JobFairs({ jobseeker, setJobseeker }) {
     setJobFairs(temp);
   };
 
-  const editDate = (newValue, label, index) => {
-    const temp = [...jobFairs];
-    temp[index][label] = newValue;
-    setJobFairs(temp);
-  };
-
   const fieldProps = [
     { label: 'Job Fair', value: 'name' },
     { label: 'Date of Job Fair', value: 'date' },
@@ -128,7 +121,7 @@ function JobFairs({ jobseeker, setJobseeker }) {
                 <div>
                   {fieldProps.map((field) => (
                     <div>
-                      {(field.value === 'name' || field.value === 'notes')
+                      {(field.value === 'name' || field.value === 'notes' || field.value === 'date')
                       && (
                         <>
                           <TextField
@@ -166,21 +159,6 @@ function JobFairs({ jobseeker, setJobseeker }) {
                               <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
                             </Select>
                           </FormControl>
-                          <div className="op-between-inputs" />
-                        </>
-                      )}
-                      {(field.value === 'date')
-                      && (
-                        <>
-                          <DateField
-                            label={field.label}
-                            focused
-                            value={jobFairObject[field.value]}
-                            onChange={(newValue) => editDate(newValue, field.value, index)}
-                            InputProps={textFieldStyles.inputProps}
-                            InputLabelProps={textFieldStyles.labelProps}
-                            className="input-field"
-                          />
                           <div className="op-between-inputs" />
                         </>
                       )}
@@ -225,7 +203,7 @@ JobFairs.propTypes = {
     jobFairs:
     {
       name: propTypes.string.isRequired,
-      date: propTypes.instanceOf(Date),
+      date: propTypes.string.isRequired,
       attended: propTypes.bool.isRequired,
       notes: propTypes.string.isRequired,
     },
