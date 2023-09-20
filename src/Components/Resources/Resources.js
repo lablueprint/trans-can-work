@@ -5,7 +5,6 @@ import { TextField } from '@material-ui/core';
 import { FormControl, InputLabel } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-// import Checkboxes from '../Checkboxes/Checkboxes';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
 
@@ -14,6 +13,14 @@ function Resources({ jobseeker, setJobseeker }) {
     dropdownOptions: {
       fontFamily: 'Montserrat',
       color: '#49454F',
+      fontSize: '1rem',
+      fontWeight: 'bold',
+      paddingLeft: '1.7%',
+      textDecoration: 'none',
+    },
+    dropdownDefault: {
+      fontFamily: 'Montserrat',
+      color: 'light grey',
       fontSize: '1rem',
       fontWeight: 'bold',
       paddingLeft: '1.7%',
@@ -76,10 +83,6 @@ function Resources({ jobseeker, setJobseeker }) {
     'Support Groups',
   ];
 
-  // const [checkedRes1,
-  //   setCheckedRes1] = useState(new Array(resources1.length).fill(false));
-  // const [checkedRes2,
-  //   setCheckedRes2] = useState(new Array(resources2.length).fill(false));
   const [loaded, setLoaded] = useState(false);
   const [trackedResources, setTrackedResources] = useState([{}]);
 
@@ -100,7 +103,7 @@ function Resources({ jobseeker, setJobseeker }) {
   const addTrackedResource = async (event) => {
     event.preventDefault();
     const temp = {
-      type: '',
+      type: 'Select Resource',
       source: '',
       notes: '',
     };
@@ -127,29 +130,12 @@ function Resources({ jobseeker, setJobseeker }) {
 
   const fieldProps = [
     { label: 'Type of Resource', value: 'type' },
-    { label: 'Source of that Resource', value: 'source' },
+    { label: 'Source of Resource', value: 'source' },
     { label: 'Notes', value: 'notes' },
   ];
 
   return (
     <div className="content">
-      {/* <div className="resources-tracker-title">Resources Tracker</div> */}
-      {/* <div className="resources-columns-container">
-        <div className="checkboxes-column-left">
-          <Checkboxes
-            skills={resources1}
-            checkedArr={checkedRes1}
-            setCheckedArr={setCheckedRes1}
-          />
-        </div>
-        <div className="checkboxes-column-right">
-          <Checkboxes
-            skills={resources2}
-            checkedArr={checkedRes2}
-            setCheckedArr={setCheckedRes2}
-          />
-        </div>
-      </div> */}
       <div className="i-title">Resources Tracker</div>
       <div>
         {trackedResources.map((resourceObject, index) => (
@@ -169,13 +155,16 @@ function Resources({ jobseeker, setJobseeker }) {
                           >
                             <InputLabel id="demo-simple-select-label">{field.label}</InputLabel>
                             <Select
-                              defaultValue="No"
                               labelId="demo-simple-select-label"
                               id="demo-simple-select"
                               label={field.label}
                               onChange={(e) => editTrackedResource(e, field.value, index)}
                               style={styles.inputLabel}
+                              value={resourceObject.type}
                             >
+                              <MenuItem value="Select Resource" style={styles.dropdownDefault}>
+                                <em>Select Resource</em>
+                              </MenuItem>
                               {resourcesList.map((resource) => (
                                 <MenuItem value={resource} style={styles.dropdownOptions}>
                                   {resource}
@@ -191,6 +180,7 @@ function Resources({ jobseeker, setJobseeker }) {
                         <>
                           <TextField
                             id="outlined-basic"
+                            placeholder={field.label}
                             label={field.label}
                             variant="outlined"
                             value={resourceObject[field.value]}
@@ -244,7 +234,7 @@ Resources.propTypes = {
     resources:
     {
       type: propTypes.string.isRequired,
-      source: propTypes.bool.isRequired,
+      source: propTypes.string.isRequired,
       notes: propTypes.string.isRequired,
     },
   }).isRequired,

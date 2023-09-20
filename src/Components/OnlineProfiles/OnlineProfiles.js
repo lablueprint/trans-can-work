@@ -2,12 +2,35 @@ import React, { useEffect, useState } from 'react';
 import './OnlineProfiles.css';
 import propTypes from 'prop-types';
 import { TextField } from '@material-ui/core';
+import { FormControl, InputLabel } from '@mui/material';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 import Add from '../../Assets/add.svg';
 import Check from '../../Assets/Images/check.png';
 import Cancel from '../../Assets/Images/cancel.png';
 import Delete from '../../Assets/delete.svg';
 
 function OnlineProfiles({ jobseeker, setJobseeker }) {
+  const styles = {
+    dropdownOptions: {
+      fontFamily: 'Montserrat',
+      color: '#49454F',
+      fontSize: '1rem',
+      fontWeight: 'bold',
+      paddingLeft: '1.7%',
+      textDecoration: 'none',
+    },
+    inputLabel: {
+      fontFamily: 'Montserrat',
+      color: '#49454F',
+      fontWeight: 'bold',
+      backgroundColor: '#F7F8FE',
+    },
+    formControl: {
+      textAlign: 'left',
+      textDecoration: 'none',
+    },
+  };
   const textFieldStyles = {
     inputProps: {
       style: {
@@ -29,7 +52,7 @@ function OnlineProfiles({ jobseeker, setJobseeker }) {
   };
 
   const [loaded, setLoaded] = useState(false);
-  const [profile, setProfile] = useState([{}]);
+  const [profile, setProfile] = useState([]);
 
   useEffect(() => {
     setProfile(jobseeker.onlineProfiles);
@@ -51,7 +74,7 @@ function OnlineProfiles({ jobseeker, setJobseeker }) {
       site: '',
       username: '',
       tools: '',
-      created: '',
+      created: false,
       notes: '',
     };
     await setProfile([...profile, temp]);
@@ -68,6 +91,17 @@ function OnlineProfiles({ jobseeker, setJobseeker }) {
     event.preventDefault();
     const temp = [...profile];
     temp[index][element] = event.target.value;
+    setProfile(temp);
+  };
+
+  const editDropdown = (event, label, index) => {
+    event.preventDefault();
+    let val = true;
+    if (event.target.value === 'No') {
+      val = false;
+    }
+    const temp = [...profile];
+    temp[index][label] = val;
     setProfile(temp);
   };
 
@@ -111,18 +145,49 @@ function OnlineProfiles({ jobseeker, setJobseeker }) {
                 <div>
                   {fieldProps.map((field) => (
                     <div>
-                      <TextField
-                        id="outlined-basic"
-                        label={field.label}
-                        variant="outlined"
-                        value={profileObject[field.value]}
-                        focused
-                        onChange={(e) => editOnlineProfile(e, field.value, index)}
-                        InputProps={textFieldStyles.inputProps}
-                        InputLabelProps={textFieldStyles.labelProps}
-                        className="input-field"
-                      />
-                      <div className="op-between-inputs" />
+                      {(field.value === 'site' || field.value === 'notes'
+                      || field.value === 'username' || field.value === 'tools')
+                      && (
+                      <>
+                        <TextField
+                          id="outlined-basic"
+                          placeholder={field.label}
+                          label={field.label}
+                          variant="outlined"
+                          value={profileObject[field.value]}
+                          focused
+                          onChange={(e) => editOnlineProfile(e, field.value, index)}
+                          InputProps={textFieldStyles.inputProps}
+                          InputLabelProps={textFieldStyles.labelProps}
+                          className="input-field"
+                        />
+                        <div className="op-between-inputs" />
+                      </>
+                      )}
+                      {(field.value === 'created')
+                      && (
+                        <>
+                          <FormControl
+                            fullWidth
+                            focused
+                            style={styles.formControl}
+                          >
+                            <InputLabel id="demo-simple-select-label">{field.label}</InputLabel>
+                            <Select
+                              defaultValue="No"
+                              labelId="demo-simple-select-label"
+                              id="demo-simple-select"
+                              label={field.label}
+                              onChange={(e) => editDropdown(e, field.value, index)}
+                              style={styles.inputLabel}
+                            >
+                              <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
+                              <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
+                            </Select>
+                          </FormControl>
+                          <div className="op-between-inputs" />
+                        </>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -166,7 +231,7 @@ OnlineProfiles.propTypes = {
       site: propTypes.string.isRequired,
       username: propTypes.string.isRequired,
       tools: propTypes.string.isRequired,
-      created: propTypes.string.isRequired,
+      created: propTypes.bool.isRequired,
       notes: propTypes.string.isRequired,
     },
   }).isRequired,

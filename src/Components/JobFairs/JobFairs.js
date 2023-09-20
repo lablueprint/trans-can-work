@@ -134,6 +134,7 @@ function JobFairs({ jobseeker, setJobseeker }) {
                             InputProps={textFieldStyles.inputProps}
                             InputLabelProps={textFieldStyles.labelProps}
                             className="input-field"
+                            placeholder={field.label}
                           />
                           <div className="op-between-inputs" />
                         </>

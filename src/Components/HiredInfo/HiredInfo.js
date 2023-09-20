@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './HiredInfo.css';
 import propTypes from 'prop-types';
 import { TextField } from '@material-ui/core';
-import { DateField } from '@mui/x-date-pickers/DateField';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
 
@@ -78,12 +77,6 @@ function HiredInfo({ jobseeker, setJobseeker }) {
     console.log(allHiredInfo);
   };
 
-  const editDate = (newValue, label, index) => {
-    const temp = [...allHiredInfo];
-    temp[index][label] = newValue;
-    setAllHiredInfo(temp);
-  };
-
   const fieldProps = [
     { label: 'Name of Company', value: 'company' },
     { label: 'Hired Date', value: 'date' },
@@ -113,32 +106,18 @@ function HiredInfo({ jobseeker, setJobseeker }) {
                       {(field.value === 'company' || field.value === 'fieldOfWork'
                       || field.value === 'jobTitle' || field.value === 'benefits' || field.value === 'notes'
                       || field.value === 'supervisorName' || field.value === 'contactEmail' || field.value === 'contactPhoneNumber'
-                      || field.value === 'hourlyPay' || field.value === 'hoursPerWeek')
+                      || field.value === 'hourlyPay' || field.value === 'hoursPerWeek' || field.label === 'Hired Date'
+                      || field.label === 'End Date' || field.label === 'Date Referral Sent (If Applicable)')
                       && (
                         <>
                           <TextField
                             id="outlined-basic"
+                            placeholder={field.label}
                             label={field.label}
                             variant="outlined"
                             value={internshipObject[field.value]}
                             focused
                             onChange={(e) => editHiredInfo(e, field.value, index)}
-                            InputProps={textFieldStyles.inputProps}
-                            InputLabelProps={textFieldStyles.labelProps}
-                            className="input-field"
-                          />
-                          <div className="op-between-inputs" />
-                        </>
-                      )}
-                      {(field.label === 'Hired Date' || field.label === 'End Date'
-                      || field.label === 'Date Referral Sent (If Applicable)')
-                      && (
-                        <>
-                          <DateField
-                            label={field.label}
-                            focused
-                            value={internshipObject[field.value]}
-                            onChange={(newValue) => editDate(newValue, field.value, index)}
                             InputProps={textFieldStyles.inputProps}
                             InputLabelProps={textFieldStyles.labelProps}
                             className="input-field"
@@ -187,11 +166,11 @@ HiredInfo.propTypes = {
     hiredInfo:
     {
       company: propTypes.string.isRequired,
-      hiredDate: propTypes.instanceOf(Date),
+      hiredDate: propTypes.string.isRequired,
       fieldOfWork: propTypes.string.isRequired,
       jobTitle: propTypes.string.isRequired,
       supervisorName: propTypes.string.isRequired,
-      referralDate: propTypes.instanceOf(Date),
+      referralDate: propTypes.string.isRequired,
       contactEmail: propTypes.string.isRequired,
       contactPhoneNumber: propTypes.string.isRequired,
       hourlyPay: propTypes.string.isRequired,

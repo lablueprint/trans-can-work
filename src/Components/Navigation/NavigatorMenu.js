@@ -174,14 +174,14 @@ function NavigatorMenu() {
         );
       case 4:
         return (
-          <Internships
+          <Workshops
             jobseeker={jobseekerData}
             setJobseeker={setJobseekerData}
           />
         );
       case 5:
         return (
-          <Workshops
+          <Internships
             jobseeker={jobseekerData}
             setJobseeker={setJobseekerData}
           />
