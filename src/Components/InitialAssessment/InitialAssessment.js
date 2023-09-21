@@ -23,7 +23,6 @@ function InitialAssessment({
         height: '3.2vw',
         fontSize: '0.9vw',
         fontWeight: 'bold',
-        borderColor: 'red',
         backgroundColor: '#F7F8FE',
       },
     },
@@ -32,7 +31,6 @@ function InitialAssessment({
         fontFamily: 'Montserrat',
         fontSize: '0.95vw',
         color: '#000AA0',
-        backgroundColor: '#FFFFFF',
       },
     },
   };

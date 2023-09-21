@@ -13,8 +13,8 @@ function NavView() {
 
   useEffect(() => {
     const asyncFn = async () => {
-      const tempUserData = await fetchUser('alannguyen711@gmail.com');
-      const tempJobseekerData = await fetchJobseekerData('alannguyen711@gmail.com');
+      const tempUserData = await fetchUser('js_angela@gmail.com');
+      const tempJobseekerData = await fetchJobseekerData('js_angela@gmail.com');
       setUserData(tempUserData.data());
       setJobseekerData(tempJobseekerData.data());
       setEmail(tempUserData.id);
@@ -24,13 +24,13 @@ function NavView() {
 
   useEffect(() => {
     if (jobseekerData !== undefined) {
-      updateJobseekerData('alannguyen711@gmail.com', jobseekerData);
+      updateJobseekerData('js_angela@gmail.com', jobseekerData);
     }
   }, [jobseekerData]);
 
   useEffect(() => {
     if (userData !== undefined) {
-      updateUser('alannguyen711@gmail.com', userData);
+      updateUser('js_angela@gmail.com', userData);
     }
   }, [userData]);
 

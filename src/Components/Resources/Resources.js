@@ -46,7 +46,6 @@ function Resources({ jobseeker, setJobseeker }) {
         height: '3.2vw',
         fontSize: '0.9vw',
         fontWeight: 'bold',
-        borderColor: '#000AA0',
         backgroundColor: '#F7F8FE',
       },
     },
@@ -55,7 +54,6 @@ function Resources({ jobseeker, setJobseeker }) {
         fontFamily: 'Montserrat',
         fontSize: '0.95vw',
         color: '#000AA0',
-        backgroundColor: '#FFFFFF',
       },
     },
   };
