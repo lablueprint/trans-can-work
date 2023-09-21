@@ -7,7 +7,7 @@ import Save from '../../Assets/save.svg';
 import Checkboxes from '../Checkboxes/Checkboxes';
 import {
   skillsChecklistOptions, industryInterestOptions, generalSkills,
-  arrayToObj, generalSubskills, objToArray,
+  arrayToObj, generalSubskills, objToArray, jobseekerDataObject,
 } from '../../Services/objects-service';
 import Loading from '../Loading/Loading';
 
@@ -37,27 +37,7 @@ function InitialAssessment({
     },
   };
 
-  const [jobseeker, setJobseeker] = useState({
-    clientInfo: {
-      'City/State': '',
-      Ethnicity: '',
-      Age: '',
-      'Gender Identity': '',
-      Sexuality: '',
-      Veteran: '',
-      Disability: '',
-      'Housing Situation': '',
-      'Currently Employed': '',
-      'Prior Convictions': '',
-      'Dream Job': '',
-    },
-    degrees: [],
-    certificates: [],
-    occupation: [],
-    skillsChecklist: [],
-    industryInterest: [],
-    generalSkills: [],
-  });
+  const [jobseeker, setJobseeker] = useState(jobseekerDataObject);
 
   // each set of checkboxes has 4 state variables:
   // an object with label/bool pairs
