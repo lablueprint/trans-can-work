@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { Avatar } from '@material-ui/core';
 import {
-  Tab, Tabs,
+  Tab, Tabs, ButtonBase,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
@@ -73,6 +74,7 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
     - add bookmarked users to datamodel + get that data when you pull from backend
 */
 export default function AdminDashboard() {
+  const navigate = useNavigate();
   const store = useSelector((state) => state.auth.value);
 
   // data from firebase
@@ -153,7 +155,7 @@ export default function AdminDashboard() {
           role: data.role,
 
           // get bookmarked and iconNumber from data somehow! eventually!
-          bookmarked: store.user.bookmarked.includes(doc.id),
+          bookmarked: store.user.bookmarked && store.user.bookmarked.includes(doc.id),
           iconNumber: 0,
         };
         usersTemp.push(elem);
@@ -174,25 +176,31 @@ export default function AdminDashboard() {
   return (
     <div className="dashboard-page-container">
       <div className="dashboard-page-headers-container">
-        <div className="dashboard-page-header-name-and-icon-container">
-          <p className="dashboard-page-header-profile-text">{`${store.user.firstName} ${store.user.lastName}`}</p>
-          <Avatar
-            facebookId="100008343750912"
-            className="profile-button-avatar"
-          />
-        </div>
-        <div className="dashboard-page-welcome-block-header">
-          <p className="dashboard-page-title">
-            Welcome,
-            {' '}
-            {store.user.firstName}
-          </p>
-          <div className="dash-admin-searchbar">
-            <SearchBar
-              value={searchTerms}
-              setValue={setSearchTerms}
-              placeholder="Search here!"
-            />
+        <div className="dashboard-page-headers-main">
+          <div className="dashboard-page-header-name-and-icon-container">
+            <ButtonBase onClick={() => navigate('/profile')}>
+              <p className="dashboard-page-header-profile-text">{`${store.user.firstName} ${store.user.lastName}`}</p>
+              <Avatar
+                facebookId="100008343750912"
+                className="profile-button-avatar"
+              />
+            </ButtonBase>
+          </div>
+
+          <div className="dashboard-page-headers-middle">
+            <p className="dashboard-page-title">
+              Welcome,
+              {' '}
+              {store.user.firstName}
+            </p>
+
+            <div className="dash-admin-searchbar">
+              <SearchBar
+                value={searchTerms}
+                setValue={setSearchTerms}
+                placeholder="Search..."
+              />
+            </div>
           </div>
         </div>
         <StyledTabs
