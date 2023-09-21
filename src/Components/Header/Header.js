@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import {
-  Tabs, Tab,
+  Tabs, Tab, ButtonBase,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import Avatar from 'react-avatar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Back from '../../Assets/back.svg';
 import './Header.css';
@@ -56,12 +56,14 @@ const tabs = [
   { title: 'Hired Info', link: 'hiredinfo' },
 ];
 
-function Header({ value, setValue }) {
+function Header({
+  jobseekerEmail, value, setValue, fullName,
+}) {
   const store = useSelector((state) => state.auth.value);
 
-  const [navbar, toggleNavbar] = useState(false);
+  const navigate = useNavigate();
 
-  const fullName = `${store.user.firstName} ${store.user.lastName}`;
+  const [navbar, toggleNavbar] = useState(false);
 
   const handleChange = (event, newValue) => {
     event.preventDefault();
@@ -77,7 +79,7 @@ function Header({ value, setValue }) {
   const [notesBody, setNotesBody] = useState('');
   const [prev, setPrev] = useState('');
   const [loaded, setLoaded] = useState(false);
-  const jobseekerEmail = 'alannguyen711@gmail.com';
+  // const jobseekerEmail = 'alannguyen711@gmail.com';
 
   const handleNotepadClick = () => {
     handleClick();
@@ -196,27 +198,27 @@ function Header({ value, setValue }) {
               </div>
 
               <div className="align-helper">
-                <div className="username-text">
-                  {fullName}
-                </div>
-                <Avatar
-                  facebookId="100008343750912"
-                  size="40"
-                  styles={{
-                    height: '2em',
-                    width: '2em',
-                    marginTop: '6px',
-                    marginBottom: '6px',
-                    marginLeft: '6px',
-                  }}
-                  round
-                />
+                <ButtonBase onClick={() => navigate('/profile')}>
+                  <p className="dashboard-page-header-profile-text">{`${store.user.firstName} ${store.user.lastName}`}</p>
+                  <Avatar
+                    facebookId="100008343750912"
+                    size="40"
+                    styles={{
+                      height: '2em',
+                      width: '2em',
+                      marginTop: '6px',
+                      marginBottom: '6px',
+                      marginLeft: '6px',
+                    }}
+                    round
+                  />
+                </ButtonBase>
               </div>
 
             </div>
             <div className="bottom-header-contents">
               <div className="username-text-roadmap">
-                {store.user.firstName + store.user.lastName}
+                {fullName}
                 &apos;s Roadmap
               </div>
 
@@ -232,8 +234,10 @@ function Header({ value, setValue }) {
 }
 
 Header.propTypes = {
+  jobseekerEmail: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
   setValue: PropTypes.func.isRequired,
+  fullName: PropTypes.string.isRequired,
 };
 
 export default Header;

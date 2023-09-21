@@ -23,6 +23,7 @@ import ScrollToTop from './Pages/scrollToTop';
 import NavigatorMenu from './Components/Navigation/NavigatorMenu';
 import MilestoneMap from './Components/Milestones/MilestoneMap';
 import NavView from './Components/NavView/NavView';
+import PageNotFound from './Components/PageNotFound/PageNotFound';
 import ProfileOutline from './Components/profileOutline'
 import { login, logout } from "./Redux/Slice/authSlices";
 import { fetchUser, addUser } from './Services/user-service';
@@ -136,6 +137,8 @@ function App() {
           <Route
             path = "/testConfirm" element = {<ConfirmPopup open handleClose = {()=> {}} handleConfirm = {()=> {}} title="DeleteConfirm" subtitle="subtitle goes here"/>}
           />
+
+        <Route path='*' element={<PageNotFound />} />
         </Routes>
         <Footer />
       </div>
