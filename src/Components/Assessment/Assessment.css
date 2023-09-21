@@ -261,6 +261,7 @@ input, textarea {
 }
 
 .content {
+    margin: 0 auto;
     margin-top: 5em;
     width: 65% !important;
 }
