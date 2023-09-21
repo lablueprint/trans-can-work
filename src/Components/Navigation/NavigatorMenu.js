@@ -160,26 +160,60 @@ function NavigatorMenu() {
         );
       case 2:
         return (
-          <OnlineProfiles />
+          <OnlineProfiles
+            jobseeker={jobseekerData}
+            setJobseeker={setJobseekerData}
+          />
         );
       case 3:
         return (
-          <TrainingPrograms />
+          <TrainingPrograms
+            jobseeker={jobseekerData}
+            setJobseeker={setJobseekerData}
+          />
         );
       case 4:
         return (
-          <Internships />
+          <Internships
+            jobseeker={jobseekerData}
+            setJobseeker={setJobseekerData}
+          />
         );
       case 5:
-        return <Workshops />;
+        return (
+          <Workshops
+            jobseeker={jobseekerData}
+            setJobseeker={setJobseekerData}
+          />
+        );
       case 6:
-        return <JobFairs />;
+        return (
+          <JobFairs
+            jobseeker={jobseekerData}
+            setJobseeker={setJobseekerData}
+          />
+        );
       case 7:
-        return <JobBoards />;
+        return (
+          <JobBoards
+            jobseeker={jobseekerData}
+            setJobseeker={setJobseekerData}
+          />
+        );
       case 8:
-        return <Resources />;
+        return (
+          <Resources
+            jobseeker={jobseekerData}
+            setJobseeker={setJobseekerData}
+          />
+        );
       case 9:
-        return <HiredInfo />;
+        return (
+          <HiredInfo
+            jobseeker={jobseekerData}
+            setJobseeker={setJobseekerData}
+          />
+        );
       default:
         return <div>Not found 404</div>;
     }
@@ -187,7 +221,7 @@ function NavigatorMenu() {
 
   return (
     <>
-      <Header />
+      <Header value={value} setValue={setValue} />
       <div className={notes ? 'notesPopupOn' : 'notesPopupOff'}>
         <div className="notes-text">
           <h1 className="notes-title">Notes</h1>

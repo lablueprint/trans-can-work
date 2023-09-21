@@ -4,6 +4,7 @@ import Assessment from '../Assessment/Assessment';
 import Header from '../Header/Header';
 import { fetchUser, updateUser } from '../../Services/user-service';
 import { fetchJobseekerData, updateJobseekerData } from '../../Services/jobseeker-data-service';
+// import OnlineProfiles from '../OnlineProfiles/OnlineProfiles';
 
 function NavView() {
   const [userData, setUserData] = useState();
@@ -51,6 +52,10 @@ function NavView() {
           setJobseeker={setJobseekerData}
           email={email}
         />
+        {/* <OnlineProfiles
+          jobseeker={jobseekerData}
+          setJobseeker={setJobseekerData}
+        /> */}
       </div>
       )}
     </div>

@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import {
   Tabs, Tab,
 } from '@mui/material';
+import PropTypes from 'prop-types';
 import Avatar from 'react-avatar';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -55,15 +56,15 @@ const tabs = [
   { title: 'Hired Info', link: 'hiredinfo' },
 ];
 
-function Header() {
+function Header({ value, setValue }) {
   const store = useSelector((state) => state.auth.value);
 
   const [navbar, toggleNavbar] = useState(false);
 
   const fullName = `${store.user.firstName} ${store.user.lastName}`;
 
-  const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
+    event.preventDefault();
     setValue(newValue);
   };
 
@@ -145,14 +146,14 @@ function Header() {
             sx: style.tabIndicatorStyle,
           }}
         >
-          {tabs.map((x) => (
+          {tabs.map((x, index) => (
             <Tab
               sx={style.tabStyle}
               key={x.link}
               label={x.title}
               component={Link}
               to={x.link}
-              onClick={handleClick}
+              onClick={(e) => handleChange(e, index)}
             />
           ))}
         </Tabs>
@@ -229,4 +230,10 @@ function Header() {
     </div>
   );
 }
+
+Header.propTypes = {
+  value: PropTypes.number.isRequired,
+  setValue: PropTypes.func.isRequired,
+};
+
 export default Header;
