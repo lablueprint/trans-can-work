@@ -46,8 +46,8 @@
 #workshop,
 #internship,
 #job-fair,
-#job-portal,
-#resource,
+#job-board,
+#resources,
 #hiring-info {
   position: absolute;
 }
@@ -88,15 +88,16 @@
   left: 21%;
 }
 
-#job-portal {
+#job-board {
   top: 58%;
   left: -6%;
 }
 
-#resource {
-  top: 38%;
+#resources {
+  top: 38%;	
   left: -10%;
 }
+
 
 #hiring-info {
   top: 9%;
@@ -146,12 +147,12 @@
     left: 41%;
   }
 
-  #job-portal {
+  #job-board {
     top: 67.5%;
     left: 37%;
   }
 
-  #resource {
+  #resources {
     top: 79%;
     left: 42%;
   }

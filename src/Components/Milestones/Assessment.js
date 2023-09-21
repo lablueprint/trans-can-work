@@ -1,106 +1,89 @@
 import React, { useEffect, useState } from 'react';
 import './Assessment.css';
-import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 import MilestoneClientInfo from './MilestoneClientInfo';
 import MilestoneChecklist from './MilestoneChecklist';
-import { fetchJobseekerData } from '../../Services/jobseeker-data-service';
-import {
-  objToArray, skillsChecklistOptions, industryInterestOptions,
-} from '../../Services/objects-service';
 
-const mockData = {
-  'Authentic Name': 'john smith',
-  Pronouns: 'they/them',
-  Phone: '(408) 263-0181',
-  Email: 'johnsmith@gmail.com',
-  Location: 'los angeles, ca',
-  Ethnicity: 'new mexican',
-  Age: '29',
-  'Gender Identity': 'nonbinary',
-  Sexuality: 'bisexual',
-  Veteran: 'no',
-  Disability: 'no',
-  Housing: 'apartment',
-  'Currently Employed': 'yes',
-  'Prior Convictions': 'none',
-};
+function mapArrays(degreeArray, string) {
+  const keyValueMap = {};
 
-function Assessment() {
+  degreeArray.forEach((degreeString, index) => {
+    const key = `${string} #${index + 1}`;
+    keyValueMap[key] = degreeString;
+  });
+
+  return keyValueMap;
+}
+
+function Assessment({ jobseeker }) {
   const [experiences, setExperience] = useState([]);
   const [industries, setIndustries] = useState([]);
   const [skills, setSkills] = useState([]);
-  const store = useSelector((state) => state.auth.value);
 
   useEffect(() => {
     const start = async () => {
-      const jobseekerData = await fetchJobseekerData(store.email);
-      console.log(jobseekerData.data());
-      console.log(objToArray(jobseekerData.data().industryInterest));
-
       const updatedExperience = [];
-      industryInterestOptions.forEach((experience) => {
-        updatedExperience.push({ label: experience, value: false, bullets: [] });
-      });
-
-      updatedExperience.forEach((experience, i) => {
-        if (objToArray(jobseekerData.data().industryInterest).includes(experience.label)) {
-          updatedExperience[i].value = true;
-        }
+      jobseeker.skillsChecklist.forEach((experience) => {
+        updatedExperience.push({ label: experience, value: true, bullets: [] });
       });
 
       const updatedIndustryInterests = [];
-      industryInterestOptions.forEach((industry) => {
-        updatedIndustryInterests.push({ label: industry, value: false, bullets: [] });
-      });
-
-      updatedIndustryInterests.forEach((industry, i) => {
-        if (objToArray(jobseekerData.data().industryInterest).includes(industry.label)) {
-          updatedIndustryInterests[i].value = true;
-        }
+      jobseeker.industryInterest.forEach((industry) => {
+        updatedIndustryInterests.push({ label: industry, value: true, bullets: [] });
       });
 
       const updatedSkills = [];
-      skillsChecklistOptions.forEach((skill) => {
-        updatedSkills.push({ label: skill, value: false, bullets: [] });
+      jobseeker.generalSkills.forEach((skill) => {
+        updatedSkills.push({ label: skill, value: true, bullets: [] });
       });
 
-      updatedSkills.forEach((skill, i) => {
-        if (objToArray(jobseekerData.data().skillsChecklist).includes(skill.label)) {
-          // update.bullets
-          updatedSkills[i].value = true;
-        }
-      });
       setExperience(updatedExperience);
       setIndustries(updatedIndustryInterests);
       setSkills(updatedSkills);
-      console.log(updatedIndustryInterests);
     };
     start();
   }, []);
+
+  const dataSets = [
+    { data: jobseeker.degrees, label: 'Degree' },
+    { data: jobseeker.certificates, label: 'Certificate' },
+  ];
 
   return (
     <div className="assessment">
       <h6 className="contentTitle">Client Info</h6>
       <hr className="shortLine" />
-      <MilestoneClientInfo data={mockData} />
+      <MilestoneClientInfo data={jobseeker.clientInfo} />
       <h6 className="contentTitle">Education Info</h6>
       <hr className="shortLine" />
+      { dataSets.map((dataSet) => (
+        <MilestoneClientInfo key={uuidv4()} data={mapArrays(dataSet.data, dataSet.label)} />
+      ))}
       <h6 className="contentTitle">Previous Experience</h6>
-      <p className="content">Yar, in what areas of these here industries do ye have actual work or volunteer experience?</p>
+      <p className="contentDescription">Yar, here are the industries ye have actual work or volunteer experience.</p>
       <hr className="longLine" />
       <MilestoneChecklist checkboxes={experiences} columns={2} />
       <h6 className="contentTitle">Industry Interests</h6>
-      <p className="content">In what of the followin&apos; industries are ye open to explorin&apos; or have an interest in possible future employment?</p>
+      <p className="contentDescription">Here are the industries ye is open to explorin&apos; or have an interest in possible future employment.</p>
       <hr className="shortLine" />
       <MilestoneChecklist checkboxes={industries} columns={2} />
       <h6 className="contentTitle">Skills Checklist</h6>
-      <p className="content">Please check all the skill sets that apply to ye.</p>
+      <p className="contentDescription">Here are the skill sets that apply to ye.</p>
       <hr className="shortLine" />
       <MilestoneChecklist checkboxes={skills} columns={2} />
       <h6 className="contentTitle">Ultimate Dream Job</h6>
       <hr className="longLine" />
+      <p className="dreamJob">
+        {jobseeker.clientInfo['Dream Job']}
+        !
+      </p>
     </div>
   );
 }
+
+Assessment.propTypes = {
+  jobseeker: PropTypes.func.isRequired,
+};
 
 export default Assessment;

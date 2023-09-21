@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './JobFair.css';
-import { jobFairOptions } from '../../Services/objects-service';
+import PropTypes from 'prop-types';
 import MilestoneChecklist from './MilestoneChecklist';
 
-function JobFair() {
+function JobFair({ jobseeker }) {
   const [jobFairs, setJobFairs] = useState([]);
 
   useEffect(() => {
     const start = async () => {
       const updatedJobFairs = [];
-      jobFairOptions.forEach((jobFair) => {
+      jobseeker.jobFairs.forEach((jobFair) => {
         updatedJobFairs.push({
           label: jobFair.name,
           value: jobFair.attended,
@@ -30,5 +30,9 @@ function JobFair() {
     </div>
   );
 }
+
+JobFair.propTypes = {
+  jobseeker: PropTypes.func.isRequired,
+};
 
 export default JobFair;

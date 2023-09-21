@@ -1,15 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
+import { v4 as uuidv4 } from 'uuid';
 import './OnlineProfile.css';
+import PropTypes from 'prop-types';
+import Loading from '../Loading/Loading';
 
-function OnlineProfile() {
-  const [inputs, setInputs] = useState({});
+function OnlineProfile({ jobseeker }) {
+  const [profiles, setProfiles] = useState();
 
-  const handleChange = (event) => {
-    const { name } = event.target;
-    const { value } = event.target;
-    setInputs((values) => ({ ...values, [name]: value }));
+  useEffect(() => {
+    if (jobseeker !== undefined) { setProfiles([...jobseeker.onlineProfiles]); }
+  }, [jobseeker]);
+
+  const handleChange = (event, param) => {
+    event.preventDefault();
+    const temp = [...profiles];
+    temp[param].username = event.target.value;
+    setProfiles(temp);
   };
+
+  if (profiles === undefined) {
+    return <Loading />;
+  }
+
   return (
     <div>
       <h6 className="onlineProfile">
@@ -18,48 +31,18 @@ function OnlineProfile() {
       </h6>
       <form className="textFields">
         <div className="onlineProfile-row">
-          <label htmlFor="linkedin" className="onlineProfile-row-label">
-            Linkedin
-            <input
-              className="profileInput"
-              type="text"
-              name="linkedin"
-              value={inputs.linkedin || ''}
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="facebook" className="onlineProfile-row-label">
-            Facebook
-            <input
-              className="profileInput"
-              type="text"
-              name="facebook"
-              value={inputs.facebook || ''}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-        <div className="onlineProfile-row">
-          <label htmlFor="imdb" className="onlineProfile-row-label">
-            Imdb
-            <input
-              className="profileInput"
-              type="text"
-              name="imdb"
-              value={inputs.imdb || ''}
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="other" className="onlineProfile-row-label">
-            Other
-            <input
-              className="profileInput"
-              type="text"
-              name="other"
-              value={inputs.other || ''}
-              onChange={handleChange}
-            />
-          </label>
+          {profiles.map((profile, index) => (
+            <label key={uuidv4()} htmlFor={profile.site} className="onlineProfile-row-label">
+              {profile.site}
+              <input
+                className="profileInput"
+                type="text"
+                name="facebook"
+                value={profile.username}
+                onChange={(e) => { handleChange(e, index); }}
+              />
+            </label>
+          ))}
         </div>
       </form>
     </div>
@@ -68,5 +51,9 @@ function OnlineProfile() {
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<OnlineProfile />);
+
+OnlineProfile.propTypes = {
+  jobseeker: PropTypes.func.isRequired,
+};
 
 export default OnlineProfile;

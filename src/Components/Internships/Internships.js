@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
+import Loading from '../Loading/Loading';
 
 function Internships({ jobseeker, setJobseeker }) {
   const styles = {
@@ -50,12 +51,23 @@ function Internships({ jobseeker, setJobseeker }) {
   };
 
   const [loaded, setLoaded] = useState(false);
-  const [allInternships, setAllInternships] = useState([]);
+  const [allInternships, setAllInternships] = useState();
 
   useEffect(() => {
-    setAllInternships(jobseeker.internships);
-    setLoaded(true);
+    if (jobseeker !== undefined) {
+      if (!jobseeker.internships.length) {
+        setAllInternships([]);
+      } else {
+        setAllInternships(jobseeker.internships);
+      }
+    }
   }, []);
+
+  useEffect(() => {
+    if (allInternships !== undefined) {
+      setLoaded(true);
+    }
+  }, [allInternships]);
 
   useEffect(() => {
     if (loaded) {
@@ -120,6 +132,10 @@ function Internships({ jobseeker, setJobseeker }) {
     { label: 'Client Successfully Completed Internship?', value: 'completed' },
     { label: 'Notes', value: 'notes' },
   ];
+
+  if (allInternships === undefined) {
+    return <Loading />;
+  }
 
   return (
     <div className="content">

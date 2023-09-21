@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
+import Loading from '../Loading/Loading';
 
 function JobFairs({ jobseeker, setJobseeker }) {
   const styles = {
@@ -50,12 +51,23 @@ function JobFairs({ jobseeker, setJobseeker }) {
   };
 
   const [loaded, setLoaded] = useState(false);
-  const [jobFairs, setJobFairs] = useState([{}]);
+  const [jobFairs, setJobFairs] = useState();
 
   useEffect(() => {
-    setJobFairs(jobseeker.jobFairs);
-    setLoaded(true);
+    if (jobseeker !== undefined) {
+      if (!jobseeker.jobFairs.length) {
+        setJobFairs([{}]);
+      } else {
+        setJobFairs(jobseeker.jobFairs);
+      }
+    }
   }, []);
+
+  useEffect(() => {
+    if (jobFairs !== undefined) {
+      setLoaded(true);
+    }
+  }, [jobFairs]);
 
   useEffect(() => {
     if (loaded) {
@@ -108,6 +120,10 @@ function JobFairs({ jobseeker, setJobseeker }) {
     { label: 'Attended Job Fair?', value: 'attended' },
     { label: 'Notes', value: 'notes' },
   ];
+
+  if (jobFairs === undefined) {
+    return <Loading />;
+  }
 
   return (
     <div className="content">

@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
+import Loading from '../Loading/Loading';
 
 function JobBoards({ jobseeker, setJobseeker }) {
   const styles = {
@@ -50,12 +51,23 @@ function JobBoards({ jobseeker, setJobseeker }) {
   };
 
   const [loaded, setLoaded] = useState(false);
-  const [jobBoards, setJobBoards] = useState([{}]);
+  const [jobBoards, setJobBoards] = useState();
 
   useEffect(() => {
-    setJobBoards(jobseeker.jobPortals);
-    setLoaded(true);
+    if (jobseeker !== undefined) {
+      if (!jobseeker.jobBoards.length) {
+        setJobBoards([{}]);
+      } else {
+        setJobBoards(jobseeker.jobBoards);
+      }
+    }
   }, []);
+
+  useEffect(() => {
+    if (jobBoards !== undefined) {
+      setLoaded(true);
+    }
+  }, [jobBoards]);
 
   useEffect(() => {
     if (loaded) {
@@ -108,6 +120,10 @@ function JobBoards({ jobseeker, setJobseeker }) {
     { label: 'Admitted into Job Board?', value: 'admitted' },
     { label: 'Notes', value: 'notes' },
   ];
+
+  if (jobBoards === undefined) {
+    return <Loading />;
+  }
 
   return (
     <div className="content">
@@ -201,7 +217,7 @@ export default JobBoards;
 
 JobBoards.propTypes = {
   jobseeker: propTypes.shape({
-    jobPortals:
+    jobBoards:
     {
       name: propTypes.string.isRequired,
       date: propTypes.string.isRequired,

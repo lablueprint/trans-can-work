@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './Workshop.css';
-import { workshopOptions } from '../../Services/objects-service';
+import PropTypes from 'prop-types';
 import MilestoneChecklist from './MilestoneChecklist';
 
-function Workshop() {
+function Workshop({ jobseeker }) {
   const [workshops, setWorkshops] = useState([]);
 
   useEffect(() => {
     const start = async () => {
       const updatedWorkshops = [];
-      workshopOptions.forEach((workshop) => {
+      jobseeker.workshops.forEach((workshop) => {
         updatedWorkshops.push({
           label: workshop.name,
           value: workshop.attended,
@@ -33,5 +33,9 @@ function Workshop() {
     </div>
   );
 }
+
+Workshop.propTypes = {
+  jobseeker: PropTypes.func.isRequired,
+};
 
 export default Workshop;

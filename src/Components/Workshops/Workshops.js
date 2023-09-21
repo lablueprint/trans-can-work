@@ -9,6 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
+import Loading from '../Loading/Loading';
 
 function Workshops({ jobseeker, setJobseeker }) {
   const styles = {
@@ -52,12 +53,23 @@ function Workshops({ jobseeker, setJobseeker }) {
   };
 
   const [loaded, setLoaded] = useState(false);
-  const [allWorkshops, setAllWorkshops] = useState([{}]);
+  const [allWorkshops, setAllWorkshops] = useState(undefined);
 
   useEffect(() => {
-    setAllWorkshops(jobseeker.workshops);
-    setLoaded(true);
+    if (jobseeker !== undefined) {
+      if (!jobseeker.workshops.length) {
+        setAllWorkshops([{}]);
+      } else {
+        setAllWorkshops(jobseeker.workshops);
+      }
+    }
   }, []);
+
+  useEffect(() => {
+    if (allWorkshops !== undefined) {
+      setLoaded(true);
+    }
+  }, [allWorkshops]);
 
   useEffect(() => {
     if (loaded) {
@@ -66,7 +78,7 @@ function Workshops({ jobseeker, setJobseeker }) {
         workshops: allWorkshops,
       });
     }
-  }, [allWorkshops]);
+  }, [loaded]);
 
   const addWorkshop = async (event) => {
     event.preventDefault();
@@ -110,6 +122,10 @@ function Workshops({ jobseeker, setJobseeker }) {
     { label: 'Attended Workshop?', value: 'attended' },
     { label: 'Notes', value: 'notes' },
   ];
+
+  if (allWorkshops === undefined) {
+    return <Loading />;
+  }
 
   return (
     <div className="content">

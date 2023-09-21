@@ -14,6 +14,7 @@ import hamburgerIcon from '../../Assets/Images/hamburger-icon.png';
 import closeButton from '../../Assets/Images/close-button.png';
 import notepadIcon from '../../Assets/Images/notepad.png';
 import '../Navigation/NavMenu.css';
+import Loading from '../Loading/Loading';
 
 const style = {
   tabStyle: {
@@ -108,10 +109,15 @@ function Header({
     const asyncFn = async () => {
       const tempJobseekerData = await fetchJobseekerData(jobseekerEmail);
       setJobseekerData(tempJobseekerData.data());
-      setLoaded(true);
     };
     asyncFn();
   }, []);
+
+  useEffect(() => {
+    if (jobseekerData !== undefined) {
+      setLoaded(true);
+    }
+  }, [jobseekerData]);
 
   useEffect(() => {
     if (notes) {
@@ -129,6 +135,10 @@ function Header({
       updateJobseekerData(jobseekerEmail, jobseekerData);
     }
   }, [jobseekerData]);
+
+  if (!loaded) {
+    return <Loading />;
+  }
 
   return (
     <div>

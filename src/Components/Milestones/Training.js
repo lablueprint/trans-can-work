@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './Training.css';
+import PropTypes from 'prop-types';
 import MilestoneChecklist from './MilestoneChecklist';
-import { trainingOptions } from '../../Services/objects-service';
 
-function Training() {
+function Training({ jobseeker }) {
   const [trainings, setTrainings] = useState([]);
 
   useEffect(() => {
     const start = async () => {
       const updatedTrainings = [];
-      trainingOptions.forEach((training) => {
+      jobseeker.trainingPrograms.forEach((training) => {
         updatedTrainings.push({
           label: training.program,
           value: training.completed,
@@ -28,5 +28,9 @@ function Training() {
     </div>
   );
 }
+
+Training.propTypes = {
+  jobseeker: PropTypes.func.isRequired,
+};
 
 export default Training;

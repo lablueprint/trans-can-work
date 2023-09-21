@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 import { TextField } from '@material-ui/core';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
+import Loading from '../Loading/Loading';
 
 function HiredInfo({ jobseeker, setJobseeker }) {
   const textFieldStyles = {
@@ -27,12 +28,23 @@ function HiredInfo({ jobseeker, setJobseeker }) {
   };
 
   const [loaded, setLoaded] = useState(false);
-  const [allHiredInfo, setAllHiredInfo] = useState([{}]);
+  const [allHiredInfo, setAllHiredInfo] = useState();
 
   useEffect(() => {
-    setAllHiredInfo(jobseeker.hiredInfo);
-    setLoaded(true);
+    if (jobseeker !== undefined) {
+      if (!jobseeker.hiredInfo.length) {
+        setAllHiredInfo([{}]);
+      } else {
+        setAllHiredInfo(jobseeker.hiredInfo);
+      }
+    }
   }, []);
+
+  useEffect(() => {
+    if (allHiredInfo !== undefined) {
+      setLoaded(true);
+    }
+  }, [allHiredInfo]);
 
   useEffect(() => {
     if (loaded) {
@@ -91,6 +103,10 @@ function HiredInfo({ jobseeker, setJobseeker }) {
     { label: 'Offers Benefits?', value: 'benefits' },
     { label: 'Notes', value: 'notes' },
   ];
+
+  if (allHiredInfo === undefined) {
+    return <Loading />;
+  }
 
   return (
     <div className="content">

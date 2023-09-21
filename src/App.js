@@ -28,6 +28,7 @@ import ProfileOutline from './Components/profileOutline'
 import { login, logout } from "./Redux/Slice/authSlices";
 import { fetchUser, addUser } from './Services/user-service';
 import ConfirmPopup from './Components/ConfirmPopup/confirmPopup';
+import Loading from './Components/Loading/Loading';
 import { auth } from './firebase';
 
 function App() {
@@ -43,7 +44,7 @@ function App() {
             </>
     } else if (store.user == undefined) {
       // replace with real loading graphic eventually
-      return <div>loading</div> 
+      return <Loading/> 
     } else if (!store.user.approved) {
         return <Splash
                 header="Awaiting Approval"
@@ -51,7 +52,7 @@ function App() {
                 graphic={<img alt="" src={approvalIcon} />}
                />
     } else if (store.user.role == "jobseeker") {
-      return <MilestoneMap />
+      return <MilestoneMap emailParam={store.email}/>
     } else if (store.user.role == "navigator") {
       return <NavDashboard />
     } else if (store.user.role == "admin") {
@@ -116,11 +117,7 @@ function App() {
 
              {/* Nav/Admin Views */}
             <Route path="/clientRoadmap/:emailParam" element={<NavigatorMenu />}/>
-            <Route path="/onboard" element={<NavView />} />
-            <Route path="/adminview" element={<AdminView />} />
-            <Route path="/admindashboard" element={<AdminDashboard />} />
-            <Route path="/navdashboard" element={<NavDashboard />} />
-            <Route path="/navigator/:emailParam" element={<div>insert the navigator view here</div>} />
+            <Route path="/roadmap/" element={<MilestoneMap emailParam={store.email}/>} />
           </>)}
           <Route path="/profile" element={<ProfileOutline />} />
 
