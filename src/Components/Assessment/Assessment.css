@@ -247,11 +247,6 @@ input, textarea {
     position: relative;
 }
 
-.dropit {
-    color: purple;
-    background-color: white;
-}
-
 /* outer container */
 .MuiBox-root {
     width: 100% !important;

@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import propTypes from 'prop-types';
 import './Assessment.css';
-import {
-  FormControl, InputLabel,
-} from '@mui/material';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
 import { TextField } from '@material-ui/core';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
@@ -14,31 +9,6 @@ import {
   skillsChecklistOptions, industryInterestOptions, generalSkills,
   arrayToObj, generalSubskills, objToArray,
 } from '../../Services/objects-service';
-
-const styles = {
-  dropdownOptions: {
-    fontFamily: 'Montserrat',
-    color: '#49454F',
-    fontSize: '0.9vw',
-    fontWeight: 'bold',
-    paddingLeft: '1.7%',
-    textDecoration: 'none',
-  },
-  inputLabel: {
-    fontFamily: 'Montserrat',
-    color: '#49454F',
-    width: '55.0vw',
-    height: '3.2vw',
-    fontSize: '0.9vw',
-    fontWeight: 'bold',
-    backgroundColor: '#F7F8FE',
-  },
-  formControl: {
-    width: '55.0vw',
-    textAlign: 'left',
-    textDecoration: 'none',
-  },
-};
 
 function Assessment({
   userData, setUserData, jobseeker, setJobseeker, email,
@@ -253,21 +223,30 @@ function Assessment({
     }
   }, [genBool]);
 
-  const addEducation = (event) => {
+  const addDegree = (event) => {
     event.preventDefault();
-    const temp = [...jobseeker.education];
+    const temp = [...jobseeker.degrees];
     if (temp.length >= 3) {
-      alert('If you have more than 3 degrees, please put the most recent three.');
+      alert('If you have more than three degrees, please put the most recent three.');
     } else {
-      temp.push({
-        degree: 'No',
-        degreeType: '',
-        certificate: 'No',
-        certificateType: '',
-      });
+      temp.push('');
       setJobseeker({
         ...jobseeker,
-        education: temp,
+        degrees: temp,
+      });
+    }
+  };
+
+  const addCertificate = (event) => {
+    event.preventDefault();
+    const temp = [...jobseeker.certificates];
+    if (temp.length >= 3) {
+      alert('If you have more than three certificates, please put the most recent three.');
+    } else {
+      temp.push('');
+      setJobseeker({
+        ...jobseeker,
+        certificates: temp,
       });
     }
   };
@@ -286,19 +265,23 @@ function Assessment({
     }
   };
 
-  const editEducation = (event, element, index) => {
+  const editDegree = (event, index) => {
     event.preventDefault();
-    const temp = [...jobseeker.education];
-    temp[index][element] = event.target.value;
-    if (element === 'certificate' && event.target.value === 'No') {
-      temp[index].certificateType = '';
-    }
-    if (element === 'degree' && event.target.value === 'No') {
-      temp[index].degreeType = '';
-    }
+    const temp = [...jobseeker.degrees];
+    temp[index] = event.target.value;
     setJobseeker({
       ...jobseeker,
-      education: temp,
+      degrees: temp,
+    });
+  };
+
+  const editCertificate = (event, index) => {
+    event.preventDefault();
+    const temp = [...jobseeker.certificates];
+    temp[index] = event.target.value;
+    setJobseeker({
+      ...jobseeker,
+      certificates: temp,
     });
   };
 
@@ -312,13 +295,19 @@ function Assessment({
     });
   };
 
-  const deleteEducation = (event, index) => {
-    event.preventDefault();
-    const temp = [...jobseeker.education];
-    temp.splice(index, 1);
-    setJobseeker({
-      ...jobseeker,
-      education: temp,
+  const deleteDegree = (index) => {
+    setJobseeker((prevJobseeker) => {
+      const temp = { ...prevJobseeker };
+      temp.degrees.splice(index, 1);
+      return { ...temp };
+    });
+  };
+
+  const deleteCertificate = (index) => {
+    setJobseeker((prevJobseeker) => {
+      const temp = { ...prevJobseeker };
+      temp.certificates.splice(index, 1);
+      return { ...temp };
     });
   };
 
@@ -427,116 +416,101 @@ function Assessment({
           />
         </div>
       </div>
-
       <div>
         <div className="section-divider" />
-        <div className="assessment-section-title">Education Info</div>
-        {jobseeker.education.map((educationObject, index) => (
+        <div className="assessment-section-title">List of Degrees</div>
+        <form>
           <div>
-            <form>
+            {jobseeker.degrees.map((degreeObject, index) => (
               <div>
-                <div className="baby-divider" />
-                <FormControl
-                  fullWidth
-                  focused
-                  style={styles.formControl}
-                >
-                  <InputLabel id="demo-simple-select-label">Degree?</InputLabel>
-                  <Select
-                    defaultValue="No"
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    label="Degree"
-                    onChange={(e) => editEducation(e, 'degree', index)}
-                    style={styles.inputLabel}
-                  >
-                    <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
-                    <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
-                    <MenuItem value="Progress" style={styles.dropdownOptions}>Still Working On</MenuItem>
-                  </Select>
-                </FormControl>
-                <div className="op-between-inputs" />
+                <form>
+                  <div className="baby-divider" />
+                  <TextField
+                    id="outlined-basic"
+                    label={`Degree ${index + 1}`}
+                    value={degreeObject}
+                    placeholder={`Degree ${index + 1}`}
+                    variant="outlined"
+                    focused
+                    onChange={(e) => editDegree(e, index)}
+                    InputProps={textFieldStyles.inputProps}
+                    InputLabelProps={textFieldStyles.labelProps}
+                    className="input-field"
+                  />
+                  <div className="op-between-inputs" />
+                </form>
+                <div className="left-button">
+                  <button type="button" className="delete-buttons" onClick={(e) => { e.preventDefault(); deleteDegree(index); }}>
+                    <img
+                      src={Delete}
+                      alt="delete icon"
+                      style={{ marginRight: '12px' }}
+                    />
+                    Delete Occupation
+                  </button>
+                </div>
               </div>
-              {(jobseeker.education[index].degree === 'Progress' || jobseeker.education[index].degree === 'Yes') && (
-              <div>
-                <TextField
-                  id="outlined-basic"
-                  label="Type of Degree"
-                  placeholder="Type of Degree"
-                  value={jobseeker.education[index].degreeType}
-                  variant="outlined"
-                  focused
-                  onChange={(e) => editEducation(e, 'degreeType', index)}
-                  InputProps={textFieldStyles.inputProps}
-                  InputLabelProps={textFieldStyles.labelProps}
-                  className="input-field"
-                />
-                <div className="op-between-inputs" />
-              </div>
-              )}
-              <div>
-                <FormControl
-                  fullWidth
-                  focused
-                  style={styles.formControl}
-                >
-                  <InputLabel id="demo-simple-select-label">Certificate?</InputLabel>
-                  <Select
-                    defaultValue="No"
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    label="Degree"
-                    onChange={(e) => editEducation(e, 'certificate', index)}
-                    style={styles.inputLabel}
-                  >
-                    <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
-                    <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
-                    <MenuItem value="Progress" style={styles.dropdownOptions}>Still Working On</MenuItem>
-                  </Select>
-                </FormControl>
-              </div>
-              {(jobseeker.education[index].certificate === 'Progress' || jobseeker.education[index].certificate === 'Yes') && (
-              <div>
-                <div className="op-between-inputs" />
-                <TextField
-                  id="outlined-basic"
-                  label="Type of Certificate"
-                  placeholder="Type of Certificate"
-                  value={jobseeker.education[index].certificateType}
-                  variant="outlined"
-                  focused
-                  onChange={(e) => editEducation(e, 'certificateType', index)}
-                  InputProps={textFieldStyles.inputProps}
-                  InputLabelProps={textFieldStyles.labelProps}
-                  className="input-field"
-                />
-              </div>
-              )}
-            </form>
-            <div className="op-between-inputs" />
-            <div className="left-button">
-              <button type="button" onClick={(e) => deleteEducation(e, index)} className="delete-buttons">
-                <img
-                  src={Delete}
-                  alt="delete icon"
-                  style={{ marginRight: '12px' }}
-                />
-                Delete Education
-              </button>
-            </div>
+            ))}
           </div>
-        ))}
+          <div className="left-button">
+            <button type="button" onClick={addDegree} className="add-buttons">
+              <img
+                src={Add}
+                alt="add icon"
+                style={{ marginRight: '12px' }}
+              />
+              Add Occupation
+            </button>
+          </div>
+        </form>
       </div>
-      <div className="left-button">
-        <button type="button" onClick={addEducation} className="add-buttons">
-          <img
-            src={Add}
-            alt="add icon"
-            style={{ marginRight: '12px' }}
-          />
-          Add Education
-
-        </button>
+      <div>
+        <div className="section-divider" />
+        <div className="assessment-section-title">List of Certificates</div>
+        <form>
+          <div>
+            {jobseeker.certificates.map((certificateObject, index) => (
+              <div>
+                <form>
+                  <div className="baby-divider" />
+                  <TextField
+                    id="outlined-basic"
+                    label={`Occupation ${index + 1}`}
+                    value={certificateObject}
+                    placeholder={`Occupation ${index + 1}`}
+                    variant="outlined"
+                    focused
+                    onChange={(e) => editCertificate(e, index)}
+                    InputProps={textFieldStyles.inputProps}
+                    InputLabelProps={textFieldStyles.labelProps}
+                    className="input-field"
+                  />
+                  <div className="op-between-inputs" />
+                </form>
+                <div className="left-button">
+                  <button type="button" className="delete-buttons" onClick={(e) => { e.preventDefault(); deleteCertificate(index); }}>
+                    <img
+                      src={Delete}
+                      alt="delete icon"
+                      style={{ marginRight: '12px' }}
+                    />
+                    Delete Occupation
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="left-button">
+            <button type="button" onClick={addCertificate} className="add-buttons">
+              <img
+                src={Add}
+                alt="add icon"
+                style={{ marginRight: '12px' }}
+              />
+              Add Occupation
+            </button>
+          </div>
+        </form>
       </div>
       <div>
         <div className="section-divider" />
@@ -708,7 +682,15 @@ Assessment.propTypes = {
     ),
     education: [{
     }],
-    occupation: [],
+    occupation: propTypes.arrayOf(
+      propTypes.string.isRequired,
+    ),
+    degrees: propTypes.arrayOf(
+      propTypes.string.isRequired,
+    ),
+    certificates: propTypes.arrayOf(
+      propTypes.string.isRequired,
+    ),
     dreamjob: propTypes.string.isRequired,
   }).isRequired,
   setJobseeker: propTypes.func.isRequired,
