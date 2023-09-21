@@ -7,7 +7,7 @@ function OnlineProfile({ jobseeker, setJobseeker }) {
   const handleChange = (event, param) => {
     const { value } = event.target;
     const tempJobseeker = { ...jobseeker };
-    tempJobseeker.onlineProfile[param].username = value;
+    tempJobseeker.onlineProfiles[param].username = value;
     setJobseeker(tempJobseeker);
   };
 

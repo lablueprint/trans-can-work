@@ -42,11 +42,13 @@ export const jobseekerDataObject = {
   },
 
   // assessment fields
-  education: [],
+  certificates: [],
+  degrees: [],
   occupation: [],
   skillsChecklist: [],
   industryInterest: [],
   generalSkills: [],
+  notes: '',
 
   // milestone progress
   milestones: {
