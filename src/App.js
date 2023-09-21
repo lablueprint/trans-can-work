@@ -10,10 +10,7 @@ import {
   Login,
   Register,
   Reset,
-  ProfileTemp,
   Landing,
-  JobseekerData,
-  Home,
   NavDashboard,
   AdminDashboard,
   AdminView
@@ -25,16 +22,8 @@ import approvalIcon from './Assets/Images/trans-flag-graphic.png';
 import ScrollToTop from './Pages/scrollToTop';
 import NavigatorMenu from './Components/Navigation/NavigatorMenu';
 import MilestoneMap from './Components/Milestones/MilestoneMap';
-import Internships from './Components/Internships/Internships';
-import Assessment from './Components/Assessment/Assessment';
 import NavView from './Components/NavView/NavView';
-import Workshops from './Components/Workshops/Workshops';
-import JobFairs from './Components/JobFairs/JobFairs';
-import JobBoards from './Components/JobBoards/JobBoards';
-import HiredInfo from './Components/HiredInfo/HiredInfo';
-import Resources from './Components/Resources/Resources';
-import OnlineProfiles from './Components/OnlineProfiles/OnlineProfiles';
-import TrainingPrograms from './Components/TrainingPrograms/TrainingPrograms';
+import ProfileOutline from './Components/profileOutline'
 import { login, logout } from "./Redux/Slice/authSlices";
 import { fetchUser, addUser } from './Services/user-service';
 import ConfirmPopup from './Components/ConfirmPopup/confirmPopup';
@@ -120,9 +109,6 @@ function App() {
           <Route path="/reset" element={<Reset />} />
           <Route path="/landing" element={<Landing />} />
 
-
-
-
           {store != undefined && ( <>
             {/* Client Views */}
             <Route path="/roadmap" element={<MilestoneMap />} />
@@ -133,7 +119,10 @@ function App() {
             <Route path="/adminview" element={<AdminView />} />
             <Route path="/admindashboard" element={<AdminDashboard />} />
             <Route path="/navdashboard" element={<NavDashboard />} />
+            <Route path="/navigator/:emailParam" element={<div>insert the navigator view here</div>} />
           </>)}
+          <Route path="/profile" element={<ProfileOutline />} />
+
           <Route
             path="/splash"
             element={

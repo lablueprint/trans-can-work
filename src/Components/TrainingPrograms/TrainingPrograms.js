@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import './TrainingPrograms.css';
 import propTypes from 'prop-types';
 import { TextField } from '@material-ui/core';
-import { DateField } from '@mui/x-date-pickers/DateField';
 import { FormControl, InputLabel } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
@@ -82,7 +81,7 @@ function TrainingPrograms({ jobseeker, setJobseeker }) {
     event.preventDefault();
     const temp = {
       program: '',
-      referral: new Date(),
+      referral: '',
       start: '',
       enrolled: '',
       end: '',
@@ -118,12 +117,6 @@ function TrainingPrograms({ jobseeker, setJobseeker }) {
     setAllPrograms(temp);
   };
 
-  const editDate = (newValue, label, index) => {
-    const temp = [...allPrograms];
-    temp[index][label] = newValue;
-    setAllPrograms(temp);
-  };
-
   return (
     <div className="content">
       <div className="tp-title">Training Programs</div>
@@ -146,7 +139,10 @@ function TrainingPrograms({ jobseeker, setJobseeker }) {
                 <div>
                   {fieldProps.map((field) => (
                     <div>
-                      {(field.label === 'Training Program' || field.label === 'Notes')
+                      {(field.label === 'Training Program' || field.label === 'Notes'
+                      || field.label === 'Date Referral Sent' || field.label === 'Start Date'
+                      || field.label === 'Date Officially Enrolled' || field.label === 'End Date'
+                      || field.label === 'Date Completed Training')
                       && (
                         <>
                           <TextField
@@ -185,23 +181,6 @@ function TrainingPrograms({ jobseeker, setJobseeker }) {
                               <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
                             </Select>
                           </FormControl>
-                          <div className="op-between-inputs" />
-                        </>
-                      )}
-                      {(field.label === 'Date Referral Sent' || field.label === 'Start Date'
-                      || field.label === 'Date Officially Enrolled' || field.label === 'End Date'
-                      || field.label === 'Date Completed Training')
-                      && (
-                        <>
-                          <DateField
-                            label={field.label}
-                            focused
-                            value={field.value}
-                            onChange={(newValue) => editDate(newValue, field.value, index)}
-                            InputProps={textFieldStyles.inputProps}
-                            InputLabelProps={textFieldStyles.labelProps}
-                            className="input-field"
-                          />
                           <div className="op-between-inputs" />
                         </>
                       )}

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { Avatar } from '@material-ui/core';
 import {
-  Tab, Tabs,
+  Tab, Tabs, ButtonBase,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
@@ -18,6 +19,7 @@ import { skillsChecklistOptions, industryInterestOptions } from '../Services/obj
 import skater from '../Assets/ProfileIcons/monogram.png';
 import dog from '../Assets/ProfileIcons/monogram-2.png';
 import { fetchJobseekerData } from '../Services/jobseeker-data-service';
+import Loading from '../Components/Loading/Loading';
 
 const icons = [
   skater,
@@ -75,6 +77,7 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
 */
 export default function NavDashboard() {
   const store = useSelector((state) => state.auth.value);
+  const navigate = useNavigate();
 
   const [tabValue, setValue] = useState(0);
   const [hasAssignments, setHasAssignments] = useState(false);
@@ -169,8 +172,7 @@ export default function NavDashboard() {
 
   // if the user's information is loading, diplay loading component
   if (store === undefined) {
-    // eventually replace with appropriate loading component
-    return (<div>loading</div>);
+    return (<Loading />);
   }
 
   return (
@@ -179,11 +181,13 @@ export default function NavDashboard() {
         <div className="dashboard-page-headers-main">
 
           <div className="dashboard-page-header-name-and-icon-container">
-            <p className="dashboard-page-header-profile-text">{`${store.user.firstName} ${store.user.lastName}`}</p>
-            <Avatar
-              facebookId="100008343750912"
-              className="profile-button-avatar"
-            />
+            <ButtonBase onClick={() => navigate('/profile')}>
+              <p className="dashboard-page-header-profile-text">{`${store.user.firstName} ${store.user.lastName}`}</p>
+              <Avatar
+                facebookId="100008343750912"
+                className="profile-button-avatar"
+              />
+            </ButtonBase>
           </div>
           <div className="dashboard-page-headers-middle">
             <p className="dashboard-page-title">

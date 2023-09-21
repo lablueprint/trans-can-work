@@ -1,10 +1,10 @@
 import './NavView.css';
 import React, { useState, useEffect } from 'react';
-import Assessment from '../Assessment/Assessment';
-import Header from '../Header/Header';
 import { fetchUser, updateUser } from '../../Services/user-service';
 import { fetchJobseekerData, updateJobseekerData } from '../../Services/jobseeker-data-service';
-// import OnlineProfiles from '../OnlineProfiles/OnlineProfiles';
+import InitialHeader from '../InitialHeader/InitialHeader';
+import InitialAssessment from '../InitialAssessment/InitialAssessment';
+import Loading from '../Loading/Loading';
 
 function NavView() {
   const [userData, setUserData] = useState();
@@ -35,29 +35,20 @@ function NavView() {
   }, [userData]);
 
   if (jobseekerData === undefined) {
-    // eventually replace with appropriate loading component
-    return (<div>loading</div>);
+    return (<Loading />);
   }
 
   return (
     <div>
-      {jobseekerData && (
       <div>
-        <Header />
-        <div className="assessment-top-padding" />
-        <Assessment
+        <InitialHeader />
+        <InitialAssessment
           userData={userData}
           setUserData={setUserData}
-          jobseeker={jobseekerData}
-          setJobseeker={setJobseekerData}
+          setJobseekerProp={setJobseekerData}
           email={email}
         />
-        {/* <OnlineProfiles
-          jobseeker={jobseekerData}
-          setJobseeker={setJobseekerData}
-        /> */}
       </div>
-      )}
     </div>
 
   );
