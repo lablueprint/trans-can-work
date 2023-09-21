@@ -10,7 +10,6 @@ import {
   skillsChecklistOptions, industryInterestOptions, generalSkills,
   arrayToObj, generalSubskills, objToArray,
 } from '../../Services/objects-service';
-import Loading from '../Loading/Loading';
 
 function Assessment({
   userData, setUserData, jobseeker, setJobseeker, email,
@@ -340,7 +339,7 @@ function Assessment({
   ];
 
   if (skillBool1 === undefined) {
-    return (<Loading />);
+    return (<div>Loading</div>);
   }
 
   return (

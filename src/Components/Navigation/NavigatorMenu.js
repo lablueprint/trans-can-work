@@ -223,6 +223,10 @@ function NavigatorMenu() {
     }
   };
 
+  if (!loaded) {
+    return <Loading />;
+  }
+
   return (
     <>
       <Header jobseekerEmail={emailParam} value={value} setValue={setValue} fullName={`${userData.firstName} ${userData.lastName}`} />

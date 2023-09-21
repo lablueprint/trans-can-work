@@ -7,7 +7,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
-import Loading from '../Loading/Loading';
 
 function JobFairs({ jobseeker, setJobseeker }) {
   const styles = {
@@ -122,7 +121,7 @@ function JobFairs({ jobseeker, setJobseeker }) {
   ];
 
   if (jobFairs === undefined) {
-    return <Loading />;
+    return <div>Loading</div>;
   }
 
   return (
