@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 function OnlineProfile({ jobseeker }) {
   const [profiles, setProfiles] = useState([...jobseeker.onlineProfiles]);
-  console.log(typeof profiles);
   const handleChange = (event, param) => {
     event.preventDefault();
     const temp = [...profiles];
