@@ -159,6 +159,10 @@ input, textarea {
     background-color: #AAAFFA;
 }
 
+.buttonlink {
+    text-decoration: none;
+}
+
 .delete-buttons {
     width: 14em;
     height: 4em;
