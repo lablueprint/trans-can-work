@@ -7,7 +7,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
-import Loading from '../Loading/Loading';
 
 function JobBoards({ jobseeker, setJobseeker }) {
   const styles = {
@@ -122,7 +121,7 @@ function JobBoards({ jobseeker, setJobseeker }) {
   ];
 
   if (jobBoards === undefined) {
-    return <Loading />;
+    return <div>Loading</div>;
   }
 
   return (

@@ -7,7 +7,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
-import Loading from '../Loading/Loading';
 
 function Internships({ jobseeker, setJobseeker }) {
   const styles = {
@@ -134,7 +133,7 @@ function Internships({ jobseeker, setJobseeker }) {
   ];
 
   if (allInternships === undefined) {
-    return <Loading />;
+    return <div>Loading</div>;
   }
 
   return (

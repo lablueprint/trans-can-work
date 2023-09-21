@@ -9,7 +9,6 @@ import Add from '../../Assets/add.svg';
 import Check from '../../Assets/Images/check.png';
 import Cancel from '../../Assets/Images/cancel.png';
 import Delete from '../../Assets/delete.svg';
-import Loading from '../Loading/Loading';
 
 function OnlineProfiles({ jobseeker, setJobseeker }) {
   const styles = {
@@ -126,7 +125,7 @@ function OnlineProfiles({ jobseeker, setJobseeker }) {
   ];
 
   if (profile === undefined) {
-    return <Loading />;
+    return <div>Loading</div>;
   }
 
   return (

@@ -4,7 +4,6 @@ import propTypes from 'prop-types';
 import { TextField } from '@material-ui/core';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
-import Loading from '../Loading/Loading';
 
 function HiredInfo({ jobseeker, setJobseeker }) {
   const textFieldStyles = {
@@ -105,7 +104,7 @@ function HiredInfo({ jobseeker, setJobseeker }) {
   ];
 
   if (allHiredInfo === undefined) {
-    return <Loading />;
+    return <div>Loading</div>;
   }
 
   return (
