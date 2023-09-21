@@ -10,11 +10,7 @@ import {
   Login,
   Register,
   Reset,
-  ProfileTemp,
-  ArchiveTemp,
   Landing,
-  JobseekerData,
-  Home,
   NavDashboard,
   AdminDashboard,
   AdminView
@@ -26,16 +22,8 @@ import approvalIcon from './Assets/Images/trans-flag-graphic.png';
 import ScrollToTop from './Pages/scrollToTop';
 import NavigatorMenu from './Components/Navigation/NavigatorMenu';
 import MilestoneMap from './Components/Milestones/MilestoneMap';
-import Internships from './Components/Internships/Internships';
-import Assessment from './Components/Assessment/Assessment';
 import NavView from './Components/NavView/NavView';
-import Workshops from './Components/Workshops/Workshops';
-import JobFairs from './Components/JobFairs/JobFairs';
-import JobBoards from './Components/JobBoards/JobBoards';
-import HiredInfo from './Components/HiredInfo/HiredInfo';
-import Resources from './Components/Resources/Resources';
-import OnlineProfiles from './Components/OnlineProfiles/OnlineProfiles';
-import TrainingPrograms from './Components/TrainingPrograms/TrainingPrograms';
+import PageNotFound from './Components/PageNotFound/PageNotFound';
 import ProfileOutline from './Components/profileOutline'
 import { login, logout } from "./Redux/Slice/authSlices";
 import { fetchUser, addUser } from './Services/user-service';
@@ -120,31 +108,17 @@ function App() {
             )}
           />
           <Route path="/reset" element={<Reset />} />
-
-          {/* Client Views */}
-          {/* <Route path="/onboard" element={<JobseekerData />} /> */}
-
-          {/* Nav/Admin Views */}
+          <Route path="/landing" element={<Landing />} />
 
           {store != undefined && ( <>
-            <Route path="/onboard" element={<div>Onboard Goes Here</div>} />
+            {/* Client Views */}
+            <Route path="/roadmap" element={<MilestoneMap />} />
+
+             {/* Nav/Admin Views */}
             <Route path="/clientRoadmap/:emailParam" element={<NavigatorMenu />}/>
             <Route path="/roadmap/" element={<MilestoneMap emailParam={store.email}/>} />
           </>)}
-
-          
-          <Route path="/clientRoadmap2/:emailParam" element={<NavigatorMenu />}/>          
-          <Route path="/onboardv2" element={<NavView />} />
-          
-
-          <Route path="/landing" element={<Landing />} />
-          <Route path="/adminview" element={<AdminView />} />
-          <Route path="/archivepopuptesting" element={<ArchiveTemp />} />
-          
-          <Route path="/admindashboard" element={<AdminDashboard />} />
-          <Route path="/navdashboard" element={<NavDashboard />} />
-
-          <Route path="/navProfile" element={<ProfileOutline />} />
+          <Route path="/profile" element={<ProfileOutline />} />
 
           <Route
             path="/splash"
@@ -159,6 +133,8 @@ function App() {
           <Route
             path = "/testConfirm" element = {<ConfirmPopup open handleClose = {()=> {}} handleConfirm = {()=> {}} title="DeleteConfirm" subtitle="subtitle goes here"/>}
           />
+
+        <Route path='*' element={<PageNotFound />} />
         </Routes>
         <Footer />
       </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 import MilestoneClientInfo from './MilestoneClientInfo';
 
 const fieldProps = [
@@ -24,7 +25,7 @@ function Hiring({ jobseeker }) {
         fieldProps.forEach((field) => {
           hiredInfoFrontEnd[field.label] = info[field.value];
         });
-        return <MilestoneClientInfo data={hiredInfoFrontEnd} />;
+        return <MilestoneClientInfo key={uuidv4()} data={hiredInfoFrontEnd} />;
       })}
     </div>
   );

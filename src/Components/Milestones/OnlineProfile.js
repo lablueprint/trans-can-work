@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
+import { v4 as uuidv4 } from 'uuid';
 import './OnlineProfile.css';
 import PropTypes from 'prop-types';
 
@@ -30,7 +31,7 @@ function OnlineProfile({ jobseeker }) {
       <form className="textFields">
         <div className="onlineProfile-row">
           {profiles.map((profile, index) => (
-            <label htmlFor={profile.site} className="onlineProfile-row-label">
+            <label key={uuidv4()} htmlFor={profile.site} className="onlineProfile-row-label">
               {profile.site}
               <input
                 className="profileInput"

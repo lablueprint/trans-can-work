@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Assessment.css';
 import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 import MilestoneClientInfo from './MilestoneClientInfo';
 import MilestoneChecklist from './MilestoneChecklist';
 
@@ -57,7 +58,7 @@ function Assessment({ jobseeker }) {
       <h6 className="contentTitle">Education Info</h6>
       <hr className="shortLine" />
       { dataSets.map((dataSet) => (
-        <MilestoneClientInfo data={mapArrays(dataSet.data, dataSet.label)} />
+        <MilestoneClientInfo key={uuidv4()} data={mapArrays(dataSet.data, dataSet.label)} />
       ))}
       <h6 className="contentTitle">Previous Experience</h6>
       <p className="contentDescription">Yar, here are the industries ye have actual work or volunteer experience.</p>

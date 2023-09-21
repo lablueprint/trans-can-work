@@ -139,7 +139,7 @@ function NavigatorMenu() {
     }
   }, [userData]);
 
-  if (jobseekerData === undefined) {
+  if (jobseekerData === undefined || userData === undefined) {
     return (<Loading />);
   }
 
@@ -220,7 +220,7 @@ function NavigatorMenu() {
 
   return (
     <>
-      <Header value={value} setValue={setValue} />
+      <Header jobseekerEmail={emailParam} value={value} setValue={setValue} fullName={`${userData.firstName} ${userData.lastName}`} />
       <div className={notes ? 'notesPopupOn' : 'notesPopupOff'}>
         <div className="notes-text">
           <h1 className="notes-title">Notes</h1>

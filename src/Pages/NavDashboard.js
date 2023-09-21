@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { Avatar } from '@material-ui/core';
 import {
-  Tab, Tabs,
+  Tab, Tabs, ButtonBase,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
@@ -76,6 +77,7 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
 */
 export default function NavDashboard() {
   const store = useSelector((state) => state.auth.value);
+  const navigate = useNavigate();
 
   const [tabValue, setValue] = useState(0);
   const [hasAssignments, setHasAssignments] = useState(false);
@@ -176,29 +178,34 @@ export default function NavDashboard() {
   return (
     <div className="dashboard-page-container">
       <div className="dashboard-page-headers-container">
-        <div className="dashboard-page-header-name-and-icon-container">
-          <p className="dashboard-page-header-profile-text">{`${store.user.firstName} ${store.user.lastName}`}</p>
-          <Avatar
-            facebookId="100008343750912"
-            className="profile-button-avatar"
-          />
-        </div>
-        <div className="dashboard-page-welcome-block-header">
-          <p className="dashboard-page-title">
-            Welcome,
-            {' '}
-            {store.user.firstName}
-          </p>
-          <div className="dashboard-page-search-bar-container">
-            <SearchAndFilter
-              accounts={currentTabAccounts}
-              checkedSkills={checkedSkills}
-              setCheckedSkills={setCheckedSkills}
-              checkedInterests={checkedInterests}
-              setCheckedInterests={setCheckedInterests}
-              setOutput={setFilteredAccounts}
-              placeholder="Search Accounts"
-            />
+        <div className="dashboard-page-headers-main">
+
+          <div className="dashboard-page-header-name-and-icon-container">
+            <ButtonBase onClick={() => navigate('/profile')}>
+              <p className="dashboard-page-header-profile-text">{`${store.user.firstName} ${store.user.lastName}`}</p>
+              <Avatar
+                facebookId="100008343750912"
+                className="profile-button-avatar"
+              />
+            </ButtonBase>
+          </div>
+          <div className="dashboard-page-headers-middle">
+            <p className="dashboard-page-title">
+              Welcome,
+              {' '}
+              {store.user.firstName}
+            </p>
+            <div className="dash-nav-searchbar">
+              <SearchAndFilter
+                accounts={currentTabAccounts}
+                checkedSkills={checkedSkills}
+                setCheckedSkills={setCheckedSkills}
+                checkedInterests={checkedInterests}
+                setCheckedInterests={setCheckedInterests}
+                setOutput={setFilteredAccounts}
+                placeholder="Search Accounts"
+              />
+            </div>
           </div>
         </div>
         <StyledTabs

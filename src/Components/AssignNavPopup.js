@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Dialog, RadioGroup, Slide, Radio, Typography,
 } from '@mui/material';
-import './archivePopup.css';
+import './AssignNavPopup.css';
 import IconButton from '@material-ui/core/IconButton';
 import { Close } from '@mui/icons-material';
 
@@ -170,7 +170,7 @@ const Transition = React.forwardRef((props, ref) => (
   backend if the check button is pressed
   - Add change profile pic functionality once designs done
   - only display password if the user isnt signed in with google */
-function ArchivePopup({
+function AssignNavPopup({
   open,
   handleClose,
 }) {
@@ -228,120 +228,109 @@ function ArchivePopup({
   }, [searchTerms]);
 
   return (
-    <div className="containerSection" style={styles.containerSection}>
-      <Dialog
-        className="popup"
-        open={open}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={handleClose}
-        aria-describedby="alert-dialog-slide-description"
-        maxWidth="xs"
-        PaperProps={{
-          style: {
-            borderRadius: 30,
-            maxHeight: '679px',
-            maxWidth: '471px',
-            minWidth: '471px',
-            backgroundColor: '#FFFBFE',
-            padding: '2em',
-          },
-        }}
-        sx={{
-          // minHeight: '100px',
-          // maxWidth: '100px',
+    <Dialog
+      className="popup"
+      open={open}
+      TransitionComponent={Transition}
+      keepMounted
+      onClose={handleClose}
+      aria-describedby="alert-choose-clients-navigator"
+      maxWidth="xs"
+      PaperProps={{
+        style: {
+          borderRadius: 30,
+          maxHeight: '679px',
+          maxWidth: '471px',
+          minWidth: '471px',
+          backgroundColor: '#FFFBFE',
+          padding: '2em',
+        },
+      }}
+      sx={{
+        // minHeight: '100px',
+        // maxWidth: '100px',
+      }}
+    >
+      <div className="closebuttonSection">
+        <IconButton
+          onClick={handleClose}
+        >
+          <Close />
+        </IconButton>
+      </div>
+      <div className="title">
+        Navigators
+      </div>
+      <div className="search-bar-container">
+        <SearchBar
+          value={searchTerms}
+          setValue={setSearchTerms}
+          placeholder="Search here!"
+        />
+      </div>
+      <RadioGroup
+        style={{
+          width: '95%',
+          margin: 'auto',
+          marginBottom: '',
         }}
       >
-        <div className="closebuttonSection">
-          <IconButton
-            onClick={handleClose}
-            // sx={{
-            //   backgroundColor: '#000000',
-            // }}
-          >
-            <Close />
-          </IconButton>
-        </div>
-        <div className="title">
-          Navigators
-        </div>
-        <div className="search-bar-container">
-          <SearchBar
-            value={searchTerms}
-            setValue={setSearchTerms}
-            placeholder="Search here!"
+        {filteredNavigators.map((element) => (
+          <FormControlLabel
+            value={element.id}
+            control={(
+              <Radio />
+)}
+            labelPlacement="end"
+            label={(
+              <Typography
+                style={{
+                  fontFamily: 'Montserrat',
+                  fontWeight: 400,
+                }}
+              >
+                {element.firstName}
+              </Typography>
+)}
+            style={{
+              display: 'flex',
+              marginTop: '1em',
+              borderBottom: '1px solid #CAC4D0',
+              marginLeft: 0,
+              marginRight: '0.5em',
+              padding: '0.5em',
+              paddingLeft: 0,
+            }}
+            onChange={(e) => handleChange(e)}
+            sx={{
+              labelPlacementStart: {
+                justifyContent: 'space-between',
+              },
+            }}
+            className="form-label"
           />
-        </div>
-        <RadioGroup
-          style={{
-            width: '95%',
-            margin: 'auto',
-            marginBottom: '',
-          }}
-        >
-          {filteredNavigators.map((element) => (
-            <FormControlLabel
-              value={element.id}
-              control={(
-                <Radio />
-)}
-              labelPlacement="end"
-              label={(
-                <Typography
-                  style={{
-                    fontFamily: 'Montserrat',
-                    fontWeight: 400,
-                  }}
-                >
-                  {element.firstName}
-                </Typography>
-)}
-              style={{
-                display: 'flex',
-                marginTop: '1em',
-                borderBottom: '1px solid #CAC4D0',
-                marginLeft: 0,
-                marginRight: '0.5em',
-                padding: '0.5em',
-                paddingLeft: 0,
-              }}
-              onChange={(e) => handleChange(e)}
-              sx={{
-                labelPlacementStart: {
-                  justifyContent: 'space-between',
-                },
-              }}
-              className="form-label"
-
-              // push id thingy to selected jobseeker's navigator field
-              // update navigator with jobseeker
-                // use real navigator objects, copy a few objects that have navigator role
-                // just copy email as id
-            />
-          ))}
-        </RadioGroup>
-        <Button
-          variant="outlined"
-          onClick={handleconfirm}
-          className="confirm"
-          style={{
-            marginTop: '3em',
-            alignSelf: 'center',
-          }}
-        >
-          {' '}
-          <p style={styles.confirmText}>Confirm</p>
-          {' '}
-        </Button>
-      </Dialog>
-
-    </div>
+        ))}
+      </RadioGroup>
+      <Button
+        variant="outlined"
+        onClick={handleconfirm}
+        className="confirm"
+        style={{
+          marginTop: '3em',
+          alignSelf: 'center',
+        }}
+      >
+        {' '}
+        <p style={styles.confirmText}>Confirm</p>
+        {' '}
+      </Button>
+    </Dialog>
   );
 }
 
-export default ArchivePopup;
+export default AssignNavPopup;
 
-ArchivePopup.propTypes = {
+AssignNavPopup.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
 };
