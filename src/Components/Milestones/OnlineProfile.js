@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './OnlineProfile.css';
 import PropTypes from 'prop-types';
 
 function OnlineProfile({ jobseeker, setJobseeker }) {
+  const [profiles, setProfiles] = useState(jobseeker.onlineProfiles);
   const handleChange = (event, param) => {
-    const { value } = event.target;
-    const tempJobseeker = { ...jobseeker };
-    tempJobseeker.onlineProfiles[param].username = value;
-    setJobseeker(tempJobseeker);
+    // const { value } = event.target;
+    // const tempJobseeker = { ...jobseeker };
+    // tempJobseeker.onlineProfiles[param].username = value;
+    // setJobseeker(tempJobseeker);
+    event.preventDefault();
+    console.log(event.target.value);
+    const temp = { ...profiles };
+    temp[param].username = event.target.value;
+    setProfiles(temp);
   };
 
   if (jobseeker === undefined) {
@@ -23,8 +29,19 @@ function OnlineProfile({ jobseeker, setJobseeker }) {
       </h6>
       <form className="textFields">
         <div className="onlineProfile-row">
-          <label htmlFor="linkedin" className="onlineProfile-row-label">
-            Linkedin
+          {profiles.map((profile, index) => (
+            <label htmlFor={profile.site} className="onlineProfile-row-label">
+              {profile.site}
+              <input
+                className="profileInput"
+                type="text"
+                name="facebook"
+                value={profile.username}
+                onChange={(e) => { handleChange(e, index); }}
+              />
+            </label>
+          ))}
+          {/* <label htmlFor="linkedin" className="onlineProfile-row-label">
             <input
               className="profileInput"
               type="text"
@@ -42,8 +59,8 @@ function OnlineProfile({ jobseeker, setJobseeker }) {
               value={jobseeker.onlineProfiles[1].username}
               onChange={(e) => { handleChange(e, 1); }}
             />
-          </label>
-        </div>
+          </label> */}
+          {/* </div>
         <div className="onlineProfile-row">
           <label htmlFor="glassdoor" className="onlineProfile-row-label">
             Glassdoor
@@ -64,7 +81,7 @@ function OnlineProfile({ jobseeker, setJobseeker }) {
               value={jobseeker.onlineProfiles[3].username}
               onChange={(e) => { handleChange(e, 3); }}
             />
-          </label>
+          </label> */}
         </div>
       </form>
     </div>
