@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './Workshops.css';
 import propTypes from 'prop-types';
 import { TextField } from '@material-ui/core';
-import { DateField } from '@mui/x-date-pickers/DateField';
 import {
   FormControl, InputLabel,
 } from '@mui/material';
@@ -105,12 +104,6 @@ function Workshops({ jobseeker, setJobseeker }) {
     setAllWorkshops(temp);
   };
 
-  const editDate = (newValue, index) => {
-    const temp = [...allWorkshops];
-    temp[index].date = newValue;
-    setAllWorkshops(temp);
-  };
-
   const fieldProps = [
     { label: 'Workshop', value: 'name' },
     { label: 'Date of Workshop', value: 'date' },
@@ -130,7 +123,8 @@ function Workshops({ jobseeker, setJobseeker }) {
                 <div>
                   {fieldProps.map((field) => (
                     <div>
-                      {(field.label === 'Workshop' || field.label === 'Notes')
+                      {(field.label === 'Workshop' || field.label === 'Notes'
+                      || field.label === 'Date of Workshop')
                       && (
                         <>
                           <TextField
@@ -169,21 +163,6 @@ function Workshops({ jobseeker, setJobseeker }) {
                               <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
                             </Select>
                           </FormControl>
-                          <div className="op-between-inputs" />
-                        </>
-                      )}
-                      {(field.label === 'Date of Workshop')
-                      && (
-                        <>
-                          <DateField
-                            label={field.label}
-                            focused
-                            value={workshopObject.date}
-                            onChange={(newValue) => editDate(newValue, index)}
-                            InputProps={textFieldStyles.inputProps}
-                            InputLabelProps={textFieldStyles.labelProps}
-                            className="input-field"
-                          />
                           <div className="op-between-inputs" />
                         </>
                       )}
@@ -228,7 +207,7 @@ Workshops.propTypes = {
     workshops:
     {
       name: propTypes.string.isRequired,
-      date: propTypes.instanceOf(Date),
+      date: propTypes.string.isRequired,
       attended: propTypes.bool.isRequired,
       notes: propTypes.string.isRequired,
     },

@@ -18,6 +18,7 @@ import { skillsChecklistOptions, industryInterestOptions } from '../Services/obj
 import skater from '../Assets/ProfileIcons/monogram.png';
 import dog from '../Assets/ProfileIcons/monogram-2.png';
 import { fetchJobseekerData } from '../Services/jobseeker-data-service';
+import Loading from '../Components/Loading/Loading';
 
 const icons = [
   skater,
@@ -169,8 +170,7 @@ export default function NavDashboard() {
 
   // if the user's information is loading, diplay loading component
   if (store === undefined) {
-    // eventually replace with appropriate loading component
-    return (<div>loading</div>);
+    return (<Loading />);
   }
 
   return (

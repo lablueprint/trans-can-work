@@ -20,6 +20,7 @@ import OnlineProfiles from '../OnlineProfiles/OnlineProfiles';
 import TrainingPrograms from '../TrainingPrograms/TrainingPrograms';
 
 import { fetchUser, updateUser } from '../../Services/user-service';
+import Loading from '../Loading/Loading';
 
 const style = {
   tabStyle: {
@@ -70,7 +71,6 @@ function NavigatorMenu() {
 
   const handleChange = (event, newValue) => {
     event.preventDefault();
-    console.log(newValue);
     setValue(newValue);
   };
 
@@ -140,8 +140,7 @@ function NavigatorMenu() {
   }, [userData]);
 
   if (jobseekerData === undefined) {
-    // eventually replace with appropriate loading component
-    return (<div>loading</div>);
+    return (<Loading />);
   }
 
   const chooseStuff = () => {
@@ -174,14 +173,14 @@ function NavigatorMenu() {
         );
       case 4:
         return (
-          <Internships
+          <Workshops
             jobseeker={jobseekerData}
             setJobseeker={setJobseekerData}
           />
         );
       case 5:
         return (
-          <Workshops
+          <Internships
             jobseeker={jobseekerData}
             setJobseeker={setJobseekerData}
           />
@@ -221,7 +220,7 @@ function NavigatorMenu() {
 
   return (
     <>
-      <Header />
+      <Header value={value} setValue={setValue} />
       <div className={notes ? 'notesPopupOn' : 'notesPopupOff'}>
         <div className="notes-text">
           <h1 className="notes-title">Notes</h1>
