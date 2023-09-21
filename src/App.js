@@ -5,9 +5,9 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { useSelector, useDispatch } from 'react-redux';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+
 import {
   Login,
-  NavigatorDashboard,
   Register,
   Reset,
   ProfileTemp,
@@ -38,12 +38,38 @@ import OnlineProfiles from './Components/OnlineProfiles/OnlineProfiles';
 import TrainingPrograms from './Components/TrainingPrograms/TrainingPrograms';
 import { login, logout } from "./Redux/Slice/authSlices";
 import { fetchUser, addUser } from './Services/user-service';
-import { auth } from "./firebase";
-
+import ConfirmPopup from './Components/ConfirmPopup/confirmPopup';
+import { auth } from './firebase';
 
 function App() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.value);
+  const store = useSelector((state) => state.auth.value);
+
+  // change displayed home page depending on the authentication stage/user role
+  const getHomeComponent = () => {
+    if(store == undefined || !store.isLoggedIn) {
+      return <>
+              <ScrollToTop />
+              <Login />
+            </>
+    } else if (store.user == undefined) {
+      // replace with real loading graphic eventually
+      return <div>loading</div> 
+    } else if (!store.user.approved) {
+        return <Splash
+                header="Awaiting Approval"
+                description="You have successfully signed up for an account. Please await approval from a TransCanWork Administator."
+                graphic={<img alt="" src={approvalIcon} />}
+               />
+    } else if (store.user.role == "jobseeker") {
+      return <MilestoneMap emailParam={store.email}/>
+    } else if (store.user.role == "navigator") {
+      return <NavDashboard />
+    } else if (store.user.role == "admin") {
+      return <AdminDashboard />
+    }
+
+  }
 
   useEffect(() => {
     // on any firebase auth change 
@@ -62,7 +88,7 @@ function App() {
         }).catch((error) => {
         });
       // if logged out
-      } else if (user != undefined) {
+      } else if (store != undefined) {
         // clear redux state
         dispatch(logout());
       }
@@ -76,19 +102,13 @@ function App() {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <div className="App">
         <Routes>
+          {/* Home Page - dependent on auth/role */}
           <Route
             exact path="/"
-            element={(
-              <>
-                <ScrollToTop />
-                <Login />
-              </>
-            )}
+            element={getHomeComponent()}
           />
-          <Route
-            path="/jobseekerView"
-            element={<Home />}
-          />
+
+          {/* Account Creation / Edits */}
           <Route
             path="/register"
             element={(
@@ -98,35 +118,31 @@ function App() {
               </>
             )}
           />
-          {user != undefined && 
-          (
-          <>
-          <Route path="/clientRoadmap" element={<NavigatorMenu />}>
-            <Route path="roadmap" element={<MilestoneMap email={'js_angela@gmail.com'}/>} />
-            <Route path="assessment" element={<Assessment />} />
-            <Route path="onlineprofiles" element={<OnlineProfiles />} />
-            <Route path="training" element={<TrainingPrograms />} />
-            <Route path="internships" element={<Internships />} />
-            <Route path="workshops" element={<Workshops />} />
-            <Route path="jobfairs" element={<JobFairs />} />
-            <Route path="jobboards" element={<JobBoards />} />
-            <Route path="resources" element={<Resources />} />
-            <Route path="hiredinfo" element={<HiredInfo />} />
-          </Route>
-          <Route path="/onboard" element={<JobseekerData />} />
-          </>)
-  }
-          <Route path="/login" element={<Login />} />
-          <Route path="/dashboard/navigator" element={<NavigatorDashboard />} />
           <Route path="/reset" element={<Reset />} />
+
+          {/* Client Views */}
+          {/* <Route path="/onboard" element={<JobseekerData />} /> */}
+
+          {/* Nav/Admin Views */}
+
+          {store != undefined && ( <>
+            <Route path="/onboard" element={<div>Onboard Goes Here</div>} />
+            <Route path="/clientRoadmap/:emailParam" element={<NavigatorMenu />}/>
+            <Route path="/roadmap/" element={<MilestoneMap emailParam={store.email}/>} />
+          </>)}
+
+          
+          <Route path="/clientRoadmap2/:emailParam" element={<NavigatorMenu />}/>          
+          <Route path="/onboardv2" element={<NavView />} />
+          
+
           <Route path="/landing" element={<Landing />} />
           <Route path="/adminview" element={<AdminView />} />
-
           <Route path="/archivepopuptesting" element={<ArchiveTemp />} />
+          
           <Route path="/admindashboard" element={<AdminDashboard />} />
           <Route path="/navdashboard" element={<NavDashboard />} />
 
-          <Route path="/roadmap/:emailParam" element={<MilestoneMap/>} />
           <Route
             path="/splash"
             element={
@@ -136,6 +152,9 @@ function App() {
                 graphic={<img alt="" src={approvalIcon} />}
               />
             }
+          />
+          <Route
+            path = "/testConfirm" element = {<ConfirmPopup open handleClose = {()=> {}} handleConfirm = {()=> {}} title="DeleteConfirm" subtitle="subtitle goes here"/>}
           />
         </Routes>
         <Footer />
