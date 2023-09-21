@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import propTypes from 'prop-types';
-import './Assessment.css';
 import { TextField } from '@material-ui/core';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
+import Save from '../../Assets/save.svg';
 import Checkboxes from '../Checkboxes/Checkboxes';
 import {
   skillsChecklistOptions, industryInterestOptions, generalSkills,
-  arrayToObj, generalSubskills, objToArray,
+  arrayToObj, generalSubskills, objToArray, jobseekerDataObject,
 } from '../../Services/objects-service';
 import Loading from '../Loading/Loading';
 
-function Assessment({
-  userData, setUserData, jobseeker, setJobseeker, email,
+function InitialAssessment({
+  userData, setUserData, email,
 }) {
   const textFieldStyles = {
     inputProps: {
@@ -36,6 +36,8 @@ function Assessment({
       },
     },
   };
+
+  const [jobseeker, setJobseeker] = useState(jobseekerDataObject);
 
   // each set of checkboxes has 4 state variables:
   // an object with label/bool pairs
@@ -644,12 +646,26 @@ function Assessment({
         </form>
       </div>
       <div className="section-divider" />
+      <div className="left-button">
+        <a href="/" className="buttonlink">
+          <button type="button" className="add-buttons">
+            <img
+              src={Save}
+              alt="save icon"
+              style={{ marginRight: '12px' }}
+            />
+            Save Changes
+          </button>
+
+        </a>
+      </div>
+      <div className="section-divider" />
     </div>
   );
 }
-export default Assessment;
+export default InitialAssessment;
 
-Assessment.propTypes = {
+InitialAssessment.propTypes = {
   email: propTypes.string.isRequired,
   userData: propTypes.shape({
     firstName: propTypes.string.isRequired,
@@ -657,42 +673,6 @@ Assessment.propTypes = {
     phoneNumber: propTypes.string.isRequired,
     pronouns: propTypes.string.isRequired,
   }).isRequired,
-  jobseeker: propTypes.shape({
-    clientInfo:
-    {
-      'City/State': propTypes.string.isRequired,
-      Ethnicity: propTypes.string.isRequired,
-      Age: propTypes.string.isRequired,
-      'Gender Identity': propTypes.string.isRequired,
-      Sexuality: propTypes.string.isRequired,
-      Veteran: propTypes.string.isRequired,
-      Disability: propTypes.string.isRequired,
-      'Housing Situation': propTypes.string.isRequired,
-      'Currently Employed': propTypes.string.isRequired,
-      'Prior Convictions': propTypes.string.isRequired,
-    },
-    industryInterest: propTypes.arrayOf(
-      propTypes.string.isRequired,
-    ),
-    generalSkills: propTypes.arrayOf(
-      propTypes.string.isRequired,
-    ),
-    skillsChecklist: propTypes.arrayOf(
-      propTypes.string.isRequired,
-    ),
-    education: [{
-    }],
-    occupation: propTypes.arrayOf(
-      propTypes.string.isRequired,
-    ),
-    degrees: propTypes.arrayOf(
-      propTypes.string.isRequired,
-    ),
-    certificates: propTypes.arrayOf(
-      propTypes.string.isRequired,
-    ),
-    dreamjob: propTypes.string.isRequired,
-  }).isRequired,
-  setJobseeker: propTypes.func.isRequired,
+  setJobseekerProp: propTypes.func.isRequired,
   setUserData: propTypes.func.isRequired,
 };

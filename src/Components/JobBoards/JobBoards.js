@@ -134,6 +134,7 @@ function JobBoards({ jobseeker, setJobseeker }) {
                           InputProps={textFieldStyles.inputProps}
                           InputLabelProps={textFieldStyles.labelProps}
                           className="input-field"
+                          placeholder={field.label}
                         />
                         <div className="op-between-inputs" />
                       </>
@@ -203,7 +204,7 @@ JobBoards.propTypes = {
     jobPortals:
     {
       name: propTypes.string.isRequired,
-      date: propTypes.instanceOf(Date),
+      date: propTypes.string.isRequired,
       attended: propTypes.bool.isRequired,
       notes: propTypes.string.isRequired,
     },

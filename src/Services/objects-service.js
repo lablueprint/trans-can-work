@@ -63,7 +63,23 @@ export const jobseekerDataObject = {
   },
 
   // milestone data
-  onlineProfiles: [],
+  onlineProfiles: [
+    {
+      site: 'LinkedIn',
+      username: '',
+      notes: '',
+    },
+    {
+      site: 'Facebook',
+      username: '',
+      notes: '',
+    },
+    {
+      site: 'Glassdoor',
+      username: '',
+      notes: '',
+    },
+  ],
   trainingPrograms: [],
   internships: [],
   jobFairs: [],

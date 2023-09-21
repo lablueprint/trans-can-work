@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: #f4ecf4;
+}
+
+.transFlag {
+    padding-top: 5%;
+    padding-bottom: 10%;
+    align-self: center;
+    margin: 0;
+    min-width: 15%;
+    max-width: 18%;
+    min-height: 15%;
+    max-height: 18%;
+}
+
+.loadingTitle {
+    padding-top: 10%;
+    align-self: center;
+    margin: 0;
+    min-width: 10%;
+    max-width: 13%;
+    min-height: 20%;
+    max-height: 25%;
+}

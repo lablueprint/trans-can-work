@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './Internships.css';
 import propTypes from 'prop-types';
 import { TextField } from '@material-ui/core';
-import { DateField } from '@mui/x-date-pickers/DateField';
 import { FormControl, InputLabel } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
@@ -51,7 +50,7 @@ function Internships({ jobseeker, setJobseeker }) {
   };
 
   const [loaded, setLoaded] = useState(false);
-  const [allInternships, setAllInternships] = useState([{}]);
+  const [allInternships, setAllInternships] = useState([]);
 
   useEffect(() => {
     setAllInternships(jobseeker.internships);
@@ -109,12 +108,6 @@ function Internships({ jobseeker, setJobseeker }) {
     setAllInternships(temp);
   };
 
-  const editDate = (newValue, label, index) => {
-    const temp = [...allInternships];
-    temp[index][label] = newValue;
-    setAllInternships(temp);
-  };
-
   const fieldProps = [
     { label: 'Company/Org of Internship', value: 'company' },
     { label: 'Program Name', value: 'program' },
@@ -140,11 +133,14 @@ function Internships({ jobseeker, setJobseeker }) {
                   {fieldProps.map((field) => (
                     <div>
                       {(field.label === 'Company/Org of Internship' || field.label === 'Program Name'
-                      || field.label === 'Position' || field.label === 'Notes')
+                      || field.label === 'Position' || field.label === 'Notes'
+                      || field.label === 'Start Date' || field.label === 'End Date'
+                      || field.label === 'Date Referral Sent (If Applicable)')
                       && (
                         <>
                           <TextField
                             id="outlined-basic"
+                            placeholder={field.label}
                             label={field.label}
                             variant="outlined"
                             value={internshipObject[field.value]}
@@ -172,29 +168,13 @@ function Internships({ jobseeker, setJobseeker }) {
                               labelId="demo-simple-select-label"
                               id="demo-simple-select"
                               label={field.label}
-                              onChange={(e) => editDropdown(e, index)}
+                              onChange={(e) => editDropdown(e, field.value, index)}
                               style={styles.inputLabel}
                             >
                               <MenuItem value="Yes" style={styles.dropdownOptions}>Yes</MenuItem>
                               <MenuItem value="No" style={styles.dropdownOptions}>No</MenuItem>
                             </Select>
                           </FormControl>
-                          <div className="op-between-inputs" />
-                        </>
-                      )}
-                      {(field.label === 'Start Date' || field.label === 'End Date'
-                      || field.label === 'Date Referral Sent (If Applicable)')
-                      && (
-                        <>
-                          <DateField
-                            label={field.label}
-                            focused
-                            value={internshipObject[field.value]}
-                            onChange={(newValue) => editDate(newValue, field.value, index)}
-                            InputProps={textFieldStyles.inputProps}
-                            InputLabelProps={textFieldStyles.labelProps}
-                            className="input-field"
-                          />
                           <div className="op-between-inputs" />
                         </>
                       )}
