@@ -71,7 +71,6 @@ function NavigatorMenu() {
 
   const handleChange = (event, newValue) => {
     event.preventDefault();
-    console.log(newValue);
     setValue(newValue);
   };
 
