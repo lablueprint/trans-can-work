@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import propTypes from 'prop-types';
 import './Assessment.css';
 import { TextField } from '@material-ui/core';
-import { v4 as uuidv4 } from 'uuid';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
 import Checkboxes from '../Checkboxes/Checkboxes';
@@ -352,7 +351,7 @@ function Assessment({
           <div className="inputWrapper">
             <div>
               {clientInfoFields.map((item) => (
-                <div key={uuidv4()}>
+                <div>
                   <TextField
                     id="outlined-basic"
                     label={item.title}
@@ -423,7 +422,7 @@ function Assessment({
         <form>
           <div>
             {jobseeker.degrees.map((degreeObject, index) => (
-              <div key={uuidv4()}>
+              <div>
                 <form>
                   <div className="baby-divider" />
                   <TextField
@@ -471,7 +470,7 @@ function Assessment({
         <form>
           <div>
             {jobseeker.certificates.map((certificateObject, index) => (
-              <div key={uuidv4()}>
+              <div>
                 <form>
                   <div className="baby-divider" />
                   <TextField
@@ -519,7 +518,7 @@ function Assessment({
         <form>
           <div>
             {jobseeker.occupation.map((occupationObject, index) => (
-              <div key={uuidv4()}>
+              <div>
                 <form>
                   <div className="baby-divider" />
                   <TextField

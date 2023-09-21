@@ -673,6 +673,5 @@ InitialAssessment.propTypes = {
     phoneNumber: propTypes.string.isRequired,
     pronouns: propTypes.string.isRequired,
   }).isRequired,
-  setJobseekerProp: propTypes.func.isRequired,
   setUserData: propTypes.func.isRequired,
 };

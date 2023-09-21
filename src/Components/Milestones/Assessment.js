@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Assessment.css';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 import MilestoneClientInfo from './MilestoneClientInfo';
 import MilestoneChecklist from './MilestoneChecklist';
@@ -82,8 +82,43 @@ function Assessment({ jobseeker }) {
   );
 }
 
-Assessment.propTypes = {
-  jobseeker: PropTypes.func.isRequired,
-};
-
 export default Assessment;
+
+Assessment.propTypes = {
+  jobseeker: propTypes.shape({
+    clientInfo:
+    {
+      'City/State': propTypes.string.isRequired,
+      Ethnicity: propTypes.string.isRequired,
+      Age: propTypes.string.isRequired,
+      'Gender Identity': propTypes.string.isRequired,
+      Sexuality: propTypes.string.isRequired,
+      Veteran: propTypes.string.isRequired,
+      Disability: propTypes.string.isRequired,
+      'Housing Situation': propTypes.string.isRequired,
+      'Currently Employed': propTypes.string.isRequired,
+      'Prior Convictions': propTypes.string.isRequired,
+    },
+    industryInterest: propTypes.arrayOf(
+      propTypes.string.isRequired,
+    ),
+    generalSkills: propTypes.arrayOf(
+      propTypes.string.isRequired,
+    ),
+    skillsChecklist: propTypes.arrayOf(
+      propTypes.string.isRequired,
+    ),
+    education: [{
+    }],
+    occupation: propTypes.arrayOf(
+      propTypes.string.isRequired,
+    ),
+    degrees: propTypes.arrayOf(
+      propTypes.string.isRequired,
+    ),
+    certificates: propTypes.arrayOf(
+      propTypes.string.isRequired,
+    ),
+    dreamjob: propTypes.string.isRequired,
+  }).isRequired,
+};
