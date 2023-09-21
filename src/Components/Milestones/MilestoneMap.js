@@ -98,11 +98,10 @@ const data = {
   },
 };
 
-function MilestoneMap() {
+function MilestoneMap({emailParam}) {
   const [buttonData, setButtonData] = useState(data);
   const [jobseeker, setJobseeker] = useState();
   const [prevJobseeker, setPrevJobseeker] = useState();
-  const { emailParam } = useParams();
 
   useEffect(() => {
     fetchJobseekerData(emailParam).then((jobseekerData) => {
