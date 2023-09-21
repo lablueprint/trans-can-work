@@ -3,16 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './OnlineProfile.css';
 import PropTypes from 'prop-types';
 
-function OnlineProfile({ jobseeker, setJobseeker }) {
-  const [profiles, setProfiles] = useState(jobseeker.onlineProfiles);
+function OnlineProfile({ jobseeker }) {
+  const [profiles, setProfiles] = useState([...jobseeker.onlineProfiles]);
+  console.log(typeof profiles);
   const handleChange = (event, param) => {
-    // const { value } = event.target;
-    // const tempJobseeker = { ...jobseeker };
-    // tempJobseeker.onlineProfiles[param].username = value;
-    // setJobseeker(tempJobseeker);
     event.preventDefault();
-    console.log(event.target.value);
-    const temp = { ...profiles };
+    const temp = [...profiles];
     temp[param].username = event.target.value;
     setProfiles(temp);
   };
@@ -93,7 +89,6 @@ root.render(<OnlineProfile />);
 
 OnlineProfile.propTypes = {
   jobseeker: PropTypes.func.isRequired,
-  setJobseeker: PropTypes.func.isRequired,
 };
 
 export default OnlineProfile;
