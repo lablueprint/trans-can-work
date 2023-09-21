@@ -111,7 +111,6 @@ function Login() {
     style: {
       fontFamily: 'Montserrat',
       paddingLeft: '0.3%',
-      backgroundColor: 'white',
     },
   };
 
