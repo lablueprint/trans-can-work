@@ -1,46 +1,55 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './OnlineProfiles.css';
+import propTypes from 'prop-types';
 import { TextField } from '@material-ui/core';
 import Add from '../../Assets/add.svg';
 import Check from '../../Assets/Images/check.png';
 import Cancel from '../../Assets/Images/cancel.png';
 import Delete from '../../Assets/delete.svg';
 
-function OnlineProfiles() {
+function OnlineProfiles({ jobseeker, setJobseeker }) {
   const textFieldStyles = {
     inputProps: {
       style: {
         fontFamily: 'Montserrat',
         color: '#49454F',
-        width: '55.0vw',
-        height: '3.2vw',
-        fontSize: '0.9vw',
         fontWeight: 'bold',
-        borderColor: 'red',
+        borderColor: '#000AA0',
+        borderWidth: '1px',
         backgroundColor: '#F7F8FE',
       },
     },
     labelProps: {
       style: {
         fontFamily: 'Montserrat',
-        fontSize: '0.95vw',
         color: '#000AA0',
         backgroundColor: '#FFFFFF',
       },
     },
   };
 
-  const [profile, setProfile] = useState([{
-    website: '',
-    tools: '',
-    created: '',
-    notes: '',
-  }]);
+  const [loaded, setLoaded] = useState(false);
+  const [profile, setProfile] = useState([{}]);
+
+  useEffect(() => {
+    setProfile(jobseeker.onlineProfiles);
+    setLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (loaded) {
+      setJobseeker({
+        ...jobseeker,
+        onlineProfiles: profile,
+      });
+    }
+  }, [profile]);
 
   const addOnlineProfile = async (event) => {
     event.preventDefault();
     const temp = {
-      website: '',
+      site: '',
+      username: '',
       tools: '',
       created: '',
       notes: '',
@@ -63,7 +72,7 @@ function OnlineProfiles() {
   };
 
   const fieldProps = [
-    { label: 'Company/Org of Internship', value: 'site' },
+    { label: 'Site Name', value: 'site' },
     { label: 'Username', value: 'username' },
     { label: 'Tools This Site Provides', value: 'tools' },
     { label: 'Created an Account?', value: 'created' },
@@ -149,3 +158,17 @@ function OnlineProfiles() {
 }
 
 export default OnlineProfiles;
+
+OnlineProfiles.propTypes = {
+  jobseeker: propTypes.shape({
+    onlineProfiles:
+    {
+      site: propTypes.string.isRequired,
+      username: propTypes.string.isRequired,
+      tools: propTypes.string.isRequired,
+      created: propTypes.string.isRequired,
+      notes: propTypes.string.isRequired,
+    },
+  }).isRequired,
+  setJobseeker: propTypes.func.isRequired,
+};

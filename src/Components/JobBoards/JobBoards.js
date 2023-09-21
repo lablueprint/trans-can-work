@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './JobBoards.css';
+import propTypes from 'prop-types';
 import { TextField } from '@material-ui/core';
 import { FormControl, InputLabel } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
@@ -7,12 +8,12 @@ import Select from '@mui/material/Select';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
 
-function JobBoards() {
+function JobBoards({ jobseeker, setJobseeker }) {
   const styles = {
     dropdownOptions: {
       fontFamily: 'Montserrat',
       color: '#49454F',
-      fontSize: '0.9vw',
+      fontSize: '1rem',
       fontWeight: 'bold',
       paddingLeft: '1.7%',
       textDecoration: 'none',
@@ -20,14 +21,10 @@ function JobBoards() {
     inputLabel: {
       fontFamily: 'Montserrat',
       color: '#49454F',
-      width: '55.0vw',
-      height: '3.2vw',
-      fontSize: '0.9vw',
       fontWeight: 'bold',
       backgroundColor: '#F7F8FE',
     },
     formControl: {
-      width: '55.0vw',
       textAlign: 'left',
       textDecoration: 'none',
     },
@@ -37,9 +34,6 @@ function JobBoards() {
       style: {
         fontFamily: 'Montserrat',
         color: '#49454F',
-        width: '55.0vw',
-        height: '3.2vw',
-        fontSize: '0.9vw',
         fontWeight: 'bold',
         borderColor: '#000AA0',
         borderWidth: '1px',
@@ -49,18 +43,28 @@ function JobBoards() {
     labelProps: {
       style: {
         fontFamily: 'Montserrat',
-        fontSize: '0.95vw',
         color: '#000AA0',
         backgroundColor: '#FFFFFF',
       },
     },
   };
-  const [jobBoards, setJobBoards] = useState([{
-    name: '',
-    profile: false,
-    admitted: false,
-    notes: '',
-  }]);
+
+  const [loaded, setLoaded] = useState(false);
+  const [jobBoards, setJobBoards] = useState([{}]);
+
+  useEffect(() => {
+    setJobBoards(jobseeker.jobPortals);
+    setLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (loaded) {
+      setJobseeker({
+        ...jobseeker,
+        jobPortals: jobBoards,
+      });
+    }
+  }, [jobBoards]);
 
   const addJobBoard = async (event) => {
     event.preventDefault();
@@ -71,7 +75,6 @@ function JobBoards() {
       notes: '',
     };
     await setJobBoards([...jobBoards, temp]);
-    console.log(jobBoards);
   };
 
   const deleteJobBoard = async (event, index) => {
@@ -86,12 +89,10 @@ function JobBoards() {
     const temp = [...jobBoards];
     temp[index][element] = event.target.value;
     setJobBoards(temp);
-    console.log(jobBoards);
   };
 
   const editDropdown = (event, label, index) => {
     event.preventDefault();
-    console.log(event.target.value);
     let val = true;
     if (event.target.value === 'No') {
       val = false;
@@ -196,3 +197,16 @@ function JobBoards() {
 }
 
 export default JobBoards;
+
+JobBoards.propTypes = {
+  jobseeker: propTypes.shape({
+    jobPortals:
+    {
+      name: propTypes.string.isRequired,
+      date: propTypes.instanceOf(Date),
+      attended: propTypes.bool.isRequired,
+      notes: propTypes.string.isRequired,
+    },
+  }).isRequired,
+  setJobseeker: propTypes.func.isRequired,
+};

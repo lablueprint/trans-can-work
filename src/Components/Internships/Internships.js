@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Internships.css';
+import propTypes from 'prop-types';
 import { TextField } from '@material-ui/core';
 import { DateField } from '@mui/x-date-pickers/DateField';
 import { FormControl, InputLabel } from '@mui/material';
@@ -8,12 +9,12 @@ import Select from '@mui/material/Select';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
 
-function Internships() {
+function Internships({ jobseeker, setJobseeker }) {
   const styles = {
     dropdownOptions: {
       fontFamily: 'Montserrat',
       color: '#49454F',
-      fontSize: '0.9vw',
+      fontSize: '1rem',
       fontWeight: 'bold',
       paddingLeft: '1.7%',
       textDecoration: 'none',
@@ -21,7 +22,6 @@ function Internships() {
     inputLabel: {
       fontFamily: 'Montserrat',
       color: '#49454F',
-      fontSize: '0.9vw',
       fontWeight: 'bold',
       backgroundColor: '#F7F8FE',
     },
@@ -35,36 +35,37 @@ function Internships() {
       style: {
         fontFamily: 'Montserrat',
         color: '#49454F',
-        width: '55.0vw',
-        height: '3.2vw',
-        fontSize: '0.9vw',
         fontWeight: 'bold',
         borderColor: '#000AA0',
+        borderWidth: '1px',
         backgroundColor: '#F7F8FE',
       },
     },
     labelProps: {
       style: {
         fontFamily: 'Montserrat',
-        fontSize: '0.95vw',
         color: '#000AA0',
         backgroundColor: '#FFFFFF',
       },
     },
   };
 
-  const [allInternships, setAllInternships] = useState([{
-    company: '',
-    program: '',
-    position: '',
-    start: '',
-    end: '',
-    referralDate: '',
-    applied: false,
-    accepted: false,
-    completed: false,
-    notes: '',
-  }]);
+  const [loaded, setLoaded] = useState(false);
+  const [allInternships, setAllInternships] = useState([{}]);
+
+  useEffect(() => {
+    setAllInternships(jobseeker.internships);
+    setLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (loaded) {
+      setJobseeker({
+        ...jobseeker,
+        internships: allInternships,
+      });
+    }
+  }, [allInternships]);
 
   const addInternship = async (event) => {
     event.preventDefault();
@@ -232,3 +233,22 @@ function Internships() {
 }
 
 export default Internships;
+
+Internships.propTypes = {
+  jobseeker: propTypes.shape({
+    internships:
+    {
+      company: propTypes.string.isRequired,
+      program: propTypes.string.isRequired,
+      position: propTypes.string.isRequired,
+      start: propTypes.instanceOf(Date),
+      end: propTypes.instanceOf(Date),
+      referralDate: propTypes.instanceOf(Date),
+      applied: propTypes.bool.isRequired,
+      accepted: propTypes.bool.isRequired,
+      completed: propTypes.bool.isRequired,
+      notes: propTypes.string.isRequired,
+    },
+  }).isRequired,
+  setJobseeker: propTypes.func.isRequired,
+};
