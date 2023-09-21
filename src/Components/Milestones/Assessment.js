@@ -67,7 +67,7 @@ function Assessment({ jobseeker }) {
       <MilestoneChecklist checkboxes={skills} columns={2} />
       <h6 className="contentTitle">Ultimate Dream Job</h6>
       <hr className="longLine" />
-      <p className="content">
+      <p className="dreamJob">
         {jobseeker.clientInfo['Dream Job']}
         !
       </p>
