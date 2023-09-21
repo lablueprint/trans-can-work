@@ -12,7 +12,7 @@ import {
 import Loading from '../Loading/Loading';
 
 function InitialAssessment({
-  userData, setUserData, setJobseekerProp, email,
+  userData, setUserData, email,
 }) {
   const textFieldStyles = {
     inputProps: {
