@@ -221,7 +221,7 @@ function NavigatorMenu() {
 
   return (
     <>
-      <Header />
+      <Header value={value} setValue={setValue} />
       <div className={notes ? 'notesPopupOn' : 'notesPopupOff'}>
         <div className="notes-text">
           <h1 className="notes-title">Notes</h1>
