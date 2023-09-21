@@ -6,7 +6,6 @@ import NavigatorDashboard from './NavigatorDashboard';
 import JobseekerData from './JobseekerData';
 import Landing from './Landing';
 import ProfileTemp from './ProfileTemp';
-import ArchiveTemp from './ArchiveTemp';
 import AdminView from '../Components/Dashboard/AdminView';
 import NavDashboard from './NavDashboard';
 import AdminDashboard from './AdminDashboard';
@@ -19,7 +18,6 @@ export {
   NavigatorDashboard,
   // Profile,
   ProfileTemp,
-  ArchiveTemp,
   JobseekerData,
   Landing,
   AdminView,

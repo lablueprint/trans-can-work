@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { IconButton, Avatar, StylesProvider } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 // eslint-disable-next-line import/no-unresolved
 import './ProfileButton.css';
@@ -92,6 +92,7 @@ function ProfileButton({
     },
     {
       label: 'Re-assign',
+      // eventually add reassign popup trigger here
       fx: () => { console.log('reassign'); },
       icon: <PersonOutlineOutlinedIcon fontSize="small" />,
     },
@@ -107,6 +108,7 @@ function ProfileButton({
     },
     {
       label: 'Download',
+      // eventually add download function here
       fx: () => { console.log('download'); },
       icon: <DownloadIcon fontSize="small" />,
     },
@@ -150,6 +152,8 @@ function ProfileButton({
     color = 'profile-button-unarchived-bg';
   }
 
+  const viewProfileLink = accountType === 'jobseeker' ? `/clientRoadmap/${email}` : `/navigator/${email}`;
+
   return (
     <div className={`profile-button-outer-container ${color}`}>
       {icon === undefined
@@ -168,7 +172,7 @@ function ProfileButton({
       <div className="profile-button-text-container">
         <p className="profile-button-name-text">{profileName}</p>
         <p className="profile-button-job-text">{workField}</p>
-        {!isArchived && <Link className="profile-button-view-link" to="/profile">View Profile</Link>}
+        {!isArchived && <Link className="profile-button-view-link" to={viewProfileLink}>View Profile</Link>}
       </div>
       <div className="profile-button-button-container">
         <IconButton

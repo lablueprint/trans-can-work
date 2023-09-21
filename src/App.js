@@ -11,7 +11,6 @@ import {
   Register,
   Reset,
   ProfileTemp,
-  ArchiveTemp,
   Landing,
   JobseekerData,
   Home,
@@ -119,30 +118,22 @@ function App() {
             )}
           />
           <Route path="/reset" element={<Reset />} />
+          <Route path="/landing" element={<Landing />} />
 
-          {/* Client Views */}
-          {/* <Route path="/onboard" element={<JobseekerData />} /> */}
 
-          {/* Nav/Admin Views */}
+
 
           {store != undefined && ( <>
-            <Route path="/onboard" element={<div>Onboard Goes Here</div>} />
+            {/* Client Views */}
+            <Route path="/roadmap" element={<MilestoneMap />} />
+
+             {/* Nav/Admin Views */}
             <Route path="/clientRoadmap/:emailParam" element={<NavigatorMenu />}/>
+            <Route path="/onboard" element={<NavView />} />
+            <Route path="/adminview" element={<AdminView />} />
+            <Route path="/admindashboard" element={<AdminDashboard />} />
+            <Route path="/navdashboard" element={<NavDashboard />} />
           </>)}
-
-          
-          <Route path="/clientRoadmap2/:emailParam" element={<NavigatorMenu />}/>          
-          <Route path="/onboardv2" element={<NavView />} />
-          
-
-          <Route path="/landing" element={<Landing />} />
-          <Route path="/adminview" element={<AdminView />} />
-          <Route path="/archivepopuptesting" element={<ArchiveTemp />} />
-          
-          <Route path="/admindashboard" element={<AdminDashboard />} />
-          <Route path="/navdashboard" element={<NavDashboard />} />
-
-          <Route path="/roadmap" element={<MilestoneMap />} />
           <Route
             path="/splash"
             element={
