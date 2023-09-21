@@ -9,6 +9,7 @@ import {
   skillsChecklistOptions, industryInterestOptions, generalSkills,
   arrayToObj, generalSubskills, objToArray,
 } from '../../Services/objects-service';
+import Loading from '../Loading/Loading';
 
 function InitialAssessment({
   userData, setUserData, setJobseekerProp, email,
@@ -360,8 +361,7 @@ function InitialAssessment({
   ];
 
   if (skillBool1 === undefined) {
-    // eventually replace with appropriate loading component
-    return (<div>loading</div>);
+    return (<Loading />);
   }
 
   return (

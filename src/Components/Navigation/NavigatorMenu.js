@@ -20,6 +20,7 @@ import OnlineProfiles from '../OnlineProfiles/OnlineProfiles';
 import TrainingPrograms from '../TrainingPrograms/TrainingPrograms';
 
 import { fetchUser, updateUser } from '../../Services/user-service';
+import Loading from '../Loading/Loading';
 
 const style = {
   tabStyle: {
@@ -140,8 +141,7 @@ function NavigatorMenu() {
   }, [userData]);
 
   if (jobseekerData === undefined) {
-    // eventually replace with appropriate loading component
-    return (<div>loading</div>);
+    return (<Loading />);
   }
 
   const chooseStuff = () => {
