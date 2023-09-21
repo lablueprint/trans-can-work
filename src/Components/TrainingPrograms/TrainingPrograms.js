@@ -8,6 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
+import Loading from '../Loading/Loading';
 
 function TrainingPrograms({ jobseeker, setJobseeker }) {
   const styles = {
@@ -61,12 +62,23 @@ function TrainingPrograms({ jobseeker, setJobseeker }) {
   ];
 
   const [loaded, setLoaded] = useState(false);
-  const [allPrograms, setAllPrograms] = useState([{}]);
+  const [allPrograms, setAllPrograms] = useState(undefined);
 
   useEffect(() => {
-    setAllPrograms(jobseeker.trainingPrograms);
-    setLoaded(true);
+    if (jobseeker !== undefined) {
+      if (!jobseeker.trainingPrograms.length) {
+        setAllPrograms([{}]);
+      } else {
+        setAllPrograms(jobseeker.trainingPrograms);
+      }
+    }
   }, []);
+
+  useEffect(() => {
+    if (allPrograms !== undefined) {
+      setLoaded(true);
+    }
+  }, [allPrograms]);
 
   useEffect(() => {
     if (loaded) {
@@ -75,7 +87,7 @@ function TrainingPrograms({ jobseeker, setJobseeker }) {
         trainingPrograms: allPrograms,
       });
     }
-  }, [allPrograms]);
+  }, [loaded]);
 
   const addProgram = async (event) => {
     event.preventDefault();
@@ -116,6 +128,10 @@ function TrainingPrograms({ jobseeker, setJobseeker }) {
     temp[index][label] = val;
     setAllPrograms(temp);
   };
+
+  if (allPrograms === undefined) {
+    return <Loading />;
+  }
 
   return (
     <div className="content">

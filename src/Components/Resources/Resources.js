@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Add from '../../Assets/add.svg';
 import Delete from '../../Assets/delete.svg';
+import Loading from '../Loading/Loading';
 
 function Resources({ jobseeker, setJobseeker }) {
   const styles = {
@@ -84,12 +85,23 @@ function Resources({ jobseeker, setJobseeker }) {
   ];
 
   const [loaded, setLoaded] = useState(false);
-  const [trackedResources, setTrackedResources] = useState([{}]);
+  const [trackedResources, setTrackedResources] = useState(undefined);
 
   useEffect(() => {
-    setTrackedResources(jobseeker.resources);
-    setLoaded(true);
+    if (jobseeker !== undefined) {
+      if (!jobseeker.resources.length) {
+        setTrackedResources([{}]);
+      } else {
+        setTrackedResources(jobseeker.resources);
+      }
+    }
   }, []);
+
+  useEffect(() => {
+    if (trackedResources !== undefined) {
+      setLoaded(true);
+    }
+  }, [trackedResources]);
 
   useEffect(() => {
     if (loaded) {
@@ -98,7 +110,7 @@ function Resources({ jobseeker, setJobseeker }) {
         resources: trackedResources,
       });
     }
-  }, [trackedResources]);
+  }, [loaded]);
 
   const addTrackedResource = async (event) => {
     event.preventDefault();
@@ -133,6 +145,10 @@ function Resources({ jobseeker, setJobseeker }) {
     { label: 'Source of Resource', value: 'source' },
     { label: 'Notes', value: 'notes' },
   ];
+
+  if (trackedResources === undefined) {
+    return <Loading />;
+  }
 
   return (
     <div className="content">

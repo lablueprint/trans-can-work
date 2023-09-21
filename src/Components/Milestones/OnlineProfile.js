@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { v4 as uuidv4 } from 'uuid';
 import './OnlineProfile.css';
 import PropTypes from 'prop-types';
+import Loading from '../Loading/Loading';
 
 function OnlineProfile({ jobseeker }) {
   const [profiles, setProfiles] = useState();
@@ -19,7 +20,7 @@ function OnlineProfile({ jobseeker }) {
   };
 
   if (profiles === undefined) {
-    return <div>Loading</div>;
+    return <Loading />;
   }
 
   return (

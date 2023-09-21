@@ -107,7 +107,7 @@ function InitialAssessment({
 
   // only assign object once the backend calls are loaded in
   useEffect(() => {
-    if (loaded) {
+    if (loaded && jobseeker !== undefined) {
       setSkillsObj(arrayToObj(jobseeker.skillsChecklist, skillsChecklistOptions));
       setIntObj(arrayToObj(jobseeker.industryInterest, industryInterestOptions));
       setGenObj(arrayToObj(jobseeker.generalSkills, generalSkills));

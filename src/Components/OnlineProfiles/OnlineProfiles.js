@@ -9,6 +9,7 @@ import Add from '../../Assets/add.svg';
 import Check from '../../Assets/Images/check.png';
 import Cancel from '../../Assets/Images/cancel.png';
 import Delete from '../../Assets/delete.svg';
+import Loading from '../Loading/Loading';
 
 function OnlineProfiles({ jobseeker, setJobseeker }) {
   const styles = {
@@ -52,12 +53,23 @@ function OnlineProfiles({ jobseeker, setJobseeker }) {
   };
 
   const [loaded, setLoaded] = useState(false);
-  const [profile, setProfile] = useState([]);
+  const [profile, setProfile] = useState(undefined);
 
   useEffect(() => {
-    setProfile(jobseeker.onlineProfiles);
-    setLoaded(true);
+    if (jobseeker !== undefined) {
+      if (!jobseeker.onlineProfiles.length) {
+        setProfile([]);
+      } else {
+        setProfile(jobseeker.onlineProfiles);
+      }
+    }
   }, []);
+
+  useEffect(() => {
+    if (profile !== undefined) {
+      setLoaded(true);
+    }
+  }, [profile]);
 
   useEffect(() => {
     if (loaded) {
@@ -66,7 +78,7 @@ function OnlineProfiles({ jobseeker, setJobseeker }) {
         onlineProfiles: profile,
       });
     }
-  }, [profile]);
+  }, [loaded]);
 
   const addOnlineProfile = async (event) => {
     event.preventDefault();
@@ -112,6 +124,10 @@ function OnlineProfiles({ jobseeker, setJobseeker }) {
     { label: 'Created an Account?', value: 'created' },
     { label: 'Notes', value: 'notes' },
   ];
+
+  if (profile === undefined) {
+    return <Loading />;
+  }
 
   return (
     <div className="content">

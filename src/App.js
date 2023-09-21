@@ -28,6 +28,7 @@ import ProfileOutline from './Components/profileOutline'
 import { login, logout } from "./Redux/Slice/authSlices";
 import { fetchUser, addUser } from './Services/user-service';
 import ConfirmPopup from './Components/ConfirmPopup/confirmPopup';
+import Loading from './Components/Loading/Loading';
 import { auth } from './firebase';
 
 function App() {
@@ -43,7 +44,7 @@ function App() {
             </>
     } else if (store.user == undefined) {
       // replace with real loading graphic eventually
-      return <div>loading</div> 
+      return <Loading/> 
     } else if (!store.user.approved) {
         return <Splash
                 header="Awaiting Approval"

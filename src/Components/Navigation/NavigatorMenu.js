@@ -111,10 +111,15 @@ function NavigatorMenu() {
       const tempJobseekerData = await fetchJobseekerData(emailParam);
       setUserData(tempUserData.data());
       setJobseekerData(tempJobseekerData.data());
-      setLoaded(true);
     };
     asyncFn();
   }, []);
+
+  useEffect(() => {
+    if (jobseekerData !== undefined && userData !== undefined) {
+      setLoaded(true);
+    }
+  }, [jobseekerData, userData]);
 
   useEffect(() => {
     if (notes) {

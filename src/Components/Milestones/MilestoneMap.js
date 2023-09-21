@@ -9,6 +9,7 @@ import background from '../../Assets/Images/roadmap-background.png';
 import detailsDesktop from '../../Assets/Images/roadmap-details-desktop.png';
 import detailsMobile from '../../Assets/Images/roadmap-details-mobile.png';
 import {useParams} from 'react-router-dom';
+import Loading from '../Loading/Loading';
 
 const data = {
   content: {
@@ -118,7 +119,7 @@ function MilestoneMap({emailParam}) {
   }, [jobseeker]);
 
   if (jobseeker === undefined) {
-    return (<div>loading</div>);
+    return <Loading/>;
   }
 
   return (
