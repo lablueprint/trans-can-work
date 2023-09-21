@@ -209,7 +209,7 @@ function Header({
 
               <div className="align-helper">
                 <ButtonBase onClick={() => navigate('/profile')}>
-                  <p className="dashboard-page-header-profile-text">{`${store.user.firstName} ${store.user.lastName}`}</p>
+                  <p className="page-header-profile-text">{`${store.user.firstName} ${store.user.lastName}`}</p>
                   <Avatar
                     facebookId="100008343750912"
                     size="40"

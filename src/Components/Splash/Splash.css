@@ -34,3 +34,31 @@
     min-height: 20%;
     max-height: 25%;
 }
+
+.splashbuttonlink {
+    text-decoration: none;
+    padding-top: 3%;
+}
+
+.splash-button {
+    width: 14em;
+    height: 4em;
+    margin-bottom: 1%;
+    background-color: #000AA0;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    font-family: 'Montserrat';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-align: left;
+    margin-bottom: .3em;
+    width: 30%;
+    margin: 0 auto;
+}
+
+.splash-button:hover {
+    background-color: #AAAFFA;
+}

@@ -10,6 +10,12 @@ function Splash() {
     <div className="container">
       <img src={awaitingApproval} className="awaitingApproval" alt="awaitingApproval" />
       <img src={awaitingText} className="awaitingText" alt="awaitingText" />
+      <a href="/onboard" className="splashbuttonlink">
+        <button type="button" className="splash-button">
+          Back to Assessment
+        </button>
+
+      </a>
       <img src={transFlag} className="transFlag" alt="transFlag" />
     </div>
   );
