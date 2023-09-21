@@ -114,6 +114,7 @@ function App() {
           {store != undefined && ( <>
             {/* Client Views */}
             <Route path="/roadmap" element={<MilestoneMap />} />
+            <Route path="/onboard" element={<NavView />} />
 
              {/* Nav/Admin Views */}
             <Route path="/clientRoadmap/:emailParam" element={<NavigatorMenu />}/>
