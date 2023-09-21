@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import './OnlineProfile.css';
 import PropTypes from 'prop-types';
 
 function OnlineProfile({ jobseeker }) {
-  const [profiles, setProfiles] = useState([...jobseeker.onlineProfiles]);
+  const [profiles, setProfiles] = useState();
+
+  useEffect(() => {
+    if (jobseeker !== undefined) { setProfiles([...jobseeker.onlineProfiles]); }
+  }, [jobseeker]);
+
   const handleChange = (event, param) => {
     event.preventDefault();
     const temp = [...profiles];
@@ -12,7 +17,7 @@ function OnlineProfile({ jobseeker }) {
     setProfiles(temp);
   };
 
-  if (jobseeker === undefined) {
+  if (profiles === undefined) {
     return <div>Loading</div>;
   }
 
@@ -36,47 +41,6 @@ function OnlineProfile({ jobseeker }) {
               />
             </label>
           ))}
-          {/* <label htmlFor="linkedin" className="onlineProfile-row-label">
-            <input
-              className="profileInput"
-              type="text"
-              name="linkedin"
-              value={jobseeker.onlineProfiles[0].username}
-              onChange={(e) => { handleChange(e, 0); }}
-            />
-          </label>
-          <label htmlFor="facebook" className="onlineProfile-row-label">
-            Facebook
-            <input
-              className="profileInput"
-              type="text"
-              name="facebook"
-              value={jobseeker.onlineProfiles[1].username}
-              onChange={(e) => { handleChange(e, 1); }}
-            />
-          </label> */}
-          {/* </div>
-        <div className="onlineProfile-row">
-          <label htmlFor="glassdoor" className="onlineProfile-row-label">
-            Glassdoor
-            <input
-              className="profileInput"
-              type="text"
-              name="glassdoor"
-              value={jobseeker.onlineProfiles[2].username}
-              onChange={(e) => { handleChange(e, 2); }}
-            />
-          </label>
-          <label htmlFor="other" className="onlineProfile-row-label">
-            Other
-            <input
-              className="profileInput"
-              type="text"
-              name="other"
-              value={jobseeker.onlineProfiles[3].username}
-              onChange={(e) => { handleChange(e, 3); }}
-            />
-          </label> */}
         </div>
       </form>
     </div>
