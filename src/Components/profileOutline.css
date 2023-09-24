@@ -1,3 +1,4 @@
+
 @font-face {
     font-family: 'Montserrat';
     font-weight: normal;
@@ -8,7 +9,6 @@
          url('../Assets/Fonts/Montserrat-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
          url('../Assets/Fonts/Montserrat-Regular.svg') format('svg'); /* Legacy iOS */
 }
-
 @font-face {
     font-family: 'Montserrat';
     font-weight: bold;
@@ -20,7 +20,7 @@
          url('../Assets/Fonts/Montserrat-Bold.svg') format('svg'); /* Legacy iOS */
 }
 
-.name-display {
+.po-name-display {
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: bold;
@@ -29,7 +29,7 @@
     margin-left: 6%;
 }
 
-label { 
+.po-label{ 
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 600;
@@ -50,7 +50,7 @@ h2 {
     line-height: 1.25em;
     display: flex;
     align-items: center;
-}
+} 
 
 h3 
 {
@@ -81,9 +81,9 @@ input, textarea {
 font-family: 'Montserrat' !important;
 text-transform: none !important;
 white-space: nowrap
-}
+} 
 
-.outermost-container {
+.po-outermost-container {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
@@ -93,7 +93,7 @@ white-space: nowrap
     margin: 0 auto;
 }
 
-.outer-container {
+.po-outer-container {
     display:flex; 
     flex-direction: row;
     margin-top: 8%; 
@@ -110,25 +110,25 @@ white-space: nowrap
     position: relative;
 }
 
-.left-column {
+.po-left-column {
     display: flex;
     flex-direction: column;
     width: 100%;
     line-height: 2em; 
 }
-.right-column {
+.po-right-column {
     display: flex;
     flex-direction: column;
     width: 100%;
     line-height: 2em; 
 
 }
-.edit-button{
+.po-edit-button{
     display: flex;
     align-items: flex-end;
     align-self: flex-end;
 }
-.top-container{
+.po-top-container{
     display:flex; 
     flex-direction: row;
     width: 55em;
@@ -220,7 +220,7 @@ input {
     width: calc(100% - 100px)
 }
 
-.background{
+.po-background{
     background: #FCFCFC;
 }
 
@@ -293,7 +293,7 @@ input {
     margin-bottom: 2.5em;
 }
 
-.logout {
+.po-logout {
     float: right;
     display: flex;
     align-items: flex-end;

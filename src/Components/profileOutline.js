@@ -135,7 +135,7 @@ export default function ProfileOutline() {
 
   if (userType === 'navigator' || (userType === 'admin' && isApproved)) {
     return (
-      <div className="background">
+      <div className="po-background">
         <div className="header">
           <Box sx={{ borderBottom: 1, borderColor: 'divider', boxShadow: '0 4px 4px #c9c9c9' }}>
             <div className="profile-page-headers-container">
@@ -191,7 +191,7 @@ export default function ProfileOutline() {
 
           </Box>
         </div>
-        <div className="top-container">
+        <div className="po-top-container">
           <div className="photo-container">
             <Avatar src={ProfilePicPlaceholder} size="150" sx={{ borderRadius: '100px' }} round />
             {/* <div
@@ -246,10 +246,10 @@ export default function ProfileOutline() {
               <Button onClick={() => setEditProfilePic(false)}>Save</Button>
             </Dialog>
           </div>
-          <p className="name-display">
+          <p className="po-name-display">
             {demographicInfo[0].name}
           </p>
-          <div className="edit-button">
+          <div className="po-edit-button">
             <Button
               variant="outlined"
               onClick={handleEdit}
@@ -279,10 +279,10 @@ export default function ProfileOutline() {
             </Button>
           </div>
         </div>
-        <div className="outermost-container">
-          <div className="outer-container">
-            <div className="left-column">
-              <label htmlFor="FirstName">
+        <div className="po-outermost-container">
+          <div className="po-outer-container">
+            <div className="po-left-column">
+              <label className="po-label" htmlFor="FirstName">
                 First Name:
                 <br />
                 <input
@@ -293,7 +293,7 @@ export default function ProfileOutline() {
                 />
               </label>
               <br />
-              <label htmlFor="Pronouns">
+              <label className="po-label" htmlFor="Pronouns">
                 Pronouns:
                 <br />
                 <input
@@ -304,7 +304,7 @@ export default function ProfileOutline() {
                 />
               </label>
               <br />
-              <label htmlFor="Email">
+              <label className="po-label" htmlFor="Email">
                 Email:
                 <br />
                 <input
@@ -316,8 +316,8 @@ export default function ProfileOutline() {
                 />
               </label>
             </div>
-            <div className="right-column">
-              <label htmlFor="LastName">
+            <div className="po-right-column">
+              <label className="po-label" htmlFor="LastName">
                 Last Name:
                 <br />
                 <input
@@ -328,7 +328,7 @@ export default function ProfileOutline() {
                 />
               </label>
               <br />
-              <label htmlFor="Phone">
+              <label className="po-label" htmlFor="Phone">
                 Phone Number:
                 <br />
                 <input
@@ -339,7 +339,7 @@ export default function ProfileOutline() {
                 />
               </label>
               <br />
-              <label htmlFor="Password">
+              <label className="po-label" htmlFor="Password">
                 Password:
                 <br />
                 <div className="eyeContainer">
@@ -387,7 +387,7 @@ export default function ProfileOutline() {
           </div>
           <br />
           <div className="bio">
-            <label htmlFor="Bio">
+            <label className="po-label" htmlFor="Bio">
               Bio:
               <br />
               <textarea
@@ -398,7 +398,7 @@ export default function ProfileOutline() {
               />
             </label>
             <br />
-            <div className="logout">
+            <div className="po-logout">
               <Button
                 variant="text"
                 onClick={logoutButton}
