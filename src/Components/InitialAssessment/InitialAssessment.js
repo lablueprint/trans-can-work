@@ -7,12 +7,12 @@ import Save from '../../Assets/save.svg';
 import Checkboxes from '../Checkboxes/Checkboxes';
 import {
   skillsChecklistOptions, industryInterestOptions, generalSkills,
-  arrayToObj, generalSubskills, objToArray, jobseekerDataObject,
+  arrayToObj, generalSubskills, objToArray,
 } from '../../Services/objects-service';
 import Loading from '../Loading/Loading';
 
 function InitialAssessment({
-  userData, setUserData, email,
+  userData, setUserData, jobseeker, setJobseeker, email,
 }) {
   const textFieldStyles = {
     inputProps: {
@@ -35,7 +35,7 @@ function InitialAssessment({
     },
   };
 
-  const [jobseeker, setJobseeker] = useState(jobseekerDataObject);
+  // const [jobseeker, setJobseeker] = useState(jobseekerDataObject);
 
   // each set of checkboxes has 4 state variables:
   // an object with label/bool pairs
@@ -338,7 +338,7 @@ function InitialAssessment({
     { title: 'Prior Convictions?', toChange: 'Prior Convictions', var: jobseeker.clientInfo['Prior Convictions'] },
   ];
 
-  if (skillBool1 === undefined) {
+  if (userData === undefined || skillBool1 === undefined) {
     return (<Loading />);
   }
 
@@ -671,5 +671,42 @@ InitialAssessment.propTypes = {
     phoneNumber: propTypes.string.isRequired,
     pronouns: propTypes.string.isRequired,
   }).isRequired,
+  jobseeker: propTypes.shape({
+    clientInfo:
+    {
+      'City/State': propTypes.string.isRequired,
+      Ethnicity: propTypes.string.isRequired,
+      Age: propTypes.string.isRequired,
+      'Gender Identity': propTypes.string.isRequired,
+      Sexuality: propTypes.string.isRequired,
+      Veteran: propTypes.string.isRequired,
+      Disability: propTypes.string.isRequired,
+      'Housing Situation': propTypes.string.isRequired,
+      'Currently Employed': propTypes.string.isRequired,
+      'Prior Convictions': propTypes.string.isRequired,
+    },
+    industryInterest: propTypes.arrayOf(
+      propTypes.string.isRequired,
+    ),
+    generalSkills: propTypes.arrayOf(
+      propTypes.string.isRequired,
+    ),
+    skillsChecklist: propTypes.arrayOf(
+      propTypes.string.isRequired,
+    ),
+    education: [{
+    }],
+    occupation: propTypes.arrayOf(
+      propTypes.string.isRequired,
+    ),
+    degrees: propTypes.arrayOf(
+      propTypes.string.isRequired,
+    ),
+    certificates: propTypes.arrayOf(
+      propTypes.string.isRequired,
+    ),
+    dreamjob: propTypes.string.isRequired,
+  }).isRequired,
+  setJobseeker: propTypes.func.isRequired,
   setUserData: propTypes.func.isRequired,
 };

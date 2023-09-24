@@ -2,23 +2,22 @@ import './NavView.css';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { fetchUser, updateUser } from '../../Services/user-service';
-import { fetchJobseekerData, updateJobseekerData } from '../../Services/jobseeker-data-service';
+import { updateJobseekerData } from '../../Services/jobseeker-data-service';
 import InitialHeader from '../InitialHeader/InitialHeader';
 import InitialAssessment from '../InitialAssessment/InitialAssessment';
 import Loading from '../Loading/Loading';
+import { jobseekerDataObject } from '../../Services/objects-service';
 
 function NavView() {
   const store = useSelector((state) => state.auth.value);
   const [userData, setUserData] = useState();
-  const [jobseekerData, setJobseekerData] = useState();
+  const [jobseekerData, setJobseekerData] = useState(jobseekerDataObject);
   const [email, setEmail] = useState();
 
   useEffect(() => {
     const asyncFn = async () => {
       const tempUserData = await fetchUser(store.email);
-      const tempJobseekerData = await fetchJobseekerData(store.email);
       setUserData(tempUserData.data());
-      setJobseekerData(tempJobseekerData.data());
       setEmail(tempUserData.id);
     };
     asyncFn();
@@ -36,7 +35,7 @@ function NavView() {
     }
   }, [userData]);
 
-  if (jobseekerData === undefined) {
+  if (userData === undefined || jobseekerData === undefined) {
     return (<Loading />);
   }
 
@@ -47,7 +46,8 @@ function NavView() {
         <InitialAssessment
           userData={userData}
           setUserData={setUserData}
-          setJobseekerProp={setJobseekerData}
+          jobseeker={jobseekerData}
+          setJobseeker={setJobseekerData}
           email={email}
         />
       </div>
