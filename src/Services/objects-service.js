@@ -83,6 +83,7 @@ export const jobseekerDataObject = {
     },
   ],
   trainingPrograms: [],
+  workshops: [],
   internships: [],
   jobFairs: [],
   jobBoards: [],
