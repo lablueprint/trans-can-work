@@ -14,7 +14,6 @@ function Splash() {
         <button type="button" className="splash-button">
           Back to Assessment
         </button>
-
       </a>
       <img src={transFlag} className="transFlag" alt="transFlag" />
     </div>

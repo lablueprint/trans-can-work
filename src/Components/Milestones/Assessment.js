@@ -78,6 +78,11 @@ function Assessment({ jobseeker }) {
         {jobseeker.clientInfo['Dream Job']}
         !
       </p>
+      <a href="/onboard" className="splashbuttonlink">
+        <button type="button" className="splash-button">
+          Back to Assessment
+        </button>
+      </a>
     </div>
   );
 }

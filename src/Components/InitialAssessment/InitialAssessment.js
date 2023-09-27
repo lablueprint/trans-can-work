@@ -459,7 +459,7 @@ function InitialAssessment({
                 alt="add icon"
                 style={{ marginRight: '12px' }}
               />
-              Add Occupation
+              Add Degree
             </button>
           </div>
         </form>
@@ -507,7 +507,7 @@ function InitialAssessment({
                 alt="add icon"
                 style={{ marginRight: '12px' }}
               />
-              Add Occupation
+              Add Certificate
             </button>
           </div>
         </form>
